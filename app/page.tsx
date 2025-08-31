@@ -26,6 +26,8 @@ export default function Home() {
         <meta name="twitter:image" content="/og-image.png" />
         <link rel="canonical" href="https://pgelephant.com/" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+        <meta name="theme-color" content="#0d9488" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
         <Header />
