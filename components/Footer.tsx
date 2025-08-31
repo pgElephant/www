@@ -16,8 +16,10 @@ const Footer = () => {
     resources: [
       { name: 'Documentation', href: '/docs' },
       { name: 'Blog', href: '/blog' },
-      { name: 'Community', href: '/community' },
-      { name: 'GitHub', href: 'https://github.com/pgElephant/rale' },
+      { name: 'Community', href: 'https://github.com/pgElephant' },
+      { name: 'RALE - High Availability', href: 'https://github.com/pgElephant/rale' },
+      { name: 'RAM - Resource Management', href: 'https://github.com/pgElephant/ram' },
+      { name: 'FauxDB - Testing Framework', href: 'https://github.com/pgElephant/fauxdb' },
     ],
     company: [
       { name: 'About', href: '/#features' },
@@ -30,18 +32,18 @@ const Footer = () => {
   const social = [
     {
       name: 'GitHub',
-      href: 'https://github.com/pgElephant/rale',
+      href: 'https://github.com/pgElephant',
       icon: Github,
+    },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/pgelephant',
+      icon: Linkedin,
     },
     {
       name: 'Twitter',
       href: 'https://twitter.com/pgelephant',
       icon: Twitter,
-    },
-    {
-      name: 'LinkedIn',
-      href: 'https://linkedin.com/company/pgelephant',
-      icon: Linkedin,
     },
   ]
 

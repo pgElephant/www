@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Zap, Shield, Globe, BarChart3, Terminal, ArrowRight, CheckCircle, Database, Users, Clock, Cpu } from 'lucide-react'
+import { Zap, Shield, Globe, BarChart3, Terminal, ArrowRight, CheckCircle, Database, Users, Clock, Cpu, Github } from 'lucide-react'
 import ElephantLogo from './ElephantLogo'
 
 const Features = () => {
@@ -90,6 +90,75 @@ const Features = () => {
               <p className="text-slate-300 leading-relaxed">{feature.description}</p>
             </div>
           ))}
+        </div>
+
+        {/* Projects Section */}
+        <div className="mt-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Open Source Projects
+            </h3>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              Our PostgreSQL High Availability platform is built on three core open source projects, each designed to work together seamlessly.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'RALE',
+                description: 'High Availability consensus engine with intelligent leader election and automatic failover.',
+                href: 'https://github.com/pgElephant/rale',
+                icon: '🔄',
+                features: ['Consensus Algorithm', 'Leader Election', 'Automatic Failover', 'Zero Data Loss']
+              },
+              {
+                name: 'RAM',
+                description: 'Resource management and monitoring system for PostgreSQL clusters.',
+                href: 'https://github.com/pgElephant/ram',
+                icon: '📊',
+                features: ['Resource Monitoring', 'Performance Metrics', 'Health Checks', 'Alerting']
+              },
+              {
+                name: 'FauxDB',
+                description: 'PostgreSQL-based document database for flexible data storage and retrieval.',
+                href: 'https://github.com/pgElephant/fauxdb',
+                icon: '📄',
+                features: ['Document Storage', 'PostgreSQL Backend', 'Flexible Schema', 'JSON Support']
+              }
+            ].map((project) => (
+              <div
+                key={project.name}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-slate-400/30 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 group"
+              >
+                <div className="text-center mb-6">
+                  <div className="text-4xl mb-4">{project.icon}</div>
+                  <h4 className="text-2xl font-bold text-white mb-2">{project.name}</h4>
+                  <p className="text-slate-300 text-sm leading-relaxed">{project.description}</p>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  {project.features.map((feature) => (
+                    <div key={feature} className="flex items-center text-sm text-slate-300">
+                      <CheckCircle className="w-4 h-4 text-teal-400 mr-2 flex-shrink-0" />
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+                
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center w-full px-6 py-3 bg-teal-600/20 border border-teal-400/30 text-teal-300 font-semibold rounded-xl hover:bg-teal-600/30 hover:border-teal-400/50 transition-all duration-200"
+                >
+                  <Github className="w-4 h-4 mr-2" />
+                  View on GitHub
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
