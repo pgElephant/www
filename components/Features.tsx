@@ -55,108 +55,70 @@ const Features = () => {
   return (
     <section id="features" className="section-padding bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
       <div className="container-custom">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-6">
-            <div className="text-teal-400 mr-4">
-              <ElephantLogo size="lg" animated={true} />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-              <span className="text-white">
-                Why Choose
-              </span>
-              <br />
-              <span className="text-teal-300">
-                pgelephant?
-              </span>
-            </h2>
-          </div>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto font-medium">
-            Built for production with professional features and simple configuration.
-          </p>
+        {/* Products Section as main feature section */}
+        <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Products
+            </h3>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              Explore our core products powering PostgreSQL High Availability and flexible data management.
+            </p>
         </div>
-
-        {/* Sleek Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              name: 'RALE',
+              description: 'Resilient Adaptive Leader Election.',
+              href: '/rale',
+              icon: Cpu,
+              features: ['Consensus Algorithm', 'Leader Election', 'Automatic Failover', 'Zero Data Loss']
+            },
+            {
+              name: 'RAM',
+              description: 'Resilient Adaptive Manager For PostgreSQL Clusters.',
+              href: '/ram',
+              icon: BarChart3,
+              features: ['Resource Monitoring', 'Performance Metrics', 'Health Checks', 'Alerting']
+            },
+            {
+              name: 'FauxDB',
+              description: 'PostgreSQL-based MongoDB Compatible Document Database.',
+              href: '/fauxdb',
+              icon: Database,
+              features: ['Document Storage', 'PostgreSQL Backend', 'Flexible Schema', 'JSON Support']
+            }
+          ].map((project) => (
             <div
-              key={feature.title}
+              key={project.name}
               className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-slate-400/30 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 group"
             >
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 bg-slate-100/20 border border-slate-400/30 group-hover:scale-110 transition-transform duration-300">
-                <feature.icon className="w-8 h-8 text-teal-400 group-hover:scale-110 transition-transform duration-300" />
+              <div className="text-center mb-6">
+                <div className="flex items-center justify-center mb-4">
+                  <project.icon className="w-10 h-10 text-teal-400" />
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-2">{project.name}</h4>
+                <p className="text-slate-300 text-sm leading-relaxed">{project.description}</p>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">{feature.title}</h3>
-              <p className="text-slate-300 leading-relaxed">{feature.description}</p>
+              
+              <div className="space-y-2 mb-6">
+                {project.features.map((feature) => (
+                  <div key={feature} className="flex items-center text-sm text-slate-300">
+                    <CheckCircle className="w-4 h-4 text-teal-400 mr-2 flex-shrink-0" />
+                    {feature}
+                  </div>
+                ))}
+              </div>
+              
+              <a
+                href={project.href}
+                className="group inline-flex items-center justify-center w-full px-6 py-3 bg-teal-600/20 border border-teal-400/30 text-teal-300 font-semibold rounded-xl hover:bg-teal-600/30 hover:border-teal-400/50 transition-all duration-200"
+              >
+                <ArrowRight className="w-4 h-4 mr-2" />
+                Learn More
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
           ))}
-        </div>
-
-        {/* Projects Section */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Products
-              </h3>
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-                Explore our core products powering PostgreSQL High Availability and flexible data management.
-              </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'RALE',
-                description: 'High Availability consensus engine with intelligent leader election and automatic failover.',
-                href: '/rale',
-                icon: '🔄',
-                features: ['Consensus Algorithm', 'Leader Election', 'Automatic Failover', 'Zero Data Loss']
-              },
-              {
-                name: 'RAM',
-                description: 'Resource management and monitoring system for PostgreSQL clusters.',
-                href: '/ram',
-                icon: '📊',
-                features: ['Resource Monitoring', 'Performance Metrics', 'Health Checks', 'Alerting']
-              },
-              {
-                name: 'FauxDB',
-                description: 'PostgreSQL-based document database for flexible data storage and retrieval.',
-                href: '/fauxdb',
-                icon: '📄',
-                features: ['Document Storage', 'PostgreSQL Backend', 'Flexible Schema', 'JSON Support']
-              }
-            ].map((project) => (
-              <div
-                key={project.name}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-slate-400/30 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 group"
-              >
-                <div className="text-center mb-6">
-                  <div className="text-4xl mb-4">{project.icon}</div>
-                  <h4 className="text-2xl font-bold text-white mb-2">{project.name}</h4>
-                  <p className="text-slate-300 text-sm leading-relaxed">{project.description}</p>
-                </div>
-                
-                <div className="space-y-2 mb-6">
-                  {project.features.map((feature) => (
-                    <div key={feature} className="flex items-center text-sm text-slate-300">
-                      <CheckCircle className="w-4 h-4 text-teal-400 mr-2 flex-shrink-0" />
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-                
-                <a
-                  href={project.href}
-                  className="group inline-flex items-center justify-center w-full px-6 py-3 bg-teal-600/20 border border-teal-400/30 text-teal-300 font-semibold rounded-xl hover:bg-teal-600/30 hover:border-teal-400/50 transition-all duration-200"
-                >
-                  <ArrowRight className="w-4 h-4 mr-2" />
-                  Learn More
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
