@@ -55,6 +55,14 @@ const Footer = () => {
         </div>
         <span className="text-2xl font-bold text-white tracking-wide mb-2">pgElephant</span>
         <div className="text-slate-400 text-sm mt-2">© 2024 pgElephant. PostgreSQL High Availability &amp; Management.</div>
+        <div className="flex space-x-6 mt-4">
+          {social.map((item) => (
+            <a key={item.name} href={item.href} className="text-slate-400 hover:text-white transition-colors">
+              <span className="sr-only">{item.name}</span>
+              <item.icon className="h-6 w-6" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
       </div>
     </footer>
   )

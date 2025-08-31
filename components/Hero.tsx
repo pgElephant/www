@@ -81,7 +81,7 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, [active]);
   return (
-    <section className="pt-16 pb-12 md:pt-20 md:pb-16 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 relative overflow-hidden">
+    <section className="pt-16 md:pt-20 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 relative overflow-hidden">
       {/* Sleek Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
@@ -100,7 +100,7 @@ const Hero = () => {
         <div className="w-full text-left">
 
           {/* Slideable Product Highlights Carousel */}
-          <div className="mb-16 flex flex-col items-start w-full">
+          <div className="flex flex-col items-start w-full">
             <div className={`w-full ${slides[active].bg} shadow-none flex flex-col items-start justify-center transition-all duration-500 relative overflow-hidden`} style={{minHeight: '480px'}}>
               {/* Remove per-slide image overlays for a unified look */}
               {/* Ensure consistent height for all slides */}
@@ -109,9 +109,7 @@ const Hero = () => {
               <div className="relative z-10 flex flex-col items-start justify-center w-full px-16 py-12">
                 <div className="flex items-center justify-start mb-8 w-full">
                   <div className="flex items-center justify-center w-36 h-36 rounded-3xl bg-white/10 border border-white/20 shadow-lg">
-                  <div className="flex items-center justify-center w-36 h-36 rounded-3xl bg-white/10 shadow-lg">
                     {slides[active].icon}
-                  </div>
                   </div>
                 </div>
                 <div className="w-full max-w-3xl">

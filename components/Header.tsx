@@ -27,7 +27,7 @@ const Header = () => {
           {/* Logo left of Docs */}
           <Link href="/" className="flex items-center space-x-3 group pl-0 ml-0 mr-8">
             <div className="text-teal-400 group-hover:text-teal-300 transition-colors">
-              <ElephantLogo size="sm" animated={false} />
+              <ElephantLogo size="md" animated={false} />
             </div>
             <span className="text-xl font-bold text-white group-hover:text-teal-300 transition-colors">
               pgelephant
