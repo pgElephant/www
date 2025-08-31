@@ -8,7 +8,6 @@ import ElephantLogo from './ElephantLogo'
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navigation = [
-    { name: 'Pricing', href: '/pricing' },
     { name: 'Docs', href: '/docs' },
     { name: 'Blog', href: '/blog' },
     { name: 'Community', href: 'https://github.com/pgElephant' },

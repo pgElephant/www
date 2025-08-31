@@ -9,6 +9,39 @@ const DocsPage = () => {
 
   const categories = [
     {
+      title: 'RALE',
+      description: 'Distributed consensus and leader election engine.',
+      icon: Cpu,
+      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
+      articles: [
+        { title: 'Getting Started', href: '/docs/rale/getting-started', status: 'Complete' },
+        { title: 'RALE Documentation', href: '/docs/rale', status: 'Complete' },
+        { title: 'API Reference', href: 'https://github.com/pgElephant/rale', status: 'External' }
+      ]
+    },
+    {
+      title: 'RAM',
+      description: 'Resource management and monitoring for PostgreSQL clusters.',
+      icon: BarChart3,
+      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
+      articles: [
+        { title: 'Getting Started', href: '/docs/ram/getting-started', status: 'Complete' },
+        { title: 'RAM Documentation', href: '/docs/ram', status: 'Complete' },
+        { title: 'API Reference', href: 'https://github.com/pgElephant/ram', status: 'External' }
+      ]
+    },
+    {
+      title: 'FauxDB',
+      description: 'MongoDB-compatible document database for PostgreSQL.',
+      icon: Database,
+      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
+      articles: [
+        { title: 'Getting Started', href: '/docs/fauxdb/getting-started', status: 'Complete' },
+        { title: 'FauxDB Documentation', href: '/docs/fauxdb', status: 'Complete' },
+        { title: 'API Reference', href: 'https://github.com/pgElephant/fauxdb', status: 'External' }
+      ]
+    },
+    {
       title: 'Getting Started',
       description: 'Quick start guides and basic concepts',
       icon: BookOpen,
