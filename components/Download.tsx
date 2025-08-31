@@ -34,6 +34,19 @@ const Download = () => {
       }
     },
     {
+      title: 'FauxDB',
+      description: 'MongoDB-compatible document database for PostgreSQL.',
+      icon: Database,
+      packages: {
+        debian: 'pgelephant-fauxdb',
+        rpm: 'pgelephant-fauxdb'
+      },
+      downloadLinks: {
+        deb: 'https://packages.pgelephant.com/debian/pgelephant-fauxdb_1.0.0_amd64.deb',
+        rpm: 'https://packages.pgelephant.com/rpm/pgelephant-fauxdb-1.0.0-1.x86_64.rpm'
+      }
+    },
+    {
       title: 'Secure PostgreSQL',
       description: 'Hardened PostgreSQL with enhanced security features',
       icon: Shield,

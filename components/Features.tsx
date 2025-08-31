@@ -68,7 +68,7 @@ const Features = () => {
           {[
             {
               name: 'RALE',
-              description: 'Resilient Adaptive Leader Election.',
+              description: 'Resilient Adaptive Leader Election And Fault Tolerance.',
               href: '/rale',
               icon: Cpu,
               features: ['Consensus Algorithm', 'Leader Election', 'Automatic Failover', 'Zero Data Loss']
