@@ -4,9 +4,8 @@ import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import Architecture from '@/components/Architecture'
 import Comparison from '@/components/Comparison'
-import Pricing from '@/components/Pricing'
 import Community from '@/components/Community'
-import Download from '@/components/Download'
+// ...existing code...
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -16,9 +15,8 @@ export default function Home() {
       <Hero />
       <Features />
       <Comparison />
-      <Pricing />
       <Community />
-      <Download />
+// ...existing code...
       <Footer />
     </main>
   )

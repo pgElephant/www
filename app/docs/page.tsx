@@ -42,30 +42,6 @@ const DocsPage = () => {
       ]
     },
     {
-      title: 'Getting Started',
-      description: 'Quick start guides and basic concepts',
-      icon: BookOpen,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Installation Guide', href: '#', status: 'Complete' },
-        { title: 'Quick Start Tutorial', href: '#', status: 'Complete' },
-        { title: 'Basic Configuration', href: '#', status: 'Complete' },
-        { title: 'First Cluster Setup', href: '#', status: 'Complete' }
-      ]
-    },
-    {
-      title: 'Core Concepts',
-      description: 'Understanding PostgreSQL high availability',
-      icon: Database,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Architecture Overview', href: '#', status: 'Complete' },
-        { title: 'Leader Election', href: '#', status: 'Complete' },
-        { title: 'Replication Strategies', href: '#', status: 'Complete' },
-        { title: 'Failover Process', href: '#', status: 'Complete' }
-      ]
-    },
-    {
       title: 'CLI Reference',
       description: 'Command-line interface documentation',
       icon: Terminal,

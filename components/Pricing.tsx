@@ -209,41 +209,6 @@ const Pricing = () => {
           </div>
         </div>
 
-        {/* Additional Benefits */}
-        <div className="mt-16">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Why Choose pgelephant?
-            </h3>
-            <p className="text-slate-300 max-w-2xl mx-auto">
-              Professional PostgreSQL high availability with simple configuration and powerful features.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-slate-100/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-400/30">
-                <Users className="w-6 h-6 text-teal-400" />
-              </div>
-              <h4 className="font-bold text-white mb-2">Trusted by Teams</h4>
-              <p className="text-sm text-slate-300">Used by 500+ organizations worldwide</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-slate-100/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-400/30">
-                <Clock className="w-6 h-6 text-teal-400" />
-              </div>
-              <h4 className="font-bold text-white mb-2">99.99% Uptime</h4>
-              <p className="text-sm text-slate-300">Professional-grade reliability</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-slate-100/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-400/30">
-                <Database className="w-6 h-6 text-teal-400" />
-              </div>
-              <h4 className="font-bold text-white mb-2">Zero Data Loss</h4>
-              <p className="text-sm text-slate-300">Synchronous replication guarantees</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )
