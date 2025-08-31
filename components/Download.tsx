@@ -59,19 +59,6 @@ const Download = () => {
         rpm: 'https://packages.pgelephant.com/rpm/pgelephant-postgresql-1.0.0-1.x86_64.rpm'
       }
     },
-    {
-      title: 'Custom Build PostgreSQL',
-      description: 'Patched PostgreSQL with pgelephant optimizations',
-      icon: DownloadIcon,
-      packages: {
-        debian: 'pgelephant-postgresql-custom',
-        rpm: 'pgelephant-postgresql-custom'
-      },
-      downloadLinks: {
-        deb: 'https://packages.pgelephant.com/debian/pgelephant-postgresql-custom_1.0.0_amd64.deb',
-        rpm: 'https://packages.pgelephant.com/rpm/pgelephant-postgresql-custom-1.0.0-1.x86_64.rpm'
-      }
-    }
   ]
 
   const installationMethods = [
