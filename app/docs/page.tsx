@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 
-import { BookOpen, Search, ChevronRight, ExternalLink, Code, Settings, Database, Users, Shield, Zap, Globe, BarChart3, Terminal } from 'lucide-react'
+import { BookOpen, Search, ChevronRight, ExternalLink, Code, Settings, Database, Users, Shield, Zap, Globe, BarChart3, Terminal, Cpu } from 'lucide-react'
 
 const DocsPage = () => {
   const [searchQuery, setSearchQuery] = useState('')

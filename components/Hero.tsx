@@ -30,23 +30,23 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-teal-300/30 rounded-full text-sm font-semibold text-teal-200 mb-6 shadow-sm hover:shadow-md transition-all duration-300">
             <Sparkles className="w-4 h-4" />
-            Production-Ready PostgreSQL
+            pgElephant &mdash; a PostgreSQL Company
           </div>
 
           {/* Headline */}
           <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
             <span className="text-white">
-              PostgreSQL
+              PostgreSQL Cluster
             </span>
             <br />
             <span className="text-teal-300">
-              High Availability
+              Multi-node &bull; Document Database
             </span>
           </h1>
 
           {/* Subheading */}
           <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-4xl mx-auto font-medium">
-            Zero-downtime • Multi-node • Production-ready
+            PostgreSQL Cluster &bull; Multi-node &bull; Document Database
           </p>
 
           {/* Feature icons */}
