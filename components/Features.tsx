@@ -95,12 +95,12 @@ const Features = () => {
         {/* Projects Section */}
         <div className="mt-20">
           <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Open Source Projects
-            </h3>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-              Our PostgreSQL High Availability platform is built on three core open source projects, each designed to work together seamlessly.
-            </p>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Products
+              </h3>
+              <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+                Explore our core products powering PostgreSQL High Availability and flexible data management.
+              </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -108,21 +108,21 @@ const Features = () => {
               {
                 name: 'RALE',
                 description: 'High Availability consensus engine with intelligent leader election and automatic failover.',
-                href: 'https://github.com/pgElephant/rale',
+                href: '/rale',
                 icon: '🔄',
                 features: ['Consensus Algorithm', 'Leader Election', 'Automatic Failover', 'Zero Data Loss']
               },
               {
                 name: 'RAM',
                 description: 'Resource management and monitoring system for PostgreSQL clusters.',
-                href: 'https://github.com/pgElephant/ram',
+                href: '/ram',
                 icon: '📊',
                 features: ['Resource Monitoring', 'Performance Metrics', 'Health Checks', 'Alerting']
               },
               {
                 name: 'FauxDB',
                 description: 'PostgreSQL-based document database for flexible data storage and retrieval.',
-                href: 'https://github.com/pgElephant/fauxdb',
+                href: '/fauxdb',
                 icon: '📄',
                 features: ['Document Storage', 'PostgreSQL Backend', 'Flexible Schema', 'JSON Support']
               }
@@ -148,12 +148,10 @@ const Features = () => {
                 
                 <a
                   href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group inline-flex items-center justify-center w-full px-6 py-3 bg-teal-600/20 border border-teal-400/30 text-teal-300 font-semibold rounded-xl hover:bg-teal-600/30 hover:border-teal-400/50 transition-all duration-200"
                 >
-                  <Github className="w-4 h-4 mr-2" />
-                  View on GitHub
+                  <ArrowRight className="w-4 h-4 mr-2" />
+                  Learn More
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
