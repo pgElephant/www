@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Optimize for performance */
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Performance optimizations */
+  text-rendering: optimizeSpeed;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+
+
+
+
+.btn-accent-primary {
+  @apply bg-accent-600 hover:bg-accent-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm;
+}
+
+.btn-accent-secondary {
+  @apply bg-transparent hover:bg-cool-50/50 text-accent-600 font-semibold py-4 px-8 rounded-xl border border-accent-600 hover:border-accent-700 transition-all duration-300 backdrop-blur-sm;
+}
+
+.btn-accent-outline {
+  @apply bg-transparent hover:bg-cool-50/50 text-accent-600 font-semibold py-4 px-8 rounded-xl border border-accent-600 hover:border-accent-700 transition-all duration-300 backdrop-blur-sm;
+}
+
+.section-padding {
+  @apply py-12 md:py-16;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+
+
+/* Sleek card styles */
+.card-cool {
+  @apply bg-white/80 backdrop-blur-sm border border-cool-200/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1;
+}
+
+
+
+/* Sleek text styles */
+.text-accent-primary {
+  @apply text-accent-600;
+}
+
+.text-accent-secondary {
+  @apply text-cool-600;
+}
+
+.text-accent-light {
+  @apply text-cool-500;
+}
+
+.text-accent-dark {
+  @apply text-cool-900;
+}
+
+.text-accent-heading {
+  @apply text-cool-800;
+}
+
+.text-accent-body {
+  @apply text-cool-700;
+}
+
+.text-accent-nav {
+  @apply text-cool-600;
+}
+
+/* Sleek gradient backgrounds */
+.bg-cool-gradient {
+  @apply bg-gradient-to-br from-cool-50/50 via-white to-cool-50/50 backdrop-blur-sm;
+}
+
+.bg-cool-hero {
+  @apply bg-gradient-to-br from-white via-cool-50/30 to-white backdrop-blur-sm;
+}
+
+.bg-cool-section {
+  @apply bg-gradient-to-br from-white to-cool-50/50 backdrop-blur-sm;
+}
+
+/* Sleek navigation styles */
+.nav-cool {
+  @apply text-cool-600 hover:text-accent-600 transition-colors duration-200;
+}
+
+.nav-cool-active {
+  @apply text-accent-600 font-medium;
+}
+
+/* Glassmorphism effects */
+.glass {
+  @apply bg-white/10 backdrop-blur-md border border-white/20;
+}
+
+.glass-card {
+  @apply bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl shadow-xl;
+}
+
+/* Cool hover effects */
+.hover-lift {
+  @apply transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl;
+}
+
+.hover-glow {
+  @apply transition-all duration-300 hover:shadow-lg hover:shadow-accent-500/25;
+}
+
+/* Animated gradients */
+.animated-gradient {
+  @apply bg-gradient-to-r from-accent-600 via-accent-500 to-accent-600 bg-size-200 animate-gradient;
+}
+
+/* Sleek dividers */
+.divider {
+  @apply h-px bg-gradient-to-r from-transparent via-cool-300 to-transparent;
+}
+
+/* Cool loading states */
+.loading-shimmer {
+  @apply animate-pulse bg-gradient-to-r from-cool-200 via-cool-100 to-cool-200 bg-size-200;
+}
+
+@layer utilities {
+  .bg-size-200 {
+    background-size: 200% 200%;
+  }
+  
+  .animate-gradient {
+    animation: gradient 3s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+    to { box-shadow: 0 0 30px rgba(14, 165, 233, 0.6); }
+  }
+} 
