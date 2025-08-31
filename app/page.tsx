@@ -32,7 +32,7 @@ export default function Home() {
         <Features />
         <Comparison />
         {/* ...existing code... */}
-        <Footer />
+  {/* Footer is rendered by layout.tsx, removed to avoid duplication */}
       </main>
     </>
   )

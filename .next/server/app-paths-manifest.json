@@ -2,14 +2,14 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/community/page": "app/community/page.js",
   "/docs/fauxdb/getting-started/page": "app/docs/fauxdb/getting-started/page.js",
-  "/docs/page": "app/docs/page.js",
-  "/docs/rale/getting-started/page": "app/docs/rale/getting-started/page.js",
-  "/docs/ram/getting-started/page": "app/docs/ram/getting-started/page.js",
   "/blog/page": "app/blog/page.js",
-  "/download/page": "app/download/page.js",
-  "/fauxdb/page": "app/fauxdb/page.js",
   "/page": "app/page.js",
-  "/pricing/page": "app/pricing/page.js",
+  "/fauxdb/page": "app/fauxdb/page.js",
+  "/docs/page": "app/docs/page.js",
+  "/docs/ram/getting-started/page": "app/docs/ram/getting-started/page.js",
   "/rale/page": "app/rale/page.js",
-  "/ram/page": "app/ram/page.js"
+  "/ram/page": "app/ram/page.js",
+  "/download/page": "app/download/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/docs/rale/getting-started/page": "app/docs/rale/getting-started/page.js"
 }

@@ -10,7 +10,7 @@ const DocsPage = () => {
   const categories = [
     {
       title: 'RALE',
-      description: 'Distributed consensus and leader election engine.',
+  description: 'Resilient Adaptive Leader Election (RALE).',
       icon: Cpu,
       color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
       articles: [
@@ -21,7 +21,7 @@ const DocsPage = () => {
     },
     {
       title: 'RAM',
-      description: 'Resource management and monitoring for PostgreSQL clusters.',
+  description: 'Resilient Adaptive Manager (RAM) for PostgreSQL.',
       icon: BarChart3,
       color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
       articles: [
@@ -42,51 +42,14 @@ const DocsPage = () => {
       ]
     },
     {
-      title: 'CLI Reference',
-      description: 'Command-line interface documentation',
-      icon: Terminal,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'pgelephant cluster', href: '#', status: 'Complete' },
-        { title: 'pgelephant node', href: '#', status: 'Complete' },
-        { title: 'pgelephant config', href: '#', status: 'Complete' },
-        { title: 'pgelephant logs', href: '#', status: 'Complete' }
-      ]
-    },
-    {
-      title: 'Configuration',
-      description: 'Advanced configuration options',
-      icon: Settings,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Cluster Configuration', href: '#', status: 'Complete' },
-        { title: 'Security Settings', href: '#', status: 'Complete' },
-        { title: 'Network Configuration', href: '#', status: 'Complete' },
-        { title: 'Monitoring Setup', href: '#', status: 'Complete' }
-      ]
-    },
-    {
-      title: 'Operations',
-      description: 'Day-to-day operations and maintenance',
-      icon: Users,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Monitoring & Alerts', href: '#', status: 'Complete' },
-        { title: 'Backup & Recovery', href: '#', status: 'Complete' },
-        { title: 'Scaling Clusters', href: '#', status: 'Complete' },
-        { title: 'Troubleshooting', href: '#', status: 'Complete' }
-      ]
-    },
-    {
-      title: 'Security',
-      description: 'Security best practices and configuration',
+      title: 'Secure PostgreSQL',
+      description: 'Hardened PostgreSQL for enterprise security and compliance.',
       icon: Shield,
       color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
       articles: [
-        { title: 'Authentication', href: '#', status: 'Complete' },
-        { title: 'Encryption', href: '#', status: 'Complete' },
-        { title: 'Network Security', href: '#', status: 'Complete' },
-        { title: 'Audit Logging', href: '#', status: 'Complete' }
+        { title: 'Getting Started', href: '/docs/secure-postgresql/getting-started', status: 'Complete' },
+        { title: 'Security Features', href: '/docs/secure-postgresql/features', status: 'Complete' },
+        { title: 'Compliance', href: '/docs/secure-postgresql/compliance', status: 'Complete' }
       ]
     }
   ]
@@ -108,47 +71,115 @@ const DocsPage = () => {
 
   return (
     <div className="pt-16 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
-      {/* Header */}
-      <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
+      {/* Hero Section: Full-width horizontal product highlights */}
+      <div className="relative">
         {/* Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-500/20 to-cyan-500/15 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-teal-300/15 to-cyan-300/10 rounded-full blur-2xl" />
         </div>
-
-        {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, #0d9488 1px, transparent 0)`,
             backgroundSize: '50px 50px'
           }} />
         </div>
-
-        {/* Glassmorphism Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
 
         <div className="container-custom py-16 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Documentation
-            </h1>
-            <p className="text-xl text-slate-300 mb-8">
-              Everything you need to deploy and manage PostgreSQL high availability clusters.
-            </p>
-            
-            {/* Search */}
-            <div className="max-w-2xl mx-auto">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search documentation..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-white/10 backdrop-blur-sm border border-slate-300/30 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-300/50"
-                />
+          <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center text-white">Documentation</h1>
+          <div className="space-y-10">
+            {/* RALE */}
+            <section className="relative flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-yellow-400/10 via-teal-400/10 to-slate-700/10 rounded-3xl p-8 md:p-12 border border-yellow-300/20 shadow-xl overflow-hidden">
+              <div className="absolute right-0 top-0 w-1/2 h-full pointer-events-none">
+                <svg viewBox="0 0 400 200" fill="none" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="300" cy="100" rx="120" ry="80" fill="url(#rale-docs-gradient)" opacity="0.18" />
+                  <defs>
+                    <radialGradient id="rale-docs-gradient" cx="0" cy="0" r="1" gradientTransform="translate(300 100) scale(120 80)" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#facc15" />
+                      <stop offset="1" stopColor="#0d9488" />
+                    </radialGradient>
+                  </defs>
+                </svg>
               </div>
+              <div className="flex-shrink-0 flex items-center justify-center w-20 h-20 rounded-2xl bg-yellow-300/20 border border-yellow-300/30 mr-0 md:mr-8 mb-6 md:mb-0">
+                <Cpu className="w-12 h-12 text-yellow-400" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-yellow-200 mb-2">Opensource RAFT-like Leader Election (RALE)</h2>
+                <p className="text-lg md:text-xl text-slate-100 mb-4">Enterprise-grade distributed consensus and leader election. Reliable, open source, and easy to integrate.</p>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <a href="/docs/rale/getting-started" className="px-6 py-3 bg-yellow-400/80 text-slate-900 font-semibold rounded-xl shadow hover:scale-105 transition">Getting Started</a>
+                  <a href="/docs/rale" className="px-6 py-3 bg-white/10 text-yellow-200 font-semibold rounded-xl border border-yellow-300/30 hover:scale-105 transition">Documentation</a>
+                  <a href="https://github.com/pgElephant/rale" className="px-6 py-3 bg-slate-800 text-yellow-200 font-semibold rounded-xl border border-yellow-300/30 hover:scale-105 transition">API Reference</a>
+                </div>
+              </div>
+            </section>
+            {/* RAM */}
+            <section className="relative flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-green-400/10 via-teal-400/10 to-slate-700/10 rounded-3xl p-8 md:p-12 border border-green-300/20 shadow-xl overflow-hidden">
+              <div className="absolute left-0 top-0 w-1/2 h-full pointer-events-none">
+                <svg viewBox="0 0 400 200" fill="none" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0" y="40" width="200" height="120" rx="60" fill="url(#ram-docs-gradient)" opacity="0.16" />
+                  <defs>
+                    <linearGradient id="ram-docs-gradient" x1="0" y1="100" x2="200" y2="100" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#22c55e" />
+                      <stop offset="1" stopColor="#0d9488" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div className="flex-shrink-0 flex items-center justify-center w-20 h-20 rounded-2xl bg-green-300/20 border border-green-300/30 mr-0 md:mr-8 mb-6 md:mb-0">
+                <BarChart3 className="w-12 h-12 text-green-400" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-green-200 mb-2">Opensource RAM</h2>
+                <p className="text-lg md:text-xl text-slate-100 mb-4">Automated PostgreSQL failover and cluster management powered by RALE. High availability, resilience, and seamless scaling.</p>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <a href="/docs/ram/getting-started" className="px-6 py-3 bg-green-400/80 text-slate-900 font-semibold rounded-xl shadow hover:scale-105 transition">Getting Started</a>
+                  <a href="/docs/ram" className="px-6 py-3 bg-white/10 text-green-200 font-semibold rounded-xl border border-green-300/30 hover:scale-105 transition">Documentation</a>
+                  <a href="https://github.com/pgElephant/ram" className="px-6 py-3 bg-slate-800 text-green-200 font-semibold rounded-xl border border-green-300/30 hover:scale-105 transition">API Reference</a>
+                </div>
+              </div>
+            </section>
+            {/* FauxDB */}
+            <section className="relative flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-blue-400/10 via-teal-400/10 to-slate-700/10 rounded-3xl p-8 md:p-12 border border-blue-300/20 shadow-xl overflow-hidden">
+              <div className="absolute right-0 top-0 w-1/2 h-full pointer-events-none">
+                <svg viewBox="0 0 400 200" fill="none" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="300" cy="100" r="80" fill="url(#fauxdb-docs-gradient)" opacity="0.15" />
+                  <defs>
+                    <radialGradient id="fauxdb-docs-gradient" cx="0" cy="0" r="1" gradientTransform="translate(300 100) scale(80)" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#38bdf8" />
+                      <stop offset="1" stopColor="#0d9488" />
+                    </radialGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div className="flex-shrink-0 flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-300/20 border border-blue-300/30 mr-0 md:mr-8 mb-6 md:mb-0">
+                <Database className="w-12 h-12 text-blue-400" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-blue-200 mb-2">Open Source MongoDB-Compatible PostgreSQL Document Database</h2>
+                <p className="text-lg md:text-xl text-slate-100 mb-4">Scalable, flexible document database built on PostgreSQL. Fully open source and MongoDB API compatible for modern apps.</p>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <a href="/docs/fauxdb/getting-started" className="px-6 py-3 bg-blue-400/80 text-slate-900 font-semibold rounded-xl shadow hover:scale-105 transition">Getting Started</a>
+                  <a href="/docs/fauxdb" className="px-6 py-3 bg-white/10 text-blue-200 font-semibold rounded-xl border border-blue-300/30 hover:scale-105 transition">Documentation</a>
+                  <a href="https://github.com/pgElephant/fauxdb" className="px-6 py-3 bg-slate-800 text-blue-200 font-semibold rounded-xl border border-blue-300/30 hover:scale-105 transition">API Reference</a>
+                </div>
+              </div>
+            </section>
+          </div>
+          {/* Search */}
+          <div className="max-w-2xl mx-auto mt-16">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search documentation..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 bg-white/10 backdrop-blur-sm border border-slate-300/30 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-300/50"
+              />
             </div>
           </div>
         </div>

@@ -42,7 +42,7 @@ const Comparison = () => {
     },
     {
       feature: 'CLI Tools',
-      pgelephant: 'pg_ramctrl',
+  pgelephant: 'ramctrl',
       patroni: 'patronictl',
       repmgr: 'repmgr',
       showIcon: false
@@ -80,7 +80,7 @@ const Comparison = () => {
   const getFeatureIcon = (value: string) => {
     if (value.includes('Simple') || value.includes('< 30') || value.includes('RALE') || 
         value.includes('Guaranteed') || value.includes('Built-in') || value.includes('Native') || 
-        value.includes('pg_ramctrl') || value.includes('C') || value.includes('12-16')) {
+  value.includes('ramctrl') || value.includes('C') || value.includes('12-16')) {
       return <Check className="w-5 h-5 text-green-400" />
     } else if (value.includes('Complex') || value.includes('Manual') || value.includes('Possible') || 
                value.includes('Limited') || value.includes('Basic') || value.includes('Minimal') ||
@@ -217,7 +217,7 @@ const Comparison = () => {
                   <Terminal className="w-8 h-8 text-teal-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Better CLI</h4>
-                <p className="text-sm text-slate-300">Simple pg_ramctrl commands vs complex patronictl</p>
+                <p className="text-sm text-slate-300">Simple ramctrl commands vs complex patronictl</p>
               </div>
             </div>
 

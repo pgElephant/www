@@ -22,10 +22,10 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-slate-500/90 backdrop-blur-xl border-b border-slate-400/30 z-50 shadow-sm">
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+      <div className="w-full px-0 mx-0">
+        <div className="flex items-center h-[76.8px] w-full">
+          {/* Logo left of Docs */}
+          <Link href="/" className="flex items-center space-x-3 group pl-0 ml-0 mr-8">
             <div className="text-teal-400 group-hover:text-teal-300 transition-colors">
               <ElephantLogo size="sm" animated={false} />
             </div>
@@ -33,9 +33,8 @@ const Header = () => {
               pgelephant
             </span>
           </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Centered menu */}
+          <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -97,15 +96,17 @@ const Header = () => {
               </div>
             </div>
           </nav>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-slate-300 hover:text-teal-300 transition-colors"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+          {/* Getting Started button right */}
+          <div className="flex items-center justify-end min-w-[180px]">
+            <Link href="/docs/rale/getting-started" className="px-6 py-2 bg-teal-500 text-white font-bold rounded-full shadow hover:bg-teal-400 transition-all duration-200 text-lg">Getting Started</Link>
+          </div>
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden p-2 text-slate-300 hover:text-teal-300 transition-colors"
+        >
+          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
@@ -156,8 +157,9 @@ const Header = () => {
           </div>
         )}
       </div>
+      </div>
     </header>
-  )
+  );
 }
 
 export default Header 

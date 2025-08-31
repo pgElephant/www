@@ -2,14 +2,14 @@
   "/_not-found/page": "/_not-found",
   "/community/page": "/community",
   "/docs/fauxdb/getting-started/page": "/docs/fauxdb/getting-started",
-  "/docs/page": "/docs",
-  "/docs/rale/getting-started/page": "/docs/rale/getting-started",
-  "/docs/ram/getting-started/page": "/docs/ram/getting-started",
   "/blog/page": "/blog",
-  "/download/page": "/download",
-  "/fauxdb/page": "/fauxdb",
   "/page": "/",
-  "/pricing/page": "/pricing",
+  "/fauxdb/page": "/fauxdb",
+  "/docs/page": "/docs",
+  "/docs/ram/getting-started/page": "/docs/ram/getting-started",
   "/rale/page": "/rale",
-  "/ram/page": "/ram"
+  "/ram/page": "/ram",
+  "/download/page": "/download",
+  "/pricing/page": "/pricing",
+  "/docs/rale/getting-started/page": "/docs/rale/getting-started"
 }

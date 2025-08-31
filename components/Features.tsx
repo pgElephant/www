@@ -90,7 +90,7 @@ const Features = () => {
           ].map((project) => (
             <div
               key={project.name}
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-slate-400/30 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 group"
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 group"
             >
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center mb-4">
