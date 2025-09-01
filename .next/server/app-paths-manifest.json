@@ -1,15 +1,15 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/blog/page": "app/blog/page.js",
-  "/docs/page": "app/docs/page.js",
-  "/community/page": "app/community/page.js",
   "/docs/rale/getting-started/page": "app/docs/rale/getting-started/page.js",
-  "/fauxdb/page": "app/fauxdb/page.js",
-  "/docs/ram/getting-started/page": "app/docs/ram/getting-started/page.js",
-  "/page": "app/page.js",
-  "/pricing/page": "app/pricing/page.js",
+  "/community/page": "app/community/page.js",
   "/docs/fauxdb/getting-started/page": "app/docs/fauxdb/getting-started/page.js",
-  "/ram/page": "app/ram/page.js",
   "/download/page": "app/download/page.js",
-  "/rale/page": "app/rale/page.js"
+  "/docs/page": "app/docs/page.js",
+  "/docs/ram/getting-started/page": "app/docs/ram/getting-started/page.js",
+  "/ram/page": "app/ram/page.js",
+  "/rale/page": "app/rale/page.js",
+  "/fauxdb/page": "app/fauxdb/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/page": "app/page.js"
 }

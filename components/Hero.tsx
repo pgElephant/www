@@ -15,7 +15,7 @@ const Hero = () => {
       bg: commonBg,
       image: (
         <div className="absolute right-10 top-1/4 w-120 h-120">
-          <img src="/h1.jpg" alt="Hero Icon" className="w-full h-full object-cover" />
+          <img src="/h2.jpg" alt="Hero Icon" className="w-full h-full object-cover" />
         </div>
       ),
       icon: icons.RALE,
@@ -31,7 +31,7 @@ const Hero = () => {
       bg: commonBg,
       image: (
         <div className="absolute right-10 top-1/4 w-120 h-120">
-          <img src="/h2.jpg" alt="Hero Icon" className="w-full h-full object-cover" />
+          <img src="/h1.jpg" alt="Hero Icon" className="w-full h-full object-cover" />
         </div>
       ),
       icon: icons.RAM,
