@@ -1,4 +1,4 @@
-// File: /Users/ibrarahmed/pgelephant/pge/www/app/fauxdb/page.tsx
+// File: /Volumes/software/home/pge/pge/www/app/fauxdb/page.tsx
 import * as entry from '../../../../app/fauxdb/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

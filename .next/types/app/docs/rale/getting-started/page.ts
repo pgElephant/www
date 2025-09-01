@@ -1,4 +1,4 @@
-// File: /Users/ibrarahmed/pgelephant/pge/www/app/docs/rale/getting-started/page.tsx
+// File: /Volumes/software/home/pge/pge/www/app/docs/rale/getting-started/page.tsx
 import * as entry from '../../../../../../app/docs/rale/getting-started/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

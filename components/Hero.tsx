@@ -5,72 +5,59 @@ import { ArrowRight, Play, Database, Zap, Shield, Globe, Sparkles, Cpu, BarChart
 
 const Hero = () => {
   const commonBg = "bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 w-full h-full";
+  const icons = {
+    RALE: <Crown className="w-36 h-36 text-yellow-400" />, // RALE: Crown icon
+    RAM: <Database className="w-36 h-36 text-green-400" />, // RAM: Database icon
+    FauxDB: <FileText className="w-36 h-36 text-blue-400" /> // FauxDB: Document icon
+  };
   const slides = [
     {
       bg: commonBg,
       image: (
-        <svg viewBox="0 0 400 200" fill="none" className="absolute right-0 top-0 w-1/2 h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="300" cy="100" rx="120" ry="80" fill="url(#rale-main-gradient)" opacity="0.18" />
-          <defs>
-            <radialGradient id="rale-main-gradient" cx="0" cy="0" r="1" gradientTransform="translate(300 100) scale(120 80)" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#facc15" />
-              <stop offset="1" stopColor="#0d9488" />
-            </radialGradient>
-          </defs>
-        </svg>
+        <div className="absolute right-10 top-1/4 w-120 h-120">
+          <img src="/h1.jpg" alt="Hero Icon" className="w-full h-full object-cover" />
+        </div>
       ),
-  icon: <Crown className="w-12 h-12 text-yellow-400" />, // RALE: Crown/leader icon
-  title: "RALE - Resilient Adaptive Leader Election",
-  subtitle: "",
+      icon: icons.RALE,
+      title: "RALE - Resilient Adaptive Leader Election",
+      subtitle: "",
       titleColor: "text-yellow-200",
-  desc: "Enterprise-grade distributed consensus and leader election. Reliable, open source, and easy to integrate with any system.",
-        ctas: [
-          { label: "Learn More", href: "/blog/rale", className: "bg-yellow-400/80 text-slate-900" }
-        ]
-    },
-    {
+      desc: "Enterprise-grade distributed consensus and leader election. Reliable, open source, and easy to integrate with any system.",
+      ctas: [
+        { label: "Learn More", href: "/blog/rale", className: "bg-yellow-400/80 text-slate-900" }
+      ]
+        },
+        {
       bg: commonBg,
       image: (
-        <svg viewBox="0 0 400 200" fill="none" className="absolute left-0 top-0 w-1/2 h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="40" width="200" height="120" rx="60" fill="url(#ram-main-gradient)" opacity="0.16" />
-          <defs>
-            <linearGradient id="ram-main-gradient" x1="0" y1="100" x2="200" y2="100" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#22c55e" />
-              <stop offset="1" stopColor="#0d9488" />
-            </linearGradient>
-          </defs>
-        </svg>
+        <div className="absolute right-10 top-1/4 w-120 h-120">
+          <img src="/h2.jpg" alt="Hero Icon" className="w-full h-full object-cover" />
+        </div>
       ),
-    icon: <Settings className="w-12 h-12 text-green-400" />, // RAM: Settings/manager icon
-    title: "RAM - Resilient Adaptive Manager For PostgreSQL Cluster",
-  subtitle: "",
+      icon: icons.RAM,
+      title: "RAM - Resilient Adaptive Manager For PostgreSQL Cluster",
+      subtitle: "",
       titleColor: "text-green-200",
       desc: "Automated PostgreSQL failover and cluster management powered by RALE. High availability, resilience, and seamless scaling.",
-        ctas: [
-          { label: "Learn More", href: "/blog/ram", className: "bg-green-400/80 text-slate-900" }
-        ]
-    },
-    {
-      bg: commonBg,
-      image: (
-        <svg viewBox="0 0 400 200" fill="none" className="absolute right-0 top-0 w-1/2 h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="300" cy="100" r="80" fill="url(#fauxdb-main-gradient)" opacity="0.15" />
-          <defs>
-            <radialGradient id="fauxdb-main-gradient" cx="0" cy="0" r="1" gradientTransform="translate(300 100) scale(80)" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#38bdf8" />
-              <stop offset="1" stopColor="#0d9488" />
-            </radialGradient>
-          </defs>
-        </svg>
-      ),
-  icon: <FileText className="w-12 h-12 text-blue-400" />, // FauxDB: Document icon
-  title: "FauxDB - A PostgreSQL Based MongoDB compatible Document Database",
-    subtitle: "",
+      ctas: [
+        { label: "Learn More", href: "/blog/ram", className: "bg-green-400/80 text-slate-900" }
+      ]
+        },
+        {
+          bg: commonBg,
+          image: (
+            <div className="absolute right-10 top-1/4 w-120 h-120">
+              <img src="/h3.jpg" alt="Hero Icon" className="w-full h-full object-cover" />
+            </div>
+          ),
+      icon: icons.FauxDB,
+      title: "FauxDB - A PostgreSQL Based MongoDB compatible Document Database",
+      subtitle: "",
       titleColor: "text-blue-200",
       desc: "Scalable, flexible document database built on PostgreSQL. Fully open source and MongoDB API compatible for modern apps.",
-        ctas: [
-          { label: "Learn More", href: "/blog/fauxdb", className: "bg-blue-400/80 text-slate-900" }
-        ]
+      ctas: [
+        { label: "Learn More", href: "/blog/fauxdb", className: "bg-blue-400/80 text-slate-900" }
+      ]
     }
   ];
   const [active, setActive] = useState(0);
@@ -102,13 +89,14 @@ const Hero = () => {
           {/* Slideable Product Highlights Carousel */}
           <div className="flex flex-col items-start w-full">
             <div className={`w-full ${slides[active].bg} shadow-none flex flex-col items-start justify-center transition-all duration-500 relative overflow-hidden`} style={{minHeight: '480px'}}>
+              {slides[active].image}
               {/* Remove per-slide image overlays for a unified look */}
               {/* Ensure consistent height for all slides */}
               {/* minHeight is already set to 480px, but let's enforce it for all screen sizes */}
               {/* Optionally, you can use h-[480px] for Tailwind or set minHeight inline for all slides */}
               <div className="relative z-10 flex flex-col items-start justify-center w-full px-16 py-12">
                 <div className="flex items-center justify-start mb-8 w-full">
-                  <div className="flex items-center justify-center w-36 h-36 rounded-3xl bg-white/10 border border-white/20 shadow-lg">
+                  <div className="flex items-center justify-center w-48 h-48 rounded-3xl bg-white/10 border border-white/20 shadow-lg">
                     {slides[active].icon}
                   </div>
                 </div>
@@ -152,4 +140,4 @@ const Hero = () => {
   )
 }
 
-export default Hero 
+export default Hero

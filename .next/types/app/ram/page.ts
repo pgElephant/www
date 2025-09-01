@@ -1,4 +1,4 @@
-// File: /Users/ibrarahmed/pgelephant/pge/www/app/ram/page.tsx
+// File: /Volumes/software/home/pge/pge/www/app/ram/page.tsx
 import * as entry from '../../../../app/ram/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
