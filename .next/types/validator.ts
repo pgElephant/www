@@ -54,6 +54,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../app/blog/postgresql-high-availability-guide/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/postgresql-high-availability-guide">> = Specific
+  const handler = {} as typeof import("../../app/blog/postgresql-high-availability-guide/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/blog/rale/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/blog/rale">> = Specific
@@ -90,6 +99,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/fauxdb/docker/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/docker">> = Specific
+  const handler = {} as typeof import("../../app/docs/fauxdb/docker/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/fauxdb/getting-started/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/getting-started">> = Specific
@@ -117,10 +135,28 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/ram/docker/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/docker">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/docker/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/ram/getting-started/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/ram/getting-started">> = Specific
   const handler = {} as typeof import("../../app/docs/ram/getting-started/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/ram/kubernetes/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/kubernetes">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/kubernetes/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

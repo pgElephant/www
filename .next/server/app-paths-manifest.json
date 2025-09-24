@@ -1,10 +1,1 @@
-{
-  "/community/page": "app/community/page.js",
-  "/page": "app/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/blog/ram/page": "app/blog/ram/page.js",
-  "/docs/page": "app/docs/page.js",
-  "/blog/rale/page": "app/blog/rale/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/download/page": "app/download/page.js"
-}
+{}

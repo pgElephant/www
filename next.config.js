@@ -8,8 +8,10 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   images: {
-    domains: ['github.com', 'avatars.githubusercontent.com'],
+    domains: ['github.com', 'avatars.githubusercontent.com', 'pgelephant.com'],
     formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   // Enable compression
   compress: true,
@@ -19,6 +21,12 @@ const nextConfig = {
   // Production optimizations
   poweredByHeader: false,
   generateEtags: false,
+  
+  // SEO optimizations
+  trailingSlash: false,
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
   
   // Security headers
   async headers() {
@@ -62,6 +70,36 @@ const nextConfig = {
       {
         source: '/home',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/documentation',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/guide',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/tutorial',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/postgresql-ha',
+        destination: '/ram',
+        permanent: true,
+      },
+      {
+        source: '/mongodb-alternative',
+        destination: '/fauxdb',
+        permanent: true,
+      },
+      {
+        source: '/consensus',
+        destination: '/rale',
         permanent: true,
       },
     ]
