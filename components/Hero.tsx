@@ -109,31 +109,9 @@ const Hero = () => {
 
       <div className="container-wide py-20 relative z-10">
         <div className="max-w-6xl mx-auto">
-          {/* CTAs */}
-          <div className="text-center mb-16">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/download"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg"
-                style={{ backgroundColor: palette.orange, color: palette.white }}
-                onMouseEnter={e => ((e.currentTarget.style.backgroundColor = palette.orangeDark))}
-                onMouseLeave={e => ((e.currentTarget.style.backgroundColor = palette.orange))}
-              >
-                Start a free trial
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/docs"
-                className="inline-flex items-center justify-center gap-2 bg-transparent text-white px-8 py-4 rounded-lg font-semibold border transition-all duration-200"
-                style={{ borderColor: 'rgba(255,255,255,0.35)' }}
-              >
-                Learn more
-              </Link>
-            </div>
-          </div>
 
           {/* Product showcase */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto mt-8">
               <div className="mb-8">
                 <div className="mb-6">
                   <div className="flex items-center gap-6 mb-4">

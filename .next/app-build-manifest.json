@@ -15,41 +15,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
-    ],
-    "/community/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/community/page.js"
-    ],
-    "/download/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/download/page.js"
-    ],
-    "/contact/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/contact/page.js"
-    ],
-    "/rale/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/rale/page.js"
-    ],
-    "/ram/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/ram/page.js"
-    ],
-    "/fauxdb/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/fauxdb/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
