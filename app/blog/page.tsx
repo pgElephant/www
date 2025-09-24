@@ -1,92 +1,54 @@
 'use client'
 
 import React from 'react'
-import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Zap, Users, TrendingUp } from 'lucide-react'
+import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Zap, Users, TrendingUp, Crown, Settings, FileText } from 'lucide-react'
 
 const BlogPage = () => {
   const blogPosts = [
     {
       id: 1,
-      title: 'pgelephant v1.2.0 Released: Improved Failover Performance',
-      excerpt: 'We\'re excited to announce the release of pgelephant v1.2.0, featuring significant improvements to failover performance, enhanced monitoring capabilities, and better multi-zone support.',
-      author: 'pgelephant Team',
+      title: 'RALE - Resilient Adaptive Leader Election',
+      excerpt: 'Deep dive into how pgelephant uses RALE consensus algorithm for leader election and maintaining consistency across PostgreSQL nodes.',
+      author: 'pgElephant Team',
       date: '2024-01-15',
-      readTime: '5 min read',
-      category: 'Release',
-      tags: ['release', 'performance', 'failover'],
+      readTime: '8 min read',
+      category: 'Technical',
+      tags: ['technical', 'rale', 'consensus'],
       featured: true,
-      image: '/blog/v1.2.0-release.jpg'
+      image: '/blog/rale-consensus.jpg',
+      href: '/blog/rale'
     },
     {
       id: 2,
-      title: 'How Company X Achieved 99.99% Uptime with pgelephant',
-      excerpt: 'A detailed case study showing how a leading fintech company implemented pgelephant to achieve enterprise-grade PostgreSQL high availability and eliminate downtime.',
-      author: 'Sarah Chen',
-      date: '2024-01-10',
-      readTime: '8 min read',
-      category: 'Case Study',
-      tags: ['case-study', 'enterprise', 'uptime'],
+      title: 'RAM - Resilient Adaptive Manager',
+      excerpt: 'Learn about RAM, the management layer that orchestrates PostgreSQL clusters using RALE consensus for automated failover and monitoring.',
+      author: 'pgElephant Team',
+      date: '2024-01-12',
+      readTime: '6 min read',
+      category: 'Technical',
+      tags: ['technical', 'ram', 'management'],
       featured: false,
-      image: '/blog/company-x-case-study.jpg'
+      image: '/blog/ram-management.jpg',
+      href: '/blog/ram'
     },
     {
       id: 3,
-      title: 'Multi-Zone PostgreSQL Deployment: Best Practices',
-      excerpt: 'Learn how to deploy PostgreSQL clusters across multiple availability zones for maximum resilience and performance using pgelephant.',
-      author: 'Michael Rodriguez',
-      date: '2024-01-05',
-      readTime: '12 min read',
-      category: 'Tutorial',
-      tags: ['tutorial', 'multi-zone', 'deployment'],
-      featured: false,
-      image: '/blog/multi-zone-deployment.jpg'
-    },
-    {
-      id: 4,
-      title: 'Understanding RALE Consensus in PostgreSQL Clustering',
-      excerpt: 'Deep dive into how pgelephant uses RALE consensus algorithm for leader election and maintaining consistency across PostgreSQL nodes.',
-      author: 'Dr. Alex Thompson',
-      date: '2024-01-01',
-      readTime: '15 min read',
+      title: 'FauxDB - MongoDB Compatible Document Database',
+      excerpt: 'Discover FauxDB, a PostgreSQL-based document database that provides MongoDB API compatibility with ACID compliance and better reliability.',
+      author: 'pgElephant Team',
+      date: '2024-01-10',
+      readTime: '7 min read',
       category: 'Technical',
-      tags: ['technical', 'rale', 'consensus'],
+      tags: ['technical', 'fauxdb', 'mongodb'],
       featured: false,
-      image: '/blog/rale-consensus.jpg'
+      image: '/blog/fauxdb-document.jpg',
+      href: '/blog/fauxdb'
     },
-    {
-      id: 5,
-      title: 'Performance Benchmarks: pgelephant vs Traditional HA Solutions',
-      excerpt: 'Comprehensive performance comparison showing how pgelephant outperforms traditional PostgreSQL high availability solutions in real-world scenarios.',
-      author: 'pgelephant Team',
-      date: '2023-12-28',
-      readTime: '10 min read',
-      category: 'Benchmark',
-      tags: ['benchmark', 'performance', 'comparison'],
-      featured: false,
-      image: '/blog/performance-benchmarks.jpg'
-    },
-    {
-      id: 6,
-      title: 'Community Spotlight: Top Contributors of 2023',
-      excerpt: 'Celebrating the amazing contributors who helped make pgelephant better throughout 2023, with insights into their contributions and impact.',
-      author: 'Community Team',
-      date: '2023-12-25',
-      readTime: '6 min read',
-      category: 'Community',
-      tags: ['community', 'contributors', '2023'],
-      featured: false,
-      image: '/blog/community-spotlight.jpg'
-    }
   ]
 
   const categories = [
-    { name: 'All', count: 6, active: true },
-    { name: 'Release', count: 1, active: false },
-    { name: 'Tutorial', count: 1, active: false },
-    { name: 'Case Study', count: 1, active: false },
-    { name: 'Technical', count: 1, active: false },
-    { name: 'Community', count: 1, active: false },
-    { name: 'Benchmark', count: 1, active: false }
+    { name: 'All', count: 3, active: true },
+    { name: 'Technical', count: 3, active: false }
   ]
 
   const featuredPost = blogPosts.find(post => post.featured)
@@ -184,7 +146,7 @@ const BlogPage = () => {
                   <span>{featuredPost.readTime}</span>
                 </div>
                 <a
-                  href="/docs"
+                  href={featuredPost.href}
                   className="inline-flex items-center text-teal-300 hover:text-teal-200 font-medium"
                 >
                   Read full article
@@ -192,7 +154,12 @@ const BlogPage = () => {
                 </a>
               </div>
               <div className="bg-slate-100/20 rounded-xl h-64 flex items-center justify-center border border-slate-400/30">
-                <span className="text-slate-400">Featured Image</span>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-400/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-yellow-400/30">
+                    <Crown className="w-8 h-8 text-yellow-400" />
+                  </div>
+                  <span className="text-slate-400 text-sm">RALE Consensus Algorithm</span>
+                </div>
               </div>
             </div>
           </div>
@@ -205,7 +172,32 @@ const BlogPage = () => {
           {blogPosts.filter(post => !post.featured).map((post) => (
             <article key={post.id} className="bg-white/10 backdrop-blur-sm rounded-xl border border-slate-400/30 hover:shadow-lg transition-shadow">
               <div className="bg-slate-100/20 rounded-t-xl h-48 flex items-center justify-center border-b border-slate-400/30">
-                <span className="text-slate-400">Post Image</span>
+                <div className="text-center">
+                  {post.title.includes('RALE') && (
+                    <>
+                      <div className="w-12 h-12 bg-yellow-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-yellow-400/30">
+                        <Crown className="w-6 h-6 text-yellow-400" />
+                      </div>
+                      <span className="text-slate-400 text-sm">RALE Consensus</span>
+                    </>
+                  )}
+                  {post.title.includes('RAM') && (
+                    <>
+                      <div className="w-12 h-12 bg-green-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-green-400/30">
+                        <Settings className="w-6 h-6 text-green-400" />
+                      </div>
+                      <span className="text-slate-400 text-sm">RAM Management</span>
+                    </>
+                  )}
+                  {post.title.includes('FauxDB') && (
+                    <>
+                      <div className="w-12 h-12 bg-blue-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-blue-400/30">
+                        <FileText className="w-6 h-6 text-blue-400" />
+                      </div>
+                      <span className="text-slate-400 text-sm">FauxDB Document</span>
+                    </>
+                  )}
+                </div>
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
@@ -229,7 +221,7 @@ const BlogPage = () => {
                     {post.author}
                   </div>
                   <a
-                    href="/docs"
+                    href={post.href}
                     className="text-teal-300 hover:text-teal-200 font-medium text-sm"
                   >
                     Read more

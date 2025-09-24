@@ -135,49 +135,54 @@ const Comparison = () => {
 
         {/* Comparison Table */}
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-slate-400/30 overflow-hidden relative z-10">
-          {/* Table Header */}
-          <div className="bg-slate-100/20 backdrop-blur-sm border-b border-slate-400/30 p-6 md:p-8">
-            <div className="grid grid-cols-4 gap-4 items-center">
-              <div className="text-lg font-semibold text-white">Feature</div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <Crown className="w-6 h-6 mr-2 text-teal-400" />
-                  <span className="font-bold text-lg text-white">pgelephant</span>
+          {/* Mobile scrollable wrapper */}
+          <div className="overflow-x-auto">
+            <div className="min-w-[600px]">
+              {/* Table Header */}
+              <div className="bg-slate-100/20 backdrop-blur-sm border-b border-slate-400/30 p-4 md:p-6 lg:p-8">
+                <div className="grid grid-cols-4 gap-4 items-center">
+                  <div className="text-sm md:text-lg font-semibold text-white">Feature</div>
+                  <div className="text-center">
+                    <div className="flex items-center justify-center mb-2">
+                      <Crown className="w-4 h-4 md:w-6 md:h-6 mr-1 md:mr-2 text-teal-400" />
+                      <span className="font-bold text-sm md:text-lg text-white">pgelephant</span>
+                    </div>
+                    <div className="text-teal-400 text-xs md:text-sm font-medium">Recommended</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-semibold text-sm md:text-lg text-slate-300">Patroni</div>
+                    <div className="text-slate-400 text-xs md:text-sm">Complex</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="font-semibold text-sm md:text-lg text-slate-300">repmgr</div>
+                    <div className="text-slate-400 text-xs md:text-sm">Basic</div>
+                  </div>
                 </div>
-                <div className="text-teal-400 text-sm font-medium">Recommended</div>
               </div>
-              <div className="text-center">
-                <div className="font-semibold text-lg text-slate-300">Patroni</div>
-                <div className="text-slate-400 text-sm">Complex</div>
-              </div>
-              <div className="text-center">
-                <div className="font-semibold text-lg text-slate-300">repmgr</div>
-                <div className="text-slate-400 text-sm">Basic</div>
+
+              {/* Table Body */}
+              <div className="divide-y divide-slate-400/30">
+                {features.map((feature) => (
+                  <div
+                    key={feature.feature}
+                    className="grid grid-cols-4 gap-4 p-3 md:p-4 lg:p-6 hover:bg-slate-100/20 transition-colors"
+                  >
+                    <div className="font-medium text-white flex items-center text-sm md:text-base">
+                      {feature.feature}
+                    </div>
+                    <div className="text-center flex items-center justify-center">
+                      {getFeatureDisplay(feature.pgelephant, feature.showIcon)}
+                    </div>
+                    <div className="text-center flex items-center justify-center">
+                      {getFeatureDisplay(feature.patroni, feature.showIcon)}
+                    </div>
+                    <div className="text-center flex items-center justify-center">
+                      {getFeatureDisplay(feature.repmgr, feature.showIcon)}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-
-          {/* Table Body */}
-          <div className="divide-y divide-slate-400/30">
-            {features.map((feature) => (
-              <div
-                key={feature.feature}
-                className="grid grid-cols-4 gap-4 p-4 md:p-6 hover:bg-slate-100/20 transition-colors"
-              >
-                <div className="font-medium text-white flex items-center">
-                  {feature.feature}
-                </div>
-                <div className="text-center flex items-center justify-center">
-                  {getFeatureDisplay(feature.pgelephant, feature.showIcon)}
-                </div>
-                <div className="text-center flex items-center justify-center">
-                  {getFeatureDisplay(feature.patroni, feature.showIcon)}
-                </div>
-                <div className="text-center flex items-center justify-center">
-                  {getFeatureDisplay(feature.repmgr, feature.showIcon)}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
 
@@ -242,13 +247,13 @@ const Comparison = () => {
             <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
               Join thousands of developers who have switched to pgelephant for their PostgreSQL high availability needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/download" className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center">
-                <Database className="w-5 h-5 mr-2" />
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <a href="/download" className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 sm:px-8 rounded-lg font-semibold transition-colors flex items-center justify-center text-sm sm:text-base">
+                <Database className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Try pgelephant Free
               </a>
-              <a href="/docs" className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center">
-                <Shield className="w-5 h-5 mr-2" />
+              <a href="/docs" className="border-2 border-white text-white px-6 py-3 sm:px-8 rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center text-sm sm:text-base">
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 View Documentation
               </a>
             </div>

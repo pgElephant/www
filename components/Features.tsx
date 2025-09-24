@@ -64,7 +64,7 @@ const Features = () => {
               Explore our core products powering PostgreSQL High Availability and flexible data management.
             </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {[
             {
               name: 'RALE',
@@ -90,20 +90,20 @@ const Features = () => {
           ].map((project) => (
             <div
               key={project.name}
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 group"
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300 group"
             >
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center mb-4">
                   <project.icon className="w-10 h-10 text-teal-400" />
                 </div>
-                <h4 className="text-2xl font-bold text-white mb-2">{project.name}</h4>
-                <p className="text-slate-300 text-sm leading-relaxed">{project.description}</p>
+                <h4 className="text-xl md:text-2xl font-bold text-white mb-2">{project.name}</h4>
+                <p className="text-slate-300 text-sm md:text-base leading-relaxed">{project.description}</p>
               </div>
               
               <div className="space-y-2 mb-6">
                 {project.features.map((feature) => (
-                  <div key={feature} className="flex items-center text-sm text-slate-300">
-                    <CheckCircle className="w-4 h-4 text-teal-400 mr-2 flex-shrink-0" />
+                  <div key={feature} className="flex items-center text-xs md:text-sm text-slate-300">
+                    <CheckCircle className="w-3 h-3 md:w-4 md:h-4 text-teal-400 mr-2 flex-shrink-0" />
                     {feature}
                   </div>
                 ))}
@@ -111,7 +111,7 @@ const Features = () => {
               
               <a
                 href={project.href}
-                className="group inline-flex items-center justify-center w-full px-6 py-3 bg-teal-600/20 border border-teal-400/30 text-teal-300 font-semibold rounded-xl hover:bg-teal-600/30 hover:border-teal-400/50 transition-all duration-200"
+                className="group inline-flex items-center justify-center w-full px-4 py-2 md:px-6 md:py-3 bg-teal-600/20 border border-teal-400/30 text-teal-300 font-semibold rounded-xl hover:bg-teal-600/30 hover:border-teal-400/50 transition-all duration-200 text-sm md:text-base"
               >
                 <ArrowRight className="w-4 h-4 mr-2" />
                 Learn More

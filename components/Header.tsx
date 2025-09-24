@@ -10,14 +10,15 @@ const Header = () => {
   const navigation = [
     { name: 'Docs', href: '/docs' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Community', href: 'https://github.com/pgElephant' },
+    { name: 'Community', href: '/community' },
     { name: 'Download', href: '/download' },
+    { name: 'Contact', href: '/contact' },
   ]
 
   const githubProjects = [
-    { name: 'RALE', href: 'https://github.com/pgElephant/rale', description: 'High Availability' },
-    { name: 'RAM', href: 'https://github.com/pgElephant/ram', description: 'Resource Management' },
-    { name: 'FauxDB', href: 'https://github.com/pgElephant/fauxdb', description: 'Document Database' },
+    { name: 'RALE', href: '/rale', description: 'High Availability' },
+    { name: 'RAM', href: '/ram', description: 'Resource Management' },
+    { name: 'FauxDB', href: '/fauxdb', description: 'Document Database' },
   ]
 
   return (
@@ -61,8 +62,6 @@ const Header = () => {
                     <a
                       key={project.name}
                       href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="flex items-start p-3 rounded-lg hover:bg-slate-500/50 transition-colors duration-200 group/item"
                     >
                       <Github className="w-5 h-5 text-teal-400 mt-0.5 mr-3 flex-shrink-0" />
@@ -96,8 +95,8 @@ const Header = () => {
               </div>
             </div>
           </nav>
-          {/* Getting Started button right */}
-          <div className="flex items-center justify-end min-w-[180px]">
+          {/* Getting Started button right - hidden on mobile */}
+          <div className="hidden md:flex items-center justify-end min-w-[180px]">
             <Link href="/docs/rale/getting-started" className="px-6 py-2 bg-teal-500 text-white font-bold rounded-full shadow hover:bg-teal-400 transition-all duration-200 text-lg">Getting Started</Link>
           </div>
         {/* Mobile menu button */}
@@ -124,17 +123,25 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              {/* Mobile GitHub Projects */}
+              {/* Mobile Getting Started Button */}
+              <div className="border-t border-slate-400/30 pt-2 mt-2">
+                <Link
+                  href="/docs/rale/getting-started"
+                  className="flex items-center px-3 py-2 bg-teal-500 text-white hover:bg-teal-400 rounded-md font-medium transition-all duration-200 justify-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Getting Started
+                </Link>
+              </div>
+              {/* Mobile Projects */}
               <div className="border-t border-slate-400/30 pt-2 mt-2">
                 <div className="px-3 py-2 text-sm font-medium text-slate-400 uppercase tracking-wider">
-                  GitHub Projects
+                  Projects
                 </div>
                 {githubProjects.map((project) => (
                   <a
                     key={project.name}
                     href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="flex items-center px-3 py-2 text-slate-300 hover:text-teal-300 hover:bg-slate-400/20 rounded-md font-medium transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >

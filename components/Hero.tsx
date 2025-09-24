@@ -101,40 +101,40 @@ const Hero = () => {
 
           {/* Slideable Product Highlights Carousel */}
           <div className="flex flex-col items-start w-full">
-            <div className={`w-full ${slides[active].bg} shadow-none flex flex-col items-start justify-center transition-all duration-500 relative overflow-hidden`} style={{minHeight: '480px'}}>
+            <div className={`w-full ${slides[active].bg} shadow-none flex flex-col items-start justify-center transition-all duration-500 relative overflow-hidden`} style={{minHeight: '400px'}}>
               {/* Remove per-slide image overlays for a unified look */}
               {/* Ensure consistent height for all slides */}
               {/* minHeight is already set to 480px, but let's enforce it for all screen sizes */}
               {/* Optionally, you can use h-[480px] for Tailwind or set minHeight inline for all slides */}
-              <div className="relative z-10 flex flex-col items-start justify-center w-full px-16 py-12">
-                <div className="flex items-center justify-start mb-8 w-full">
-                  <div className="flex items-center justify-center w-36 h-36 rounded-3xl bg-white/10 border border-white/20 shadow-lg">
+              <div className="relative z-10 flex flex-col items-start justify-center w-full px-4 sm:px-8 md:px-16 py-8 md:py-12">
+                <div className="flex items-center justify-start mb-6 md:mb-8 w-full">
+                  <div className="flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-2xl md:rounded-3xl bg-white/10 border border-white/20 shadow-lg">
                     {slides[active].icon}
                   </div>
                 </div>
                 <div className="w-full max-w-3xl">
                 </div>
                 <div className="w-full max-w-5xl">
-                  <h2 className={`font-extrabold mb-2 leading-tight ${slides[active].titleColor} text-left whitespace-nowrap text-2xl md:text-4xl`} style={{ maxWidth: '100%', width: '100%' }}>{slides[active].title}</h2>
+                  <h2 className={`font-extrabold mb-2 leading-tight ${slides[active].titleColor} text-left text-lg sm:text-xl md:text-2xl lg:text-4xl`} style={{ maxWidth: '100%', width: '100%' }}>{slides[active].title}</h2>
                   {slides[active].subtitle && slides[active].subtitle.trim() !== "" && (
-                    <div className={`italic text-base md:text-xl font-semibold mb-6 text-left ${active === 2 ? 'text-blue-100' : active === 1 ? 'text-green-100' : 'text-yellow-100'}`}>{slides[active].subtitle}</div>
+                    <div className={`italic text-sm sm:text-base md:text-xl font-semibold mb-4 md:mb-6 text-left ${active === 2 ? 'text-blue-100' : active === 1 ? 'text-green-100' : 'text-yellow-100'}`}>{slides[active].subtitle}</div>
                   )}
-                  <p className="text-2xl md:text-3xl text-slate-100 mb-8 leading-snug text-left">{slides[active].desc}</p>
-                  <div className="flex flex-wrap gap-6 mb-8 justify-start">
+                  <p className="text-base sm:text-lg md:text-2xl lg:text-3xl text-slate-100 mb-6 md:mb-8 leading-snug text-left">{slides[active].desc}</p>
+                  <div className="flex flex-wrap gap-3 md:gap-6 mb-6 md:mb-8 justify-start">
                     {slides[active].ctas.map((cta, idx) => (
-                      <a key={idx} href={cta.href} className={`px-10 py-5 text-lg font-bold rounded-2xl shadow-lg hover:scale-105 transition ${cta.className}`}>{cta.label}</a>
+                      <a key={idx} href={cta.href} className={`px-6 py-3 md:px-10 md:py-5 text-sm md:text-lg font-bold rounded-xl md:rounded-2xl shadow-lg hover:scale-105 transition ${cta.className}`}>{cta.label}</a>
                     ))}
                   </div>
-                  <div className="flex gap-8 mt-2 justify-start">
+                  <div className="flex flex-col sm:flex-row gap-4 md:gap-8 mt-2 justify-start">
                     <button
-                      className={`px-6 py-3 rounded-full bg-slate-800 text-white font-bold text-xl shadow-lg hover:bg-teal-600 transition-all duration-200 ${active === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`px-4 py-2 md:px-6 md:py-3 rounded-full bg-slate-800 text-white font-bold text-sm md:text-xl shadow-lg hover:bg-teal-600 transition-all duration-200 ${active === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
                       onClick={() => setActive((a) => Math.max(a - 1, 0))}
                       disabled={active === 0}
                     >
                       &#8592; Prev
                     </button>
                     <button
-                      className={`px-6 py-3 rounded-full bg-slate-800 text-white font-bold text-xl shadow-lg hover:bg-teal-600 transition-all duration-200 ${active === slides.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`px-4 py-2 md:px-6 md:py-3 rounded-full bg-slate-800 text-white font-bold text-sm md:text-xl shadow-lg hover:bg-teal-600 transition-all duration-200 ${active === slides.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
                       onClick={() => setActive((a) => Math.min(a + 1, slides.length - 1))}
                       disabled={active === slides.length - 1}
                     >

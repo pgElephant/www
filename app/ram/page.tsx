@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import { Settings } from 'lucide-react'
 
 export default function RamPage() {
   return (
@@ -23,19 +22,18 @@ export default function RamPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
-        <Header />
-        <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
+        <section className="pt-16 md:pt-20 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-500/20 to-cyan-500/15 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-teal-300/15 to-cyan-300/10 rounded-full blur-2xl" />
+            <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-green-400/20 to-green-300/15 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-green-500/20 to-green-400/15 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-green-300/15 to-green-200/10 rounded-full blur-2xl" />
           </div>
 
           {/* Grid Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, #0d9488 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 1px 1px, #22c55e 1px, transparent 0)`,
               backgroundSize: '50px 50px'
             }} />
           </div>
@@ -45,15 +43,25 @@ export default function RamPage() {
 
           <div className="container-custom py-16 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                RAM
-              </h1>
-              <p className="text-xl text-slate-300 mb-8">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-20 h-20 bg-green-400/20 rounded-2xl flex items-center justify-center mr-4 border border-green-400/30">
+                  <Settings className="w-10 h-10 text-green-400" />
+                </div>
+                <div>
+                  <h1 className="text-4xl md:text-5xl font-bold text-green-200 mb-2">
+                    RAM
+                  </h1>
+                  <p className="text-xl text-slate-300">
+                    Resilient Adaptive Manager
+                  </p>
+                </div>
+              </div>
+              <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto">
                 Automated PostgreSQL failover and cluster management powered by RALE. High availability, resilience, and seamless scaling.
               </p>
             </div>
           </div>
-        </div>
+        </section>
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-8">What is RAM?</h2>
@@ -88,7 +96,6 @@ export default function RamPage() {
             </a>
           </div>
         </section>
-        <Footer />
       </main>
     </>
   )

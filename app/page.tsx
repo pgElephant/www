@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
-
+import Architecture from '@/components/Architecture'
 import Comparison from '@/components/Comparison'
 
 import Footer from '@/components/Footer'
@@ -33,6 +33,7 @@ export default function Home() {
         <Header />
         <Hero />
         <Features />
+        <Architecture />
         <Comparison />
         {/* ...existing code... */}
   {/* Footer is rendered by layout.tsx, removed to avoid duplication */}

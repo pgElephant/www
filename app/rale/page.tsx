@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import { Crown } from 'lucide-react'
 
 export default function RalePage() {
   return (
@@ -23,19 +22,18 @@ export default function RalePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
-        <Header />
-        <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
+        <section className="pt-16 md:pt-20 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-500/20 to-cyan-500/15 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-teal-300/15 to-cyan-300/10 rounded-full blur-2xl" />
+            <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-yellow-400/20 to-yellow-300/15 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-yellow-500/20 to-yellow-400/15 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-yellow-300/15 to-yellow-200/10 rounded-full blur-2xl" />
           </div>
 
           {/* Grid Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, #0d9488 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 1px 1px, #facc15 1px, transparent 0)`,
               backgroundSize: '50px 50px'
             }} />
           </div>
@@ -45,15 +43,25 @@ export default function RalePage() {
 
           <div className="container-custom py-16 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                RALE
-              </h1>
-              <p className="text-xl text-slate-300 mb-8">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-20 h-20 bg-yellow-400/20 rounded-2xl flex items-center justify-center mr-4 border border-yellow-400/30">
+                  <Crown className="w-10 h-10 text-yellow-400" />
+                </div>
+                <div>
+                  <h1 className="text-4xl md:text-5xl font-bold text-yellow-200 mb-2">
+                    RALE
+                  </h1>
+                  <p className="text-xl text-slate-300">
+                    Resilient Adaptive Leader Election
+                  </p>
+                </div>
+              </div>
+              <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto">
                 Enterprise-grade distributed consensus and leader election. Reliable, open source, and easy to integrate with any system.
               </p>
             </div>
           </div>
-        </div>
+        </section>
         <section className="py-16 px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-8">What is RALE?</h2>
@@ -96,7 +104,6 @@ export default function RalePage() {
             </a>
           </div>
         </section>
-        <Footer />
       </main>
     </>
   )
