@@ -97,7 +97,7 @@ const Header = () => {
           </nav>
           {/* Getting Started button right - hidden on mobile */}
           <div className="hidden md:flex items-center justify-end min-w-[180px]">
-            <Link href="/docs/rale/getting-started" className="px-6 py-2 bg-teal-500 text-white font-bold rounded-full shadow hover:bg-teal-400 transition-all duration-200 text-lg">Getting Started</Link>
+            <Link href="/docs" className="px-6 py-2 bg-teal-500 text-white font-bold rounded-full shadow hover:bg-teal-400 transition-all duration-200 text-lg">Getting Started</Link>
           </div>
         {/* Mobile menu button */}
         <button

@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Source_Sans_3, Inter } from 'next/font/google'
 import dynamic from 'next/dynamic'
 import './globals.css'
 
@@ -14,7 +14,18 @@ const Footer = dynamic(() => import('@/components/Footer'), {
   ssr: true
 })
 
-const inter = Inter({ subsets: ['latin'] })
+const sourceSans = Source_Sans_3({ 
+  subsets: ['latin'],
+  variable: '--font-source-sans',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900']
+})
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap'
+})
 
 export const metadata: Metadata = {
   title: {
@@ -154,7 +165,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://twitter.com" />
       </head>
-      <body className={inter.className}>
+      <body className={`${sourceSans.variable} ${inter.variable} font-sans`}>
         <Header />
         {children}
         <Footer />

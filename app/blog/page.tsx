@@ -7,6 +7,19 @@ const BlogPage = () => {
   const blogPosts = [
     {
       id: 1,
+      title: 'pgElephant Enterprise Platform: The fastest way to build, deploy, and scale PostgreSQL applications',
+      excerpt: 'A unified PostgreSQL platform that breaks free from the complexity trap and transforms your database initiatives from concept to production in weeks, not months or years.',
+      author: 'pgElephant Team',
+      date: '2025-01-20',
+      readTime: '12 min read',
+      category: 'Enterprise',
+      tags: ['enterprise', 'platform', 'postgresql'],
+      featured: true,
+      image: '/blog/enterprise-platform.jpg',
+      href: '/blog/pgelephant-enterprise-postgresql-platform'
+    },
+    {
+      id: 2,
       title: 'RALE - Resilient Adaptive Leader Election',
       excerpt: 'Deep dive into how pgelephant uses RALE consensus algorithm for leader election and maintaining consistency across PostgreSQL nodes.',
       author: 'pgElephant Team',
@@ -14,12 +27,12 @@ const BlogPage = () => {
       readTime: '8 min read',
       category: 'Technical',
       tags: ['technical', 'rale', 'consensus'],
-      featured: true,
+      featured: false,
       image: '/blog/rale-consensus.jpg',
       href: '/blog/rale'
     },
     {
-      id: 2,
+      id: 3,
       title: 'RAM - Resilient Adaptive Manager',
       excerpt: 'Learn about RAM, the management layer that orchestrates PostgreSQL clusters using RALE consensus for automated failover and monitoring.',
       author: 'pgElephant Team',
@@ -32,7 +45,7 @@ const BlogPage = () => {
       href: '/blog/ram'
     },
     {
-      id: 3,
+      id: 4,
       title: 'FauxDB - MongoDB Compatible Document Database',
       excerpt: 'Discover FauxDB, a PostgreSQL-based document database that provides MongoDB API compatibility with ACID compliance and better reliability.',
       author: 'pgElephant Team',
@@ -47,7 +60,8 @@ const BlogPage = () => {
   ]
 
   const categories = [
-    { name: 'All', count: 3, active: true },
+    { name: 'All', count: 4, active: true },
+    { name: 'Enterprise', count: 1, active: false },
     { name: 'Technical', count: 3, active: false }
   ]
 
@@ -197,11 +211,23 @@ const BlogPage = () => {
                       <span className="text-slate-400 text-sm">FauxDB Document</span>
                     </>
                   )}
+                  {post.title.includes('pgElephant Enterprise') && (
+                    <>
+                      <div className="w-12 h-12 bg-teal-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-teal-400/30">
+                        <TrendingUp className="w-6 h-6 text-teal-400" />
+                      </div>
+                      <span className="text-slate-400 text-sm">Enterprise Platform</span>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="inline-flex items-center px-2 py-1 bg-teal-400/20 text-teal-300 rounded-full text-xs font-medium">
+                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                    post.category === 'Enterprise' 
+                      ? 'bg-teal-400/20 text-teal-300' 
+                      : 'bg-teal-400/20 text-teal-300'
+                  }`}>
                     {post.category}
                   </span>
                   <div className="flex items-center text-xs text-slate-400">

@@ -16,9 +16,9 @@ const Footer = () => {
       { name: 'Documentation', href: '/docs' },
       { name: 'Blog', href: '/blog' },
       { name: 'Community', href: '/community' },
-      { name: 'RALE - High Availability', href: 'https://github.com/pgElephant/rale' },
-      { name: 'RAM - Resource Management', href: 'https://github.com/pgElephant/ram' },
-      { name: 'FauxDB - Document Database', href: 'https://github.com/pgElephant/fauxdb' },
+      { name: 'RALE - High Availability', href: '/rale' },
+      { name: 'RAM - Resource Management', href: '/ram' },
+      { name: 'FauxDB - Document Database', href: '/fauxdb' },
     ],
     company: [
       { name: 'About', href: '/' },

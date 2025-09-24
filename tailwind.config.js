@@ -36,7 +36,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-source-sans)', 'Source Sans Pro', 'Inter', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-source-sans)', 'Source Sans Pro', 'sans-serif'],
+        body: ['var(--font-source-sans)', 'Source Sans Pro', 'sans-serif'],
+        display: ['var(--font-source-sans)', 'Source Sans Pro', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
