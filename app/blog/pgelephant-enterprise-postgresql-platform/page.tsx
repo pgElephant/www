@@ -101,7 +101,7 @@ const PgElephantEnterpriseBlogPage = () => {
 
         {/* Content */}
         <div className="container-custom py-12">
-          <div className="max-w-4xl mx-auto">
+          <div className="container-content">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30">
               <div className="prose prose-invert max-w-none">
                 

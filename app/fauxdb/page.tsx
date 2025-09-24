@@ -78,7 +78,7 @@ export default function FauxDBPage() {
         </section>
         {/* Architecture Section */}
         <section className="py-16 px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="container-wide">
             <h2 className="text-3xl font-bold text-white mb-8 text-center">Architecture</h2>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-12">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
@@ -122,7 +122,7 @@ export default function FauxDBPage() {
 
         {/* Key Features Section */}
         <section className="py-16 px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="container-wide">
             <h2 className="text-3xl font-bold text-white mb-8 text-center">Key Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
@@ -173,7 +173,7 @@ export default function FauxDBPage() {
 
         {/* MongoDB Compatibility Section */}
         <section className="py-16 px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="container-wide">
             <h2 className="text-3xl font-bold text-white mb-8 text-center">MongoDB Compatibility</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
@@ -218,7 +218,7 @@ export default function FauxDBPage() {
 
         {/* Quick Start Section */}
         <section className="py-16 px-8">
-          <div className="max-w-4xl mx-auto">
+          <div className="container-narrow">
             <h2 className="text-3xl font-bold text-white mb-8 text-center">Quick Start</h2>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
               <div className="space-y-6">
@@ -257,7 +257,7 @@ export default function FauxDBPage() {
 
         {/* Docker Support Section */}
         <section className="py-16 px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="container-wide">
             <h2 className="text-3xl font-bold text-white mb-8 text-center">Docker Support</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
@@ -302,7 +302,7 @@ export default function FauxDBPage() {
 
         {/* CTA Section */}
         <section className="py-16 px-8">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="container-narrow text-center">
             <h2 className="text-3xl font-bold text-white mb-8">Ready to Get Started?</h2>
             <p className="text-xl text-slate-300 mb-8">
               Experience the power of MongoDB compatibility with PostgreSQL reliability.

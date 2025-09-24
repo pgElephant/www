@@ -90,7 +90,7 @@ const BlogPage = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
 
         <div className="container-custom py-16 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="container-content text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Blog
             </h1>
