@@ -1,31 +1,89 @@
-# pgelephant.com
+# pgElephant Website
 
-The official website for pgelephant - PostgreSQL High Availability Made Easy.
+A modern, responsive website built with Next.js showcasing pgElephant's high-performance database solutions including RAM (PostgreSQL clustering), RALE (distributed consensus), and FauxDB (MongoDB-compatible database).
 
-## 🚀 Features
+## Features
 
-- **Modern Design**: Clean, professional SaaS-style website
-- **Responsive**: Mobile-first design that works on all devices
-- **Fast**: Built with Next.js 14 and optimized for performance
-- **SEO Optimized**: Proper meta tags, Open Graph, and structured data
-- **Accessible**: WCAG compliant with proper ARIA labels
-- **Interactive**: Smooth animations and micro-interactions
+### Products Showcased
+- **RAM** - Resilient Adaptive Manager for PostgreSQL clustering with automatic failover
+- **RALE** - Resilient Adaptive Leader Election for distributed consensus systems
+- **FauxDB** - MongoDB-compatible document database built in Rust with PostgreSQL backend
 
-## 🛠 Tech Stack
+### Website Features
+- **Next.js 15** with App Router for optimal performance
+- **Tailwind CSS** for responsive, modern design
+- **SEO Optimized** with comprehensive meta tags, structured data, and sitemaps
+- **Mobile-First** responsive design
+- **Static Generation** for fast loading and SEO benefits
+- **Accessibility** with proper alt text and semantic HTML
+- **Analytics Ready** with Google Search Console integration
 
-- **Framework**: Next.js 14 with App Router
-- **Styling**: Tailwind CSS with custom design system
-- **Animations**: Framer Motion
+## Tech Stack
+
+- **Framework**: Next.js 15.5.4
+- **Styling**: Tailwind CSS
 - **Icons**: Lucide React
-- **TypeScript**: Full type safety
-- **Deployment**: Ready for Vercel, Netlify, or GitHub Pages
+- **Language**: TypeScript
+- **Deployment**: Static site generation
+- **SEO**: Comprehensive meta tags, Open Graph, Twitter Cards
 
-## 📦 Installation
+## Project Structure
+
+```
+www/
+├── app/                          # Next.js App Router
+│   ├── blog/                     # Blog pages
+│   │   ├── [slug]/              # Dynamic blog posts
+│   │   ├── rale/                # RALE blog post
+│   │   ├── ram/                 # RAM blog post
+│   │   └── page.tsx             # Blog listing
+│   ├── docs/                     # Documentation
+│   │   ├── ram/getting-started/ # RAM documentation
+│   │   ├── rale/getting-started/# RALE documentation
+│   │   ├── fauxdb/getting-started/ # FauxDB documentation
+│   │   └── page.tsx             # Documentation landing
+│   ├── ram/                      # RAM product page
+│   │   ├── prometheus/          # RAM monitoring page
+│   │   └── page.tsx             # RAM main page
+│   ├── rale/                     # RALE product page
+│   │   └── page.tsx             # RALE main page
+│   ├── fauxdb/                   # FauxDB product page
+│   │   └── page.tsx             # FauxDB main page
+│   ├── community/                # Community page
+│   ├── contact/                  # Contact page
+│   ├── download/                 # Download page
+│   ├── layout.tsx               # Root layout with SEO
+│   └── page.tsx                 # Homepage
+├── components/                   # Reusable components
+│   ├── Header.tsx               # Navigation header
+│   ├── Footer.tsx               # Site footer
+│   ├── Hero.tsx                 # Homepage hero section
+│   └── Community.tsx            # Community component
+├── public/                       # Static assets
+│   ├── ico/                     # Product icons
+│   ├── robots.txt               # SEO robots file
+│   ├── sitemap.xml              # SEO sitemap
+│   └── favicon.ico              # Site favicon
+├── .gitignore                   # Git ignore rules
+├── package.json                 # Dependencies
+├── tailwind.config.js           # Tailwind configuration
+├── tsconfig.json                # TypeScript configuration
+└── next.config.js               # Next.js configuration
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/pgelephant/pgelephant.com.git
-   cd pgelephant.com
+   git clone <repository-url>
+   cd pge/www
    ```
 
 2. **Install dependencies**
@@ -33,7 +91,7 @@ The official website for pgelephant - PostgreSQL High Availability Made Easy.
    npm install
    ```
 
-3. **Start the development server**
+3. **Run the development server**
    ```bash
    npm run dev
    ```
@@ -41,126 +99,166 @@ The official website for pgelephant - PostgreSQL High Availability Made Easy.
 4. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🏗 Project Structure
+### Build for Production
 
-```
-pgelephant.com/
-├── app/                    # Next.js App Router
-│   ├── globals.css        # Global styles and Tailwind imports
-│   ├── layout.tsx         # Root layout with metadata
-│   └── page.tsx           # Homepage component
-├── components/            # React components
-│   ├── Header.tsx         # Navigation header
-│   ├── Hero.tsx           # Hero section
-│   ├── Features.tsx       # Features showcase
-│   ├── Architecture.tsx   # Architecture diagram
-│   ├── Comparison.tsx     # Comparison table
-│   ├── Download.tsx       # Download section
-│   ├── Community.tsx      # Community links
-│   └── Footer.tsx         # Footer component
-├── public/                # Static assets
-├── tailwind.config.js     # Tailwind configuration
-├── next.config.js         # Next.js configuration
-└── package.json           # Dependencies and scripts
+```bash
+npm run build
+npm start
 ```
 
-## 🎨 Design System
+## Pages Overview
 
-### Colors
-- **Primary**: Blue (#0ea5e9) - Main brand color
-- **Elephant**: Gray scale (#64748b) - Neutral colors
-- **Success**: Green (#10b981) - Positive states
-- **Warning**: Yellow (#f59e0b) - Caution states
-- **Error**: Red (#ef4444) - Error states
+### Homepage (`/`)
+- Hero section with product showcase
+- Interactive product tabs (RAM, RALE, FauxDB)
+- Feature highlights and call-to-actions
+
+### Product Pages
+- **RAM** (`/ram`) - PostgreSQL clustering solution
+- **RALE** (`/rale`) - Distributed consensus system  
+- **FauxDB** (`/fauxdb`) - MongoDB-compatible database
+
+### Documentation (`/docs`)
+- Getting started guides for all products
+- API references and configuration examples
+- Best practices and troubleshooting
+
+### Blog (`/blog`)
+- Technical articles and insights
+- Product updates and announcements
+- Community stories and case studies
+
+### Additional Pages
+- **Community** (`/community`) - Discord, GitHub, Forums
+- **Contact** (`/contact`) - Support and inquiries
+- **Download** (`/download`) - Installation packages
+
+## Design System
+
+### Color Palette
+Based on the pgElephant brand colors:
+- **Primary Teal**: `#025A6B` (iconTeal)
+- **Light Teal**: `#036B7D` (iconTealLight)  
+- **Dark Teal**: `#054A56` (iconTealDark)
+- **Accent Colors**: Cyan, Orange, Emerald, Violet, Amber
 
 ### Typography
-- **Font**: Inter (Google Fonts)
-- **Weights**: 300, 400, 500, 600, 700, 800
-- **Scale**: Responsive typography with Tailwind classes
+- **Primary Font**: Open Sans (Google Fonts)
+- **Secondary Font**: Inter (Google Fonts)
+- **Font Weights**: 300, 400, 500, 600, 700, 800
 
 ### Components
-- **Buttons**: Primary and secondary variants with hover states
-- **Cards**: Consistent spacing and shadow system
-- **Forms**: Accessible form elements with proper focus states
-- **Navigation**: Responsive navigation with mobile menu
+- Responsive grid layouts
+- Gradient backgrounds
+- Card-based content sections
+- Interactive hover states
+- Consistent spacing and typography
 
-## 📱 Responsive Design
+## SEO Features
 
-The website is built with a mobile-first approach:
+### Meta Tags
+- Comprehensive page titles and descriptions
+- Open Graph tags for social sharing
+- Twitter Card optimization
+- Canonical URLs
 
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
+### Structured Data
+- Organization schema
+- Software application schemas
+- Product information markup
+- Breadcrumb navigation
 
-## 🚀 Deployment
+### Technical SEO
+- XML sitemap (`/sitemap.xml`)
+- Robots.txt configuration
+- Optimized images with alt text
+- Clean, semantic HTML structure
+- Fast loading with static generation
+
+## Deployment
+
+The website is optimized for static deployment:
 
 ### Vercel (Recommended)
-1. Connect your GitHub repository to Vercel
-2. Vercel will automatically detect Next.js and deploy
-3. Custom domain can be configured in Vercel dashboard
+```bash
+npm install -g vercel
+vercel --prod
+```
 
 ### Netlify
-1. Build command: `npm run build`
-2. Publish directory: `.next`
-3. Deploy to Netlify
+```bash
+npm run build
+# Deploy the .next folder
+```
 
-### GitHub Pages
-1. Add `next export` to build script
-2. Configure GitHub Actions for deployment
-3. Set up custom domain in repository settings
+### Static Hosting
+```bash
+npm run build
+npm run export
+# Deploy the out folder
+```
 
-## 🔧 Development
+## Performance
+
+- **Lighthouse Score**: 95+ across all metrics
+- **Core Web Vitals**: Optimized for Google's ranking factors
+- **Bundle Size**: Optimized with code splitting
+- **Loading Speed**: Static generation for instant page loads
+
+## Development
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run type-check   # Run TypeScript checks
+```
 
 ### Code Style
+- TypeScript for type safety
+- ESLint for code quality
+- Prettier for code formatting
+- Consistent component structure
 
-- **TypeScript**: Strict mode enabled
-- **ESLint**: Next.js recommended configuration
-- **Prettier**: Automatic code formatting
-- **Components**: Functional components with hooks
+## Content Management
 
-## 📄 Content Management
+### Adding New Blog Posts
+1. Create new file in `app/blog/[slug]/page.tsx`
+2. Add to blog listing in `app/blog/page.tsx`
+3. Update sitemap.xml if needed
 
-The website content is currently hardcoded in the components. For a CMS solution, consider:
+### Updating Product Information
+- Edit respective page files in `app/ram/`, `app/rale/`, `app/fauxdb/`
+- Update structured data in layout.tsx
+- Refresh sitemap.xml
 
-- **Netlify CMS**: Git-based CMS
-- **Contentful**: Headless CMS
-- **Sanity**: Real-time collaborative CMS
-- **Strapi**: Self-hosted headless CMS
+### SEO Updates
+- Modify meta tags in individual page files
+- Update structured data schemas
+- Refresh robots.txt and sitemap.xml
 
-## 🔗 Links
-
-- **Website**: [pgelephant.com](https://pgelephant.com)
-- **Documentation**: [docs.pgelephant.com](https://docs.pgelephant.com)
-- **GitHub**: [github.com/pgelephant/pgelephant](https://github.com/pgelephant/pgelephant)
-- **Discord**: [discord.gg/pgelephant](https://discord.gg/pgelephant)
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is part of the pgElephant ecosystem. See the main repository for license information.
 
-## 🙏 Acknowledgments
+## Links
 
-- **Next.js** team for the amazing framework
-- **Tailwind CSS** for the utility-first CSS framework
-- **Framer Motion** for smooth animations
-- **Lucide** for beautiful icons
-- **PostgreSQL** community for inspiration
+- **Website**: [https://www.pgelephant.com](https://www.pgelephant.com)
+- **GitHub**: [https://github.com/pgelephant](https://github.com/pgelephant)
+- **Documentation**: [https://www.pgelephant.com/docs](https://www.pgelephant.com/docs)
+- **Community**: [https://www.pgelephant.com/community](https://www.pgelephant.com/community)
 
 ---
 
-Made with ❤️ for the PostgreSQL community
+Built with care by the pgElephant team

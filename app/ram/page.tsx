@@ -31,7 +31,7 @@ const RamPage = () => {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "RAM - Resilient Adaptive Manager",
-    "description": "Enterprise-grade PostgreSQL clustering with automatic failover, Raft consensus, and real-time monitoring. Zero-downtime failover for production environments.",
+    "description": "High-performance PostgreSQL clustering with automatic failover, Raft consensus, and real-time monitoring. Zero-downtime failover for production environments.",
     "applicationCategory": "DatabaseApplication",
     "operatingSystem": "Linux, macOS",
     "offers": {
@@ -154,7 +154,7 @@ const RamPage = () => {
                 </div>
               </div>
             <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
-              Enterprise-grade PostgreSQL clustering with automatic failover.
+              High-performance PostgreSQL clustering with automatic failover.
             </p>
           </div>
         </div>
@@ -405,7 +405,7 @@ const RamPage = () => {
           <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl text-gray-900 mb-6">
-              Enterprise Features
+              Advanced Features
             </h2>
             <p className="text-lg text-gray-600 mb-12 leading-relaxed">
               Production-ready PostgreSQL clustering solution.
@@ -441,7 +441,7 @@ const RamPage = () => {
                   <Shield className="w-8 h-8" style={{ color: palette.orange }} />
                 </div>
                 <h3 className="text-lg text-gray-900 mb-2">
-                  Enterprise Security
+                  Advanced Security
                 </h3>
                 <p className="text-gray-600">
                   Token-based auth, SSL/TLS, rate limiting.

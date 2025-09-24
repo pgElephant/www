@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     default: 'pgElephant - PostgreSQL High Availability & MongoDB Alternative',
     template: '%s | pgElephant'
   },
-  description: 'Enterprise-grade PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE. Production-ready solutions for modern applications.',
+  description: 'High-performance PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE. Production-ready solutions for modern applications.',
   icons: {
     icon: '/ico/pgElephant_no_com_HD.ico',
     shortcut: '/ico/pgElephant_no_com_HD.ico',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   keywords: [
     'PostgreSQL', 'high availability', 'HA', 'clustering', 'failover', 'database',
     'RAM', 'RALE', 'FauxDB', 'MongoDB alternative', 'distributed consensus',
-    'enterprise database', 'production ready', 'automated failover',
+    'high-performance database', 'production ready', 'automated failover',
     'PostgreSQL clustering', 'database replication', 'zero downtime',
     'pgraft', 'ramd', 'ramctrl', 'MongoDB compatible', 'document database',
     'Rust database', 'PostgreSQL extension', 'consensus algorithm'
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     url: 'https://www.pgelephant.com',
     siteName: 'pgElephant',
     title: 'pgElephant - PostgreSQL High Availability & MongoDB Alternative',
-    description: 'Enterprise-grade PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.',
+    description: 'High-performance PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.',
     images: [
       {
         url: '/og-image.jpg',
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     site: '@pgElephant',
     creator: '@pgElephant',
     title: 'pgElephant - PostgreSQL High Availability & MongoDB Alternative',
-    description: 'Enterprise-grade PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.',
+    description: 'High-performance PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -107,7 +107,7 @@ export default function RootLayout({
     "name": "pgElephant",
     "url": "https://www.pgelephant.com",
     "logo": "https://www.pgelephant.com/logo.png",
-    "description": "Enterprise-grade PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.",
+    "description": "High-performance PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.",
     "foundingDate": "2024",
     "sameAs": [
       "https://github.com/pgElephant",

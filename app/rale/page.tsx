@@ -401,7 +401,7 @@ const RalePage = () => {
               Key Features
             </h2>
             <p className="text-xl text-gray-600 mb-12 leading-relaxed">
-              Built for enterprise-grade distributed systems.
+              Built for high-performance distributed systems.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
