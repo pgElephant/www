@@ -1,247 +1,267 @@
 'use client'
 
-import React, { useState } from 'react'
-import Head from 'next/head'
-import { BookOpen, Search, ChevronRight, ExternalLink, Code, Settings, Database, Users, Shield, Zap, Globe, BarChart3, Terminal, Cpu } from 'lucide-react'
+import React from 'react'
+import { BookOpen, ArrowRight, Code, Download, ExternalLink, Play, Container, FileText } from 'lucide-react'
+import Link from 'next/link'
+
+// Same palette as home page
+const palette = {
+  navy: '#1E293B',
+  navyDeep: '#0F172A',
+  slate: '#334155',
+  cyan: '#0EA5E9',
+  cyanDeep: '#0284C7',
+  teal: '#14B8A6',
+  tealDeep: '#0D9488',
+  gray100: '#F8FAFC',
+  gray300: '#CBD5E1',
+  white: '#FFFFFF',
+  orange: '#F97316',
+  orangeDark: '#EA580C'
+}
 
 const DocsPage = () => {
-  const [searchQuery, setSearchQuery] = useState('')
+  // Function to get appropriate icon for documentation type
+  const getDocIcon = (type: string) => {
+    switch (type) {
+      case 'Guide':
+        return BookOpen
+      case 'Tutorial':
+        return Container
+      case 'Reference':
+        return FileText
+      default:
+        return BookOpen
+    }
+  }
 
-  const categories = [
+  const products = [
     {
-      title: 'RALE',
-  description: 'Resilient Adaptive Leader Election (RALE).',
-      icon: Cpu,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Getting Started', href: '/docs/rale/getting-started', status: 'Complete' },
-        { title: 'RALE Documentation', href: '/docs/rale', status: 'Complete' },
-        { title: 'API Reference', href: 'https://github.com/pgElephant/rale', status: 'External' }
+      id: 'rale',
+      name: 'RALE',
+      title: 'Resilient Adaptive Leader Election',
+      icon: '/ico/RALE_HD.ico',
+      bg: { from: palette.navy, via: palette.slate, to: palette.navy },
+      docs: [
+        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Guide' },
+        { title: 'Docker Setup', href: '/docs/rale/docker', type: 'Tutorial' },
+        { title: 'API Reference', href: '/docs/rale/api', type: 'Reference' }
       ]
     },
     {
-      title: 'RAM',
-  description: 'Resilient Adaptive Manager (RAM) for PostgreSQL.',
-      icon: BarChart3,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Getting Started', href: '/docs/ram/getting-started', status: 'Complete' },
-        { title: 'RAM Documentation', href: '/docs/ram', status: 'Complete' },
-        { title: 'API Reference', href: 'https://github.com/pgElephant/ram', status: 'External' }
+      id: 'ram',
+      name: 'RAM',
+      title: 'Resilient Adaptive Manager',
+      icon: '/ico/RAM_HD.ico',
+      bg: { from: palette.slate, via: palette.navy, to: palette.slate },
+      docs: [
+        { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Guide' },
+        { title: 'Docker Setup', href: '/docs/ram/docker', type: 'Tutorial' },
+        { title: 'API Reference', href: '/docs/ram/api', type: 'Reference' }
       ]
     },
     {
-      title: 'FauxDB',
-      description: 'MongoDB-compatible document database for PostgreSQL.',
-      icon: Database,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Getting Started', href: '/docs/fauxdb/getting-started', status: 'Complete' },
-        { title: 'FauxDB Documentation', href: '/docs/fauxdb', status: 'Complete' },
-        { title: 'API Reference', href: 'https://github.com/pgElephant/fauxdb', status: 'External' }
-      ]
-    },
-    {
-      title: 'Secure PostgreSQL',
-      description: 'Hardened PostgreSQL for enterprise security and compliance.',
-      icon: Shield,
-      color: 'bg-white/10 backdrop-blur-sm border-slate-400/30',
-      articles: [
-        { title: 'Getting Started', href: '/docs/secure-postgresql/getting-started', status: 'Complete' },
-        { title: 'Security Features', href: '/docs/secure-postgresql/features', status: 'Complete' },
-        { title: 'Compliance', href: '/docs/secure-postgresql/compliance', status: 'Complete' }
+      id: 'fauxdb',
+      name: 'FauxDB',
+      title: 'MongoDB Compatible Document Database',
+      icon: '/ico/FauxDB_HD.ico',
+      bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
+      docs: [
+        { title: 'Getting Started', href: '/docs/fauxdb/getting-started', type: 'Guide' },
+        { title: 'Docker Setup', href: '/docs/fauxdb/docker', type: 'Tutorial' },
+        { title: 'API Reference', href: '/docs/fauxdb/api', type: 'Reference' }
       ]
     }
   ]
 
-  const popularArticles = [
-    { title: 'Quick Start Guide', href: '#', views: '2.4k' },
-    { title: 'Cluster Configuration', href: '#', views: '1.8k' },
-    { title: 'Failover Testing', href: '#', views: '1.5k' },
-    { title: 'Monitoring Setup', href: '#', views: '1.2k' },
-    { title: 'Security Best Practices', href: '#', views: '980' }
-  ]
-
-  const filteredCategories = categories.filter(category =>
-    category.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    category.articles.some(article => 
-      article.title.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  )
-
   return (
-    <>
-      <Head>
-        <title>Documentation - pgElephant Products | Consensus, PostgreSQL, MongoDB</title>
-        <meta name="description" content="Comprehensive documentation for pgElephant products: distributed consensus, PostgreSQL clusters, MongoDB-compatible document database, and high availability solutions." />
-        <meta name="keywords" content="documentation, pgelephant, consensus, distributed, quorum, postgresql, postgres, mongodb, mongo, document database, high availability, cluster management" />
-        <meta property="og:title" content="Documentation - pgElephant Products" />
-        <meta property="og:description" content="Complete guides for distributed consensus, PostgreSQL, and MongoDB solutions." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://pgelephant.com/docs" />
-        <meta property="og:image" content="/og-image.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Documentation - pgElephant Products" />
-        <meta name="twitter:description" content="Comprehensive documentation for pgElephant solutions." />
-        <meta name="twitter:image" content="/og-image.png" />
-        <link rel="canonical" href="https://pgelephant.com/docs" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div className="pt-16 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-500/20 to-cyan-500/15 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-teal-300/15 to-cyan-300/10 rounded-full blur-2xl" />
+    <div className="pt-16">
+      {/* Hero Section with gradient background */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: `linear-gradient(135deg, ${palette.navy}, ${palette.slate}, ${palette.navy})`
+        }}
+      >
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
+              backgroundSize: '48px 48px'
+            }}
+          />
         </div>
 
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #0d9488 1px, transparent 0)`,
-            backgroundSize: '50px 50px'
-          }} />
-        </div>
-
-        {/* Glassmorphism Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
-
-        <div className="container-custom py-16 relative z-10">
+        <div className="container-wide py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl text-white mb-6">
               Documentation
             </h1>
-            <p className="text-xl text-slate-300 mb-8">
-              Comprehensive guides and resources for pgElephant products.
+            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
+              Complete guides and references for pgElephant products.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              <h3 className="text-lg font-semibold text-white mb-4">Popular Articles</h3>
-              <div className="space-y-2">
-                {popularArticles.map((article) => (
-                  <a
-                    key={article.title}
-                    href={article.href}
-                    className="block p-3 rounded-lg hover:bg-slate-400/20 transition-colors group"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-slate-300 group-hover:text-white">
-                        {article.title}
-                      </span>
-                      <span className="text-xs text-slate-400">{article.views}</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            {searchQuery && (
-              <div className="mb-8 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-slate-400/30">
-                <p className="text-slate-300">
-                  Showing results for "<span className="font-semibold">{searchQuery}</span>"
-                </p>
-              </div>
-            )}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {filteredCategories.map((category, index) => (
+      {/* Products Documentation */}
+      <div className="bg-white py-20">
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
                 <div
-                  key={category.title}
-                  className={`${category.color} rounded-2xl p-6 border hover:shadow-xl hover:scale-105 transition-all duration-300`}
+                  key={product.id}
+                  className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow duration-200"
                 >
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-slate-100/20 rounded-xl flex items-center justify-center mr-4 border border-slate-400/30">
-                      <category.icon className="w-6 h-6 text-teal-400" />
+                  {/* Product Header */}
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 flex items-center justify-center mr-4 bg-gray-50 rounded-lg">
+                      <img 
+                        src={product.icon} 
+                        alt={`${product.name} icon`}
+                        className="w-14 h-14 object-contain"
+                      />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white">{category.title}</h3>
-                      <p className="text-sm text-slate-300">{category.description}</p>
+                      <h3 className="text-2xl text-gray-900 mb-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {product.title}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    {category.articles.map((article) => (
-                      <a
-                        key={article.title}
-                        href={article.href}
-                        className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-400/20 transition-colors group"
+
+                  {/* Documentation Links */}
+                  <div className="space-y-3">
+                    {product.docs.map((doc, index) => (
+                      <Link
+                        key={index}
+                        href={doc.href}
+                        className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors group"
                       >
-                        <span className="text-sm text-slate-300 group-hover:text-white">
-                          {article.title}
-                        </span>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-xs px-2 py-1 bg-green-400/20 text-green-300 rounded-full">
-                            {article.status}
-                          </span>
-                          <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-teal-300 transition-colors" />
+                        <div className="flex items-center">
+                          {(() => {
+                            const IconComponent = getDocIcon(doc.type)
+                            return <IconComponent className="w-4 h-4 mr-3 text-gray-500" />
+                          })()}
+                          <div>
+                            <span className="text-xs text-gray-900">
+                              {doc.title}
+                            </span>
+                            <span className="ml-2 text-xs text-gray-500">
+                              {doc.type}
+                            </span>
+                          </div>
                         </div>
-                      </a>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                      </Link>
                     ))}
+                  </div>
+
+                  {/* Quick Actions */}
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/${product.id}`}
+                        className="flex-1 text-center py-2 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors text-xs"
+                      >
+                        Learn More
+                      </Link>
+                      <Link
+                        href="/download"
+                        className="flex-1 text-center py-2 px-4 rounded-lg text-white transition-colors text-xs"
+                        style={{ backgroundColor: palette.cyan }}
+                        onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.cyanDeep}
+                        onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.cyan}
+                      >
+                        Download
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Additional Resources */}
-            <div className="mt-16 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-slate-400/30">
-              <h3 className="text-2xl font-bold text-white mb-6">Additional Resources</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a
-                  href="https://github.com/pgElephant/rale"
-                  className="group bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <Code className="w-8 h-8 text-teal-400" />
-                    <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-teal-300 transition-colors" />
-                  </div>
-                  <h4 className="font-semibold text-white mb-2">API Reference</h4>
-                  <p className="text-sm text-slate-300">Complete API documentation and examples</p>
-                </a>
-                
-                <a
-                  href="/community"
-                  className="group bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <Users className="w-8 h-8 text-teal-400" />
-                    <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-teal-300 transition-colors" />
-                  </div>
-                  <h4 className="font-semibold text-white mb-2">Community</h4>
-                  <p className="text-sm text-slate-300">Get help from the community</p>
-                </a>
-                
-                <a
-                  href="/download"
-                  className="group bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <Zap className="w-8 h-8 text-teal-400" />
-                    <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-teal-300 transition-colors" />
-                  </div>
-                  <h4 className="font-semibold text-white mb-2">Download</h4>
-                  <p className="text-sm text-slate-300">Get the latest version</p>
-                </a>
+      {/* Quick Start Section */}
+      <div 
+        className="py-20"
+        style={{ 
+          background: `linear-gradient(135deg, ${palette.gray100}, ${palette.white})`
+        }}
+      >
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Quick Start
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+              Get up and running with pgElephant in minutes.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <Download className="w-8 h-8" style={{ color: palette.cyan }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Download
+                </h3>
+                <p className="text-gray-600">
+                  Get the latest version of pgElephant products.
+                </p>
               </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <Code className="w-8 h-8" style={{ color: palette.teal }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Install
+                </h3>
+                <p className="text-gray-600">
+                  Follow our installation guides for your platform.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <ExternalLink className="w-8 h-8" style={{ color: palette.orange }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Deploy
+                </h3>
+                <p className="text-gray-600">
+                  Deploy to production with confidence.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <Link
+                href="/download"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-white transition-all duration-200 shadow-lg"
+                style={{ backgroundColor: palette.orange }}
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.orangeDark}
+                onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.orange}
+              >
+                Get Started
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </>
   )
 }
 
-export default DocsPage 
+export default DocsPage

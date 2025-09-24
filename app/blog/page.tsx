@@ -4,6 +4,22 @@ import React from 'react'
 import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Search, Filter } from 'lucide-react'
 import Link from 'next/link'
 
+// Same palette as home page
+const palette = {
+  navy: '#1E293B',
+  navyDeep: '#0F172A',
+  slate: '#334155',
+  cyan: '#0EA5E9',
+  cyanDeep: '#0284C7',
+  teal: '#14B8A6',
+  tealDeep: '#0D9488',
+  gray100: '#F8FAFC',
+  gray300: '#CBD5E1',
+  white: '#FFFFFF',
+  orange: '#F97316',
+  orangeDark: '#EA580C'
+}
+
 const BlogPage = () => {
   const blogPosts = [
     {
@@ -69,25 +85,43 @@ const BlogPage = () => {
   const featuredPost = blogPosts.find(post => post.featured)
 
   return (
-    <div className="pt-16 bg-white">
-      {/* Header */}
-      <div className="professional-hero border-b border-gray-200">
-        <div className="container-custom py-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+    <div className="pt-16">
+      {/* Header with gradient background */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: `linear-gradient(135deg, ${palette.navy}, ${palette.slate}, ${palette.navy})`
+        }}
+      >
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
+              backgroundSize: '48px 48px'
+            }}
+          />
+        </div>
+
+        <div className="container-wide py-20 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Blog
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
               Latest updates, tutorials, case studies, and insights from the pgElephant community.
             </p>
             
             {/* Search Bar */}
             <div className="relative max-w-md mx-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: palette.gray300 }} />
               <input
                 type="text"
                 placeholder="Search blog posts..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:border-transparent bg-white/10 backdrop-blur-sm border text-white placeholder-gray-300"
+                style={{ borderColor: 'rgba(255,255,255,0.25)' }}
               />
             </div>
           </div>
@@ -95,17 +129,20 @@ const BlogPage = () => {
       </div>
 
       {/* Categories */}
-      <div className="bg-gray-50 border-b border-gray-200">
-        <div className="container-custom py-6">
+      <div className="bg-white border-b border-gray-200">
+        <div className="container-wide py-6">
           <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <button
                 key={category.name}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   category.active
-                    ? 'bg-teal-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                    ? 'text-white'
+                    : 'text-gray-700 hover:bg-gray-100 border border-gray-300'
                 }`}
+                style={{
+                  backgroundColor: category.active ? palette.cyan : 'transparent'
+                }}
               >
                 {category.name} ({category.count})
               </button>
@@ -117,12 +154,18 @@ const BlogPage = () => {
       {/* Featured Post */}
       {featuredPost && (
         <div className="bg-white">
-          <div className="container-custom py-12">
+          <div className="container-wide py-12">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
                 <div className="p-8">
                   <div className="flex items-center mb-4">
-                    <span className="inline-flex items-center px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium">
+                    <span 
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
+                      style={{ 
+                        backgroundColor: `${palette.cyan}15`, 
+                        color: palette.cyan 
+                      }}
+                    >
                       Featured Post
                     </span>
                   </div>
@@ -146,7 +189,10 @@ const BlogPage = () => {
                   
                   <Link
                     href={featuredPost.href}
-                    className="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium"
+                    className="inline-flex items-center font-medium transition-colors"
+                    style={{ color: palette.cyan }}
+                    onMouseEnter={e => e.currentTarget.style.color = palette.cyanDeep}
+                    onMouseLeave={e => e.currentTarget.style.color = palette.cyan}
                   >
                     Read full article
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -160,7 +206,7 @@ const BlogPage = () => {
 
       {/* Blog Posts Grid */}
       <div className="bg-gray-50">
-        <div className="container-custom py-12">
+        <div className="container-wide py-12">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogPosts.filter(post => !post.featured).map((post) => (
@@ -215,7 +261,7 @@ const BlogPage = () => {
 
       {/* Newsletter Signup */}
       <div className="bg-white border-t border-gray-200">
-        <div className="container-custom py-16">
+        <div className="container-wide py-16">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Stay Updated

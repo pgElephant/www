@@ -1,110 +1,549 @@
+'use client'
+
 import React from 'react'
-import Head from 'next/head'
-import { Crown } from 'lucide-react'
+import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe } from 'lucide-react'
+import Link from 'next/link'
 
-export default function RalePage() {
+// Same palette as home page
+const palette = {
+  navy: '#1E293B',
+  navyDeep: '#0F172A',
+  slate: '#334155',
+  cyan: '#0EA5E9',
+  cyanDeep: '#0284C7',
+  teal: '#14B8A6',
+  tealDeep: '#0D9488',
+  gray100: '#F8FAFC',
+  gray300: '#CBD5E1',
+  white: '#FFFFFF',
+  orange: '#F97316',
+  orangeDark: '#EA580C'
+}
+
+const RalePage = () => {
+  // Function to get appropriate icon for feature type
+  const getFeatureIcon = (type: string) => {
+    switch (type) {
+      case 'Getting Started':
+        return BookOpen
+      case 'Download':
+        return Download
+      case 'API Reference':
+        return Code
+      case 'Docker':
+        return Server
+      default:
+        return BookOpen
+    }
+  }
+
+  const features = [
+    {
+      id: 'consensus',
+      name: 'Consensus',
+      title: 'Distributed Consensus Algorithm',
+      icon: '/ico/RALE_HD.ico',
+      bg: { from: palette.navy, via: palette.slate, to: palette.navy },
+      links: [
+        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Getting Started' },
+        { title: 'Download', href: '/download', type: 'Download' },
+        { title: 'API Reference', href: '/docs/rale/api', type: 'API Reference' }
+      ]
+    },
+    {
+      id: 'leader',
+      name: 'Leader Election',
+      title: 'Automated Leader Selection',
+      icon: '/ico/RALE_HD.ico',
+      bg: { from: palette.slate, via: palette.navy, to: palette.slate },
+      links: [
+        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Getting Started' },
+        { title: 'Docker Setup', href: '/docs/rale/docker', type: 'Docker' },
+        { title: 'Configuration', href: '/docs/rale/config', type: 'API Reference' }
+      ]
+    },
+    {
+      id: 'availability',
+      name: 'High Availability',
+      title: 'Fault-Tolerant Operations',
+      icon: '/ico/RALE_HD.ico',
+      bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
+      links: [
+        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Getting Started' },
+        { title: 'Monitoring', href: '/docs/rale/monitoring', type: 'API Reference' },
+        { title: 'Troubleshooting', href: '/docs/rale/troubleshooting', type: 'API Reference' }
+      ]
+    }
+  ]
+
   return (
-    <>
-      <Head>
-        <title>RALE - Distributed Consensus & Leader Election | pgElephant</title>
-        <meta name="description" content="RALE provides enterprise-grade distributed consensus, quorum selection, and leader election for PostgreSQL high availability and cluster management." />
-        <meta name="keywords" content="rale, consensus, distributed, quorum, selection, leader election, postgres, postgresql, high availability, cluster management, pgelephant" />
-        <meta property="og:title" content="RALE - Distributed Consensus & Leader Election" />
-        <meta property="og:description" content="Enterprise-grade distributed consensus and leader election for PostgreSQL clusters." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://pgelephant.com/rale" />
-        <meta property="og:image" content="/og-image.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="RALE - Distributed Consensus & Leader Election" />
-        <meta name="twitter:description" content="Distributed consensus and leader election for high availability." />
-        <meta name="twitter:image" content="/og-image.png" />
-        <link rel="canonical" href="https://pgelephant.com/rale" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="min-h-screen bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
-        <section className="pt-16 md:pt-20 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 relative overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-yellow-400/20 to-yellow-300/15 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-yellow-500/20 to-yellow-400/15 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-yellow-300/15 to-yellow-200/10 rounded-full blur-2xl" />
-          </div>
+    <div className="pt-16">
+      {/* Hero Section with gradient background */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: `linear-gradient(135deg, ${palette.navy}, ${palette.slate}, ${palette.navy})`
+        }}
+      >
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
+              backgroundSize: '48px 48px'
+            }}
+          />
+        </div>
 
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, #facc15 1px, transparent 0)`,
-              backgroundSize: '50px 50px'
-            }} />
-          </div>
-
-          {/* Glassmorphism Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
-
-          <div className="container-custom py-16 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="flex items-center justify-center mb-6">
-                <div className="w-20 h-20 bg-yellow-400/20 rounded-2xl flex items-center justify-center mr-4 border border-yellow-400/30">
-                  <Crown className="w-10 h-10 text-yellow-400" />
-                </div>
-                <div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-yellow-200 mb-2">
-                    RALE
-                  </h1>
-                  <p className="text-xl text-slate-300">
-                    Resilient Adaptive Leader Election
-                  </p>
-                </div>
-              </div>
-              <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto">
-                Enterprise-grade distributed consensus and leader election. Reliable, open source, and easy to integrate with any system.
-              </p>
-            </div>
-          </div>
-        </section>
-        <section className="py-16 px-8">
+        <div className="container-wide py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-8">What is RALE?</h2>
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-              RALE is a high-performance distributed consensus and key-value store system written in C. It provides reliable distributed coordination and persistent storage for distributed applications with strong consistency guarantees.
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mr-6">
+                <img 
+                  src="/ico/RALE_HD.ico" 
+                  alt="RALE icon"
+                  className="w-16 h-16 object-contain"
+                />
+              </div>
+              <div className="text-left">
+                <h1 className="text-4xl md:text-5xl text-white mb-2">
+                  RALE
+                </h1>
+                <p className="text-xl text-gray-300">
+                  Resilient Adaptive Leader Election
+                </p>
+              </div>
+            </div>
+            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
+              Distributed consensus for high availability in distributed systems.
             </p>
-            <h3 className="text-2xl font-bold text-white mb-6">Key Features</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h4 className="text-lg font-semibold text-yellow-300 mb-2">Consensus Algorithm</h4>
-                <p className="text-slate-300">Reliable leader election and log replication</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h4 className="text-lg font-semibold text-yellow-300 mb-2">Distributed Store</h4>
-                <p className="text-slate-300">High-performance replicated key-value storage</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h4 className="text-lg font-semibold text-yellow-300 mb-2">Thread Safety</h4>
-                <p className="text-slate-300">Full multi-threading support</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h4 className="text-lg font-semibold text-yellow-300 mb-2">Network Layer</h4>
-                <p className="text-slate-300">TCP/UDP communication with automatic failover</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h4 className="text-lg font-semibold text-yellow-300 mb-2">Memory Safety</h4>
-                <p className="text-slate-300">Safe allocation/deallocation with leak prevention</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h4 className="text-lg font-semibold text-yellow-300 mb-2">Clean Logging</h4>
-                <p className="text-slate-300">Professional logging</p>
-              </div>
-            </div>
-            <div className="mt-8 text-slate-400">
-              <p><strong>License:</strong> MIT</p>
-              <p><strong>Languages:</strong> C (99.3%), Other (0.7%)</p>
-            </div>
-            <a href="https://github.com/pgElephant/rale" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 mt-6 bg-yellow-400/80 text-slate-900 font-semibold rounded-xl hover:bg-yellow-500 transition-all duration-200">
-              View on GitHub
-            </a>
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </div>
+
+      {/* Features */}
+      <div className="bg-white py-20">
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {features.map((feature) => (
+                <div
+                  key={feature.id}
+                  className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow duration-200"
+                >
+                  {/* Feature Header */}
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 flex items-center justify-center mr-4 bg-gray-50 rounded-lg">
+                      <img 
+                        src={feature.icon} 
+                        alt={`${feature.name} icon`}
+                        className="w-14 h-14 object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl text-gray-900 mb-1">
+                        {feature.name}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {feature.title}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Feature Links */}
+                  <div className="space-y-3">
+                    {feature.links.map((link, index) => (
+                      <Link
+                        key={index}
+                        href={link.href}
+                        className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors group"
+                      >
+                        <div className="flex items-center">
+                          {(() => {
+                            const IconComponent = getFeatureIcon(link.type)
+                            return <IconComponent className="w-4 h-4 mr-3 text-gray-500" />
+                          })()}
+                          <div>
+                            <span className="text-xs text-gray-900 whitespace-nowrap">
+                              {link.title}
+                            </span>
+                            <span className="ml-2 text-xs text-gray-500">
+                              {link.type}
+                            </span>
+                          </div>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                      </Link>
+                    ))}
+                  </div>
+
+                  {/* Quick Actions */}
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <div className="flex gap-2">
+                      <Link
+                        href="/docs/rale"
+                        className="flex-1 text-center py-2 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors text-xs"
+                      >
+                        Learn More
+                      </Link>
+                      <Link
+                        href="/download"
+                        className="flex-1 text-center py-2 px-4 rounded-lg text-white transition-colors text-xs"
+                        style={{ backgroundColor: palette.cyan }}
+                        onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.cyanDeep}
+                        onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.cyan}
+                      >
+                        Download
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Architecture Diagram */}
+      <div className="bg-gray-50 py-20">
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl text-gray-900 mb-6 text-center">
+              RALE Architecture
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 leading-relaxed text-center">
+              Distributed consensus and key-value store system.
+            </p>
+            
+            <div className="bg-white rounded-xl p-8 shadow-lg">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Node 1 */}
+                <div className="text-center">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 mb-4">
+                    <h3 className="text-lg font-semibold text-blue-900 mb-2">Node 1 (Leader)</h3>
+                    <div className="space-y-2 text-sm text-blue-800">
+                      <div className="bg-white rounded p-2">raled daemon</div>
+                      <div className="bg-white rounded p-2">librale core</div>
+                      <div className="bg-white rounded p-2">cluster_db (Distributed KV Store)</div>
+                      <div className="bg-white rounded p-2">tcp_server (Network Layer)</div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-gray-600">Port 7400/7401</div>
+                </div>
+
+                {/* Node 2 */}
+                <div className="text-center">
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 mb-4">
+                    <h3 className="text-lg font-semibold text-green-900 mb-2">Node 2 (Follower)</h3>
+                    <div className="space-y-2 text-sm text-green-800">
+                      <div className="bg-white rounded p-2">raled daemon</div>
+                      <div className="bg-white rounded p-2">librale core</div>
+                      <div className="bg-white rounded p-2">cluster_db (Distributed KV Store)</div>
+                      <div className="bg-white rounded p-2">tcp_client (Network Layer)</div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-gray-600">Port 7400/7401</div>
+                </div>
+
+                {/* Node 3 */}
+                <div className="text-center">
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 mb-4">
+                    <h3 className="text-lg font-semibold text-purple-900 mb-2">Node 3 (Follower)</h3>
+                    <div className="space-y-2 text-sm text-purple-800">
+                      <div className="bg-white rounded p-2">raled daemon</div>
+                      <div className="bg-white rounded p-2">librale core</div>
+                      <div className="bg-white rounded p-2">cluster_db (Distributed KV Store)</div>
+                      <div className="bg-white rounded p-2">tcp_client (Network Layer)</div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-gray-600">Port 7400/7401</div>
+                </div>
+              </div>
+
+              {/* Communication Flow */}
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <div className="text-center mb-6">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Consensus Protocol</h4>
+                  <div className="flex items-center justify-center space-x-6 text-xs text-gray-600">
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                      Consensus
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                      Leader Election
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                      High Availability
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                  <div className="bg-blue-50 rounded-lg p-4">
+                    <h5 className="font-semibold text-blue-900 mb-2">RALE Consensus</h5>
+                    <ul className="text-blue-800 space-y-1">
+                      <li>• Reliable leader election</li>
+                      <li>• Log replication</li>
+                      <li>• Split-brain prevention</li>
+                    </ul>
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-4">
+                    <h5 className="font-semibold text-green-900 mb-2">Distributed Store</h5>
+                    <ul className="text-green-800 space-y-1">
+                      <li>• High-performance KV storage</li>
+                      <li>• Thread-safe operations</li>
+                      <li>• Memory leak prevention</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h5 className="font-semibold text-purple-900 mb-2">Network Layer</h5>
+                    <ul className="text-purple-800 space-y-1">
+                      <li>• TCP/UDP communication</li>
+                      <li>• Automatic failover</li>
+                      <li>• Watchdog monitoring</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Key Features Section */}
+      <div 
+        className="py-20"
+        style={{ 
+          background: `linear-gradient(135deg, ${palette.gray100}, ${palette.white})`
+        }}
+      >
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl text-gray-900 mb-6">
+              Key Features
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+              Built for enterprise-grade distributed systems.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-8 h-8" style={{ color: palette.cyan }} />
+                </div>
+                <h3 className="text-lg text-gray-900 mb-2">
+                  Fast Consensus
+                </h3>
+                <p className="text-gray-600">
+                  Optimized algorithms for rapid consensus decisions.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8" style={{ color: palette.teal }} />
+                </div>
+                <h3 className="text-lg text-gray-900 mb-2">
+                  Fault Tolerant
+                </h3>
+                <p className="text-gray-600">
+                  Handles node failures with automatic recovery.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <Globe className="w-8 h-8" style={{ color: palette.orange }} />
+                </div>
+                <h3 className="text-lg text-gray-900 mb-2">
+                  Scalable
+                </h3>
+                <p className="text-gray-600">
+                  Designed to scale with your infrastructure.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <Link
+                href="/docs/rale"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white transition-all duration-200 shadow-lg"
+                style={{ backgroundColor: palette.orange }}
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.orangeDark}
+                onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.orange}
+              >
+                Get Started
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Features Comparison Table */}
+      <div className="bg-white py-20">
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl text-gray-900 mb-6 text-center">
+              RALE vs Other Consensus Systems
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 leading-relaxed text-center">
+              Compare RALE with popular distributed consensus solutions.
+            </p>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-gray-300 rounded-lg overflow-hidden">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-6 py-4 text-left font-semibold text-gray-900">Feature</th>
+                    <th className="border border-gray-300 px-6 py-4 text-center font-semibold text-blue-900 bg-blue-50">RALE</th>
+                    <th className="border border-gray-300 px-6 py-4 text-center font-semibold text-gray-900">etcd</th>
+                    <th className="border border-gray-300 px-6 py-4 text-center font-semibold text-gray-900">Consul</th>
+                    <th className="border border-gray-300 px-6 py-4 text-center font-semibold text-gray-900">Zookeeper</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-6 py-4 font-medium text-gray-900">Consensus Algorithm</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center text-blue-900 bg-blue-50">RALE (Raft-based)</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Raft</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Raft</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">ZAB</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-300 px-6 py-4 font-medium text-gray-900">Performance</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center text-blue-900 bg-blue-50">High (C implementation)</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Good (Go)</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Good (Go)</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Medium (Java)</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-6 py-4 font-medium text-gray-900">Memory Usage</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center text-blue-900 bg-blue-50">Low</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Medium</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Medium</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">High</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-300 px-6 py-4 font-medium text-gray-900">PostgreSQL Integration</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center text-blue-900 bg-blue-50">Native</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">External</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">External</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">External</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-6 py-4 font-medium text-gray-900">Setup Complexity</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center text-blue-900 bg-blue-50">Simple</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Medium</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Complex</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">Complex</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-300 px-6 py-4 font-medium text-gray-900">Split-brain Prevention</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center text-blue-900 bg-blue-50">✅ Built-in</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">✅ Built-in</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">✅ Built-in</td>
+                    <td className="border border-gray-300 px-6 py-4 text-center">✅ Built-in</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div 
+        className="py-20"
+        style={{ 
+          background: `linear-gradient(135deg, ${palette.gray100}, ${palette.white})`
+        }}
+      >
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl text-gray-900 mb-6 text-center">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-gray-600 mb-12 leading-relaxed text-center">
+              Common questions about RALE distributed consensus.
+            </p>
+            
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  What is RALE and how does it differ from other consensus algorithms?
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  RALE (Resilient Adaptive Leader Election) is our custom consensus algorithm built specifically for PostgreSQL environments. 
+                  It's based on Raft but optimized for database workloads with features like split-brain prevention, 
+                  automatic failover, and seamless integration with PostgreSQL clustering solutions.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  How many nodes do I need for a RALE cluster?
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  RALE requires a minimum of 3 nodes for fault tolerance. With 3 nodes, you can tolerate 1 node failure. 
+                  For production environments, we recommend 5 nodes for better performance and fault tolerance. 
+                  RALE supports up to 64 nodes in a single cluster.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  What happens during a network partition?
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  RALE implements strong consistency guarantees. During a network partition, only the majority partition 
+                  can elect a leader and continue operations. The minority partition will remain in follower state, 
+                  preventing split-brain scenarios and ensuring data consistency.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Can I use RALE with existing PostgreSQL setups?
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Yes! RALE is designed to integrate seamlessly with existing PostgreSQL deployments. 
+                  It provides a distributed key-value store that can be used for cluster coordination, 
+                  configuration management, and metadata storage without requiring changes to your PostgreSQL setup.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  What monitoring and observability features does RALE provide?
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  RALE includes comprehensive monitoring with metrics for leader election, log replication, 
+                  network latency, and cluster health. It integrates with Prometheus for metrics collection 
+                  and provides detailed logging for troubleshooting cluster issues.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  How do I get started with RALE?
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Getting started is simple! Download the RALE binary, configure your cluster nodes, 
+                  and start the raled daemon on each node. Check our documentation for detailed installation 
+                  guides, configuration examples, and best practices for production deployments.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
+
+export default RalePage

@@ -1,43 +1,18 @@
 import React from 'react'
-import Head from 'next/head'
-import Header from '@/components/Header'
 import Hero from '@/components/Hero'
-import Features from '@/components/Features'
-import Architecture from '@/components/Architecture'
-import Comparison from '@/components/Comparison'
+import WhyPgElephant from '@/components/WhyPgElephant'
 
-import Footer from '@/components/Footer'
+export const metadata = {
+  title: 'Enterprise PostgreSQL Platform | pgElephant',
+  description: 'pgElephant provides enterprise-grade PostgreSQL solutions: RALE for distributed consensus, RAM for clustering, and FauxDB for MongoDB compatibility.',
+  keywords: 'pgelephant, postgresql, rale, ram, fauxdb, enterprise, clustering, consensus, mongodb, document database'
+}
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>pgElephant - Distributed Consensus, PostgreSQL Clusters & MongoDB Compatible Document Database</title>
-        <meta name="description" content="pgElephant provides distributed consensus, quorum selection, high-availability PostgreSQL clusters, and MongoDB-compatible document database solutions for modern applications." />
-        <meta name="keywords" content="pgelephant, consensus, distributed, quorum, selection, postgres, postgresql, mongodb, mongo, document database, high availability, cluster management, leader election, failover" />
-        <meta property="og:title" content="pgElephant - Distributed Consensus, PostgreSQL Clusters & MongoDB Compatible Document Database" />
-        <meta property="og:description" content="Distributed consensus, quorum selection, PostgreSQL clusters, and MongoDB-compatible document database for high availability." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://pgelephant.com/" />
-        <meta property="og:image" content="/og-image.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="pgElephant - Distributed Consensus, PostgreSQL Clusters & MongoDB Compatible Document Database" />
-        <meta name="twitter:description" content="Distributed consensus, quorum selection, PostgreSQL clusters, and MongoDB-compatible document database." />
-        <meta name="twitter:image" content="/og-image.png" />
-        <link rel="canonical" href="https://pgelephant.com/" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
-        <meta name="theme-color" content="#0d9488" />
-      </Head>
-      <main className="min-h-screen bg-white">
-        <Header />
-        <Hero />
-        <Features />
-        <Architecture />
-        <Comparison />
-        {/* ...existing code... */}
-  {/* Footer is rendered by layout.tsx, removed to avoid duplication */}
-      </main>
-    </>
+    <main className="min-h-screen">
+      <Hero />
+      <WhyPgElephant />
+    </main>
   )
 }

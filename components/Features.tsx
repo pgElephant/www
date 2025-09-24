@@ -51,7 +51,7 @@ const Features = () => {
 
   return (
     <section className="premium-section">
-      <div className="container-custom">
+      <div className="container-wide">
         <div className="max-w-4xl mx-auto text-center mb-20">
           <h2 className="text-5xl font-bold premium-heading mb-8">
             Enterprise-Grade Features

@@ -1,1 +1,9 @@
-{}
+{
+  "/blog/page": "app/blog/page.js",
+  "/blog/pgelephant-enterprise-postgresql-platform/page": "app/blog/pgelephant-enterprise-postgresql-platform/page.js",
+  "/download/page": "app/download/page.js",
+  "/page": "app/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/community/page": "app/community/page.js",
+  "/fauxdb/page": "app/fauxdb/page.js"
+}

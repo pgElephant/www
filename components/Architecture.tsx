@@ -6,7 +6,7 @@ import { Server, Database, Wifi, Shield, ArrowRight, Zap, Globe, Users, Activity
 const Architecture = () => {
   return (
     <section id="architecture" className="section-padding bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
-      <div className="container-custom">
+      <div className="container-wide">
         {/* Section Header */}
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">

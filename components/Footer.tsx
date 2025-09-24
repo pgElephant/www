@@ -48,7 +48,7 @@ const Footer = () => {
 
   return (
     <footer className="professional-footer pt-16 pb-8">
-      <div className="container-custom">
+      <div className="container-wide">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Logo and Description */}
           <div className="md:col-span-1">

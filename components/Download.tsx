@@ -148,7 +148,7 @@ const Download = () => {
         {/* Glassmorphism Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
 
-        <div className="container-custom py-16 relative z-10">
+        <div className="container-wide py-16 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Download
@@ -161,7 +161,7 @@ const Download = () => {
       </div>
 
       {/* Content */}
-      <div className="container-custom py-16">
+      <div className="container-wide py-16">
 
         {/* Repository Setup */}
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 mb-16 border border-slate-400/30 shadow-lg">

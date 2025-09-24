@@ -8,11 +8,10 @@ import ElephantLogo from './ElephantLogo'
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navigation = [
-    { name: 'Docs', href: '/docs' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'Blogs', href: '/blog' },
     { name: 'Community', href: '/community' },
     { name: 'Download', href: '/download' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Contact Us', href: '/contact' },
   ]
 
   const githubProjects = [
@@ -23,7 +22,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 professional-header z-50">
-      <div className="container-custom">
+      <div className="container-wide">
         <div className="flex items-center h-20 w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">

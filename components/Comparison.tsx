@@ -106,7 +106,7 @@ const Comparison = () => {
 
   return (
     <section id="comparison" className="section-padding bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 relative overflow-hidden">
-      <div className="container-custom">
+      <div className="container-wide">
         {/* Dark Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/15 to-blue-400/15 rounded-full blur-3xl" />

@@ -1,93 +1,211 @@
 'use client'
 
-import React from 'react'
-import { ArrowRight, Play, Database, Zap, Shield, Globe, Sparkles, Cpu, BarChart3, Crown, Settings, FileText, CheckCircle, Download } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
+
+type BG = { from: string; via?: string; to: string }
+const palette = {
+  navy: '#1E293B',
+  navyDeep: '#0F172A',
+  slate: '#334155',
+  cyan: '#0EA5E9',
+  cyanDeep: '#0284C7',
+  teal: '#14B8A6',
+  tealDeep: '#0D9488',
+  gray100: '#F8FAFC',
+  gray300: '#CBD5E1',
+  white: '#FFFFFF',
+  // CTA like EDB's accent
+  orange: '#F97316',
+  orangeDark: '#EA580C'
+}
+
+type Product = {
+  id: string
+  name: string
+  title: string
+  description: string
+  description2: string
+  description3: string
+  icon: string
+  color: string
+  bg: BG
+}
 
 const Hero = () => {
+  const [currentProduct, setCurrentProduct] = useState(0)
+
+  const products: Product[] = [
+      {
+        id: 'rale',
+        name: 'RALE',
+        title: 'Resilient Adaptive Leader Election',
+        description: 'Distributed consensus for high availability in distributed systems.',
+        description2: 'Automated leader election and failover for any distributed database.',
+        description3: 'Zero data loss during node failures with strong consistency guarantees.',
+        icon: '/ico/RALE_HD.ico',
+        color: `from-[${palette.cyan}] to-[${palette.cyanDeep}]`,
+        bg: { from: palette.navy, via: palette.slate, to: palette.navy }
+      },
+      {
+        id: 'ram',
+        name: 'RAM',
+        title: 'Resilient Adaptive Manager',
+        description: 'Enterprise-grade PostgreSQL clustering with automatic failover.',
+        description2: 'Intelligent resource management and load balancing across nodes.',
+        description3: 'Real-time monitoring and automated scaling capabilities.',
+        icon: '/ico/RAM_HD.ico',
+        color: `from-[${palette.teal}] to-[${palette.tealDeep}]`,
+        bg: { from: palette.slate, via: palette.navy, to: palette.slate }
+      },
+      {
+        id: 'fauxdb',
+        name: 'FauxDB',
+        title: 'MongoDB Compatible Document Database',
+        description: '• High-performance MongoDB-compatible database built in Rust.',
+        description2: '• Native JSON support with ACID transaction guarantees.',
+        description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
+        icon: '/ico/FauxDB_HD.ico',
+        color: `from-[${palette.cyan}] to-[${palette.teal}]`,
+        bg: { from: palette.slate, via: palette.navy, to: palette.navyDeep }
+      }
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentProduct(prev => (prev + 1) % products.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [products.length])
+
+  const current = products[currentProduct]
+  const heroGradient = `linear-gradient(135deg, ${current.bg.from}, ${current.bg.via ?? current.bg.from}, ${current.bg.to})`
+  const tileGradient = `linear-gradient(135deg, ${palette.cyan}, ${palette.teal})`
+
   return (
-    <section className="premium-hero">
-      <div className="container-custom py-24 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Main Heading */}
-          <div className="mb-12">
-            <h1 className="text-6xl md:text-7xl premium-heading mb-8">
-              Enterprise-Grade
-              <span className="professional-text-gradient block">PostgreSQL Platform</span>
-            </h1>
-            <p className="text-xl premium-subheading mb-10 max-w-3xl mx-auto">
-              Unified platform for PostgreSQL clustering, document databases, and distributed consensus. 
-              Deploy production-ready applications in weeks, not months.
-            </p>
-          </div>
+    <section
+      className="relative overflow-hidden transition-colors duration-300"
+      style={{ backgroundImage: heroGradient }}
+    >
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
+            backgroundSize: '48px 48px'
+          }}
+        />
+      </div>
 
-          {/* Key Benefits */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            <div className="flex items-center premium-badge">
-              <CheckCircle className="w-4 h-4 mr-2" />
-              <span>Zero Downtime</span>
-            </div>
-            <div className="flex items-center premium-badge">
-              <CheckCircle className="w-4 h-4 mr-2" />
-              <span>Production Ready</span>
-            </div>
-            <div className="flex items-center premium-badge">
-              <CheckCircle className="w-4 h-4 mr-2" />
-              <span>Open Source</span>
-            </div>
-            <div className="flex items-center premium-badge">
-              <CheckCircle className="w-4 h-4 mr-2" />
-              <span>Enterprise Security</span>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
-            <Link href="/docs" className="premium-button">
-              <Database className="w-5 h-5 mr-3" />
-              Get Started
-              <ArrowRight className="w-4 h-4 ml-3" />
-            </Link>
-            <Link href="/download" className="professional-button-outline">
-              <Download className="w-5 h-5 mr-3" />
-              Download Now
-            </Link>
-          </div>
-
-          {/* Feature Cards */}
-          <div className="premium-grid">
-            <div className="premium-card p-10 text-center">
-              <div className="w-20 h-20 bg-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                <Crown className="w-10 h-10 text-slate-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">RALE</h3>
-              <p className="text-slate-600 mb-8 leading-relaxed text-lg">Resilient Adaptive Leader Election for distributed consensus</p>
-              <Link href="/rale" className="text-slate-700 hover:text-slate-900 font-semibold transition-colors text-lg">
-                Learn More →
+      <div className="container-wide py-20 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          {/* CTAs */}
+          <div className="text-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/download"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg"
+                style={{ backgroundColor: palette.orange, color: palette.white }}
+                onMouseEnter={e => ((e.currentTarget.style.backgroundColor = palette.orangeDark))}
+                onMouseLeave={e => ((e.currentTarget.style.backgroundColor = palette.orange))}
+              >
+                Start a free trial
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/docs"
+                className="inline-flex items-center justify-center gap-2 bg-transparent text-white px-8 py-4 rounded-lg font-semibold border transition-all duration-200"
+                style={{ borderColor: 'rgba(255,255,255,0.35)' }}
+              >
+                Learn more
               </Link>
             </div>
+          </div>
 
-            <div className="premium-card p-10 text-center">
-              <div className="w-20 h-20 bg-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                <Settings className="w-10 h-10 text-slate-600" />
+          {/* Product showcase */}
+          <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="text-center mb-6">
+                  <div className="flex items-center justify-center gap-6 mb-4">
+                    <div className="w-24 h-24 flex items-center justify-center">
+                      <Image 
+                        src={current.icon} 
+                        alt={`${current.name} icon`}
+                        width={96}
+                        height={96}
+                        className="w-24 h-24"
+                      />
+                    </div>
+                    <div className="text-left">
+                      <h2 className="text-3xl md:text-4xl font-bold text-white">
+                        {current.name}
+                      </h2>
+                      <p className="text-lg" style={{ color: palette.gray300 }}>
+                        {current.title}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                    <div className="text-xl max-w-2xl mx-auto space-y-2 text-left" style={{ color: palette.gray100 }}>
+                      <p>{current.description}</p>
+                      <p>{current.description2}</p>
+                      <p>{current.description3}</p>
+                    </div>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">RAM</h3>
-              <p className="text-slate-600 mb-8 leading-relaxed text-lg">PostgreSQL clustering with automatic failover</p>
-              <Link href="/ram" className="text-slate-700 hover:text-slate-900 font-semibold transition-colors text-lg">
-                Learn More →
-              </Link>
-            </div>
 
-            <div className="premium-card p-10 text-center">
-              <div className="w-20 h-20 bg-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                <FileText className="w-10 h-10 text-slate-600" />
+              {/* Dots */}
+              <div className="flex justify-center gap-2 mb-8">
+                {products.map((p, index) => (
+                  <button
+                    key={p.id}
+                    onClick={() => setCurrentProduct(index)}
+                    className="w-3 h-3 rounded-full transition-all duration-200"
+                    style={{
+                      backgroundColor:
+                        index === currentProduct ? palette.white : 'rgba(255,255,255,0.35)'
+                    }}
+                    aria-label={`Show ${p.name}`}
+                  />
+                ))}
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">FauxDB</h3>
-              <p className="text-slate-600 mb-8 leading-relaxed text-lg">MongoDB-compatible document database</p>
-              <Link href="/fauxdb" className="text-slate-700 hover:text-slate-900 font-semibold transition-colors text-lg">
-                Learn More →
-              </Link>
-            </div>
+
+              {/* Product links */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                 {products.map((product) => {
+                   const active = product.id === current.id
+                   return (
+                     <Link
+                       key={product.id}
+                       href={`/${product.id}`}
+                       className="flex items-center gap-3 px-6 py-3 rounded-lg border transition-all duration-200"
+                       style={{
+                         borderColor: active ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.25)',
+                         backgroundColor: active ? 'rgba(255,255,255,0.14)' : 'transparent',
+                         boxShadow: active ? '0 6px 16px rgba(0,0,0,0.25)' : 'none'
+                       }}
+                     >
+                       <Image 
+                         src={product.icon} 
+                         alt={`${product.name} icon`}
+                         width={20}
+                         height={20}
+                         className="w-5 h-5"
+                         style={{ filter: active ? 'none' : 'brightness(0.7)' }}
+                       />
+                       <span
+                         className="font-medium"
+                         style={{ color: active ? palette.white : '#D1D5DB' }}
+                       >
+                         {product.name}
+                       </span>
+                     </Link>
+                   )
+                 })}
+              </div>
           </div>
         </div>
       </div>
@@ -96,3 +214,4 @@ const Hero = () => {
 }
 
 export default Hero
+
