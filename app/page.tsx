@@ -29,7 +29,7 @@ export default function Home() {
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
         <meta name="theme-color" content="#0d9488" />
       </Head>
-      <main className="min-h-screen bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
+      <main className="min-h-screen bg-white">
         <Header />
         <Hero />
         <Features />

@@ -27,9 +27,9 @@ const PgElephantEnterpriseBlogPage = () => {
       
       <div className="pt-16 bg-white">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200">
-          <div className="container-custom py-8">
-            <div className="max-w-4xl mx-auto">
+        <div className="professional-hero border-b border-gray-200">
+          <div className="container-custom py-16">
+            <div className="max-w-3xl mx-auto">
               <Link href="/blog" className="inline-flex items-center text-teal-600 hover:text-teal-700 mb-8">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Blog

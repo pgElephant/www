@@ -47,20 +47,86 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 text-white pt-10 pb-6">
-      <div className="max-w-xl mx-auto flex flex-col items-center">
-        <div className="mb-2">
-          <ElephantLogo size="md" animated={false} />
+    <footer className="professional-footer pt-16 pb-8">
+      <div className="container-custom">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          {/* Logo and Description */}
+          <div className="md:col-span-1">
+            <div className="flex items-center space-x-3 mb-4">
+              <ElephantLogo size="md" animated={false} />
+              <span className="text-xl font-bold text-white">pgElephant</span>
+            </div>
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+              Enterprise-grade PostgreSQL platform with distributed consensus, clustering, and document database capabilities.
+            </p>
+            <div className="flex space-x-4">
+              {social.map((item) => (
+                <a key={item.name} href={item.href} className="text-slate-400 hover:text-white transition-colors">
+                  <span className="sr-only">{item.name}</span>
+                  <item.icon className="h-5 w-5" aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Product Links */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Product</h3>
+            <ul className="space-y-3">
+              {navigation.product.map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="text-slate-300 hover:text-white transition-colors text-sm">
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources Links */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Resources</h3>
+            <ul className="space-y-3">
+              {navigation.resources.map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="text-slate-300 hover:text-white transition-colors text-sm">
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Links */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <ul className="space-y-3">
+              {navigation.company.map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="text-slate-300 hover:text-white transition-colors text-sm">
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <span className="text-2xl font-bold text-white tracking-wide mb-2">pgElephant</span>
-        <div className="text-slate-400 text-sm mt-2">© 2024 pgElephant. PostgreSQL High Availability &amp; Management.</div>
-        <div className="flex space-x-6 mt-4">
-          {social.map((item) => (
-            <a key={item.name} href={item.href} className="text-slate-400 hover:text-white transition-colors">
-              <span className="sr-only">{item.name}</span>
-              <item.icon className="h-6 w-6" aria-hidden="true" />
-            </a>
-          ))}
+
+        {/* Bottom Bar */}
+        <div className="border-t border-slate-700 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-slate-400 text-sm">
+              © 2024 pgElephant. All rights reserved.
+            </p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <a href="/privacy" className="text-slate-400 hover:text-white transition-colors text-sm">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-slate-400 hover:text-white transition-colors text-sm">
+                Terms of Service
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

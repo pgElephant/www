@@ -156,7 +156,7 @@ body {
   @apply animate-pulse bg-gradient-to-r from-cool-200 via-cool-100 to-cool-200 bg-size-200;
 }
 
-/* EnterpriseDB-style Typography */
+/* Professional Typography System */
 .font-heading {
   font-family: var(--font-open-sans), 'Open Sans', sans-serif;
   font-weight: 600;
@@ -188,6 +188,88 @@ body {
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.05em;
+}
+
+/* Professional Design Enhancements */
+.professional-card {
+  @apply bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1;
+}
+
+.professional-button {
+  @apply inline-flex items-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-lg;
+}
+
+.professional-button-outline {
+  @apply inline-flex items-center px-8 py-4 bg-white text-slate-900 border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 font-semibold rounded-xl transition-all duration-200;
+}
+
+.professional-gradient {
+  @apply bg-gradient-to-r from-slate-900 to-slate-800;
+}
+
+.professional-text-gradient {
+  @apply bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent;
+}
+
+.professional-badge {
+  @apply inline-flex items-center px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium border border-slate-200;
+}
+
+.professional-section {
+  @apply py-20 bg-white;
+}
+
+.professional-section-alt {
+  @apply py-20 bg-slate-50;
+}
+
+.professional-hero {
+  @apply bg-gradient-to-br from-white via-slate-50 to-white;
+}
+
+.professional-feature-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.professional-stats-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8;
+}
+
+.professional-testimonial {
+  @apply bg-white border border-slate-200 p-8 rounded-2xl shadow-sm;
+}
+
+.professional-cta {
+  @apply bg-slate-900 text-white rounded-2xl p-12;
+}
+
+/* Enhanced Professional Elements */
+.professional-header {
+  @apply bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm;
+}
+
+.professional-nav-link {
+  @apply text-slate-700 hover:text-slate-900 transition-colors duration-200 font-medium;
+}
+
+.professional-nav-link-active {
+  @apply text-slate-900 font-semibold;
+}
+
+.professional-footer {
+  @apply bg-slate-900 text-white;
+}
+
+.professional-input {
+  @apply w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200;
+}
+
+.professional-textarea {
+  @apply w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 resize-none;
+}
+
+.professional-select {
+  @apply w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white;
 }
 
 @layer utilities {
