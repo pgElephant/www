@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Source_Sans_3, Inter } from 'next/font/google'
+import { Open_Sans, Inter } from 'next/font/google'
 import dynamic from 'next/dynamic'
 import './globals.css'
 
@@ -14,11 +14,11 @@ const Footer = dynamic(() => import('@/components/Footer'), {
   ssr: true
 })
 
-const sourceSans = Source_Sans_3({ 
+const openSans = Open_Sans({ 
   subsets: ['latin'],
-  variable: '--font-source-sans',
+  variable: '--font-open-sans',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800', '900']
+  weight: ['300', '400', '500', '600', '700', '800']
 })
 
 const inter = Inter({ 
@@ -165,7 +165,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://twitter.com" />
       </head>
-      <body className={`${sourceSans.variable} ${inter.variable} font-sans`}>
+      <body className={`${openSans.variable} ${inter.variable} font-sans`}>
         <Header />
         {children}
         <Footer />
