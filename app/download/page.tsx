@@ -4,8 +4,13 @@ import React from 'react'
 import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github, FileText, Play } from 'lucide-react'
 import Link from 'next/link'
 
-// Same palette as home page
+// Colors from pgElephant icon (darker variants)
 const palette = {
+  iconTeal: '#025A6B',
+  iconTealLight: '#036B7D',
+  iconTealMedium: '#045E70',
+  iconTealDark: '#054A56',
+  // Supporting colors
   navy: '#1E293B',
   navyDeep: '#0F172A',
   slate: '#334155',
@@ -82,7 +87,7 @@ const DownloadPage = () => {
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.navy}, ${palette.slate}, ${palette.navy})`
+          background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
         }}
       >
         {/* Background pattern */}

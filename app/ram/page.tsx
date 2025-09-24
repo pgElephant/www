@@ -1,11 +1,16 @@
 'use client'
 
 import React from 'react'
-import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Users, Settings, BarChart3, GitBranch, Crown, Wifi } from 'lucide-react'
+import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Users, Settings, BarChart3, GitBranch, Crown, Wifi, RefreshCw, Network, BarChart } from 'lucide-react'
 import Link from 'next/link'
 
-// Same palette as home page
+// Colors from pgElephant icon (darker variants)
 const palette = {
+  iconTeal: '#025A6B',
+  iconTealLight: '#036B7D',
+  iconTealMedium: '#045E70',
+  iconTealDark: '#054A56',
+  // Supporting colors
   navy: '#1E293B',
   navyDeep: '#0F172A',
   slate: '#334155',
@@ -42,7 +47,8 @@ const RamPage = () => {
       id: 'failover',
       name: 'Auto Failover',
       title: 'Zero-Downtime Failover',
-      icon: '/ico/RAM_HD.ico',
+      icon: RefreshCw,
+      iconColor: '#EF4444', // red-500
       bg: { from: palette.navy, via: palette.slate, to: palette.navy },
       links: [
         { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Getting Started' },
@@ -54,7 +60,8 @@ const RamPage = () => {
       id: 'consensus',
       name: 'Raft Consensus',
       title: 'Leader Election & Coordination',
-      icon: '/ico/RAM_HD.ico',
+      icon: Network,
+      iconColor: '#8B5CF6', // violet-500
       bg: { from: palette.slate, via: palette.navy, to: palette.slate },
       links: [
         { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Getting Started' },
@@ -66,7 +73,8 @@ const RamPage = () => {
       id: 'monitoring',
       name: 'Monitoring',
       title: 'Real-time Metrics & Alerts',
-      icon: '/ico/RAM_HD.ico',
+      icon: BarChart,
+      iconColor: '#06B6D4', // cyan-500
       bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
       links: [
         { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Getting Started' },
@@ -82,7 +90,7 @@ const RamPage = () => {
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.navy}, ${palette.slate}, ${palette.navy})`
+          background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
         }}
       >
         {/* Background pattern */}
@@ -98,9 +106,9 @@ const RamPage = () => {
         </div>
 
         <div className="container-wide py-20 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mr-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center mb-6">
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mr-6">
                 <img 
                   src="/ico/RAM_HD.ico" 
                   alt="RAM icon"
@@ -136,11 +144,18 @@ const RamPage = () => {
                   {/* Feature Header */}
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 flex items-center justify-center mr-4 bg-gray-50 rounded-lg flex-shrink-0">
-                      <img 
-                        src={feature.icon} 
-                        alt={`${feature.name} icon`}
-                        className="w-14 h-14 object-contain"
-                      />
+                      {typeof feature.icon === 'string' ? (
+                        <img 
+                          src={feature.icon} 
+                          alt={`${feature.name} icon`}
+                          className="w-14 h-14 object-contain"
+                        />
+                      ) : (
+                        <feature.icon 
+                          className="w-8 h-8" 
+                          style={{ color: feature.iconColor }} 
+                        />
+                      )}
                     </div>
                     <div className="min-w-0 flex-1">
                       <h3 className="text-xl text-gray-900 mb-1 font-semibold">
@@ -168,11 +183,11 @@ const RamPage = () => {
                           <div className="min-w-0 flex-1">
                             <span className="text-xs text-gray-900 block truncate">
                               {link.title}
-                            </span>
+                </span>
                             <span className="text-xs text-gray-500">
                               {link.type}
-                            </span>
-                          </div>
+                </span>
+              </div>
                         </div>
                         <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 ml-2" />
                       </Link>

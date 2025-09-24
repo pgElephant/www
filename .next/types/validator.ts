@@ -36,37 +36,10 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 }
 
 
-// Validate ../../app/blog/fauxdb/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/blog/fauxdb">> = Specific
-  const handler = {} as typeof import("../../app/blog/fauxdb/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
 // Validate ../../app/blog/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/blog">> = Specific
   const handler = {} as typeof import("../../app/blog/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/blog/pgelephant-enterprise-postgresql-platform/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/blog/pgelephant-enterprise-postgresql-platform">> = Specific
-  const handler = {} as typeof import("../../app/blog/pgelephant-enterprise-postgresql-platform/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/blog/postgresql-high-availability-guide/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/blog/postgresql-high-availability-guide">> = Specific
-  const handler = {} as typeof import("../../app/blog/postgresql-high-availability-guide/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

@@ -1,11 +1,16 @@
 'use client'
 
 import React from 'react'
-import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe } from 'lucide-react'
+import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, CheckCircle, UserCheck, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 
-// Same palette as home page
+// Colors from pgElephant icon (darker variants)
 const palette = {
+  iconTeal: '#025A6B',
+  iconTealLight: '#036B7D',
+  iconTealMedium: '#045E70',
+  iconTealDark: '#054A56',
+  // Supporting colors
   navy: '#1E293B',
   navyDeep: '#0F172A',
   slate: '#334155',
@@ -42,7 +47,8 @@ const RalePage = () => {
       id: 'consensus',
       name: 'Consensus',
       title: 'Distributed Consensus Algorithm',
-      icon: '/ico/RALE_HD.ico',
+      icon: CheckCircle,
+      iconColor: '#10B981', // emerald-500
       bg: { from: palette.navy, via: palette.slate, to: palette.navy },
       links: [
         { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Getting Started' },
@@ -54,7 +60,8 @@ const RalePage = () => {
       id: 'leader',
       name: 'Leader Election',
       title: 'Automated Leader Selection',
-      icon: '/ico/RALE_HD.ico',
+      icon: UserCheck,
+      iconColor: '#3B82F6', // blue-500
       bg: { from: palette.slate, via: palette.navy, to: palette.slate },
       links: [
         { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Getting Started' },
@@ -66,7 +73,8 @@ const RalePage = () => {
       id: 'availability',
       name: 'High Availability',
       title: 'Fault-Tolerant Operations',
-      icon: '/ico/RALE_HD.ico',
+      icon: ShieldCheck,
+      iconColor: '#F59E0B', // amber-500
       bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
       links: [
         { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Getting Started' },
@@ -82,7 +90,7 @@ const RalePage = () => {
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.navy}, ${palette.slate}, ${palette.navy})`
+          background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
         }}
       >
         {/* Background pattern */}
@@ -98,9 +106,9 @@ const RalePage = () => {
         </div>
 
         <div className="container-wide py-20 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mr-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center mb-6">
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mr-6">
                 <img 
                   src="/ico/RALE_HD.ico" 
                   alt="RALE icon"
@@ -131,66 +139,73 @@ const RalePage = () => {
               {features.map((feature) => (
                 <div
                   key={feature.id}
-                  className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow duration-200"
+                  className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow duration-200 flex flex-col h-full"
                 >
                   {/* Feature Header */}
                   <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 flex items-center justify-center mr-4 bg-gray-50 rounded-lg">
-                      <img 
-                        src={feature.icon} 
-                        alt={`${feature.name} icon`}
-                        className="w-14 h-14 object-contain"
-                      />
+                    <div className="w-16 h-16 flex items-center justify-center mr-4 bg-gray-50 rounded-lg flex-shrink-0">
+                      {typeof feature.icon === 'string' ? (
+                        <img 
+                          src={feature.icon} 
+                          alt={`${feature.name} icon`}
+                          className="w-14 h-14 object-contain"
+                        />
+                      ) : (
+                        <feature.icon 
+                          className="w-8 h-8" 
+                          style={{ color: feature.iconColor }} 
+                        />
+                      )}
                     </div>
-                    <div>
-                      <h3 className="text-2xl text-gray-900 mb-1">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-xl text-gray-900 mb-1 font-semibold">
                         {feature.name}
                       </h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-600 leading-relaxed">
                         {feature.title}
                       </p>
                     </div>
                   </div>
 
                   {/* Feature Links */}
-                  <div className="space-y-3">
+                  <div className="space-y-3 flex-1 mb-6">
                     {feature.links.map((link, index) => (
                       <Link
                         key={index}
                         href={link.href}
                         className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors group"
                       >
-                        <div className="flex items-center">
+                        <div className="flex items-center min-w-0 flex-1">
                           {(() => {
                             const IconComponent = getFeatureIcon(link.type)
-                            return <IconComponent className="w-4 h-4 mr-3 text-gray-500" />
+                            return <IconComponent className="w-4 h-4 mr-3 text-gray-500 flex-shrink-0" />
                           })()}
-                          <div>
-                            <span className="text-xs text-gray-900 whitespace-nowrap">
+                          <div className="min-w-0 flex-1">
+                            <span className="text-xs text-gray-900 block truncate">
                               {link.title}
                             </span>
-                            <span className="ml-2 text-xs text-gray-500">
+                            <span className="text-xs text-gray-500">
                               {link.type}
                             </span>
                           </div>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 ml-2" />
                       </Link>
                     ))}
-                  </div>
+          </div>
 
                   {/* Quick Actions */}
-                  <div className="mt-6 pt-6 border-t border-gray-200">
+                  <div className="pt-6 border-t border-gray-200 mt-auto">
                     <div className="flex gap-2">
                       <Link
                         href="/docs/rale"
-                        className="flex-1 text-center py-2 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors text-xs"
+                        className="flex-1 text-center py-2 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors text-xs font-medium"
                       >
                         Learn More
                       </Link>
                       <Link
                         href="/download"
-                        className="flex-1 text-center py-2 px-4 rounded-lg text-white transition-colors text-xs"
+                        className="flex-1 text-center py-2 px-4 rounded-lg text-white transition-colors text-xs font-medium"
                         style={{ backgroundColor: palette.cyan }}
                         onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.cyanDeep}
                         onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.cyan}

@@ -4,28 +4,33 @@ import React from 'react'
 import { ArrowLeft, Calendar, Clock, User, Tag, ArrowRight, Settings, BarChart3, Shield, Globe, Database } from 'lucide-react'
 import Link from 'next/link'
 
+// Colors from pgElephant icon (darker variants)
+const palette = {
+  iconTeal: '#025A6B',
+  iconTealLight: '#036B7D',
+  iconTealMedium: '#045E70',
+  iconTealDark: '#054A56',
+  // Supporting colors
+  navy: '#1E293B',
+  navyDeep: '#0F172A',
+  slate: '#334155',
+  cyan: '#0EA5E9',
+  cyanDeep: '#0284C7',
+  teal: '#14B8A6',
+  tealDeep: '#0D9488',
+  gray100: '#F8FAFC',
+  gray300: '#CBD5E1',
+  white: '#FFFFFF',
+  orange: '#F97316',
+  orangeDark: '#EA580C'
+}
+
 const RamBlogPage = () => {
   return (
-    <div className="pt-16 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
+    <div className="pt-16">
       {/* Header */}
-      <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-green-400/20 to-green-300/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-green-500/20 to-green-400/15 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-green-300/15 to-green-200/10 rounded-full blur-2xl" />
-        </div>
+      <div className="bg-gradient-to-br from-teal-600 to-teal-800 py-16 text-white relative overflow-hidden">
 
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #22c55e 1px, transparent 0)`,
-            backgroundSize: '50px 50px'
-          }} />
-        </div>
-
-        {/* Glassmorphism Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
 
         <div className="container-custom py-16 relative z-10">
           <div className="max-w-4xl mx-auto">

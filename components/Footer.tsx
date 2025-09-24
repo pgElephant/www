@@ -3,7 +3,14 @@
 import React from 'react'
 
 import { Github, Twitter, Linkedin, Mail, Globe, Users, BookOpen, Download } from 'lucide-react'
-import ElephantLogo from './ElephantLogo'
+
+// Colors from pgElephant icon (darker variants)
+const palette = {
+  iconTeal: '#025A6B',
+  iconTealLight: '#036B7D',
+  iconTealMedium: '#045E70',
+  iconTealDark: '#054A56',
+}
 
 const Footer = () => {
   const navigation = {
@@ -47,67 +54,48 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="professional-footer pt-16 pb-8">
+    <footer 
+      className="pt-12 pb-6"
+      style={{
+        background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
+      }}
+    >
       <div className="container-wide">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo and Description */}
           <div className="md:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
-              <ElephantLogo size="md" animated={false} />
-              <span className="text-xl font-bold text-white">pgElephant</span>
+            <div className="flex justify-center md:justify-start mb-4">
+              <div className="w-20 h-20 bg-white rounded-xl flex items-center justify-center border border-white/20">
+                <img 
+                  src="/ico/pgElephant_no_com_HD.ico" 
+                  alt="pgElephant" 
+                  className="w-16 h-16 object-contain"
+                />
+              </div>
             </div>
-            <p className="text-slate-300 text-sm leading-relaxed mb-6">
-              Enterprise-grade PostgreSQL platform with distributed consensus, clustering, and document database capabilities.
+            <p className="text-slate-300 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0">
+              Enterprise-grade PostgreSQL platform.
             </p>
-            <div className="flex space-x-4">
-              {social.map((item) => (
-                <a key={item.name} href={item.href} className="text-slate-400 hover:text-white transition-colors">
-                  <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-5 w-5" aria-hidden="true" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Product Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
-            <ul className="space-y-3">
-              {navigation.product.map((item) => (
-                <li key={item.name}>
-                  <a href={item.href} className="text-slate-300 hover:text-white transition-colors text-sm">
-                    {item.name}
-                  </a>
-                </li>
-              ))}
+          <div className="text-center md:text-left">
+            <h3 className="text-white font-semibold mb-3 text-sm">Products</h3>
+            <ul className="space-y-2">
+              <li><a href="/rale" className="text-slate-300 hover:text-white transition-colors text-sm">RALE</a></li>
+              <li><a href="/ram" className="text-slate-300 hover:text-white transition-colors text-sm">RAM</a></li>
+              <li><a href="/fauxdb" className="text-slate-300 hover:text-white transition-colors text-sm">FauxDB</a></li>
             </ul>
           </div>
 
-          {/* Resources Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Resources</h3>
-            <ul className="space-y-3">
-              {navigation.resources.map((item) => (
-                <li key={item.name}>
-                  <a href={item.href} className="text-slate-300 hover:text-white transition-colors text-sm">
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
-            <ul className="space-y-3">
-              {navigation.company.map((item) => (
-                <li key={item.name}>
-                  <a href={item.href} className="text-slate-300 hover:text-white transition-colors text-sm">
-                    {item.name}
-                  </a>
-                </li>
-              ))}
+          {/* Quick Links */}
+          <div className="text-center md:text-left">
+            <h3 className="text-white font-semibold mb-3 text-sm">Quick Links</h3>
+            <ul className="space-y-2">
+              <li><a href="/download" className="text-slate-300 hover:text-white transition-colors text-sm">Download</a></li>
+              <li><a href="/blog" className="text-slate-300 hover:text-white transition-colors text-sm">Blog</a></li>
+              <li><a href="/docs" className="text-slate-300 hover:text-white transition-colors text-sm">Documentation</a></li>
+              <li><a href="/community" className="text-slate-300 hover:text-white transition-colors text-sm">Community</a></li>
             </ul>
           </div>
         </div>

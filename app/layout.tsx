@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     template: '%s | pgElephant'
   },
   description: 'Enterprise-grade PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE. Production-ready solutions for modern applications.',
+  icons: {
+    icon: '/ico/pgElephant_no_com_HD.ico',
+    shortcut: '/ico/pgElephant_no_com_HD.ico',
+    apple: '/ico/pgElephant_no_com_HD.ico',
+  },
   keywords: [
     'PostgreSQL', 'high availability', 'HA', 'clustering', 'failover', 'database',
     'RAM', 'RALE', 'FauxDB', 'MongoDB alternative', 'distributed consensus',
@@ -41,17 +46,17 @@ export const metadata: Metadata = {
     'pgraft', 'ramd', 'ramctrl', 'MongoDB compatible', 'document database',
     'Rust database', 'PostgreSQL extension', 'consensus algorithm'
   ],
-  authors: [{ name: 'pgElephant Team', url: 'https://pgelephant.com' }],
+  authors: [{ name: 'pgElephant Team', url: 'https://www.pgelephant.com' }],
   creator: 'pgElephant',
   publisher: 'pgElephant',
-  metadataBase: new URL('https://pgelephant.com'),
+  metadataBase: new URL('https://www.pgelephant.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://pgelephant.com',
+    url: 'https://www.pgelephant.com',
     siteName: 'pgElephant',
     title: 'pgElephant - PostgreSQL High Availability & MongoDB Alternative',
     description: 'Enterprise-grade PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.',
@@ -100,8 +105,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "pgElephant",
-    "url": "https://pgelephant.com",
-    "logo": "https://pgelephant.com/logo.png",
+    "url": "https://www.pgelephant.com",
+    "logo": "https://www.pgelephant.com/logo.png",
     "description": "Enterprise-grade PostgreSQL high availability with RAM clustering, MongoDB-compatible FauxDB, and distributed consensus with RALE.",
     "foundingDate": "2024",
     "sameAs": [

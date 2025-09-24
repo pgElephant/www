@@ -7,6 +7,12 @@ import Image from 'next/image'
 
 type BG = { from: string; via?: string; to: string }
 const palette = {
+  // Colors from pgElephant icon (darker variants)
+  iconTeal: '#025A6B',
+  iconTealLight: '#036B7D',
+  iconTealMedium: '#045E70',
+  iconTealDark: '#054A56',
+  // Supporting colors
   navy: '#1E293B',
   navyDeep: '#0F172A',
   slate: '#334155',
@@ -42,23 +48,23 @@ const Hero = () => {
         id: 'rale',
         name: 'RALE',
         title: 'Resilient Adaptive Leader Election',
-        description: 'Distributed consensus for high availability in distributed systems.',
-        description2: 'Automated leader election and failover for any distributed database.',
-        description3: 'Zero data loss during node failures with strong consistency guarantees.',
+        description: '• Distributed consensus for high availability in distributed systems.',
+        description2: '• Automated leader election and failover for any distributed database.',
+        description3: '• Zero data loss during node failures with strong consistency guarantees.',
         icon: '/ico/RALE_HD.ico',
-        color: `from-[${palette.cyan}] to-[${palette.cyanDeep}]`,
-        bg: { from: palette.navy, via: palette.slate, to: palette.navy }
+        color: `from-[${palette.iconTeal}] to-[${palette.iconTealLight}]`,
+        bg: { from: palette.iconTealDark, via: palette.iconTeal, to: palette.iconTealLight }
       },
       {
         id: 'ram',
         name: 'RAM',
         title: 'Resilient Adaptive Manager',
-        description: 'Enterprise-grade PostgreSQL clustering with automatic failover.',
-        description2: 'Intelligent resource management and load balancing across nodes.',
-        description3: 'Real-time monitoring and automated scaling capabilities.',
+        description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
+        description2: '• Intelligent resource management and load balancing across nodes.',
+        description3: '• Real-time monitoring and automated scaling capabilities.',
         icon: '/ico/RAM_HD.ico',
-        color: `from-[${palette.teal}] to-[${palette.tealDeep}]`,
-        bg: { from: palette.slate, via: palette.navy, to: palette.slate }
+        color: `from-[${palette.iconTealMedium}] to-[${palette.iconTealLight}]`,
+        bg: { from: palette.iconTeal, via: palette.iconTealMedium, to: palette.iconTealLight }
       },
       {
         id: 'fauxdb',
@@ -68,8 +74,8 @@ const Hero = () => {
         description2: '• Native JSON support with ACID transaction guarantees.',
         description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
         icon: '/ico/FauxDB_HD.ico',
-        color: `from-[${palette.cyan}] to-[${palette.teal}]`,
-        bg: { from: palette.slate, via: palette.navy, to: palette.navyDeep }
+        color: `from-[${palette.iconTealLight}] to-[${palette.iconTealMedium}]`,
+        bg: { from: palette.iconTealDark, via: palette.iconTeal, to: palette.iconTealMedium }
       }
   ]
 
@@ -128,9 +134,9 @@ const Hero = () => {
 
           {/* Product showcase */}
           <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-8">
-                <div className="text-center mb-6">
-                  <div className="flex items-center justify-center gap-6 mb-4">
+              <div className="mb-8">
+                <div className="mb-6">
+                  <div className="flex items-center gap-6 mb-4">
                     <div className="w-24 h-24 flex items-center justify-center">
                       <Image 
                         src={current.icon} 
@@ -150,7 +156,7 @@ const Hero = () => {
                     </div>
                   </div>
                 </div>
-                    <div className="text-xl max-w-2xl mx-auto space-y-2 text-left" style={{ color: palette.gray100 }}>
+                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16" style={{ color: palette.gray100 }}>
                       <p>{current.description}</p>
                       <p>{current.description2}</p>
                       <p>{current.description3}</p>

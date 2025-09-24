@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import { Menu, X, Github } from 'lucide-react'
 import Link from 'next/link'
-import ElephantLogo from './ElephantLogo'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,13 +24,14 @@ const Header = () => {
       <div className="container-wide">
         <div className="flex items-center h-20 w-full">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="/" className="flex items-center group">
             <div className="text-slate-600 group-hover:text-slate-800 transition-colors">
-              <ElephantLogo size="md" animated={false} />
+              <img 
+                src="/ico/pgElephant_no_com_HD.ico" 
+                alt="pgElephant" 
+                className="w-32 h-32 object-contain"
+              />
             </div>
-            <span className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">
-              pgelephant
-            </span>
           </Link>
           {/* Centered menu */}
           <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center">

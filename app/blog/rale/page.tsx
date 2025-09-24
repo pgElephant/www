@@ -1,69 +1,64 @@
-'use client'
-
-import React from 'react'
-import { ArrowLeft, Calendar, Clock, User, Tag, ArrowRight, Crown, Zap, Shield, Globe, Database } from 'lucide-react'
+import { Metadata } from 'next'
 import Link from 'next/link'
+import { ArrowLeft, Calendar, Clock, User, Code, Database, Network, Shield } from 'lucide-react'
 
-const RaleBlogPage = () => {
+export const metadata: Metadata = {
+  title: 'RALE - Resilient Adaptive Leader Election | pgElephant Blog',
+  description: 'Deep dive into RALE, a distributed consensus algorithm for leader election and maintaining consistency in any distributed system.',
+}
+
+const palette = {
+  iconTeal: {
+    50: '#f0fdfa',
+    100: '#ccfbf1',
+    200: '#99f6e4',
+    300: '#5eead4',
+    400: '#2dd4bf',
+    500: '#14b8a6',
+    600: '#0d9488',
+    700: '#0f766e',
+    800: '#115e59',
+    900: '#134e4a',
+    950: '#042f2e'
+  }
+}
+
+export default function RALEBlogPage() {
   return (
-    <div className="pt-16 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header */}
-      <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-yellow-400/20 to-yellow-300/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-yellow-500/20 to-yellow-400/15 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-yellow-300/15 to-yellow-200/10 rounded-full blur-2xl" />
-        </div>
-
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #facc15 1px, transparent 0)`,
-            backgroundSize: '50px 50px'
-          }} />
-        </div>
-
-        {/* Glassmorphism Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
-
-        <div className="container-custom py-16 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <Link href="/blog" className="inline-flex items-center text-yellow-300 hover:text-yellow-200 mb-8">
-              <ArrowLeft className="w-4 h-4 mr-2" />
+      <div className="bg-gradient-to-br from-teal-600 to-teal-800 py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <Link href="/blog" className="inline-flex items-center gap-2 text-teal-200 hover:text-white transition-colors">
+              <ArrowLeft className="w-4 h-4" />
               Back to Blog
             </Link>
-            
-            <div className="flex items-center mb-6">
-              <div className="w-16 h-16 bg-yellow-400/20 rounded-2xl flex items-center justify-center mr-4 border border-yellow-400/30">
-                <Crown className="w-8 h-8 text-yellow-400" />
-              </div>
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-yellow-200 mb-2">
-                  RALE - Resilient Adaptive Leader Election
-                </h1>
-                <p className="text-xl text-slate-300">
-                  Enterprise-grade distributed consensus and leader election
-                </p>
-              </div>
+          </div>
+          
+          <div className="text-center">
+            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm text-white mb-4">
+              Technical Deep Dive
             </div>
-
-            <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400">
-              <div className="flex items-center">
-                <User className="w-4 h-4 mr-2" />
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              RALE - Resilient Adaptive Leader Election
+            </h1>
+            <p className="text-xl text-teal-100 max-w-3xl mx-auto mb-8">
+              Deep dive into RALE, a distributed consensus algorithm for leader election and maintaining consistency in any distributed system.
+            </p>
+            
+            <div className="flex items-center justify-center gap-6 text-teal-100">
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4" />
                 <span>pgElephant Team</span>
               </div>
-              <div className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>January 15, 2024</span>
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                <span>December 15, 2024</span>
               </div>
-              <div className="flex items-center">
-                <Clock className="w-4 h-4 mr-2" />
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
                 <span>8 min read</span>
-              </div>
-              <div className="flex items-center">
-                <Tag className="w-4 h-4 mr-2" />
-                <span>Technical, Consensus, High Availability</span>
               </div>
             </div>
           </div>
@@ -71,120 +66,310 @@ const RaleBlogPage = () => {
       </div>
 
       {/* Content */}
-      <div className="container-custom py-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30">
-            <div className="prose prose-invert max-w-none">
-              <h2 className="text-2xl font-bold text-white mb-6">What is RALE?</h2>
-              <p className="text-slate-300 mb-6 text-lg leading-relaxed">
-                RALE (Resilient Adaptive Leader Election) is a distributed consensus algorithm designed specifically for PostgreSQL high availability clusters. It provides reliable leader election, automatic failover, and maintains consistency across distributed database nodes.
-              </p>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <article className="prose prose-lg max-w-none">
+          
+          {/* Introduction */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              RALE (Resilient Adaptive Leader Election) is a distributed consensus and key-value store system built with modern C engineering practices. 
+              It provides reliable distributed coordination and persistent storage for distributed applications with strong consistency guarantees.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Unlike traditional consensus algorithms that focus solely on leader election, RALE combines consensus with a distributed key-value store, 
+              making it particularly well-suited for PostgreSQL clustering scenarios where both coordination and state management are critical.
+            </p>
+          </div>
 
-              <h2 className="text-2xl font-bold text-white mb-6 mt-12">Key Features</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
-                  <div className="flex items-center mb-3">
-                    <Zap className="w-6 h-6 text-yellow-400 mr-3" />
-                    <h3 className="text-lg font-semibold text-white">Fast Failover</h3>
-                  </div>
-                  <p className="text-slate-300 text-sm">Automatic failover in under 30 seconds with zero data loss</p>
-                </div>
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
-                  <div className="flex items-center mb-3">
-                    <Shield className="w-6 h-6 text-yellow-400 mr-3" />
-                    <h3 className="text-lg font-semibold text-white">Consensus Algorithm</h3>
-                  </div>
-                  <p className="text-slate-300 text-sm">Raft-based consensus ensures consistency across all nodes</p>
-                </div>
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
-                  <div className="flex items-center mb-3">
-                    <Globe className="w-6 h-6 text-yellow-400 mr-3" />
-                    <h3 className="text-lg font-semibold text-white">Multi-Zone Support</h3>
-                  </div>
-                  <p className="text-slate-300 text-sm">Deploy across multiple availability zones for maximum resilience</p>
-                </div>
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
-                  <div className="flex items-center mb-3">
-                    <Database className="w-6 h-6 text-yellow-400 mr-3" />
-                    <h3 className="text-lg font-semibold text-white">PostgreSQL Native</h3>
-                  </div>
-                  <p className="text-slate-300 text-sm">Built specifically for PostgreSQL with native integration</p>
-                </div>
+          {/* Architecture Overview */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <Network className="w-8 h-8 text-teal-600" />
+              System Architecture
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Core Components</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <strong>librale</strong> - Core consensus and distributed store library
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <strong>raled</strong> - Daemon process for cluster management
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <strong>ralectrl</strong> - Command-line interface for operations
+                    </div>
+                  </li>
+                </ul>
               </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>Thread-safe operations with proper synchronization</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>Memory-safe allocation/deallocation</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>TCP/UDP communication with failover</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>Unified cluster database storage</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-              <h2 className="text-2xl font-bold text-white mb-6 mt-12">How RALE Works</h2>
-              <p className="text-slate-300 mb-6 text-lg leading-relaxed">
-                RALE implements a modified Raft consensus algorithm optimized for database workloads. It maintains a log of all state changes and ensures that all nodes agree on the current leader and cluster state.
-              </p>
+            {/* Architecture Diagram */}
+            <div className="bg-gray-50 rounded-lg p-6 mb-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">Cluster Architecture</h4>
+              <div className="text-sm text-gray-700 font-mono">
+                <pre className="whitespace-pre-wrap">{`┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   (Node 1)      │◄──►│   (Node 2)      │◄──►│   (Node 3)      │
+│   raled         │    │   raled         │    │   raled         │
+│   + librale     │    │   + librale     │    │   + librale     │
+│   + cluster.db  │    │   + cluster.db  │    │   + cluster.db  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+       ▲                        ▲                        ▲
+       │                        │                        │
+┌─────────────┐        ┌─────────────┐        ┌─────────────┐
+│  ralectrl   │        │  ralectrl   │        │  ralectrl   │
+│    (CLI)    │        │    (CLI)    │        │    (CLI)    │
+└─────────────┘        └─────────────┘        └─────────────┘`}</pre>
+              </div>
+            </div>
+          </div>
 
-              <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30 mb-8">
-                <h3 className="text-lg font-semibold text-white mb-4">Consensus Process</h3>
-                <ol className="text-slate-300 space-y-2">
-                  <li className="flex items-start">
-                    <span className="bg-yellow-400 text-slate-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
-                    <span>Nodes participate in leader election when current leader becomes unavailable</span>
+          {/* Consensus Algorithm */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <Shield className="w-8 h-8 text-teal-600" />
+              RALE Consensus Protocol
+            </h2>
+            
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              The RALE consensus protocol ensures distributed agreement and consistency across cluster nodes. 
+              It implements a variant of the Raft algorithm optimized for PostgreSQL clustering scenarios.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Leader Election Process</h3>
+                <ol className="space-y-3 list-decimal list-inside">
+                  <li className="text-gray-700">
+                    <strong>Candidate Selection:</strong> Nodes transition to candidate state during leader timeout
                   </li>
-                  <li className="flex items-start">
-                    <span className="bg-yellow-400 text-slate-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
-                    <span>Consensus is reached through majority voting among healthy nodes</span>
+                  <li className="text-gray-700">
+                    <strong>Vote Collection:</strong> Candidates request votes from cluster members
                   </li>
-                  <li className="flex items-start">
-                    <span className="bg-yellow-400 text-slate-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">3</span>
-                    <span>New leader takes over PostgreSQL primary role and updates cluster state</span>
+                  <li className="text-gray-700">
+                    <strong>Majority Decision:</strong> Node with majority votes becomes leader
                   </li>
-                  <li className="flex items-start">
-                    <span className="bg-yellow-400 text-slate-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">4</span>
-                    <span>All nodes acknowledge the new leader and update their configurations</span>
+                  <li className="text-gray-700">
+                    <strong>Heartbeat Maintenance:</strong> Leader sends regular heartbeats to maintain authority
                   </li>
                 </ol>
               </div>
-
-              <h2 className="text-2xl font-bold text-white mb-6 mt-12">Getting Started</h2>
-              <p className="text-slate-300 mb-6 text-lg leading-relaxed">
-                RALE is designed to be simple to deploy and configure. It integrates seamlessly with PostgreSQL and provides a clean API for cluster management.
-              </p>
-
-              <div className="bg-slate-900 rounded-xl p-6 border border-slate-400/30 mb-8">
-                <h3 className="text-lg font-semibold text-white mb-4">Quick Start</h3>
-                <pre className="text-slate-300 text-sm overflow-x-auto">
-{`# Install RALE
-curl -sSL https://install.pgelephant.com/rale | bash
-
-# Configure cluster
-rale init --nodes=3 --zone=us-west-2
-
-# Start cluster
-rale start
-
-# Check status
-rale status`}
-                </pre>
+              
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Safety Properties</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Election Safety:</strong> At most one leader per term</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Leader Append-Only:</strong> Leaders never overwrite log entries</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Log Matching:</strong> Consistent log replication across nodes</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Leader Completeness:</strong> Leader contains all committed entries</div>
+                  </li>
+                </ul>
               </div>
+            </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mt-12">
-                <Link
-                  href="/rale"
-                  className="inline-flex items-center px-6 py-3 bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 rounded-lg hover:bg-yellow-400/30 transition-colors"
-                >
-                  <Crown className="w-5 h-5 mr-2" />
-                  Learn More About RALE
-                  <ArrowRight className="w-4 h-4 ml-2" />
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">Log Replication Mechanism</h4>
+              <ol className="space-y-3 list-decimal list-inside text-gray-700">
+                <li><strong>Client Request:</strong> Application submits operation to leader</li>
+                <li><strong>Log Append:</strong> Leader appends entry to local log</li>
+                <li><strong>Replication:</strong> Leader replicates entry to follower nodes</li>
+                <li><strong>Commit:</strong> Entry committed when majority acknowledges</li>
+                <li><strong>Application:</strong> State machine applies committed entries</li>
+              </ol>
+            </div>
+          </div>
+
+          {/* Distributed Store */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <Database className="w-8 h-8 text-teal-600" />
+              Distributed Store (DStore)
+            </h2>
+            
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              The DStore provides a distributed key-value storage layer with strong consistency guarantees. 
+              It uses a unified cluster database approach for efficient state management.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Storage Architecture</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Hash Table:</strong> In-memory hash table for fast key lookups</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Persistence:</strong> File-based storage for durability</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Replication:</strong> Automatic replication across cluster nodes</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Atomic Operations:</strong> Consistent read/write operations</div>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Unified Database Benefits</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Faster Startup:</strong> Single file load vs multiple file parsing</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Consistent State:</strong> No race conditions between components</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Efficient Storage:</strong> Binary format vs text parsing</div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div><strong>Data Integrity:</strong> Atomic operations with mutex protection</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* API and Usage */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <Code className="w-8 h-8 text-teal-600" />
+              API Design and Usage
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Core API Functions</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <pre className="text-sm text-gray-700 font-mono">{`/* Core RALE API */
+int rale_init(const config_t *config);
+int rale_finit(void);
+int rale_process_command(const char *command, 
+                         char *response,
+                         size_t response_size);
+int rale_get_status(char *status, 
+                    size_t status_size);
+int rale_quram_process(void);`}</pre>
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">RALE State Structure</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <pre className="text-sm text-gray-700 font-mono">{`typedef struct rale_state_t {
+  int32_t current_term;
+  int32_t voted_for;
+  int32_t leader_id;
+  rale_role_t role;
+  int32_t last_log_index;
+  int32_t last_log_term;
+  int32_t commit_index;
+  int32_t last_applied;
+  time_t last_heartbeat;
+  time_t election_deadline;
+} rale_state_t;`}</pre>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">Quick Start Example</h4>
+              <pre className="text-sm text-gray-700 font-mono">{`# Clone and build
+git clone https://github.com/pgElephant/rale.git
+cd rale && ./build.sh
+
+# Start single node
+raled --config conf/raled1.conf
+
+# Use CLI to add nodes
+ralectrl ADD --node-id 1 --node-name "node1" \\
+  --node-ip "127.0.0.1" --rale-port 7400 \\
+  --dstore-port 7401`}</pre>
+            </div>
+          </div>
+
+          {/* Conclusion */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Conclusion</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              RALE represents a significant advancement in distributed consensus systems, specifically designed for PostgreSQL clustering scenarios. 
+              By combining robust leader election with a distributed key-value store, RALE provides the foundation for highly available PostgreSQL deployments.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              The unified database approach, thread-safe operations, and memory management make RALE suitable for production environments where 
+              reliability and performance are paramount. Its clean API design and comprehensive documentation make it accessible for developers 
+              building distributed PostgreSQL solutions.
+            </p>
+            
+            <div className="bg-teal-50 border border-teal-200 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-teal-900 mb-2">Next Steps</h3>
+              <p className="text-teal-800 mb-4">
+                Ready to implement RALE in your PostgreSQL cluster? Check out our comprehensive documentation and examples.
+              </p>
+              <div className="flex gap-4">
+                <Link href="/docs/rale/getting-started" className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
+                  Getting Started Guide
                 </Link>
-                <Link
-                  href="/docs/rale/getting-started"
-                  className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors"
-                >
-                  <Database className="w-5 h-5 mr-2" />
-                  View Documentation
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                <Link href="/rale" className="inline-flex items-center gap-2 px-4 py-2 border border-teal-600 text-teal-600 rounded-lg hover:bg-teal-50 transition-colors">
+                  Learn More About RALE
                 </Link>
               </div>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   )
 }
-
-export default RaleBlogPage
