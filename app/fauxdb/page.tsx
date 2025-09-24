@@ -21,55 +21,37 @@ export default function FauxDBPage() {
         <link rel="canonical" href="https://pgelephant.com/fauxdb" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="min-h-screen bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
-        <section className="pt-16 md:pt-20 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 relative overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-blue-300/15 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-blue-500/20 to-blue-400/15 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-blue-300/15 to-blue-200/10 rounded-full blur-2xl" />
-          </div>
-
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, #3b82f6 1px, transparent 0)`,
-              backgroundSize: '50px 50px'
-            }} />
-          </div>
-
-          {/* Glassmorphism Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
-
-          <div className="container-custom py-16 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="flex items-center justify-center mb-6">
-                <div className="w-20 h-20 bg-blue-400/20 rounded-2xl flex items-center justify-center mr-4 border border-blue-400/30">
-                  <FileText className="w-10 h-10 text-blue-400" />
+      <main className="min-h-screen bg-white">
+        <section className="pt-20 professional-hero">
+          <div className="container-custom py-20">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="flex items-center justify-center mb-8">
+                <div className="w-20 h-20 bg-slate-100 rounded-2xl flex items-center justify-center mr-4 border border-slate-200">
+                  <FileText className="w-10 h-10 text-slate-600" />
                 </div>
                 <div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-blue-200 mb-2">
+                  <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
                     FauxDB
                   </h1>
-                  <p className="text-xl text-slate-300">
+                  <p className="text-xl text-slate-600">
                     MongoDB Compatible Document Database
                   </p>
                 </div>
               </div>
-              <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto">
+              <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
                 High-performance, production-ready MongoDB-compatible database server built in Rust with full wire protocol compatibility and pure PostgreSQL backend.
               </p>
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <span className="px-4 py-2 bg-blue-400/20 text-blue-300 rounded-full text-sm font-medium border border-blue-400/30">
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                <span className="professional-badge">
                   100% MongoDB Compatible
                 </span>
-                <span className="px-4 py-2 bg-blue-400/20 text-blue-300 rounded-full text-sm font-medium border border-blue-400/30">
+                <span className="professional-badge">
                   Built in Rust
                 </span>
-                <span className="px-4 py-2 bg-blue-400/20 text-blue-300 rounded-full text-sm font-medium border border-blue-400/30">
+                <span className="professional-badge">
                   Production Ready
                 </span>
-                <span className="px-4 py-2 bg-blue-400/20 text-blue-300 rounded-full text-sm font-medium border border-blue-400/30">
+                <span className="professional-badge">
                   PostgreSQL Backend
                 </span>
               </div>

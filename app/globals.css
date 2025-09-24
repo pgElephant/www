@@ -48,19 +48,23 @@ body {
 }
 
 .container-custom {
-  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-12;
 }
 
 .container-wide {
-  @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-5xl mx-auto px-6 sm:px-8 lg:px-12;
 }
 
 .container-narrow {
-  @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-3xl mx-auto px-6 sm:px-8 lg:px-12;
 }
 
 .container-content {
-  @apply max-w-2xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-2xl mx-auto px-6 sm:px-8 lg:px-12;
+}
+
+.container-premium {
+  @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12;
 }
 
 
@@ -192,15 +196,15 @@ body {
 
 /* Professional Design Enhancements */
 .professional-card {
-  @apply bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1;
+  @apply bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2;
 }
 
 .professional-button {
-  @apply inline-flex items-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-lg;
+  @apply inline-flex items-center px-10 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105;
 }
 
 .professional-button-outline {
-  @apply inline-flex items-center px-8 py-4 bg-white text-slate-900 border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 font-semibold rounded-xl transition-all duration-200;
+  @apply inline-flex items-center px-10 py-4 bg-white text-slate-900 border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 font-semibold rounded-2xl transition-all duration-300 shadow-sm hover:shadow-lg;
 }
 
 .professional-gradient {
@@ -212,35 +216,35 @@ body {
 }
 
 .professional-badge {
-  @apply inline-flex items-center px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium border border-slate-200;
+  @apply inline-flex items-center px-5 py-2.5 bg-slate-50 text-slate-700 rounded-full text-sm font-medium border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200;
 }
 
 .professional-section {
-  @apply py-20 bg-white;
+  @apply py-24 bg-white;
 }
 
 .professional-section-alt {
-  @apply py-20 bg-slate-50;
+  @apply py-24 bg-slate-50;
 }
 
 .professional-hero {
-  @apply bg-gradient-to-br from-white via-slate-50 to-white;
+  @apply bg-gradient-to-br from-white via-slate-50/50 to-white;
 }
 
 .professional-feature-grid {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
 }
 
 .professional-stats-grid {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-8;
+  @apply grid grid-cols-1 md:grid-cols-3 gap-10;
 }
 
 .professional-testimonial {
-  @apply bg-white border border-slate-200 p-8 rounded-2xl shadow-sm;
+  @apply bg-white border border-slate-200 p-10 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300;
 }
 
 .professional-cta {
-  @apply bg-slate-900 text-white rounded-2xl p-12;
+  @apply bg-slate-900 text-white rounded-3xl p-16 shadow-2xl;
 }
 
 /* Enhanced Professional Elements */
@@ -270,6 +274,63 @@ body {
 
 .professional-select {
   @apply w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200 bg-white;
+}
+
+/* Premium Design Elements */
+.premium-card {
+  @apply bg-white border border-slate-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 backdrop-blur-sm;
+}
+
+.premium-button {
+  @apply inline-flex items-center px-12 py-5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform;
+}
+
+.premium-section {
+  @apply py-32 bg-gradient-to-br from-white via-slate-50/30 to-white;
+}
+
+.premium-hero {
+  @apply bg-gradient-to-br from-white via-slate-50/50 to-white relative overflow-hidden;
+}
+
+.premium-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(148, 163, 184, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(148, 163, 184, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.premium-text {
+  @apply text-slate-900 font-semibold leading-relaxed;
+}
+
+.premium-heading {
+  @apply text-slate-900 font-bold leading-tight tracking-tight;
+}
+
+.premium-subheading {
+  @apply text-slate-600 font-medium leading-relaxed;
+}
+
+.premium-badge {
+  @apply inline-flex items-center px-6 py-3 bg-slate-50 text-slate-700 rounded-full text-sm font-semibold border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105;
+}
+
+.premium-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12;
+}
+
+.premium-spacing {
+  @apply space-y-16;
+}
+
+.premium-divider {
+  @apply h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent;
 }
 
 @layer utilities {
