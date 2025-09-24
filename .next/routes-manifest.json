@@ -1,1 +1,258 @@
-{"version":3,"caseSensitive":false,"basePath":"","rewrites":{"beforeFiles":[],"afterFiles":[],"fallback":[]},"redirects":[{"source":"/:path+/","destination":"/:path+","permanent":true,"internal":true,"regex":"^(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))\\/$"},{"source":"/home","destination":"/","permanent":true,"regex":"^(?!\\/_next)\\/home(?:\\/)?$"},{"source":"/documentation","destination":"/docs","permanent":true,"regex":"^(?!\\/_next)\\/documentation(?:\\/)?$"},{"source":"/guide","destination":"/docs","permanent":true,"regex":"^(?!\\/_next)\\/guide(?:\\/)?$"},{"source":"/tutorial","destination":"/docs","permanent":true,"regex":"^(?!\\/_next)\\/tutorial(?:\\/)?$"},{"source":"/postgresql-ha","destination":"/ram","permanent":true,"regex":"^(?!\\/_next)\\/postgresql-ha(?:\\/)?$"},{"source":"/mongodb-alternative","destination":"/fauxdb","permanent":true,"regex":"^(?!\\/_next)\\/mongodb-alternative(?:\\/)?$"},{"source":"/consensus","destination":"/rale","permanent":true,"regex":"^(?!\\/_next)\\/consensus(?:\\/)?$"}],"headers":[{"source":"/(.*)","headers":[{"key":"X-Frame-Options","value":"DENY"},{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"origin-when-cross-origin"},{"key":"X-DNS-Prefetch-Control","value":"on"},{"key":"Strict-Transport-Security","value":"max-age=31536000; includeSubDomains; preload"},{"key":"Content-Security-Policy","value":"upgrade-insecure-requests"}],"regex":"^(?:\\/(.*))(?:\\/)?$"}]}
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/home(?:/)?$"
+    },
+    {
+      "source": "/documentation",
+      "destination": "/docs",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/documentation(?:/)?$"
+    },
+    {
+      "source": "/guide",
+      "destination": "/docs",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/guide(?:/)?$"
+    },
+    {
+      "source": "/tutorial",
+      "destination": "/docs",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/tutorial(?:/)?$"
+    },
+    {
+      "source": "/postgresql-ha",
+      "destination": "/ram",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/postgresql-ha(?:/)?$"
+    },
+    {
+      "source": "/mongodb-alternative",
+      "destination": "/fauxdb",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/mongodb-alternative(?:/)?$"
+    },
+    {
+      "source": "/consensus",
+      "destination": "/rale",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/consensus(?:/)?$"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "upgrade-insecure-requests"
+        }
+      ],
+      "regex": "^(?:/(.*))(?:/)?$"
+    }
+  ],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/blog",
+      "regex": "^/blog(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/blog(?:/)?$"
+    },
+    {
+      "page": "/blog/rale",
+      "regex": "^/blog/rale(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/blog/rale(?:/)?$"
+    },
+    {
+      "page": "/blog/ram",
+      "regex": "^/blog/ram(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/blog/ram(?:/)?$"
+    },
+    {
+      "page": "/community",
+      "regex": "^/community(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/community(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/docs",
+      "regex": "^/docs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs(?:/)?$"
+    },
+    {
+      "page": "/docs/fauxdb",
+      "regex": "^/docs/fauxdb(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/fauxdb(?:/)?$"
+    },
+    {
+      "page": "/docs/fauxdb/docker",
+      "regex": "^/docs/fauxdb/docker(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/fauxdb/docker(?:/)?$"
+    },
+    {
+      "page": "/docs/fauxdb/getting-started",
+      "regex": "^/docs/fauxdb/getting\\-started(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/fauxdb/getting\\-started(?:/)?$"
+    },
+    {
+      "page": "/docs/rale",
+      "regex": "^/docs/rale(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/rale(?:/)?$"
+    },
+    {
+      "page": "/docs/rale/getting-started",
+      "regex": "^/docs/rale/getting\\-started(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/rale/getting\\-started(?:/)?$"
+    },
+    {
+      "page": "/docs/ram",
+      "regex": "^/docs/ram(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/ram(?:/)?$"
+    },
+    {
+      "page": "/docs/ram/docker",
+      "regex": "^/docs/ram/docker(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/ram/docker(?:/)?$"
+    },
+    {
+      "page": "/docs/ram/getting-started",
+      "regex": "^/docs/ram/getting\\-started(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/ram/getting\\-started(?:/)?$"
+    },
+    {
+      "page": "/docs/ram/kubernetes",
+      "regex": "^/docs/ram/kubernetes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/ram/kubernetes(?:/)?$"
+    },
+    {
+      "page": "/download",
+      "regex": "^/download(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/download(?:/)?$"
+    },
+    {
+      "page": "/fauxdb",
+      "regex": "^/fauxdb(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/fauxdb(?:/)?$"
+    },
+    {
+      "page": "/rale",
+      "regex": "^/rale(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rale(?:/)?$"
+    },
+    {
+      "page": "/ram",
+      "regex": "^/ram(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ram(?:/)?$"
+    },
+    {
+      "page": "/ram/prometheus",
+      "regex": "^/ram/prometheus(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ram/prometheus(?:/)?$"
+    },
+    {
+      "page": "/robots.txt",
+      "regex": "^/robots\\.txt(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/robots\\.txt(?:/)?$"
+    },
+    {
+      "page": "/sitemap.xml",
+      "regex": "^/sitemap\\.xml(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sitemap\\.xml(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

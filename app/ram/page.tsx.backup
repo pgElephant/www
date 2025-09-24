@@ -114,7 +114,12 @@ const RamPage = () => {
   ]
 
   return (
-    <div className="pt-16">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="pt-16">
         {/* Hero Section with gradient background */}
         <div 
           className="relative overflow-hidden"
@@ -623,7 +628,7 @@ const RamPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
