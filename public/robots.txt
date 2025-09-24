@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://pgElephant.com/sitemap.xml
+
+# Disallow admin or sensitive areas if any
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all search engines to crawl all content
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Crawl delay (optional - only if needed)
+# Crawl-delay: 1

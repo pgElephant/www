@@ -1,8 +1,40 @@
-'use client'
-
 import React from 'react'
+import { Metadata } from 'next'
 import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, CheckCircle, UserCheck, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'RALE - Resilient Adaptive Leader Election | Distributed Consensus',
+  description: 'General-purpose distributed consensus and leader election system for high availability. Raft-based consensus algorithm for distributed systems beyond PostgreSQL.',
+  keywords: [
+    'distributed consensus', 'leader election', 'Raft algorithm', 'high availability',
+    'RALE', 'Resilient Adaptive Leader Election', 'distributed systems', 'consensus protocol',
+    'fault tolerance', 'distributed key-value store', 'network coordination'
+  ],
+  openGraph: {
+    title: 'RALE - Resilient Adaptive Leader Election | Distributed Consensus',
+    description: 'General-purpose distributed consensus and leader election system for high availability. Raft-based consensus algorithm for distributed systems.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/rale',
+    images: [
+      {
+        url: '/ico/RALE_HD.ico',
+        width: 512,
+        height: 512,
+        alt: 'RALE - Distributed Consensus System',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RALE - Resilient Adaptive Leader Election | Distributed Consensus',
+    description: 'General-purpose distributed consensus and leader election system for high availability.',
+    images: ['/ico/RALE_HD.ico'],
+  },
+  alternates: {
+    canonical: '/rale',
+  },
+}
 
 // Colors from pgElephant icon (darker variants)
 const palette = {
@@ -26,6 +58,35 @@ const palette = {
 }
 
 const RalePage = () => {
+  // Structured data for RALE
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RALE - Resilient Adaptive Leader Election",
+    "description": "General-purpose distributed consensus and leader election system for high availability. Raft-based consensus algorithm for distributed systems beyond PostgreSQL.",
+    "applicationCategory": "DatabaseApplication",
+    "operatingSystem": "Linux, macOS",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Distributed Consensus",
+      "Leader Election",
+      "High Availability",
+      "Fault Tolerance",
+      "Key-Value Store",
+      "Network Coordination"
+    ],
+    "screenshot": "/ico/RALE_HD.ico",
+    "author": {
+      "@type": "Organization",
+      "name": "pgElephant"
+    },
+    "url": "https://www.pgelephant.com/rale"
+  }
+
   // Function to get appropriate icon for feature type
   const getFeatureIcon = (type: string) => {
     switch (type) {
@@ -85,7 +146,12 @@ const RalePage = () => {
   ]
 
   return (
-    <div className="pt-16">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="pt-16">
       {/* Hero Section with gradient background */}
       <div 
         className="relative overflow-hidden"
@@ -558,6 +624,7 @@ const RalePage = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

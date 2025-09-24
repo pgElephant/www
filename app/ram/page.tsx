@@ -1,8 +1,40 @@
-'use client'
-
 import React from 'react'
+import { Metadata } from 'next'
 import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Users, Settings, BarChart3, GitBranch, Crown, Wifi, RefreshCw, Network, BarChart } from 'lucide-react'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'RAM - Resilient Adaptive Manager | PostgreSQL Clustering',
+  description: 'Enterprise-grade PostgreSQL clustering with automatic failover, Raft consensus, and real-time monitoring. Zero-downtime failover for production environments.',
+  keywords: [
+    'PostgreSQL clustering', 'automatic failover', 'Raft consensus', 'database HA',
+    'RAM', 'Resilient Adaptive Manager', 'zero downtime', 'database monitoring',
+    'PostgreSQL high availability', 'database replication', 'cluster management'
+  ],
+  openGraph: {
+    title: 'RAM - Resilient Adaptive Manager | PostgreSQL Clustering',
+    description: 'Enterprise-grade PostgreSQL clustering with automatic failover, Raft consensus, and real-time monitoring.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/ram',
+    images: [
+      {
+        url: '/ico/RAM_HD.ico',
+        width: 512,
+        height: 512,
+        alt: 'RAM - PostgreSQL Clustering Solution',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RAM - Resilient Adaptive Manager | PostgreSQL Clustering',
+    description: 'Enterprise-grade PostgreSQL clustering with automatic failover, Raft consensus, and real-time monitoring.',
+    images: ['/ico/RAM_HD.ico'],
+  },
+  alternates: {
+    canonical: '/ram',
+  },
+}
 
 // Colors from pgElephant icon (darker variants)
 const palette = {
@@ -26,6 +58,35 @@ const palette = {
 }
 
 const RamPage = () => {
+  // Structured data for RAM
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RAM - Resilient Adaptive Manager",
+    "description": "Enterprise-grade PostgreSQL clustering with automatic failover, Raft consensus, and real-time monitoring. Zero-downtime failover for production environments.",
+    "applicationCategory": "DatabaseApplication",
+    "operatingSystem": "Linux, macOS",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Automatic Failover",
+      "Raft Consensus",
+      "Real-time Monitoring",
+      "Zero-downtime Failover",
+      "PostgreSQL Integration",
+      "Health Monitoring"
+    ],
+    "screenshot": "/ico/RAM_HD.ico",
+    "author": {
+      "@type": "Organization",
+      "name": "pgElephant"
+    },
+    "url": "https://www.pgelephant.com/ram"
+  }
+
   // Function to get appropriate icon for feature type
   const getFeatureIcon = (type: string) => {
     switch (type) {
@@ -85,7 +146,12 @@ const RamPage = () => {
   ]
 
   return (
-    <div className="pt-16">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="pt-16">
       {/* Hero Section with gradient background */}
       <div 
         className="relative overflow-hidden"
@@ -595,6 +661,8 @@ const RamPage = () => {
             </div>
             </div>
           </div>
+      </div>
+    </>
   )
 }
 

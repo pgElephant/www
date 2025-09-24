@@ -1,8 +1,40 @@
-'use client'
-
 import React from 'react'
+import { Metadata } from 'next'
 import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Layers, Rocket, Settings } from 'lucide-react'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'FauxDB - MongoDB Compatible Document Database | PostgreSQL Backend',
+  description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL backend. 100% wire protocol support with ACID compliance and better reliability.',
+  keywords: [
+    'MongoDB compatible', 'document database', 'PostgreSQL backend', 'Rust database',
+    'FauxDB', 'MongoDB alternative', 'wire protocol', 'ACID compliance',
+    'document store', 'NoSQL database', 'MongoDB API', 'database compatibility'
+  ],
+  openGraph: {
+    title: 'FauxDB - MongoDB Compatible Document Database | PostgreSQL Backend',
+    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL backend. 100% wire protocol support with ACID compliance.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/fauxdb',
+    images: [
+      {
+        url: '/ico/FauxDB_HD.ico',
+        width: 512,
+        height: 512,
+        alt: 'FauxDB - MongoDB Compatible Database',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FauxDB - MongoDB Compatible Document Database | PostgreSQL Backend',
+    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL backend.',
+    images: ['/ico/FauxDB_HD.ico'],
+  },
+  alternates: {
+    canonical: '/fauxdb',
+  },
+}
 
 // Colors from pgElephant icon (darker variants)
 const palette = {
@@ -26,6 +58,35 @@ const palette = {
 }
 
 const FauxDbPage = () => {
+  // Structured data for FauxDB
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "FauxDB - MongoDB Compatible Document Database",
+    "description": "High-performance MongoDB-compatible document database built in Rust with PostgreSQL backend. 100% wire protocol support with ACID compliance and better reliability.",
+    "applicationCategory": "DatabaseApplication",
+    "operatingSystem": "Linux, macOS, Windows",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "MongoDB Compatibility",
+      "100% Wire Protocol",
+      "High Performance",
+      "Rust-Powered Engine",
+      "Advanced Features",
+      "Transactions & Geospatial"
+    ],
+    "screenshot": "/ico/FauxDB_HD.ico",
+    "author": {
+      "@type": "Organization",
+      "name": "pgElephant"
+    },
+    "url": "https://www.pgelephant.com/fauxdb"
+  }
+
   // Function to get appropriate icon for feature type
   const getFeatureIcon = (type: string) => {
     switch (type) {
@@ -85,7 +146,12 @@ const FauxDbPage = () => {
   ]
 
   return (
-    <div className="pt-16">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="pt-16">
       {/* Hero Section with gradient background */}
       <div 
         className="relative overflow-hidden"
@@ -483,6 +549,7 @@ const FauxDbPage = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
