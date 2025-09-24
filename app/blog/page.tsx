@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Zap, Users, TrendingUp, Crown, Settings, FileText } from 'lucide-react'
+import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Search, Filter } from 'lucide-react'
+import Link from 'next/link'
 
 const BlogPage = () => {
   const blogPosts = [
@@ -68,64 +69,42 @@ const BlogPage = () => {
   const featuredPost = blogPosts.find(post => post.featured)
 
   return (
-    <div className="pt-16 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
+    <div className="pt-16 bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-500/20 to-cyan-500/15 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-teal-300/15 to-cyan-300/10 rounded-full blur-2xl" />
-        </div>
-
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #0d9488 1px, transparent 0)`,
-            backgroundSize: '50px 50px'
-          }} />
-        </div>
-
-        {/* Glassmorphism Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-600/30 via-slate-700/20 to-teal-700/30 backdrop-blur-sm" />
-
-        <div className="container-custom py-16 relative z-10">
-          <div className="container-content text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+      <div className="bg-white border-b border-gray-200">
+        <div className="container-custom py-12">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Blog
             </h1>
-            <p className="text-xl text-slate-300 mb-8">
-              Latest updates, tutorials, case studies, and insights from the pgelephant community.
+            <p className="text-xl text-gray-600 mb-8">
+              Latest updates, tutorials, case studies, and insights from the pgElephant community.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className="flex items-center text-slate-300">
-                <BookOpen className="w-5 h-5 mr-2" />
-                <span>Latest posts and updates</span>
-              </div>
-              <div className="flex items-center text-slate-300">
-                <Zap className="w-5 h-5 mr-2" />
-                <span>Technical deep dives</span>
-              </div>
-              <div className="flex items-center text-slate-300">
-                <Users className="w-5 h-5 mr-2" />
-                <span>Community stories</span>
-              </div>
+            
+            {/* Search Bar */}
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search blog posts..."
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              />
             </div>
           </div>
         </div>
       </div>
 
       {/* Categories */}
-      <div className="border-b border-slate-400/30">
+      <div className="bg-gray-50 border-b border-gray-200">
         <div className="container-custom py-6">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <button
                 key={category.name}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   category.active
                     ? 'bg-teal-600 text-white'
-                    : 'bg-white/10 text-slate-300 hover:bg-slate-400/20'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
                 }`}
               >
                 {category.name} ({category.count})
@@ -137,42 +116,41 @@ const BlogPage = () => {
 
       {/* Featured Post */}
       {featuredPost && (
-        <div className="container-custom py-12">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-slate-400/30">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="inline-flex items-center px-3 py-1 bg-teal-400/20 text-teal-300 rounded-full text-sm font-medium mb-4">
-                  <Zap className="w-4 h-4 mr-1" />
-                  Featured Post
-                </div>
-                <h2 className="text-3xl font-bold text-white mb-4">
-                  {featuredPost.title}
-                </h2>
-                <p className="text-slate-300 mb-6 text-lg">
-                  {featuredPost.excerpt}
-                </p>
-                <div className="flex items-center text-sm text-slate-400 mb-6">
-                  <User className="w-4 h-4 mr-2" />
-                  <span className="mr-4">{featuredPost.author}</span>
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <span className="mr-4">{featuredPost.date}</span>
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>{featuredPost.readTime}</span>
-                </div>
-                <a
-                  href={featuredPost.href}
-                  className="inline-flex items-center text-teal-300 hover:text-teal-200 font-medium"
-                >
-                  Read full article
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </a>
-              </div>
-              <div className="bg-slate-100/20 rounded-xl h-64 flex items-center justify-center border border-slate-400/30">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-yellow-400/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-yellow-400/30">
-                    <Crown className="w-8 h-8 text-yellow-400" />
+        <div className="bg-white">
+          <div className="container-custom py-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="p-8">
+                  <div className="flex items-center mb-4">
+                    <span className="inline-flex items-center px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium">
+                      Featured Post
+                    </span>
                   </div>
-                  <span className="text-slate-400 text-sm">RALE Consensus Algorithm</span>
+                  
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                    {featuredPost.title}
+                  </h2>
+                  
+                  <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                    {featuredPost.excerpt}
+                  </p>
+                  
+                  <div className="flex items-center text-sm text-gray-500 mb-6">
+                    <User className="w-4 h-4 mr-2" />
+                    <span className="mr-4">{featuredPost.author}</span>
+                    <Calendar className="w-4 h-4 mr-2" />
+                    <span className="mr-4">{featuredPost.date}</span>
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span>{featuredPost.readTime}</span>
+                  </div>
+                  
+                  <Link
+                    href={featuredPost.href}
+                    className="inline-flex items-center text-teal-600 hover:text-teal-700 font-medium"
+                  >
+                    Read full article
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -181,99 +159,77 @@ const BlogPage = () => {
       )}
 
       {/* Blog Posts Grid */}
-      <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.filter(post => !post.featured).map((post) => (
-            <article key={post.id} className="bg-white/10 backdrop-blur-sm rounded-xl border border-slate-400/30 hover:shadow-lg transition-shadow">
-              <div className="bg-slate-100/20 rounded-t-xl h-48 flex items-center justify-center border-b border-slate-400/30">
-                <div className="text-center">
-                  {post.title.includes('RALE') && (
-                    <>
-                      <div className="w-12 h-12 bg-yellow-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-yellow-400/30">
-                        <Crown className="w-6 h-6 text-yellow-400" />
+      <div className="bg-gray-50">
+        <div className="container-custom py-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {blogPosts.filter(post => !post.featured).map((post) => (
+                <article key={post.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                  <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <BookOpen className="w-6 h-6 text-teal-600" />
                       </div>
-                      <span className="text-slate-400 text-sm">RALE Consensus</span>
-                    </>
-                  )}
-                  {post.title.includes('RAM') && (
-                    <>
-                      <div className="w-12 h-12 bg-green-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-green-400/30">
-                        <Settings className="w-6 h-6 text-green-400" />
-                      </div>
-                      <span className="text-slate-400 text-sm">RAM Management</span>
-                    </>
-                  )}
-                  {post.title.includes('FauxDB') && (
-                    <>
-                      <div className="w-12 h-12 bg-blue-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-blue-400/30">
-                        <FileText className="w-6 h-6 text-blue-400" />
-                      </div>
-                      <span className="text-slate-400 text-sm">FauxDB Document</span>
-                    </>
-                  )}
-                  {post.title.includes('pgElephant Enterprise') && (
-                    <>
-                      <div className="w-12 h-12 bg-teal-400/20 rounded-xl flex items-center justify-center mx-auto mb-3 border border-teal-400/30">
-                        <TrendingUp className="w-6 h-6 text-teal-400" />
-                      </div>
-                      <span className="text-slate-400 text-sm">Enterprise Platform</span>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                    post.category === 'Enterprise' 
-                      ? 'bg-teal-400/20 text-teal-300' 
-                      : 'bg-teal-400/20 text-teal-300'
-                  }`}>
-                    {post.category}
-                  </span>
-                  <div className="flex items-center text-xs text-slate-400">
-                    <Clock className="w-3 h-3 mr-1" />
-                    {post.readTime}
+                      <span className="text-gray-500 text-sm">Blog Post</span>
+                    </div>
                   </div>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-slate-300 mb-4 line-clamp-3">
-                  {post.excerpt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-sm text-slate-400">
-                    <User className="w-4 h-4 mr-1" />
-                    {post.author}
+                  
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">
+                        {post.category}
+                      </span>
+                      <div className="flex items-center text-xs text-gray-500">
+                        <Clock className="w-3 h-3 mr-1" />
+                        {post.readTime}
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 leading-tight">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <User className="w-4 h-4 mr-1" />
+                        {post.author}
+                      </div>
+                      <Link
+                        href={post.href}
+                        className="text-teal-600 hover:text-teal-700 font-medium text-sm"
+                      >
+                        Read more
+                      </Link>
+                    </div>
                   </div>
-                  <a
-                    href={post.href}
-                    className="text-teal-300 hover:text-teal-200 font-medium text-sm"
-                  >
-                    Read more
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* Newsletter Signup */}
-        <div className="mt-16 text-center">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-slate-400/30">
-            <h2 className="text-2xl font-bold text-white mb-4">
+      {/* Newsletter Signup */}
+      <div className="bg-white border-t border-gray-200">
+        <div className="container-custom py-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Stay Updated
             </h2>
-            <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-              Get the latest pgelephant updates, tutorials, and community stories delivered to your inbox.
+            <p className="text-gray-600 mb-8">
+              Get the latest pgElephant updates, tutorials, and community stories delivered to your inbox.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/10 backdrop-blur-sm border border-slate-400/30 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-300/50 focus:border-transparent"
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
-              <button className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors">
+              <button className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors font-medium">
                 Subscribe
               </button>
             </div>
@@ -284,4 +240,4 @@ const BlogPage = () => {
   )
 }
 
-export default BlogPage 
+export default BlogPage
