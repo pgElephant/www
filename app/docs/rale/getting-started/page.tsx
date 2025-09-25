@@ -259,30 +259,30 @@ int main() {
     {
       number: 1,
       title: 'Install RALE',
-      description: 'Download and install the RALE binary on your system',
+      description: 'Download and install all RALE components (librale, raled, ralectrl)',
       icon: Download,
       color: palette.cyan
     },
     {
       number: 2,
-      title: 'Configure Cluster',
-      description: 'Set up your RALE consensus cluster configuration',
-      icon: Settings,
+      title: 'Use librale Library',
+      description: 'Integrate librale core library into your C applications',
+      icon: Code,
       color: palette.teal
     },
     {
       number: 3,
-      title: 'Start Services',
-      description: 'Launch RALE daemon and join the cluster',
-      icon: Server,
-      color: palette.orange
+      title: 'Configure raled Daemon',
+      description: 'Set up and start the RALE cluster management daemon',
+      icon: Settings,
+      color: palette.navy
     },
     {
       number: 4,
-      title: 'Verify Setup',
-      description: 'Test consensus and monitor cluster health',
-      icon: CheckCircle,
-      color: palette.teal
+      title: 'Control with ralectrl',
+      description: 'Manage cluster operations using the command-line interface',
+      icon: Terminal,
+      color: palette.slate
     }
   ]
 
@@ -385,14 +385,37 @@ int main() {
               </div>
             </div>
 
-            {/* Step 2: Configure */}
+            {/* Step 2: librale Library Integration */}
             <div className="mb-12">
               <div className="flex items-center mb-6">
                 <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   2
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
-                  Configure Cluster
+                  Use librale Library in Your Application
+                </h3>
+              </div>
+              <div className="bg-gray-900 rounded-lg p-6 relative">
+                <pre className="text-gray-100 text-sm overflow-x-auto">
+                  <code>{codeBlocks.library}</code>
+                </pre>
+                <button
+                  onClick={() => copyToClipboard(codeBlocks.library, 'library')}
+                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                >
+                  {copiedCode === 'library' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Step 3: Configure raled Daemon */}
+            <div className="mb-12">
+              <div className="flex items-center mb-6">
+                <div className="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
+                  3
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900">
+                  Configure and Start raled Daemon
                 </h3>
               </div>
               <div className="bg-gray-900 rounded-lg p-6 relative">
@@ -408,14 +431,14 @@ int main() {
               </div>
             </div>
 
-            {/* Step 3: Start */}
+            {/* Step 4: Control with ralectrl */}
             <div className="mb-12">
               <div className="flex items-center mb-6">
-                <div className="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
-                  3
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
+                  4
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
-                  Start RALE Daemon
+                  Control Cluster with ralectrl
                 </h3>
               </div>
               <div className="bg-gray-900 rounded-lg p-6 relative">
@@ -427,29 +450,6 @@ int main() {
                   className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
                 >
                   {copiedCode === 'start' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-
-            {/* Step 4: Library Integration */}
-            <div className="mb-12">
-              <div className="flex items-center mb-6">
-                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
-                  4
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900">
-                  Integrate with Your Application
-                </h3>
-              </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
-                <pre className="text-gray-100 text-sm overflow-x-auto">
-                  <code>{codeBlocks.library}</code>
-                </pre>
-                <button
-                  onClick={() => copyToClipboard(codeBlocks.library, 'library')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
-                >
-                  {copiedCode === 'library' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
             </div>

@@ -157,30 +157,30 @@ curl -H "Authorization: Bearer your_auth_token" \\
     {
       number: 1,
       title: 'Install RAM',
-      description: 'Download and install the RAM binary on your system',
+      description: 'Download and install all RAM components (pgraft, ramd, ramctrl)',
       icon: Download,
       color: palette.cyan
     },
     {
       number: 2,
-      title: 'Configure Cluster',
-      description: 'Set up your PostgreSQL cluster configuration',
-      icon: Settings,
+      title: 'Setup pgraft Extension',
+      description: 'Install and configure the pgraft PostgreSQL extension',
+      icon: Database,
       color: palette.teal
     },
     {
       number: 3,
-      title: 'Start Services',
-      description: 'Launch RAM daemon and PostgreSQL instances',
-      icon: Server,
-      color: palette.orange
+      title: 'Configure ramd Daemon',
+      description: 'Set up and start the RAM cluster management daemon',
+      icon: Settings,
+      color: palette.navy
     },
     {
       number: 4,
-      title: 'Verify Setup',
-      description: 'Test failover and monitor cluster health',
-      icon: CheckCircle,
-      color: palette.teal
+      title: 'Control with ramctrl',
+      description: 'Manage cluster operations using the command-line interface',
+      icon: Terminal,
+      color: palette.slate
     }
   ]
 
@@ -283,14 +283,14 @@ curl -H "Authorization: Bearer your_auth_token" \\
               </div>
             </div>
 
-            {/* Step 2: Configure */}
+            {/* Step 2: Setup pgraft Extension */}
             <div className="mb-12">
               <div className="flex items-center mb-6">
                 <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   2
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
-                  Configure Cluster
+                  Setup pgraft PostgreSQL Extension
                 </h3>
               </div>
               <div className="bg-gray-900 rounded-lg p-6 relative">
@@ -306,14 +306,37 @@ curl -H "Authorization: Bearer your_auth_token" \\
               </div>
             </div>
 
-            {/* Step 3: Start */}
+            {/* Step 3: Configure ramd Daemon */}
             <div className="mb-12">
               <div className="flex items-center mb-6">
                 <div className="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   3
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">
-                  Start RAM Daemon
+                  Configure and Start ramd Daemon
+                </h3>
+              </div>
+              <div className="bg-gray-900 rounded-lg p-6 relative">
+                <pre className="text-gray-100 text-sm overflow-x-auto">
+                  <code>{codeBlocks.start}</code>
+                </pre>
+                <button
+                  onClick={() => copyToClipboard(codeBlocks.start, 'start')}
+                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                >
+                  {copiedCode === 'start' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Step 4: Control with ramctrl */}
+            <div className="mb-12">
+              <div className="flex items-center mb-6">
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
+                  4
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900">
+                  Control Cluster with ramctrl
                 </h3>
               </div>
               <div className="bg-gray-900 rounded-lg p-6 relative">
