@@ -4,14 +4,13 @@
 type AppRoutes = "/" | "/blog" | "/blog/rale" | "/blog/ram" | "/community" | "/contact" | "/docs" | "/docs/fauxdb" | "/docs/fauxdb/docker" | "/docs/fauxdb/getting-started" | "/docs/rale" | "/docs/rale/getting-started" | "/docs/ram" | "/docs/ram/docker" | "/docs/ram/getting-started" | "/docs/ram/kubernetes" | "/download" | "/fauxdb" | "/rale" | "/ram" | "/ram/prometheus"
 type PageRoutes = never
 type LayoutRoutes = "/"
-type RedirectRoutes = "/[[...path]]" | "/consensus" | "/documentation" | "/guide" | "/home" | "/mongodb-alternative" | "/postgresql-ha" | "/tutorial"
+type RedirectRoutes = "/consensus" | "/documentation" | "/guide" | "/home" | "/mongodb-alternative" | "/postgresql-ha" | "/tutorial"
 type RewriteRoutes = never
 type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRoutes
 
 
 interface ParamMap {
   "/": {}
-  "/[[...path]]": { "path"?: string[]; }
   "/blog": {}
   "/blog/rale": {}
   "/blog/ram": {}

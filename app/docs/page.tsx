@@ -48,9 +48,7 @@ const DocsPage = () => {
       icon: '/ico/RALE_HD.ico',
       bg: { from: palette.navy, via: palette.slate, to: palette.navy },
       docs: [
-        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Guide' },
-        { title: 'Docker Setup', href: '/docs/rale/docker', type: 'Tutorial' },
-        { title: 'API Reference', href: '/docs/rale/api', type: 'Reference' }
+        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Guide' }
       ]
     },
     {
@@ -62,7 +60,7 @@ const DocsPage = () => {
       docs: [
         { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Guide' },
         { title: 'Docker Setup', href: '/docs/ram/docker', type: 'Tutorial' },
-        { title: 'API Reference', href: '/docs/ram/api', type: 'Reference' }
+        { title: 'Kubernetes', href: '/docs/ram/kubernetes', type: 'Tutorial' }
       ]
     },
     {
@@ -73,8 +71,7 @@ const DocsPage = () => {
       bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
       docs: [
         { title: 'Getting Started', href: '/docs/fauxdb/getting-started', type: 'Guide' },
-        { title: 'Docker Setup', href: '/docs/fauxdb/docker', type: 'Tutorial' },
-        { title: 'API Reference', href: '/docs/fauxdb/api', type: 'Reference' }
+        { title: 'Docker Setup', href: '/docs/fauxdb/docker', type: 'Tutorial' }
       ]
     }
   ]
@@ -182,8 +179,6 @@ const DocsPage = () => {
                         href="/download"
                         className="flex-1 text-center py-2 px-4 rounded-lg text-white transition-colors text-xs"
                         style={{ backgroundColor: palette.cyan }}
-                        onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.cyanDeep}
-                        onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.cyan}
                       >
                         Download
                       </Link>
@@ -255,8 +250,6 @@ const DocsPage = () => {
                 href="/download"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-white transition-all duration-200 shadow-lg"
                 style={{ backgroundColor: palette.orange }}
-                onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.orangeDark}
-                onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.orange}
               >
                 Get Started
                 <ArrowRight className="w-4 h-4" />

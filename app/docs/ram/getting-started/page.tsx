@@ -35,37 +35,122 @@ const RamGettingStartedPage = () => {
   }
 
   const codeBlocks = {
-    install: `# Download RAM binary
-wget https://github.com/pgelephant/ram/releases/latest/download/ram-linux-amd64
-chmod +x ram-linux-amd64
-sudo mv ram-linux-amd64 /usr/local/bin/ramd
+    install: `# Prerequisites
+sudo apt-get update
+sudo apt-get install -y build-essential cmake libpq-dev postgresql-server-dev-17 git golang-go
+
+# Clone and build RAM from source
+git clone https://github.com/pgElephant/ram.git
+cd ram
+
+# Build all components
+make clean
+make all
+
+# Install components system-wide
+sudo make install
+
+# Build creates three main components:
+# - pgraft: PostgreSQL extension (lib/pgraft.so)
+# - ramd: Cluster management daemon (bin/ramd)
+# - ramctrl: Command-line control utility (bin/ramctrl)
 
 # Verify installation
-ramd --version`,
+ramd --version
+ramctrl --help
+psql -d postgres -c "SELECT * FROM pg_extension WHERE extname = 'pgraft';"`,
 
     config: `# /etc/ramd/ramd.conf
 [cluster]
 name = "my-postgres-cluster"
-nodes = ["node1:7400", "node2:7400", "node3:7400"]
+nodes = ["127.0.0.1:7400", "127.0.0.1:7401", "127.0.0.1:7402"]
+auto_failover = true
+failover_timeout = 30s
+max_nodes = 7
 
 [postgresql]
+primary_host = "127.0.0.1"
 primary_port = 5432
-standby_ports = [5433, 5434]
+replica_ports = [5433, 5434]
 data_directory = "/var/lib/postgresql/data"
+log_directory = "/var/log/postgresql"
+user = "postgres"
+password = "your_secure_password"
 
 [raft]
 election_timeout = 150ms
 heartbeat_interval = 50ms
-snapshot_interval = 1000`,
+snapshot_interval = 1000
+max_log_entries = 10000
+commit_timeout = 100ms
 
-    start: `# Start RAM daemon
+[replication]
+synchronous_standby_names = "ANY 2 (replica1, replica2)"
+synchronous_commit = on
+wal_level = replica
+max_wal_senders = 10
+max_replication_slots = 10
+
+[backup]
+enabled = true
+backup_directory = "/var/backups/postgresql"
+retention_days = 7
+compression = true
+schedule = "0 2 * * *"  # Daily at 2 AM
+
+[monitoring]
+prometheus_port = 9090
+grafana_enabled = true
+health_check_interval = 5s
+metrics_interval = 10s
+log_level = "info"
+
+[security]
+tls_enabled = false
+tls_cert_file = "/etc/ssl/certs/ramd.crt"
+tls_key_file = "/etc/ssl/private/ramd.key"
+auth_enabled = true
+auth_token = "your_auth_token"
+
+[api]
+http_port = 8080
+enable_cors = true
+rate_limit = 1000  # requests per minute`,
+
+    start: `# Configure PostgreSQL for pgraft extension
+sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS pgraft;"
+sudo -u postgres psql -c "SELECT pgraft_init();"
+
+# Create cluster configuration
+sudo mkdir -p /etc/ramd
+sudo cp ramd.conf /etc/ramd/
+
+# Start RAM daemon
 sudo systemctl start ramd
 
 # Check status
 sudo systemctl status ramd
+ramctrl status
 
 # View logs
-sudo journalctl -u ramd -f`
+sudo journalctl -u ramd -f
+
+# Create a 3-node PostgreSQL cluster
+ramctrl cluster create --num-nodes=3 --primary-port=5432 --replica-ports=5433,5434
+
+# Verify cluster creation
+ramctrl cluster status
+ramctrl nodes list
+
+# Test failover
+ramctrl cluster failover --target-node=replica1
+
+# Monitor cluster health
+ramctrl monitor --interval 5s
+
+# Access REST API
+curl -H "Authorization: Bearer your_auth_token" \\
+  http://localhost:8080/api/v1/cluster/status`
   }
 
   const steps = [

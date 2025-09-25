@@ -1,1 +1,26 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/blog/ram/page": "app/blog/ram/page.js",
+  "/docs/rale/getting-started/page": "app/docs/rale/getting-started/page.js",
+  "/docs/fauxdb/getting-started/page": "app/docs/fauxdb/getting-started/page.js",
+  "/docs/rale/page": "app/docs/rale/page.js",
+  "/docs/fauxdb/page": "app/docs/fauxdb/page.js",
+  "/docs/ram/docker/page": "app/docs/ram/docker/page.js",
+  "/docs/ram/getting-started/page": "app/docs/ram/getting-started/page.js",
+  "/community/page": "app/community/page.js",
+  "/docs/fauxdb/docker/page": "app/docs/fauxdb/docker/page.js",
+  "/docs/ram/kubernetes/page": "app/docs/ram/kubernetes/page.js",
+  "/docs/ram/page": "app/docs/ram/page.js",
+  "/download/page": "app/download/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/docs/page": "app/docs/page.js",
+  "/ram/prometheus/page": "app/ram/prometheus/page.js",
+  "/ram/page": "app/ram/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/blog/rale/page": "app/blog/rale/page.js",
+  "/page": "app/page.js",
+  "/fauxdb/page": "app/fauxdb/page.js",
+  "/rale/page": "app/rale/page.js"
+}

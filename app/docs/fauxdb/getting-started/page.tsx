@@ -35,38 +35,133 @@ const FauxDbGettingStartedPage = () => {
   }
 
   const codeBlocks = {
-    install: `# Download FauxDB binary
-wget https://github.com/pgelephant/fauxdb/releases/latest/download/fauxdb-linux-amd64
-chmod +x fauxdb-linux-amd64
-sudo mv fauxdb-linux-amd64 /usr/local/bin/fauxdb
+    install: `# Prerequisites
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+sudo apt-get install -y postgresql-17 postgresql-client-17 libpq-dev
 
-# Verify installation
-fauxdb --version`,
+# Clone and build FauxDB from source
+git clone https://github.com/pgElephant/fauxdb.git
+cd fauxdb
 
-    config: `# /etc/fauxdb/fauxdb.conf
+# Build with optimizations
+cargo build --release
+
+# Run with default configuration
+./target/release/fauxdb
+
+# Or use Docker for quick start
+docker-compose up -d
+
+# Connect with MongoDB client
+mongosh mongodb://localhost:27018
+
+# Verify MongoDB compatibility
+mongosh --host localhost --port 27018 --eval "db.runCommand({ping: 1})"`,
+
+    config: `# config/fauxdb.toml
 [server]
-port = 27017
 host = "0.0.0.0"
+port = 27018
+max_connections = 10000
+connection_timeout_ms = 30000
+idle_timeout_ms = 60000
+worker_threads = 4
 
-[postgresql]
-host = "localhost"
-port = 5432
-database = "fauxdb"
-username = "fauxdb"
-password = "your_password"
+[database]
+uri = "postgresql://fauxdb:password@localhost:5432/fauxdb"
+max_connections = 100
+connection_timeout_ms = 5000
+idle_timeout_ms = 60000
+enable_jsonb_extensions = true
 
-[storage]
-data_directory = "/var/lib/fauxdb/data"
-max_connections = 100`,
+[logging]
+level = "info"
+format = "json"
+output = "stdout"
+log_file = "/var/log/fauxdb/fauxdb.log"
 
-    start: `# Start FauxDB server
-sudo systemctl start fauxdb
+[metrics]
+enabled = true
+port = 9090
+path = "/metrics"
 
-# Check status
-sudo systemctl status fauxdb
+[ssl]
+enabled = false
+cert_file = "/etc/ssl/certs/fauxdb.crt"
+key_file = "/etc/ssl/private/fauxdb.key"
+ca_file = "/etc/ssl/certs/ca.crt"
+verify_mode = "peer"
+min_tls_version = "1.2"
 
-# View logs
-sudo journalctl -u fauxdb -f`
+[authentication]
+enabled = true
+default_auth_method = "SCRAM-SHA-256"
+session_timeout_minutes = 30
+max_sessions_per_user = 10
+
+[authentication.password_policy]
+min_length = 8
+require_uppercase = true
+require_lowercase = true
+require_numbers = true
+require_special_chars = true
+max_age_days = 90
+
+[transactions]
+enabled = true
+max_commit_time_ms = 5000
+read_concern = "majority"
+write_concern = "majority"
+
+[geospatial]
+enable_postgis = true
+default_crs = "EPSG:4326"
+
+[aggregation]
+max_pipeline_depth = 100
+enable_computed_fields = true`,
+
+    start: `# Setup PostgreSQL database
+sudo -u postgres createdb fauxdb
+sudo -u postgres psql -d fauxdb -c "CREATE USER fauxdb WITH PASSWORD 'password';"
+sudo -u postgres psql -d fauxdb -c "GRANT ALL PRIVILEGES ON DATABASE fauxdb TO fauxdb;"
+
+# Start FauxDB server
+./target/release/fauxdb --config config/fauxdb.toml
+
+# Or use Docker
+docker-compose up -d
+
+# Connect and test MongoDB operations
+mongosh mongodb://localhost:27018/fauxdb
+
+# Test CRUD operations
+db.users.insertOne({name: "John", email: "john@example.com"})
+db.users.find({name: "John"})
+db.users.updateOne({name: "John"}, {$set: {age: 30}})
+db.users.deleteOne({name: "John"})
+
+# Test transactions
+session = db.getMongo().startSession()
+session.startTransaction()
+db.users.insertOne({name: "Alice"}, {session: session})
+db.profiles.insertOne({userId: "123"}, {session: session})
+session.commitTransaction()
+
+# Test geospatial queries
+db.locations.createIndex({location: "2dsphere"})
+db.locations.insertOne({
+  name: "Central Park",
+  location: {type: "Point", coordinates: [-73.965355, 40.782865]}
+})
+
+# Test aggregation pipeline
+db.sales.aggregate([
+  {$match: {date: {$gte: new Date("2024-01-01")}}},
+  {$group: {_id: "$category", total: {$sum: "$amount"}}},
+  {$sort: {total: -1}}
+])`
   }
 
   const steps = [

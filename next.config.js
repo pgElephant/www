@@ -67,18 +67,6 @@ const nextConfig = {
   // Redirects for better SEO
   async redirects() {
     return [
-      // Redirect non-www to www for consistency
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'pgelephant.com',
-          },
-        ],
-        destination: 'https://www.pgelephant.com/:path*',
-        permanent: true,
-      },
       {
         source: '/home',
         destination: '/',
