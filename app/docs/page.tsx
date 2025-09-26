@@ -47,8 +47,16 @@ const DocsPage = () => {
       title: 'Resilient Adaptive Leader Election',
       icon: '/ico/RALE_HD.ico',
       bg: { from: palette.navy, via: palette.slate, to: palette.navy },
+      description: 'Distributed consensus and key-value store system for high availability',
       docs: [
-        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Guide' }
+        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Guide', description: 'Install and configure RALE components' },
+        { title: 'librale Documentation', href: '/docs/rale/librale', type: 'Reference', description: 'Core C library API reference' },
+        { title: 'raled Documentation', href: '/docs/rale/raled', type: 'Reference', description: 'Daemon process configuration and management' },
+        { title: 'ralectrl Documentation', href: '/docs/rale/ralectrl', type: 'Reference', description: 'Command-line interface reference' },
+        { title: 'Architecture Guide', href: '/docs/rale/architecture', type: 'Guide', description: 'Understanding RALE architecture and design' },
+        { title: 'API Reference', href: '/docs/rale/api', type: 'Reference', description: 'Complete API documentation' },
+        { title: 'Examples', href: '/docs/rale/examples', type: 'Tutorial', description: 'Code examples and use cases' },
+        { title: 'Troubleshooting', href: '/docs/rale/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
       ]
     },
     {
@@ -57,10 +65,18 @@ const DocsPage = () => {
       title: 'Resilient Adaptive Manager',
       icon: '/ico/RAM_HD.ico',
       bg: { from: palette.slate, via: palette.navy, to: palette.slate },
+      description: 'PostgreSQL clustering solution with automatic failover and Raft consensus',
       docs: [
-        { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Guide' },
-        { title: 'Docker Setup', href: '/docs/ram/docker', type: 'Tutorial' },
-        { title: 'Kubernetes', href: '/docs/ram/kubernetes', type: 'Tutorial' }
+        { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Guide', description: 'Install and configure RAM components' },
+        { title: 'pgraft Documentation', href: '/docs/ram/pgraft', type: 'Reference', description: 'PostgreSQL extension for Raft consensus' },
+        { title: 'ramd Documentation', href: '/docs/ram/ramd', type: 'Reference', description: 'Cluster management daemon' },
+        { title: 'ramctrl Documentation', href: '/docs/ram/ramctrl', type: 'Reference', description: 'Command-line control utility' },
+        { title: 'Docker Setup', href: '/docs/ram/docker', type: 'Tutorial', description: 'Containerized deployment guide' },
+        { title: 'Kubernetes', href: '/docs/ram/kubernetes', type: 'Tutorial', description: 'Kubernetes deployment with Helm' },
+        { title: 'Configuration', href: '/docs/ram/configuration', type: 'Guide', description: 'Advanced configuration options' },
+        { title: 'Monitoring', href: '/docs/ram/monitoring', type: 'Guide', description: 'Prometheus metrics and monitoring' },
+        { title: 'API Reference', href: '/docs/ram/api', type: 'Reference', description: 'REST API documentation' },
+        { title: 'Troubleshooting', href: '/docs/ram/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
       ]
     },
     {
@@ -69,9 +85,16 @@ const DocsPage = () => {
       title: 'MongoDB Compatible Document Database',
       icon: '/ico/FauxDB_HD.ico',
       bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
+      description: 'MongoDB-compatible document database built in Rust with PostgreSQL backend',
       docs: [
-        { title: 'Getting Started', href: '/docs/fauxdb/getting-started', type: 'Guide' },
-        { title: 'Docker Setup', href: '/docs/fauxdb/docker', type: 'Tutorial' }
+        { title: 'Getting Started', href: '/docs/fauxdb/getting-started', type: 'Guide', description: 'Install and configure FauxDB' },
+        { title: 'Docker Setup', href: '/docs/fauxdb/docker', type: 'Tutorial', description: 'Containerized deployment guide' },
+        { title: 'Configuration', href: '/docs/fauxdb/configuration', type: 'Guide', description: 'Configuration file reference' },
+        { title: 'MongoDB Compatibility', href: '/docs/fauxdb/mongodb-compatibility', type: 'Guide', description: 'MongoDB wire protocol support' },
+        { title: 'API Reference', href: '/docs/fauxdb/api', type: 'Reference', description: 'Complete API documentation' },
+        { title: 'Performance Tuning', href: '/docs/fauxdb/performance', type: 'Guide', description: 'Optimization and tuning guide' },
+        { title: 'Security', href: '/docs/fauxdb/security', type: 'Guide', description: 'Authentication and authorization' },
+        { title: 'Troubleshooting', href: '/docs/fauxdb/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
       ]
     }
   ]
@@ -103,8 +126,76 @@ const DocsPage = () => {
               Documentation
             </h1>
             <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
-              Complete guides and references for pgElephant products.
+              Complete guides and references for pgElephant products. Professional documentation following enterprise standards.
             </p>
+            
+            {/* Documentation Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-2">3</div>
+                <div className="text-sm" style={{ color: palette.gray100 }}>Products</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-2">26</div>
+                <div className="text-sm" style={{ color: palette.gray100 }}>Documentation Pages</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-2">100%</div>
+                <div className="text-sm" style={{ color: palette.gray100 }}>Open Source</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Overview */}
+      <div 
+        className="py-16"
+        style={{ 
+          background: `linear-gradient(135deg, ${palette.gray100}, ${palette.white})`
+        }}
+      >
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+              Documentation Structure
+            </h2>
+            <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+              Our documentation follows enterprise standards with comprehensive guides, API references, and tutorials for each product.
+            </p>
+            
+            {/* Documentation Categories */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="w-8 h-8" style={{ color: palette.cyan }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Guides</h3>
+                <p className="text-gray-600 text-sm">
+                  Step-by-step guides for installation, configuration, and getting started
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <FileText className="w-8 h-8" style={{ color: palette.teal }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Reference</h3>
+                <p className="text-gray-600 text-sm">
+                  Complete API documentation, function references, and configuration options
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                  <Container className="w-8 h-8" style={{ color: palette.orange }} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Tutorials</h3>
+                <p className="text-gray-600 text-sm">
+                  Hands-on tutorials for Docker, Kubernetes, and advanced deployment scenarios
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,6 +204,9 @@ const DocsPage = () => {
       <div className="bg-white py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+              Product Documentation
+            </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {products.map((product) => (
                 <div
@@ -139,29 +233,41 @@ const DocsPage = () => {
                   </div>
 
 
+                  {/* Product Description */}
+                  <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+                    {product.description}
+                  </p>
+
                   {/* Documentation Links */}
                   <div className="space-y-3">
                     {product.docs.map((doc, index) => (
                       <Link
                         key={index}
                         href={doc.href}
-                        className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors group"
+                        className="block p-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors group"
                       >
-                        <div className="flex items-center">
-                          {(() => {
-                            const IconComponent = getDocIcon(doc.type)
-                            return <IconComponent className="w-4 h-4 mr-3 text-gray-500" />
-                          })()}
-                          <div>
-                            <span className="text-xs text-gray-900">
-                              {doc.title}
-                            </span>
-                            <span className="ml-2 text-xs text-gray-500">
-                              {doc.type}
-                            </span>
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-start">
+                            {(() => {
+                              const IconComponent = getDocIcon(doc.type)
+                              return <IconComponent className="w-4 h-4 mr-3 text-gray-500 mt-0.5 flex-shrink-0" />
+                            })()}
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-sm font-medium text-gray-900">
+                                  {doc.title}
+                                </span>
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                                  {doc.type}
+                                </span>
+                              </div>
+                              <p className="text-xs text-gray-600 leading-relaxed">
+                                {doc.description}
+                              </p>
+                            </div>
                           </div>
+                          <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 ml-2" />
                         </div>
-                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                       </Link>
                     ))}
                   </div>
@@ -254,6 +360,87 @@ const DocsPage = () => {
                 Get Started
                 <ArrowRight className="w-4 h-4" />
               </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Additional Resources */}
+      <div className="bg-white py-20 border-t border-gray-200">
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+              Additional Resources
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <ExternalLink className="w-8 h-8 text-gray-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">GitHub</h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  Source code, issues, and contributions
+                </p>
+                <Link
+                  href="https://github.com/pgElephant"
+                  className="text-sm font-medium"
+                  style={{ color: palette.cyan }}
+                >
+                  View on GitHub →
+                </Link>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Play className="w-8 h-8 text-gray-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Community</h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  Join our community for support
+                </p>
+                <Link
+                  href="/community"
+                  className="text-sm font-medium"
+                  style={{ color: palette.cyan }}
+                >
+                  Join Community →
+                </Link>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <FileText className="w-8 h-8 text-gray-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Blog</h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  Latest updates and tutorials
+                </p>
+                <Link
+                  href="/blog"
+                  className="text-sm font-medium"
+                  style={{ color: palette.cyan }}
+                >
+                  Read Blog →
+                </Link>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Code className="w-8 h-8 text-gray-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Support</h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  Get help and technical support
+                </p>
+                <Link
+                  href="/contact"
+                  className="text-sm font-medium"
+                  style={{ color: palette.cyan }}
+                >
+                  Contact Support →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
