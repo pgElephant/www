@@ -221,7 +221,7 @@ const LiveDemoTerminal = () => {
 
   return (
     <section className="section-padding bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 relative overflow-hidden">
-      <div className="container-wide">
+      <div className="container-extra-wide">
         {/* Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-green-400/10 to-blue-400/10 rounded-full blur-3xl" />
@@ -249,7 +249,7 @@ const LiveDemoTerminal = () => {
         </div>
 
         {/* Terminal Container */}
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
             {/* Terminal Header */}
             <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">

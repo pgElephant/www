@@ -178,7 +178,7 @@ const FeaturesList = () => {
 
   return (
     <section id="features" className="section-padding bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 relative overflow-hidden">
-      <div className="container-wide">
+      <div className="container-extra-wide">
         {/* Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl" />
@@ -206,7 +206,7 @@ const FeaturesList = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-8xl mx-auto relative z-10">
           {projects.map((project, index) => {
             const colors = getColorClasses(project.color)
             

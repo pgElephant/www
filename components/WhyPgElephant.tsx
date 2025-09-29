@@ -39,7 +39,7 @@ const WhyPgElephant = () => {
 
   return (
     <section className="py-20 bg-gray-50">
-      <div className="container-wide">
+      <div className="container-extra-wide">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Why PgElephant?

@@ -5,7 +5,7 @@ import React from 'react'
 const FontShowcase = () => {
   return (
     <section className="section-padding bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      <div className="container-wide">
+      <div className="container-extra-wide">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">

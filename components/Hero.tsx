@@ -107,7 +107,7 @@ const Hero = () => {
         />
       </div>
 
-      <div className="container-wide py-20 relative z-10">
+      <div className="container-extra-wide py-20 relative z-10">
         <div className="max-w-6xl mx-auto">
 
           {/* Product showcase */}
