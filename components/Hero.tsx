@@ -127,13 +127,13 @@ const Hero = () => {
                       <h2 className="text-3xl md:text-4xl font-heading font-bold text-white">
                         {current.name}
                       </h2>
-                      <p className="text-lg" style={{ color: palette.gray300 }}>
+                      <p className="text-lg" style={{ color: palette.neutralMedium }}>
                         {current.title}
                       </p>
                     </div>
                   </div>
                 </div>
-                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16" style={{ color: palette.gray100 }}>
+                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16" style={{ color: palette.neutralLight }}>
                       <p>{current.description}</p>
                       <p>{current.description2}</p>
                       <p>{current.description3}</p>
