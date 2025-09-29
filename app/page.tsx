@@ -1,7 +1,8 @@
 import React from 'react'
 import Hero from '@/components/Hero'
 import WhyPgElephant from '@/components/WhyPgElephant'
-import ProjectComparison from '@/components/ProjectComparison'
+import FeaturesList from '@/components/FeaturesList'
+import LiveDemoTerminal from '@/components/LiveDemoTerminal'
 
 export const metadata = {
   title: 'Enterprise PostgreSQL Platform | pgElephant',
@@ -14,7 +15,8 @@ export default function Home() {
     <main className="min-h-screen">
       <Hero />
       <WhyPgElephant />
-      <ProjectComparison />
+      <FeaturesList />
+      <LiveDemoTerminal />
     </main>
   )
 }
