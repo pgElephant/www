@@ -25,115 +25,153 @@ const FeaturesList = () => {
   const projects = [
     {
       name: 'RAM',
-      description: 'High-Performance In-Memory Database',
+      description: 'Resilient Adaptive Manager',
       icon: <Zap className="w-8 h-8" />,
       color: 'primary',
       features: [
         {
-          title: 'Ultra-Fast Performance',
-          description: 'In-memory operations with microsecond latency',
+          title: 'Automatic Failover',
+          description: 'Zero-downtime failover with sub-second detection',
           icon: <Zap className="w-5 h-5" />
         },
         {
-          title: 'Zero Disk I/O',
-          description: 'All data operations in RAM for maximum speed',
-          icon: <HardDrive className="w-5 h-5" />
-        },
-        {
-          title: 'Simple Setup',
-          description: 'Get running in seconds with minimal configuration',
-          icon: <Settings className="w-5 h-5" />
-        },
-        {
-          title: 'Developer Friendly',
-          description: 'Perfect for development, testing, and prototyping',
-          icon: <Code className="w-5 h-5" />
-        },
-        {
-          title: 'Memory Optimized',
-          description: 'Efficient memory usage with smart caching',
-          icon: <Cpu className="w-5 h-5" />
-        },
-        {
-          title: 'Real-time Analytics',
-          description: 'Process large datasets with lightning speed',
-          icon: <Activity className="w-5 h-5" />
-        }
-      ]
-    },
-    {
-      name: 'pgraft',
-      description: 'PostgreSQL Raft Consensus Engine',
-      icon: <Crown className="w-8 h-8" />,
-      color: 'secondary',
-      features: [
-        {
-          title: 'Automatic Leader Election',
-          description: 'Raft consensus ensures reliable leader selection',
+          title: 'Leader Election',
+          description: 'Raft-based consensus for reliable leader selection',
           icon: <Crown className="w-5 h-5" />
         },
         {
-          title: 'Fault Tolerance',
-          description: 'Survives node failures with automatic failover',
-          icon: <Shield className="w-5 h-5" />
-        },
-        {
-          title: 'Data Consistency',
-          description: 'ACID compliance with distributed consensus',
-          icon: <Lock className="w-5 h-5" />
-        },
-        {
-          title: 'Multi-Node Clustering',
-          description: 'Scale to 3, 5, or more nodes seamlessly',
-          icon: <Users className="w-5 h-5" />
-        },
-        {
-          title: 'Network Communication',
-          description: 'TCP-based peer communication with retry logic',
+          title: 'Distributed Consensus',
+          description: 'Multi-node coordination with split-brain prevention',
           icon: <Network className="w-5 h-5" />
         },
         {
-          title: 'Production Ready',
-          description: 'Enterprise-grade reliability and monitoring',
+          title: 'Real-time Monitoring',
+          description: 'Prometheus metrics and Grafana dashboards',
+          icon: <Activity className="w-5 h-5" />
+        },
+        {
+          title: 'Enterprise Security',
+          description: 'Token-based auth, SSL/TLS, rate limiting',
+          icon: <Shield className="w-5 h-5" />
+        },
+        {
+          title: 'Cloud-Native',
+          description: 'Docker, Kubernetes, and Helm chart support',
           icon: <Server className="w-5 h-5" />
         }
       ]
     },
     {
-      name: 'RALE',
-      description: 'Distributed Consensus Library',
+      name: 'pgraft',
+      description: 'PostgreSQL Raft Consensus Extension',
+      icon: <Crown className="w-8 h-8" />,
+      color: 'secondary',
+      features: [
+        {
+          title: 'Raft Consensus Protocol',
+          description: 'Implements the Raft algorithm for distributed consensus',
+          icon: <Globe className="w-5 h-5" />
+        },
+        {
+          title: 'Automatic Leader Election',
+          description: 'Seamless leader election and failover',
+          icon: <Crown className="w-5 h-5" />
+        },
+        {
+          title: 'Log Replication',
+          description: 'Consistent log replication across cluster nodes',
+          icon: <Database className="w-5 h-5" />
+        },
+        {
+          title: 'High Availability',
+          description: 'Fault-tolerant cluster with automatic recovery',
+          icon: <Shield className="w-5 h-5" />
+        },
+        {
+          title: 'Zero-Downtime Operations',
+          description: 'Non-disruptive cluster operations',
+          icon: <Activity className="w-5 h-5" />
+        },
+        {
+          title: 'Go Integration',
+          description: 'Leverages Go\'s robust Raft implementation',
+          icon: <Code className="w-5 h-5" />
+        }
+      ]
+    },
+    {
+      name: 'FauxDB',
+      description: 'MongoDB Compatible Document Database',
       icon: <Globe className="w-8 h-8" />,
       color: 'accent',
       features: [
         {
-          title: 'Raft Implementation',
-          description: 'Complete Raft consensus algorithm implementation',
-          icon: <Globe className="w-5 h-5" />
-        },
-        {
-          title: 'Shared Memory',
-          description: 'Efficient inter-process communication',
+          title: '100% MongoDB Compatibility',
+          description: 'Full wire protocol support with mongosh compatibility',
           icon: <Database className="w-5 h-5" />
         },
         {
-          title: 'Background Workers',
-          description: 'PostgreSQL background worker integration',
-          icon: <Terminal className="w-5 h-5" />
+          title: 'High Performance',
+          description: 'Built in Rust for superior speed and memory efficiency',
+          icon: <Zap className="w-5 h-5" />
         },
         {
-          title: 'Configuration Management',
-          description: 'Dynamic node addition and removal',
+          title: 'Advanced Features',
+          description: 'Transactions, geospatial, aggregation pipelines',
+          icon: <Globe className="w-5 h-5" />
+        },
+        {
+          title: 'Pure PostgreSQL Backend',
+          description: 'Native JSONB support, no external dependencies',
+          icon: <Server className="w-5 h-5" />
+        },
+        {
+          title: 'Production Ready',
+          description: 'Enterprise-grade monitoring, logging, and configuration',
+          icon: <Shield className="w-5 h-5" />
+        },
+        {
+          title: 'Docker Support',
+          description: 'Comprehensive Docker support for dev, test, and production',
           icon: <Settings className="w-5 h-5" />
+        }
+      ]
+    },
+    {
+      name: 'RALE',
+      description: 'Distributed Consensus and Key-Value Store',
+      icon: <Network className="w-8 h-8" />,
+      color: 'primary',
+      features: [
+        {
+          title: 'RALE Consensus',
+          description: 'Reliable leader election and log replication',
+          icon: <Crown className="w-5 h-5" />
         },
         {
-          title: 'Command Queue',
-          description: 'FIFO command processing for reliability',
+          title: 'Distributed Store',
+          description: 'High-performance replicated key-value storage',
+          icon: <Database className="w-5 h-5" />
+        },
+        {
+          title: 'Thread Safety',
+          description: 'Full multi-threading support with proper synchronization',
+          icon: <Shield className="w-5 h-5" />
+        },
+        {
+          title: 'Network Layer',
+          description: 'TCP/UDP communication with automatic failover',
+          icon: <Network className="w-5 h-5" />
+        },
+        {
+          title: 'Memory Safety',
+          description: 'Safe allocation/deallocation with leak prevention',
           icon: <Activity className="w-5 h-5" />
         },
         {
-          title: 'Monitoring & Logging',
-          description: 'Comprehensive logging and health monitoring',
-          icon: <Shield className="w-5 h-5" />
+          title: 'Clean Logging',
+          description: 'Professional logging without colors or terminal dependencies',
+          icon: <Terminal className="w-5 h-5" />
         }
       ]
     }
