@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Menu, X, Github } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,8 +15,9 @@ const Header = () => {
   ]
 
   const githubProjects = [
-    { name: 'RALE', href: '/rale', description: 'High Availability' },
-    { name: 'RAM', href: '/ram', description: 'Resource Management' },
+    { name: 'RALE', href: '/rale', description: 'Distributed Consensus' },
+    { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering' },
+    { name: 'pgraft', href: '/pgraft', description: 'Raft Extension' },
     { name: 'FauxDB', href: '/fauxdb', description: 'Document Database' },
   ]
 
@@ -26,10 +28,13 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <div className="text-slate-600 group-hover:text-slate-800 transition-colors">
-              <img 
+              <Image 
                 src="/ico/pgElephant_no_com_HD.ico" 
                 alt="pgElephant" 
+                width={128}
+                height={128}
                 className="w-32 h-32 object-contain"
+                priority
               />
             </div>
           </Link>
@@ -98,13 +103,15 @@ const Header = () => {
           <div className="hidden md:flex items-center justify-end min-w-[180px]">
             <Link href="/docs" className="professional-button text-sm">Getting Started</Link>
           </div>
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 text-slate-600 hover:text-slate-800 transition-colors"
-        >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-slate-600 hover:text-slate-800 transition-colors"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
@@ -162,7 +169,6 @@ const Header = () => {
             </div>
           </div>
         )}
-      </div>
       </div>
     </header>
   );

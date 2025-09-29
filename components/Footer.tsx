@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 
 import { Github, Twitter, Linkedin, Mail, Globe, Users, BookOpen, Download } from 'lucide-react'
 
@@ -66,9 +67,11 @@ const Footer = () => {
           <div className="md:col-span-1">
             <div className="flex justify-center md:justify-start mb-4">
               <div className="w-20 h-20 bg-white rounded-xl flex items-center justify-center border border-white/20">
-                <img 
+                <Image 
                   src="/ico/pgElephant_no_com_HD.ico" 
                   alt="pgElephant" 
+                  width={64}
+                  height={64}
                   className="w-16 h-16 object-contain"
                 />
               </div>

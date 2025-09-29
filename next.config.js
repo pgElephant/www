@@ -93,6 +93,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/raft-extension',
+        destination: '/pgraft',
+        permanent: true,
+      },
+      {
+        source: '/postgresql-raft',
+        destination: '/pgraft',
+        permanent: true,
+      },
+      {
         source: '/mongodb-alternative',
         destination: '/fauxdb',
         permanent: true,

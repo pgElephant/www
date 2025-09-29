@@ -42,6 +42,18 @@
       "regex": "^(?!/_next)/postgresql-ha(?:/)?$"
     },
     {
+      "source": "/raft-extension",
+      "destination": "/pgraft",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/raft-extension(?:/)?$"
+    },
+    {
+      "source": "/postgresql-raft",
+      "destination": "/pgraft",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/postgresql-raft(?:/)?$"
+    },
+    {
       "source": "/mongodb-alternative",
       "destination": "/fauxdb",
       "statusCode": 308,
@@ -160,6 +172,18 @@
       "namedRegex": "^/docs/fauxdb/getting\\-started(?:/)?$"
     },
     {
+      "page": "/docs/pgraft",
+      "regex": "^/docs/pgraft(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/pgraft(?:/)?$"
+    },
+    {
+      "page": "/docs/pgraft/getting-started",
+      "regex": "^/docs/pgraft/getting\\-started(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/docs/pgraft/getting\\-started(?:/)?$"
+    },
+    {
       "page": "/docs/rale",
       "regex": "^/docs/rale(?:/)?$",
       "routeKeys": {},
@@ -206,6 +230,12 @@
       "regex": "^/fauxdb(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/fauxdb(?:/)?$"
+    },
+    {
+      "page": "/pgraft",
+      "regex": "^/pgraft(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pgraft(?:/)?$"
     },
     {
       "page": "/rale",
