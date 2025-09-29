@@ -1,6 +1,15 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Open_Sans, Inter } from 'next/font/google'
+import { 
+  Inter, 
+  Poppins, 
+  Space_Grotesk, 
+  JetBrains_Mono, 
+  Outfit, 
+  Orbitron, 
+  Exo_2, 
+  Playfair_Display 
+} from 'next/font/google'
 import dynamic from 'next/dynamic'
 import './globals.css'
 
@@ -14,17 +23,61 @@ const Footer = dynamic(() => import('@/components/Footer'), {
   ssr: true
 })
 
-const openSans = Open_Sans({ 
+// Modern font configurations
+const inter = Inter({ 
   subsets: ['latin'],
-  variable: '--font-open-sans',
+  variable: '--font-inter',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900']
+})
+
+const poppins = Poppins({ 
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900']
+})
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700']
+})
+
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
   display: 'swap',
   weight: ['300', '400', '500', '600', '700', '800']
 })
 
-const inter = Inter({ 
+const outfit = Outfit({ 
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap'
+  variable: '--font-outfit',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900']
+})
+
+const orbitron = Orbitron({ 
+  subsets: ['latin'],
+  variable: '--font-orbitron',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900']
+})
+
+const exo2 = Exo_2({ 
+  subsets: ['latin'],
+  variable: '--font-exo-2',
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800', '900']
+})
+
+const playfairDisplay = Playfair_Display({ 
+  subsets: ['latin'],
+  variable: '--font-playfair-display',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900']
 })
 
 export const metadata: Metadata = {
@@ -182,7 +235,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://twitter.com" />
       </head>
-      <body className={`${openSans.variable} ${inter.variable} font-sans`}>
+      <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} ${orbitron.variable} ${exo2.variable} ${playfairDisplay.variable} font-sans`}>
         <Header />
         {children}
         <Footer />

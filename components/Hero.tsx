@@ -125,7 +125,7 @@ const Hero = () => {
                       />
                     </div>
                     <div className="text-left">
-                      <h2 className="text-3xl md:text-4xl font-bold text-white">
+                      <h2 className="text-3xl md:text-4xl font-heading font-bold text-white">
                         {current.name}
                       </h2>
                       <p className="text-lg" style={{ color: palette.gray300 }}>

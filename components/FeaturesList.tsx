@@ -191,12 +191,12 @@ const FeaturesList = () => {
             <Database className="w-4 h-4" />
             Project Features
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
             <span className="text-white">
               Complete Database
             </span>
             <br />
-            <span className="text-purple-300">
+            <span className="text-purple-300 font-heading">
               Solution Suite
             </span>
           </h2>
@@ -206,7 +206,7 @@ const FeaturesList = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-10">
           {projects.map((project, index) => {
             const colors = getColorClasses(project.color)
             
@@ -222,7 +222,7 @@ const FeaturesList = () => {
                       {project.icon}
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-2xl font-heading font-bold text-white mb-2">
                     {project.name}
                   </h3>
                   <p className={`text-lg font-medium ${colors.accent}`}>

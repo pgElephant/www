@@ -36,10 +36,34 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-open-sans)', 'Open Sans', 'Inter', 'system-ui', 'sans-serif'],
-        heading: ['var(--font-open-sans)', 'Open Sans', 'sans-serif'],
-        body: ['var(--font-open-sans)', 'Open Sans', 'sans-serif'],
-        display: ['var(--font-open-sans)', 'Open Sans', 'sans-serif'],
+        // Modern, clean sans-serif fonts
+        sans: ['Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        
+        // Premium heading fonts - great for titles and headers
+        heading: ['Poppins', 'Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
+        
+        // Professional body text
+        body: ['Inter', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        
+        // Display fonts for hero sections and large text
+        display: ['Space Grotesk', 'Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        
+        // Monospace for code and terminal
+        mono: ['JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Consolas', 'monospace'],
+        
+        // Modern geometric fonts
+        geometric: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        
+        // Tech/cyberpunk style fonts
+        tech: ['Orbitron', 'Exo 2', 'Inter', 'system-ui', 'sans-serif'],
+        
+        // Elegant serif for special sections
+        serif: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
+      },
+      maxWidth: {
+        '7xl': '1280px',
+        '8xl': '1400px',
+        '9xl': '1600px',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
