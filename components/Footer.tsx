@@ -56,12 +56,38 @@ const Footer = () => {
 
   return (
     <footer 
-      className="pt-12 pb-6"
+      className="pt-12 pb-6 relative overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
+        background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+        position: 'relative'
       }}
     >
-      <div className="container-wide">
+      {/* Elegant overlay gradient - same as Hero */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+        }}
+      />
+      
+      {/* Elegant floating elements - same as Hero */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating orbs */}
+        <div className="absolute top-10 left-10 w-24 h-24 bg-gradient-to-r from-primary-500/15 to-secondary-500/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-secondary-500/10 to-accent-500/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-20 left-1/4 w-20 h-20 bg-gradient-to-r from-accent-500/8 to-primary-500/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        
+        {/* Subtle pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+            backgroundSize: '32px 32px'
+          }}
+        />
+      </div>
+      <div className="container-wide relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo and Description */}
           <div className="md:col-span-1">
@@ -76,18 +102,18 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <p className="text-slate-300 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0">
+            <p className="text-white/80 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0 drop-shadow-sm">
               Enterprise-grade PostgreSQL platform.
             </p>
           </div>
 
           {/* Product Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-semibold mb-3 text-sm">Products</h3>
+            <h3 className="text-white font-semibold mb-3 text-sm drop-shadow-sm">Products</h3>
             <ul className="space-y-2">
-              <li><a href="/rale" className="text-slate-300 hover:text-white transition-colors text-sm">RALE</a></li>
-              <li><a href="/ram" className="text-slate-300 hover:text-white transition-colors text-sm">RAM</a></li>
-              <li><a href="/fauxdb" className="text-slate-300 hover:text-white transition-colors text-sm">FauxDB</a></li>
+              <li><a href="/rale" className="text-white/70 hover:text-white transition-colors text-sm drop-shadow-sm">RALE</a></li>
+              <li><a href="/ram" className="text-white/70 hover:text-white transition-colors text-sm drop-shadow-sm">RAM</a></li>
+              <li><a href="/fauxdb" className="text-white/70 hover:text-white transition-colors text-sm drop-shadow-sm">FauxDB</a></li>
             </ul>
           </div>
 

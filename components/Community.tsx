@@ -158,7 +158,7 @@ const Community = () => {
           ))}
         </div>
 
-        {/* Contribution Areas */}
+        {/* Contribution Areas - Simple List Layout */}
         <div className="mb-16">
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-bold text-edbDark-900 mb-4">
@@ -169,27 +169,31 @@ const Community = () => {
             </p>
           </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contributionAreas.map((area, index) => (
-              <div
-                key={area.title}
-                className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
-                  <area.icon className="w-6 h-6 text-gray-600" />
-                </div>
-                <h4 className="font-semibold text-edbDark-900 mb-2">{area.title}</h4>
-                <p className="text-sm text-edbGray-600 mb-4">{area.description}</p>
-                <a
-                  href={area.link}
-                  className="text-blue-600 hover:text-blue-700 font-medium text-sm"
-                  target={area.link.startsWith('http') ? '_blank' : undefined}
-                  rel={area.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-8">
+              {contributionAreas.map((area, index) => (
+                <div
+                  key={area.title}
+                  className="flex items-start gap-4 p-6 hover:bg-gray-50 rounded-lg transition-colors duration-200"
                 >
-                  Get Started →
-                </a>
-              </div>
-            ))}
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <area.icon className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-edbDark-900 mb-2 text-lg">{area.title}</h4>
+                    <p className="text-edbGray-600 mb-3">{area.description}</p>
+                    <a
+                      href={area.link}
+                      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                      target={area.link.startsWith('http') ? '_blank' : undefined}
+                      rel={area.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    >
+                      Get Started →
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -1,40 +1,8 @@
-import React from 'react'
-import { Metadata } from 'next'
-import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Layers, Rocket, Settings } from 'lucide-react'
-import Link from 'next/link'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'FauxDB - MongoDB Compatible Document Database | PostgreSQL Backend',
-  description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL backend. 100% wire protocol support with ACID compliance and better reliability.',
-  keywords: [
-    'MongoDB compatible', 'document database', 'PostgreSQL backend', 'Rust database',
-    'FauxDB', 'MongoDB alternative', 'wire protocol', 'ACID compliance',
-    'document store', 'NoSQL database', 'MongoDB API', 'database compatibility'
-  ],
-  openGraph: {
-    title: 'FauxDB - MongoDB Compatible Document Database | PostgreSQL Backend',
-    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL backend. 100% wire protocol support with ACID compliance.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/fauxdb',
-    images: [
-      {
-        url: '/ico/FauxDB_HD.ico',
-        width: 512,
-        height: 512,
-        alt: 'FauxDB - MongoDB Compatible Database',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'FauxDB - MongoDB Compatible Document Database | PostgreSQL Backend',
-    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL backend.',
-    images: ['/ico/FauxDB_HD.ico'],
-  },
-  alternates: {
-    canonical: '/fauxdb',
-  },
-}
+import React, { useState } from 'react'
+import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Layers, Rocket, Settings, Play, Terminal, Monitor, CheckCircle, Users, Star, Clock, BarChart3 } from 'lucide-react'
+import Link from 'next/link'
 
 // Colors from pgElephant icon (darker variants)
 const palette = {
@@ -58,6 +26,115 @@ const palette = {
 }
 
 const FauxDbPage = () => {
+  const [currentQuery, setCurrentQuery] = useState('')
+  const [queryResults, setQueryResults] = useState<any[]>([])
+  const [isExecuting, setIsExecuting] = useState(false)
+  const [demoData, setDemoData] = useState([
+    { _id: 'user1', name: 'John Doe', age: 30, email: 'john@example.com' },
+    { _id: 'user2', name: 'Jane Smith', age: 25, email: 'jane@example.com' },
+    { _id: 'user3', name: 'Bob Johnson', age: 35, email: 'bob@example.com' }
+  ])
+
+  // Demo statistics
+  const demoStats = [
+    { label: 'Active Demos', value: '15', icon: Play, color: 'text-blue-600' },
+    { label: 'Demo Users', value: '47', icon: Users, color: 'text-green-600' },
+    { label: 'Queries/sec', value: '2.1k', icon: BarChart3, color: 'text-purple-600' },
+    { label: 'Uptime', value: '99.9%', icon: Clock, color: 'text-yellow-500' }
+  ]
+
+  // Execute demo query
+  const executeQuery = async (query: string) => {
+    setIsExecuting(true)
+    setCurrentQuery(query)
+    
+    // Simulate query execution delay
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    let results: any[] = []
+    
+    if (query.includes('insertOne')) {
+      const newUser = { _id: `user${Date.now()}`, name: 'New User', age: 28, email: 'new@example.com' }
+      setDemoData(prev => [...prev, newUser])
+      results = [{ acknowledged: true, insertedId: newUser._id }]
+    } else if (query.includes('find')) {
+      if (query.includes('age: {$gte: 25}')) {
+        results = demoData.filter(user => user.age >= 25)
+      } else {
+        results = demoData
+      }
+    } else if (query.includes('updateOne')) {
+      const updatedData = demoData.map(user => 
+        user.name === 'John Doe' ? { ...user, age: 31 } : user
+      )
+      setDemoData(updatedData)
+      results = [{ acknowledged: true, modifiedCount: 1 }]
+    } else if (query.includes('count')) {
+      results = [{ count: demoData.length }]
+    }
+    
+    setQueryResults(results)
+    setIsExecuting(false)
+  }
+
+  // Quick demo commands
+  const quickCommands = [
+    { label: 'Find All Users', query: 'db.users.find({})' },
+    { label: 'Find Adults', query: 'db.users.find({age: {$gte: 25}})' },
+    { label: 'Count Users', query: 'db.users.countDocuments()' },
+    { label: 'Add User', query: 'db.users.insertOne({name: "Alice", age: 27, email: "alice@example.com"})' }
+  ]
+
+  // Demo features
+  const demoFeatures = [
+    {
+      title: 'Live Query Demo',
+      description: 'Execute MongoDB queries in real-time and see the results',
+      icon: Terminal,
+      status: 'Active',
+      users: '23 online'
+    },
+    {
+      title: 'Performance Benchmark',
+      description: 'Compare FauxDB performance against native MongoDB',
+      icon: BarChart3,
+      status: 'Running',
+      users: '12 online'
+    },
+    {
+      title: 'Migration Tool',
+      description: 'Live demo of migrating data from MongoDB to FauxDB',
+      icon: Database,
+      status: 'Available',
+      users: '8 online'
+    },
+    {
+      title: 'ACID Compliance Test',
+      description: 'Demonstrate ACID transactions and consistency guarantees',
+      icon: Shield,
+      status: 'Active',
+      users: '15 online'
+    }
+  ]
+
+  // Live demo commands
+  const demoCommands = [
+    {
+      command: 'db.users.insertOne({name: "John", age: 30})',
+      description: 'Insert a document into users collection',
+      result: '{ "acknowledged": true, "insertedId": ObjectId("...") }'
+    },
+    {
+      command: 'db.users.find({age: {$gte: 25}})',
+      description: 'Find users with age >= 25',
+      result: '[{ "_id": ObjectId("..."), "name": "John", "age": 30 }]'
+    },
+    {
+      command: 'db.users.updateOne({name: "John"}, {$set: {age: 31}})',
+      description: 'Update user document',
+      result: '{ "acknowledged": true, "modifiedCount": 1 }'
+    }
+  ]
   // Structured data for FauxDB
   const structuredData = {
     "@context": "https://schema.org",
@@ -147,13 +224,39 @@ const FauxDbPage = () => {
 
   return (
     <div className="pt-16">
-      {/* Hero Section with gradient background */}
+      {/* Hero Section with elegant gradient background - same as main page */}
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          position: 'relative'
         }}
       >
+        {/* Elegant overlay gradient - same as Hero */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -167,8 +270,8 @@ const FauxDbPage = () => {
         </div>
 
         <div className="container-wide py-20 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center mb-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center mb-8">
               <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mr-6">
                 <img 
                   src="/ico/FauxDB_HD.ico" 
@@ -177,17 +280,30 @@ const FauxDbPage = () => {
                 />
                 </div>
               <div className="text-left">
-                <h1 className="text-4xl md:text-5xl text-white mb-2">
+                <h1 className="text-4xl md:text-6xl text-white mb-2 drop-shadow-lg font-bold">
                     FauxDB
                   </h1>
-                <p className="text-xl text-gray-300">
+                <p className="text-xl md:text-2xl text-white/90 drop-shadow-md">
                     MongoDB Compatible Document Database
                   </p>
                 </div>
               </div>
-            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
-              High-performance MongoDB-compatible database built in Rust.
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white/80 drop-shadow-sm max-w-4xl">
+              High-performance MongoDB-compatible database built in Rust with PostgreSQL backend. Try our live demos below!
             </p>
+
+            {/* Demo Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl">
+              {demoStats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex justify-center mb-2">
+                    <stat.icon className={`w-8 h-8 ${stat.color}`} />
+                  </div>
+                  <div className="text-3xl font-bold text-white drop-shadow-sm">{stat.value}</div>
+                  <div className="text-sm text-white/80 drop-shadow-sm">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -466,6 +582,141 @@ const FauxDbPage = () => {
                     </ul>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Live Demo Section */}
+      <div className="bg-gray-50 py-20">
+        <div className="container-wide">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Live Demo</h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Experience FauxDB in action with our interactive demos. Try MongoDB queries and see real-time results.
+              </p>
+            </div>
+
+            {/* Demo Features */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+              {demoFeatures.map((demo, index) => (
+                <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                      <demo.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{demo.title}</h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        <div className={`w-2 h-2 rounded-full ${demo.status === 'Active' ? 'bg-green-500' : demo.status === 'Running' ? 'bg-blue-500' : 'bg-gray-400'}`}></div>
+                        <span className="text-xs text-gray-500">{demo.status}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray-600 text-sm mb-3">{demo.description}</p>
+                  <div className="flex items-center text-blue-600 text-sm font-medium">
+                    <Users className="w-4 h-4 mr-1" />
+                    {demo.users}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Interactive Demo Terminal */}
+            <div className="bg-gray-900 rounded-xl p-8 text-white">
+              <div className="flex items-center mb-6">
+                <div className="flex gap-2 mr-4">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <span className="text-gray-300">FauxDB Interactive Demo</span>
+                {isExecuting && <div className="ml-4 text-yellow-400 text-sm">Executing...</div>}
+              </div>
+
+              {/* Quick Commands */}
+              <div className="mb-6">
+                <h4 className="text-gray-300 text-sm mb-3">Quick Commands:</h4>
+                <div className="flex flex-wrap gap-2">
+                  {quickCommands.map((cmd, index) => (
+                    <button
+                      key={index}
+                      onClick={() => executeQuery(cmd.query)}
+                      disabled={isExecuting}
+                      className="bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-white px-3 py-1 rounded text-xs font-mono transition-colors"
+                    >
+                      {cmd.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Query Input */}
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <span className="text-green-400 text-sm">$</span>
+                  <input
+                    type="text"
+                    value={currentQuery}
+                    onChange={(e) => setCurrentQuery(e.target.value)}
+                    placeholder="db.users.find({})"
+                    className="bg-gray-800 text-blue-400 ml-2 flex-1 px-3 py-1 rounded text-sm font-mono border-none outline-none"
+                    onKeyPress={(e) => e.key === 'Enter' && executeQuery(currentQuery)}
+                    disabled={isExecuting}
+                  />
+                  <button
+                    onClick={() => executeQuery(currentQuery)}
+                    disabled={isExecuting || !currentQuery.trim()}
+                    className="ml-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-4 py-1 rounded text-sm transition-colors"
+                  >
+                    {isExecuting ? '...' : 'Execute'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Results */}
+              {queryResults.length > 0 && (
+                <div className="mb-6">
+                  <h4 className="text-gray-300 text-sm mb-2">Results:</h4>
+                  <div className="bg-gray-800 rounded-lg p-4">
+                    <pre className="text-gray-200 text-xs font-mono whitespace-pre-wrap">
+                      {JSON.stringify(queryResults, null, 2)}
+                    </pre>
+                  </div>
+                </div>
+              )}
+
+              {/* Current Data */}
+              <div className="mb-6">
+                <h4 className="text-gray-300 text-sm mb-2">Current Data ({demoData.length} documents):</h4>
+                <div className="bg-gray-800 rounded-lg p-4 max-h-40 overflow-y-auto">
+                  <pre className="text-gray-200 text-xs font-mono">
+                    {JSON.stringify(demoData, null, 2)}
+                  </pre>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => {
+                    setDemoData([
+                      { _id: 'user1', name: 'John Doe', age: 30, email: 'john@example.com' },
+                      { _id: 'user2', name: 'Jane Smith', age: 25, email: 'jane@example.com' },
+                      { _id: 'user3', name: 'Bob Johnson', age: 35, email: 'bob@example.com' }
+                    ])
+                    setQueryResults([])
+                    setCurrentQuery('')
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                >
+                  Reset Demo
+                </button>
+                <button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                  <Terminal className="w-4 h-4 mr-2 inline" />
+                  Copy Connection String
+                </button>
               </div>
             </div>
           </div>

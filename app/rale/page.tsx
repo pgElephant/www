@@ -147,13 +147,39 @@ const RalePage = () => {
 
   return (
     <div className="pt-16">
-      {/* Hero Section with gradient background */}
+      {/* Hero Section with elegant gradient background - same as main page */}
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          position: 'relative'
         }}
       >
+        {/* Elegant overlay gradient - same as Hero */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -177,15 +203,15 @@ const RalePage = () => {
                 />
               </div>
               <div className="text-left">
-                <h1 className="text-4xl md:text-5xl text-white mb-2">
+                <h1 className="text-4xl md:text-5xl text-white mb-2 drop-shadow-lg">
                   RALE
                 </h1>
-                <p className="text-xl text-gray-300">
+                <p className="text-xl text-white/90 drop-shadow-md">
                   Resilient Adaptive Leader Election
                 </p>
               </div>
             </div>
-            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
+            <p className="text-xl mb-8 leading-relaxed text-white/80 drop-shadow-sm">
               Distributed consensus for high availability in distributed systems.
             </p>
           </div>

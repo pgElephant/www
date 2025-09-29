@@ -86,22 +86,40 @@ const Hero = () => {
   }, [products.length])
 
   const current = products[currentProduct]
-  const heroGradient = `linear-gradient(135deg, ${current.bg.from}, ${current.bg.via ?? current.bg.from}, ${current.bg.to})`
+  
+  // Elegant gradient design
+  const heroGradient = `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`
   const tileGradient = `linear-gradient(135deg, ${palette.primary}, ${palette.secondary})`
 
   return (
     <section
-      className="relative overflow-hidden transition-colors duration-300"
-      style={{ backgroundImage: heroGradient }}
+      className="relative overflow-hidden"
+      style={{ 
+        background: heroGradient,
+        position: 'relative'
+      }}
     >
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-20">
+      {/* Elegant overlay gradient */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+        }}
+      />
+      {/* Elegant floating elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating orbs */}
+        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        
+        {/* Subtle pattern overlay */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
-            backgroundSize: '48px 48px'
+              'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+            backgroundSize: '32px 32px'
           }}
         />
       </div>
@@ -124,16 +142,16 @@ const Hero = () => {
                       />
                     </div>
                     <div className="text-left">
-                      <h2 className="text-3xl md:text-4xl font-heading font-bold text-white">
+                      <h2 className="text-3xl md:text-4xl font-heading font-bold text-white drop-shadow-lg">
                         {current.name}
                       </h2>
-                      <p className="text-lg" style={{ color: palette.neutralMedium }}>
+                      <p className="text-lg text-white/90 drop-shadow-md">
                         {current.title}
                       </p>
                     </div>
                   </div>
                 </div>
-                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16" style={{ color: palette.neutralLight }}>
+                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16 text-white/80 drop-shadow-sm">
                       <p>{current.description}</p>
                       <p>{current.description2}</p>
                       <p>{current.description3}</p>
@@ -146,10 +164,11 @@ const Hero = () => {
                   <button
                     key={p.id}
                     onClick={() => setCurrentProduct(index)}
-                    className="w-3 h-3 rounded-full transition-all duration-200"
+                    className="w-3 h-3 rounded-full transition-all duration-300 hover:scale-125"
                     style={{
                       backgroundColor:
-                        index === currentProduct ? palette.white : 'rgba(255,255,255,0.35)'
+                        index === currentProduct ? '#4f46e5' : 'rgba(255,255,255,0.3)',
+                      boxShadow: index === currentProduct ? '0 0 12px rgba(79, 70, 229, 0.6)' : 'none'
                     }}
                     aria-label={`Show ${p.name}`}
                   />
@@ -164,11 +183,11 @@ const Hero = () => {
                      <Link
                        key={product.id}
                        href={`/${product.id}`}
-                       className="flex items-center gap-3 px-6 py-3 rounded-lg border transition-all duration-200"
+                       className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-all duration-300 backdrop-blur-sm hover:scale-105"
                        style={{
-                         borderColor: active ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.25)',
-                         backgroundColor: active ? 'rgba(255,255,255,0.14)' : 'transparent',
-                         boxShadow: active ? '0 6px 16px rgba(0,0,0,0.25)' : 'none'
+                         borderColor: active ? 'rgba(79, 70, 229, 0.6)' : 'rgba(255,255,255,0.2)',
+                         backgroundColor: active ? 'rgba(79, 70, 229, 0.15)' : 'rgba(255,255,255,0.05)',
+                         boxShadow: active ? '0 8px 32px rgba(79, 70, 229, 0.3)' : '0 4px 16px rgba(0,0,0,0.1)'
                        }}
                      >
                        <Image 
@@ -180,8 +199,7 @@ const Hero = () => {
                          style={{ filter: active ? 'none' : 'brightness(0.7)' }}
                        />
                        <span
-                         className="font-medium"
-                         style={{ color: active ? palette.white : '#D1D5DB' }}
+                         className="font-medium text-white drop-shadow-sm"
                        >
                          {product.name}
                        </span>

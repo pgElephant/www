@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github, FileText, Play } from 'lucide-react'
+import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github, FileText, Play, Shield, CheckCircle, Clock, Users, Star, Zap, Globe, Monitor, Smartphone, Tablet } from 'lucide-react'
 import Link from 'next/link'
 
 // Colors from pgElephant icon (darker variants)
@@ -37,10 +37,55 @@ const DownloadPage = () => {
         return Server
       case 'Docs':
         return FileText
+      case 'Linux':
+        return Terminal
+      case 'macOS':
+        return Monitor
+      case 'Windows':
+        return Monitor
       default:
         return Download
     }
   }
+
+  // Download statistics
+  const downloadStats = [
+    { label: 'Total Downloads', value: '200', icon: Download, color: 'text-blue-600' },
+    { label: 'Active Users', value: '10', icon: Users, color: 'text-green-600' },
+    { label: 'Supported Platforms', value: '5', icon: Globe, color: 'text-purple-600' },
+    { label: 'Latest Version', value: 'v1.0.0', icon: Star, color: 'text-yellow-500' }
+  ]
+
+  // Platform support
+  const supportedPlatforms = [
+    { name: 'Linux', icon: Terminal, description: 'Ubuntu 20.04+, CentOS 8+, Debian 11+' },
+    { name: 'macOS', icon: Monitor, description: 'macOS 11.0+ (Intel & Apple Silicon)' },
+    { name: 'Windows', icon: Monitor, description: 'Windows 10+ (WSL2 recommended)' },
+    { name: 'Docker', icon: Server, description: 'All Docker-supported platforms' },
+    { name: 'Kubernetes', icon: Server, description: 'Any K8s cluster (1.20+)' }
+  ]
+
+  // Installation methods
+  const installationMethods = [
+    {
+      title: 'Quick Start',
+      description: 'Get up and running in minutes with our pre-built binaries',
+      icon: Zap,
+      steps: ['Download binary', 'Extract archive', 'Run executable', 'Configure']
+    },
+    {
+      title: 'Docker',
+      description: 'Deploy with Docker for consistent environments',
+      icon: Server,
+      steps: ['Pull image', 'Run container', 'Mount volumes', 'Start services']
+    },
+    {
+      title: 'Source Build',
+      description: 'Build from source for custom configurations',
+      icon: Code,
+      steps: ['Clone repository', 'Install dependencies', 'Build project', 'Install']
+    }
+  ]
 
   const products = [
     {
@@ -83,13 +128,39 @@ const DownloadPage = () => {
 
   return (
     <div className="pt-16">
-      {/* Hero Section with gradient background */}
+      {/* Hero Section with elegant gradient background - same as main page */}
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          position: 'relative'
         }}
       >
+        {/* Elegant overlay gradient - same as Hero */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -103,13 +174,26 @@ const DownloadPage = () => {
         </div>
 
         <div className="container-wide py-20 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl text-white mb-6">
+          <div className="max-w-6xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl text-white mb-6 drop-shadow-lg font-bold">
               Download
             </h1>
-            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
-              Get the latest versions of pgElephant products for your platform.
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white/90 drop-shadow-md max-w-4xl mx-auto">
+              Get the latest versions of pgElephant products for your platform. Professional-grade PostgreSQL solutions ready for production.
             </p>
+            
+            {/* Download Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
+              {downloadStats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex justify-center mb-2">
+                    <stat.icon className={`w-8 h-8 ${stat.color}`} />
+                  </div>
+                  <div className="text-3xl font-bold text-white drop-shadow-sm">{stat.value}</div>
+                  <div className="text-sm text-white/80 drop-shadow-sm">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

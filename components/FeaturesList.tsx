@@ -136,44 +136,6 @@ const FeaturesList = () => {
           icon: <Settings className="w-5 h-5" />
         }
       ]
-    },
-    {
-      name: 'RALE',
-      description: 'Distributed Consensus and Key-Value Store',
-      icon: <Network className="w-8 h-8" />,
-      color: 'primary',
-      features: [
-        {
-          title: 'RALE Consensus',
-          description: 'Reliable leader election and log replication',
-          icon: <Crown className="w-5 h-5" />
-        },
-        {
-          title: 'Distributed Store',
-          description: 'High-performance replicated key-value storage',
-          icon: <Database className="w-5 h-5" />
-        },
-        {
-          title: 'Thread Safety',
-          description: 'Full multi-threading support with proper synchronization',
-          icon: <Shield className="w-5 h-5" />
-        },
-        {
-          title: 'Network Layer',
-          description: 'TCP/UDP communication with automatic failover',
-          icon: <Network className="w-5 h-5" />
-        },
-        {
-          title: 'Memory Safety',
-          description: 'Safe allocation/deallocation with leak prevention',
-          icon: <Activity className="w-5 h-5" />
-        },
-        {
-          title: 'Clean Logging',
-          description: 'Professional logging without colors or terminal dependencies',
-          icon: <Terminal className="w-5 h-5" />
-        }
-      ]
     }
   ]
 
@@ -215,13 +177,41 @@ const FeaturesList = () => {
   }
 
   return (
-    <section id="features" className="section-padding bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 relative overflow-hidden">
-      <div className="container-extra-wide">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary-400/10 to-secondary-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-secondary-400/10 to-accent-400/10 rounded-full blur-3xl" />
-        </div>
+    <section 
+      id="features" 
+      className="section-padding relative overflow-hidden"
+      style={{
+        background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+        position: 'relative'
+      }}
+    >
+      {/* Elegant overlay gradient - same as Hero */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+        }}
+      />
+      
+      {/* Elegant floating elements - same as Hero */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating orbs */}
+        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        
+        {/* Subtle pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+            backgroundSize: '32px 32px'
+          }}
+        />
+      </div>
+
+      <div className="container-extra-wide relative z-10">
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
@@ -244,14 +234,14 @@ const FeaturesList = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-8xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-8xl mx-auto relative z-10">
           {projects.map((project, index) => {
             const colors = getColorClasses(project.color)
             
             return (
               <div
                 key={project.name}
-                className={`bg-gradient-to-br ${colors.bg} backdrop-blur-sm rounded-3xl p-8 border ${colors.border} hover:shadow-2xl transition-all duration-300 hover:scale-105 group`}
+                className={`bg-gradient-to-br ${colors.bg} backdrop-blur-sm rounded-3xl p-8 border ${colors.border} hover:shadow-2xl transition-all duration-300 hover:scale-105 group flex flex-col h-full`}
               >
                 {/* Project Header */}
                 <div className="text-center mb-8">
@@ -269,7 +259,7 @@ const FeaturesList = () => {
                 </div>
 
                 {/* Features List */}
-                <div className="space-y-6">
+                <div className="space-y-6 flex-1">
                   {project.features.map((feature, featureIndex) => (
                     <div
                       key={featureIndex}

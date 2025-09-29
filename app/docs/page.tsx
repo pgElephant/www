@@ -31,6 +31,12 @@ const DocsPage = () => {
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const [activeProduct, setActiveProduct] = useState<string | null>(null)
 
+  // Ensure clean state on mount
+  React.useEffect(() => {
+    setActiveProduct(null)
+    setActiveSection(null)
+  }, [])
+
   // Function to get appropriate icon for documentation type
   const getDocIcon = (type: string) => {
     switch (type) {
@@ -1639,18 +1645,22 @@ docker exec -it fauxdb_fauxdb_1 mongosh
     if (!activeProduct || !activeSection) {
       return (
         <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
-            Product Documentation
-          </h2>
-          
-          <p className="text-lg text-gray-600 mb-12 leading-relaxed">
-            Comprehensive documentation for all pgElephant products. Each product includes guides, API references, and tutorials to help you get started and master advanced features.
-          </p>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Product Documentation
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Comprehensive documentation for all pgElephant products. Each product includes guides, API references, and tutorials to help you get started and master advanced features.
+            </p>
+            <div className="mt-4 inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">
+              👈 Click on any documentation link in the sidebar to get started
+            </div>
+          </div>
 
-          {/* Text-based Documentation */}
-          <div className="prose prose-lg max-w-none">
+          {/* All Documentation Links - Simple List Layout */}
+          <div className="space-y-16">
             {products.map((product) => (
-              <div key={product.id} className="mb-12">
+              <div key={product.id} className="border-b border-gray-200 pb-16 last:border-b-0">
                 {/* Product Header */}
                 <div className="flex items-center mb-6">
                   <Image 
@@ -1668,20 +1678,23 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                       {product.title}
                     </p>
                   </div>
-        </div>
+                </div>
 
                 {/* Product Description */}
-                <p className="text-gray-700 mb-6 leading-relaxed">
+                <p className="text-gray-700 mb-8 leading-relaxed">
                   {product.description}
                 </p>
 
-                {/* Documentation Links as Text List */}
-                <div className="mb-8">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Documentation</h4>
-                  <ul className="space-y-3">
-                    {product.docs.map((doc, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium mr-3 mt-0.5"
+                {/* Documentation Links - Simple Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  {product.docs.map((doc, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleSidebarClick(product.id, doc.title)}
+                      className="flex items-start gap-4 p-4 text-left bg-gray-50 hover:bg-blue-50 rounded-lg transition-colors group border border-gray-200 hover:border-blue-300"
+                    >
+                      <div className="flex-shrink-0">
+                        <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium"
                               style={{
                                 backgroundColor: doc.type === 'Guide' ? '#E0F2FE' : 
                                                doc.type === 'Reference' ? '#F0FDF4' : '#FEF3C7',
@@ -1690,43 +1703,36 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                               }}>
                           {doc.type}
                         </span>
-                        <div className="flex-1">
-                          <button
-                            onClick={() => handleSidebarClick(product.id, doc.title)}
-                            className="text-blue-600 hover:text-blue-800 font-medium hover:underline text-left"
-                          >
-                            {doc.title}
-                          </button>
-                          <p className="text-sm text-gray-600 mt-1">
-                            {doc.description}
-                          </p>
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium text-gray-900 group-hover:text-blue-700 mb-1">
+                          {doc.title}
                         </div>
-                      </li>
-                    ))}
-                  </ul>
-        </div>
+                        <p className="text-sm text-gray-600">
+                          {doc.description}
+                        </p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors flex-shrink-0 mt-1" />
+                    </button>
+                  ))}
+                </div>
 
                 {/* Quick Actions */}
-                <div className="flex gap-4 mb-8">
+                <div className="flex gap-4">
                   <Link
                     href={`/${product.id}`}
-                    className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                    className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-medium"
                   >
                     Learn More
                   </Link>
                   <Link
                     href="/download"
-                    className="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium text-white transition-colors"
+                    className="inline-flex items-center px-4 py-2 rounded-lg text-white transition-colors font-medium"
                     style={{ backgroundColor: palette.cyan }}
                   >
                     Download
                   </Link>
                 </div>
-
-                {/* Separator */}
-                {product.id !== products[products.length - 1].id && (
-                  <hr className="border-gray-200" />
-                )}
               </div>
             ))}
           </div>
@@ -1837,13 +1843,39 @@ docker exec -it fauxdb_fauxdb_1 mongosh
 
   return (
     <div className="pt-16">
-      {/* Hero Section with gradient background */}
+      {/* Hero Section with elegant gradient background - same as main page */}
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.iconTealDark}, ${palette.iconTeal}, ${palette.iconTealLight})`
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          position: 'relative'
         }}
       >
+        {/* Elegant overlay gradient - same as Hero */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -1858,26 +1890,26 @@ docker exec -it fauxdb_fauxdb_1 mongosh
 
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl text-white mb-6">
+            <h1 className="text-4xl md:text-5xl text-white mb-6 drop-shadow-lg">
               Documentation
             </h1>
-            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
+            <p className="text-xl mb-8 leading-relaxed text-white/90 drop-shadow-md">
               Complete guides and references for pgElephant products. Professional documentation following enterprise standards.
             </p>
             
             {/* Documentation Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">3</div>
-                <div className="text-sm" style={{ color: palette.gray100 }}>Products</div>
+                <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">3</div>
+                <div className="text-sm text-white/80 drop-shadow-sm">Products</div>
           </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">26</div>
-                <div className="text-sm" style={{ color: palette.gray100 }}>Documentation Pages</div>
+                <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">26</div>
+                <div className="text-sm text-white/80 drop-shadow-sm">Documentation Pages</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">100%</div>
-                <div className="text-sm" style={{ color: palette.gray100 }}>Open Source</div>
+                <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">100%</div>
+                <div className="text-sm text-white/80 drop-shadow-sm">Open Source</div>
               </div>
             </div>
           </div>
@@ -1900,36 +1932,30 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               Our documentation follows enterprise standards with comprehensive guides, API references, and tutorials for each product.
             </p>
             
-            {/* Documentation Categories */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
-                  <BookOpen className="w-8 h-8" style={{ color: palette.cyan }} />
-                    </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Guides</h3>
-                <p className="text-gray-600 text-sm">
-                  Step-by-step guides for installation, configuration, and getting started
-                </p>
+            {/* Documentation Categories - Simple List */}
+            <div className="flex flex-wrap justify-center gap-8 mb-16">
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-6 h-6" style={{ color: palette.cyan }} />
+                <div>
+                  <h3 className="font-semibold text-gray-900">Guides</h3>
+                  <p className="text-gray-600 text-sm">Step-by-step installation and configuration</p>
+                </div>
               </div>
               
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
-                  <FileText className="w-8 h-8" style={{ color: palette.teal }} />
-            </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Reference</h3>
-                <p className="text-gray-600 text-sm">
-                  Complete API documentation, function references, and configuration options
-                </p>
+              <div className="flex items-center gap-3">
+                <FileText className="w-6 h-6" style={{ color: palette.teal }} />
+                <div>
+                  <h3 className="font-semibold text-gray-900">Reference</h3>
+                  <p className="text-gray-600 text-sm">Complete API documentation and functions</p>
+                </div>
               </div>
               
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
-                  <Container className="w-8 h-8" style={{ color: palette.orange }} />
-                    </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Tutorials</h3>
-                <p className="text-gray-600 text-sm">
-                  Hands-on tutorials for Docker, Kubernetes, and advanced deployment scenarios
-                </p>
+              <div className="flex items-center gap-3">
+                <Container className="w-6 h-6" style={{ color: palette.orange }} />
+                <div>
+                  <h3 className="font-semibold text-gray-900">Tutorials</h3>
+                  <p className="text-gray-600 text-sm">Docker, Kubernetes, and deployment guides</p>
+                </div>
               </div>
             </div>
           </div>

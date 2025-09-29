@@ -86,10 +86,40 @@ const PgraftPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-teal-50/50"></div>
-        <div className="container-wide py-24 relative">
+      {/* Hero Section - Elegant theme same as main page */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          position: 'relative'
+        }}
+      >
+        {/* Elegant overlay gradient - same as Hero */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
+        <div className="container-wide py-24 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <div className="flex justify-center mb-8">
               <Image 
@@ -101,15 +131,15 @@ const PgraftPage = () => {
               />
             </div>
             
-            <h1 className="text-5xl font-bold text-slate-900 mb-6 leading-tight">
+            <h1 className="text-5xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               pgraft
             </h1>
             
-            <p className="text-2xl text-slate-600 mb-8 leading-relaxed">
+            <p className="text-2xl text-white/90 mb-8 leading-relaxed drop-shadow-md">
               PostgreSQL Raft Extension
             </p>
             
-            <p className="text-lg text-slate-700 mb-12 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg text-white/80 mb-12 leading-relaxed max-w-3xl mx-auto drop-shadow-sm">
               pgraft is a PostgreSQL extension that implements the Raft consensus protocol, enabling distributed database systems with automatic leader election, log replication, and fault tolerance. Built for high-performance PostgreSQL clusters requiring strong consistency guarantees.
             </p>
 
