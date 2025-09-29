@@ -27,7 +27,7 @@ const FeaturesList = () => {
       name: 'RAM',
       description: 'High-Performance In-Memory Database',
       icon: <Zap className="w-8 h-8" />,
-      color: 'yellow',
+      color: 'primary',
       features: [
         {
           title: 'Ultra-Fast Performance',
@@ -65,7 +65,7 @@ const FeaturesList = () => {
       name: 'pgraft',
       description: 'PostgreSQL Raft Consensus Engine',
       icon: <Crown className="w-8 h-8" />,
-      color: 'green',
+      color: 'secondary',
       features: [
         {
           title: 'Automatic Leader Election',
@@ -103,7 +103,7 @@ const FeaturesList = () => {
       name: 'RALE',
       description: 'Distributed Consensus Library',
       icon: <Globe className="w-8 h-8" />,
-      color: 'blue',
+      color: 'accent',
       features: [
         {
           title: 'Raft Implementation',
@@ -141,53 +141,53 @@ const FeaturesList = () => {
 
   const getColorClasses = (color: string) => {
     switch (color) {
-      case 'yellow':
+      case 'primary':
         return {
-          bg: 'from-yellow-500/20 to-orange-500/20',
-          border: 'border-yellow-400/30',
-          icon: 'text-yellow-400',
-          accent: 'text-yellow-300',
-          button: 'bg-yellow-600 hover:bg-yellow-700'
+          bg: 'from-primary-500/20 to-primary-600/20',
+          border: 'border-primary-400/30',
+          icon: 'text-primary-400',
+          accent: 'text-primary-300',
+          button: 'bg-primary-600 hover:bg-primary-700'
         }
-      case 'green':
+      case 'secondary':
         return {
-          bg: 'from-green-500/20 to-emerald-500/20',
-          border: 'border-green-400/30',
-          icon: 'text-green-400',
-          accent: 'text-green-300',
-          button: 'bg-green-600 hover:bg-green-700'
+          bg: 'from-secondary-500/20 to-secondary-600/20',
+          border: 'border-secondary-400/30',
+          icon: 'text-secondary-400',
+          accent: 'text-secondary-300',
+          button: 'bg-secondary-600 hover:bg-secondary-700'
         }
-      case 'blue':
+      case 'accent':
         return {
-          bg: 'from-blue-500/20 to-cyan-500/20',
-          border: 'border-blue-400/30',
-          icon: 'text-blue-400',
-          accent: 'text-blue-300',
-          button: 'bg-blue-600 hover:bg-blue-700'
+          bg: 'from-accent-500/20 to-accent-600/20',
+          border: 'border-accent-400/30',
+          icon: 'text-accent-400',
+          accent: 'text-accent-300',
+          button: 'bg-accent-600 hover:bg-accent-700'
         }
       default:
         return {
-          bg: 'from-gray-500/20 to-slate-500/20',
-          border: 'border-gray-400/30',
-          icon: 'text-gray-400',
-          accent: 'text-gray-300',
-          button: 'bg-gray-600 hover:bg-gray-700'
+          bg: 'from-neutral-500/20 to-neutral-600/20',
+          border: 'border-neutral-400/30',
+          icon: 'text-neutral-400',
+          accent: 'text-neutral-300',
+          button: 'bg-neutral-600 hover:bg-neutral-700'
         }
     }
   }
 
   return (
-    <section id="features" className="section-padding bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 relative overflow-hidden">
+    <section id="features" className="section-padding bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 relative overflow-hidden">
       <div className="container-extra-wide">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-green-400/10 to-blue-400/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary-400/10 to-secondary-400/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-secondary-400/10 to-accent-400/10 rounded-full blur-3xl" />
         </div>
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-purple-300/30 rounded-full text-sm font-semibold text-purple-200 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-semibold text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
             Project Features
           </div>
@@ -274,7 +274,7 @@ const FeaturesList = () => {
               Choose the right tool for your needs, or use them together for a complete database solution.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+              <button className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
                 <Database className="w-5 h-5" />
                 Download All Projects
               </button>

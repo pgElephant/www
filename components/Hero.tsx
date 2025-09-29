@@ -7,25 +7,24 @@ import Image from 'next/image'
 
 type BG = { from: string; via?: string; to: string }
 const palette = {
-  // Colors from pgElephant icon (darker variants)
-  iconTeal: '#025A6B',
-  iconTealLight: '#036B7D',
-  iconTealMedium: '#045E70',
-  iconTealDark: '#054A56',
-  // Supporting colors
-  navy: '#1E293B',
-  navyDeep: '#0F172A',
-  slate: '#334155',
-  cyan: '#0EA5E9',
-  cyanDeep: '#0284C7',
-  teal: '#14B8A6',
-  tealDeep: '#0D9488',
-  gray100: '#F8FAFC',
-  gray300: '#CBD5E1',
+  // Modern Tech Stack Colors
+  primary: '#4f46e5',      // Indigo-600
+  primaryLight: '#6366f1', // Indigo-500
+  primaryDark: '#3730a3',  // Indigo-800
+  secondary: '#06b6d4',    // Cyan-500
+  secondaryLight: '#22d3ee', // Cyan-400
+  secondaryDark: '#0891b2',  // Cyan-600
+  accent: '#10b981',       // Emerald-500
+  accentLight: '#34d399',  // Emerald-400
+  accentDark: '#059669',   // Emerald-600
+  // Neutral colors
+  neutral: '#18181b',      // Zinc-900
+  neutralLight: '#27272a', // Zinc-800
+  neutralMedium: '#3f3f46', // Zinc-700
   white: '#FFFFFF',
-  // CTA like EDB's accent
-  orange: '#F97316',
-  orangeDark: '#EA580C'
+  // Legacy compatibility
+  navy: '#1E293B',
+  slate: '#334155'
 }
 
 type Product = {
@@ -52,8 +51,8 @@ const Hero = () => {
         description2: '• Automated leader election and failover for any distributed database.',
         description3: '• Zero data loss during node failures with strong consistency guarantees.',
         icon: '/ico/RALE_HD.ico',
-        color: `from-[${palette.iconTeal}] to-[${palette.iconTealLight}]`,
-        bg: { from: palette.iconTealDark, via: palette.iconTeal, to: palette.iconTealLight }
+        color: `from-[${palette.primary}] to-[${palette.primaryLight}]`,
+        bg: { from: palette.primaryDark, via: palette.primary, to: palette.primaryLight }
       },
       {
         id: 'ram',
@@ -63,8 +62,8 @@ const Hero = () => {
         description2: '• Intelligent resource management and load balancing across nodes.',
         description3: '• Real-time monitoring and automated scaling capabilities.',
         icon: '/ico/RAM_HD.ico',
-        color: `from-[${palette.iconTealMedium}] to-[${palette.iconTealLight}]`,
-        bg: { from: palette.iconTeal, via: palette.iconTealMedium, to: palette.iconTealLight }
+        color: `from-[${palette.secondary}] to-[${palette.secondaryLight}]`,
+        bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.secondaryLight }
       },
       {
         id: 'fauxdb',
@@ -74,8 +73,8 @@ const Hero = () => {
         description2: '• Native JSON support with ACID transaction guarantees.',
         description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
         icon: '/ico/FauxDB_HD.ico',
-        color: `from-[${palette.iconTealLight}] to-[${palette.iconTealMedium}]`,
-        bg: { from: palette.iconTealDark, via: palette.iconTeal, to: palette.iconTealMedium }
+        color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
+        bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
       }
   ]
 
@@ -88,7 +87,7 @@ const Hero = () => {
 
   const current = products[currentProduct]
   const heroGradient = `linear-gradient(135deg, ${current.bg.from}, ${current.bg.via ?? current.bg.from}, ${current.bg.to})`
-  const tileGradient = `linear-gradient(135deg, ${palette.cyan}, ${palette.teal})`
+  const tileGradient = `linear-gradient(135deg, ${palette.primary}, ${palette.secondary})`
 
   return (
     <section

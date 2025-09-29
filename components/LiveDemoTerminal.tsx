@@ -220,17 +220,17 @@ const LiveDemoTerminal = () => {
   }
 
   return (
-    <section className="section-padding bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 relative overflow-hidden">
+    <section className="section-padding bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 relative overflow-hidden">
       <div className="container-extra-wide">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-green-400/10 to-blue-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-blue-400/10 to-green-400/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-secondary-400/10 to-accent-400/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-accent-400/10 to-secondary-400/10 rounded-full blur-3xl" />
         </div>
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-green-300/30 rounded-full text-sm font-semibold text-green-200 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-secondary-300/30 rounded-full text-sm font-semibold text-secondary-200 mb-6 shadow-sm">
             <Terminal className="w-4 h-4" />
             Live Demo Terminal
           </div>
@@ -239,7 +239,7 @@ const LiveDemoTerminal = () => {
               Try pgraft
             </span>
             <br />
-            <span className="text-green-300">
+            <span className="text-secondary-300">
               Live in Your Browser
             </span>
           </h2>
@@ -256,7 +256,7 @@ const LiveDemoTerminal = () => {
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
                 <span className="text-gray-300 text-sm ml-4 font-mono">pgraft-demo</span>
               </div>
               <div className="flex items-center gap-2">
@@ -280,7 +280,7 @@ const LiveDemoTerminal = () => {
             {/* Terminal Content */}
             <div 
               ref={terminalRef}
-              className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black text-green-400"
+              className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400"
             >
               {/* Command History */}
               {commandHistory.map((cmd, index) => (
@@ -290,7 +290,7 @@ const LiveDemoTerminal = () => {
                   </div>
                   <div className="ml-4">
                     {cmd.output.map((line, lineIndex) => (
-                      <div key={lineIndex} className="text-green-400">
+                      <div key={lineIndex} className="text-secondary-400">
                         {line}
                       </div>
                     ))}
@@ -302,7 +302,7 @@ const LiveDemoTerminal = () => {
               {isTyping && (
                 <div className="text-blue-400 mb-2">
                   <span className="text-gray-500">[{new Date().toLocaleTimeString()}]</span> $ {currentCommand}
-                  <span className={`inline-block w-2 h-4 bg-green-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+                  <span className={`inline-block w-2 h-4 bg-secondary-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
                 </div>
               )}
 
@@ -310,7 +310,7 @@ const LiveDemoTerminal = () => {
               {!isRunning && (
                 <div className="flex items-center">
                   <span className="text-blue-400">$ </span>
-                  <span className={`inline-block w-2 h-4 bg-green-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+                  <span className={`inline-block w-2 h-4 bg-secondary-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
                 </div>
               )}
             </div>
@@ -325,7 +325,7 @@ const LiveDemoTerminal = () => {
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                       isRunning 
                         ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                        : 'bg-green-600 hover:bg-green-700 text-white hover:scale-105'
+                        : 'bg-secondary-600 hover:bg-secondary-700 text-white hover:scale-105'
                     }`}
                   >
                     <Play className="w-4 h-4" />
@@ -349,7 +349,7 @@ const LiveDemoTerminal = () => {
                 <div className="text-gray-400 text-sm">
                   {isRunning ? (
                     <span className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <div className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse"></div>
                       Demo Running
                     </span>
                   ) : (
@@ -369,15 +369,15 @@ const LiveDemoTerminal = () => {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
               <div className="bg-white/5 rounded-lg p-4">
-                <h4 className="font-semibold text-green-400 mb-2">🚀 Cluster Initialization</h4>
+                <h4 className="font-semibold text-secondary-400 mb-2">Cluster Initialization</h4>
                 <p className="text-sm text-gray-300">Watch as pgraft starts a 3-node cluster with automatic leader election.</p>
               </div>
               <div className="bg-white/5 rounded-lg p-4">
-                <h4 className="font-semibold text-blue-400 mb-2">⚡ Failover & Recovery</h4>
+                <h4 className="font-semibold text-primary-400 mb-2">Failover & Recovery</h4>
                 <p className="text-sm text-gray-300">See how the cluster handles leader failure and automatic recovery.</p>
               </div>
               <div className="bg-white/5 rounded-lg p-4">
-                <h4 className="font-semibold text-purple-400 mb-2">📊 Real-time Status</h4>
+                <h4 className="font-semibold text-accent-400 mb-2">Real-time Status</h4>
                 <p className="text-sm text-gray-300">Monitor cluster health, terms, and node synchronization.</p>
               </div>
             </div>

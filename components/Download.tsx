@@ -127,14 +127,14 @@ const Download = () => {
   }
 
   return (
-    <div className="pt-16 bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
+    <div className="pt-16 bg-gradient-to-br from-neutral-600 via-neutral-700 to-secondary-700">
       {/* Header */}
-      <div className="bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-br from-neutral-600 via-neutral-700 to-secondary-700 text-white relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-500/20 to-cyan-500/15 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-teal-300/15 to-cyan-300/10 rounded-full blur-2xl" />
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-secondary-400/20 to-accent-400/15 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-secondary-500/20 to-accent-500/15 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-r from-secondary-300/15 to-accent-300/10 rounded-full blur-2xl" />
         </div>
 
         {/* Grid Pattern */}

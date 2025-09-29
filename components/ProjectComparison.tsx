@@ -186,17 +186,17 @@ const ProjectComparison = () => {
   }
 
   return (
-    <section id="project-comparison" className="section-padding bg-gradient-to-br from-slate-800 via-slate-700 to-blue-700 relative overflow-hidden">
+    <section id="project-comparison" className="section-padding bg-gradient-to-br from-neutral-800 via-neutral-700 to-primary-700 relative overflow-hidden">
       <div className="container-wide">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/15 to-teal-400/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-teal-400/15 to-blue-400/15 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary-400/15 to-secondary-400/15 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-secondary-400/15 to-primary-400/15 rounded-full blur-3xl" />
         </div>
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-blue-300/30 rounded-full text-sm font-semibold text-blue-200 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-semibold text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
             Project Comparison
           </div>

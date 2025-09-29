@@ -5,7 +5,7 @@ import { Server, Database, Wifi, Shield, ArrowRight, Zap, Globe, Users, Activity
 
 const Architecture = () => {
   return (
-    <section id="architecture" className="section-padding bg-gradient-to-br from-slate-600 via-slate-700 to-teal-700">
+    <section id="architecture" className="section-padding bg-gradient-to-br from-neutral-600 via-neutral-700 to-secondary-700">
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center mb-20">
@@ -22,8 +22,8 @@ const Architecture = () => {
           <div className="relative max-w-6xl mx-auto">
             {/* Static Background Elements */}
             <div className="absolute inset-0">
-              <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-teal-400/20 to-cyan-400/15 rounded-full blur-3xl" />
-              <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-teal-500/20 to-cyan-500/15 rounded-full blur-3xl" />
+              <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-secondary-400/20 to-accent-400/15 rounded-full blur-3xl" />
+              <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-secondary-500/20 to-accent-500/15 rounded-full blur-3xl" />
             </div>
 
             {/* Static Connection Lines */}

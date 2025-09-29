@@ -18,7 +18,7 @@ const Community = () => {
       description: 'Open source development and discussions',
       url: 'https://github.com/pgElephant/rale',
       icon: Github,
-      color: 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200',
+      color: 'bg-gradient-to-br from-neutral-50 to-neutral-100 border-neutral-200',
       stats: '2.4k stars, 150+ contributors'
     },
     {
@@ -26,7 +26,7 @@ const Community = () => {
       description: 'Real-time community chat and support',
       url: '#',
       icon: MessageCircle,
-      color: 'bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200',
+      color: 'bg-gradient-to-br from-primary-50 to-primary-100 border-primary-200',
       stats: '500+ members, active discussions'
     },
     {
@@ -34,7 +34,7 @@ const Community = () => {
       description: 'Latest updates, tutorials, and insights',
       url: '/blog',
       icon: Globe,
-      color: 'bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200',
+      color: 'bg-gradient-to-br from-secondary-50 to-secondary-100 border-secondary-200',
       stats: 'Monthly posts, technical deep dives'
     }
   ]
@@ -92,7 +92,7 @@ const Community = () => {
   ]
 
   return (
-    <section id="community" className="section-padding bg-gradient-to-br from-edbGray-50 to-white">
+    <section id="community" className="section-padding bg-gradient-to-br from-neutral-50 to-white">
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center mb-16">
