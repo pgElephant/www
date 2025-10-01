@@ -15,7 +15,16 @@ const PgraftDemoTerminal = () => {
   const [commandHistory, setCommandHistory] = useState<TerminalCommand[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
+  const [speedMultiplier, setSpeedMultiplier] = useState(1)
   const terminalRef = useRef<HTMLDivElement>(null)
+
+  // Base timing values (in ms)
+  const baseTimings = {
+    typeSpeed: 100,
+    commandDelay: 2000,
+    outputDelay: 400,
+    betweenCommands: 2000
+  }
 
   // Pgraft-specific demo commands and their outputs
   const demoCommands = [
@@ -151,7 +160,7 @@ const PgraftDemoTerminal = () => {
         setIsTyping(false)
         onComplete()
       }
-    }, 50)
+    }, baseTimings.typeSpeed / speedMultiplier)
   }
 
   // Show output with delay
@@ -171,7 +180,7 @@ const PgraftDemoTerminal = () => {
         clearInterval(interval)
         onComplete()
       }
-    }, 200)
+    }, baseTimings.outputDelay / speedMultiplier)
   }
 
   // Run demo sequence
@@ -217,9 +226,9 @@ const PgraftDemoTerminal = () => {
         setTimeout(() => {
           showOutput(cmd.output, () => {
             commandIndex++
-            setTimeout(runNextCommand, 1000) // Pause between commands
+            setTimeout(runNextCommand, baseTimings.betweenCommands / speedMultiplier)
           })
-        }, 500)
+        }, baseTimings.commandDelay / speedMultiplier)
       })
     }
     
@@ -337,13 +346,33 @@ const PgraftDemoTerminal = () => {
               <Square className="w-4 h-4" />
               Stop
             </button>
+
+            <div className="flex items-center gap-2 ml-4">
+              <span className="text-gray-400 text-sm">Speed:</span>
+              <div className="flex gap-1">
+                {[1, 2, 3].map((speed) => (
+                  <button
+                    key={speed}
+                    onClick={() => setSpeedMultiplier(speed)}
+                    disabled={isRunning}
+                    className={`px-2 py-1 rounded text-sm font-mono transition-all ${
+                      speedMultiplier === speed
+                        ? 'bg-secondary-600 text-white'
+                        : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
+                    } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+                  >
+                    {speed}x
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="text-gray-400 text-sm">
             {isRunning ? (
               <span className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse"></div>
-                Demo Running
+                Demo Running ({speedMultiplier}x)
               </span>
             ) : (
               <span>Ready to run</span>
