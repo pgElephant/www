@@ -54,11 +54,12 @@ const PgraftPage = () => {
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
         <div className="container-wide relative z-10 text-center">
           <h1 className="text-5xl font-bold mb-5 tracking-tight">
-            pgraft: Distributed PostgreSQL Powered by Raft
+            pgraft: Raft based postgresql extension for leader election
           </h1>
             <p className="text-xl max-w-3xl mx-auto mb-8 text-slate-200">
-            A production-ready PostgreSQL extension delivering strong consistency, automatic failover,
-            log replication, and 100% split-brain protection using the proven etcd-io/raft engine.
+            A battle-tested PostgreSQL extension that provides reliable leader election, automatic failover, 
+            and robust consensus using proven libraft implementation. Built for high-availability clusters 
+            with zero split-brain guarantee.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             <Link href="/docs/pgraft/getting-started" className="bg-white text-slate-900 hover:bg-slate-100 font-semibold px-8 py-4 rounded-2xl transition-all duration-300 inline-flex items-center shadow">
@@ -97,12 +98,12 @@ const PgraftPage = () => {
         <div className="container-wide">
           <SectionHeading kicker="Overview">Why pgraft</SectionHeading>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <FeatureCard title="Battle-Tested Consensus" desc="Leverages etcd-io/raft for correctness, liveness and proven reliability in production environments." />
-            <FeatureCard title="Transparent Operations" desc="All cluster state is inspectable through SQL functions—no opaque sidecars or proprietary control planes." />
-            <FeatureCard title="Fast Recovery" desc="Automatic failover with deterministic leader elections and bounded recovery time under network turbulence." />
-            <FeatureCard title="Operational Simplicity" desc="Single extension load + minimal configuration. Scale from laptop dev clusters to production footprints." />
-            <FeatureCard title="Durable & Crash Safe" desc="Persistent Raft HardState, log entries and snapshots ensure continuity after ungraceful restarts." />
-            <FeatureCard title="Native Postgres UX" desc="Uses PostgreSQL background workers + shared memory IPC for seamless integration and low overhead." />
+            <FeatureCard title="Production-Grade Consensus" desc="Built on proven libraft implementation for reliable leader election and distributed consensus." />
+            <FeatureCard title="Transparent Operations" desc="All cluster state is inspectable through SQL functions—no external dependencies or control planes." />
+            <FeatureCard title="Fast Recovery" desc="Automatic failover with deterministic leader elections and quick recovery during network partitions." />
+            <FeatureCard title="Operational Simplicity" desc="Pure PostgreSQL extension with minimal configuration. Ideal for both development and production." />
+            <FeatureCard title="Durable & Crash Safe" desc="Persistent Raft state and log entries ensure cluster consistency after restarts or failures." />
+            <FeatureCard title="Native Integration" desc="Seamlessly integrates with PostgreSQL using background workers and shared memory IPC." />
           </div>
         </div>
       </section>
@@ -131,6 +132,31 @@ const PgraftPage = () => {
               <CodeBlock code={`CREATE EXTENSION pgraft;\nSELECT pgraft_init(); -- Run on each node\n-- After leader elected (~10s) add members\nSELECT pgraft_add_node(2,'127.0.0.1',7002);\nSELECT pgraft_add_node(3,'127.0.0.1',7003);`} />
               <p className="text-xs text-slate-500">See <Link href="/docs/pgraft/getting-started/quick-start" className="text-indigo-600 hover:underline">Quick Start</Link> for full multi-node walkthrough.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Architecture Overview */}
+      <section className="py-20 bg-slate-50 border-t border-b">
+        <div className="container-wide">
+          <SectionHeading kicker="Architecture">Design & Components</SectionHeading>
+          <div className="max-w-3xl mx-auto">
+            <p className="text-slate-600 mb-6">
+                            pgraft is a native PostgreSQL extension that leverages libraft, a robust implementation of the Raft consensus algorithm, to provide reliable leader election in distributed PostgreSQL environments.
+            </p>
+            <p className="text-slate-600 mb-4">
+              The extension consists of two primary components:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 mb-6 text-slate-600">
+              <li>pgraft core - Integration layer with libraft for consensus</li>
+              <li>pgraft controller - High-level cluster management and coordination</li>
+            </ul>
+            <p className="text-slate-600 mb-6">
+              These components work in harmony to enable efficient leader election while maintaining full compatibility with PostgreSQL's existing functionality.
+            </p>
+            <p className="text-slate-600">
+              At its foundation, pgraft utilizes PostgreSQL background workers and shared memory IPC for optimal performance. The Raft state and logs are persistently stored to guarantee cluster consistency across restarts.
+            </p>
           </div>
         </div>
       </section>
