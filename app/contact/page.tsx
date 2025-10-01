@@ -168,7 +168,7 @@ Message: ${formData.message}
           />
         </div>
 
-        <div className="container-wide py-20 relative z-10">
+  <div className="container-wide py-28 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl text-white mb-6 drop-shadow-lg">
               Contact Us
