@@ -1,8 +1,7 @@
 import React from 'react';
 import { BookOpen, Github, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-
-const DEMO_VIDEO_URL = 'https://www.youtube.com/embed/1u7QpQqQGgE'; // Using home page demo video
+import LiveDemoTerminal from '@/components/LiveDemoTerminal';
 
 /* ===================== Small Reusable UI Parts ===================== */
 function SectionHeading({ children, kicker, className = '' }: { children: React.ReactNode; kicker?: string; className?: string }) {
@@ -74,14 +73,8 @@ const PgraftPage = () => {
               <Github className="w-5 h-5 mr-2" /> Source <ExternalLink className="w-4 h-4 ml-2" />
             </a>
           </div>
-          <div className="aspect-video w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl ring-1 ring-slate-700/60 border border-slate-700">
-            <iframe
-              className="w-full h-full"
-              src={DEMO_VIDEO_URL}
-              title="pgraft Demo"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+          <div className="max-w-4xl mx-auto">
+            <LiveDemoTerminal />
           </div>
           <div className="mt-8 flex flex-wrap justify-center">
             <Badge>PostgreSQL 16–18</Badge>
