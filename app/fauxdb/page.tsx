@@ -89,32 +89,32 @@ const FauxDbPage = () => {
   // Demo features
   const demoFeatures = [
     {
-      title: 'Live Query Demo',
-      description: 'Execute MongoDB queries in real-time and see the results',
+      title: 'MongoDB API Explorer',
+      description: 'Test MongoDB wire protocol compatibility with real queries on FauxDB.',
       icon: Terminal,
-      status: 'Active',
-      users: '23 online'
+      status: 'Live',
+      users: '18 users now'
     },
     {
-      title: 'Performance Benchmark',
-      description: 'Compare FauxDB performance against native MongoDB',
+      title: 'Rust Engine Profiler',
+      description: 'See how FauxDB’s Rust-powered backend handles complex workloads.',
       icon: BarChart3,
-      status: 'Running',
-      users: '12 online'
+      status: 'Benchmarking',
+      users: '9 running'
     },
     {
-      title: 'Migration Tool',
-      description: 'Live demo of migrating data from MongoDB to FauxDB',
+      title: 'Migration Playground',
+      description: 'Try migrating sample MongoDB data into FauxDB and inspect results.',
       icon: Database,
-      status: 'Available',
-      users: '8 online'
+      status: 'Ready',
+      users: '5 active'
     },
     {
-      title: 'ACID Compliance Test',
-      description: 'Demonstrate ACID transactions and consistency guarantees',
+      title: 'Transaction Validator',
+      description: 'Experiment with multi-document ACID transactions and rollback scenarios.',
       icon: Shield,
-      status: 'Active',
-      users: '15 online'
+      status: 'Stable',
+      users: '11 testing'
     }
   ]
 
@@ -384,6 +384,30 @@ const FauxDbPage = () => {
                         Download
                       </Link>
                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Demo Features Section */}
+      <div className="bg-gray-50 py-20">
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-2xl text-gray-900 mb-8 text-center font-semibold">Demo Features</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {demoFeatures.map((feature, idx) => (
+                <div key={idx} className="bg-white border border-gray-200 rounded-xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-shadow">
+                  <div className="w-14 h-14 flex items-center justify-center rounded-lg mb-4 bg-gray-50">
+                    <feature.icon className="w-7 h-7 text-cyan-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4 flex-1">{feature.description}</p>
+                  <div className="flex items-center justify-center gap-2 mt-auto">
+                    <span className="inline-block px-2 py-1 text-xs rounded bg-cyan-100 text-cyan-800 font-medium">{feature.status}</span>
+                    <span className="inline-block px-2 py-1 text-xs rounded bg-gray-100 text-gray-500">{feature.users}</span>
                   </div>
                 </div>
               ))}
