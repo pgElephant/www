@@ -1,5 +1,8 @@
-import React from 'react';
+'use client'
+
+import React, { useState, useEffect } from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import { Terminal, Database, Activity, Users, Shield, Zap, Server } from 'lucide-react';
 
 const raleConfig = {
   hero: {
@@ -15,31 +18,91 @@ const raleConfig = {
     'Observability',
   ],
   demo: (
-    <div className="max-w-4xl mx-auto mb-8">
-      <div className="bg-gray-900 rounded-xl p-8 text-white font-mono text-sm">
-        <div className="flex items-center mb-6">
-          <div className="flex gap-2 mr-4">
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+    <div className="max-w-6xl mx-auto mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* raled daemon terminal */}
+        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+          <div className="flex items-center mb-3">
+            <div className="flex gap-1 mr-2">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-green-300">raled</span>
           </div>
-          <span className="text-gray-300">RALE Demo Terminal</span>
+          <pre className="whitespace-pre-line text-green-200">{`> raled --config conf/raled1.conf
+[INFO] RALE daemon starting...
+[INFO] Node ID: 1, Name: node1
+[INFO] RALE port: 7400, DStore port: 7401
+[INFO] Data directory: ./data
+[INFO] Consensus initialized
+[INFO] Distributed store ready
+[INFO] Listening on 127.0.0.1:7400
+[INFO] Cluster ready
+
+> raled --config conf/raled2.conf &
+> raled --config conf/raled3.conf &
+`}</pre>
         </div>
-          <pre className="bg-transparent p-0 m-0 mb-4 text-green-300 whitespace-pre-line">
-{`> raled status
-Cluster: Healthy
-Leader: node1
-Term: 42
-Nodes: node1, node2, node3
+        
+        {/* ralectrl CLI terminal */}
+        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+          <div className="flex items-center mb-3">
+            <div className="flex gap-1 mr-2">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-blue-300">ralectrl</span>
+          </div>
+          <pre className="whitespace-pre-line text-blue-200">{`> ralectrl STATUS
+Cluster State: Healthy
+Leader: node1 (127.0.0.1:7400)
+Term: 15
+Nodes: 3
+  - node1 (Leader)
+  - node2 (Follower)
+  - node3 (Follower)
 
-> raled log append "set x=1"
-Entry appended to log. Index: 1234
+> ralectrl ADD --node-id 4 --node-name "node4"
+Node node4 added to cluster
+Cluster size: 4 nodes
 
-> raled leader-election
-Leader election initiated...
-New Leader: node3
-`}
-          </pre>
+> ralectrl LIST
+Node ID | Name  | IP         | RALE Port | DStore Port
+--------|-------|------------|-----------|------------
+      1 | node1 | 127.0.0.1  | 7400      | 7401
+      2 | node2 | 127.0.0.1  | 7402      | 7403
+      3 | node3 | 127.0.0.1  | 7404      | 7405
+      4 | node4 | 127.0.0.1  | 7406      | 7407
+`}</pre>
+        </div>
+        
+        {/* librale library terminal */}
+        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+          <div className="flex items-center mb-3">
+            <div className="flex gap-1 mr-2">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-purple-300">librale</span>
+          </div>
+          <pre className="whitespace-pre-line text-purple-200">{`> ./benchmark_tool
+RALE Performance Benchmark
+==========================
+Consensus Operations: 1000 ops/sec
+Storage Operations: 10000 ops/sec
+Write Latency: <10ms
+Read Latency: <1ms
+
+> librale_dstore_put("key1", "value1", 6)
+Success: Entry stored at index 1024
+
+> librale_dstore_get("key1", buffer, &len)
+Success: Retrieved "value1" (6 bytes)
+`}</pre>
+        </div>
       </div>
     </div>
   ),
@@ -55,15 +118,12 @@ New Leader: node3
     ],
   },
   features: [
-    { icon: '', iconColor: 'text-indigo-500', title: 'Raft Log', desc: 'Distributed, strongly consistent log.' },
-    { icon: '', iconColor: 'text-sky-500', title: 'Crash Safe', desc: 'Persistent, durable log entries.' },
-    { icon: '', iconColor: 'text-green-500', title: 'PostgreSQL Integration', desc: 'Native extension for PostgreSQL.' },
-    { icon: '', iconColor: 'text-yellow-500', title: 'Observability', desc: 'Monitor log state and replication.' },
-    { icon: '', iconColor: 'text-pink-500', title: 'Minimal Configuration', desc: 'Production-ready defaults.' },
-    { icon: '', iconColor: 'text-cyan-500', title: 'Scaling', desc: 'Add/remove nodes easily.' },
-    { icon: '', iconColor: 'text-red-500', title: 'Debugging', desc: 'Extended logging and audit.' },
-    { icon: '', iconColor: 'text-violet-500', title: 'Open Source', desc: 'MIT licensed, community-driven.' },
-    { icon: '', iconColor: 'text-emerald-500', title: 'Extensible', desc: 'Plugin architecture for custom features.' },
+    { icon: <Database className="w-5 h-5" />, iconColor: 'text-indigo-500', title: 'Distributed Key-Value Store', desc: 'High-performance replicated key-value storage with strong consistency.' },
+    { icon: <Users className="w-5 h-5" />, iconColor: 'text-sky-500', title: 'Raft Consensus', desc: 'Reliable leader election and log replication with split-brain prevention.' },
+    { icon: <Shield className="w-5 h-5" />, iconColor: 'text-green-500', title: 'Thread Safety', desc: 'Full multi-threading support with proper synchronization mechanisms.' },
+    { icon: <Activity className="w-5 h-5" />, iconColor: 'text-yellow-500', title: 'Network Layer', desc: 'TCP/UDP communication with automatic failover and fault tolerance.' },
+    { icon: <Zap className="w-5 h-5" />, iconColor: 'text-pink-500', title: 'Memory Safety', desc: 'Safe allocation/deallocation with comprehensive leak prevention.' },
+    { icon: <Terminal className="w-5 h-5" />, iconColor: 'text-cyan-500', title: 'Professional CLI', desc: 'Clean logging without colors or terminal dependencies.' },
   ],
   featureMatrix: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">

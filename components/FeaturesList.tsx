@@ -102,19 +102,29 @@ const FeaturesList = () => {
     },
     {
       name: 'FauxDB',
-      description: 'MongoDB Compatible Document Database',
+      description: 'MongoDB Wire Protocol Proxy & Query Translator',
       icon: <Globe className="w-8 h-8" />,
       color: 'accent',
       features: [
         {
-          title: '100% MongoDB Compatibility',
-          description: 'Full wire protocol support with mongosh compatibility',
+          title: 'MongoDB Wire Protocol Proxy',
+          description: 'Full MongoDB wire protocol support with mongosh compatibility',
           icon: <Database className="w-5 h-5" />
         },
         {
-          title: 'High Performance',
-          description: 'Built in Rust for superior speed and memory efficiency',
+          title: 'Query Translation Engine',
+          description: 'Real-time MongoDB queries translated to PostgreSQL SQL',
+          icon: <Code className="w-5 h-5" />
+        },
+        {
+          title: 'Rust-Powered Performance',
+          description: 'High-performance, safe, and modern proxy engine',
           icon: <Zap className="w-5 h-5" />
+        },
+        {
+          title: 'PostgreSQL Backend',
+          description: 'Pure PostgreSQL storage with native JSONB support',
+          icon: <HardDrive className="w-5 h-5" />
         },
         {
           title: 'Advanced Features',
@@ -122,19 +132,9 @@ const FeaturesList = () => {
           icon: <Globe className="w-5 h-5" />
         },
         {
-          title: 'Pure PostgreSQL Backend',
-          description: 'Native JSONB support, no external dependencies',
-          icon: <Server className="w-5 h-5" />
-        },
-        {
           title: 'Production Ready',
           description: 'Enterprise-grade monitoring, logging, and configuration',
           icon: <Shield className="w-5 h-5" />
-        },
-        {
-          title: 'Docker Support',
-          description: 'Comprehensive Docker support for dev, test, and production',
-          icon: <Settings className="w-5 h-5" />
         }
       ]
     }

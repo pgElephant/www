@@ -1,31 +1,37 @@
-import ProjectTemplate from '../_components/ProjectTemplate';
+'use client'
+
+import { useState } from 'react'
+import ProjectTemplate from '../_components/ProjectTemplate'
+import { Play, Terminal, Monitor, CheckCircle, Users, Star, Clock, BarChart3 } from 'lucide-react'
 
 const fauxdbConfig = {
   hero: {
-    title: 'FauxDB: MongoDB-Compatible Document Database',
-    subtitle: 'Wire-protocol compatible, Rust-powered, PostgreSQL-backed',
-    projectName: 'FauxDB',
+    title: 'FauxDB: MongoDB wire-protocol proxy with PostgreSQL storage',
+    subtitle: 'MongoDB wire protocol proxy, Rust-powered, PostgreSQL backend',
+    projectName: 'fauxdb',
   },
   badges: [
-    'MongoDB API',
+    'MongoDB Compatible',
+    'Query Translator',
     'Rust Engine',
     'PostgreSQL Backend',
     'ACID Transactions',
     'Geospatial',
   ],
   demo: (
-    <div className="max-w-4xl mx-auto mb-8">
-      <div className="bg-gray-900 rounded-xl p-8 text-white font-mono text-sm">
-        <div className="flex items-center mb-6">
-          <div className="flex gap-2 mr-4">
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+    <div className="max-w-6xl mx-auto mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* mongosh terminal */}
+        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+          <div className="flex items-center mb-3">
+            <div className="flex gap-1 mr-2">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-gray-300">mongosh</span>
           </div>
-          <span className="text-gray-300">FauxDB Demo Terminal</span>
-        </div>
-  <pre className="bg-transparent p-0 m-0 mb-4 text-green-300 whitespace-pre-line">
-{`> db.users.insertOne({ name: "Alice", age: 27 })
+          <pre className="whitespace-pre-line text-green-300">{`> db.users.insertOne({ name: "Alice", age: 27 })
 { acknowledged: true, insertedId: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8") }
 
 > db.users.find({ age: { $gt: 20 } })
@@ -35,74 +41,66 @@ const fauxdbConfig = {
 
 > db.stats()
 { collections: 1, objects: 1, avgObjSize: 32, storageSize: 4096 }
-`}
-  </pre>
+`}</pre>
+        </div>
+        {/* fauxdb terminal */}
+        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+          <div className="flex items-center mb-3">
+            <div className="flex gap-1 mr-2">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-cyan-300">fauxdb-proxy</span>
+          </div>
+          <pre className="whitespace-pre-line text-cyan-200">{`> Query Translator: MongoDB → SQL
+> Protocol: MongoDB Wire Protocol
+> Backend: PostgreSQL Storage
+> Status: Connected to PostgreSQL
+
+> Translation: insertOne() → INSERT
+> Translation: find() → SELECT
+> Translation: stats() → ANALYZE
+`}</pre>
+        </div>
+        {/* postgresql terminal */}
+        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+          <div className="flex items-center mb-3">
+            <div className="flex gap-1 mr-2">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-yellow-200">postgresql</span>
+          </div>
+          <pre className="whitespace-pre-line text-yellow-100">{`> psql -d fauxdb -c "SELECT * FROM users;"
+id |  name  | age
+----+--------+-----
+ 1  | Alice  | 27
+(1 row)
+
+> psql -d fauxdb -c "SELECT COUNT(*) FROM users;"
+ count
+-------
+     1
+(1 row)
+`}</pre>
+        </div>
       </div>
     </div>
   ),
   featurePillars: {
     kicker: 'Overview',
     items: [
-      { title: 'MongoDB Compatibility', desc: 'Full MongoDB wire protocol support for seamless migration.' },
-      { title: 'Rust-Powered Engine', desc: 'High-performance, safe, and modern backend.' },
-      { title: 'PostgreSQL Storage', desc: 'Reliable, battle-tested storage engine.' },
-      { title: 'Advanced Features', desc: 'Transactions, geospatial, and more.' },
-      { title: 'Easy Migration', desc: 'Drop-in replacement for MongoDB workloads.' },
-      { title: 'Open Source', desc: 'Community-driven and extensible.' },
+      { title: 'MongoDB Wire Protocol', desc: 'Full MongoDB wire protocol proxy for seamless compatibility.' },
+      { title: 'Query Translation', desc: 'Real-time MongoDB queries translated to PostgreSQL SQL.' },
+      { title: 'Rust-Powered Engine', desc: 'High-performance, safe, and modern proxy engine.' },
+      { title: 'PostgreSQL Backend', desc: 'Reliable, battle-tested PostgreSQL storage backend.' },
     ],
   },
-  features: [
-    { icon: '', iconColor: 'text-indigo-500', title: 'Wire Protocol', desc: '100% MongoDB wire protocol compatibility.' },
-    { icon: '', iconColor: 'text-sky-500', title: 'Rust Engine', desc: 'Modern, safe, and fast.' },
-    { icon: '', iconColor: 'text-green-500', title: 'PostgreSQL Backend', desc: 'Leverages PostgreSQL for durability.' },
-    { icon: '', iconColor: 'text-yellow-500', title: 'ACID Transactions', desc: 'Multi-document ACID compliance.' },
-    { icon: '', iconColor: 'text-pink-500', title: 'Geospatial', desc: 'Advanced geospatial queries.' },
-    { icon: '', iconColor: 'text-cyan-500', title: 'Migration Tools', desc: 'Easy migration from MongoDB.' },
-    { icon: '', iconColor: 'text-red-500', title: 'Observability', desc: 'Built-in monitoring and metrics.' },
-    { icon: '', iconColor: 'text-violet-500', title: 'Open Source', desc: 'MIT licensed, community-driven.' },
-    { icon: '', iconColor: 'text-emerald-500', title: 'Extensible', desc: 'Plugin architecture for custom features.' },
-  ],
-  featureMatrix: (
-    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
-      <thead className="bg-slate-800/60">
-        <tr className="text-left">
-          <th className="px-4 py-3 font-semibold text-white">Capability</th>
-          <th className="px-4 py-3 font-semibold text-white">Description</th>
-          <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">MongoDB API</td>
-          <td className="px-4 py-3 text-slate-300">Wire protocol, drivers, and tools compatibility.</td>
-          <td className="px-4 py-3 text-slate-300">Seamless migration.</td>
-        </tr>
-        <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Rust Engine</td>
-          <td className="px-4 py-3 text-slate-300">Modern, safe, and fast backend.</td>
-          <td className="px-4 py-3 text-slate-300">High performance.</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Storage</td>
-          <td className="px-4 py-3 text-slate-300">Battle-tested, reliable storage.</td>
-          <td className="px-4 py-3 text-slate-300">Durability and reliability.</td>
-        </tr>
-        <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">ACID Transactions</td>
-          <td className="px-4 py-3 text-slate-300">Multi-document ACID compliance.</td>
-          <td className="px-4 py-3 text-slate-300">Data integrity.</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Geospatial</td>
-          <td className="px-4 py-3 text-slate-300">Advanced geospatial queries.</td>
-          <td className="px-4 py-3 text-slate-300">Location-based features.</td>
-        </tr>
-      </tbody>
-    </table>
-  ),
   docsLinks: [
-    { href: '/docs/fauxdb/architecture', title: 'Architecture', desc: 'Learn about FauxDB’s internal architecture.' },
     { href: '/docs/fauxdb/api', title: 'API Reference', desc: 'Explore the FauxDB API.' },
+    { href: '/docs/fauxdb/query-translation', title: 'Query Translation', desc: 'Learn how MongoDB queries are translated.' },
   ],
 };
 

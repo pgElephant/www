@@ -1,5 +1,8 @@
-import React from 'react';
+'use client'
+
+import React, { useState, useEffect } from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import { Terminal, Server, Activity, Users, Shield, Zap } from 'lucide-react';
 
 const ramConfig = {
   hero: {
@@ -15,32 +18,84 @@ const ramConfig = {
     'Production Ready',
   ],
     demo: (
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="bg-gray-900 rounded-xl p-8 text-white font-mono text-sm">
-          <div className="flex items-center mb-6">
-            <div className="flex gap-2 mr-4">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+      <div className="max-w-6xl mx-auto mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* ramctrl terminal */}
+          <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+            <div className="flex items-center mb-3">
+              <div className="flex gap-1 mr-2">
+                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              </div>
+              <span className="text-blue-300">ramctrl</span>
             </div>
-            <span className="text-gray-300">RAM Demo Terminal</span>
-          </div>
-            <pre className="bg-transparent p-0 m-0 mb-4 text-green-300 whitespace-pre-line">
-{`> ramctl cluster status
+            <pre className="whitespace-pre-line text-blue-200">{`> ramctrl status
 Cluster State: Healthy
-Nodes:
-  - node1 (Leader)
-  - node2 (Follower)
-  - node3 (Follower)
+Leader: node1 (192.168.1.10:5432)
+Followers: 2
+  - node2 (192.168.1.11:5432)
+  - node3 (192.168.1.12:5432)
 
-> ramctl failover
+> ramctrl failover
 Initiating failover...
 New Leader: node2
+Failover completed in 1.2s
 
-> ramctl add-node node4
-Node node4 added to cluster.
-`}
-            </pre>
+> ramctrl add-node node4
+Node node4 added to cluster
+Cluster size: 4 nodes
+`}</pre>
+          </div>
+          
+          {/* ramd daemon terminal */}
+          <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+            <div className="flex items-center mb-3">
+              <div className="flex gap-1 mr-2">
+                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              </div>
+              <span className="text-green-300">ramd</span>
+            </div>
+            <pre className="whitespace-pre-line text-green-200">{`> ramd start --config /etc/ram/ramd.conf
+[INFO] RAMD daemon starting...
+[INFO] PostgreSQL connection established
+[INFO] Raft consensus initialized
+[INFO] HTTP API listening on :8080
+[INFO] Prometheus metrics on :9090
+[INFO] Cluster health check: PASS
+[INFO] Ready to serve requests
+
+> curl http://localhost:8080/health
+{"status":"healthy","leader":"node1","nodes":3}
+`}</pre>
+          </div>
+          
+          {/* pgraft extension terminal */}
+          <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
+            <div className="flex items-center mb-3">
+              <div className="flex gap-1 mr-2">
+                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              </div>
+              <span className="text-purple-300">pgraft</span>
+            </div>
+            <pre className="whitespace-pre-line text-purple-200">{`> psql -c "SELECT * FROM pgraft_status();"
+ node_id | role    | term | commit_index
+---------+---------+------+-------------
+       1 | leader  |   15 |         1024
+       2 | follower|   15 |         1024
+       3 | follower|   15 |         1024
+
+> psql -c "SELECT pgraft_add_node(4, 'node4', '192.168.1.13');"
+ pgraft_add_node
+-----------------
+ t
+(1 row)
+`}</pre>
+          </div>
         </div>
       </div>
     ),
@@ -56,15 +111,12 @@ Node node4 added to cluster.
     ],
   },
   features: [
-    { icon: '', iconColor: 'text-indigo-500', title: 'Raft Consensus', desc: 'Leader election, log replication, term monotonicity.' },
-    { icon: '', iconColor: 'text-sky-500', title: 'State Durability', desc: 'Persistent HardState, entries, snapshots.' },
-    { icon: '', iconColor: 'text-green-500', title: 'Command Interface', desc: 'SQL functions for init, membership, diagnostics.' },
-    { icon: '', iconColor: 'text-yellow-500', title: 'Monitoring Hooks', desc: 'Cluster status, log stats, leader checks.' },
-    { icon: '', iconColor: 'text-pink-500', title: 'Node Membership', desc: 'Add/remove nodes through leader replication.' },
-    { icon: '', iconColor: 'text-cyan-500', title: 'Debug Mode', desc: 'Toggle extended logging via SQL.' },
-    { icon: '', iconColor: 'text-red-500', title: 'Crash-Safe', desc: 'Crash-safe recovery.' },
-    { icon: '', iconColor: 'text-violet-500', title: 'Native DB Admin', desc: 'Native DB admin UX.' },
-    { icon: '', iconColor: 'text-emerald-500', title: 'Background Worker', desc: 'Efficient, low-overhead operation.' },
+    { icon: <Zap className="w-5 h-5" />, iconColor: 'text-indigo-500', title: 'Automatic Failover', desc: 'Zero-downtime failover with sub-second detection and leader election.' },
+    { icon: <Users className="w-5 h-5" />, iconColor: 'text-sky-500', title: 'Raft Consensus', desc: 'Leader election, log replication, term monotonicity with split-brain prevention.' },
+    { icon: <Terminal className="w-5 h-5" />, iconColor: 'text-green-500', title: 'Professional CLI', desc: 'Advanced command-line interface with JSON/table output formats.' },
+    { icon: <Activity className="w-5 h-5" />, iconColor: 'text-yellow-500', title: 'Real-time Monitoring', desc: 'Prometheus metrics, Grafana dashboards, and health checks.' },
+    { icon: <Shield className="w-5 h-5" />, iconColor: 'text-pink-500', title: 'Enterprise Security', desc: 'Token-based authentication, SSL/TLS, rate limiting, and audit logging.' },
+    { icon: <Server className="w-5 h-5" />, iconColor: 'text-cyan-500', title: 'Cloud-Native', desc: 'Docker, Kubernetes, and Helm chart support for modern deployments.' },
   ],
   featureMatrix: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
