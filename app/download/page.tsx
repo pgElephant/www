@@ -106,21 +106,19 @@ const DownloadPage = () => {
 
   const products = [
     {
-      id: 'rale',
-      name: 'RALE',
-      title: 'Resilient Adaptive Leader Election',
-      icon: '/ico/RALE_HD.ico',
-      downloads: [
-        { title: 'Linux Binary', href: '/download/rale', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/rale', type: 'Source' },
-        { title: 'Docker Image', href: '/download/rale', type: 'Docker' }
-      ]
-    },
-    {
       id: 'ram',
       name: 'RAM',
       title: 'Resilient Adaptive Manager',
       icon: '/ico/RAM_HD.ico',
+      features: [
+        'Automatic Failover: Zero-downtime failover with sub-second detection',
+        'Leader Election: Raft-based consensus for reliable leader selection',
+        'Distributed Consensus: Multi-node coordination with split-brain prevention',
+        'Real-time Monitoring: Prometheus metrics and Grafana dashboards',
+        'Enterprise Security: Token-based auth, SSL/TLS, rate limiting',
+        'Cloud-Native: Docker, Kubernetes, and Helm chart support',
+      ],
+      details: '/ram/enterprise',
       downloads: [
         { title: 'Linux Binary', href: '/download/ram', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/ram', type: 'Source' },
@@ -128,10 +126,40 @@ const DownloadPage = () => {
       ]
     },
     {
+      id: 'pgraft',
+      name: 'pgraft',
+      title: 'PostgreSQL Raft Consensus Extension',
+      icon: '/ico/pgsql_raft_leader_HD.ico',
+      featured: true,
+      features: [
+        'Raft Consensus Protocol: Implements the Raft algorithm for distributed consensus',
+        'Automatic Leader Election: Seamless leader election and failover',
+        'Log Replication: Consistent log replication across cluster nodes',
+        'High Availability: Fault-tolerant cluster with automatic recovery',
+        'Zero-Downtime Operations: Non-disruptive cluster operations',
+        "Go Integration: Leverages Go's robust Raft implementation",
+      ],
+      details: '/pgraft/enterprise',
+      downloads: [
+        { title: 'Linux Binary', href: '/download/pgraft', type: 'Binary' },
+        { title: 'Source Code', href: 'https://github.com/pgelephant/pgraft', type: 'Source' },
+        { title: 'Docker Image', href: '/download/pgraft', type: 'Docker' }
+      ]
+    },
+    {
       id: 'fauxdb',
       name: 'FauxDB',
       title: 'MongoDB Compatible Document Database',
       icon: '/ico/FauxDB_HD.ico',
+      features: [
+        '100% MongoDB Compatibility: Full wire protocol support with mongosh compatibility',
+        'High Performance: Built in Rust for superior speed and memory efficiency',
+        'Advanced Features: Transactions, geospatial, aggregation pipelines',
+        'Pure PostgreSQL Backend: Native JSONB support, no external dependencies',
+        'Production Ready: Enterprise-grade monitoring, logging, and configuration',
+        'Docker Support: Comprehensive Docker support for dev, test, and production',
+      ],
+      details: '/fauxdb/enterprise',
       downloads: [
         { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/fauxdb', type: 'Source' },
@@ -139,17 +167,22 @@ const DownloadPage = () => {
       ]
     },
     {
-      id: 'pgraft',
-      name: 'pgraft',
-      title: 'PostgreSQL Raft Extension',
-      icon: '/ico/pgsql_raft_leader_HD.ico',
-      featured: true,
+      id: 'rale',
+      name: 'RALE',
+      title: 'Resilient Adaptive Leader Election',
+      icon: '/ico/RALE_HD.ico',
+      features: [
+        'Distributed Leader Election: Reliable, adaptive leader selection',
+        'Split-Brain Prevention: Ensures cluster consistency',
+        'Production Proven: Used in mission-critical deployments',
+      ],
+      details: '/rale/enterprise',
       downloads: [
-        { title: 'Linux Binary', href: '/download/pgraft', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/pgraft', type: 'Source' },
-        { title: 'Docker Image', href: '/download/pgraft', type: 'Docker' }
+        { title: 'Linux Binary', href: '/download/rale', type: 'Binary' },
+        { title: 'Source Code', href: 'https://github.com/pgelephant/rale', type: 'Source' },
+        { title: 'Docker Image', href: '/download/rale', type: 'Docker' }
       ]
-    }
+    },
   ]
 
   return (
@@ -192,7 +225,7 @@ const DownloadPage = () => {
       <section className="bg-white py-24">
         <div className="container-wide mx-auto">
           <div className="max-w-5xl mx-auto">
-            <table className="w-full text-left border-separate border-spacing-y-2">
+            <table className="w-full text-left border-separate border-spacing-y-0">
               <thead>
                 <tr className="text-gray-700 text-sm uppercase tracking-wider">
                   <th className="py-2">Product</th>
@@ -212,7 +245,7 @@ const DownloadPage = () => {
                       ' hover:bg-cyan-50'
                     }
                   >
-                    <td className="py-4 px-2 align-top whitespace-nowrap">
+                    <td className="py-3 px-2 align-top whitespace-nowrap">
                       <div className="flex items-center gap-3">
                         <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200 shadow-sm" />
                         <div>
@@ -226,8 +259,22 @@ const DownloadPage = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="py-4 px-2 align-top text-sm text-gray-600 max-w-xs">{product.title}</td>
-                    <td className="py-4 px-2 align-top">
+                    <td className="py-3 px-2 align-top text-sm text-gray-600 max-w-xs">
+                      <div className="flex flex-col h-full justify-between min-h-[180px]">
+                        <div>
+                          <div className="font-semibold text-base text-gray-900 mb-1">{product.title}</div>
+                          <ul className="list-disc list-inside space-y-1 mb-4">
+                            {product.features && product.features.map((feature, i) => (
+                              <li key={i} className="text-gray-600 text-xs leading-snug">{feature}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <Link href={product.details} className="inline-block mt-2 text-xs font-semibold text-cyan-700 hover:underline hover:text-cyan-900 transition">View Enterprise Details</Link>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="py-3 px-2 align-top">
                       <div className="flex flex-col gap-2">
                         {product.downloads.map((download, index) => (
                           <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-100 transition-colors text-sm font-medium shadow-sm">
@@ -241,7 +288,7 @@ const DownloadPage = () => {
                         ))}
                       </div>
                     </td>
-                    <td className="py-4 px-2 align-top">
+                    <td className="py-3 px-2 align-top">
                       <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-cyan-700 hover:underline">View</a>
                     </td>
                   </tr>
