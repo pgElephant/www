@@ -1,4 +1,31 @@
-/* Critical CSS for Core Web Vitals optimization */
+/* Design System - Core Web Vitals optimization */
+
+/* Base Theme Variables */
+:root {
+  /* Colors */
+  --color-primary-50: #eef2ff;
+  --color-primary-500: #6366f1;
+  --color-primary-700: #4338ca;
+  
+  --color-slate-50: #f8fafc;
+  --color-slate-200: #e2e8f0;
+  --color-slate-600: #475569;
+  --color-slate-900: #0f172a;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-8: 2rem;
+
+  /* Transitions */
+  --transition-base: 200ms ease-in-out;
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 /* Prevent layout shift by defining font fallbacks */
 :root {
