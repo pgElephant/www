@@ -275,28 +275,26 @@ const PgraftDemoTerminal = () => {
       {/* Terminal Content */}
       <div 
         ref={terminalRef}
-        className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400"
+        className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400 text-left whitespace-pre"
       >
         {/* Command History */}
         {commandHistory.map((cmd, index) => (
           <div key={index} className="mb-2">
-            <div className="text-blue-400 mb-1">
-              <span className="text-gray-500">[{cmd.timestamp}]</span> $ {cmd.command}
+            <div className="text-blue-400">
+              $ {cmd.command}
             </div>
-            <div className="ml-4">
-              {cmd.output.map((line, lineIndex) => (
-                <div key={lineIndex} className="text-secondary-400">
-                  {line}
-                </div>
-              ))}
-            </div>
+            {cmd.output.map((line, lineIndex) => (
+              <div key={lineIndex} className="text-secondary-400 font-mono">
+                {line}
+              </div>
+            ))}
           </div>
         ))}
 
         {/* Current Command */}
         {isTyping && (
-          <div className="text-blue-400 mb-2">
-            <span className="text-gray-500">[{new Date().toLocaleTimeString()}]</span> $ {currentCommand}
+          <div className="text-blue-400">
+            $ {currentCommand}
             <span className={`inline-block w-2 h-4 bg-secondary-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
           </div>
         )}
