@@ -110,7 +110,6 @@ const DownloadPage = () => {
       name: 'RALE',
       title: 'Resilient Adaptive Leader Election',
       icon: '/ico/RALE_HD.ico',
-      bg: { from: palette.navy, via: palette.slate, to: palette.navy },
       downloads: [
         { title: 'Linux Binary', href: '/download/rale', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/rale', type: 'Source' },
@@ -122,7 +121,6 @@ const DownloadPage = () => {
       name: 'RAM',
       title: 'Resilient Adaptive Manager',
       icon: '/ico/RAM_HD.ico',
-      bg: { from: palette.slate, via: palette.navy, to: palette.slate },
       downloads: [
         { title: 'Linux Binary', href: '/download/ram', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/ram', type: 'Source' },
@@ -134,11 +132,22 @@ const DownloadPage = () => {
       name: 'FauxDB',
       title: 'MongoDB Compatible Document Database',
       icon: '/ico/FauxDB_HD.ico',
-      bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
       downloads: [
         { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/fauxdb', type: 'Source' },
         { title: 'Docker Image', href: '/download/fauxdb', type: 'Docker' }
+      ]
+    },
+    {
+      id: 'pgraft',
+      name: 'pgraft',
+      title: 'PostgreSQL Raft Extension',
+      icon: '/ico/pgsql_raft_leader_HD.ico',
+      featured: true,
+      downloads: [
+        { title: 'Linux Binary', href: '/download/pgraft', type: 'Binary' },
+        { title: 'Source Code', href: 'https://github.com/pgelephant/pgraft', type: 'Source' },
+        { title: 'Docker Image', href: '/download/pgraft', type: 'Docker' }
       ]
     }
   ]
@@ -183,7 +192,7 @@ const DownloadPage = () => {
       <section className="bg-white py-24">
         <div className="container-wide mx-auto">
           <div className="max-w-5xl mx-auto">
-            <table className="w-full text-left border-separate border-spacing-y-4">
+            <table className="w-full text-left border-separate border-spacing-y-2">
               <thead>
                 <tr className="text-gray-700 text-sm uppercase tracking-wider">
                   <th className="py-2">Product</th>
@@ -193,14 +202,25 @@ const DownloadPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
-                  <tr key={product.id} className="bg-white border-b border-gray-100 hover:bg-gray-50 transition">
+                {products.map((product, idx) => (
+                  <tr
+                    key={product.id}
+                    className={
+                      `transition ` +
+                      (idx % 2 === 0 ? 'bg-gray-50' : 'bg-white') +
+                      (product.featured ? ' ring-2 ring-cyan-400/40' : '') +
+                      ' hover:bg-cyan-50'
+                    }
+                  >
                     <td className="py-4 px-2 align-top whitespace-nowrap">
                       <div className="flex items-center gap-3">
-                        <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200" />
+                        <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200 shadow-sm" />
                         <div>
                           <div className="font-semibold text-lg text-gray-900 flex items-center gap-2">
                             {product.name}
+                            {product.featured && (
+                              <span className="inline-block bg-cyan-100 text-cyan-700 text-xs font-semibold px-2 py-0.5 rounded animate-pulse">New</span>
+                            )}
                             <span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded">Stable</span>
                           </div>
                         </div>
@@ -210,7 +230,7 @@ const DownloadPage = () => {
                     <td className="py-4 px-2 align-top">
                       <div className="flex flex-col gap-2">
                         {product.downloads.map((download, index) => (
-                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition-colors text-sm font-medium">
+                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-100 transition-colors text-sm font-medium shadow-sm">
                             {(() => {
                               const IconComponent = getDownloadIcon(download.type)
                               return <IconComponent className="w-4 h-4 text-cyan-600" />

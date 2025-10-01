@@ -30,7 +30,8 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/docs": {
+    "/_not-found": {
+      "initialStatus": 404,
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -43,8 +44,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/docs",
-      "dataRoute": "/docs.rsc",
+      "srcRoute": "/_not-found",
+      "dataRoute": "/_not-found.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -54,7 +55,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/community": {
+    "/docs/ram/getting-started": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -67,8 +68,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/community",
-      "dataRoute": "/community.rsc",
+      "srcRoute": "/docs/ram/getting-started",
+      "dataRoute": "/docs/ram/getting-started.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -78,7 +79,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/docs/ram": {
+    "/docs/fauxdb/getting-started": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -91,8 +92,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/docs/ram",
-      "dataRoute": "/docs/ram.rsc",
+      "srcRoute": "/docs/fauxdb/getting-started",
+      "dataRoute": "/docs/fauxdb/getting-started.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -102,7 +103,12 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/ram": {
+    "/sitemap.xml": {
+      "initialHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "application/xml",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/sitemap.xml/layout,_N_T_/sitemap.xml/route,_N_T_/sitemap.xml"
+      },
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -115,32 +121,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/blog/ram",
-      "dataRoute": "/blog/ram.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/download": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/download",
-      "dataRoute": "/download.rsc",
+      "srcRoute": "/sitemap.xml",
+      "dataRoute": null,
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -222,7 +204,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/docs/ram/getting-started": {
+    "/docs/fauxdb": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -235,8 +217,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/docs/ram/getting-started",
-      "dataRoute": "/docs/ram/getting-started.rsc",
+      "srcRoute": "/docs/fauxdb",
+      "dataRoute": "/docs/fauxdb.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -246,7 +228,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/fauxdb": {
+    "/docs/rale/getting-started": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -259,8 +241,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/fauxdb",
-      "dataRoute": "/fauxdb.rsc",
+      "srcRoute": "/docs/rale/getting-started",
+      "dataRoute": "/docs/rale/getting-started.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -270,7 +252,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/blog/rale": {
+    "/docs/ram": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -283,8 +265,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/blog/rale",
-      "dataRoute": "/blog/rale.rsc",
+      "srcRoute": "/docs/ram",
+      "dataRoute": "/docs/ram.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -318,6 +300,54 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/download": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/download",
+      "dataRoute": "/download.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/docs": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/docs",
+      "dataRoute": "/docs.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/ram/prometheus": {
       "experimentalBypassFor": [
         {
@@ -342,54 +372,6 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/docs/fauxdb": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/docs/fauxdb",
-      "dataRoute": "/docs/fauxdb.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/docs/fauxdb/docker": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/docs/fauxdb/docker",
-      "dataRoute": "/docs/fauxdb/docker.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/blog": {
       "experimentalBypassFor": [
         {
@@ -405,6 +387,54 @@
       "initialRevalidateSeconds": false,
       "srcRoute": "/blog",
       "dataRoute": "/blog.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/community": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/community",
+      "dataRoute": "/community.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/blog/rale": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/blog/rale",
+      "dataRoute": "/blog/rale.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -462,30 +492,6 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/pgraft": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/pgraft",
-      "dataRoute": "/pgraft.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/docs/pgraft/getting-started": {
       "experimentalBypassFor": [
         {
@@ -510,8 +516,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/_not-found": {
-      "initialStatus": 404,
+    "/blog/ram": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -524,8 +529,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/_not-found",
-      "dataRoute": "/_not-found.rsc",
+      "srcRoute": "/blog/ram",
+      "dataRoute": "/blog/ram.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -559,7 +564,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/docs/fauxdb/getting-started": {
+    "/pgraft": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -572,8 +577,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/docs/fauxdb/getting-started",
-      "dataRoute": "/docs/fauxdb/getting-started.rsc",
+      "srcRoute": "/pgraft",
+      "dataRoute": "/pgraft.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -583,12 +588,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/sitemap.xml": {
-      "initialHeaders": {
-        "cache-control": "public, max-age=0, must-revalidate",
-        "content-type": "application/xml",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/sitemap.xml/layout,_N_T_/sitemap.xml/route,_N_T_/sitemap.xml"
-      },
+    "/docs/fauxdb/docker": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -601,8 +601,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/sitemap.xml",
-      "dataRoute": null,
+      "srcRoute": "/docs/fauxdb/docker",
+      "dataRoute": "/docs/fauxdb/docker.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -612,7 +612,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/docs/rale/getting-started": {
+    "/fauxdb": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -625,8 +625,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/docs/rale/getting-started",
-      "dataRoute": "/docs/rale/getting-started.rsc",
+      "srcRoute": "/fauxdb",
+      "dataRoute": "/fauxdb.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
