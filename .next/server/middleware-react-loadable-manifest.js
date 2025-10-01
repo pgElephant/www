@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST='{"components/ClientOnlyComponents.tsx -> @/components/SEO/QuickIndexing":{"id":4709,"files":["static/chunks/709.26046701f5bdc0f3.js"]},"components/ClientOnlyComponents.tsx -> @/components/SEO/WebVitals":{"id":3068,"files":["static/chunks/687.0e5a54a2e5939751.js"]}}';

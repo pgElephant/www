@@ -246,11 +246,10 @@ const FeaturesList = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-400/30 bg-white/5">
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Solution</th>
+                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/3">Solution</th>
                     <th className="text-left p-4 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/6">Category</th>
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Enterprise Features</th>
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Deployment</th>
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/6">ROI Impact</th>
+                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/3">Enterprise Features</th>
+                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/6">Deployment</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -322,31 +321,6 @@ const FeaturesList = () => {
                                 <div className="text-sm text-slate-300">• Rust-based performance</div>
                                 <div className="text-sm text-slate-300">• PostgreSQL backend</div>
                                 <div className="text-sm text-slate-300">• Container-ready</div>
-                              </>
-                            )}
-                          </div>
-                        </td>
-                        <td className="p-4">
-                          <div className="space-y-2">
-                            {project.name === 'RAM' && (
-                              <>
-                                <div className="text-xs text-slate-300">• 99.99% uptime SLA</div>
-                                <div className="text-xs text-slate-300">• Reduced operational costs</div>
-                                <div className="text-xs text-slate-300">• Faster disaster recovery</div>
-                              </>
-                            )}
-                            {project.name === 'pgraft' && (
-                              <>
-                                <div className="text-xs text-slate-300">• Eliminates split-brain</div>
-                                <div className="text-xs text-slate-300">• Simplified management</div>
-                                <div className="text-xs text-slate-300">• Reduced complexity</div>
-                              </>
-                            )}
-                            {project.name === 'FauxDB' && (
-                              <>
-                                <div className="text-xs text-slate-300">• Zero migration downtime</div>
-                                <div className="text-xs text-slate-300">• Unified database platform</div>
-                                <div className="text-xs text-slate-300">• Lower licensing costs</div>
                               </>
                             )}
                           </div>

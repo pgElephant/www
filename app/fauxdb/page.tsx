@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Layers, Rocket, Settings, Play, Terminal, Monitor, CheckCircle, Users, Star, Clock, BarChart3 } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 // Colors from pgElephant icon (darker variants)
 const palette = {
@@ -273,10 +274,13 @@ const FauxDbPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center mb-8">
               <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mr-6">
-                <img 
-                  src="/ico/FauxDB_HD.ico" 
+                <Image
+                  src="/ico/FauxDB_HD.ico"
                   alt="FauxDB icon"
+                  width={64}
+                  height={64}
                   className="w-16 h-16 object-contain"
+                  priority
                 />
                 </div>
               <div className="text-left">

@@ -1,0 +1,50 @@
+{
+  "name": "pgElephant - Enterprise PostgreSQL Platform",
+  "short_name": "pgElephant",
+  "description": "Enterprise-grade PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["productivity", "developer", "database"],
+  "icons": [
+    {
+      "src": "/ico/pgElephant_no_com_HD.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "pgElephant Desktop View"
+    },
+    {
+      "src": "/screenshots/mobile.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "pgElephant Mobile View"
+    }
+  ]
+}

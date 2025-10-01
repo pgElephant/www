@@ -1,0 +1,148 @@
+/* Critical CSS for Core Web Vitals optimization */
+
+/* Prevent layout shift by defining font fallbacks */
+:root {
+  --font-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-mono-fallback: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+/* Font display optimizations */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  font-weight: 300 700;
+  src: local('Inter');
+}
+
+/* Critical path rendering optimizations */
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-inter), var(--font-fallback);
+  line-height: 1.6;
+  color: #1f2937;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Prevent cumulative layout shift (CLS) */
+img, video, iframe, embed, object {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Optimize image loading */
+img {
+  display: block;
+  loading: lazy;
+  decoding: async;
+}
+
+/* Critical path images should not be lazy loaded */
+.hero img,
+.above-fold img {
+  loading: eager;
+}
+
+/* Performance optimizations for animations */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Optimize will-change for frequently animated elements */
+.animated-element {
+  will-change: transform, opacity;
+}
+
+/* Remove will-change after animation completes */
+.animation-complete {
+  will-change: auto;
+}
+
+/* Optimize for mobile first */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* Preload critical resources */
+.preload-critical {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+/* Optimize scroll behavior */
+.scroll-container {
+  scroll-behavior: smooth;
+  overflow-anchor: auto;
+}
+
+/* Critical layout styles to prevent CLS */
+.layout-critical {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .layout-critical {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+/* Button and interactive element optimizations */
+button, .interactive {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus management for accessibility and UX */
+:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+/* Skeleton loading states to prevent CLS */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Container query optimization */
+.responsive-container {
+  container-type: inline-size;
+}
+
+@container (min-width: 768px) {
+  .responsive-element {
+    font-size: 1.125rem;
+  }
+}
+
+/* Critical path CSS ends here */

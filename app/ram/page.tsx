@@ -3,6 +3,7 @@
 import React from 'react'
 import { ArrowRight, Download, BookOpen, Code, Server, Zap, Shield, Globe, Database, Cpu, Activity, Users, Settings, BarChart3, GitBranch, Crown, Wifi, RefreshCw, Network, BarChart } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 // Colors from pgElephant icon (darker variants)
 const palette = {
@@ -164,10 +165,13 @@ const RamPage = () => {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center mb-6">
               <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mr-6">
-                <img 
-                  src="/ico/RAM_HD.ico" 
+                <Image
+                  src="/ico/RAM_HD.ico"
                   alt="RAM icon"
+                  width={64}
+                  height={64}
                   className="w-16 h-16 object-contain"
+                  priority
                 />
                 </div>
               <div className="text-left">
@@ -200,10 +204,13 @@ const RamPage = () => {
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 flex items-center justify-center mr-4 bg-gray-50 rounded-lg flex-shrink-0">
                       {typeof feature.icon === 'string' ? (
-                        <img 
-                          src={feature.icon} 
+                        <Image
+                          src={feature.icon}
                           alt={`${feature.name} icon`}
+                          width={56}
+                          height={56}
                           className="w-14 h-14 object-contain"
+                          priority
                         />
                       ) : (
                         <feature.icon 
