@@ -75,11 +75,10 @@ const DownloadPage = () => {
 
   // Platform support
   const supportedPlatforms = [
-    { name: 'Linux', icon: Terminal, description: 'Ubuntu 20.04+, CentOS 8+, Debian 11+' },
-    { name: 'macOS', icon: Monitor, description: 'macOS 11.0+ (Intel & Apple Silicon)' },
-    { name: 'Windows', icon: Monitor, description: 'Windows 10+ (WSL2 recommended)' },
+    { name: 'Linux', icon: Terminal, description: 'Ubuntu 22.04+, Rocky Linux 9+' },
+    { name: 'macOS', icon: Monitor, description: 'macOS 12.0+ (Intel & Apple Silicon)' },
     { name: 'Docker', icon: Server, description: 'All Docker-supported platforms' },
-    { name: 'Kubernetes', icon: Server, description: 'Any K8s cluster (1.20+)' }
+    { name: 'Kubernetes', icon: Server, description: 'Any K8s cluster (1.24+)' }
   ]
 
   // Installation methods
