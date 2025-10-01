@@ -20,23 +20,53 @@ const PgraftDemoTerminal = () => {
   // Pgraft-specific demo commands and their outputs
   const demoCommands = [
     {
-      command: 'make && make install',
+      command: 'git clone https://github.com/pgelephant/pgraft.git && cd pgraft',
       output: [
-        'Building pgraft...',
+        'Cloning into \'pgraft\'...',
+        'remote: Enumerating objects: 1234, done.',
+        'remote: Counting objects: 100% (1234/1234), done.',
+        'remote: Compressing objects: 100% (789/789), done.',
+        'remote: Total 1234 (delta 445), reused 1233 (delta 444)',
+        'Receiving objects: 100% (1234/1234), done.',
+        'Resolving deltas: 100% (445/445), done.',
+        'Changing directory to pgraft...'
+      ]
+    },
+    {
+      command: 'make clean && make -j && sudo make install',
+      output: [
+        'cleaning...',
+        'rm -f pgraft.so pgraft.o raft_integration.o worker.o',
+        'building pgraft...',
         'CC pgraft.o',
         'CC worker.o',
         'CC raft_integration.o',
         'LINK pgraft.so',
         '✓ Build successful',
-        'Installing pgraft...',
+        'installing...',
         '✓ Extension installed to PostgreSQL'
+      ]
+    },
+    {
+      command: 'cat postgresql.conf',
+      output: [
+        '# pgraft configuration',
+        'shared_preload_libraries = \'pgraft\'',
+        'pgraft.cluster_id = \'prod-cluster\'',
+        'pgraft.node_id = 1',
+        'pgraft.address = \'127.0.0.1\'',
+        'pgraft.port = 7001',
+        'pgraft.election_timeout = 1000',
+        'pgraft.heartbeat_interval = 100',
+        '',
+        '# Restart PostgreSQL after configuration changes'
       ]
     },
     {
       command: 'psql -d postgres -c "CREATE EXTENSION pgraft;"',
       output: [
         'CREATE EXTENSION',
-        '✓ pgraft extension created'
+        '✓ pgraft extension created successfully'
       ]
     },
     {
@@ -47,18 +77,19 @@ const PgraftDemoTerminal = () => {
         ' t',
         '(1 row)',
         '',
-        '✓ pgraft initialized successfully'
+        '✓ Node initialized successfully',
+        'Waiting for leader election (takes ~10s)...'
       ]
     },
     {
-      command: 'psql -d postgres -c "SELECT pgraft_get_cluster_status();"',
+      command: 'psql -d postgres -c "SELECT pgraft_is_leader(), pgraft_get_term(), pgraft_get_leader();"',
       output: [
-        ' node_id | state  | leader_id | current_term | last_heartbeat ',
-        '---------+--------+-----------+--------------+----------------',
-        '       1 | leader |         1 |            1 | now()',
+        ' pgraft_is_leader | pgraft_get_term | pgraft_get_leader ',
+        '-----------------+----------------+------------------',
+        ' t               |              1 |                1',
         '(1 row)',
         '',
-        'Initial cluster state: Single node, Term 1'
+        '✓ Node 1 elected as leader in term 1'
       ]
     },
     {
@@ -69,30 +100,44 @@ const PgraftDemoTerminal = () => {
         ' t',
         '(1 row)',
         '',
-        '✓ Node 2 added to cluster'
+        '✓ Node 2 added to cluster configuration'
       ]
     },
     {
-      command: 'psql -d postgres -c "SELECT * FROM pgraft_cluster_status();"',
+      command: 'psql -d postgres -c "SELECT pgraft_add_node(3, \'127.0.0.1\', 7003);"',
       output: [
-        ' node_id | state    | leader_id | current_term | last_heartbeat ',
-        '---------+----------+-----------+--------------+----------------',
-        '       1 | leader   |         1 |            1 | now()',
-        '       2 | follower |         1 |            1 | now()',
-        '(2 rows)',
-        '',
-        'Cluster Status: HEALTHY'
-      ]
-    },
-    {
-      command: 'psql -d postgres -c "SELECT pgraft_is_leader();"',
-      output: [
-        ' pgraft_is_leader ',
-        '-----------------',
+        ' pgraft_add_node ',
+        '----------------',
         ' t',
         '(1 row)',
         '',
-        'Current node is the leader'
+        '✓ Node 3 added to cluster configuration'
+      ]
+    },
+    {
+      command: 'psql -d postgres -c "SELECT * FROM pgraft_get_cluster_status();"',
+      output: [
+        ' node_id | state    | leader_id | current_term | last_heartbeat ',
+        '---------+----------+-----------+--------------+----------------',
+        '       1 | leader   |         1 |            1 | 2025-10-02 10:30:15',
+        '       2 | follower |         1 |            1 | 2025-10-02 10:30:14',
+        '       3 | follower |         1 |            1 | 2025-10-02 10:30:13',
+        '(3 rows)',
+        '',
+        'Cluster Status: HEALTHY - All nodes synchronized'
+      ]
+    },
+    {
+      command: 'psql -d postgres -c "SELECT * FROM pgraft_get_nodes();"',
+      output: [
+        ' node_id | address    | port | is_leader ',
+        '---------+------------+------+-----------',
+        '       1 | 127.0.0.1  | 7001 | t',
+        '       2 | 127.0.0.1  | 7002 | f',
+        '       3 | 127.0.0.1  | 7003 | f',
+        '(3 rows)',
+        '',
+        'Node Configuration: 3-node cluster established'
       ]
     }
   ]

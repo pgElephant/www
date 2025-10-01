@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, Github, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import LiveDemoTerminal from '@/components/LiveDemoTerminal';
+import PgraftDemoTerminal from '@/components/PgraftDemoTerminal';
 
 /* ===================== Small Reusable UI Parts ===================== */
 function SectionHeading({ children, kicker, className = '' }: { children: React.ReactNode; kicker?: string; className?: string }) {
@@ -74,7 +74,7 @@ const PgraftPage = () => {
             </a>
           </div>
           <div className="max-w-4xl mx-auto">
-            <LiveDemoTerminal />
+            <PgraftDemoTerminal />
           </div>
           <div className="mt-8 flex flex-wrap justify-center">
             <Badge>PostgreSQL 16–18</Badge>
@@ -239,27 +239,7 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Operations & Monitoring */}
-      <section className="py-20 bg-slate-50 border-t border-b">
-        <div className="container-wide">
-          <SectionHeading kicker="Operations">Operations & Monitoring</SectionHeading>
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-slate-600 mb-8">
-              Learn how to effectively monitor and operate your pgraft cluster with our comprehensive operations documentation.
-            </p>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <Link href="/docs/pgraft/operations/monitoring" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
-                <h3 className="font-semibold text-lg text-slate-900 mb-2">Monitoring Guide</h3>
-                <p className="text-sm text-slate-600">Best practices for monitoring cluster health, alerts, and metrics.</p>
-              </Link>
-              <Link href="/docs/pgraft/operations/troubleshooting" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
-                <h3 className="font-semibold text-lg text-slate-900 mb-2">Troubleshooting</h3>
-                <p className="text-sm text-slate-600">Common issues, debugging tips, and resolution steps.</p>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Technical Details */}
       <section className="py-20 bg-slate-50">
