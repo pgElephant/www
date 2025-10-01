@@ -150,49 +150,47 @@ const blogPosts = [
   }
 ]
 
-const BlogCard = ({ post }: { post: typeof blogPosts[0] }) => {
-  const getIconGradient = (icon: string) => {
-    switch (icon) {
-      case 'RALE':
-        return 'from-slate-600 to-slate-800'
-      case 'RAM':
-        return 'from-slate-600 to-slate-800'
-      case 'FauxDB':
-        return 'from-slate-600 to-slate-800'
-      default:
-        return 'from-slate-600 to-slate-800'
-    }
-  }
 
+// Stock images for blog cards (Unsplash)
+const stockImages = [
+  '/stock/unsplash-1.jpg',
+  '/stock/unsplash-2.jpg',
+  '/stock/unsplash-3.jpg',
+  '/stock/unsplash-4.jpg',
+  '/stock/unsplash-5.jpg',
+]
+
+import Image from 'next/image'
+
+const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number }) => {
+  // Cycle through stock images for demo
+  const imageUrl = stockImages[index % stockImages.length] || stockImages[0]
   return (
     <article className="group h-full">
       <Link href={`/blog/${post.slug}`} className="block h-full">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 group-hover:border-gray-300 h-full flex flex-col">
-          {/* Header with gradient background */}
-          <div className={`h-32 bg-gradient-to-br ${getIconGradient(post.icon)} relative overflow-hidden flex-shrink-0`}>
-            <div className="absolute inset-0 bg-black/10"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-white font-bold text-4xl opacity-80">{post.icon}</span>
+        <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-gray-200 h-full flex flex-col">
+          {/* Large Stock Image */}
+          <div className="relative w-full aspect-[3/2] bg-gray-200 overflow-hidden flex-shrink-0">
+            <Image
+              src={imageUrl}
+              alt={post.title}
+              fill
+              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, 33vw"
+              priority={index < 3}
+            />
+            <div className="absolute top-4 left-4 bg-white/80 text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow">
+              {post.category}
             </div>
           </div>
-          
           {/* Content */}
-          <div className="p-6 flex flex-col flex-1">
-            <div className="flex items-center gap-2 mb-3 flex-shrink-0">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                {post.category}
-              </span>
-              <span className="text-gray-500 text-sm">{post.readTime}</span>
-            </div>
-            
-            <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-teal-600 transition-colors flex-shrink-0">
+          <div className="p-7 flex flex-col flex-1">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors flex-shrink-0 leading-tight">
               {post.title}
             </h3>
-            
-            <p className="text-gray-600 mb-4 line-clamp-3 flex-1">
+            <p className="text-gray-600 mb-4 line-clamp-3 flex-1 text-lg">
               {post.excerpt}
             </p>
-            
             <div className="flex items-center justify-between text-sm text-gray-500 mt-auto flex-shrink-0">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
@@ -204,7 +202,7 @@ const BlogCard = ({ post }: { post: typeof blogPosts[0] }) => {
                   <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1 text-teal-600 group-hover:gap-2 transition-all">
+              <div className="flex items-center gap-1 text-primary-600 group-hover:gap-2 transition-all font-semibold">
                 <span>Read more</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
@@ -316,38 +314,19 @@ export default function BlogPage() {
         </div>
       </div>
 
-      {/* Featured Articles */}
-      <div className="bg-white py-20">
-        <div className="container-wide">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Articles</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Our most popular and impactful articles covering PostgreSQL, distributed systems, and database engineering
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-              {blogPosts.filter(post => post.featured).map((post) => (
-                <BlogCard key={post.slug} post={post} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* All Articles */}
-      <div className="bg-gray-50 py-20">
+
+      {/* Blog Articles - Clean Modern Grid */}
+      <div className="bg-white py-24">
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">All Articles</h2>
-              <p className="text-lg text-gray-600">Complete archive of our technical content and insights</p>
+            <div className="text-center mb-14">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Articles</h2>
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
-                <BlogCard key={post.slug} post={post} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+              {blogPosts.map((post, i) => (
+                <BlogCard key={post.slug} post={post} index={i} />
               ))}
             </div>
           </div>

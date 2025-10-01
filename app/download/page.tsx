@@ -300,18 +300,23 @@ const DownloadPage = () => {
       </section>
 
       {/* Quick Start Section */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white border-t border-b border-gray-100">
-        <div className="container-wide mx-auto">
+      <section className="py-24 border-t border-b border-gray-100 relative overflow-hidden" style={{ background: unifiedHeroGradient }}>
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-orange-400/10 rounded-full blur-2xl animate-pulse" />
+          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-cyan-200/10 to-transparent" />
+        </div>
+        <div className="container-wide mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Quick Start</h2>
-            <p className="text-lg text-gray-600 mb-12 leading-relaxed">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 drop-shadow-lg">Quick Start</h2>
+            <p className="text-lg text-white/90 mb-12 leading-relaxed drop-shadow-md">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
-                <div key={i} className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
-                  <method.icon className="w-10 h-10 mb-3 text-cyan-600" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{method.title}</h3>
-                  <p className="text-gray-500 text-sm mb-3">{method.description}</p>
-                  <ol className="text-left text-xs text-gray-700 space-y-1 list-decimal list-inside">
+                <div key={i} className="bg-white/10 rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
+                  <method.icon className="w-10 h-10 mb-3 text-cyan-200" />
+                  <h3 className="text-lg font-semibold text-white mb-2 drop-shadow">{method.title}</h3>
+                  <p className="text-white/80 text-sm mb-3">{method.description}</p>
+                  <ol className="text-left text-xs text-white/80 space-y-1 list-decimal list-inside">
                     {method.steps.map((step, j) => (
                       <li key={j}>{step}</li>
                     ))}
@@ -319,7 +324,7 @@ const DownloadPage = () => {
                 </div>
               ))}
             </div>
-            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white transition-all duration-200 shadow-lg text-lg font-semibold" style={{ backgroundColor: palette.orange }} onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.orangeDark} onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.orange}>
+            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white transition-all duration-200 shadow-lg text-lg font-semibold bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
               Get Started
               <ArrowRight className="w-5 h-5" />
             </Link>
