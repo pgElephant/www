@@ -108,29 +108,23 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Installation & Requirements */}
+      {/* Installation & Setup */}
       <section className="py-20 bg-white border-t border-b">
         <div className="container-wide">
-          <SectionHeading kicker="Setup">Installation & Requirements</SectionHeading>
-          <div className="grid md:grid-cols-2 gap-10 items-start">
-            <div className="space-y-6">
-              <h3 className="font-semibold text-lg text-slate-900">Prerequisites</h3>
-              <ul className="text-sm text-slate-600 list-disc pl-5 space-y-2">
-                <li>PostgreSQL 16, 17 or 18 compiled with standard extension toolchain</li>
-                <li>Go 1.21+ for building the Raft integration layer</li>
-                <li>Build tools: make, gcc/clang, pg_config available in PATH</li>
-                <li>Linux or macOS recommended (ARM64 + x86_64 supported)</li>
-              </ul>
-              <h3 className="font-semibold text-lg text-slate-900 pt-4">Build From Source</h3>
-              <CodeBlock code={`git clone https://github.com/pgelephant/pgraft.git\ncd pgraft\nmake clean && make -j\nsudo make install`} />
-              <p className="text-xs text-slate-500">More: <Link href="/docs/pgraft/getting-started/installation" className="text-indigo-600 hover:underline">Full Installation Guide</Link></p>
-            </div>
-            <div className="space-y-6">
-              <h3 className="font-semibold text-lg text-slate-900">Configure postgresql.conf</h3>
-              <CodeBlock code={`shared_preload_libraries = 'pgraft'\npgraft.cluster_id = 'prod-cluster'\npgraft.node_id = 1\npgraft.address = '127.0.0.1'\npgraft.port = 7001\npgraft.election_timeout = 1000    # ms\npgraft.heartbeat_interval = 100   # ms`} />
-              <h3 className="font-semibold text-lg text-slate-900">Initialize</h3>
-              <CodeBlock code={`CREATE EXTENSION pgraft;\nSELECT pgraft_init(); -- Run on each node\n-- After leader elected (~10s) add members\nSELECT pgraft_add_node(2,'127.0.0.1',7002);\nSELECT pgraft_add_node(3,'127.0.0.1',7003);`} />
-              <p className="text-xs text-slate-500">See <Link href="/docs/pgraft/getting-started/quick-start" className="text-indigo-600 hover:underline">Quick Start</Link> for full multi-node walkthrough.</p>
+          <SectionHeading kicker="Setup">Getting Started</SectionHeading>
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-slate-600 mb-8">
+              Get up and running with pgraft by following our comprehensive documentation. Our guides cover everything from installation prerequisites to configuration and usage examples.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <Link href="/docs/pgraft/getting-started/installation" className="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Installation Guide</h3>
+                <p className="text-sm text-slate-600">Step-by-step instructions for installing pgraft and setting up your environment.</p>
+              </Link>
+              <Link href="/docs/pgraft/getting-started/quick-start" className="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Quick Start</h3>
+                <p className="text-sm text-slate-600">Get a basic cluster up and running with our quick start tutorial.</p>
+              </Link>
             </div>
           </div>
         </div>
@@ -252,69 +246,64 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Monitoring & Observability */}
+      {/* Operations & Monitoring */}
       <section className="py-20 bg-slate-50 border-t border-b">
         <div className="container-wide">
-          <SectionHeading kicker="Operations">Monitoring & Observability</SectionHeading>
-          <div className="grid md:grid-cols-2 gap-10 items-start">
-            <div className="space-y-5 text-sm text-slate-600">
-              <p>Core surfaces expose cluster health, leader identity, log progression and worker state. Suitable for scraping into Prometheus via psql exporters or custom scripts.</p>
-              <CodeBlock code={`SELECT pgraft_is_leader(), pgraft_get_leader(), pgraft_get_worker_state();\nSELECT * FROM pgraft_get_cluster_status();\nSELECT * FROM pgraft_log_get_stats();`} />
-              <p>Integrate with external tooling by wrapping SQL calls in cron / sidecar scripts. Debug mode can be toggled to enrich logs during incident windows.</p>
-              <CodeBlock code={`SELECT pgraft_set_debug(true); -- enable\n-- investigative period\nSELECT pgraft_set_debug(false); -- disable`} />
-            </div>
-            <div className="space-y-5">
-              <h3 className="font-semibold text-slate-900 text-lg">Recommended Alerts</h3>
-              <ul className="list-disc pl-5 text-sm space-y-2 text-slate-600">
-                <li>No leader elected &gt; 10s</li>
-                <li>Commit index stalled &gt; threshold</li>
-                <li>Excessive elections per hour</li>
-                <li>Replication lag between last_index and commit_index widening</li>
-                <li>Worker state not RUNNING</li>
-              </ul>
-              <p className="text-xs text-slate-500">More: <Link href="/docs/pgraft/operations/monitoring" className="text-indigo-600 hover:underline">Monitoring Guide</Link></p>
+          <SectionHeading kicker="Operations">Operations & Monitoring</SectionHeading>
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-slate-600 mb-8">
+              Learn how to effectively monitor and operate your pgraft cluster with our comprehensive operations documentation.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <Link href="/docs/pgraft/operations/monitoring" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Monitoring Guide</h3>
+                <p className="text-sm text-slate-600">Best practices for monitoring cluster health, alerts, and metrics.</p>
+              </Link>
+              <Link href="/docs/pgraft/operations/troubleshooting" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Troubleshooting</h3>
+                <p className="text-sm text-slate-600">Common issues, debugging tips, and resolution steps.</p>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Lifecycle States */}
+      {/* Technical Details */}
       <section className="py-20 bg-slate-50">
         <div className="container-wide">
-          <SectionHeading kicker="Internals">Worker Lifecycle States</SectionHeading>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
-            {[
-              { state: 'INIT', desc: 'Extension loaded; worker preparing in-memory + disk state.' },
-              { state: 'RUNNING', desc: 'Actively participating in Raft; processing ticks and messages.' },
-              { state: 'LEADER', desc: 'Holds leadership; sending heartbeats and replicating entries.' },
-              { state: 'FOLLOWER', desc: 'Replicating from leader; eligible to campaign if timeouts expire.' },
-              { state: 'CANDIDATE', desc: 'Campaigning for leadership during election interval.' },
-              { state: 'STOPPING', desc: 'Graceful shutdown sequence triggered.' },
-            ].map(s => (
-              <div key={s.state} className="bg-white border border-slate-200 rounded-lg p-5">
-                <div className="font-mono text-[11px] bg-slate-900 text-indigo-300 inline-block px-2 py-1 rounded mb-3">{s.state}</div>
-                <p className="text-slate-600 leading-relaxed text-xs md:text-sm">{s.desc}</p>
-              </div>
-            ))}
+          <SectionHeading kicker="Internals">Technical Documentation</SectionHeading>
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-slate-600 mb-8">
+              Dive deep into pgraft's technical details, architecture, and internal workings with our comprehensive documentation.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <Link href="/docs/pgraft/internals/architecture" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Architecture</h3>
+                <p className="text-sm text-slate-600">Learn about pgraft's internal architecture and design decisions.</p>
+              </Link>
+              <Link href="/docs/pgraft/internals/worker-lifecycle" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Worker Lifecycle</h3>
+                <p className="text-sm text-slate-600">Understand the states and transitions of pgraft workers.</p>
+              </Link>
+            </div>
           </div>
-          <p className="mt-6 text-xs text-slate-500">Query state via: <code className="font-mono bg-slate-100 px-1 py-0.5 rounded">SELECT pgraft_get_worker_state();</code></p>
         </div>
       </section>
 
-      {/* SQL API Overview */}
+      {/* API Documentation */}
       <section className="py-20 bg-white border-t">
         <div className="container-wide">
-          <SectionHeading kicker="Interface">Core SQL Functions</SectionHeading>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <SqlCard fn="pgraft_init()" desc="Initialize the local node environment and worker." />
-            <SqlCard fn="pgraft_add_node(node_id,address,port)" desc="Add a new member through the leader—replicated as configuration change." />
-            <SqlCard fn="pgraft_remove_node(node_id)" desc="Remove an existing member (leader only)." />
-            <SqlCard fn="pgraft_get_cluster_status()" desc="Structured snapshot of cluster + role metadata." />
-            <SqlCard fn="pgraft_is_leader()" desc="Boolean leadership check for routing logic." />
-            <SqlCard fn="pgraft_replicate_entry(data)" desc="Manually append an opaque payload entry for replication experiments." />
-            <SqlCard fn="pgraft_log_get_stats()" desc="Inspect log sequence, commit & apply progression." />
+          <SectionHeading kicker="Interface">API Documentation</SectionHeading>
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-slate-600 mb-8">
+              pgraft provides a comprehensive set of SQL functions for cluster management, monitoring, and control. Visit our documentation for detailed API references and usage examples.
+            </p>
+            <Link 
+              href="/docs/pgraft/user-guide/sql-functions" 
+              className="inline-block bg-slate-900 text-white hover:bg-slate-800 font-semibold px-8 py-4 rounded-xl transition-all duration-300">
+              View Complete API Reference
+            </Link>
           </div>
-          <p className="mt-6 text-xs text-slate-500">Full reference: <Link href="/docs/pgraft/user-guide/sql-functions" className="text-indigo-600 hover:underline">SQL Functions Guide</Link></p>
         </div>
       </section>
 
