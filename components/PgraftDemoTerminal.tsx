@@ -297,16 +297,7 @@ const PgraftDemoTerminal = () => {
       
       // Type the command
       typeCommand(cmd.command, () => {
-        // Execute command (show prompt)
-        setCommandHistory(prev => [
-          ...prev.slice(0, -1),
-          {
-            ...prev[prev.length - 1],
-            output: ['$ ' + cmd.command, '']
-          }
-        ])
-        
-        // Show output
+        // Show output only (do not echo command again)
         setTimeout(() => {
           showOutput(cmd.output, () => {
             commandIndex++

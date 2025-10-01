@@ -14,7 +14,35 @@ const raleConfig = {
     'Crash Safe',
     'Observability',
   ],
-  demo: null, // Add demo terminal if available
+  demo: (
+    <div className="max-w-4xl mx-auto mb-8">
+      <div className="bg-gray-900 rounded-xl p-8 text-white font-mono text-sm">
+        <div className="flex items-center mb-6">
+          <div className="flex gap-2 mr-4">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+          <span className="text-gray-300">RALE Demo Terminal</span>
+        </div>
+          <pre className="bg-transparent p-0 m-0 mb-4 text-green-300 whitespace-pre-line">
+{`> raled status
+Cluster: Healthy
+Leader: node1
+Term: 42
+Nodes: node1, node2, node3
+
+> raled log append "set x=1"
+Entry appended to log. Index: 1234
+
+> raled leader-election
+Leader election initiated...
+New Leader: node3
+`}
+          </pre>
+      </div>
+    </div>
+  ),
   featurePillars: {
     kicker: 'Overview',
     items: [

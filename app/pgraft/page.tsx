@@ -52,9 +52,17 @@ const PgraftPage = () => {
       <section className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
         <div className="container-wide relative z-10 text-center">
-          <h1 className="text-5xl font-bold mb-5 tracking-tight">
-            pgraft: Raft based postgresql extension for leader election
-          </h1>
+          <div className="flex flex-col items-center justify-center mb-5">
+            <div className="mb-4">
+              <img src="/ico/pgraft.ico" alt="pgraft icon" width={64} height={64} className="inline-block align-middle" />
+            </div>
+            <h1 className="text-5xl font-bold tracking-tight">
+              <b>pgraft</b>: Raft based postgresql extension for leader election
+            </h1>
+            <div className="text-xl font-semibold text-white/90 mt-2">
+              Raft-Based PostgresSQL Extension For Leader Election
+            </div>
+          </div>
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold text-white mb-4">Command Line Examples</h3>
           </div>
@@ -86,15 +94,11 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Detailed Features List (Clean, Card Grid) */}
+      {/* Detailed Features List */}
       <section className="py-20 bg-slate-50 border-t border-b">
         <div className="container-wide">
-          <div className="text-center mb-14">
-            <div className="text-xs tracking-wider font-semibold text-indigo-500 uppercase mb-2">Features</div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Detailed Features List</h2>
-            <p className="max-w-2xl mx-auto text-base text-slate-600">Everything you need for robust, distributed PostgreSQL—built in.</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <SectionHeading kicker="Features">Detailed Features List</SectionHeading>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
               <span className="text-indigo-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 3v18m9-9H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
@@ -162,56 +166,76 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Feature Matrix (Non-hero, technical table) */}
-      <section className="py-16 bg-white border-t">
-        <div className="container-wide">
-          <div className="mb-10 text-center">
-            <div className="text-xs tracking-wider font-semibold text-indigo-500 uppercase mb-2">Depth</div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Feature Matrix</h2>
-            <p className="max-w-2xl mx-auto text-base text-slate-600">Technical breakdown of core mechanisms and operational impact.</p>
-          </div>
+      {/* Detailed Feature Matrix */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+        <div className="container-wide relative z-10">
+          <SectionHeading kicker="Depth" className="text-white">Feature Matrix</SectionHeading>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
-              <thead className="bg-slate-100">
+            <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+              <thead className="bg-slate-800/60">
                 <tr className="text-left">
-                  <th className="px-4 py-3 font-semibold text-slate-700">Capability</th>
-                  <th className="px-4 py-3 font-semibold text-slate-700">Description</th>
-                  <th className="px-4 py-3 font-semibold text-slate-700">Operational Impact</th>
+                  <th className="px-4 py-3 font-semibold text-white">Capability</th>
+                  <th className="px-4 py-3 font-semibold text-white">Description</th>
+                  <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 bg-white">
+              <tbody className="divide-y divide-slate-700 bg-slate-800/40">
                 <tr>
-                  <td className="px-4 py-3 font-medium text-indigo-700">Consensus (Raft)</td>
-                  <td className="px-4 py-3 text-slate-700">Leader election, log replication, term monotonicity, and cluster-wide agreement on all writes.</td>
-                  <td className="px-4 py-3 text-slate-600">Deterministic failover, no split-brain, and strong consistency guarantees.</td>
+                  <td className="px-4 py-3 font-medium text-cyan-300">Consensus (Raft)</td>
+                  <td className="px-4 py-3 text-slate-300">Leader election, log replication, term monotonicity.</td>
+                  <td className="px-4 py-3 text-slate-300">Deterministic failover; no split-brain.</td>
+                </tr>
+                <tr className="bg-slate-800/60">
+                  <td className="px-4 py-3 font-medium text-cyan-300">State Durability</td>
+                  <td className="px-4 py-3 text-slate-300">Persistent HardState, entries, snapshots.</td>
+                  <td className="px-4 py-3 text-slate-300">Crash-safe recovery.</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-medium text-indigo-700">State Durability</td>
-                  <td className="px-4 py-3 text-slate-700">Persistent HardState, log entries, and periodic snapshots for crash-safe recovery.</td>
-                  <td className="px-4 py-3 text-slate-600">No data loss on restart, fast recovery, and robust cluster state.</td>
+                  <td className="px-4 py-3 font-medium text-cyan-300">Command Interface</td>
+                  <td className="px-4 py-3 text-slate-300">SQL functions for init, membership, diagnostics.</td>
+                  <td className="px-4 py-3 text-slate-300">Native DB admin UX.</td>
+                </tr>
+                <tr className="bg-slate-800/60">
+                  <td className="px-4 py-3 font-medium text-cyan-300">Monitoring Hooks</td>
+                  <td className="px-4 py-3 text-slate-300">Cluster status, log stats, leader checks.</td>
+                  <td className="px-4 py-3 text-slate-300">Simplifies observability.</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-medium text-indigo-700">Command Interface</td>
-                  <td className="px-4 py-3 text-slate-700">SQL functions for cluster init, membership changes, diagnostics, and monitoring.</td>
-                  <td className="px-4 py-3 text-slate-600">Native DB admin UX, no external tools required.</td>
+                  <td className="px-4 py-3 font-medium text-cyan-300">Node Membership</td>
+                  <td className="px-4 py-3 text-slate-300">Add/remove nodes through leader replication.</td>
+                  <td className="px-4 py-3 text-slate-300">Controlled scaling.</td>
                 </tr>
-                <tr>
-                  <td className="px-4 py-3 font-medium text-indigo-700">Monitoring Hooks</td>
-                  <td className="px-4 py-3 text-slate-700">Cluster status, log stats, leader checks, and health endpoints.</td>
-                  <td className="px-4 py-3 text-slate-600">Easy integration with dashboards and alerting systems.</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-medium text-indigo-700">Node Membership</td>
-                  <td className="px-4 py-3 text-slate-700">Add/remove nodes through leader-driven consensus and replication.</td>
-                  <td className="px-4 py-3 text-slate-600">Controlled scaling and safe topology changes.</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 font-medium text-indigo-700">Debug Mode</td>
-                  <td className="px-4 py-3 text-slate-700">Toggle extended logging and trace cluster events for troubleshooting.</td>
-                  <td className="px-4 py-3 text-slate-600">Faster incident analysis and compliance review.</td>
+                <tr className="bg-slate-800/60">
+                  <td className="px-4 py-3 font-medium text-cyan-300">Debug Mode</td>
+                  <td className="px-4 py-3 text-slate-300">Toggle extended logging via SQL.</td>
+                  <td className="px-4 py-3 text-slate-300">Faster incident analysis.</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <p className="mt-4 text-xs text-slate-400">Full reference: <Link href="/docs/pgraft/user-guide/sql-functions" className="text-indigo-400 hover:underline">SQL Functions Guide</Link></p>
+        </div>
+      </section>
+
+      {/* Technical Details */}
+      <section className="py-20 bg-slate-50">
+        <div className="container-wide">
+          <SectionHeading kicker="Internals">Technical Documentation</SectionHeading>
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-slate-600 mb-8">
+              Dive deep into pgraft's technical details, architecture, and internal workings with our comprehensive documentation.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <Link href="/docs/pgraft/internals/architecture" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Architecture</h3>
+                <p className="text-sm text-slate-600">Learn about pgraft's internal architecture and design decisions.</p>
+              </Link>
+              <Link href="/docs/pgraft/internals/worker-lifecycle" className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">Worker Lifecycle</h3>
+                <p className="text-sm text-slate-600">Understand the states and transitions of pgraft workers.</p>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

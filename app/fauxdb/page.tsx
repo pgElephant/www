@@ -13,7 +13,33 @@ const fauxdbConfig = {
     'ACID Transactions',
     'Geospatial',
   ],
-  demo: null, // Add demo terminal if available
+  demo: (
+    <div className="max-w-4xl mx-auto mb-8">
+      <div className="bg-gray-900 rounded-xl p-8 text-white font-mono text-sm">
+        <div className="flex items-center mb-6">
+          <div className="flex gap-2 mr-4">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+          <span className="text-gray-300">FauxDB Demo Terminal</span>
+        </div>
+  <pre className="bg-transparent p-0 m-0 mb-4 text-green-300 whitespace-pre-line">
+{`> db.users.insertOne({ name: "Alice", age: 27 })
+{ acknowledged: true, insertedId: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8") }
+
+> db.users.find({ age: { $gt: 20 } })
+[
+  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8"), name: "Alice", age: 27 }
+]
+
+> db.stats()
+{ collections: 1, objects: 1, avgObjSize: 32, storageSize: 4096 }
+`}
+  </pre>
+      </div>
+    </div>
+  ),
   featurePillars: {
     kicker: 'Overview',
     items: [

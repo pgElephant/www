@@ -14,7 +14,36 @@ const ramConfig = {
     'Real-time Monitoring',
     'Production Ready',
   ],
-  demo: null, // Add demo terminal if available
+    demo: (
+      <div className="max-w-4xl mx-auto mb-8">
+        <div className="bg-gray-900 rounded-xl p-8 text-white font-mono text-sm">
+          <div className="flex items-center mb-6">
+            <div className="flex gap-2 mr-4">
+              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-gray-300">RAM Demo Terminal</span>
+          </div>
+            <pre className="bg-transparent p-0 m-0 mb-4 text-green-300 whitespace-pre-line">
+{`> ramctl cluster status
+Cluster State: Healthy
+Nodes:
+  - node1 (Leader)
+  - node2 (Follower)
+  - node3 (Follower)
+
+> ramctl failover
+Initiating failover...
+New Leader: node2
+
+> ramctl add-node node4
+Node node4 added to cluster.
+`}
+            </pre>
+        </div>
+      </div>
+    ),
   featurePillars: {
     kicker: 'Overview',
     items: [
