@@ -18,7 +18,8 @@ import {
   Cpu,
   HardDrive,
   Network,
-  Activity
+  Activity,
+  BookOpen
 } from 'lucide-react'
 
 const FeaturesList = () => {
@@ -245,11 +246,11 @@ const FeaturesList = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-400/30 bg-white/5">
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider">Solution</th>
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider">Category</th>
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider">Enterprise Features</th>
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider">Deployment</th>
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider">ROI Impact</th>
+                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Solution</th>
+                    <th className="text-left p-4 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/6">Category</th>
+                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Enterprise Features</th>
+                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Deployment</th>
+                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/6">ROI Impact</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -268,24 +269,24 @@ const FeaturesList = () => {
                             </div>
                           </div>
                         </td>
-                        <td className="p-6">
-                          <div className="space-y-1">
+                        <td className="p-4">
+                          <div className="space-y-2">
                             {project.name === 'RAM' && (
                               <>
-                                <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-medium rounded-full">High Availability</span>
-                                <span className="inline-block px-3 py-1 bg-green-500/20 text-green-300 text-xs font-medium rounded-full ml-2">Clustering</span>
+                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-medium rounded-full text-center">High Availability</span>
+                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-medium rounded-full text-center">Clustering</span>
                               </>
                             )}
                             {project.name === 'pgraft' && (
                               <>
-                                <span className="inline-block px-3 py-1 bg-purple-500/20 text-purple-300 text-xs font-medium rounded-full">Consensus Protocol</span>
-                                <span className="inline-block px-3 py-1 bg-orange-500/20 text-orange-300 text-xs font-medium rounded-full ml-2">Extension</span>
+                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-medium rounded-full text-center">Consensus Protocol</span>
+                                <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-medium rounded-full text-center">Extension</span>
                               </>
                             )}
                             {project.name === 'FauxDB' && (
                               <>
-                                <span className="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-medium rounded-full">Migration Tool</span>
-                                <span className="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-medium rounded-full ml-2">Compatibility</span>
+                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-medium rounded-full text-center">Migration Tool</span>
+                                <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-medium rounded-full text-center">Compatibility</span>
                               </>
                             )}
                           </div>
@@ -325,27 +326,27 @@ const FeaturesList = () => {
                             )}
                           </div>
                         </td>
-                        <td className="p-6">
+                        <td className="p-4">
                           <div className="space-y-2">
                             {project.name === 'RAM' && (
                               <>
-                                <div className="text-sm text-slate-300">• 99.99% uptime SLA</div>
-                                <div className="text-sm text-slate-300">• Reduced operational costs</div>
-                                <div className="text-sm text-slate-300">• Faster disaster recovery</div>
+                                <div className="text-xs text-slate-300">• 99.99% uptime SLA</div>
+                                <div className="text-xs text-slate-300">• Reduced operational costs</div>
+                                <div className="text-xs text-slate-300">• Faster disaster recovery</div>
                               </>
                             )}
                             {project.name === 'pgraft' && (
                               <>
-                                <div className="text-sm text-slate-300">• Eliminates split-brain</div>
-                                <div className="text-sm text-slate-300">• Simplified management</div>
-                                <div className="text-sm text-slate-300">• Reduced complexity</div>
+                                <div className="text-xs text-slate-300">• Eliminates split-brain</div>
+                                <div className="text-xs text-slate-300">• Simplified management</div>
+                                <div className="text-xs text-slate-300">• Reduced complexity</div>
                               </>
                             )}
                             {project.name === 'FauxDB' && (
                               <>
-                                <div className="text-sm text-slate-300">• Zero migration downtime</div>
-                                <div className="text-sm text-slate-300">• Unified database platform</div>
-                                <div className="text-sm text-slate-300">• Lower licensing costs</div>
+                                <div className="text-xs text-slate-300">• Zero migration downtime</div>
+                                <div className="text-xs text-slate-300">• Unified database platform</div>
+                                <div className="text-xs text-slate-300">• Lower licensing costs</div>
                               </>
                             )}
                           </div>
@@ -402,6 +403,63 @@ const FeaturesList = () => {
           </div>
         </div>
 
+        {/* Internal Navigation Links for SEO */}
+        <div className="mt-16 relative z-10">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-slate-400/30 max-w-6xl mx-auto">
+            <h3 className="text-2xl font-bold mb-6 text-white text-center">
+              Explore Our Enterprise Solutions
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <a href="/ram" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-primary-400/40">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-primary-400">
+                    <Zap className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-lg font-bold text-white group-hover:text-primary-300 transition-colors">RAM</h4>
+                </div>
+                <p className="text-sm text-slate-300 mb-3">PostgreSQL clustering solution with automatic failover and Raft consensus for enterprise high availability.</p>
+                <div className="flex items-center text-primary-400 text-sm font-medium">
+                  Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </a>
+              
+              <a href="/pgraft" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-secondary-400/40">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-secondary-400">
+                    <Crown className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-lg font-bold text-white group-hover:text-secondary-300 transition-colors">pgraft</h4>
+                </div>
+                <p className="text-sm text-slate-300 mb-3">PostgreSQL extension implementing Raft consensus protocol for distributed database coordination.</p>
+                <div className="flex items-center text-secondary-400 text-sm font-medium">
+                  Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </a>
+              
+              <a href="/fauxdb" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-accent-400/40">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-accent-400">
+                    <Globe className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-lg font-bold text-white group-hover:text-accent-300 transition-colors">FauxDB</h4>
+                </div>
+                <p className="text-sm text-slate-300 mb-3">MongoDB-compatible document database built in Rust with PostgreSQL backend for seamless migration.</p>
+                <div className="flex items-center text-accent-400 text-sm font-medium">
+                  Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </a>
+            </div>
+            
+            <div className="text-center">
+              <a href="/docs" className="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm">
+                <BookOpen className="w-4 h-4" />
+                View Complete Documentation
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Enterprise CTA */}
         <div className="mt-20 text-center relative z-10">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30 max-w-5xl mx-auto">
@@ -427,18 +485,18 @@ const FeaturesList = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+              <a href="/download" className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
                 <Database className="w-5 h-5" />
-                Request Enterprise Demo
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
+                Download All Projects
+              </a>
+              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5" />
-                Download Whitepaper
-              </button>
-              <button className="border-2 border-slate-400 text-slate-300 px-8 py-4 rounded-lg font-semibold hover:bg-slate-400 hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
+                View Documentation
+              </a>
+              <a href="/contact" className="border-2 border-slate-400 text-slate-300 px-8 py-4 rounded-lg font-semibold hover:bg-slate-400 hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
                 <Users className="w-5 h-5" />
                 Contact Sales
-              </button>
+              </a>
             </div>
           </div>
         </div>
