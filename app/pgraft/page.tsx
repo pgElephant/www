@@ -55,20 +55,6 @@ const PgraftPage = () => {
           <h1 className="text-5xl font-bold mb-5 tracking-tight">
             pgraft: Raft based postgresql extension for leader election
           </h1>
-            
-          <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <Link href="/docs/pgraft/getting-started" className="bg-white text-slate-900 hover:bg-slate-100 font-semibold px-8 py-4 rounded-2xl transition-all duration-300 inline-flex items-center shadow">
-              <BookOpen className="w-5 h-5 mr-2" /> Get Started
-            </Link>
-            <a
-              href="https://github.com/pgElephant/pgraft"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold px-8 py-4 rounded-2xl transition-all duration-300 inline-flex items-center"
-            >
-              <Github className="w-5 h-5 mr-2" /> Source <ExternalLink className="w-4 h-4 ml-2" />
-            </a>
-          </div>
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold text-white mb-4">Command Line Examples</h3>
           </div>
@@ -100,29 +86,22 @@ const PgraftPage = () => {
         </div>
       </section>
 
-
-
-      {/* Architecture Overview */}
+      {/* Detailed Features List */}
       <section className="py-20 bg-slate-50 border-t border-b">
         <div className="container-wide">
-          <SectionHeading kicker="Architecture">Design & Components</SectionHeading>
+          <SectionHeading kicker="Features">Detailed Features List</SectionHeading>
           <div className="max-w-3xl mx-auto">
-            <p className="text-slate-600 mb-6">
-                            pgraft is a native PostgreSQL extension that leverages libraft, a robust implementation of the Raft consensus algorithm, to provide reliable leader election in distributed PostgreSQL environments.
-            </p>
-            <p className="text-slate-600 mb-4">
-              The extension consists of two primary components:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-6 text-slate-600">
-              <li>pgraft core - Integration layer with libraft for consensus</li>
-              <li>pgraft controller - High-level cluster management and coordination</li>
+            <ul className="list-disc pl-6 space-y-3 text-slate-600 text-base">
+              <li><b>Native PostgreSQL Extension:</b> Seamless integration, no external daemons required.</li>
+              <li><b>Raft Consensus:</b> Reliable leader election, log replication, and strong consistency.</li>
+              <li><b>Crash-Safe Durability:</b> Persistent state and logs for robust recovery.</li>
+              <li><b>SQL Management Functions:</b> Cluster init, membership, diagnostics, and monitoring via SQL.</li>
+              <li><b>Observability:</b> Inspect cluster state, logs, and leader status with SQL queries.</li>
+              <li><b>Dynamic Node Membership:</b> Add/remove nodes through consensus.</li>
+              <li><b>Debug & Audit:</b> Toggle extended logging and access audit-friendly surfaces.</li>
+              <li><b>Minimal Configuration:</b> Simple setup, production-ready defaults, and tuneable parameters.</li>
+              <li><b>Background Worker Architecture:</b> Efficient, low-overhead operation inside PostgreSQL.</li>
             </ul>
-            <p className="text-slate-600 mb-6">
-              These components work in harmony to enable efficient leader election while maintaining full compatibility with PostgreSQL's existing functionality.
-            </p>
-            <p className="text-slate-600">
-              At its foundation, pgraft utilizes PostgreSQL background workers and shared memory IPC for optimal performance. The Raft state and logs are persistently stored to guarantee cluster consistency across restarts.
-            </p>
           </div>
         </div>
       </section>
@@ -178,21 +157,6 @@ const PgraftPage = () => {
           <p className="mt-4 text-xs text-slate-400">Full reference: <Link href="/docs/pgraft/user-guide/sql-functions" className="text-indigo-400 hover:underline">SQL Functions Guide</Link></p>
         </div>
       </section>
-
-      {/* Use Cases */}
-      <section className="py-20 bg-white border-t">
-        <div className="container-wide">
-          <SectionHeading kicker="Adoption">Primary Use Cases</SectionHeading>
-          <div className="grid md:grid-cols-3 gap-8">
-            <FeatureCard title="Highly Available Writes" desc="Guarantee a single writer ordering path backed by consensus; survive node failures transparently." />
-            <FeatureCard title="Edge / Regional Clusters" desc="Deploy compact 3-node consensus groups in latency-sensitive zones for localized workloads." />
-            <FeatureCard title="Regulated Environments" desc="Deterministic election & audit-friendly SQL surfaces simplify compliance review and change tracking." />
-          </div>
-        </div>
-      </section>
-
-
-
 
       {/* Technical Details */}
       <section className="py-20 bg-slate-50">
