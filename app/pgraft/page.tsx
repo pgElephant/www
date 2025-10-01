@@ -86,77 +86,76 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Detailed Features List (Hero Section) */}
-      <section className="py-24 bg-gradient-to-br from-indigo-600 via-sky-500 to-indigo-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,0.25),transparent_60%)]" />
-        <div className="container-wide relative z-10">
-          <div className="text-center mb-16">
-            <div className="text-xs tracking-wider font-semibold text-white uppercase mb-2">Features</div>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">Detailed Features List</h2>
-            <p className="max-w-2xl mx-auto text-lg text-slate-100/90 font-medium">Everything you need for robust, distributed PostgreSQL—built in.</p>
+      {/* Detailed Features List (Clean, Card Grid) */}
+      <section className="py-20 bg-slate-50 border-t border-b">
+        <div className="container-wide">
+          <div className="text-center mb-14">
+            <div className="text-xs tracking-wider font-semibold text-indigo-500 uppercase mb-2">Features</div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Detailed Features List</h2>
+            <p className="max-w-2xl mx-auto text-base text-slate-600">Everything you need for robust, distributed PostgreSQL—built in.</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 3v18m9-9H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-indigo-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 3v18m9-9H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Native PostgreSQL Extension</h4>
-                <p className="text-slate-100/90">Seamless in-core integration—no external daemons, no sidecars, no wrappers. Deploy and manage consensus directly inside PostgreSQL.</p>
+                <h4 className="font-bold text-lg mb-1">Native PostgreSQL Extension</h4>
+                <p className="text-slate-600">Seamless in-core integration—no external daemons, no sidecars, no wrappers. Deploy and manage consensus directly inside PostgreSQL.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-sky-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Raft Consensus</h4>
-                <p className="text-slate-100/90">Reliable leader election, log replication, and strong consistency using the proven Raft algorithm. No split-brain, deterministic failover.</p>
+                <h4 className="font-bold text-lg mb-1">Raft Consensus</h4>
+                <p className="text-slate-600">Reliable leader election, log replication, and strong consistency using the proven Raft algorithm. No split-brain, deterministic failover.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-green-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Crash-Safe Durability</h4>
-                <p className="text-slate-100/90">All Raft state and logs are persisted for robust, crash-safe recovery. Survive restarts and failures without data loss or reconfiguration.</p>
+                <h4 className="font-bold text-lg mb-1">Crash-Safe Durability</h4>
+                <p className="text-slate-600">All Raft state and logs are persisted for robust, crash-safe recovery. Survive restarts and failures without data loss or reconfiguration.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-yellow-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">SQL Management Functions</h4>
-                <p className="text-slate-100/90">Full cluster lifecycle—init, membership, diagnostics, and monitoring—managed via simple SQL functions. No external control plane required.</p>
+                <h4 className="font-bold text-lg mb-1">SQL Management Functions</h4>
+                <p className="text-slate-600">Full cluster lifecycle—init, membership, diagnostics, and monitoring—managed via simple SQL functions. No external control plane required.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-pink-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Observability</h4>
-                <p className="text-slate-100/90">Inspect cluster state, logs, and leader status with SQL queries. Built-in monitoring hooks for easy integration with dashboards and alerts.</p>
+                <h4 className="font-bold text-lg mb-1">Observability</h4>
+                <p className="text-slate-600">Inspect cluster state, logs, and leader status with SQL queries. Built-in monitoring hooks for easy integration with dashboards and alerts.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-cyan-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Dynamic Node Membership</h4>
-                <p className="text-slate-100/90">Add or remove nodes through consensus. Scale up or down safely, with all changes replicated and agreed by the cluster.</p>
+                <h4 className="font-bold text-lg mb-1">Dynamic Node Membership</h4>
+                <p className="text-slate-600">Add or remove nodes through consensus. Scale up or down safely, with all changes replicated and agreed by the cluster.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-red-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Debug & Audit</h4>
-                <p className="text-slate-100/90">Toggle extended logging, access audit-friendly SQL surfaces, and trace cluster events for compliance and troubleshooting.</p>
+                <h4 className="font-bold text-lg mb-1">Debug & Audit</h4>
+                <p className="text-slate-600">Toggle extended logging, access audit-friendly SQL surfaces, and trace cluster events for compliance and troubleshooting.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-violet-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Minimal Configuration</h4>
-                <p className="text-slate-100/90">Production-ready defaults, simple setup, and tuneable parameters. Get started quickly and adapt to your workload needs.</p>
+                <h4 className="font-bold text-lg mb-1">Minimal Configuration</h4>
+                <p className="text-slate-600">Production-ready defaults, simple setup, and tuneable parameters. Get started quickly and adapt to your workload needs.</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 bg-indigo-700/80 rounded-2xl shadow-xl p-8 border border-indigo-400/30">
-              <span className="text-white"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
+            <div className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+              <span className="text-emerald-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-xl mb-2">Background Worker Architecture</h4>
-                <p className="text-slate-100/90">Efficient, low-overhead operation inside PostgreSQL. Leverages background workers and shared memory for high performance.</p>
+                <h4 className="font-bold text-lg mb-1">Background Worker Architecture</h4>
+                <p className="text-slate-600">Efficient, low-overhead operation inside PostgreSQL. Leverages background workers and shared memory for high performance.</p>
               </div>
             </div>
           </div>
