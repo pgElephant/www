@@ -116,39 +116,37 @@ const RamPage = () => {
 
   return (
     <div className="pt-16">
-        {/* Hero Section with elegant gradient background - same as main page */}
+      {/* Hero Section with demo terminal and badges, matching pgraft/fauxdb */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          position: 'relative'
+        }}
+      >
+        {/* Elegant overlay gradient - same as Hero */}
         <div 
-          className="relative overflow-hidden"
-          style={{ 
-            background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
-            position: 'relative'
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
           }}
-        >
-          {/* Elegant overlay gradient - same as Hero */}
-          <div 
-            className="absolute inset-0"
+        />
+        {/* Elegant floating elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
             style={{
-              background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
             }}
           />
-          
-          {/* Elegant floating elements - same as Hero */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Floating orbs */}
-            <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-            <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-            
-            {/* Subtle pattern overlay */}
-            <div
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage:
-                  'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
-                backgroundSize: '32px 32px'
-              }}
-            />
-          </div>
+        </div>
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -162,9 +160,9 @@ const RamPage = () => {
         </div>
 
         <div className="container-wide py-20 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center mb-6">
-              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mr-6">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="flex flex-col items-center justify-center mb-8">
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-4">
                 <Image
                   src="/ico/RAM_HD.ico"
                   alt="RAM icon"
@@ -173,22 +171,45 @@ const RamPage = () => {
                   className="w-16 h-16 object-contain"
                   priority
                 />
+              </div>
+              <h1 className="text-5xl font-bold mb-5 tracking-tight text-white drop-shadow-lg">RAM: Resilient Adaptive Manager</h1>
+              <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white/80 drop-shadow-sm max-w-4xl">
+                High-performance PostgreSQL clustering with automatic failover, Raft consensus, and real-time monitoring.
+              </p>
+            </div>
+
+            {/* Demo Terminal (placeholder, for visual alignment) */}
+            <div className="max-w-4xl mx-auto mb-8">
+              <div className="bg-gray-900 rounded-xl p-8 text-white">
+                <div className="flex items-center mb-6">
+                  <div className="flex gap-2 mr-4">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <span className="text-gray-300">RAM Demo Terminal (Coming Soon)</span>
                 </div>
-              <div className="text-left">
-                <h1 className="text-4xl md:text-5xl text-white mb-2">
-                    RAM
-                  </h1>
-                <p className="text-xl text-gray-300">
-                    Resilient Adaptive Manager
-                  </p>
+                <div className="mb-6 text-gray-400 text-sm text-center">Interactive cluster management demo will be available here.</div>
+                <div className="flex gap-4 justify-center">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors" disabled>
+                    Simulate Failover
+                  </button>
+                  <button className="bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors" disabled>
+                    View Cluster State
+                  </button>
                 </div>
               </div>
-            <p className="text-xl mb-8 leading-relaxed" style={{ color: palette.gray100 }}>
-              High-performance PostgreSQL clustering with automatic failover.
-            </p>
+            </div>
+
+            {/* Badges (like pgraft/fauxdb) */}
+            <div className="mt-8 flex flex-wrap justify-center">
+              <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">PostgreSQL Clustering</span>
+              <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">Raft Consensus</span>
+              <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">Auto Failover</span>
+              <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">Real-time Monitoring</span>
+              <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">Production Ready</span>
+            </div>
           </div>
-        </div>
-      </div>
 
       {/* Features */}
       <div className="bg-white py-20">
@@ -657,7 +678,7 @@ const RamPage = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default RamPage
