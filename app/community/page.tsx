@@ -176,7 +176,7 @@ const CommunityPage = () => {
           />
         </div>
 
-        <div className="container-wide py-20 relative z-10">
+  <div className="container-wide py-28 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl text-white mb-6 drop-shadow-lg font-bold">
               Community

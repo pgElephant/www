@@ -40,6 +40,8 @@ const trustBar = [
   { icon: Globe2, label: 'Global CDN Delivery' },
 ]
 
+const unifiedHeroGradient = 'linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)'
+
 const DownloadPage = () => {
   // Function to get appropriate icon for download type
   const getDownloadIcon = (type: string) => {
@@ -143,14 +145,14 @@ const DownloadPage = () => {
 
   return (
     <div className="pt-0">
-      {/* Animated Professional Hero */}
-      <section className="relative bg-gradient-to-br from-navy via-slate to-gray-900 py-28 text-center overflow-hidden">
+      {/* Unified Professional Hero */}
+      <section className="relative text-center overflow-hidden" style={{ background: unifiedHeroGradient }}>
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-orange-400/10 rounded-full blur-2xl animate-pulse" />
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-cyan-200/10 to-transparent" />
         </div>
-        <div className="container-wide mx-auto relative z-10">
+        <div className="container-wide mx-auto relative z-10 py-28">
           <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg tracking-tight">Download Center</h1>
           <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl mx-auto drop-shadow-md">
             Official, production-grade releases. Secure, fast, and trusted by global enterprises.
@@ -177,56 +179,55 @@ const DownloadPage = () => {
         </div>
       </section>
 
-      {/* Product Download Cards with Highlights and Release Notes */}
+      {/* Professional Download Table/List */}
       <section className="bg-white py-24">
         <div className="container-wide mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {products.map((product) => (
-              <div key={product.id} className="relative bg-white border border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl transition p-8 flex flex-col">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 flex items-center justify-center mr-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <Image src={product.icon} alt={`${product.name} icon`} width={56} height={56} className="w-14 h-14 object-contain" priority />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-1 flex items-center gap-2">
-                      {product.name}
-                      <span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded ml-2">Stable</span>
-                    </h3>
-                    <p className="text-xs text-gray-500 font-medium">{product.title}</p>
-                  </div>
-                </div>
-                {/* Product Highlights */}
-                <ul className="mb-4 text-xs text-gray-700 space-y-1 list-disc list-inside">
-                  <li>Open Source & Audited</li>
-                  <li>Production-Ready</li>
-                  <li>Multi-Platform Support</li>
-                  <li>Enterprise Documentation</li>
-                </ul>
-                <div className="space-y-3 mb-4">
-                  {product.downloads.map((download, index) => (
-                    <Link key={index} href={download.href} className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition-colors group">
-                      <div className="flex items-center">
-                        {(() => {
-                          const IconComponent = getDownloadIcon(download.type)
-                          return <IconComponent className="w-4 h-4 mr-3 text-cyan-600" />
-                        })()}
-                        <span className="text-sm text-gray-900 font-medium whitespace-nowrap">{download.title}</span>
-                        <span className="ml-2 text-xs text-gray-500">{download.type}</span>
+          <div className="max-w-5xl mx-auto">
+            <table className="w-full text-left border-separate border-spacing-y-4">
+              <thead>
+                <tr className="text-gray-700 text-sm uppercase tracking-wider">
+                  <th className="py-2">Product</th>
+                  <th className="py-2">Description</th>
+                  <th className="py-2">Downloads</th>
+                  <th className="py-2">Release Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.id} className="bg-white border-b border-gray-100 hover:bg-gray-50 transition">
+                    <td className="py-4 px-2 align-top whitespace-nowrap">
+                      <div className="flex items-center gap-3">
+                        <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200" />
+                        <div>
+                          <div className="font-semibold text-lg text-gray-900 flex items-center gap-2">
+                            {product.name}
+                            <span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded">Stable</span>
+                          </div>
+                        </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-cyan-600 transition-colors" />
-                    </Link>
-                  ))}
-                </div>
-                <div className="flex gap-2 mt-auto">
-                  <Link href={`/${product.id}`} className="flex-1 text-center py-2 px-4 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors text-xs font-semibold">Learn More</Link>
-                  <Link href="/docs" className="flex-1 text-center py-2 px-4 rounded-lg text-white transition-colors text-xs font-semibold" style={{ backgroundColor: palette.cyan }} onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.cyanDeep} onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.cyan}>Documentation</Link>
-                </div>
-                {/* Release Notes Link */}
-                <div className="mt-4 text-right">
-                  <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-cyan-700 hover:underline">View Release Notes</a>
-                </div>
-              </div>
-            ))}
+                    </td>
+                    <td className="py-4 px-2 align-top text-sm text-gray-600 max-w-xs">{product.title}</td>
+                    <td className="py-4 px-2 align-top">
+                      <div className="flex flex-col gap-2">
+                        {product.downloads.map((download, index) => (
+                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition-colors text-sm font-medium">
+                            {(() => {
+                              const IconComponent = getDownloadIcon(download.type)
+                              return <IconComponent className="w-4 h-4 text-cyan-600" />
+                            })()}
+                            {download.title}
+                            <span className="ml-2 text-xs text-gray-500">{download.type}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="py-4 px-2 align-top">
+                      <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-cyan-700 hover:underline">View</a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
