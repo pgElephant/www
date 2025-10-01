@@ -191,32 +191,6 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Performance Snapshot */}
-      <section className="py-20 bg-slate-900 text-slate-100 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_70%_40%,rgba(255,255,255,0.25),transparent_60%)]" />
-        <div className="container-wide relative z-10">
-          <SectionHeading kicker="Performance">Operational Profile</SectionHeading>
-          <div className="grid md:grid-cols-4 gap-6 text-center">
-            <div className="bg-slate-800/60 rounded-xl p-6 border border-slate-700">
-              <div className="text-2xl font-semibold text-white mb-1">~100ms</div>
-              <p className="text-xs text-slate-300">Heartbeat Interval (default)</p>
-            </div>
-            <div className="bg-slate-800/60 rounded-xl p-6 border border-slate-700">
-              <div className="text-2xl font-semibold text-white mb-1">1–5s</div>
-              <p className="text-xs text-slate-300">Election Convergence Window</p>
-            </div>
-            <div className="bg-slate-800/60 rounded-xl p-6 border border-slate-700">
-              <div className="text-2xl font-semibold text-white mb-1">&lt;1% CPU</div>
-              <p className="text-xs text-slate-300">Idle Worker Overhead</p>
-            </div>
-            <div className="bg-slate-800/60 rounded-xl p-6 border border-slate-700">
-              <div className="text-2xl font-semibold text-white mb-1">~50MB</div>
-              <p className="text-xs text-slate-300">Resident Memory (node)</p>
-            </div>
-          </div>
-          <p className="text-[11px] mt-6 text-slate-400 text-center">Figures are indicative defaults; tuneable via configuration. Always benchmark with production workload characteristics.</p>
-        </div>
-      </section>
 
 
 
@@ -242,22 +216,6 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* API Documentation */}
-      <section className="py-20 bg-white border-t">
-        <div className="container-wide">
-          <SectionHeading kicker="Interface">API Documentation</SectionHeading>
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-slate-600 mb-8">
-              pgraft provides a comprehensive set of SQL functions for cluster management, monitoring, and control. Visit our documentation for detailed API references and usage examples.
-            </p>
-            <Link 
-              href="/docs/pgraft/user-guide/sql-functions" 
-              className="inline-block bg-slate-900 text-white hover:bg-slate-800 font-semibold px-8 py-4 rounded-xl transition-all duration-300">
-              View Complete API Reference
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Comparison Snapshot */}
       <section className="py-20 bg-slate-900 text-slate-100">

@@ -153,6 +153,67 @@ const PgraftDemoTerminal = () => {
         '3       | 127.0.0.1  | 7002 | f',
         '(3 rows)'
       ]
+    },
+    // Log Replication Example
+    {
+      command: 'psql -p 5431 -d postgres -c "CREATE TABLE users (id serial primary key, name text);"',
+      output: [
+        'CREATE TABLE'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "INSERT INTO users (name) VALUES (\'alice\'), (\'bob\'), (\'charlie\');"',
+      output: [
+        'INSERT 0 3'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT * FROM users;"',
+      output: [
+        'id | name',
+        '---+----------',
+        ' 1 | alice',
+        ' 2 | bob',
+        ' 3 | charlie',
+        '(3 rows)'
+      ]
+    },
+    {
+      command: 'psql -p 5432 -d postgres -c "SELECT * FROM users;"',
+      output: [
+        'id | name',
+        '---+----------',
+        ' 1 | alice',
+        ' 2 | bob',
+        ' 3 | charlie',
+        '(3 rows)',
+        '',
+        '-- Data replicated to follower node (5432)'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT log_index, command, committed FROM pgraft_get_log_entries();"',
+      output: [
+        'log_index | command                        | committed',
+        '----------+-------------------------------+----------',
+        '       10 | CREATE TABLE users ...         | t',
+        '       11 | INSERT INTO users ...          | t',
+        '(2 rows)',
+        '',
+        '-- Log entries on leader (5431)'
+      ]
+    },
+    {
+      command: 'psql -p 5432 -d postgres -c "SELECT log_index, command, committed FROM pgraft_get_log_entries();"',
+      output: [
+        'log_index | command                        | committed',
+        '----------+-------------------------------+----------',
+        '       10 | CREATE TABLE users ...         | t',
+        '       11 | INSERT INTO users ...          | t',
+        '(2 rows)',
+        '',
+        '-- Log entries on follower (5432)'
+      ]
     }
   ]
 
