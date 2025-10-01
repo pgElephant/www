@@ -263,7 +263,7 @@ const DownloadPage = () => {
                       <div className="flex flex-col h-full justify-between min-h-[180px]">
                         <div>
                           <div className="font-semibold text-base text-gray-900 mb-1">{product.title}</div>
-                          <ul className="list-disc list-inside space-y-1 mb-4">
+                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 list-disc list-inside mb-4">
                             {product.features && product.features.map((feature, i) => (
                               <li key={i} className="text-gray-600 text-xs leading-snug">{feature}</li>
                             ))}
