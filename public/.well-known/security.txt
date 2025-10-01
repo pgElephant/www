@@ -1,0 +1,12 @@
+Contact: mailto:admin@pgelephant.com
+Contact: https://www.pgelephant.com/contact
+Expires: 2026-01-27T00:00:00.000Z
+Encryption: https://www.pgelephant.com/pgp-key.txt
+Acknowledgments: https://www.pgelephant.com/security-acknowledgments
+Preferred-Languages: en
+Canonical: https://www.pgelephant.com/.well-known/security.txt
+Policy: https://www.pgelephant.com/security-policy
+
+# Security Policy for pgElephant
+# For security vulnerabilities, please contact us via the methods above.
+# We appreciate responsible disclosure of security issues.

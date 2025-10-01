@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://pgelephant.com'
+  const baseUrl = 'https://www.pgelephant.com'
   const currentDate = new Date()
 
   return [
@@ -25,6 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/rale`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/pgraft`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -79,6 +85,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/docs/rale/getting-started`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/docs/pgraft/getting-started`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.7,

@@ -1,0 +1,35 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Developer: pgElephant Team
+    Contact: info [at] pgelephant.com
+    From: Worldwide
+
+# THANKS
+
+    PostgreSQL Community
+    Rust Community  
+    Go Community
+    Next.js Team
+    Tailwind CSS Team
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, JavaScript ES6+
+    Next.js 15.5.4
+    React 18+
+    Tailwind CSS
+    TypeScript
+    PostgreSQL
+    Rust
+    Go
+
+# SITE
+
+    Last update: 2025/01/27
+    Standards: HTML5, CSS3, ES6+
+    Components: React, Next.js
+    Software: VSCode, Git
+    Hosting: Production Ready
