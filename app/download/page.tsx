@@ -260,8 +260,8 @@ const DownloadPage = () => {
                       </div>
                     </td>
                     <td className="py-3 px-2 align-top text-sm text-gray-600 max-w-xs">
-                      <div className="flex flex-col h-full justify-between min-h-[180px]">
-                        <div>
+                      <div className="flex flex-col h-full min-h-[180px]">
+                        <div className="flex-1">
                           <div className="font-semibold text-base text-gray-900 mb-1">{product.title}</div>
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 list-disc list-inside mb-4">
                             {product.features && product.features.map((feature, i) => (
@@ -269,7 +269,7 @@ const DownloadPage = () => {
                             ))}
                           </ul>
                         </div>
-                        <div>
+                        <div className="flex items-end mt-auto">
                           <Link href={product.details} className="inline-block mt-2 text-xs font-semibold text-cyan-700 hover:underline hover:text-cyan-900 transition">View Enterprise Details</Link>
                         </div>
                       </div>

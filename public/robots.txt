@@ -24,8 +24,8 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 Disallow: /private/
-Disallow: /cpanel/
-Disallow: /cpanel
+# Disallow: /cpanel/
+# Disallow: /cpanel
 Disallow: /cgi-bin/
 Disallow: /webmail/
 Disallow: /mail/
