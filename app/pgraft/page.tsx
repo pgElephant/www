@@ -55,11 +55,7 @@ const PgraftPage = () => {
           <h1 className="text-5xl font-bold mb-5 tracking-tight">
             pgraft: Raft based postgresql extension for leader election
           </h1>
-            <p className="text-xl max-w-3xl mx-auto mb-8 text-slate-200">
-            A battle-tested PostgreSQL extension that provides reliable leader election, automatic failover, 
-            and robust consensus using proven libraft implementation. Built for high-availability clusters 
-            with zero split-brain guarantee.
-          </p>
+            
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             <Link href="/docs/pgraft/getting-started" className="bg-white text-slate-900 hover:bg-slate-100 font-semibold px-8 py-4 rounded-2xl transition-all duration-300 inline-flex items-center shadow">
               <BookOpen className="w-5 h-5 mr-2" /> Get Started
@@ -72,6 +68,9 @@ const PgraftPage = () => {
             >
               <Github className="w-5 h-5 mr-2" /> Source <ExternalLink className="w-4 h-4 ml-2" />
             </a>
+          </div>
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-semibold text-white mb-4">Command Line Examples</h3>
           </div>
           <div className="max-w-4xl mx-auto">
             <PgraftDemoTerminal />
@@ -101,27 +100,7 @@ const PgraftPage = () => {
         </div>
       </section>
 
-      {/* Installation & Setup */}
-      <section className="py-20 bg-white border-t border-b">
-        <div className="container-wide">
-          <SectionHeading kicker="Setup">Getting Started</SectionHeading>
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-slate-600 mb-8">
-              Get up and running with pgraft by following our comprehensive documentation. Our guides cover everything from installation prerequisites to configuration and usage examples.
-            </p>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <Link href="/docs/pgraft/getting-started/installation" className="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
-                <h3 className="font-semibold text-lg text-slate-900 mb-2">Installation Guide</h3>
-                <p className="text-sm text-slate-600">Step-by-step instructions for installing pgraft and setting up your environment.</p>
-              </Link>
-              <Link href="/docs/pgraft/getting-started/quick-start" className="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
-                <h3 className="font-semibold text-lg text-slate-900 mb-2">Quick Start</h3>
-                <p className="text-sm text-slate-600">Get a basic cluster up and running with our quick start tutorial.</p>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Architecture Overview */}
       <section className="py-20 bg-slate-50 border-t border-b">
