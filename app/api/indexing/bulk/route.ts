@@ -39,23 +39,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Also ping other search engines
-    const searchEngines = [
-      'https://www.google.com/ping?sitemap=',
-      'https://www.bing.com/ping?sitemap=',
-    ]
-
-    const sitemapUrl = `${baseUrl}/sitemap.xml`
-    
-    for (const engine of searchEngines) {
-      try {
-        await fetch(`${engine}${encodeURIComponent(sitemapUrl)}`, {
-          method: 'GET'
-        })
-      } catch (error) {
-        console.log(`Failed to ping search engine: ${engine}`, error)
-      }
-    }
+    // Per Google guidance, sitemaps ping is deprecated.
+    // Rely on Search Console submission and accurate lastmod.
 
     const successCount = results.filter(r => r.success).length
     const totalCount = results.length
@@ -64,7 +49,7 @@ export async function POST(request: NextRequest) {
       success: successCount > 0,
       message: `Successfully submitted ${successCount}/${totalCount} URLs for indexing`,
       results,
-      sitemapPinged: true
+      sitemapPinged: false
     })
 
   } catch (error) {

@@ -14,6 +14,7 @@ const palette = {
 }
 
 const Footer = () => {
+  const year = new Date().getFullYear()
   const navigation = {
     products: [
       { name: 'RALE', href: '/rale', description: 'Distributed Consensus' },
@@ -61,6 +62,8 @@ const Footer = () => {
 
   return (
     <footer 
+      role="contentinfo"
+      aria-label="Site footer"
       className="pt-12 pb-6 relative overflow-hidden"
       style={{
         background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
@@ -107,44 +110,65 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0 drop-shadow-sm">
+            <p className="text-white text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0">
               Enterprise-grade PostgreSQL platform.
             </p>
+            {/* Social links */}
+            <div className="flex justify-center md:justify-start gap-4" aria-label="Social links">
+              {social.map(({ name, href, icon: Icon }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Product Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white drop-shadow-2xl shadow-2xl font-semibold mb-3 text-sm drop-shadow-sm">Products</h3>
-            <ul className="space-y-2">
-              <li><a href="/rale" className="text-white drop-shadow-2xl shadow-2xl/70 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm drop-shadow-sm">RALE</a></li>
-              <li><a href="/ram" className="text-white drop-shadow-2xl shadow-2xl/70 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm drop-shadow-sm">RAM</a></li>
-              <li><a href="/fauxdb" className="text-white drop-shadow-2xl shadow-2xl/70 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm drop-shadow-sm">FauxDB</a></li>
-            </ul>
+            <h3 className="text-white font-semibold mb-3 text-sm">Products</h3>
+            <nav aria-label="Products">
+              <ul className="space-y-2">
+                <li><a href="/ram" className="text-white/90 hover:text-white transition-colors text-sm">RAM</a></li>
+                <li><a href="/pgraft" className="text-white/90 hover:text-white transition-colors text-sm">pgraft</a></li>
+                <li><a href="/fauxdb" className="text-white/90 hover:text-white transition-colors text-sm">FauxDB</a></li>
+                <li><a href="/rale" className="text-white/90 hover:text-white transition-colors text-sm">RALE</a></li>
+              </ul>
+            </nav>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white drop-shadow-2xl shadow-2xl font-semibold mb-3 text-sm">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><a href="/download" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Download</a></li>
-              <li><a href="/blog" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Blog</a></li>
-              <li><a href="/docs" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Documentation</a></li>
-              <li><a href="/community" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Community</a></li>
-            </ul>
+            <h3 className="text-white font-semibold mb-3 text-sm">Quick Links</h3>
+            <nav aria-label="Quick Links">
+              <ul className="space-y-2">
+                <li><a href="/download" className="text-white/90 hover:text-white transition-colors text-sm">Download</a></li>
+                <li><a href="/docs" className="text-white/90 hover:text-white transition-colors text-sm">Documentation</a></li>
+                <li><a href="/blog" className="text-white/90 hover:text-white transition-colors text-sm">Blog</a></li>
+                <li><a href="/community" className="text-white/90 hover:text-white transition-colors text-sm">Community</a></li>
+                <li><a href="/contact" className="text-white/90 hover:text-white transition-colors text-sm">Contact</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-slate-400 text-sm">
-              © 2024 pgElephant. All rights reserved.
+            <p className="text-white/70 text-sm">
+              © {year} pgElephant. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="/privacy" className="text-slate-400 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">
+              <a href="/privacy" className="text-white/70 hover:text-white transition-colors text-sm">
                 Privacy Policy
               </a>
-              <a href="/terms" className="text-slate-400 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">
+              <a href="/terms" className="text-white/70 hover:text-white transition-colors text-sm">
                 Terms of Service
               </a>
             </div>
