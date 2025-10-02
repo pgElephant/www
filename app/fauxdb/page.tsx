@@ -33,7 +33,7 @@ const fauxdbConfig = {
               </div>
               <span className="text-green-300">mongosh</span>
             </div>
-            <pre className="whitespace-pre-line text-green-300">{`> db.users.insertOne({ name: "Alice", age: 27 })
+            <pre className="whitespace-pre-line text-green-300 text-left">{`> db.users.insertOne({ name: "Alice", age: 27 })
 { acknowledged: true, insertedId: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8") }
 
 > db.users.find({ age: { $gt: 20 } })
@@ -56,7 +56,7 @@ const fauxdbConfig = {
               </div>
               <span className="text-cyan-300">fauxdb-proxy</span>
             </div>
-            <pre className="whitespace-pre-line text-cyan-200">{`[INFO] MongoDB wire protocol request received
+            <pre className="whitespace-pre-line text-cyan-200 text-left">{`[INFO] MongoDB wire protocol request received
 [TRANSLATE] insertOne() → INSERT INTO users (name, age) VALUES ('Alice', 27)
 [TRANSLATE] find({age: {$gt: 20}}) → SELECT * FROM users WHERE age > 20
 [TRANSLATE] stats() → SELECT COUNT(*) FROM users; SELECT pg_total_relation_size('users')
@@ -82,7 +82,7 @@ const fauxdbConfig = {
               </div>
               <span className="text-yellow-200">postgresql</span>
             </div>
-            <pre className="whitespace-pre-line text-yellow-100">{`> psql -d fauxdb -c "INSERT INTO users (name, age) VALUES ('Alice', 27);"
+            <pre className="whitespace-pre-line text-yellow-100 text-left">{`> psql -d fauxdb -c "INSERT INTO users (name, age) VALUES ('Alice', 27);"
 INSERT 0 1
 
 > psql -d fauxdb -c "SELECT * FROM users WHERE age > 20;"
@@ -115,7 +115,7 @@ id |  name  | age
               </div>
               <span className="text-purple-300">postgresql.log</span>
             </div>
-            <pre className="whitespace-pre-line text-purple-200">{`2025-10-01 10:30:15.123 UTC [1234] LOG:  connection received: host=127.0.0.1 port=5432
+            <pre className="whitespace-pre-line text-purple-200 text-left">{`2025-10-01 10:30:15.123 UTC [1234] LOG:  connection received: host=127.0.0.1 port=5432
 2025-10-01 10:30:15.124 UTC [1234] LOG:  connection authorized: user=fauxdb database=fauxdb
 2025-10-01 10:30:15.125 UTC [1234] LOG:  statement: INSERT INTO users (name, age) VALUES ('Alice', 27);
 2025-10-01 10:30:15.126 UTC [1234] LOG:  statement: SELECT * FROM users WHERE age > 20;

@@ -56,11 +56,11 @@ const PgraftPage = () => {
             <div className="mb-4">
               <img src="/ico/pgraft.ico" alt="pgraft icon" width={64} height={64} className="inline-block align-middle" />
             </div>
-            <h1 className="text-5xl font-bold tracking-tight">
-              <b>pgraft</b>: Raft based postgresql extension for leader election
+            <h1 className="text-3xl font-semibold tracking-tight">
+              <span className="text-blue-400">pgraft</span>: Raft based postgresql extension for leader election
             </h1>
-            <div className="text-xl font-semibold text-white/90 mt-2">
-              Raft-Based PostgresSQL Extension For Leader Election
+            <div className="text-lg font-medium text-white/90 mt-2">
+              Raft-Based PostgreSQL Extension For Leader Election
             </div>
           </div>
           <div className="text-center mb-8">
