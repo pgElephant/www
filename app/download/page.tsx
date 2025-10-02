@@ -194,7 +194,7 @@ const DownloadPage = () => {
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-cyan-200/10 to-transparent" />
         </div>
         <div className="container-wide mx-auto relative z-10 py-28">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg tracking-tight">Download Center</h1>
+          <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 drop-shadow-lg tracking-tight">Download Center</h1>
           <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl mx-auto drop-shadow-md">
             Official, production-grade releases. Secure, fast, and trusted by global enterprises.
           </p>

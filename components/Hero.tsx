@@ -142,10 +142,10 @@ const Hero = () => {
                       />
                     </div>
                     <div className="text-left">
-                      <h2 className="text-3xl md:text-4xl font-heading font-bold text-white drop-shadow-lg">
+                      <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-lg">
                         {current.name}
                       </h2>
-                      <p className="text-lg text-white/90 drop-shadow-md">
+                      <p className="text-lg font-thin text-white/90 drop-shadow-md">
                         {current.title}
                       </p>
                     </div>
