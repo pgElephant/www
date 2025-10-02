@@ -248,7 +248,7 @@ const DownloadPage = () => {
                       <div className="flex items-center gap-3">
                         <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200 shadow-sm" />
                         <div>
-                          <div className="font-thin text-lg text-gray-900 flex items-center gap-2">
+                          <div className="font-bold text-lg text-gray-900 flex items-center gap-2">
                             {product.name}
                             {product.featured && (
                               <span className="inline-block bg-cyan-100 text-cyan-700 text-xs font-thin px-2 py-0.5 rounded animate-pulse">New</span>
