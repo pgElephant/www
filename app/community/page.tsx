@@ -178,10 +178,10 @@ const CommunityPage = () => {
 
   <div className="container-wide py-28 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
               Community
             </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto">
               Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
             </p>
             
@@ -350,7 +350,7 @@ const CommunityPage = () => {
                   <MessageCircle className="w-10 h-10 text-white drop-shadow-2xl shadow-2xl" />
                 </div>
                 <div className="text-left">
-                  <h2 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-lg">
+                  <h2 className="text-4xl md:text-5xl font-thin text-white mb-2">
                     Discord
                   </h2>
                   <p className="text-xl text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
@@ -547,7 +547,7 @@ const CommunityPage = () => {
                   <Github className="w-10 h-10 text-white drop-shadow-2xl shadow-2xl" />
                 </div>
                 <div className="text-left">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-lg">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
                     GitHub
                   </h2>
                   <p className="text-xl text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
@@ -733,7 +733,7 @@ const CommunityPage = () => {
                   <MessageCircle className="w-10 h-10 text-white drop-shadow-2xl shadow-2xl" />
                 </div>
                 <div className="text-left">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-lg">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
                     Community Forum
                   </h2>
                   <p className="text-xl text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">

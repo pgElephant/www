@@ -322,7 +322,7 @@ export default function BlogPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
               <h2 className="text-4xl md:text-5xl font-thin text-white mb-4 tracking-tight">Articles</h2>
-              <p className="text-lg text-white/80 max-w-2xl mx-auto drop-shadow-2xl shadow-2xl">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {blogPosts.map((post, i) => (
