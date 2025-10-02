@@ -246,10 +246,10 @@ const FeaturesList = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-400/30 bg-white/5">
-                    <th className="text-left p-6 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/4">Solution</th>
-                    <th className="text-left p-4 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/6">Category</th>
-                    <th className="text-left px-4 py-6 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/4">Enterprise Features</th>
-                    <th className="text-left px-8 py-6 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/3">Deployment</th>
+                    <th className="text-left p-6 text-white font-thin text-sm uppercase tracking-wider w-1/4">Solution</th>
+                    <th className="text-left p-4 text-white font-thin text-sm uppercase tracking-wider w-1/6">Category</th>
+                    <th className="text-left px-4 py-6 text-white font-thin text-sm uppercase tracking-wider w-1/4">Enterprise Features</th>
+                    <th className="text-left px-8 py-6 text-white font-thin text-sm uppercase tracking-wider w-1/3">Deployment</th>
                   </tr>
                 </thead>
                 <tbody>

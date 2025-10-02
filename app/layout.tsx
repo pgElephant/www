@@ -265,6 +265,36 @@ export default function RootLayout({
         {/* Additional browser-specific favicons */}
         <link rel="fluid-icon" href="/ico/pgElephant_HD.ico" title="pgElephant" />
         
+        {/* Organization Schema for Google Search */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "pgElephant",
+              "alternateName": "PostgreSQL Elephant",
+              "url": "https://www.pgelephant.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+                "width": 512,
+                "height": 512
+              },
+              "description": "Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus",
+              "foundingDate": "2024",
+              "sameAs": [
+                "https://github.com/pgElephant"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Technical Support",
+                "url": "https://www.pgelephant.com/contact"
+              }
+            })
+          }}
+        />
+        
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -287,8 +317,11 @@ export default function RootLayout({
               "creator": {
                 "@type": "Organization",
                 "name": "pgElephant Team",
-                "url": "https://www.pgelephant.com"
+                "url": "https://www.pgelephant.com",
+                "logo": "https://www.pgelephant.com/ico/pgElephant_HD.ico"
               },
+              "image": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+              "logo": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
               "featureList": [
                 "PostgreSQL High Availability",
                 "Automatic Failover",

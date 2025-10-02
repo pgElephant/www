@@ -236,6 +236,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/ram/ramctrl/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/ramctrl">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/ramctrl/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/ram/ramd/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/ramd">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/ramd/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/download/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/download">> = Specific
