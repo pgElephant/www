@@ -168,7 +168,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
   return (
     <article className="group h-full">
       <Link href={`/blog/${post.slug}`} className="block h-full">
-        <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-gray-200 h-full flex flex-col">
+        <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-gray-200 h-full flex flex-col">
           {/* Large Stock Image */}
           <div className="relative w-full aspect-[3/2] bg-gray-200 overflow-hidden flex-shrink-0">
             <Image
@@ -179,7 +179,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               sizes="(max-width: 768px) 100vw, 33vw"
               priority={index < 3}
             />
-            <div className="absolute top-4 left-4 bg-white/80 text-gray-900 px-3 py-1 rounded-full text-xs font-thin shadow">
+            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm/80 text-gray-900 px-3 py-1 rounded-full text-xs font-thin shadow">
               {post.category}
             </div>
           </div>
@@ -289,7 +289,7 @@ export default function BlogPage() {
       </div>
 
       {/* Blog Categories */}
-      <div className="bg-gray-50 py-16">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-16">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -299,7 +299,7 @@ export default function BlogPage() {
             
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {blogCategories.map((category, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
+                <div key={index} className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <category.icon className="w-6 h-6 text-white" />
                   </div>
@@ -317,7 +317,7 @@ export default function BlogPage() {
 
 
       {/* Blog Articles - Clean Modern Grid */}
-      <div className="bg-white py-24">
+      <div className="bg-white/95 backdrop-blur-sm py-24">
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">

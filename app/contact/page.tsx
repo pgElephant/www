@@ -181,7 +181,7 @@ Message: ${formData.message}
       </div>
 
       {/* Professional Contact Methods */}
-      <div className="bg-white py-24">
+      <div className="bg-white/95 backdrop-blur-sm py-24">
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             {/* Professional Header */}
@@ -212,7 +212,7 @@ Message: ${formData.message}
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-blue-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">General Support</div>
@@ -221,7 +221,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-blue-600" />
                     </div>
                   </div>
-                  <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-blue-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Sales Inquiries</div>
@@ -230,7 +230,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-blue-600" />
                     </div>
                   </div>
-                  <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-blue-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Technical Support</div>
@@ -266,7 +266,7 @@ Message: ${formData.message}
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-white/70 rounded-lg p-4 border border-gray-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-gray-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Report Bug</div>
@@ -275,7 +275,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-gray-600" />
                     </div>
                   </div>
-                  <div className="bg-white/70 rounded-lg p-4 border border-gray-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-gray-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Feature Request</div>
@@ -284,7 +284,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-gray-600" />
                     </div>
                   </div>
-                  <div className="bg-white/70 rounded-lg p-4 border border-gray-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-gray-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Code Discussion</div>
@@ -320,7 +320,7 @@ Message: ${formData.message}
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-white/70 rounded-lg p-4 border border-green-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-green-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Discord Server</div>
@@ -329,7 +329,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-green-600" />
                     </div>
                   </div>
-                  <div className="bg-white/70 rounded-lg p-4 border border-green-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-green-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Forum Discussion</div>
@@ -338,7 +338,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-green-600" />
                     </div>
                   </div>
-                  <div className="bg-white/70 rounded-lg p-4 border border-green-100">
+                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-green-100">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Documentation</div>
@@ -401,7 +401,7 @@ Message: ${formData.message}
                 Have a question or need support? Send us a message and we'll get back to you within 2 hours.
               </p>
             </div>
-            <div className="bg-white rounded-2xl p-12 shadow-2xl border border-gray-100">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-12 shadow-2xl border border-gray-100">
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

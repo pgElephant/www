@@ -201,7 +201,7 @@ const DownloadPage = () => {
           {/* Trust Bar */}
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {trustBar.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 text-white border border-white/20 text-base font-thin shadow-sm">
+              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 backdrop-blur-sm/10 text-white border border-white/20 text-base font-thin shadow-sm">
                 <item.icon className="w-5 h-5" />
                 {item.label}
               </div>
@@ -210,7 +210,7 @@ const DownloadPage = () => {
           {/* Download Stats */}
           <div className="flex flex-wrap justify-center gap-4">
             {downloadStats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center bg-white/10 px-6 py-4 rounded-xl min-w-[120px]">
+              <div key={i} className="flex flex-col items-center bg-white/95 backdrop-blur-sm/10 px-6 py-4 rounded-xl min-w-[120px]">
                 <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
                 <span className="text-2xl font-thin text-white">{stat.value}</span>
                 <span className="text-xs text-white/80">{stat.label}</span>
@@ -221,7 +221,7 @@ const DownloadPage = () => {
       </section>
 
       {/* Professional Download Table/List */}
-      <section className="bg-white py-24">
+      <section className="bg-white/95 backdrop-blur-sm py-24">
         <div className="container-wide mx-auto">
           <div className="max-w-5xl mx-auto">
             <table className="w-full text-left border-separate border-spacing-y-0">
@@ -239,7 +239,7 @@ const DownloadPage = () => {
                     key={product.id}
                     className={
                       `transition ` +
-                      (idx % 2 === 0 ? 'bg-gray-50' : 'bg-white') +
+                      (idx % 2 === 0 ? 'bg-gradient-to-br from-slate-50 to-slate-100' : 'bg-white/95 backdrop-blur-sm') +
                       (product.featured ? ' ring-2 ring-cyan-400/40' : '') +
                       ' hover:bg-cyan-50'
                     }
@@ -311,7 +311,7 @@ const DownloadPage = () => {
             <p className="text-lg text-white/90 mb-12 leading-relaxed drop-shadow-md">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
-                <div key={i} className="bg-white/10 rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
+                <div key={i} className="bg-white/95 backdrop-blur-sm/10 rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
                   <method.icon className="w-10 h-10 mb-3 text-cyan-200" />
                   <h3 className="text-lg font-thin text-white mb-2 drop-shadow">{method.title}</h3>
                   <p className="text-white/80 text-sm mb-3">{method.description}</p>
@@ -339,7 +339,7 @@ const DownloadPage = () => {
             <p className="text-lg text-gray-600 mb-8">All downloads are cryptographically signed, verified, and scanned for security. We provide open source, enterprise-grade software trusted by leading organizations worldwide.</p>
             <div className="flex flex-wrap justify-center gap-6">
               {trustBar.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white border border-gray-200 shadow-sm text-base font-thin text-gray-900">
+                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/95 backdrop-blur-sm border border-gray-200 shadow-sm text-base font-thin text-gray-900">
                   <item.icon className="w-6 h-6 text-cyan-600" />
                   {item.label}
                 </div>

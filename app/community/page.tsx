@@ -242,7 +242,7 @@ const CommunityPage = () => {
                     {/* Platform Stats */}
                     <div className="flex flex-wrap gap-4 lg:ml-auto">
                       {Object.entries(platform.stats).map(([key, value]) => (
-                        <div key={key} className="text-center px-4 py-2 bg-gray-50 rounded-lg">
+                        <div key={key} className="text-center px-4 py-2 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg">
                           <div className="text-lg font-thin text-gray-900">{value}</div>
                           <div className="text-xs text-gray-500 capitalize">{key}</div>
                         </div>
@@ -256,7 +256,7 @@ const CommunityPage = () => {
                       <Link
                         key={index}
                         href={link.href}
-                        className="flex items-start p-4 bg-gray-50 hover:bg-blue-50 rounded-xl transition-all duration-300 group border border-gray-200 hover:border-blue-300 hover:shadow-md"
+                        className="flex items-start p-4 bg-gradient-to-br from-slate-50 to-slate-100 hover:bg-blue-50 rounded-xl transition-all duration-300 group border border-gray-200 hover:border-blue-300 hover:shadow-md"
                       >
                         <div className="flex items-start w-full">
                           {(() => {
@@ -284,7 +284,7 @@ const CommunityPage = () => {
                   <div className="flex flex-wrap gap-4">
                     <Link
                       href={platform.links[0].href}
-                      className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-thin shadow-sm hover:shadow-md"
+                      className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gradient-to-br from-slate-50 to-slate-100 transition-colors font-thin shadow-sm hover:shadow-md"
                     >
                       <platform.icon className="w-4 h-4 mr-2" />
                       Join {platform.name}
