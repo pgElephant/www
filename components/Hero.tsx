@@ -142,16 +142,16 @@ const Hero = () => {
                       />
                     </div>
                     <div className="text-left">
-                      <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-2xl shadow-2xl">
+                      <h2 className="text-3xl md:text-4xl font-thin text-white">
                         {current.name}
                       </h2>
-                      <p className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl">
+                      <p className="text-lg font-thin text-white">
                         {current.title}
                       </p>
                     </div>
                   </div>
                 </div>
-                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16 text-white drop-shadow-2xl shadow-2xl">
+                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16 text-white">
                       <p>{current.description}</p>
                       <p>{current.description2}</p>
                       <p>{current.description3}</p>
@@ -199,7 +199,7 @@ const Hero = () => {
                          style={{ filter: active ? 'none' : 'brightness(0.7)' }}
                        />
                        <span
-                         className="font-medium text-white drop-shadow-2xl shadow-2xl"
+                         className="font-medium text-white"
                        >
                          {product.name}
                        </span>

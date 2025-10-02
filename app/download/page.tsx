@@ -194,8 +194,8 @@ const DownloadPage = () => {
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-cyan-200/10 to-transparent" />
         </div>
         <div className="container-wide mx-auto relative z-10 py-28">
-          <h1 className="text-5xl md:text-6xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4 tracking-tight">Download Center</h1>
-          <p className="text-xl md:text-2xl text-white drop-shadow-2xl shadow-2xl mb-8 max-w-2xl mx-auto">
+          <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight">Download Center</h1>
+          <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto">
             Official, production-grade releases. Secure, fast, and trusted by global enterprises.
           </p>
           {/* Trust Bar */}
@@ -307,8 +307,8 @@ const DownloadPage = () => {
         </div>
         <div className="container-wide mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6">Quick Start</h2>
-            <p className="text-lg text-white drop-shadow-2xl shadow-2xl mb-12 leading-relaxed">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
+            <h2 className="text-3xl md:text-4xl font-thin text-white mb-6">Quick Start</h2>
+            <p className="text-lg text-white mb-12 leading-relaxed">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
                 <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">

@@ -265,10 +265,10 @@ export default function BlogPage() {
 
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
               Blog
             </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto">
               Technical insights, tutorials, and updates from our team building the future of PostgreSQL clustering
             </p>
             
@@ -293,8 +293,8 @@ export default function BlogPage() {
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4">Categories</h2>
-              <p className="text-lg text-white/80 drop-shadow-2xl shadow-2xl">Explore our content by topic and expertise area</p>
+              <h2 className="text-3xl font-thin text-white mb-4">Categories</h2>
+              <p className="text-lg text-white/80">Explore our content by topic and expertise area</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -321,7 +321,7 @@ export default function BlogPage() {
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <h2 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4 tracking-tight">Articles</h2>
+              <h2 className="text-4xl md:text-5xl font-thin text-white mb-4 tracking-tight">Articles</h2>
               <p className="text-lg text-white/80 max-w-2xl mx-auto drop-shadow-2xl shadow-2xl">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">

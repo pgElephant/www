@@ -11,7 +11,7 @@ function SectionHeading({ children, kicker, className = '' }: SectionHeadingProp
   return (
     <div className={`text-center mb-14 ${className}`}>
       {kicker && <div className="text-xs tracking-wider font-thin text-indigo-500 uppercase mb-2">{kicker}</div>}
-      <h2 className={`text-3xl md:text-4xl font-thin ${className === 'text-white' ? 'text-white drop-shadow-2xl shadow-2xl' : 'text-slate-900'} mb-3`}>{children}</h2>
+      <h2 className={`text-3xl md:text-4xl font-thin ${className === 'text-white' ? 'text-white' : 'text-slate-900'} mb-3`}>{children}</h2>
       <div className="mx-auto h-1 w-28 bg-gradient-to-r from-indigo-500 to-sky-500 rounded" />
     </div>
   );
@@ -78,7 +78,7 @@ export default function ProjectTemplate({
             )}
             <h1 className="text-5xl font-thin mb-5 tracking-tight">{hero.title}</h1>
           </div>
-          {hero.subtitle && <div className="text-center mb-8"><h3 className="text-2xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4">{hero.subtitle}</h3></div>}
+          {hero.subtitle && <div className="text-center mb-8"><h3 className="text-2xl font-thin text-white mb-4">{hero.subtitle}</h3></div>}
           {demo && <div className="max-w-4xl mx-auto">{demo}</div>}
           <div className="mt-8 flex flex-wrap justify-center">
             {badges && badges.map((b: string, i: number) => <Badge key={i}>{b}</Badge>)}
