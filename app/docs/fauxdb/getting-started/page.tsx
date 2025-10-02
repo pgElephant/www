@@ -208,7 +208,7 @@ db.sales.aggregate([
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm/10 rounded-2xl flex items-center justify-center mr-6">
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mr-6 border border-white/20">
                 <Image
                   src="/ico/FauxDB_HD.ico"
                   alt="FauxDB icon"

@@ -132,7 +132,7 @@ const Community = () => {
               className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300"
             >
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
+                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mr-4 border border-white/20">
                   <platform.icon className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
@@ -174,7 +174,7 @@ const Community = () => {
               {contributionAreas.map((area, index) => (
                 <div
                   key={area.title}
-                  className="flex items-start gap-4 p-6 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                  className="flex items-start gap-4 p-6 hover:bg-white/10 rounded-lg transition-colors duration-200"
                 >
                   <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
                     <area.icon className="w-6 h-6 text-blue-600" />
@@ -210,7 +210,7 @@ const Community = () => {
                 >
                   <div className="flex items-start justify-between mb-3">
                     <h4 className="font-semibold text-edbDark-900">{update.title}</h4>
-                    <span className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">
+                    <span className="text-xs bg-white/10 backdrop-blur-sm text-white px-2 py-1 rounded-full border border-white/20">
                       {update.tag}
                     </span>
                   </div>
