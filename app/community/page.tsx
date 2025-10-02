@@ -307,6 +307,202 @@ const CommunityPage = () => {
         </div>
       </div>
 
+      {/* Discord Hero Section */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          position: 'relative'
+        }}
+      >
+        {/* Elegant overlay gradient */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-indigo-500/15 to-blue-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
+
+        <div className="container-wide py-24 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            {/* Discord Header */}
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
+                  <MessageCircle className="w-10 h-10 text-white" />
+                </div>
+                <div className="text-left">
+                  <h2 className="text-4xl md:text-5xl font-thin text-white mb-2 drop-shadow-lg">
+                    Discord
+                  </h2>
+                  <p className="text-xl text-white/90 drop-shadow-md">
+                    Real-time Community Chat
+                  </p>
+                </div>
+              </div>
+              <p className="text-lg text-white/80 max-w-3xl mx-auto drop-shadow-sm">
+                Join our active Discord server for instant support, discussions, and real-time collaboration.
+              </p>
+            </div>
+
+            {/* Discord Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">23</div>
+                <div className="text-sm text-white/80 drop-shadow-sm">members</div>
+              </div>
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">3</div>
+                <div className="text-sm text-white/80 drop-shadow-sm">online</div>
+              </div>
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">5</div>
+                <div className="text-sm text-white/80 drop-shadow-sm">channels</div>
+              </div>
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">3</div>
+                <div className="text-sm text-white/80 drop-shadow-sm">languages</div>
+              </div>
+            </div>
+
+            {/* Discord Channels */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {/* General Chat */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
+                    <MessageCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-thin text-white">General Chat</h3>
+                    <p className="text-sm text-white/70">Support</p>
+                  </div>
+                </div>
+                <p className="text-white/80 text-sm mb-4">
+                  Connect with the community
+                </p>
+                <p className="text-white/60 text-xs">
+                  Casual discussions and introductions
+                </p>
+              </div>
+
+              {/* Technical Support */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
+                    <Users className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-thin text-white">Technical Support</h3>
+                    <p className="text-sm text-white/70">Support</p>
+                  </div>
+                </div>
+                <p className="text-white/80 text-sm mb-4">
+                  Get help with installation and usage
+                </p>
+                <p className="text-white/60 text-xs">
+                  Expert assistance and troubleshooting
+                </p>
+              </div>
+
+              {/* Development Channel */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                    <Code className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-thin text-white">Development Channel</h3>
+                    <p className="text-sm text-white/70">Code</p>
+                  </div>
+                </div>
+                <p className="text-white/80 text-sm mb-4">
+                  Discuss code and architecture
+                </p>
+                <p className="text-white/60 text-xs">
+                  Technical discussions and code reviews
+                </p>
+              </div>
+
+              {/* Announcements */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
+                    <BookOpen className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-thin text-white">Announcements</h3>
+                    <p className="text-sm text-white/70">Documentation</p>
+                  </div>
+                </div>
+                <p className="text-white/80 text-sm mb-4">
+                  Latest updates and releases
+                </p>
+                <p className="text-white/60 text-xs">
+                  Stay informed about new features
+                </p>
+              </div>
+
+              {/* Voice Channels */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center mr-3">
+                    <Users className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-thin text-white">Voice Channels</h3>
+                    <p className="text-sm text-white/70">Support</p>
+                  </div>
+                </div>
+                <p className="text-white/80 text-sm mb-4">
+                  Voice calls and screen sharing
+                </p>
+                <p className="text-white/60 text-xs">
+                  Real-time collaboration and meetings
+                </p>
+              </div>
+            </div>
+
+            {/* Discord Actions */}
+            <div className="text-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  href="https://discord.gg/pgelephant"
+                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-thin shadow-lg hover:shadow-xl hover:scale-105"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Join Discord
+                </Link>
+                <Link
+                  href="/docs"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl hover:bg-white/15 transition-all duration-200 font-thin"
+                >
+                  Learn More
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Community Guidelines Section */}
       <div className="bg-white py-20">
