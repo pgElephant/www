@@ -383,38 +383,6 @@ export default function RootLayout({
           }}
         />
         
-        {/* Product Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": "pgElephant Platform",
-              "description": "Complete PostgreSQL enterprise solution suite including RAM clustering, RALE consensus, pgraft extension, and FauxDB MongoDB alternative",
-              "brand": {
-                "@type": "Brand",
-                "name": "pgElephant"
-              },
-              "category": "Database Software",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/InStock",
-                "seller": {
-                  "@type": "Organization",
-                  "name": "pgElephant"
-                }
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5.0",
-                "reviewCount": "1"
-              }
-            })
-          }}
-        />
 
         {/* WebSite SearchAction */}
         <script

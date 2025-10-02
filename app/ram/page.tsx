@@ -42,41 +42,63 @@ export const metadata = {
 // Structured Data for RAM
 const ramStructuredData = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "RAM",
-  "alternateName": ["Resilient Adaptive Manager", "PostgreSQL High Availability", "PostgreSQL Clustering"],
+  "@type": "Product",
+  "name": "RAM - Resilient Adaptive Manager",
+  "alternateName": ["RAM", "Resilient Adaptive Manager", "PostgreSQL High Availability"],
   "description": "PostgreSQL high availability solution with automatic failover and clustering. RAM provides enterprise-grade PostgreSQL clustering with Raft consensus and real-time monitoring.",
   "url": "https://www.pgelephant.com/ram",
-  "applicationCategory": "DatabaseApplication",
-  "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
+  "brand": {
+    "@type": "Brand",
+    "name": "pgElephant"
+  },
+  "category": "Database Software",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "pgElephant",
+      "url": "https://www.pgelephant.com"
+    }
   },
-  "creator": {
+  "manufacturer": {
     "@type": "Organization",
     "name": "pgElephant Team",
     "url": "https://www.pgelephant.com"
   },
-  "featureList": [
-    "PostgreSQL Clustering",
-    "Automatic Failover",
-    "Raft Consensus",
-    "Real-time Monitoring",
-    "Production Ready",
-    "High Availability",
-    "Load Balancing",
-    "Health Checks",
-    "Prometheus Metrics",
-    "Enterprise Security"
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "PostgreSQL Clustering",
+      "value": "Supported"
+    },
+    {
+      "@type": "PropertyValue", 
+      "name": "Automatic Failover",
+      "value": "Supported"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Raft Consensus",
+      "value": "Supported"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Real-time Monitoring",
+      "value": "Supported"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Production Ready",
+      "value": "Yes"
+    }
   ],
   "softwareVersion": "1.0.0",
   "datePublished": "2024-01-01",
   "dateModified": new Date().toISOString().split('T')[0],
-  "downloadUrl": "https://www.pgelephant.com/download",
-  "screenshot": "https://www.pgelephant.com/og-image.jpg"
+  "downloadUrl": "https://www.pgelephant.com/download"
 }
 
 const ramConfig = {

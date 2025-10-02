@@ -59,49 +59,7 @@ const OrganizationSchema: React.FC = () => {
       'Relational Databases'
     ],
     areaServed: 'Worldwide',
-    serviceType: 'Database Software Development',
-    makesOffer: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'SoftwareApplication',
-          name: 'RAM',
-          description: 'PostgreSQL clustering solution with automatic failover'
-        },
-        price: '0',
-        priceCurrency: 'USD'
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'SoftwareApplication',
-          name: 'RALE',
-          description: 'Distributed consensus and leader election system'
-        },
-        price: '0',
-        priceCurrency: 'USD'
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'SoftwareApplication',
-          name: 'pgraft',
-          description: 'PostgreSQL extension implementing Raft consensus protocol'
-        },
-        price: '0',
-        priceCurrency: 'USD'
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'SoftwareApplication',
-          name: 'FauxDB',
-          description: 'MongoDB-compatible document database built in Rust'
-        },
-        price: '0',
-        priceCurrency: 'USD'
-      }
-    ]
+    serviceType: 'Database Software Development'
   }
 
   return (
