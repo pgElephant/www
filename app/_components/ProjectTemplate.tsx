@@ -23,7 +23,7 @@ type FeatureCardProps = {
 };
 function FeatureCard({ title, desc }: FeatureCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate-200 p-6 flex flex-col">
+    <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate-200/50 p-6 flex flex-col">
       <h4 className="font-thin text-lg mb-2 text-slate-900">{title}</h4>
       <p className="text-slate-600 text-sm leading-relaxed flex-1">{desc}</p>
     </div>
@@ -34,7 +34,7 @@ type BadgeProps = {
   children: React.ReactNode;
 };
 function Badge({ children }: BadgeProps) {
-  return <span className="inline-block bg-slate-100 text-slate-700 text-xs font-thin px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">{children}</span>;
+  return <span className="inline-block bg-white/80 backdrop-blur-sm text-slate-700 text-xs font-thin px-2.5 py-1 rounded-md border border-slate-200/50 mr-2 mb-2">{children}</span>;
 }
 
 type ProjectTemplateProps = {
@@ -135,7 +135,7 @@ export default function ProjectTemplate({
 
       {/* Docs Links */}
       {docsLinks && (
-        <section className="py-20 bg-slate-50">
+        <section className="py-20" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)' }}>
           <div className="container-wide">
             <SectionHeading kicker="Internals">Technical Documentation</SectionHeading>
             <div className="text-center max-w-3xl mx-auto">

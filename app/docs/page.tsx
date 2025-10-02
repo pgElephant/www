@@ -1495,7 +1495,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
     const docContent = content[productId]?.[docTitle]
     if (!docContent) {
       return (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-8">
+        <div className="bg-gradient-to-br from-slate-50 to-slate-100 border border-gray-200 rounded-lg p-8">
           <p className="text-gray-600">
             Documentation content for "{docTitle}" is being prepared. 
             Please check back soon or visit the full documentation page.
@@ -1507,7 +1507,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
     return (
       <div className="space-y-8">
         {docContent.sections.map((section: any, index: number) => (
-          <div key={index} className="bg-white border border-gray-200 rounded-lg p-6">
+          <div key={index} className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-lg p-6">
             <h3 className="text-xl font-thin text-gray-900 mb-4">
               {section.title}
             </h3>
@@ -1691,7 +1691,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     <button
                       key={index}
                       onClick={() => handleSidebarClick(product.id, doc.title)}
-                      className="flex items-start gap-4 p-4 text-left bg-gray-50 hover:bg-blue-50 rounded-lg transition-colors group border border-gray-200 hover:border-blue-300"
+                      className="flex items-start gap-4 p-4 text-left bg-gradient-to-br from-slate-50 to-slate-100 hover:bg-blue-50 rounded-lg transition-colors group border border-gray-200 hover:border-blue-300"
                     >
                       <div className="flex-shrink-0">
                         <span className="inline-flex items-center px-2 py-1 rounded text-xs font-thin"
@@ -1721,7 +1721,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="flex gap-4">
                   <Link
                     href={`/${product.id}`}
-                    className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-thin"
+                    className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gradient-to-br from-slate-50 to-slate-100 transition-colors font-thin"
                   >
                     Learn More
                   </Link>
@@ -1963,7 +1963,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
 
       {/* Two-Column Documentation Layout */}
-      <div className="bg-white py-20">
+      <div className="bg-white/95 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
                   <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
@@ -1971,7 +1971,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               {/* Left Sidebar - Navigation */}
               <div className="lg:col-span-2">
             <div className="sticky top-24">
-                  <div className="bg-gray-50 rounded-lg p-6">
+                  <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-6">
                     <h3 className="text-lg font-thin text-gray-900 mb-4">Documentation</h3>
                     
                     {/* Navigation Menu */}
@@ -2001,7 +2001,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                                       className={`block w-full py-2 px-3 text-sm text-left rounded-md transition-colors group ${
                                         activeProduct === product.id && activeSection === doc.title
                                           ? 'bg-blue-50 text-blue-700 border-l-2 border-blue-500'
-                                          : 'text-gray-600 hover:text-gray-900 hover:bg-white'
+                                          : 'text-gray-600 hover:text-gray-900 hover:bg-white/95 backdrop-blur-sm'
                                       }`}
                   >
                     <div className="flex items-center justify-between">
@@ -2053,7 +2053,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
                   <Download className="w-8 h-8" style={{ color: palette.cyan }} />
                     </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">
@@ -2065,7 +2065,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     </div>
 
               <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
                   <Code className="w-8 h-8" style={{ color: palette.teal }} />
                 </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">
@@ -2077,7 +2077,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
 
               <div className="text-center">
-                <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
                   <ExternalLink className="w-8 h-8" style={{ color: palette.orange }} />
                 </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">
@@ -2104,7 +2104,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             </div>
 
             {/* Additional Resources */}
-      <div className="bg-white py-20 border-t border-gray-200">
+      <div className="bg-white/95 backdrop-blur-sm py-20 border-t border-gray-200">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-thin text-gray-900 mb-12 text-center">

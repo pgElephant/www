@@ -202,7 +202,7 @@ const CommunityPage = () => {
       </div>
 
       {/* Community Platforms - Enhanced Layout */}
-      <div className="bg-white py-20">
+      <div className="bg-white/95 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-16">
@@ -365,19 +365,19 @@ const CommunityPage = () => {
 
             {/* Discord Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">23</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">members</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">3</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">online</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">5</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">channels</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">3</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">languages</div>
               </div>
@@ -386,7 +386,7 @@ const CommunityPage = () => {
             {/* Discord Channels */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {/* General Chat */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
                     <MessageCircle className="w-5 h-5 text-white" />
@@ -405,7 +405,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Technical Support */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
                     <Users className="w-5 h-5 text-white" />
@@ -424,7 +424,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Development Channel */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                     <Code className="w-5 h-5 text-white" />
@@ -443,7 +443,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Announcements */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
                     <BookOpen className="w-5 h-5 text-white" />
@@ -462,7 +462,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Voice Channels */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center mr-3">
                     <Users className="w-5 h-5 text-white" />
@@ -493,7 +493,7 @@ const CommunityPage = () => {
                 </Link>
                 <Link
                   href="/docs"
-                  className="flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl hover:bg-white/15 transition-all duration-200 font-thin"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-thin"
                 >
                   Learn More
                   <ArrowRight className="w-4 h-4" />
@@ -562,19 +562,19 @@ const CommunityPage = () => {
 
             {/* GitHub Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">3</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Projects</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">12</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Contributors</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">45</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Commits</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">2</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Stars</div>
               </div>
@@ -583,7 +583,7 @@ const CommunityPage = () => {
             {/* GitHub Repositories */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               {/* RALE Repository */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
                     <Code className="w-5 h-5 text-white" />
@@ -611,7 +611,7 @@ const CommunityPage = () => {
               </div>
 
               {/* RAM Repository */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
                     <Server className="w-5 h-5 text-white" />
@@ -639,7 +639,7 @@ const CommunityPage = () => {
               </div>
 
               {/* FauxDB Repository */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                     <Database className="w-5 h-5 text-white" />
@@ -679,7 +679,7 @@ const CommunityPage = () => {
                 </Link>
                 <Link
                   href="/docs"
-                  className="flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl hover:bg-white/15 transition-all duration-200 font-bold"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-bold"
                 >
                   Contribute Guide
                   <ArrowRight className="w-4 h-4" />
@@ -748,19 +748,19 @@ const CommunityPage = () => {
 
             {/* Forum Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">156</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Topics</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">423</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Posts</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">89</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Members</div>
               </div>
-              <div className="text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                 <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">12</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Categories</div>
               </div>
@@ -769,7 +769,7 @@ const CommunityPage = () => {
             {/* Forum Categories */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {/* Installation & Setup */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
                     <ArrowRight className="w-5 h-5 text-white" />
@@ -796,7 +796,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Technical Support */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                     <Users className="w-5 h-5 text-white" />
@@ -823,7 +823,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Feature Requests */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
                     <Lightbulb className="w-5 h-5 text-white" />
@@ -850,7 +850,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Development */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
                     <Code className="w-5 h-5 text-white" />
@@ -877,7 +877,7 @@ const CommunityPage = () => {
               </div>
 
               {/* Announcements */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
                     <BookOpen className="w-5 h-5 text-white" />
@@ -904,7 +904,7 @@ const CommunityPage = () => {
               </div>
 
               {/* General Discussion */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
                     <MessageCircle className="w-5 h-5 text-white" />
@@ -943,7 +943,7 @@ const CommunityPage = () => {
                 </Link>
                 <Link
                   href="/docs"
-                  className="flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl hover:bg-white/15 transition-all duration-200 font-bold"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-bold"
                 >
                   Forum Guidelines
                   <ArrowRight className="w-4 h-4" />
@@ -955,7 +955,7 @@ const CommunityPage = () => {
       </div>
 
       {/* Community Guidelines Section */}
-      <div className="bg-white py-20">
+      <div className="bg-white/95 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
