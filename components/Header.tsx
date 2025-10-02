@@ -121,7 +121,7 @@ const Header = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center px-4 py-3 text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-xl font-medium transition-all duration-200"
+                  className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-xl font-medium transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -148,7 +148,7 @@ const Header = () => {
                   <a
                     key={project.name}
                     href={project.href}
-                    className="flex items-center px-4 py-3 text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-xl font-medium transition-all duration-200"
+                    className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-xl font-medium transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <Github className="w-5 h-5 mr-3" />
@@ -159,7 +159,7 @@ const Header = () => {
                   href="https://github.com/pgElephant"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center px-4 py-3 text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-xl font-medium transition-all duration-200"
+                  className="flex items-center px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-xl font-medium transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Github className="w-5 h-5 mr-3" />

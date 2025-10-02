@@ -266,7 +266,7 @@ const DownloadPage = () => {
                   >
                     <td className="py-3 px-2 align-top whitespace-nowrap">
                       <div className="flex items-center gap-3">
-                        <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-white/20" />
+                        <Image src={product.icon} alt={`${product.name} icon`} width={48} height={48} className="w-12 h-12 object-contain rounded-lg border border-white/20" />
                         <div>
                           <div className="font-bold text-lg text-white flex items-center gap-2">
                             {product.name}

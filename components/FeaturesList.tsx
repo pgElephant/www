@@ -259,7 +259,7 @@ const FeaturesList = () => {
                       <tr key={project.name} className="border-b border-slate-400/20 hover:bg-white/5 transition-colors">
                         <td className="p-6">
                           <div className="flex items-center gap-4">
-                            <div className={`w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
+                            <div className={`w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
                               {project.icon}
                             </div>
                             <div>
@@ -340,7 +340,7 @@ const FeaturesList = () => {
               return (
                 <div key={project.name} className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-slate-400/30">
                   <div className="flex items-center gap-4 mb-8">
-                    <div className={`w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
+                    <div className={`w-16 h-16 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
                       {project.icon}
                     </div>
                     <div>
