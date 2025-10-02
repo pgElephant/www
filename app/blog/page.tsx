@@ -30,19 +30,19 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '47', icon: BookOpen, color: 'text-blue-600' },
-  { label: 'Monthly Readers', value: '2.1k', icon: Eye, color: 'text-green-600' },
-  { label: 'Categories', value: '8', icon: Tag, color: 'text-purple-600' },
-  { label: 'Authors', value: '12', icon: Users, color: 'text-yellow-500' }
+  { label: 'Total Articles', value: '47', icon: BookOpen, color: 'text-white' },
+  { label: 'Monthly Readers', value: '2.1k', icon: Eye, color: 'text-white' },
+  { label: 'Categories', value: '8', icon: Tag, color: 'text-white' },
+  { label: 'Authors', value: '12', icon: Users, color: 'text-white' }
 ]
 
 // Blog categories
 const blogCategories = [
-  { name: 'Technical', icon: Code, count: 18, color: 'bg-blue-100 text-blue-800' },
-  { name: 'Tutorials', icon: BookOpen, count: 12, color: 'bg-green-100 text-green-800' },
-  { name: 'Updates', icon: TrendingUp, count: 8, color: 'bg-purple-100 text-purple-800' },
-  { name: 'Performance', icon: Zap, count: 5, color: 'bg-orange-100 text-orange-800' },
-  { name: 'Security', icon: Award, count: 4, color: 'bg-red-100 text-red-800' }
+  { name: 'Technical', icon: Code, count: 18, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
+  { name: 'Tutorials', icon: BookOpen, count: 12, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
+  { name: 'Updates', icon: TrendingUp, count: 8, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
+  { name: 'Performance', icon: Zap, count: 5, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
+  { name: 'Security', icon: Award, count: 4, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' }
 ]
 
 const blogPosts = [
