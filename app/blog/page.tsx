@@ -36,14 +36,6 @@ const blogStats = [
   { label: 'Authors', value: '12', icon: Users, color: 'text-white' }
 ]
 
-// Blog categories
-const blogCategories = [
-  { name: 'Technical', icon: Code, count: 18, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
-  { name: 'Tutorials', icon: BookOpen, count: 12, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
-  { name: 'Updates', icon: TrendingUp, count: 8, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
-  { name: 'Performance', icon: Zap, count: 5, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' },
-  { name: 'Security', icon: Award, count: 4, color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20' }
-]
 
 const blogPosts = [
   {

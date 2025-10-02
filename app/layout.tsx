@@ -194,8 +194,21 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://twitter.com" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/ico/pgElephant_no_com_HD.ico" />
-        <link rel="apple-touch-icon" href="/ico/pgElephant_no_com_HD.ico" />
+        <link rel="icon" type="image/x-icon" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="144x144" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="120x120" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="114x114" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="76x76" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="60x60" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="57x57" href="/ico/pgElephant_HD.ico" />
+        <meta name="msapplication-TileColor" content="#070d1a" />
+        <meta name="msapplication-TileImage" content="/ico/pgElephant_HD.ico" />
+        <meta name="theme-color" content="#070d1a" />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <OrganizationSchema />
