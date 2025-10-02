@@ -226,7 +226,7 @@ const DownloadPage = () => {
           <div className="max-w-5xl mx-auto">
             <table className="w-full text-left border-separate border-spacing-y-0">
               <thead>
-                <tr className="text-gray-700 text-sm uppercase tracking-wider">
+                <tr className="text-gray-800 text-sm uppercase tracking-wider font-semibold drop-shadow-lg">
                   <th className="py-2">Product</th>
                   <th className="py-2">Description</th>
                   <th className="py-2">Downloads</th>
@@ -276,13 +276,13 @@ const DownloadPage = () => {
                     <td className="py-3 px-2 align-top">
                       <div className="flex flex-col gap-2">
                         {product.downloads.map((download, index) => (
-                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-100 transition-colors text-sm font-thin shadow-sm">
+                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm font-bold shadow-lg drop-shadow-lg">
                             {(() => {
                               const IconComponent = getDownloadIcon(download.type)
-                              return <IconComponent className="w-4 h-4 text-cyan-600" />
+                              return <IconComponent className="w-4 h-4 text-blue-600 drop-shadow-lg" />
                             })()}
                             {download.title}
-                            <span className="ml-2 text-xs text-gray-500">{download.type}</span>
+                            <span className="ml-2 text-xs text-blue-600 font-bold drop-shadow-sm">{download.type}</span>
                           </Link>
                         ))}
                       </div>

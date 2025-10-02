@@ -27,7 +27,7 @@ const Header = () => {
         <div className="flex items-center h-20 w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="text-white drop-shadow-2xl shadow-2xl group-hover:text-white/80 transition-colors">
+            <div className="text-white drop-shadow-2xl shadow-2xl group-hover:text-white transition-colors hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)]">
               <Image 
                 src="/ico/pgElephant_no_com_HD.ico" 
                 alt="pgElephant" 
@@ -44,7 +44,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors font-thin hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]"
+                className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors font-semibold hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)] hover:text-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                 target={item.href.startsWith('http') ? '_blank' : undefined}
                 rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
@@ -53,7 +53,7 @@ const Header = () => {
             ))}
             {/* GitHub Projects Dropdown */}
             <div className="relative group">
-              <button className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors flex items-center font-thin hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]">
+              <button className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors flex items-center font-semibold hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)] hover:text-shadow-[0_0_10px_rgba(255,255,255,0.8)]">
                 <Github className="w-5 h-5 mr-2" />
                 Projects
                 <svg className="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,7 +101,7 @@ const Header = () => {
           </nav>
           {/* Getting Started button right - hidden on mobile */}
           <div className="hidden md:flex items-center justify-end min-w-[180px]">
-            <Link href="/docs" className="professional-button text-sm">Getting Started</Link>
+            <Link href="/docs" className="bg-white/20 hover:bg-white/30 text-white drop-shadow-2xl shadow-2xl font-semibold px-6 py-2 rounded-lg transition-all duration-200 text-sm hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)] hover:text-shadow-[0_0_10px_rgba(255,255,255,0.8)]">Getting Started</Link>
           </div>
           
           {/* Mobile menu button */}
