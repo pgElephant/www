@@ -128,6 +128,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgraft/cluster-management/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/cluster-management">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/cluster-management/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgraft/configuration/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/configuration">> = Specific
@@ -164,6 +173,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgraft/performance/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/performance">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/performance/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgraft/raft-protocol/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/raft-protocol">> = Specific
@@ -177,6 +195,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/sql-functions">> = Specific
   const handler = {} as typeof import("../../app/docs/pgraft/sql-functions/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgraft/troubleshooting/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/troubleshooting">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/troubleshooting/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

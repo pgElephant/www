@@ -366,7 +366,7 @@ const FeaturesList = () => {
                   </div>
                   
                   <div className="mt-8 pt-6 border-t border-slate-400/20">
-                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-thin transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2`}>
+                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-thin transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
                       View Enterprise Details
                       <ArrowRight className="w-4 h-4" />
                     </button>
