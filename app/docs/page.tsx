@@ -87,7 +87,7 @@ const DocsPage = () => {
         const code = codeBlockMatch[2].trim();
         
         return (
-          <pre key={index} className="bg-gray-100 text-gray-900 p-4 rounded-lg overflow-x-auto text-sm border font-mono">
+          <pre key={index} className="bg-white/10 backdrop-blur-sm text-white p-4 rounded-lg overflow-x-auto text-sm border border-white/20 font-mono">
             <code className={`language-${language}`}>
               {renderHighlightedCode(code, language)}
             </code>
@@ -97,7 +97,7 @@ const DocsPage = () => {
       
       // Regular text content
       const formattedText = part
-        .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
+        .replace(/`([^`]+)`/g, '<code class="bg-white/10 backdrop-blur-sm px-2 py-1 rounded text-sm font-mono border border-white/20">$1</code>')
         .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-thin">$1</strong>')
         .replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>')
         .replace(/\n/g, '<br/>');
@@ -2113,7 +2113,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <ExternalLink className="w-8 h-8 text-gray-600" />
                 </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">GitHub</h3>
@@ -2130,7 +2130,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Play className="w-8 h-8 text-gray-600" />
                 </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">Community</h3>
@@ -2147,7 +2147,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <FileText className="w-8 h-8 text-gray-600" />
                 </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">Blog</h3>
@@ -2164,7 +2164,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Code className="w-8 h-8 text-gray-600" />
               </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">Support</h3>

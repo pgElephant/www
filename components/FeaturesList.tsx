@@ -463,7 +463,7 @@ const FeaturesList = () => {
                 <Database className="w-5 h-5" />
                 Download All Projects
               </a>
-              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-thin hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
+              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-thin hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5" />
                 View Documentation
               </a>

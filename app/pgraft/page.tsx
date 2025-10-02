@@ -17,7 +17,7 @@ function SectionHeading({ children, kicker, className = '' }: { children: React.
 
 function FeatureCard({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate-200 p-6 flex flex-col">
+    <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-shadow border border-white/20 p-6 flex flex-col">
       <h4 className="font-semibold text-lg mb-2 text-slate-900">{title}</h4>
       <p className="text-slate-600 text-sm leading-relaxed flex-1">{desc}</p>
     </div>

@@ -106,7 +106,7 @@ export default function ProjectTemplate({
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-3">
                 {features.map((f: { icon: React.ReactNode; iconColor: string; title: string; desc: string }, i: number) => (
-                  <div key={i} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white hover:shadow-sm transition-all border-l-3 border-transparent hover:border-indigo-400">
+                  <div key={i} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/10 hover:shadow-sm transition-all border-l-3 border-transparent hover:border-indigo-400">
                     <span className={`${f.iconColor} mt-0.5 flex-shrink-0`}>{f.icon}</span>
                     <div className="flex-1 min-w-0">
                       <h4 className="font-thin text-base mb-1 text-slate-900 leading-tight">{f.title}</h4>
@@ -144,7 +144,7 @@ export default function ProjectTemplate({
               </p>
               <div className="grid sm:grid-cols-2 gap-6">
                 {docsLinks.map((doc: { href: string; title: string; desc: string }, i: number) => (
-                  <Link key={i} href={doc.href} className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
+                  <Link key={i} href={doc.href} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-indigo-300 transition-colors">
                     <h3 className="font-thin text-lg text-slate-900 mb-2">{doc.title}</h3>
                     <p className="text-sm text-slate-600">{doc.desc}</p>
                   </Link>
