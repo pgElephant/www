@@ -5,8 +5,8 @@ import Link from 'next/link';
 import PgraftDemoTerminal from '@/components/PgraftDemoTerminal';
 
 export const metadata = {
-  title: 'pgraft - PostgreSQL Raft Extension | Distributed Consensus | Leader Election',
-  description: 'pgraft: PostgreSQL extension implementing Raft consensus protocol for distributed database systems. Automatic leader election, failover, and high availability. Go-based Raft implementation for PostgreSQL clusters.',
+  title: 'pgraft - PostgreSQL Raft Extension | Leader Election',
+  description: 'PostgreSQL extension implementing Raft consensus protocol. Automatic leader election, failover, and high availability for distributed PostgreSQL clusters.',
   keywords: [
     'pgraft', 'PostgreSQL Raft', 'PostgreSQL extension', 'Raft consensus', 'distributed consensus',
     'PostgreSQL leader election', 'PostgreSQL failover', 'PostgreSQL high availability', 'Raft algorithm',
@@ -140,6 +140,35 @@ const PgraftPage = () => {
         </div>
       </section>
 
+      {/* Introduction Section */}
+      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-thin text-white mb-6">PostgreSQL Raft Extension for Distributed Consensus</h2>
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              pgraft is a production-ready PostgreSQL extension that implements the Raft consensus algorithm, 
+              enabling automatic leader election and failover for distributed PostgreSQL clusters. Built with 
+              Go's robust Raft library and integrated seamlessly into PostgreSQL, pgraft provides enterprise-grade 
+              high availability without compromising performance or data integrity.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 mt-12">
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                <h3 className="text-xl font-thin text-white mb-3">Automatic Failover</h3>
+                <p className="text-white/90 text-sm">Sub-second leader election and automatic failover with zero data loss. Raft consensus ensures split-brain prevention and maintains consistency across all cluster nodes.</p>
+          </div>
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                <h3 className="text-xl font-thin text-white mb-3">Production Ready</h3>
+                <p className="text-white/90 text-sm">Battle-tested in production environments with comprehensive monitoring, debugging capabilities, and minimal configuration requirements for enterprise deployments.</p>
+                  </div>
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                <h3 className="text-xl font-thin text-white mb-3">Native Integration</h3>
+                <p className="text-white/90 text-sm">Seamlessly integrated into PostgreSQL with SQL functions, background workers, and shared memory architecture for optimal performance and resource utilization.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* High-Level Feature Pillars */}
       <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
@@ -151,8 +180,8 @@ const PgraftPage = () => {
             <FeatureCard title="Operational Simplicity" desc="Pure PostgreSQL extension with minimal configuration. Ideal for both development and production." />
             <FeatureCard title="Durable & Crash Safe" desc="Persistent Raft state and log entries ensure cluster consistency after restarts or failures." />
             <FeatureCard title="Native Integration" desc="Seamlessly integrates with PostgreSQL using background workers and shared memory IPC." />
-          </div>
         </div>
+      </div>
       </section>
 
       {/* Detailed Features List */}
@@ -283,19 +312,44 @@ const PgraftPage = () => {
       <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <SectionHeading kicker="Internals">Technical Documentation</SectionHeading>
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-white/90 mb-8">
-              Dive deep into pgraft's technical details, architecture, and internal workings with our comprehensive documentation.
+          <div className="text-center max-w-4xl mx-auto">
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              Dive deep into pgraft's technical details, architecture, and internal workings with our comprehensive documentation. 
+              pgraft leverages PostgreSQL's background worker infrastructure to implement the Raft consensus algorithm, providing 
+              a native extension that integrates seamlessly with existing PostgreSQL deployments and management workflows.
             </p>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <Link href="/docs/pgraft/internals/architecture" className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-indigo-300 transition-colors">
                 <h3 className="font-semibold text-lg text-white mb-2">Architecture</h3>
-                <p className="text-sm text-white/90">Learn about pgraft's internal architecture and design decisions.</p>
+                <p className="text-sm text-white/90">Learn about pgraft's internal architecture, background worker design, and integration with PostgreSQL's shared memory system.</p>
               </Link>
               <Link href="/docs/pgraft/internals/worker-lifecycle" className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-indigo-300 transition-colors">
                 <h3 className="font-semibold text-lg text-white mb-2">Worker Lifecycle</h3>
-                <p className="text-sm text-white/90">Understand the states and transitions of pgraft workers.</p>
+                <p className="text-sm text-white/90">Understand the states and transitions of pgraft workers, including initialization, consensus participation, and graceful shutdown.</p>
               </Link>
+              <Link href="/docs/pgraft/internals/raft-implementation" className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-indigo-300 transition-colors">
+                <h3 className="font-semibold text-lg text-white mb-2">Raft Implementation</h3>
+                <p className="text-sm text-white/90">Explore how the Raft consensus algorithm is implemented within PostgreSQL, including log replication and leader election mechanisms.</p>
+              </Link>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/20 max-w-3xl mx-auto">
+              <h3 className="text-2xl font-thin text-white mb-4">Getting Started with pgraft</h3>
+              <p className="text-white/90 mb-6">
+                pgraft is designed for simplicity and reliability. Installation requires minimal configuration, and the extension 
+                provides comprehensive SQL functions for cluster management, monitoring, and diagnostics. Whether you're building 
+                a new distributed PostgreSQL deployment or adding high availability to an existing system, pgraft offers the 
+                enterprise-grade consensus capabilities you need.
+              </p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white/10 p-4 rounded-lg">
+                  <h4 className="font-semibold text-white mb-2">Quick Setup</h4>
+                  <p className="text-sm text-white/90">Install the extension, configure cluster nodes, and initialize consensus with simple SQL commands.</p>
+                </div>
+                <div className="bg-white/10 p-4 rounded-lg">
+                  <h4 className="font-semibold text-white mb-2">Production Ready</h4>
+                  <p className="text-sm text-white/90">Built-in monitoring, debugging capabilities, and comprehensive documentation for enterprise deployments.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

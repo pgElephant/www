@@ -6,7 +6,7 @@ import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
   title: 'pgElephant | Enterprise PostgreSQL Platform',
-  description: 'Enterprise PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible database. Production-ready tools.',
+  description: 'Enterprise PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible database.',
   keywords: [
     'enterprise postgresql', 'postgresql platform', 'database clustering', 'high availability',
     'postgresql failover', 'mongodb alternative', 'document database', 'distributed consensus',
