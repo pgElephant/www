@@ -68,8 +68,8 @@ export default function ProjectTemplate({
       <section className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
         <div className="container-wide relative z-10 text-center">
-          <h1 className="text-5xl font-bold mb-5 tracking-tight">{hero.title}</h1>
-          {hero.subtitle && <div className="text-center mb-8"><h3 className="text-2xl font-semibold text-white mb-4">{hero.subtitle}</h3></div>}
+          <h1 className="text-5xl font-thin mb-5 tracking-tight">{hero.title}</h1>
+          {hero.subtitle && <div className="text-center mb-8"><h3 className="text-2xl font-thin text-white mb-4">{hero.subtitle}</h3></div>}
           {demo && <div className="max-w-4xl mx-auto">{demo}</div>}
           <div className="mt-8 flex flex-wrap justify-center">
             {badges && badges.map((b: string, i: number) => <Badge key={i}>{b}</Badge>)}

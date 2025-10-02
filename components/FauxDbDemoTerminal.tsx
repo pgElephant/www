@@ -180,16 +180,25 @@ const FauxDbDemoTerminal = () => {
         }
       ])
       
-      // Type the command
-      typeCommand(cmd.command, () => {
-        // Show output only (do not echo command again)
+      // Only type command if it's not empty (for interactive terminals)
+      if (cmd.command) {
+        typeCommand(cmd.command, () => {
+          setTimeout(() => {
+            showOutput(cmd.output, () => {
+              commandIndex++
+              setTimeout(runNextCommand, baseTimings.betweenCommands / speedMultiplier)
+            })
+          }, baseTimings.commandDelay / speedMultiplier)
+        })
+      } else {
+        // For non-interactive commands, just show output immediately
         setTimeout(() => {
           showOutput(cmd.output, () => {
             commandIndex++
             setTimeout(runNextCommand, baseTimings.betweenCommands / speedMultiplier)
           })
         }, baseTimings.commandDelay / speedMultiplier)
-      })
+      }
     }
     
     runNextCommand()
@@ -259,10 +268,12 @@ const FauxDbDemoTerminal = () => {
         {/* Command History */}
         {commandHistory.map((cmd, index) => (
           <div key={index} className="mb-2">
-            <div className={`${getTerminalColor(cmd.terminal)} flex items-center gap-2`}>
-              <span className="text-xs opacity-70">[{cmd.terminal}]</span>
-              <span>$ {cmd.command}</span>
-            </div>
+            {cmd.command && (
+              <div className={`${getTerminalColor(cmd.terminal)} flex items-center gap-2`}>
+                <span className="text-xs opacity-70">[{cmd.terminal}]</span>
+                <span>$ {cmd.command}</span>
+              </div>
+            )}
             {cmd.output.map((line, lineIndex) => (
               <div key={lineIndex} className="text-gray-300 font-mono text-left">
                 {line}
