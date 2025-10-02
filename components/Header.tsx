@@ -27,7 +27,7 @@ const Header = () => {
         <div className="flex items-center h-20 w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="text-slate-600 group-hover:text-slate-800 transition-colors">
+            <div className="text-white drop-shadow-2xl shadow-2xl group-hover:text-white/80 transition-colors">
               <Image 
                 src="/ico/pgElephant_no_com_HD.ico" 
                 alt="pgElephant" 
