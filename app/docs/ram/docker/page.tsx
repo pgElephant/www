@@ -52,7 +52,7 @@ export default function RamDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">1. Clone and Setup</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
                 <div className="text-green-400 mb-4"># Clone the repository</div>
                 <div className="text-slate-300 mb-2">git clone https://github.com/pgElephant/ram.git</div>
                 <div className="text-slate-300 mb-2">cd ram</div>
@@ -69,7 +69,7 @@ export default function RamDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">2. Start the Cluster</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
                 <div className="text-green-400 mb-4"># Start all services</div>
                 <div className="text-slate-300 mb-2">docker-compose up -d</div>
                 <div className="text-slate-300 mb-4"></div>
@@ -85,7 +85,7 @@ export default function RamDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">3. Verify Installation</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
                 <div className="text-green-400 mb-4"># Test PostgreSQL connections</div>
                 <div className="text-slate-300 mb-2">docker-compose exec postgres-primary psql -U postgres -c "SELECT version();"</div>
                 <div className="text-slate-300 mb-2">docker-compose exec postgres-standby1 psql -U postgres -c "SELECT pg_is_in_recovery();"</div>
@@ -109,7 +109,7 @@ export default function RamDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Basic docker-compose.yml</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm overflow-x-auto">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm overflow-x-auto">
                 <div className="text-slate-300 mb-2">version: '3.8'</div>
                 <div className="text-slate-300 mb-2">services:</div>
                 <div className="text-slate-300 mb-2">  postgres-primary:</div>
@@ -156,7 +156,7 @@ export default function RamDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Environment Variables (.env)</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
                 <div className="text-green-400 mb-4"># PostgreSQL Configuration</div>
                 <div className="text-slate-300 mb-2">POSTGRES_DB=postgres</div>
                 <div className="text-slate-300 mb-2">POSTGRES_USER=postgres</div>
@@ -188,7 +188,7 @@ export default function RamDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">3-Node Cluster Configuration</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm overflow-x-auto">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm overflow-x-auto">
                 <div className="text-slate-300 mb-2"># Add to docker-compose.yml</div>
                 <div className="text-slate-300 mb-2">  postgres-standby1:</div>
                 <div className="text-slate-300 mb-2">    image: postgres:15</div>
@@ -234,7 +234,7 @@ export default function RamDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Initialize Cluster</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
                 <div className="text-green-400 mb-4"># Start all nodes</div>
                 <div className="text-slate-300 mb-2">docker-compose up -d</div>
                 <div className="text-slate-300 mb-4"></div>
@@ -266,7 +266,7 @@ export default function RamDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Add Prometheus and Grafana</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm overflow-x-auto">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm overflow-x-auto">
                 <div className="text-slate-300 mb-2"># Add to docker-compose.yml</div>
                 <div className="text-slate-300 mb-2">  prometheus:</div>
                 <div className="text-slate-300 mb-2">    image: prom/prometheus:latest</div>
@@ -300,7 +300,7 @@ export default function RamDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Access Monitoring</h3>
-              <div className="bg-slate-800/50 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
                 <div className="text-green-400 mb-4"># Start monitoring stack</div>
                 <div className="text-slate-300 mb-2">docker-compose up -d prometheus grafana</div>
                 <div className="text-slate-300 mb-4"></div>
@@ -384,9 +384,9 @@ export default function RamDockerSetup() {
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Common Issues</h3>
               <div className="space-y-4">
-                <div className="bg-slate-800/50 rounded-lg p-4">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
                   <h4 className="text-lg font-semibold text-green-300 mb-2">Container won't start</h4>
-                  <div className="bg-slate-800/50 rounded-lg p-4 font-mono text-sm mt-2">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm mt-2">
                     <div className="text-green-400"># Check logs</div>
                     <div className="text-slate-300">docker-compose logs postgres-primary</div>
                     <div className="text-slate-300"></div>
@@ -395,9 +395,9 @@ export default function RamDockerSetup() {
                   </div>
                 </div>
                 
-                <div className="bg-slate-800/50 rounded-lg p-4">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
                   <h4 className="text-lg font-semibold text-green-300 mb-2">Cluster formation fails</h4>
-                  <div className="bg-slate-800/50 rounded-lg p-4 font-mono text-sm mt-2">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm mt-2">
                     <div className="text-green-400"># Check network connectivity</div>
                     <div className="text-slate-300">docker-compose exec postgres-primary ping postgres-standby1</div>
                     <div className="text-slate-300"></div>
@@ -406,9 +406,9 @@ export default function RamDockerSetup() {
                   </div>
                 </div>
                 
-                <div className="bg-slate-800/50 rounded-lg p-4">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
                   <h4 className="text-lg font-semibold text-green-300 mb-2">Performance issues</h4>
-                  <div className="bg-slate-800/50 rounded-lg p-4 font-mono text-sm mt-2">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm mt-2">
                     <div className="text-green-400"># Check resource usage</div>
                     <div className="text-slate-300">docker stats</div>
                     <div className="text-slate-300"></div>

@@ -87,28 +87,28 @@ const RamBlogPage = () => {
 
               <h2 className="text-2xl font-bold text-white mb-6 mt-12">Key Features</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30">
                   <div className="flex items-center mb-3">
                     <BarChart3 className="w-6 h-6 text-green-400 mr-3" />
                     <h3 className="text-lg font-semibold text-white">Resource Monitoring</h3>
                   </div>
                   <p className="text-slate-300 text-sm">Real-time monitoring of CPU, memory, disk, and network usage</p>
                 </div>
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30">
                   <div className="flex items-center mb-3">
                     <Shield className="w-6 h-6 text-green-400 mr-3" />
                     <h3 className="text-lg font-semibold text-white">Health Checks</h3>
                   </div>
                   <p className="text-slate-300 text-sm">Continuous health monitoring with automatic recovery actions</p>
                 </div>
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30">
                   <div className="flex items-center mb-3">
                     <Globe className="w-6 h-6 text-green-400 mr-3" />
                     <h3 className="text-lg font-semibold text-white">Multi-Zone Management</h3>
                   </div>
                   <p className="text-slate-300 text-sm">Manage clusters across multiple availability zones</p>
                 </div>
-                <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30">
                   <div className="flex items-center mb-3">
                     <Database className="w-6 h-6 text-green-400 mr-3" />
                     <h3 className="text-lg font-semibold text-white">PostgreSQL Integration</h3>
@@ -122,7 +122,7 @@ const RamBlogPage = () => {
                 RAM acts as the control plane for your PostgreSQL cluster, managing failover decisions, resource allocation, and cluster state. It integrates with RALE for consensus and provides a unified management interface.
               </p>
 
-              <div className="bg-slate-100/10 rounded-xl p-6 border border-slate-400/30 mb-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30 mb-8">
                 <h3 className="text-lg font-semibold text-white mb-4">Management Components</h3>
                 <ul className="text-slate-300 space-y-2">
                   <li className="flex items-start">
@@ -149,7 +149,7 @@ const RamBlogPage = () => {
                 RAM provides comprehensive monitoring capabilities with built-in alerting and integration with popular monitoring systems like Prometheus and Grafana.
               </p>
 
-              <div className="bg-slate-900 rounded-xl p-6 border border-slate-400/30 mb-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-slate-400/30 mb-8">
                 <h3 className="text-lg font-semibold text-white mb-4">Key Metrics</h3>
                 <pre className="text-slate-300 text-sm overflow-x-auto">
 {`# Cluster Health

@@ -121,7 +121,7 @@ export default function PgraftGettingStarted() {
               <div className="space-y-6">
                 <div>
                   <h4 className="text-lg font-semibold text-white mb-3">1. Install Dependencies</h4>
-                  <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                     <div className="text-green-400 mb-2"># Ubuntu/Debian</div>
                     <div className="text-white">sudo apt-get install postgresql-17 postgresql-server-dev-17 golang-go build-essential</div>
                     <div className="text-green-400 mt-4 mb-2"># CentOS/RHEL</div>
@@ -133,7 +133,7 @@ export default function PgraftGettingStarted() {
 
                 <div>
                   <h4 className="text-lg font-semibold text-white mb-3">2. Clone and Build</h4>
-                  <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                     <div className="text-green-400 mb-2">git clone https://github.com/pgelephant/pgraft.git</div>
                     <div className="text-white">cd pgraft</div>
                     <div className="text-white">make clean && make</div>
@@ -142,7 +142,7 @@ export default function PgraftGettingStarted() {
 
                 <div>
                   <h4 className="text-lg font-semibold text-white mb-3">3. Install Extension</h4>
-                  <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                     <div className="text-white">sudo make install</div>
                     <div className="text-green-400 mt-2"># Verify installation</div>
                     <div className="text-white">ls -la $(pg_config --libdir)/pgraft*</div>
@@ -167,9 +167,9 @@ export default function PgraftGettingStarted() {
               {/* Step 1: Configuration */}
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                 <h3 className="text-2xl font-bold text-white mb-6">Step 1: Configure PostgreSQL</h3>
-                <p className="text-white/80 mb-4">Add these settings to your <code className="bg-gray-800 px-2 py-1 rounded text-blue-300">postgresql.conf</code>:</p>
+                <p className="text-white/80 mb-4">Add these settings to your <code className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded text-blue-300">postgresql.conf</code>:</p>
                 
-                <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                   <div className="text-green-400 mb-2"># Load pgraft extension</div>
                   <div className="text-white">shared_preload_libraries = 'pgraft'</div>
                   <div className="text-green-400 mt-4 mb-2"># Core cluster configuration</div>
@@ -186,7 +186,7 @@ export default function PgraftGettingStarted() {
                 <h3 className="text-2xl font-bold text-white mb-6">Step 2: Initialize pgraft</h3>
                 <p className="text-white/80 mb-4">Connect to PostgreSQL and create the extension:</p>
                 
-                <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                   <div className="text-green-400 mb-2"># Create extension</div>
                   <div className="text-white">CREATE EXTENSION pgraft;</div>
                   <div className="text-green-400 mt-4 mb-2"># Initialize node</div>
@@ -199,7 +199,7 @@ export default function PgraftGettingStarted() {
                 <h3 className="text-2xl font-bold text-white mb-6">Step 3: Add Additional Nodes</h3>
                 <p className="text-white/80 mb-4">Repeat steps 1-2 on other nodes, then add them to the cluster:</p>
                 
-                <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                   <div className="text-green-400 mb-2"># Wait 10 seconds for leader election, then add nodes</div>
                   <div className="text-white">SELECT pgraft_add_node(2, '127.0.0.1', 7002);</div>
                   <div className="text-white">SELECT pgraft_add_node(3, '127.0.0.1', 7003);</div>
@@ -211,7 +211,7 @@ export default function PgraftGettingStarted() {
                 <h3 className="text-2xl font-bold text-white mb-6">Step 4: Verify Cluster Status</h3>
                 <p className="text-white/80 mb-4">Check that your cluster is healthy:</p>
                 
-                <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                   <div className="text-green-400 mb-2"># Get cluster status</div>
                   <div className="text-white">SELECT * FROM pgraft_get_cluster_status();</div>
                   <div className="text-green-400 mt-4 mb-2"># Get all nodes</div>
