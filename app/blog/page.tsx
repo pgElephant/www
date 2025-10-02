@@ -265,10 +265,10 @@ export default function BlogPage() {
 
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl font-thin text-white drop-shadow-lg mb-6 drop-shadow-lg">
               Blog
             </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white/90 drop-shadow-md max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white drop-shadow-lg/90 drop-shadow-md max-w-4xl mx-auto">
               Technical insights, tutorials, and updates from our team building the future of PostgreSQL clustering
             </p>
             
@@ -279,8 +279,8 @@ export default function BlogPage() {
                   <div className="flex justify-center mb-2">
                     <stat.icon className={`w-8 h-8 ${stat.color}`} />
                   </div>
-                  <div className="text-3xl font-thin text-white drop-shadow-sm">{stat.value}</div>
-                  <div className="text-sm text-white/80 drop-shadow-sm">{stat.label}</div>
+                  <div className="text-3xl font-thin text-white drop-shadow-lg drop-shadow-sm">{stat.value}</div>
+                  <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -301,7 +301,7 @@ export default function BlogPage() {
               {blogCategories.map((category, index) => (
                 <div key={index} className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <category.icon className="w-6 h-6 text-white" />
+                    <category.icon className="w-6 h-6 text-white drop-shadow-lg" />
                   </div>
                   <h3 className="font-thin text-gray-900 mb-2">{category.name}</h3>
                   <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-thin ${category.color}`}>
