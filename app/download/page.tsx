@@ -40,7 +40,7 @@ const trustBar = [
   { icon: Globe2, label: 'Global CDN Delivery' },
 ]
 
-const unifiedHeroGradient = 'linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)'
+const unifiedHeroGradient = 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
 
 const DownloadPage = () => {
   // Function to get appropriate icon for download type
@@ -201,7 +201,7 @@ const DownloadPage = () => {
           {/* Trust Bar */}
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {trustBar.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm/10 text-white drop-shadow-2xl shadow-2xl border border-white/20 text-base font-semibold">
+              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20 text-base font-semibold">
                 <item.icon className="w-5 h-5" />
                 {item.label}
               </div>
@@ -210,10 +210,10 @@ const DownloadPage = () => {
           {/* Download Stats */}
           <div className="flex flex-wrap justify-center gap-4">
             {downloadStats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm/10 px-6 py-4 rounded-xl min-w-[120px] border border-white/20">
+              <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm px-6 py-4 rounded-xl min-w-[120px] border border-white/20">
                 <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
-                <span className="text-2xl font-thin text-white drop-shadow-2xl shadow-2xl">{stat.value}</span>
-                <span className="text-xs text-white drop-shadow-2xl shadow-2xl">{stat.label}</span>
+                <span className="text-2xl font-thin text-white">{stat.value}</span>
+                <span className="text-xs text-white">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -221,12 +221,12 @@ const DownloadPage = () => {
       </section>
 
       {/* Professional Download Table/List */}
-      <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide mx-auto">
           <div className="max-w-5xl mx-auto">
             <table className="w-full text-left border-separate border-spacing-y-0">
               <thead>
-                <tr className="text-gray-800 text-sm uppercase tracking-wider font-semibold drop-shadow-lg">
+                <tr className="text-white text-sm uppercase tracking-wider font-semibold">
                   <th className="py-2">Product</th>
                   <th className="py-2">Description</th>
                   <th className="py-2">Downloads</th>
@@ -239,56 +239,56 @@ const DownloadPage = () => {
                     key={product.id}
                     className={
                       `transition ` +
-                      (idx % 2 === 0 ? 'bg-gradient-to-br from-slate-50/80 to-slate-100/80 backdrop-blur-sm' : 'bg-white/20 backdrop-blur-sm') +
+                      (idx % 2 === 0 ? 'bg-white/10 backdrop-blur-sm' : 'bg-white/5 backdrop-blur-sm') +
                       (product.featured ? ' ring-2 ring-cyan-400/40' : '') +
-                      ' hover:bg-cyan-50'
+                      ' hover:bg-white/20'
                     }
                   >
                     <td className="py-3 px-2 align-top whitespace-nowrap">
                       <div className="flex items-center gap-3">
-                        <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200 shadow-sm" />
+                        <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-white/20" />
                         <div>
-                          <div className="font-bold text-lg text-gray-900 flex items-center gap-2 drop-shadow-lg">
+                          <div className="font-bold text-lg text-white flex items-center gap-2">
                             {product.name}
                             {product.featured && (
-                              <span className="inline-block bg-cyan-100 text-cyan-700 text-xs font-thin px-2 py-0.5 rounded animate-pulse">New</span>
+                              <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-thin px-2 py-0.5 rounded animate-pulse border border-white/30">New</span>
                             )}
-                            <span className="inline-block bg-green-100 text-green-700 text-xs font-thin px-2 py-0.5 rounded">Stable</span>
+                            <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-thin px-2 py-0.5 rounded border border-white/30">Stable</span>
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="py-3 px-2 align-top text-sm text-gray-600 max-w-xs">
+                    <td className="py-3 px-2 align-top text-sm text-white max-w-xs">
                       <div className="flex flex-col h-full min-h-[180px]">
                         <div className="flex-1">
-                          <div className="font-semibold text-base text-gray-900 mb-1 drop-shadow-lg">{product.title}</div>
+                          <div className="font-semibold text-base text-white mb-1">{product.title}</div>
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 list-disc list-inside mb-4">
                             {product.features && product.features.map((feature, i) => (
-                              <li key={i} className="text-gray-700 text-xs leading-snug font-medium drop-shadow-sm">{feature}</li>
+                              <li key={i} className="text-white text-xs leading-snug font-medium">{feature}</li>
                             ))}
                           </ul>
                         </div>
                         <div className="flex items-end mt-auto">
-                          <Link href={product.details} className="inline-block mt-2 text-xs font-semibold text-blue-600 hover:underline hover:text-blue-800 transition drop-shadow-sm">View Enterprise Details</Link>
+                          <Link href={product.details} className="inline-block mt-2 text-xs font-semibold text-blue-400 hover:underline hover:text-blue-300 transition">View Enterprise Details</Link>
                         </div>
                       </div>
                     </td>
                     <td className="py-3 px-2 align-top">
                       <div className="flex flex-col gap-2">
                         {product.downloads.map((download, index) => (
-                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm font-bold shadow-lg">
+                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/20 hover:border-blue-400 hover:bg-white/10 transition-colors text-sm font-bold">
                             {(() => {
                               const IconComponent = getDownloadIcon(download.type)
-                              return <IconComponent className="w-4 h-4 text-blue-600 drop-shadow-lg" />
+                              return <IconComponent className="w-4 h-4 text-blue-400" />
                             })()}
                             {download.title}
-                            <span className="ml-2 text-xs text-blue-600 font-bold drop-shadow-sm">{download.type}</span>
+                            <span className="ml-2 text-xs text-blue-400 font-bold">{download.type}</span>
                           </Link>
                         ))}
                       </div>
                     </td>
                     <td className="py-3 px-2 align-top">
-                      <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-blue-600 hover:underline font-semibold drop-shadow-sm">View</a>
+                      <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-blue-400 hover:underline font-semibold">View</a>
                     </td>
                   </tr>
                 ))}
@@ -311,11 +311,11 @@ const DownloadPage = () => {
             <p className="text-lg text-white mb-12 leading-relaxed">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
-                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
+                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center border border-white/20">
                   <method.icon className="w-10 h-10 mb-3 text-cyan-200" />
-                  <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl mb-2">{method.title}</h3>
-                  <p className="text-white drop-shadow-2xl shadow-2xl text-sm mb-3">{method.description}</p>
-                  <ol className="text-left text-xs text-white drop-shadow-2xl shadow-2xl space-y-1 list-decimal list-inside">
+                  <h3 className="text-lg font-thin text-white mb-2">{method.title}</h3>
+                  <p className="text-white text-sm mb-3">{method.description}</p>
+                  <ol className="text-left text-xs text-white space-y-1 list-decimal list-inside">
                     {method.steps.map((step, j) => (
                       <li key={j}>{step}</li>
                     ))}
@@ -323,7 +323,7 @@ const DownloadPage = () => {
                 </div>
               ))}
             </div>
-            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-all duration-200 text-lg font-thin bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
+            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white transition-all duration-200 text-lg font-thin bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
               Get Started
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -332,15 +332,15 @@ const DownloadPage = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-20 bg-gradient-to-br from-cyan-50 to-white border-t border-gray-100">
+      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide mx-auto">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-thin text-gray-900 mb-4">Why Download from pgElephant?</h2>
-            <p className="text-lg text-gray-600 mb-8">All downloads are cryptographically signed, verified, and scanned for security. We provide open source, enterprise-grade software trusted by leading organizations worldwide.</p>
+            <h2 className="text-2xl md:text-3xl font-thin text-white mb-4">Why Download from pgElephant?</h2>
+            <p className="text-lg text-white mb-8">All downloads are cryptographically signed, verified, and scanned for security. We provide open source, enterprise-grade software trusted by leading organizations worldwide.</p>
             <div className="flex flex-wrap justify-center gap-6">
               {trustBar.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-sm text-base font-semibold text-white drop-shadow-2xl shadow-2xl">
-                  <item.icon className="w-6 h-6 text-cyan-600" />
+                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-base font-semibold text-white">
+                  <item.icon className="w-6 h-6 text-cyan-400" />
                   {item.label}
                 </div>
               ))}

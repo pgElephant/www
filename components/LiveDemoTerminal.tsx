@@ -230,7 +230,7 @@ const LiveDemoTerminal = () => {
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-secondary-300/30 rounded-full text-sm font-semibold text-secondary-200 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-secondary-300/30 rounded-full text-sm font-semibold text-secondary-200 mb-6 ">
             <Terminal className="w-4 h-4" />
             Live Demo Terminal
           </div>
@@ -250,7 +250,7 @@ const LiveDemoTerminal = () => {
 
         {/* Terminal Container */}
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
+          <div className="bg-black rounded-lg  border border-gray-700 overflow-hidden">
             {/* Terminal Header */}
             <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
               <div className="flex items-center gap-2">

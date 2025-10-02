@@ -55,23 +55,23 @@ const raleConfig = {
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Raft Log Engine</td>
-          <td className="px-4 py-3 text-slate-300">Distributed write-ahead log for consensus operations.</td>
-          <td className="px-4 py-3 text-slate-300">Durable, consistent log replication.</td>
+          <td className="px-4 py-3 text-white/90">Distributed write-ahead log for consensus operations.</td>
+          <td className="px-4 py-3 text-white/90">Durable, consistent log replication.</td>
                   </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">Leader Election</td>
-          <td className="px-4 py-3 text-slate-300">Automatic leader election with split-brain prevention.</td>
-          <td className="px-4 py-3 text-slate-300">Deterministic leadership transitions.</td>
+          <td className="px-4 py-3 text-white/90">Automatic leader election with split-brain prevention.</td>
+          <td className="px-4 py-3 text-white/90">Deterministic leadership transitions.</td>
                   </tr>
                   <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Crash Safe</td>
-          <td className="px-4 py-3 text-slate-300">Persistent logs for robust recovery.</td>
-          <td className="px-4 py-3 text-slate-300">Crash-safe recovery.</td>
+          <td className="px-4 py-3 text-white/90">Persistent logs for robust recovery.</td>
+          <td className="px-4 py-3 text-white/90">Crash-safe recovery.</td>
                   </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">Distributed Consensus</td>
-          <td className="px-4 py-3 text-slate-300">Strong consistency guarantees across nodes.</td>
-          <td className="px-4 py-3 text-slate-300">Reliable distributed operations.</td>
+          <td className="px-4 py-3 text-white/90">Strong consistency guarantees across nodes.</td>
+          <td className="px-4 py-3 text-white/90">Reliable distributed operations.</td>
                   </tr>
                 </tbody>
               </table>

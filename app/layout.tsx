@@ -197,7 +197,7 @@ export default function RootLayout({
         <link rel="icon" href="/ico/pgElephant_no_com_HD.ico" />
         <link rel="apple-touch-icon" href="/ico/pgElephant_no_com_HD.ico" />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <OrganizationSchema />
         <Header />
         <main role="main">

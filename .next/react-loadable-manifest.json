@@ -1,14 +1,14 @@
 {
   "components/ClientOnlyComponents.tsx -> @/components/SEO/QuickIndexing": {
-    "id": 4709,
+    "id": "components/ClientOnlyComponents.tsx -> @/components/SEO/QuickIndexing",
     "files": [
-      "static/chunks/709.26046701f5bdc0f3.js"
+      "static/chunks/_app-pages-browser_components_SEO_QuickIndexing_tsx.js"
     ]
   },
   "components/ClientOnlyComponents.tsx -> @/components/SEO/WebVitals": {
-    "id": 3068,
+    "id": "components/ClientOnlyComponents.tsx -> @/components/SEO/WebVitals",
     "files": [
-      "static/chunks/687.0e5a54a2e5939751.js"
+      "static/chunks/_app-pages-browser_components_SEO_WebVitals_tsx.js"
     ]
   }
 }

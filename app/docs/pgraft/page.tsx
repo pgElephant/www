@@ -71,7 +71,7 @@ const PgraftDocsPage = () => {
   return (
     <div className="min-h-screen bg-white/10 backdrop-blur-sm">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-slate-50 to-white">
+      <div style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide py-16">
           <div className="flex items-center mb-8">
             <Image 
@@ -128,7 +128,7 @@ const PgraftDocsPage = () => {
             {features.map((feature, index) => (
               <div key={index} className="professional-card p-6 text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
                     <feature.icon className="w-6 h-6 text-slate-700" />
                   </div>
                 </div>
@@ -145,7 +145,7 @@ const PgraftDocsPage = () => {
       </div>
 
       {/* Quick Links Section */}
-      <div className="bg-slate-50 py-16">
+      <div className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">
             Quick Links
@@ -162,7 +162,7 @@ const PgraftDocsPage = () => {
                     className="professional-card p-6 block hover:shadow-xl transition-all duration-300 group"
                   >
                     <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center mr-4">
+                      <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center mr-4 border border-white/20">
                         <link.icon className="w-5 h-5 text-slate-700" />
                       </div>
                       <h3 className="text-lg font-semibold text-slate-900 group-hover:text-slate-700">
@@ -180,7 +180,7 @@ const PgraftDocsPage = () => {
                     className="professional-card p-6 block hover:shadow-xl transition-all duration-300 group"
                   >
                     <div className="flex items-center mb-4">
-                      <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center mr-4">
+                      <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center mr-4 border border-white/20">
                         <link.icon className="w-5 h-5 text-slate-700" />
                       </div>
                       <h3 className="text-lg font-semibold text-slate-900 group-hover:text-slate-700">

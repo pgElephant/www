@@ -151,34 +151,17 @@ const blogPosts = [
 ]
 
 
-// Stock images for blog cards (Unsplash)
-const stockImages = [
-  '/stock/unsplash-1.jpg',
-  '/stock/unsplash-2.jpg',
-  '/stock/unsplash-3.jpg',
-  '/stock/unsplash-4.jpg',
-  '/stock/unsplash-5.jpg',
-]
-
-import Image from 'next/image'
-
 const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number }) => {
-  // Cycle through stock images for demo
-  const imageUrl = stockImages[index % stockImages.length] || stockImages[0]
   return (
     <article className="group h-full">
       <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-white/30 h-full flex flex-col">
           {/* Large Stock Image */}
-          <div className="relative w-full aspect-[3/2] bg-white/10 backdrop-blur-sm overflow-hidden flex-shrink-0 border border-white/20">
-            <Image
-              src={imageUrl}
-              alt={post.title}
-              fill
-              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-              sizes="(max-width: 768px) 100vw, 33vw"
-              priority={index < 3}
-            />
+          <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20 overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center">
+            <div className="text-center p-6">
+              <div className="text-4xl mb-2">📄</div>
+              <div className="text-white/80 text-sm font-thin">{post.category}</div>
+            </div>
             <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm/80 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg drop-shadow-lg">
               {post.category}
             </div>
@@ -222,7 +205,7 @@ export default function BlogPage() {
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #94a3b8 100%)`,
+          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
           position: 'relative'
         }}
       >
@@ -289,7 +272,7 @@ export default function BlogPage() {
       </div>
 
       {/* Blog Categories */}
-      <div className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #94a3b8 100%)' }}>
+      <div className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -317,7 +300,7 @@ export default function BlogPage() {
 
 
       {/* Blog Articles - Clean Modern Grid */}
-      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">

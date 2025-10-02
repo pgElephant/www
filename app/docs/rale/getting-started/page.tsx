@@ -326,7 +326,7 @@ int main() {
       </div>
 
       {/* Quick Start Steps */}
-      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl text-gray-900 mb-12 text-center">
@@ -359,7 +359,7 @@ int main() {
       </div>
 
       {/* Installation Steps */}
-      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl text-gray-900 mb-8 text-center">
@@ -462,7 +462,7 @@ int main() {
       </div>
 
       {/* RALE Architecture */}
-      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -638,7 +638,7 @@ int main() {
       </div>
 
       {/* Advanced Features & Troubleshooting */}
-      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -829,7 +829,7 @@ ralectrl LIST --detailed`}
       </div>
 
       {/* Next Steps */}
-      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl text-gray-900 mb-6">

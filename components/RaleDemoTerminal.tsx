@@ -252,7 +252,7 @@ const RaleDemoTerminal = () => {
   }
 
   return (
-    <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
+    <div className="bg-black rounded-lg border border-gray-700 overflow-hidden">
       {/* Terminal Header */}
       <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
         <div className="flex items-center gap-2">

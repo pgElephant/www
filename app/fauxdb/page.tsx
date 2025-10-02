@@ -9,7 +9,7 @@ const fauxdbConfig = {
   hero: {
     title: 'FauxDB: MongoDB wire-protocol proxy with PostgreSQL storage',
     subtitle: 'MongoDB wire protocol proxy, Rust-powered, PostgreSQL backend',
-    projectName: 'fauxdb',
+    projectName: 'FauxDB',
     icon: '/ico/FauxDB_HD.ico',
   },
   badges: [

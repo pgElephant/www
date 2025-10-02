@@ -43,7 +43,6 @@ export async function POST(request: NextRequest) {
     const searchEngines = [
       'https://www.google.com/ping?sitemap=',
       'https://www.bing.com/ping?sitemap=',
-      'https://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=',
     ]
 
     const sitemapUrl = `${baseUrl}/sitemap.xml`

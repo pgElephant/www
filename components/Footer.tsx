@@ -63,7 +63,7 @@ const Footer = () => {
     <footer 
       className="pt-12 pb-6 relative overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, #0c1220 0%, #1a2332 25%, #2d3748 50%, #3f4a5c 75%, #556270 100%)`,
+        background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
         position: 'relative'
       }}
     >

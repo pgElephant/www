@@ -14,16 +14,14 @@
     font-feature-settings: "kern" 1, "liga" 1;
   }
   
-  /* Make all white text extremely shiny and crisp */
+  /* Clean text without shadows */
   .text-white {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
-    filter: contrast(1.2) brightness(1.1);
+    filter: contrast(1.1) brightness(1.05);
   }
   
-  /* Enhanced white text for headings */
+  /* Clean headings without shadows */
   h1.text-white, h2.text-white, h3.text-white, h4.text-white, h5.text-white, h6.text-white {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 255, 255, 0.7), 0 0 35px rgba(255, 255, 255, 0.5);
-    filter: contrast(1.3) brightness(1.15);
+    filter: contrast(1.1) brightness(1.05);
   }
 }
 
@@ -57,11 +55,11 @@ body {
 
 
 .btn-primary {
-  @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-xl;
+  @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm;
 }
 
 .btn-secondary {
-  @apply bg-secondary-600 hover:bg-secondary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-xl;
+  @apply bg-secondary-600 hover:bg-secondary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 backdrop-blur-sm;
 }
 
 .btn-outline-primary {
@@ -112,7 +110,7 @@ body {
 
 /* Sleek card styles */
 .card-cool {
-  @apply bg-white/80 backdrop-blur-sm border border-cool-200/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1;
+  @apply bg-white/80 backdrop-blur-sm border border-cool-200/50 rounded-2xl transition-all duration-300 transform hover:-translate-y-1;
 }
 
 
@@ -179,11 +177,11 @@ body {
 
 /* Cool hover effects */
 .hover-lift {
-  @apply transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl;
+  @apply transition-all duration-300 transform hover:-translate-y-2;
 }
 
 .hover-glow {
-  @apply transition-all duration-300 hover:shadow-lg hover:shadow-accent-500/25;
+  @apply transition-all duration-300;
 }
 
 /* Animated gradients */
@@ -237,15 +235,15 @@ body {
 
 /* Professional Design Enhancements */
 .professional-card {
-  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2;
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl transition-all duration-500 hover:-translate-y-2;
 }
 
 .professional-button {
-  @apply inline-flex items-center px-10 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105;
+  @apply inline-flex items-center px-10 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105;
 }
 
 .professional-button-outline {
-  @apply inline-flex items-center px-10 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/20 hover:border-white/30 hover:bg-white/20 font-semibold rounded-2xl transition-all duration-300 shadow-sm hover:shadow-lg;
+  @apply inline-flex items-center px-10 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/20 hover:border-white/30 hover:bg-white/20 font-semibold rounded-2xl transition-all duration-300;
 }
 
 .professional-gradient {
@@ -257,7 +255,7 @@ body {
 }
 
 .professional-badge {
-  @apply inline-flex items-center px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/20 shadow-sm hover:shadow-md transition-all duration-200;
+  @apply inline-flex items-center px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/20 transition-all duration-200;
 }
 
 .professional-section {
@@ -281,16 +279,16 @@ body {
 }
 
 .professional-testimonial {
-  @apply bg-white/10 backdrop-blur-sm border border-white/20 p-10 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300;
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 p-10 rounded-3xl transition-all duration-300;
 }
 
 .professional-cta {
-  @apply bg-slate-900 text-white rounded-3xl p-16 shadow-2xl;
+  @apply bg-slate-900 text-white rounded-3xl p-16;
 }
 
 /* Enhanced Professional Elements */
 .professional-header {
-  @apply bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm;
+  @apply bg-white/95 backdrop-blur-xl border-b border-slate-200;
 }
 
 .professional-nav-link {

@@ -22,12 +22,12 @@ const Header = () => {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg shadow-sm border-b border-slate-700" style={{ background: 'linear-gradient(135deg, #020617 0%, #0f172a 25%, #1e293b 50%, #334155 75%, #475569 100%)' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg  border-b border-slate-700" style={{ background: 'linear-gradient(135deg, #020617 0%, #0f172a 25%, #1e293b 50%, #334155 75%, #475569 100%)' }}>
       <div className="container-wide mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-20 w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="text-white drop-shadow-2xl shadow-2xl group-hover:text-white transition-colors hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)]">
+            <div className="text-white  group-hover:text-white transition-colors ">
               <Image 
                 src="/ico/pgElephant_no_com_HD.ico" 
                 alt="pgElephant" 
@@ -44,7 +44,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors font-semibold hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)] hover:text-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                className="text-white  hover:text-white transition-colors font-semibold  "
                 target={item.href.startsWith('http') ? '_blank' : undefined}
                 rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
@@ -53,20 +53,20 @@ const Header = () => {
             ))}
             {/* GitHub Projects Dropdown */}
             <div className="relative group">
-              <button className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors flex items-center font-semibold hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)] hover:text-shadow-[0_0_10px_rgba(255,255,255,0.8)]">
+              <button className="text-white  hover:text-white transition-colors flex items-center font-semibold  ">
                 <Github className="w-5 h-5 mr-2" />
                 Projects
                 <svg className="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div className="absolute top-full right-0 mt-2 w-64 bg-white/95 backdrop-blur-xl border border-slate-200/50 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="absolute top-full right-0 mt-2 w-64 bg-white/95 backdrop-blur-xl border border-slate-200/50 rounded-2xl  opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="p-4 space-y-3">
                   {githubProjects.map((project) => (
                     <a
                       key={project.name}
                       href={project.href}
-                      className="flex items-start p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200 group/item"
+                      className="flex items-start p-3 rounded-xl hover:bg-white/10 transition-colors duration-200 group/item"
                     >
                       <Github className="w-5 h-5 text-slate-600 mt-0.5 mr-3 flex-shrink-0" />
                       <div>
@@ -83,7 +83,7 @@ const Header = () => {
                     href="https://github.com/pgElephant"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start p-3 rounded-xl hover:bg-slate-50 transition-colors duration-200 group/item border-t border-slate-200 pt-3"
+                    className="flex items-start p-3 rounded-xl hover:bg-white/10 transition-colors duration-200 group/item border-t border-white/20 pt-3"
                   >
                     <Github className="w-5 h-5 text-slate-600 mt-0.5 mr-3 flex-shrink-0" />
                     <div>
@@ -101,7 +101,7 @@ const Header = () => {
           </nav>
           {/* Getting Started button right - hidden on mobile */}
           <div className="hidden md:flex items-center justify-end min-w-[180px]">
-            <Link href="/docs" className="bg-white/20 hover:bg-white/30 text-white drop-shadow-2xl shadow-2xl font-semibold px-6 py-2 rounded-lg transition-all duration-200 text-sm hover:drop-shadow-[0_0_25px_rgba(255,255,255,1)] hover:text-shadow-[0_0_10px_rgba(255,255,255,0.8)]">Getting Started</Link>
+            <Link href="/docs" className="bg-white/20 hover:bg-white/30 text-white  font-semibold px-6 py-2 rounded-lg transition-all duration-200 text-sm  ">Getting Started</Link>
           </div>
           
           {/* Mobile menu button */}

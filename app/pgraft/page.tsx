@@ -18,8 +18,8 @@ function SectionHeading({ children, kicker, className = '' }: { children: React.
 function FeatureCard({ title, desc }: { title: string; desc: string }) {
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-md transition-shadow border border-white/20 p-6 flex flex-col">
-      <h4 className="font-semibold text-lg mb-2 text-slate-900 drop-shadow-lg">{title}</h4>
-      <p className="text-slate-700 text-sm leading-relaxed flex-1 drop-shadow-sm">{desc}</p>
+      <h4 className="font-semibold text-lg mb-2 text-white drop-shadow-lg">{title}</h4>
+      <p className="text-white/90 text-sm leading-relaxed flex-1 drop-shadow-sm">{desc}</p>
     </div>
   );
 }
@@ -42,15 +42,15 @@ function CodeBlock({ code }: { code: string }) {
 }
 
 function Badge({ children }: { children: React.ReactNode }) {
-  return <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">{children}</span>;
+  return <span className="inline-block bg-white/10 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-md border border-white/20 mr-2 mb-2">{children}</span>;
 }
 
 /* ===================== Page Component ===================== */
 const PgraftPage = () => {
   return (
-    <div className="pb-24">
+    <div className="pb-8">
       {/* Hero */}
-      <section className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
+      <section className="py-28 text-white relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
         <div className="container-wide relative z-10 text-center">
           <div className="flex flex-col items-center justify-center mb-5">
@@ -81,7 +81,7 @@ const PgraftPage = () => {
       </section>
 
       {/* High-Level Feature Pillars */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <SectionHeading kicker="Overview">Why pgraft</SectionHeading>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -96,71 +96,71 @@ const PgraftPage = () => {
       </section>
 
       {/* Detailed Features List */}
-      <section className="py-20 bg-slate-50 border-t border-b">
+      <section className="py-20 relative overflow-hidden border-t border-b border-white/20" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <SectionHeading kicker="Features">Detailed Features List</SectionHeading>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-indigo-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 3v18m9-9H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Native PostgreSQL Extension</h4>
-                <p className="text-slate-600">Seamless in-core integration—no external daemons, no sidecars, no wrappers. Deploy and manage consensus directly inside PostgreSQL.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Native PostgreSQL Extension</h4>
+                <p className="text-white/90">Seamless in-core integration—no external daemons, no sidecars, no wrappers. Deploy and manage consensus directly inside PostgreSQL.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-sky-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Raft Consensus</h4>
-                <p className="text-slate-600">Reliable leader election, log replication, and strong consistency using the proven Raft algorithm. No split-brain, deterministic failover.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Raft Consensus</h4>
+                <p className="text-white/90">Reliable leader election, log replication, and strong consistency using the proven Raft algorithm. No split-brain, deterministic failover.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-green-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Crash-Safe Durability</h4>
-                <p className="text-slate-600">All Raft state and logs are persisted for robust, crash-safe recovery. Survive restarts and failures without data loss or reconfiguration.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Crash-Safe Durability</h4>
+                <p className="text-white/90">All Raft state and logs are persisted for robust, crash-safe recovery. Survive restarts and failures without data loss or reconfiguration.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-yellow-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">SQL Management Functions</h4>
-                <p className="text-slate-600">Full cluster lifecycle—init, membership, diagnostics, and monitoring—managed via simple SQL functions. No external control plane required.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">SQL Management Functions</h4>
+                <p className="text-white/90">Full cluster lifecycle—init, membership, diagnostics, and monitoring—managed via simple SQL functions. No external control plane required.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-pink-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Observability</h4>
-                <p className="text-slate-600">Inspect cluster state, logs, and leader status with SQL queries. Built-in monitoring hooks for easy integration with dashboards and alerts.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Observability</h4>
+                <p className="text-white/90">Inspect cluster state, logs, and leader status with SQL queries. Built-in monitoring hooks for easy integration with dashboards and alerts.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-cyan-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Dynamic Node Membership</h4>
-                <p className="text-slate-600">Add or remove nodes through consensus. Scale up or down safely, with all changes replicated and agreed by the cluster.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Dynamic Node Membership</h4>
+                <p className="text-white/90">Add or remove nodes through consensus. Scale up or down safely, with all changes replicated and agreed by the cluster.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-red-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Debug & Audit</h4>
-                <p className="text-slate-600">Toggle extended logging, access audit-friendly SQL surfaces, and trace cluster events for compliance and troubleshooting.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Debug & Audit</h4>
+                <p className="text-white/90">Toggle extended logging, access audit-friendly SQL surfaces, and trace cluster events for compliance and troubleshooting.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-violet-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Minimal Configuration</h4>
-                <p className="text-slate-600">Production-ready defaults, simple setup, and tuneable parameters. Get started quickly and adapt to your workload needs.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Minimal Configuration</h4>
+                <p className="text-white/90">Production-ready defaults, simple setup, and tuneable parameters. Get started quickly and adapt to your workload needs.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-emerald-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
-                <h4 className="font-bold text-lg mb-1">Background Worker Architecture</h4>
-                <p className="text-slate-600">Efficient, low-overhead operation inside PostgreSQL. Leverages background workers and shared memory for high performance.</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Background Worker Architecture</h4>
+                <p className="text-white/90">Efficient, low-overhead operation inside PostgreSQL. Leverages background workers and shared memory for high performance.</p>
               </div>
             </div>
           </div>
@@ -168,7 +168,7 @@ const PgraftPage = () => {
       </section>
 
       {/* Detailed Feature Matrix */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
+      <section className="py-20 text-white relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
         <div className="container-wide relative z-10">
           <SectionHeading kicker="Depth" className="text-white">Feature Matrix</SectionHeading>
@@ -220,21 +220,21 @@ const PgraftPage = () => {
       </section>
 
       {/* Technical Details */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <SectionHeading kicker="Internals">Technical Documentation</SectionHeading>
           <div className="text-center max-w-3xl mx-auto">
-            <p className="text-slate-600 mb-8">
+            <p className="text-white/90 mb-8">
               Dive deep into pgraft's technical details, architecture, and internal workings with our comprehensive documentation.
             </p>
             <div className="grid sm:grid-cols-2 gap-6">
               <Link href="/docs/pgraft/internals/architecture" className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-indigo-300 transition-colors">
-                <h3 className="font-semibold text-lg text-slate-900 mb-2">Architecture</h3>
-                <p className="text-sm text-slate-600">Learn about pgraft's internal architecture and design decisions.</p>
+                <h3 className="font-semibold text-lg text-white mb-2">Architecture</h3>
+                <p className="text-sm text-white/90">Learn about pgraft's internal architecture and design decisions.</p>
               </Link>
               <Link href="/docs/pgraft/internals/worker-lifecycle" className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-indigo-300 transition-colors">
-                <h3 className="font-semibold text-lg text-slate-900 mb-2">Worker Lifecycle</h3>
-                <p className="text-sm text-slate-600">Understand the states and transitions of pgraft workers.</p>
+                <h3 className="font-semibold text-lg text-white mb-2">Worker Lifecycle</h3>
+                <p className="text-sm text-white/90">Understand the states and transitions of pgraft workers.</p>
               </Link>
             </div>
           </div>

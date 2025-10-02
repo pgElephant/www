@@ -88,7 +88,7 @@ const Hero = () => {
   const current = products[currentProduct]
   
   // Elegant gradient design
-  const heroGradient = `linear-gradient(135deg, #0c1220 0%, #1a2332 25%, #2d3748 50%, #3f4a5c 75%, #556270 100%)`
+  const heroGradient = `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`
   const tileGradient = `linear-gradient(135deg, ${palette.primary}, ${palette.secondary})`
 
   return (

@@ -28,13 +28,13 @@ const palette = {
 
 const DocsPage = () => {
   // State for active documentation section
-  const [activeSection, setActiveSection] = useState<string | null>(null)
-  const [activeProduct, setActiveProduct] = useState<string | null>(null)
+  const [activeSection, setActiveSection] = useState<string | null>('Getting Started')
+  const [activeProduct, setActiveProduct] = useState<string | null>('rale')
 
-  // Ensure clean state on mount
+  // Set default documentation on mount
   React.useEffect(() => {
-    setActiveProduct(null)
-    setActiveSection(null)
+    setActiveProduct('rale')
+    setActiveSection('Getting Started')
   }, [])
 
   // Function to get appropriate icon for documentation type
@@ -1495,8 +1495,8 @@ docker exec -it fauxdb_fauxdb_1 mongosh
     const docContent = content[productId]?.[docTitle]
     if (!docContent) {
       return (
-        <div className="bg-gradient-to-br from-slate-50 to-slate-100 border border-gray-200 rounded-lg p-8">
-          <p className="text-gray-600">
+        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-8">
+          <p className="text-white/90">
             Documentation content for "{docTitle}" is being prepared. 
             Please check back soon or visit the full documentation page.
           </p>
@@ -1508,7 +1508,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       <div className="space-y-8">
         {docContent.sections.map((section: any, index: number) => (
           <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-            <h3 className="text-xl font-thin text-gray-900 mb-4">
+            <h3 className="text-xl font-thin text-white mb-4">
               {section.title}
             </h3>
             <div className="prose prose-sm max-w-none">
@@ -1558,7 +1558,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
     }
 
   return (
-      <p className="text-gray-700 leading-relaxed">
+      <p className="text-white/90 leading-relaxed">
         {overviews[productId]?.[docTitle] || `This section covers ${docTitle} for ${productId.toUpperCase()}. Click "View Full Documentation" to see the complete guide.`}
       </p>
     )
@@ -1646,13 +1646,13 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       return (
         <div>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-thin text-gray-900 mb-4">
+            <h2 className="text-3xl font-thin text-white mb-4">
               Product Documentation
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-white/90 max-w-3xl mx-auto">
               Comprehensive documentation for all pgElephant products. Each product includes guides, API references, and tutorials to help you get started and master advanced features.
             </p>
-            <div className="mt-4 inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-thin">
+            <div className="mt-4 inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-thin border border-white/30">
               👈 Click on any documentation link in the sidebar to get started
             </div>
           </div>
@@ -1671,17 +1671,17 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     className="w-12 h-12 mr-4 object-contain"
                   />
                   <div>
-                    <h3 className="text-2xl font-thin text-gray-900 mb-1">
+                    <h3 className="text-2xl font-thin text-white mb-1">
                       {product.name}
                     </h3>
-                    <p className="text-lg text-gray-600">
+                    <p className="text-lg text-white/90">
                       {product.title}
                     </p>
                   </div>
                 </div>
 
                 {/* Product Description */}
-                <p className="text-gray-700 mb-8 leading-relaxed">
+                <p className="text-white/90 mb-8 leading-relaxed">
                   {product.description}
                 </p>
 
@@ -1691,7 +1691,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     <button
                       key={index}
                       onClick={() => handleSidebarClick(product.id, doc.title)}
-                      className="flex items-start gap-4 p-4 text-left bg-gradient-to-br from-slate-50 to-slate-100 hover:bg-blue-50 rounded-lg transition-colors group border border-gray-200 hover:border-blue-300"
+                      className="flex items-start gap-4 p-4 text-left bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-lg transition-colors group border border-white/20 hover:border-blue-300"
                     >
                       <div className="flex-shrink-0">
                         <span className="inline-flex items-center px-2 py-1 rounded text-xs font-thin"
@@ -1705,14 +1705,14 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                         </span>
                       </div>
                       <div className="flex-1">
-                        <div className="font-thin text-gray-900 group-hover:text-blue-700 mb-1">
+                        <div className="font-thin text-white group-hover:text-blue-300 mb-1">
                           {doc.title}
                         </div>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-white/90">
                           {doc.description}
                         </p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors flex-shrink-0 mt-1" />
+                      <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-blue-300 transition-colors flex-shrink-0 mt-1" />
                     </button>
                   ))}
                 </div>
@@ -1721,7 +1721,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="flex gap-4">
                   <Link
                     href={`/${product.id}`}
-                    className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gradient-to-br from-slate-50 to-slate-100 transition-colors font-thin"
+                    className="inline-flex items-center px-4 py-2 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors font-thin"
                   >
                     Learn More
                   </Link>
@@ -1763,7 +1763,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     }
                   }, 100)
                 }}
-                className="inline-flex items-center text-sm font-thin text-gray-700 hover:text-blue-600"
+                className="inline-flex items-center text-sm font-thin text-white/90 hover:text-blue-300"
               >
                 <BookOpen className="w-4 h-4 mr-2" />
                 Documentation
@@ -1771,7 +1771,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             </li>
             <li>
               <div className="flex items-center">
-                <ArrowRight className="w-4 h-4 text-gray-400 mx-1" />
+                <ArrowRight className="w-4 h-4 text-white/60 mx-1" />
                 <button
                   onClick={() => {
                     setActiveSection(null);
@@ -1782,7 +1782,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                       }
                     }, 100)
                   }}
-                  className="ml-1 text-sm font-thin text-gray-700 hover:text-blue-600 md:ml-2"
+                  className="ml-1 text-sm font-thin text-white/90 hover:text-blue-300 md:ml-2"
                 >
                   {product.name}
                 </button>
@@ -1790,8 +1790,8 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             </li>
             <li aria-current="page">
               <div className="flex items-center">
-                <ArrowRight className="w-4 h-4 text-gray-400 mx-1" />
-                <span className="ml-1 text-sm font-thin text-gray-500 md:ml-2">
+                <ArrowRight className="w-4 h-4 text-white/60 mx-1" />
+                <span className="ml-1 text-sm font-thin text-white/70 md:ml-2">
                   {doc.title}
                 </span>
               </div>
@@ -1809,28 +1809,22 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               height={32}
               className="w-8 h-8 mr-3 object-contain"
             />
-            <h1 className="text-3xl font-thin text-gray-900">
+            <h1 className="text-3xl font-thin text-white">
               {doc.title}
             </h1>
           </div>
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-thin"
-                  style={{
-                    backgroundColor: doc.type === 'Guide' ? '#E0F2FE' : 
-                                   doc.type === 'Reference' ? '#F0FDF4' : '#FEF3C7',
-                    color: doc.type === 'Guide' ? '#0369A1' : 
-                          doc.type === 'Reference' ? '#166534' : '#92400E'
-                  }}>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-thin bg-white/20 backdrop-blur-sm text-white border border-white/30">
               {doc.type}
             </span>
-            <span className="text-sm text-gray-500">•</span>
-            <span className="text-sm text-gray-600">{product.name}</span>
+            <span className="text-sm text-white/60">•</span>
+            <span className="text-sm text-white/90">{product.name}</span>
           </div>
         </div>
 
         {/* Content Body */}
         <div className="prose prose-lg max-w-none">
-          <p className="text-lg text-gray-700 mb-6">
+          <p className="text-lg text-white/90 mb-6">
             {doc.description}
           </p>
           
@@ -1847,7 +1841,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #94a3b8 100%)`,
+          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
           position: 'relative'
         }}
       >
@@ -1917,18 +1911,18 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       </div>
 
       {/* Navigation Overview */}
-      <div 
+      <div
         className="py-16"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.gray100}, ${palette.white})`
+          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
         }}
       >
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-thin text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-thin text-white mb-8 text-center">
               Documentation Structure
             </h2>
-            <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            <p className="text-lg text-white/90 text-center mb-12 max-w-3xl mx-auto">
               Our documentation follows enterprise standards with comprehensive guides, API references, and tutorials for each product.
             </p>
             
@@ -1937,24 +1931,24 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               <div className="flex items-center gap-3">
                 <BookOpen className="w-6 h-6" style={{ color: palette.cyan }} />
                 <div>
-                  <h3 className="font-thin text-gray-900">Guides</h3>
-                  <p className="text-gray-600 text-sm">Step-by-step installation and configuration</p>
+                  <h3 className="font-thin text-white">Guides</h3>
+                  <p className="text-white/90 text-sm">Step-by-step installation and configuration</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-3">
                 <FileText className="w-6 h-6" style={{ color: palette.teal }} />
                 <div>
-                  <h3 className="font-thin text-gray-900">Reference</h3>
-                  <p className="text-gray-600 text-sm">Complete API documentation and functions</p>
+                  <h3 className="font-thin text-white">Reference</h3>
+                  <p className="text-white/90 text-sm">Complete API documentation and functions</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-3">
                 <Container className="w-6 h-6" style={{ color: palette.orange }} />
                 <div>
-                  <h3 className="font-thin text-gray-900">Tutorials</h3>
-                  <p className="text-gray-600 text-sm">Docker, Kubernetes, and deployment guides</p>
+                  <h3 className="font-thin text-white">Tutorials</h3>
+                  <p className="text-white/90 text-sm">Docker, Kubernetes, and deployment guides</p>
                 </div>
               </div>
             </div>
@@ -1963,7 +1957,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
 
       {/* Two-Column Documentation Layout */}
-      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
                   <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
@@ -1971,8 +1965,8 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               {/* Left Sidebar - Navigation */}
               <div className="lg:col-span-2">
             <div className="sticky top-24">
-                  <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-6">
-                    <h3 className="text-lg font-thin text-gray-900 mb-4">Documentation</h3>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <h3 className="text-lg font-thin text-white mb-4">Documentation</h3>
                     
                     {/* Navigation Menu */}
                     <nav className="space-y-2">
@@ -1987,7 +1981,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                               height={24}
                               className="w-6 h-6 mr-2 object-contain"
                             />
-                            <h4 className="text-sm font-thin text-gray-900">
+                            <h4 className="text-sm font-thin text-white">
                               {product.name}
                             </h4>
           </div>
@@ -2001,7 +1995,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                                       className={`block w-full py-2 px-3 text-sm text-left rounded-md transition-colors group ${
                                         activeProduct === product.id && activeSection === doc.title
                                           ? 'bg-blue-50 text-blue-700 border-l-2 border-blue-500'
-                                          : 'text-gray-600 hover:text-gray-900 hover:bg-white/95 backdrop-blur-sm'
+                                          : 'text-white hover:text-white hover:bg-white/10 backdrop-blur-sm'
                                       }`}
                   >
                     <div className="flex items-center justify-between">
@@ -2039,15 +2033,15 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       <div 
         className="py-20"
         style={{ 
-          background: `linear-gradient(135deg, ${palette.gray100}, ${palette.white})`
+          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
         }}
       >
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-thin text-gray-900 mb-6">
+            <h2 className="text-3xl font-thin text-white mb-6">
               Quick Start
             </h2>
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+            <p className="text-xl text-white/90 mb-12 leading-relaxed">
               Get up and running with pgElephant in minutes.
             </p>
 
@@ -2056,10 +2050,10 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Download className="w-8 h-8" style={{ color: palette.cyan }} />
                     </div>
-                <h3 className="text-lg font-thin text-gray-900 mb-2">
+                <h3 className="text-lg font-thin text-white mb-2">
                   Download
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-white/90">
                   Get the latest version of pgElephant products.
                 </p>
                     </div>
@@ -2068,10 +2062,10 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Code className="w-8 h-8" style={{ color: palette.teal }} />
                 </div>
-                <h3 className="text-lg font-thin text-gray-900 mb-2">
+                <h3 className="text-lg font-thin text-white mb-2">
                   Install
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-white/90">
                   Follow our installation guides for your platform.
                 </p>
                   </div>
@@ -2080,10 +2074,10 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <ExternalLink className="w-8 h-8" style={{ color: palette.orange }} />
                 </div>
-                <h3 className="text-lg font-thin text-gray-900 mb-2">
+                <h3 className="text-lg font-thin text-white mb-2">
                   Deploy
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-white/90">
                   Deploy to production with confidence.
                 </p>
               </div>
@@ -2104,20 +2098,20 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             </div>
 
             {/* Additional Resources */}
-      <div className="py-20 relative overflow-hidden border-t border-gray-200" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
+      <div className="py-20 relative overflow-hidden border-t border-white/20" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-thin text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-thin text-white mb-12 text-center">
               Additional Resources
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <ExternalLink className="w-8 h-8 text-gray-600" />
+                  <ExternalLink className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-lg font-thin text-gray-900 mb-2">GitHub</h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <h3 className="text-lg font-thin text-white mb-2">GitHub</h3>
+                <p className="text-white/90 text-sm mb-4">
                   Source code, issues, and contributions
                 </p>
                 <Link
@@ -2131,10 +2125,10 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <Play className="w-8 h-8 text-gray-600" />
+                  <Play className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-lg font-thin text-gray-900 mb-2">Community</h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <h3 className="text-lg font-thin text-white mb-2">Community</h3>
+                <p className="text-white/90 text-sm mb-4">
                   Join our community for support
                 </p>
                 <Link
@@ -2148,10 +2142,10 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <FileText className="w-8 h-8 text-gray-600" />
+                  <FileText className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-lg font-thin text-gray-900 mb-2">Blog</h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <h3 className="text-lg font-thin text-white mb-2">Blog</h3>
+                <p className="text-white/90 text-sm mb-4">
                   Latest updates and tutorials
                 </p>
                 <Link
@@ -2165,10 +2159,10 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <Code className="w-8 h-8 text-gray-600" />
+                  <Code className="w-8 h-8 text-white" />
               </div>
-                <h3 className="text-lg font-thin text-gray-900 mb-2">Support</h3>
-                <p className="text-gray-600 text-sm mb-4">
+                <h3 className="text-lg font-thin text-white mb-2">Support</h3>
+                <p className="text-white/90 text-sm mb-4">
                   Get help and technical support
                 </p>
                 <Link

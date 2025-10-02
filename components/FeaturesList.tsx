@@ -182,7 +182,7 @@ const FeaturesList = () => {
       id="features" 
       className="section-padding relative overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+        background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
         position: 'relative'
       }}
     >
@@ -467,7 +467,7 @@ const FeaturesList = () => {
                 <Shield className="w-5 h-5" />
                 View Documentation
               </a>
-              <a href="/contact" className="border-2 border-slate-400 text-slate-300 px-8 py-4 rounded-lg font-thin hover:bg-slate-400 hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
+              <a href="/contact" className="border-2 border-white/40 text-white px-8 py-4 rounded-lg font-thin hover:bg-white/20 hover:text-white transition-colors flex items-center justify-center gap-2">
                 <Users className="w-5 h-5" />
                 Contact Sales
               </a>
