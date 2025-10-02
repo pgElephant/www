@@ -128,6 +128,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgraft/configuration/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/configuration">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/configuration/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgraft/getting-started/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/getting-started">> = Specific
@@ -137,10 +146,37 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgraft/installation/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/installation">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/installation/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgraft/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft">> = Specific
   const handler = {} as typeof import("../../app/docs/pgraft/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgraft/raft-protocol/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/raft-protocol">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/raft-protocol/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgraft/sql-functions/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/sql-functions">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/sql-functions/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
