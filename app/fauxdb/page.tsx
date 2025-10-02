@@ -4,19 +4,20 @@ import FauxDbDemoTerminal from '@/components/FauxDbDemoTerminal'
 import { Play, Terminal, Monitor, CheckCircle, Users, Star, Clock, BarChart3, Zap, Shield } from 'lucide-react'
 
 export const metadata = {
-  title: 'FauxDB - MongoDB Alternative | PostgreSQL Document Database | Wire Protocol Proxy',
-  description: 'FauxDB: MongoDB-compatible document database with PostgreSQL backend. Wire protocol proxy, query translation, Rust-powered performance. Drop-in MongoDB replacement with ACID transactions, geospatial support, and aggregation pipelines.',
+  title: 'FauxDB - MongoDB / DocumentDB Alternative | PostgreSQL Document Database',
+  description: 'FauxDB: MongoDB- and DocumentDB-compatible document database with PostgreSQL backend. Wire protocol proxy, query translation, Rust-powered performance. Drop-in replacement with ACID transactions, geospatial support, and aggregation pipelines.',
   keywords: [
-    'FauxDB', 'MongoDB alternative', 'MongoDB compatible', 'document database', 'PostgreSQL document store',
-    'wire protocol proxy', 'query translation', 'MongoDB to PostgreSQL', 'NoSQL database', 'document store',
-    'MongoDB replacement', 'PostgreSQL JSONB', 'Rust database', 'database proxy', 'query translator',
-    'MongoDB migration', 'document database PostgreSQL', 'MongoDB wire protocol', 'PostgreSQL NoSQL',
-    'FauxDB database', 'MongoDB compatible database', 'PostgreSQL document database', 'wire protocol',
-    'database translation', 'MongoDB PostgreSQL', 'document store PostgreSQL', 'NoSQL PostgreSQL'
+    'FauxDB', 'MongoDB alternative', 'DocumentDB alternative', 'MongoDB compatible', 'DocumentDB compatible',
+    'AWS DocumentDB', 'document database', 'PostgreSQL document store', 'wire protocol proxy', 'query translation',
+    'MongoDB to PostgreSQL', 'DocumentDB to PostgreSQL', 'NoSQL database', 'document store',
+    'MongoDB replacement', 'DocumentDB replacement', 'PostgreSQL JSONB', 'Rust database', 'database proxy', 'query translator',
+    'MongoDB migration', 'DocumentDB migration', 'document database PostgreSQL', 'MongoDB wire protocol', 'PostgreSQL NoSQL',
+    'FauxDB database', 'MongoDB compatible database', 'DocumentDB compatible database', 'PostgreSQL document database', 'wire protocol',
+    'database translation', 'MongoDB PostgreSQL', 'DocumentDB PostgreSQL', 'document store PostgreSQL', 'NoSQL PostgreSQL'
   ],
   openGraph: {
-    title: 'FauxDB - MongoDB Alternative with PostgreSQL Backend',
-    description: 'Drop-in MongoDB replacement with PostgreSQL storage. Wire protocol proxy, query translation, and enterprise features.',
+    title: 'FauxDB - MongoDB / DocumentDB Alternative with PostgreSQL Backend',
+    description: 'Drop-in MongoDB & DocumentDB replacement with PostgreSQL storage. Wire protocol proxy, query translation, and enterprise features.',
     type: 'website',
     url: 'https://www.pgelephant.com/fauxdb',
     images: [
@@ -30,8 +31,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FauxDB - MongoDB Alternative with PostgreSQL Backend',
-    description: 'Drop-in MongoDB replacement with PostgreSQL storage. Wire protocol proxy, query translation, and enterprise features.',
+    title: 'FauxDB - MongoDB / DocumentDB Alternative with PostgreSQL Backend',
+    description: 'Drop-in MongoDB & DocumentDB replacement with PostgreSQL storage. Wire protocol proxy, query translation, and enterprise features.',
     images: ['https://www.pgelephant.com/og-image.jpg'],
   },
   alternates: {
@@ -44,8 +45,8 @@ const fauxdbStructuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
   "name": "FauxDB",
-  "alternateName": ["FauxDB Database", "MongoDB Alternative", "PostgreSQL Document Database"],
-  "description": "MongoDB-compatible document database with PostgreSQL backend. Wire protocol proxy, query translation, and enterprise features.",
+  "alternateName": ["FauxDB Database", "MongoDB Alternative", "DocumentDB Alternative", "PostgreSQL Document Database"],
+  "description": "MongoDB- and DocumentDB-compatible document database with PostgreSQL backend. Wire protocol proxy, query translation, and enterprise features.",
   "url": "https://www.pgelephant.com/fauxdb",
     "applicationCategory": "DatabaseApplication",
   "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
@@ -81,8 +82,8 @@ const fauxdbStructuredData = {
 
 const fauxdbConfig = {
   hero: {
-    title: 'FauxDB: MongoDB wire-protocol proxy with PostgreSQL storage',
-    subtitle: 'MongoDB wire protocol proxy, Rust-powered, PostgreSQL backend',
+    title: 'FauxDB: MongoDB / DocumentDB wire-protocol proxy with PostgreSQL storage',
+    subtitle: 'MongoDB & DocumentDB wire protocol proxy, Rust-powered, PostgreSQL backend',
     projectName: 'FauxDB',
     icon: '/ico/FauxDB_HD.ico',
   },

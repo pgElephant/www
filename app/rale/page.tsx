@@ -4,8 +4,8 @@ import RaleDemoTerminal from '@/components/RaleDemoTerminal';
 import { Terminal, Database, Activity, Users, Shield, Zap, Server } from 'lucide-react';
 
 export const metadata = {
-  title: 'RALE - Resilient Adaptive Leader Election | Raft Log Engine | Distributed Consensus',
-  description: 'RALE: Resilient Adaptive Leader Election - Raft Log Engine for distributed consensus and leader election. Crash-safe, observable, and production-ready distributed systems consensus protocol implementation.',
+  title: 'RALE - Raft Log Engine | Distributed Consensus | Leader Election',
+  description: 'Raft Log Engine for distributed consensus and leader election. RALE provides crash-safe, observable, and production-ready distributed systems consensus protocol implementation.',
   keywords: [
     'RALE', 'Resilient Adaptive Leader Election', 'Raft Log Engine', 'distributed consensus',
     'leader election', 'distributed systems', 'consensus protocol', 'Raft algorithm',
@@ -37,6 +37,46 @@ export const metadata = {
   alternates: {
     canonical: 'https://www.pgelephant.com/rale',
   },
+}
+
+// Structured Data for RALE
+const raleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+  "name": "RALE",
+  "alternateName": ["Resilient Adaptive Leader Election", "Raft Log Engine", "Distributed Consensus Engine"],
+  "description": "Raft Log Engine for distributed consensus and leader election. RALE provides crash-safe, observable, and production-ready distributed systems consensus protocol implementation.",
+  "url": "https://www.pgelephant.com/rale",
+    "applicationCategory": "DatabaseApplication",
+  "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "pgElephant Team",
+    "url": "https://www.pgelephant.com"
+    },
+    "featureList": [
+    "Raft Log Engine",
+    "Leader Election",
+      "Distributed Consensus",
+    "Crash Safe",
+    "Observability",
+    "Production Ready",
+    "Consensus Protocol",
+    "Distributed Systems",
+      "High Availability",
+    "Fault Tolerance"
+  ],
+  "softwareVersion": "1.0.0",
+  "datePublished": "2024-01-01",
+  "dateModified": new Date().toISOString().split('T')[0],
+  "downloadUrl": "https://www.pgelephant.com/download",
+  "screenshot": "https://www.pgelephant.com/og-image.jpg"
 }
 
 const raleConfig = {
@@ -117,5 +157,16 @@ const raleConfig = {
 };
 
 export default function RalePage() {
-  return <ProjectTemplate {...raleConfig} />;
+  return (
+    <div className="min-h-screen">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(raleStructuredData)
+        }}
+      />
+      <ProjectTemplate {...raleConfig} />
+    </div>
+  );
 }

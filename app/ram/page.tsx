@@ -4,8 +4,8 @@ import RamDemoTerminal from '@/components/RamDemoTerminal';
 import { Terminal, Server, Activity, Users, Shield, Zap } from 'lucide-react';
 
 export const metadata = {
-  title: 'RAM - Resilient Adaptive Manager | PostgreSQL High Availability | Auto Failover | Clustering',
-  description: 'RAM: Resilient Adaptive Manager for PostgreSQL high availability and clustering. Auto-failover daemon with Raft consensus, real-time monitoring, and production-ready PostgreSQL clustering solution.',
+  title: 'RAM - PostgreSQL High Availability | Auto Failover | Clustering',
+  description: 'PostgreSQL high availability solution with automatic failover and clustering. RAM provides enterprise-grade PostgreSQL clustering with Raft consensus and real-time monitoring.',
   keywords: [
     'RAM PostgreSQL', 'Resilient Adaptive Manager', 'PostgreSQL high availability', 'PostgreSQL clustering',
     'PostgreSQL auto failover', 'PostgreSQL HA', 'PostgreSQL cluster', 'database clustering',
@@ -37,6 +37,46 @@ export const metadata = {
   alternates: {
     canonical: 'https://www.pgelephant.com/ram',
   },
+}
+
+// Structured Data for RAM
+const ramStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "RAM",
+  "alternateName": ["Resilient Adaptive Manager", "PostgreSQL High Availability", "PostgreSQL Clustering"],
+  "description": "PostgreSQL high availability solution with automatic failover and clustering. RAM provides enterprise-grade PostgreSQL clustering with Raft consensus and real-time monitoring.",
+  "url": "https://www.pgelephant.com/ram",
+  "applicationCategory": "DatabaseApplication",
+  "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "pgElephant Team",
+    "url": "https://www.pgelephant.com"
+  },
+  "featureList": [
+    "PostgreSQL Clustering",
+    "Automatic Failover",
+    "Raft Consensus",
+    "Real-time Monitoring",
+    "Production Ready",
+    "High Availability",
+    "Load Balancing",
+    "Health Checks",
+    "Prometheus Metrics",
+    "Enterprise Security"
+  ],
+  "softwareVersion": "1.0.0",
+  "datePublished": "2024-01-01",
+  "dateModified": new Date().toISOString().split('T')[0],
+  "downloadUrl": "https://www.pgelephant.com/download",
+  "screenshot": "https://www.pgelephant.com/og-image.jpg"
 }
 
 const ramConfig = {
@@ -117,5 +157,16 @@ const ramConfig = {
 };
 
 export default function RamPage() {
-  return <ProjectTemplate {...ramConfig} />;
+  return (
+    <div className="min-h-screen">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ramStructuredData)
+        }}
+      />
+      <ProjectTemplate {...ramConfig} />
+    </div>
+  );
 }
