@@ -16,7 +16,7 @@ export const metadata = {
     'database translation', 'MongoDB PostgreSQL', 'DocumentDB PostgreSQL', 'document store PostgreSQL', 'NoSQL PostgreSQL'
   ],
   openGraph: {
-    title: 'FauxDB - MongoDB / DocumentDB Alternative with PostgreSQL Backend',
+    title: 'FauxDB - MongoDB Alternative with PostgreSQL Backend',
     description: 'Drop-in MongoDB & DocumentDB replacement with PostgreSQL storage. Wire protocol proxy, query translation, and enterprise features.',
     type: 'website',
     url: 'https://www.pgelephant.com/fauxdb',
