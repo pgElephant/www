@@ -214,6 +214,208 @@ const PgraftDemoTerminal = () => {
         '',
         '-- Log entries on follower (5432)'
       ]
+    },
+    // Cluster Health and Monitoring
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_cluster_health();"',
+      output: [
+        'node_id | status    | uptime        | last_seen            | lag_ms | role',
+        '--------+-----------+---------------+---------------------+--------+-------',
+        '1       | healthy   | 00:05:23      | 2025-10-02 10:35:18 |      0 | leader',
+        '2       | healthy   | 00:05:20      | 2025-10-02 10:35:17 |     12 | follower',
+        '3       | healthy   | 00:05:18      | 2025-10-02 10:35:16 |     25 | follower',
+        '(3 rows)'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_get_metrics();"',
+      output: [
+        'metric_name                    | value | unit',
+        '------------------------------+-------+------',
+        'raft_heartbeat_sent           |   150 | count',
+        'raft_heartbeat_received       |   150 | count',
+        'raft_log_entries_appended     |    11 | count',
+        'raft_log_entries_committed    |    11 | count',
+        'raft_election_timeout_count   |     1 | count',
+        'raft_leader_changes           |     1 | count',
+        'raft_cluster_size             |     3 | nodes',
+        '(7 rows)'
+      ]
+    },
+    // Advanced Configuration
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT name, setting, unit, context FROM pg_settings WHERE name LIKE \'pgraft%\';"',
+      output: [
+        'name                         | setting | unit | context',
+        '-----------------------------+---------+------+--------',
+        'pgraft.cluster_id            | prod-cluster | | postmaster',
+        'pgraft.node_id               | 1       | | postmaster',
+        'pgraft.address               | 127.0.0.1 | | postmaster',
+        'pgraft.port                  | 7000    | | postmaster',
+        'pgraft.election_timeout      | 1000    | ms   | postmaster',
+        'pgraft.heartbeat_interval    | 100     | ms   | postmaster',
+        'pgraft.log_level             | info    | | postmaster',
+        'pgraft.snapshot_threshold    | 1000    | entries | postmaster',
+        '(8 rows)'
+      ]
+    },
+    // More Data Operations with Replication
+    {
+      command: 'psql -p 5431 -d postgres -c "CREATE TABLE orders (id serial primary key, customer_id int, amount decimal(10,2), status text);"',
+      output: [
+        'CREATE TABLE'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "INSERT INTO orders (customer_id, amount, status) VALUES (1, 99.99, \'pending\'), (2, 149.50, \'shipped\'), (3, 79.99, \'completed\');"',
+      output: [
+        'INSERT 0 3'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "UPDATE orders SET status = \'completed\' WHERE id = 1;"',
+      output: [
+        'UPDATE 1'
+      ]
+    },
+    {
+      command: 'psql -p 5432 -d postgres -c "SELECT * FROM orders ORDER BY id;"',
+      output: [
+        'id | customer_id | amount | status   ',
+        '---+-------------+--------+----------',
+        ' 1 |           1 |  99.99 | completed',
+        ' 2 |           2 | 149.50 | shipped  ',
+        ' 3 |           3 |  79.99 | completed',
+        '(3 rows)',
+        '',
+        '-- Updates replicated to follower (5432)'
+      ]
+    },
+    // Performance and Statistics
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_performance_stats();"',
+      output: [
+        'stat_name                | value | unit',
+        '------------------------+-------+------',
+        'avg_replication_lag     |    15 | ms',
+        'max_replication_lag     |    45 | ms',
+        'avg_heartbeat_rtt       |     2 | ms',
+        'max_heartbeat_rtt       |     8 | ms',
+        'log_entries_per_second  |    12 | entries/s',
+        'committed_entries_rate  |    12 | entries/s',
+        '(6 rows)'
+      ]
+    },
+    // Node Management
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_remove_node(3);"',
+      output: [
+        'pgraft_remove_node',
+        '------------------',
+        't',
+        '(1 row)'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_cluster_status();"',
+      output: [
+        'node_id | state    | leader_id | current_term | last_heartbeat',
+        '--------+----------+-----------+--------------+---------------',
+        '1       | leader   | 1         | 2            | 2025-10-02 10:36:45',
+        '2       | follower | 1         | 2            | 2025-10-02 10:36:44',
+        '(2 rows)',
+        '',
+        '-- Node 3 removed from cluster'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_add_node(4, \'127.0.0.1\', 7003);"',
+      output: [
+        'pgraft_add_node',
+        '----------------',
+        't',
+        '(1 row)'
+      ]
+    },
+    // Failover Simulation
+    {
+      command: 'echo "Simulating leader failure..." && sleep 2',
+      output: [
+        'Simulating leader failure...',
+        ''
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_step_down();"',
+      output: [
+        'pgraft_step_down',
+        '----------------',
+        't',
+        '(1 row)'
+      ]
+    },
+    {
+      command: 'psql -p 5432 -d postgres -c "SELECT pgraft_is_leader(), pgraft_get_term(), pgraft_get_leader();"',
+      output: [
+        'pgraft_is_leader | pgraft_get_term | pgraft_get_leader',
+        '-----------------+----------------+------------------',
+        't                |              3 |                2',
+        '(1 row)',
+        '',
+        '-- Node 2 is now the new leader after step-down'
+      ]
+    },
+    {
+      command: 'psql -p 5432 -d postgres -c "INSERT INTO users (name) VALUES (\'david\'), (\'eve\');"',
+      output: [
+        'INSERT 0 2'
+      ]
+    },
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT * FROM users ORDER BY id;"',
+      output: [
+        'id | name',
+        '---+----------',
+        ' 1 | alice',
+        ' 2 | bob',
+        ' 3 | charlie',
+        ' 4 | david',
+        ' 5 | eve',
+        '(5 rows)',
+        '',
+        '-- Data replicated from new leader (5432) to former leader (5431)'
+      ]
+    },
+    // Cluster Recovery and Status
+    {
+      command: 'psql -p 5432 -d postgres -c "SELECT * FROM pgraft_get_cluster_status();"',
+      output: [
+        'node_id | state    | leader_id | current_term | last_heartbeat',
+        '--------+----------+-----------+--------------+---------------',
+        '1       | follower | 2         | 3            | 2025-10-02 10:37:12',
+        '2       | leader   | 2         | 3            | 2025-10-02 10:37:13',
+        '4       | follower | 2         | 3            | 2025-10-02 10:37:11',
+        '(3 rows)',
+        '',
+        '-- Cluster successfully recovered with new leader'
+      ]
+    },
+    // Final Verification
+    {
+      command: 'psql -p 5431 -d postgres -c "SELECT COUNT(*) as total_users FROM users; SELECT COUNT(*) as total_orders FROM orders;"',
+      output: [
+        'total_users',
+        '-----------',
+        '          5',
+        '(1 row)',
+        '',
+        'total_orders',
+        '------------',
+        '          3',
+        '(1 row)',
+        '',
+        '-- Final data consistency check across all nodes'
+      ]
     }
   ]
 
