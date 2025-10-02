@@ -10,6 +10,7 @@ const raleConfig = {
     title: 'RALE: Resilient Adaptive Leader Election',
     subtitle: 'Raft Log Engine for Distributed Consensus',
     projectName: 'RALE',
+    icon: '/ico/RALE_HD.ico',
   },
   badges: [
     'Raft Log Engine',

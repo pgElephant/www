@@ -10,6 +10,7 @@ const ramConfig = {
     title: 'RAM: Resilient Adaptive Manager',
     subtitle: 'PostgreSQL Auto-Failover Daemon with Raft Consensus',
     projectName: 'RAM',
+    icon: '/ico/RAM_HD.ico',
   },
   badges: [
     'PostgreSQL Clustering',

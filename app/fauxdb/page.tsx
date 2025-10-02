@@ -10,6 +10,7 @@ const fauxdbConfig = {
     title: 'FauxDB: MongoDB wire-protocol proxy with PostgreSQL storage',
     subtitle: 'MongoDB wire protocol proxy, Rust-powered, PostgreSQL backend',
     projectName: 'fauxdb',
+    icon: '/ico/FauxDB_HD.ico',
   },
   badges: [
     'MongoDB Compatible',

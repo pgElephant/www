@@ -55,7 +55,7 @@ const PgraftPage = () => {
         <div className="container-wide relative z-10 text-center">
           <div className="flex flex-col items-center justify-center mb-5">
             <div className="mb-4">
-              <Image src="/ico/pgraft.ico" alt="pgraft icon" width={64} height={64} className="inline-block align-middle" />
+              <Image src="/ico/pgsql_raft_leader_HD.ico" alt="pgraft icon" width={64} height={64} className="inline-block align-middle" />
             </div>
             <h1 className="text-3xl font-thin tracking-tight">
               <span className="text-blue-400">pgraft</span>: Raft based postgresql extension for leader election
