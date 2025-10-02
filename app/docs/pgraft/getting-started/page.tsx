@@ -30,7 +30,7 @@ export default function PgraftGettingStarted() {
             </h1>
             
             <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
-              Get your first pgraft cluster up and running in minutes with this comprehensive quick start guide.
+              Get your first pgraft cluster up and running in minutes. pgraft is a production-ready PostgreSQL extension that embeds the Raft consensus protocol for automatic leader election, deterministic failover, and 100% split-brain protection.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -122,9 +122,9 @@ export default function PgraftGettingStarted() {
                 <div>
                   <h4 className="text-lg font-semibold text-white mb-3">1. Install Dependencies</h4>
                   <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
-                    <div className="text-green-400 mb-2"># Ubuntu/Debian</div>
+                    <div className="text-green-400 mb-2"># Ubuntu/Debian (PostgreSQL 16-18)</div>
                     <div className="text-white">sudo apt-get install postgresql-17 postgresql-server-dev-17 golang-go build-essential</div>
-                    <div className="text-green-400 mt-4 mb-2"># CentOS/RHEL</div>
+                    <div className="text-green-400 mt-4 mb-2"># CentOS/RHEL/Rocky Linux</div>
                     <div className="text-white">sudo yum install postgresql17 postgresql17-devel golang gcc make</div>
                     <div className="text-green-400 mt-4 mb-2"># macOS</div>
                     <div className="text-white">brew install postgresql@17 go</div>
@@ -134,10 +134,13 @@ export default function PgraftGettingStarted() {
                 <div>
                   <h4 className="text-lg font-semibold text-white mb-3">2. Clone and Build</h4>
                   <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
-                    <div className="text-green-400 mb-2">git clone https://github.com/pgelephant/pgraft.git</div>
+                    <div className="text-green-400 mb-2"># Clone the repository</div>
+                    <div className="text-white">git clone https://github.com/pgelephant/pgraft.git</div>
                     <div className="text-white">cd pgraft</div>
+                    <div className="text-green-400 mt-2"># Build the extension (includes Go compilation)</div>
                     <div className="text-white">make clean && make</div>
                   </div>
+                  <p className="text-white/70 text-sm mt-2">Note: The build process compiles both C and Go components, including the etcd-io/raft library integration.</p>
                 </div>
 
                 <div>
@@ -146,6 +149,8 @@ export default function PgraftGettingStarted() {
                     <div className="text-white">sudo make install</div>
                     <div className="text-green-400 mt-2"># Verify installation</div>
                     <div className="text-white">ls -la $(pg_config --libdir)/pgraft*</div>
+                    <div className="text-green-400 mt-2"># Check Go library</div>
+                    <div className="text-white">ls -la $(pg_config --libdir)/pgraft_go.*</div>
                   </div>
                 </div>
               </div>
@@ -172,13 +177,18 @@ export default function PgraftGettingStarted() {
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
                   <div className="text-green-400 mb-2"># Load pgraft extension</div>
                   <div className="text-white">shared_preload_libraries = 'pgraft'</div>
-                  <div className="text-green-400 mt-4 mb-2"># Core cluster configuration</div>
+                  <div className="text-green-400 mt-4 mb-2"># Core cluster configuration (etcd-style)</div>
                   <div className="text-white">pgraft.cluster_id = 'production-cluster'</div>
                   <div className="text-white">pgraft.node_id = 1</div>
                   <div className="text-white">pgraft.address = '127.0.0.1'</div>
                   <div className="text-white">pgraft.port = 7001</div>
                   <div className="text-white">pgraft.data_dir = '/var/lib/postgresql/pgraft'</div>
+                  <div className="text-green-400 mt-4 mb-2"># Consensus settings (optional)</div>
+                  <div className="text-white">pgraft.election_timeout = 1000</div>
+                  <div className="text-white">pgraft.heartbeat_interval = 100</div>
+                  <div className="text-white">pgraft.snapshot_interval = 10000</div>
                 </div>
+                <p className="text-white/70 text-sm mt-2">Note: Each node needs a unique <code className="bg-white/10 backdrop-blur-sm px-1 py-0.5 rounded text-blue-300">node_id</code> and <code className="bg-white/10 backdrop-blur-sm px-1 py-0.5 rounded text-blue-300">port</code>.</p>
               </div>
 
               {/* Step 2: Initialize */}
@@ -209,16 +219,21 @@ export default function PgraftGettingStarted() {
               {/* Step 4: Verify */}
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                 <h3 className="text-2xl font-bold text-white mb-6">Step 4: Verify Cluster Status</h3>
-                <p className="text-white/80 mb-4">Check that your cluster is healthy:</p>
+                <p className="text-white/80 mb-4">Check that your cluster is healthy and working properly:</p>
                 
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm">
-                  <div className="text-green-400 mb-2"># Get cluster status</div>
+                  <div className="text-green-400 mb-2"># Get detailed cluster status</div>
                   <div className="text-white">SELECT * FROM pgraft_get_cluster_status();</div>
-                  <div className="text-green-400 mt-4 mb-2"># Get all nodes</div>
+                  <div className="text-green-400 mt-4 mb-2"># Get all nodes in cluster</div>
                   <div className="text-white">SELECT * FROM pgraft_get_nodes();</div>
                   <div className="text-green-400 mt-4 mb-2"># Quick health check</div>
-                  <div className="text-white">SELECT pgraft_is_leader(), pgraft_get_term(), pgraft_get_leader();</div>
+                  <div className="text-white">SELECT pgraft_is_leader() as is_leader, pgraft_get_term() as term, pgraft_get_leader() as leader_id;</div>
+                  <div className="text-green-400 mt-4 mb-2"># Check worker status</div>
+                  <div className="text-white">SELECT pgraft_get_worker_state();</div>
+                  <div className="text-green-400 mt-4 mb-2"># Get log statistics</div>
+                  <div className="text-white">SELECT * FROM pgraft_log_get_stats();</div>
                 </div>
+                <p className="text-white/70 text-sm mt-2">The cluster should show one leader node and the worker should be running. Wait 10 seconds after initialization for leader election to complete.</p>
               </div>
             </div>
           </div>
