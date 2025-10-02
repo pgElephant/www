@@ -129,7 +129,7 @@ kubectl get storageclass`
             <h1 className="text-4xl md:text-5xl text-white mb-6">
               RAM Kubernetes Setup
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-white/90300 max-w-3xl mx-auto">
               Complete guide to deploying RAM PostgreSQL clustering solution on Kubernetes for production environments
             </p>
           </div>
@@ -139,7 +139,7 @@ kubectl get storageclass`
       <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white/90900 mb-12 text-center">
               Prerequisites
             </h2>
             
@@ -150,9 +150,9 @@ kubectl get storageclass`
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                       <Cloud className="w-6 h-6 text-blue-600" />
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900">Kubernetes Requirements</h3>
+                    <h3 className="text-xl font-semibold text-white/90900">Kubernetes Requirements</h3>
                   </div>
-                  <ul className="text-gray-600 space-y-3">
+                  <ul className="text-white/90600 space-y-3">
                     <li className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                       <span>Kubernetes 1.20+ cluster</span>
@@ -183,9 +183,9 @@ kubectl get storageclass`
                     <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                       <Monitor className="w-6 h-6 text-purple-600" />
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900">Resource Requirements</h3>
+                    <h3 className="text-xl font-semibold text-white/90900">Resource Requirements</h3>
                   </div>
-                  <ul className="text-gray-600 space-y-3">
+                  <ul className="text-white/90600 space-y-3">
                     <li className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                       <span>3+ worker nodes for high availability</span>
@@ -214,7 +214,7 @@ kubectl get storageclass`
       <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white/90900 mb-12 text-center">
               Helm Installation
             </h2>
             
@@ -225,13 +225,13 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                     <Cloud className="w-6 h-6 text-blue-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">1. Add Helm Repository</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">1. Add Helm Repository</h3>
                 </div>
                 
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.helmRepo, 'helmRepo')}
-                    className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                    className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                   >
                     {copiedCode === 'helmRepo' ? (
                       <CheckCircle className="w-4 h-4 text-green-400" />
@@ -239,7 +239,7 @@ kubectl get storageclass`
                       <Copy className="w-4 h-4" />
                     )}
                   </button>
-                  <pre className="text-gray-100 text-sm overflow-x-auto">
+                  <pre className="text-white/90100 text-sm overflow-x-auto">
                     <code>{codeBlocks.helmRepo}</code>
                   </pre>
                 </div>
@@ -251,13 +251,13 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                     <Settings className="w-6 h-6 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">2. Create Namespace</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">2. Create Namespace</h3>
                 </div>
                 
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.namespace, 'namespace')}
-                    className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                    className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                   >
                     {copiedCode === 'namespace' ? (
                       <CheckCircle className="w-4 h-4 text-green-400" />
@@ -265,7 +265,7 @@ kubectl get storageclass`
                       <Copy className="w-4 h-4" />
                     )}
                   </button>
-                  <pre className="text-gray-100 text-sm overflow-x-auto">
+                  <pre className="text-white/90100 text-sm overflow-x-auto">
                     <code>{codeBlocks.namespace}</code>
                   </pre>
                 </div>
@@ -277,13 +277,13 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                     <Database className="w-6 h-6 text-purple-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">3. Install RAM Cluster</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">3. Install RAM Cluster</h3>
                 </div>
                 
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.install, 'install')}
-                    className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                    className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                   >
                     {copiedCode === 'install' ? (
                       <CheckCircle className="w-4 h-4 text-green-400" />
@@ -291,7 +291,7 @@ kubectl get storageclass`
                       <Copy className="w-4 h-4" />
                     )}
                   </button>
-                  <pre className="text-gray-100 text-sm overflow-x-auto">
+                  <pre className="text-white/90100 text-sm overflow-x-auto">
                     <code>{codeBlocks.install}</code>
                   </pre>
                 </div>
@@ -305,7 +305,7 @@ kubectl get storageclass`
       <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white/90900 mb-12 text-center">
               Custom Configuration
             </h2>
             
@@ -316,13 +316,13 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
                     <Settings className="w-6 h-6 text-orange-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">values.yaml Configuration</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">values.yaml Configuration</h3>
                 </div>
                 
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.values, 'values')}
-                    className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                    className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                   >
                     {copiedCode === 'values' ? (
                       <CheckCircle className="w-4 h-4 text-green-400" />
@@ -330,7 +330,7 @@ kubectl get storageclass`
                       <Copy className="w-4 h-4" />
                     )}
                   </button>
-                  <pre className="text-gray-100 text-sm overflow-x-auto">
+                  <pre className="text-white/90100 text-sm overflow-x-auto">
                     <code>{codeBlocks.values}</code>
                   </pre>
                 </div>
@@ -342,13 +342,13 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                     <Terminal className="w-6 h-6 text-blue-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">Install with Custom Values</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">Install with Custom Values</h3>
                 </div>
                 
                 <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.customInstall, 'customInstall')}
-                    className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                    className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                   >
                     {copiedCode === 'customInstall' ? (
                       <CheckCircle className="w-4 h-4 text-green-400" />
@@ -356,7 +356,7 @@ kubectl get storageclass`
                       <Copy className="w-4 h-4" />
                     )}
                   </button>
-                  <pre className="text-gray-100 text-sm overflow-x-auto">
+                  <pre className="text-white/90100 text-sm overflow-x-auto">
                     <code>{codeBlocks.customInstall}</code>
                   </pre>
                 </div>
@@ -370,7 +370,7 @@ kubectl get storageclass`
       <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white/90900 mb-12 text-center">
               Monitoring Setup
             </h2>
             
@@ -379,13 +379,13 @@ kubectl get storageclass`
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                   <Monitor className="w-6 h-6 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">Access Monitoring Services</h3>
+                <h3 className="text-xl font-semibold text-white/90900">Access Monitoring Services</h3>
               </div>
               
-              <div className="bg-gray-900 rounded-lg p-6 relative">
+              <div className="bg-white/10900 rounded-lg p-6 relative">
                 <button
                   onClick={() => copyToClipboard(codeBlocks.monitoring, 'monitoring')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                 >
                   {copiedCode === 'monitoring' ? (
                     <CheckCircle className="w-4 h-4 text-green-400" />
@@ -393,7 +393,7 @@ kubectl get storageclass`
                     <Copy className="w-4 h-4" />
                   )}
                 </button>
-                <pre className="text-gray-100 text-sm overflow-x-auto">
+                <pre className="text-white/90100 text-sm overflow-x-auto">
                   <code>{codeBlocks.monitoring}</code>
                 </pre>
               </div>
@@ -406,7 +406,7 @@ kubectl get storageclass`
       <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white/90900 mb-12 text-center">
               Production Deployment
             </h2>
             
@@ -416,9 +416,9 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                     <Zap className="w-6 h-6 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">High Availability</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">High Availability</h3>
                 </div>
-                <ul className="text-gray-600 space-y-3">
+                <ul className="text-white/90600 space-y-3">
                   <li className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                     <span>Deploy across multiple availability zones</span>
@@ -451,9 +451,9 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
                     <Shield className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">Security</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">Security</h3>
                 </div>
-                <ul className="text-gray-600 space-y-3">
+                <ul className="text-white/90600 space-y-3">
                   <li className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                     <span>Use Kubernetes secrets for passwords</span>
@@ -489,7 +489,7 @@ kubectl get storageclass`
       <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white/90900 mb-12 text-center">
               Troubleshooting
             </h2>
             
@@ -499,16 +499,16 @@ kubectl get storageclass`
                   <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
                     <AlertCircle className="w-6 h-6 text-yellow-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">Common Issues</h3>
+                  <h3 className="text-xl font-semibold text-white/90900">Common Issues</h3>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Pods not starting</h4>
-                    <div className="bg-gray-900 rounded-lg p-4 relative">
+                    <h4 className="text-lg font-semibold text-white/90900 mb-4">Pods not starting</h4>
+                    <div className="bg-white/10900 rounded-lg p-4 relative">
                       <button
                         onClick={() => copyToClipboard(codeBlocks.troubleshooting, 'troubleshooting')}
-                        className="absolute top-2 right-2 p-1 text-gray-400 hover:text-white transition-colors"
+                        className="absolute top-2 right-2 p-1 text-white/90400 hover:text-white transition-colors"
                       >
                         {copiedCode === 'troubleshooting' ? (
                           <CheckCircle className="w-3 h-3 text-green-400" />
@@ -516,15 +516,15 @@ kubectl get storageclass`
                           <Copy className="w-3 h-3" />
                         )}
                       </button>
-                      <pre className="text-gray-100 text-xs overflow-x-auto">
+                      <pre className="text-white/90100 text-xs overflow-x-auto">
                         <code>{codeBlocks.troubleshooting}</code>
                       </pre>
                     </div>
                   </div>
                   
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Storage issues</h4>
-                    <ul className="text-gray-600 space-y-2 text-sm">
+                    <h4 className="text-lg font-semibold text-white/90900 mb-4">Storage issues</h4>
+                    <ul className="text-white/90600 space-y-2 text-sm">
                       <li>• Check persistent volume claims (PVC)</li>
                       <li>• Verify storage class configuration</li>
                       <li>• Ensure sufficient storage capacity</li>
@@ -543,7 +543,7 @@ kubectl get storageclass`
       <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl text-gray-900 mb-6">
+            <h2 className="text-2xl text-white/90900 mb-6">
               What's Next?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -551,24 +551,24 @@ kubectl get storageclass`
                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Database className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Cluster Management</h3>
-                <p className="text-gray-600 text-sm">Learn advanced cluster operations and maintenance</p>
+                <h3 className="text-lg font-semibold text-white/90900 mb-2">Cluster Management</h3>
+                <p className="text-white/90600 text-sm">Learn advanced cluster operations and maintenance</p>
               </div>
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Monitor className="w-8 h-8 text-purple-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Advanced Monitoring</h3>
-                <p className="text-gray-600 text-sm">Set up comprehensive monitoring and alerting</p>
+                <h3 className="text-lg font-semibold text-white/90900 mb-2">Advanced Monitoring</h3>
+                <p className="text-white/90600 text-sm">Set up comprehensive monitoring and alerting</p>
               </div>
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Security Hardening</h3>
-                <p className="text-gray-600 text-sm">Implement enterprise security and compliance</p>
+                <h3 className="text-lg font-semibold text-white/90900 mb-2">Security Hardening</h3>
+                <p className="text-white/90600 text-sm">Implement enterprise security and compliance</p>
               </div>
             </div>
           </div>

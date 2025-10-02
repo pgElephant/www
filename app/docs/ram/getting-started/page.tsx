@@ -211,7 +211,7 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 <h1 className="text-4xl md:text-5xl text-white mb-2">
                   RAM Getting Started
                 </h1>
-                <p className="text-xl text-gray-300">
+                <p className="text-xl text-white/90300">
                   Set up your first PostgreSQL cluster
                 </p>
               </div>
@@ -227,7 +227,7 @@ curl -H "Authorization: Bearer your_auth_token" \\
       <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl text-gray-900 mb-12 text-center">
+            <h2 className="text-2xl text-white/90900 mb-12 text-center">
               Quick Start Guide
             </h2>
             
@@ -240,13 +240,13 @@ curl -H "Authorization: Bearer your_auth_token" \\
                   >
                     <step.icon className="w-8 h-8" style={{ color: step.color }} />
                   </div>
-                  <div className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center mx-auto mb-3 text-sm font-bold">
+                  <div className="w-8 h-8 bg-white/10900 text-white rounded-full flex items-center justify-center mx-auto mb-3 text-sm font-bold">
                     {step.number}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-white/90900 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-white/90600 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -260,7 +260,7 @@ curl -H "Authorization: Bearer your_auth_token" \\
       <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl text-gray-900 mb-8 text-center">
+            <h2 className="text-2xl text-white/90900 mb-8 text-center">
               Installation Steps
             </h2>
 
@@ -270,17 +270,17 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 <div className="w-8 h-8 bg-cyan-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   1
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white/90900">
                   Install RAM Binary
                 </h3>
               </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
-                <pre className="text-gray-100 text-sm overflow-x-auto">
+              <div className="bg-white/10900 rounded-lg p-6 relative">
+                <pre className="text-white/90100 text-sm overflow-x-auto">
                   <code>{codeBlocks.install}</code>
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.install, 'install')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                 >
                   {copiedCode === 'install' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -293,17 +293,17 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   2
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white/90900">
                   Setup pgraft PostgreSQL Extension
                 </h3>
               </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
-                <pre className="text-gray-100 text-sm overflow-x-auto">
+              <div className="bg-white/10900 rounded-lg p-6 relative">
+                <pre className="text-white/90100 text-sm overflow-x-auto">
                   <code>{codeBlocks.config}</code>
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.config, 'config')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                 >
                   {copiedCode === 'config' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -316,17 +316,17 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 <div className="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   3
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white/90900">
                   Configure and Start ramd Daemon
                 </h3>
               </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
-                <pre className="text-gray-100 text-sm overflow-x-auto">
+              <div className="bg-white/10900 rounded-lg p-6 relative">
+                <pre className="text-white/90100 text-sm overflow-x-auto">
                   <code>{codeBlocks.start}</code>
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.start, 'start')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                 >
                   {copiedCode === 'start' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -339,17 +339,17 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   4
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white/90900">
                   Control Cluster with ramctrl
                 </h3>
               </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
-                <pre className="text-gray-100 text-sm overflow-x-auto">
+              <div className="bg-white/10900 rounded-lg p-6 relative">
+                <pre className="text-white/90100 text-sm overflow-x-auto">
                   <code>{codeBlocks.start}</code>
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.start, 'start')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
                 >
                   {copiedCode === 'start' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -363,10 +363,10 @@ curl -H "Authorization: Bearer your_auth_token" \\
       <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl text-gray-900 mb-6">
+            <h2 className="text-2xl text-white/90900 mb-6">
               What's Next?
             </h2>
-            <p className="text-lg text-gray-600 mb-12 leading-relaxed">
+            <p className="text-lg text-white/90600 mb-12 leading-relaxed">
               Your RAM cluster is ready! Explore these next steps.
             </p>
             
@@ -376,10 +376,10 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <Settings className="w-8 h-8 text-cyan-600 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white/90900 mb-2">
                   Configuration
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-white/90600 text-sm">
                   Learn about advanced configuration options.
                 </p>
               </Link>
@@ -389,10 +389,10 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <BarChart3 className="w-8 h-8 text-teal-600 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white/90900 mb-2">
                   Monitoring
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-white/90600 text-sm">
                   Set up Prometheus metrics and dashboards.
                 </p>
               </Link>
@@ -402,10 +402,10 @@ curl -H "Authorization: Bearer your_auth_token" \\
                 className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <Code className="w-8 h-8 text-orange-600 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white/90900 mb-2">
                   API Reference
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-white/90600 text-sm">
                   Explore the REST API for cluster management.
                 </p>
               </Link>

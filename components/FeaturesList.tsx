@@ -338,7 +338,7 @@ const FeaturesList = () => {
             {projects.map((project, index) => {
               const colors = getColorClasses(project.color)
               return (
-                <div key={project.name} className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-slate-400/30">
+                <div key={project.name} className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-slate-400/30 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-8">
                     <div className={`w-16 h-16 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
                       {project.icon}
@@ -349,7 +349,7 @@ const FeaturesList = () => {
                     </div>
                   </div>
                   
-                  <div className="space-y-6">
+                  <div className="space-y-6 flex-grow">
                     {project.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="border-l-2 border-slate-400/30 pl-4">
                         <div className="flex items-start gap-3">
@@ -384,40 +384,40 @@ const FeaturesList = () => {
               Explore Our Enterprise Solutions
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <a href="/ram" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-primary-400/40">
+              <a href="/ram" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-primary-400/40 h-full flex flex-col">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-primary-400">
                     <Zap className="w-6 h-6" />
                   </div>
                   <h4 className="text-lg font-thin text-white group-hover:text-primary-300 transition-colors">RAM</h4>
                 </div>
-                <p className="text-sm text-white/90 mb-3">PostgreSQL clustering solution with automatic failover and Raft consensus for enterprise high availability.</p>
+                <p className="text-sm text-white/90 mb-3 flex-grow">PostgreSQL clustering solution with automatic failover and Raft consensus for enterprise high availability.</p>
                 <div className="flex items-center text-primary-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>
               
-              <a href="/pgraft" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-secondary-400/40">
+              <a href="/pgraft" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-secondary-400/40 h-full flex flex-col">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-secondary-400">
                     <Crown className="w-6 h-6" />
                   </div>
                   <h4 className="text-lg font-thin text-white group-hover:text-secondary-300 transition-colors">pgraft</h4>
                 </div>
-                <p className="text-sm text-white/90 mb-3">PostgreSQL extension implementing Raft consensus protocol for distributed database coordination.</p>
+                <p className="text-sm text-white/90 mb-3 flex-grow">PostgreSQL extension implementing Raft consensus protocol for distributed database coordination.</p>
                 <div className="flex items-center text-secondary-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>
               
-              <a href="/fauxdb" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-accent-400/40">
+              <a href="/fauxdb" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-accent-400/40 h-full flex flex-col">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-accent-400">
                     <Globe className="w-6 h-6" />
                   </div>
                   <h4 className="text-lg font-thin text-white group-hover:text-accent-300 transition-colors">FauxDB</h4>
                 </div>
-                <p className="text-sm text-white/90 mb-3">MongoDB-compatible document database built in Rust with PostgreSQL backend for seamless migration.</p>
+                <p className="text-sm text-white/90 mb-3 flex-grow">MongoDB-compatible document database built in Rust with PostgreSQL backend for seamless migration.</p>
                 <div className="flex items-center text-accent-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
