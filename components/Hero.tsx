@@ -142,11 +142,14 @@ const Hero = () => {
                       />
                     </div>
                     <div className="text-left">
-                      <h2 className="text-3xl md:text-4xl font-thin text-white">
-                        {current.name}
+                      <h1 className="text-3xl md:text-4xl font-thin text-white">
+                        Enterprise PostgreSQL Platform
+                      </h1>
+                      <h2 className="text-2xl md:text-3xl font-thin text-white/90 mt-2">
+                        {current.name}: {current.title}
                       </h2>
-                      <p className="text-lg font-thin text-white">
-                        {current.title}
+                      <p className="text-lg font-thin text-white/80 mt-1">
+                        High Availability & MongoDB Alternative
                       </p>
                     </div>
                   </div>

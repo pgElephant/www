@@ -438,7 +438,7 @@ const FeaturesList = () => {
         <div className="mt-20 text-center relative z-10">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30 max-w-5xl mx-auto">
             <h3 className="text-3xl font-thin mb-4 text-white">
-              Enterprise Database Solutions
+              Complete Database Solution Suite
             </h3>
             <p className="text-lg text-slate-300 mb-8 max-w-3xl mx-auto">
               Transform your database infrastructure with enterprise-grade PostgreSQL solutions. 

@@ -5,8 +5,8 @@ import FeaturesList from '@/components/FeaturesList'
 import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
-  title: 'Enterprise PostgreSQL Platform | High Availability & MongoDB Alternative',
-  description: 'pgElephant delivers enterprise-grade PostgreSQL solutions: RAM clustering with automatic failover, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database. Production-ready, open-source tools for modern applications.',
+  title: 'pgElephant | Enterprise PostgreSQL Platform',
+  description: 'Enterprise PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible database. Production-ready tools.',
   keywords: [
     'enterprise postgresql', 'postgresql platform', 'database clustering', 'high availability',
     'postgresql failover', 'mongodb alternative', 'document database', 'distributed consensus',
