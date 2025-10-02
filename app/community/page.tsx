@@ -192,7 +192,7 @@ const CommunityPage = () => {
                   <div className="flex justify-center mb-2">
                     <stat.icon className={`w-8 h-8 ${stat.color}`} />
                   </div>
-                  <div className="text-3xl font-bold text-white drop-shadow-sm">{stat.value}</div>
+                  <div className="text-3xl font-thin text-white drop-shadow-sm">{stat.value}</div>
                   <div className="text-sm text-white/80 drop-shadow-sm">{stat.label}</div>
                 </div>
               ))}
@@ -227,7 +227,7 @@ const CommunityPage = () => {
                         />
                       </div>
                       <div>
-                        <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                        <h3 className="text-3xl font-thin text-gray-900 mb-2">
                           {platform.name}
                         </h3>
                         <p className="text-lg text-gray-600 mb-2">
@@ -243,7 +243,7 @@ const CommunityPage = () => {
                     <div className="flex flex-wrap gap-4 lg:ml-auto">
                       {Object.entries(platform.stats).map(([key, value]) => (
                         <div key={key} className="text-center px-4 py-2 bg-gray-50 rounded-lg">
-                          <div className="text-lg font-bold text-gray-900">{value}</div>
+                          <div className="text-lg font-thin text-gray-900">{value}</div>
                           <div className="text-xs text-gray-500 capitalize">{key}</div>
                         </div>
                       ))}
@@ -264,7 +264,7 @@ const CommunityPage = () => {
                             return <IconComponent className="w-5 h-5 mr-3 text-gray-500 mt-0.5 flex-shrink-0" />
                           })()}
                           <div className="flex-1 min-w-0">
-                            <div className="font-medium text-gray-900 group-hover:text-blue-700 mb-1">
+                            <div className="font-thin text-gray-900 group-hover:text-blue-700 mb-1">
                               {link.title}
                             </div>
                             <div className="text-sm text-gray-500 mb-2">
@@ -284,14 +284,14 @@ const CommunityPage = () => {
                   <div className="flex flex-wrap gap-4">
                     <Link
                       href={platform.links[0].href}
-                      className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-medium shadow-sm hover:shadow-md"
+                      className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-thin shadow-sm hover:shadow-md"
                     >
                       <platform.icon className="w-4 h-4 mr-2" />
                       Join {platform.name}
                     </Link>
                     <Link
                       href="/docs"
-                      className="inline-flex items-center px-6 py-3 rounded-lg text-white transition-colors font-medium shadow-sm hover:shadow-md"
+                      className="inline-flex items-center px-6 py-3 rounded-lg text-white transition-colors font-thin shadow-sm hover:shadow-md"
                       style={{ backgroundColor: palette.cyan }}
                       onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.cyanDeep}
                       onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.cyan}
@@ -313,7 +313,7 @@ const CommunityPage = () => {
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Community Guidelines</h2>
+              <h2 className="text-3xl font-thin text-gray-900 mb-4">Community Guidelines</h2>
               <p className="text-lg text-gray-600">Our principles for a welcoming and productive community</p>
             </div>
             
@@ -323,7 +323,7 @@ const CommunityPage = () => {
                   <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <guideline.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{guideline.title}</h3>
+                  <h3 className="text-lg font-thin text-gray-900 mb-3">{guideline.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{guideline.description}</p>
                 </div>
               ))}

@@ -201,7 +201,7 @@ const DownloadPage = () => {
           {/* Trust Bar */}
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {trustBar.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 text-white border border-white/20 text-base font-medium shadow-sm">
+              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 text-white border border-white/20 text-base font-thin shadow-sm">
                 <item.icon className="w-5 h-5" />
                 {item.label}
               </div>
@@ -212,7 +212,7 @@ const DownloadPage = () => {
             {downloadStats.map((stat, i) => (
               <div key={i} className="flex flex-col items-center bg-white/10 px-6 py-4 rounded-xl min-w-[120px]">
                 <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
-                <span className="text-2xl font-bold text-white">{stat.value}</span>
+                <span className="text-2xl font-thin text-white">{stat.value}</span>
                 <span className="text-xs text-white/80">{stat.label}</span>
               </div>
             ))}
@@ -248,12 +248,12 @@ const DownloadPage = () => {
                       <div className="flex items-center gap-3">
                         <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200 shadow-sm" />
                         <div>
-                          <div className="font-semibold text-lg text-gray-900 flex items-center gap-2">
+                          <div className="font-thin text-lg text-gray-900 flex items-center gap-2">
                             {product.name}
                             {product.featured && (
-                              <span className="inline-block bg-cyan-100 text-cyan-700 text-xs font-semibold px-2 py-0.5 rounded animate-pulse">New</span>
+                              <span className="inline-block bg-cyan-100 text-cyan-700 text-xs font-thin px-2 py-0.5 rounded animate-pulse">New</span>
                             )}
-                            <span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded">Stable</span>
+                            <span className="inline-block bg-green-100 text-green-700 text-xs font-thin px-2 py-0.5 rounded">Stable</span>
                           </div>
                         </div>
                       </div>
@@ -261,7 +261,7 @@ const DownloadPage = () => {
                     <td className="py-3 px-2 align-top text-sm text-gray-600 max-w-xs">
                       <div className="flex flex-col h-full min-h-[180px]">
                         <div className="flex-1">
-                          <div className="font-semibold text-base text-gray-900 mb-1">{product.title}</div>
+                          <div className="font-thin text-base text-gray-900 mb-1">{product.title}</div>
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 list-disc list-inside mb-4">
                             {product.features && product.features.map((feature, i) => (
                               <li key={i} className="text-gray-600 text-xs leading-snug">{feature}</li>
@@ -269,14 +269,14 @@ const DownloadPage = () => {
                           </ul>
                         </div>
                         <div className="flex items-end mt-auto">
-                          <Link href={product.details} className="inline-block mt-2 text-xs font-semibold text-cyan-700 hover:underline hover:text-cyan-900 transition">View Enterprise Details</Link>
+                          <Link href={product.details} className="inline-block mt-2 text-xs font-thin text-cyan-700 hover:underline hover:text-cyan-900 transition">View Enterprise Details</Link>
                         </div>
                       </div>
                     </td>
                     <td className="py-3 px-2 align-top">
                       <div className="flex flex-col gap-2">
                         {product.downloads.map((download, index) => (
-                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-100 transition-colors text-sm font-medium shadow-sm">
+                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-cyan-400 hover:bg-cyan-100 transition-colors text-sm font-thin shadow-sm">
                             {(() => {
                               const IconComponent = getDownloadIcon(download.type)
                               return <IconComponent className="w-4 h-4 text-cyan-600" />
@@ -307,13 +307,13 @@ const DownloadPage = () => {
         </div>
         <div className="container-wide mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 drop-shadow-lg">Quick Start</h2>
+            <h2 className="text-3xl md:text-4xl font-thin text-white mb-6 drop-shadow-lg">Quick Start</h2>
             <p className="text-lg text-white/90 mb-12 leading-relaxed drop-shadow-md">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
                 <div key={i} className="bg-white/10 rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
                   <method.icon className="w-10 h-10 mb-3 text-cyan-200" />
-                  <h3 className="text-lg font-semibold text-white mb-2 drop-shadow">{method.title}</h3>
+                  <h3 className="text-lg font-thin text-white mb-2 drop-shadow">{method.title}</h3>
                   <p className="text-white/80 text-sm mb-3">{method.description}</p>
                   <ol className="text-left text-xs text-white/80 space-y-1 list-decimal list-inside">
                     {method.steps.map((step, j) => (
@@ -323,7 +323,7 @@ const DownloadPage = () => {
                 </div>
               ))}
             </div>
-            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white transition-all duration-200 shadow-lg text-lg font-semibold bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
+            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white transition-all duration-200 shadow-lg text-lg font-thin bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
               Get Started
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -335,11 +335,11 @@ const DownloadPage = () => {
       <section className="py-20 bg-gradient-to-br from-cyan-50 to-white border-t border-gray-100">
         <div className="container-wide mx-auto">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Why Download from pgElephant?</h2>
+            <h2 className="text-2xl md:text-3xl font-thin text-gray-900 mb-4">Why Download from pgElephant?</h2>
             <p className="text-lg text-gray-600 mb-8">All downloads are cryptographically signed, verified, and scanned for security. We provide open source, enterprise-grade software trusted by leading organizations worldwide.</p>
             <div className="flex flex-wrap justify-center gap-6">
               {trustBar.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white border border-gray-200 shadow-sm text-base font-medium text-gray-900">
+                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white border border-gray-200 shadow-sm text-base font-thin text-gray-900">
                   <item.icon className="w-6 h-6 text-cyan-600" />
                   {item.label}
                 </div>

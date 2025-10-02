@@ -98,7 +98,7 @@ const DocsPage = () => {
       // Regular text content
       const formattedText = part
         .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
-        .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold">$1</strong>')
+        .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-thin">$1</strong>')
         .replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>')
         .replace(/\n/g, '<br/>');
       
@@ -121,7 +121,7 @@ const DocsPage = () => {
               } else if (part.match(/^\$\s/)) {
                 return <span key={partIndex} className="text-blue-600">{part}</span>;
               } else if (part.match(/^(git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn)$/)) {
-                return <span key={partIndex} className="text-purple-600 font-semibold">{part}</span>;
+                return <span key={partIndex} className="text-purple-600 font-thin">{part}</span>;
               } else if (part.match(/^--\w+/)) {
                 return <span key={partIndex} className="text-orange-600">{part}</span>;
               } else if (part.match(/^".*"$/)) {
@@ -139,7 +139,7 @@ const DocsPage = () => {
           <div key={lineIndex}>
             {parts.map((part, partIndex) => {
               if (part.match(/^(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END)$/i)) {
-                return <span key={partIndex} className="text-blue-600 font-semibold">{part}</span>;
+                return <span key={partIndex} className="text-blue-600 font-thin">{part}</span>;
               } else if (part.match(/^--.*$/)) {
                 return <span key={partIndex} className="text-green-600">{part}</span>;
               } else if (part.match(/^\/\*[\s\S]*?\*\/$/)) {
@@ -168,12 +168,12 @@ const DocsPage = () => {
       return code
         .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
         .replace(/(\$\s)/g, '<span class="text-blue-600">$1</span>') // Command prompt
-        .replace(/(git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn)\b/g, '<span class="text-purple-600 font-semibold">$1</span>') // Commands
+        .replace(/(git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn)\b/g, '<span class="text-purple-600 font-thin">$1</span>') // Commands
         .replace(/(--\w+)/g, '<span class="text-orange-600">$1</span>') // Options
         .replace(/(".*?")/g, '<span class="text-red-600">$1</span>'); // Strings
     } else if (language === 'sql') {
       return code
-        .replace(/(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END)\b/gi, '<span class="text-blue-600 font-semibold">$1</span>') // Keywords
+        .replace(/(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END)\b/gi, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
         .replace(/(--.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
         .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
         .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
@@ -181,27 +181,27 @@ const DocsPage = () => {
     } else if (language === 'c' || language === 'cpp') {
       return code
         .replace(/(#include|#define|#ifdef|#ifndef|#endif|#if|#else|#elif)\b/g, '<span class="text-purple-600">$1</span>') // Preprocessor
-        .replace(/(int|char|float|double|void|struct|typedef|enum|const|static|extern|volatile|register|auto|signed|unsigned|long|short)\b/g, '<span class="text-blue-600 font-semibold">$1</span>') // Types
-        .replace(/(if|else|while|for|do|switch|case|default|break|continue|return|goto)\b/g, '<span class="text-orange-600 font-semibold">$1</span>') // Keywords
+        .replace(/(int|char|float|double|void|struct|typedef|enum|const|static|extern|volatile|register|auto|signed|unsigned|long|short)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Types
+        .replace(/(if|else|while|for|do|switch|case|default|break|continue|return|goto)\b/g, '<span class="text-orange-600 font-thin">$1</span>') // Keywords
         .replace(/(\/\/.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
         .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
         .replace(/(".*?")/g, '<span class="text-red-600">$1</span>'); // Strings
     } else if (language === 'javascript' || language === 'js') {
       return code
-        .replace(/(function|const|let|var|if|else|while|for|do|switch|case|default|break|continue|return|try|catch|finally|throw|new|this|class|extends|import|export|from|async|await)\b/g, '<span class="text-blue-600 font-semibold">$1</span>') // Keywords
+        .replace(/(function|const|let|var|if|else|while|for|do|switch|case|default|break|continue|return|try|catch|finally|throw|new|this|class|extends|import|export|from|async|await)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
         .replace(/(\/\/.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
         .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
         .replace(/(".*?"|'.*?'|`.*?`)/g, '<span class="text-red-600">$1</span>') // Strings
         .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
     } else if (language === 'yaml' || language === 'yml') {
       return code
-        .replace(/(version|services|ports|environment|volumes|networks|depends_on|build|image|command|restart|healthcheck)\b/g, '<span class="text-blue-600 font-semibold">$1</span>') // Keywords
+        .replace(/(version|services|ports|environment|volumes|networks|depends_on|build|image|command|restart|healthcheck)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
         .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
         .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
         .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
     } else if (language === 'toml') {
       return code
-        .replace(/(\[.*?\])/g, '<span class="text-blue-600 font-semibold">$1</span>') // Sections
+        .replace(/(\[.*?\])/g, '<span class="text-blue-600 font-thin">$1</span>') // Sections
         .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
         .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
         .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
@@ -1508,7 +1508,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       <div className="space-y-8">
         {docContent.sections.map((section: any, index: number) => (
           <div key={index} className="bg-white border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-thin text-gray-900 mb-4">
               {section.title}
             </h3>
             <div className="prose prose-sm max-w-none">
@@ -1646,7 +1646,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       return (
         <div>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-thin text-gray-900 mb-4">
               Product Documentation
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -1671,7 +1671,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     className="w-12 h-12 mr-4 object-contain"
                   />
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-1">
+                    <h3 className="text-2xl font-thin text-gray-900 mb-1">
                       {product.name}
                     </h3>
                     <p className="text-lg text-gray-600">
@@ -1809,7 +1809,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               height={32}
               className="w-8 h-8 mr-3 object-contain"
             />
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-thin text-gray-900">
               {doc.title}
             </h1>
           </div>
@@ -1900,15 +1900,15 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             {/* Documentation Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">3</div>
+                <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">3</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Products</div>
           </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">26</div>
+                <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">26</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Documentation Pages</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2 drop-shadow-sm">100%</div>
+                <div className="text-3xl font-thin text-white mb-2 drop-shadow-sm">100%</div>
                 <div className="text-sm text-white/80 drop-shadow-sm">Open Source</div>
               </div>
             </div>
@@ -1925,7 +1925,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       >
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 className="text-3xl font-thin text-gray-900 mb-8 text-center">
               Documentation Structure
             </h2>
             <p className="text-lg text-gray-600 text-center mb-12 max-w-3xl mx-auto">
@@ -1937,7 +1937,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               <div className="flex items-center gap-3">
                 <BookOpen className="w-6 h-6" style={{ color: palette.cyan }} />
                 <div>
-                  <h3 className="font-semibold text-gray-900">Guides</h3>
+                  <h3 className="font-thin text-gray-900">Guides</h3>
                   <p className="text-gray-600 text-sm">Step-by-step installation and configuration</p>
                 </div>
               </div>
@@ -1945,7 +1945,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               <div className="flex items-center gap-3">
                 <FileText className="w-6 h-6" style={{ color: palette.teal }} />
                 <div>
-                  <h3 className="font-semibold text-gray-900">Reference</h3>
+                  <h3 className="font-thin text-gray-900">Reference</h3>
                   <p className="text-gray-600 text-sm">Complete API documentation and functions</p>
                 </div>
               </div>
@@ -1953,7 +1953,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               <div className="flex items-center gap-3">
                 <Container className="w-6 h-6" style={{ color: palette.orange }} />
                 <div>
-                  <h3 className="font-semibold text-gray-900">Tutorials</h3>
+                  <h3 className="font-thin text-gray-900">Tutorials</h3>
                   <p className="text-gray-600 text-sm">Docker, Kubernetes, and deployment guides</p>
                 </div>
               </div>
@@ -1972,7 +1972,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
               <div className="lg:col-span-2">
             <div className="sticky top-24">
                   <div className="bg-gray-50 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Documentation</h3>
+                    <h3 className="text-lg font-thin text-gray-900 mb-4">Documentation</h3>
                     
                     {/* Navigation Menu */}
                     <nav className="space-y-2">
@@ -1987,7 +1987,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                               height={24}
                               className="w-6 h-6 mr-2 object-contain"
                             />
-                            <h4 className="text-sm font-semibold text-gray-900">
+                            <h4 className="text-sm font-thin text-gray-900">
                               {product.name}
                             </h4>
           </div>
@@ -2044,7 +2044,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       >
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl font-thin text-gray-900 mb-6">
               Quick Start
             </h2>
             <p className="text-xl text-gray-600 mb-12 leading-relaxed">
@@ -2056,7 +2056,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
                   <Download className="w-8 h-8" style={{ color: palette.cyan }} />
                     </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-thin text-gray-900 mb-2">
                   Download
                 </h3>
                 <p className="text-gray-600">
@@ -2068,7 +2068,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
                   <Code className="w-8 h-8" style={{ color: palette.teal }} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-thin text-gray-900 mb-2">
                   Install
                 </h3>
                 <p className="text-gray-600">
@@ -2080,7 +2080,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
                   <ExternalLink className="w-8 h-8" style={{ color: palette.orange }} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-thin text-gray-900 mb-2">
                   Deploy
                 </h3>
                 <p className="text-gray-600">
@@ -2092,7 +2092,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             <div className="mt-12">
               <Link
                 href="/download"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-white transition-all duration-200 shadow-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-thin text-white transition-all duration-200 shadow-lg"
                 style={{ backgroundColor: palette.orange }}
               >
                 Get Started
@@ -2107,7 +2107,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       <div className="bg-white py-20 border-t border-gray-200">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-thin text-gray-900 mb-12 text-center">
               Additional Resources
             </h2>
             
@@ -2116,7 +2116,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <ExternalLink className="w-8 h-8 text-gray-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">GitHub</h3>
+                <h3 className="text-lg font-thin text-gray-900 mb-2">GitHub</h3>
                 <p className="text-gray-600 text-sm mb-4">
                   Source code, issues, and contributions
                 </p>
@@ -2133,7 +2133,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Play className="w-8 h-8 text-gray-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Community</h3>
+                <h3 className="text-lg font-thin text-gray-900 mb-2">Community</h3>
                 <p className="text-gray-600 text-sm mb-4">
                   Join our community for support
                 </p>
@@ -2150,7 +2150,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <FileText className="w-8 h-8 text-gray-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Blog</h3>
+                <h3 className="text-lg font-thin text-gray-900 mb-2">Blog</h3>
                 <p className="text-gray-600 text-sm mb-4">
                   Latest updates and tutorials
                 </p>
@@ -2167,7 +2167,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Code className="w-8 h-8 text-gray-600" />
               </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Support</h3>
+                <h3 className="text-lg font-thin text-gray-900 mb-2">Support</h3>
                 <p className="text-gray-600 text-sm mb-4">
                   Get help and technical support
                 </p>

@@ -179,13 +179,13 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               sizes="(max-width: 768px) 100vw, 33vw"
               priority={index < 3}
             />
-            <div className="absolute top-4 left-4 bg-white/80 text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow">
+            <div className="absolute top-4 left-4 bg-white/80 text-gray-900 px-3 py-1 rounded-full text-xs font-thin shadow">
               {post.category}
             </div>
           </div>
           {/* Content */}
           <div className="p-7 flex flex-col flex-1">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors flex-shrink-0 leading-tight">
+            <h3 className="text-2xl font-thin text-gray-900 mb-2 group-hover:text-primary-600 transition-colors flex-shrink-0 leading-tight">
               {post.title}
             </h3>
             <p className="text-gray-600 mb-4 line-clamp-3 flex-1 text-lg">
@@ -202,7 +202,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
                   <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1 text-primary-600 group-hover:gap-2 transition-all font-semibold">
+              <div className="flex items-center gap-1 text-primary-600 group-hover:gap-2 transition-all font-thin">
                 <span>Read more</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
@@ -265,7 +265,7 @@ export default function BlogPage() {
 
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl text-white mb-6 drop-shadow-lg font-bold">
+            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6 drop-shadow-lg">
               Blog
             </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white/90 drop-shadow-md max-w-4xl mx-auto">
@@ -279,7 +279,7 @@ export default function BlogPage() {
                   <div className="flex justify-center mb-2">
                     <stat.icon className={`w-8 h-8 ${stat.color}`} />
                   </div>
-                  <div className="text-3xl font-bold text-white drop-shadow-sm">{stat.value}</div>
+                  <div className="text-3xl font-thin text-white drop-shadow-sm">{stat.value}</div>
                   <div className="text-sm text-white/80 drop-shadow-sm">{stat.label}</div>
                 </div>
               ))}
@@ -293,7 +293,7 @@ export default function BlogPage() {
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Categories</h2>
+              <h2 className="text-3xl font-thin text-gray-900 mb-4">Categories</h2>
               <p className="text-lg text-gray-600">Explore our content by topic and expertise area</p>
             </div>
             
@@ -303,8 +303,8 @@ export default function BlogPage() {
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <category.icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">{category.name}</h3>
-                  <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${category.color}`}>
+                  <h3 className="font-thin text-gray-900 mb-2">{category.name}</h3>
+                  <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-thin ${category.color}`}>
                     {category.count} articles
                   </div>
                 </div>
@@ -321,7 +321,7 @@ export default function BlogPage() {
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Articles</h2>
+              <h2 className="text-4xl md:text-5xl font-thin text-gray-900 mb-4 tracking-tight">Articles</h2>
               <p className="text-lg text-gray-500 max-w-2xl mx-auto">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
