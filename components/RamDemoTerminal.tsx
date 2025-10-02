@@ -29,6 +29,32 @@ const RamDemoTerminal = () => {
   // RAM-specific demo commands and their outputs
   const demoCommands = [
     {
+      command: 'ramd start --config /etc/ram/ramd.conf',
+      output: [
+        '[INFO] RAMD daemon starting...',
+        '[INFO] PostgreSQL connection established',
+        '[INFO] pgraft extension loaded',
+        '[INFO] Raft consensus initialized',
+        '[INFO] HTTP API listening on :8080',
+        '[INFO] Prometheus metrics on :9090',
+        '[INFO] Cluster health check: PASS',
+        '[INFO] Ready to serve requests',
+        '',
+        'RAM daemon started successfully'
+      ]
+    },
+    {
+      command: 'psql -c "SELECT * FROM pgraft_status();"',
+      output: [
+        ' node_id | role    | term | commit_index',
+        '---------+---------+------+-------------',
+        '       1 | leader  |   15 |         1024',
+        '       2 | follower|   15 |         1024',
+        '       3 | follower|   15 |         1024',
+        '(3 rows)'
+      ]
+    },
+    {
       command: 'ramctrl status',
       output: [
         'Cluster State: Healthy',
@@ -43,17 +69,30 @@ const RamDemoTerminal = () => {
       ]
     },
     {
-      command: 'ramd start --config /etc/ram/ramd.conf',
+      command: 'psql -c "CREATE TABLE users (id serial primary key, name text);"',
       output: [
-        '[INFO] RAMD daemon starting...',
-        '[INFO] PostgreSQL connection established',
-        '[INFO] Raft consensus initialized',
-        '[INFO] HTTP API listening on :8080',
-        '[INFO] Prometheus metrics on :9090',
-        '[INFO] Cluster health check: PASS',
-        '[INFO] Ready to serve requests',
+        'CREATE TABLE',
         '',
-        'RAM daemon started successfully'
+        '-- Table created on leader, will be replicated via pgraft'
+      ]
+    },
+    {
+      command: 'psql -c "INSERT INTO users (name) VALUES (\'alice\'), (\'bob\'), (\'charlie\');"',
+      output: [
+        'INSERT 0 3',
+        '',
+        '-- Data inserted on leader, replicated to followers'
+      ]
+    },
+    {
+      command: 'psql -c "SELECT * FROM users;"',
+      output: [
+        ' id |  name',
+        '----+----------',
+        '  1 | alice',
+        '  2 | bob',
+        '  3 | charlie',
+        '(3 rows)'
       ]
     },
     {
@@ -82,27 +121,29 @@ const RamDemoTerminal = () => {
       ]
     },
     {
-      command: 'ramctrl add-node node4',
+      command: 'psql -c "SELECT * FROM pgraft_status();"',
       output: [
-        'Adding node4 to cluster...',
-        'Node node4 added to cluster',
-        'Cluster size: 4 nodes',
-        'Replication started...',
-        'Node4 is now following leader',
+        ' node_id | role    | term | commit_index',
+        '---------+---------+------+-------------',
+        '       1 | follower|   16 |         1025',
+        '       2 | leader  |   16 |         1025',
+        '       3 | follower|   16 |         1025',
+        '(3 rows)',
         '',
-        'Cluster expansion completed successfully'
+        '-- Leader changed from node1 to node2 after failover'
       ]
     },
     {
-      command: 'psql -c "SELECT * FROM pgram.cluster_overview;"',
+      command: 'psql -c "SELECT * FROM users;"',
       output: [
-        ' node_id | role     | state    | leader_id | term | commit_index',
-        '---------+----------+----------+-----------+------+-------------',
-        '       1 | follower | healthy  |         2 |   15 |         1024',
-        '       2 | leader   | healthy  |         2 |   15 |         1024',
-        '       3 | follower | healthy  |         2 |   15 |         1024',
-        '       4 | follower | healthy  |         2 |   15 |         1024',
-        '(4 rows)'
+        ' id |  name',
+        '----+----------',
+        '  1 | alice',
+        '  2 | bob',
+        '  3 | charlie',
+        '(3 rows)',
+        '',
+        '-- Data still available on new leader'
       ]
     }
   ]

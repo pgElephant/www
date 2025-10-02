@@ -44,30 +44,6 @@ const FauxDbDemoTerminal = () => {
       ]
     },
     {
-      terminal: 'fauxdb-proxy' as const,
-      command: 'Query Translation',
-      output: [
-        '[INFO] MongoDB wire protocol request received',
-        '[TRANSLATE] insertMany() → INSERT INTO users (name, age) VALUES (\'Alice\', 27), (\'Bob\', 32), (\'Charlie\', 25)',
-        '[INFO] Query translation completed',
-        '[INFO] Forwarding to PostgreSQL backend'
-      ]
-    },
-    {
-      terminal: 'postgresql' as const,
-      command: 'INSERT INTO users (name, age) VALUES (\'Alice\', 27), (\'Bob\', 32), (\'Charlie\', 25);',
-      output: [
-        'INSERT 0 3'
-      ]
-    },
-    {
-      terminal: 'postgresql.log' as const,
-      command: 'Log Entry',
-      output: [
-        '2025-10-01 10:30:15.125 UTC [1234] LOG:  statement: INSERT INTO users (name, age) VALUES (\'Alice\', 27), (\'Bob\', 32), (\'Charlie\', 25);'
-      ]
-    },
-    {
       terminal: 'postgresql' as const,
       command: 'SELECT * FROM users;',
       output: [
@@ -76,21 +52,18 @@ const FauxDbDemoTerminal = () => {
         '  1 | Alice   |  27 ',
         '  2 | Bob     |  32 ',
         '  3 | Charlie |  25 ',
-        '(3 rows)'
+        '(3 rows)',
+        '',
+        '-- 3 rows from MongoDB insertMany()'
       ]
     },
     {
       terminal: 'postgresql' as const,
       command: 'INSERT INTO users (name, age) VALUES (\'Diana\', 28), (\'Eve\', 35), (\'Frank\', 22);',
       output: [
-        'INSERT 0 3'
-      ]
-    },
-    {
-      terminal: 'postgresql.log' as const,
-      command: 'Log Entry',
-      output: [
-        '2025-10-01 10:30:15.130 UTC [1234] LOG:  statement: INSERT INTO users (name, age) VALUES (\'Diana\', 28), (\'Eve\', 35), (\'Frank\', 22);'
+        'INSERT 0 3',
+        '',
+        '-- Adding 3 more rows directly in PostgreSQL'
       ]
     },
     {
@@ -104,17 +77,9 @@ const FauxDbDemoTerminal = () => {
         '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7bb"), name: "Diana", age: 28 },',
         '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7bc"), name: "Eve", age: 35 },',
         '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7bd"), name: "Frank", age: 22 }',
-        ']'
-      ]
-    },
-    {
-      terminal: 'fauxdb-proxy' as const,
-      command: 'Query Translation',
-      output: [
-        '[INFO] MongoDB wire protocol request received',
-        '[TRANSLATE] find({}) → SELECT * FROM users',
-        '[INFO] Query translation completed',
-        '[INFO] Forwarding to PostgreSQL backend'
+        ']',
+        '',
+        '-- All 6 rows visible from MongoDB (3 from MongoDB + 3 from PostgreSQL)'
       ]
     },
     {
@@ -129,7 +94,9 @@ const FauxDbDemoTerminal = () => {
         '  4 | Diana   |  28 ',
         '  5 | Eve     |  35 ',
         '  6 | Frank   |  22 ',
-        '(6 rows)'
+        '(6 rows)',
+        '',
+        '-- All 6 rows visible from PostgreSQL'
       ]
     }
   ]
