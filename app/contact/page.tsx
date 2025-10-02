@@ -170,10 +170,10 @@ Message: ${formData.message}
 
   <div className="container-wide py-28 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6">
               Contact Us
             </h1>
-            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
+            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl">
               Get in touch with our team for support, sales, or technical questions.
             </p>
           </div>

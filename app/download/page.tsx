@@ -201,7 +201,7 @@ const DownloadPage = () => {
           {/* Trust Bar */}
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {trustBar.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm/10 text-white drop-shadow-2xl shadow-2xl border border-white/20 text-base font-semibold shadow-sm">
+              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm/10 text-white drop-shadow-2xl shadow-2xl border border-white/20 text-base font-semibold">
                 <item.icon className="w-5 h-5" />
                 {item.label}
               </div>
@@ -213,7 +213,7 @@ const DownloadPage = () => {
               <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm/10 px-6 py-4 rounded-xl min-w-[120px] border border-white/20">
                 <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
                 <span className="text-2xl font-thin text-white drop-shadow-2xl shadow-2xl">{stat.value}</span>
-                <span className="text-xs text-white drop-shadow-2xl shadow-2xl/80">{stat.label}</span>
+                <span className="text-xs text-white drop-shadow-2xl shadow-2xl">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -276,7 +276,7 @@ const DownloadPage = () => {
                     <td className="py-3 px-2 align-top">
                       <div className="flex flex-col gap-2">
                         {product.downloads.map((download, index) => (
-                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm font-bold shadow-lg drop-shadow-lg">
+                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm font-bold shadow-lg">
                             {(() => {
                               const IconComponent = getDownloadIcon(download.type)
                               return <IconComponent className="w-4 h-4 text-blue-600 drop-shadow-lg" />
@@ -307,15 +307,15 @@ const DownloadPage = () => {
         </div>
         <div className="container-wide mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">Quick Start</h2>
-            <p className="text-lg text-white drop-shadow-2xl shadow-2xl/90 mb-12 leading-relaxed drop-shadow-md">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
+            <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6">Quick Start</h2>
+            <p className="text-lg text-white drop-shadow-2xl shadow-2xl mb-12 leading-relaxed">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
                 <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
                   <method.icon className="w-10 h-10 mb-3 text-cyan-200" />
-                  <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow">{method.title}</h3>
-                  <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-3">{method.description}</p>
-                  <ol className="text-left text-xs text-white drop-shadow-2xl shadow-2xl/80 space-y-1 list-decimal list-inside">
+                  <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl mb-2">{method.title}</h3>
+                  <p className="text-white drop-shadow-2xl shadow-2xl text-sm mb-3">{method.description}</p>
+                  <ol className="text-left text-xs text-white drop-shadow-2xl shadow-2xl space-y-1 list-decimal list-inside">
                     {method.steps.map((step, j) => (
                       <li key={j}>{step}</li>
                     ))}
@@ -323,7 +323,7 @@ const DownloadPage = () => {
                 </div>
               ))}
             </div>
-            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-all duration-200 shadow-lg text-lg font-thin bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
+            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-all duration-200 text-lg font-thin bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
               Get Started
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -339,7 +339,7 @@ const DownloadPage = () => {
             <p className="text-lg text-gray-600 mb-8">All downloads are cryptographically signed, verified, and scanned for security. We provide open source, enterprise-grade software trusted by leading organizations worldwide.</p>
             <div className="flex flex-wrap justify-center gap-6">
               {trustBar.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-sm text-base font-semibold text-white drop-shadow-lg">
+                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-sm text-base font-semibold text-white drop-shadow-2xl shadow-2xl">
                   <item.icon className="w-6 h-6 text-cyan-600" />
                   {item.label}
                 </div>
