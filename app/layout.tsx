@@ -382,6 +382,24 @@ export default function RootLayout({
             })
           }}
         />
+
+        {/* WebSite SearchAction */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "url": "https://www.pgelephant.com",
+              "name": "pgElephant",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.google.com/search?q=site%3Apgelephant.com+{search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <OrganizationSchema />

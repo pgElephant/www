@@ -256,6 +256,21 @@ const PgraftPage = () => {
         </div>
       </section>
 
+      {/* Breadcrumbs Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pgelephant.com/" },
+              { "@type": "ListItem", "position": 2, "name": "pgraft", "item": "https://www.pgelephant.com/pgraft" }
+            ]
+          })
+        }}
+      />
+
       {/* Detailed Feature Matrix */}
       <section className="py-20 text-white relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />

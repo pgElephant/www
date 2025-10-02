@@ -126,7 +126,7 @@ const nextConfig = {
       },
       // Cache static assets aggressively
       {
-        source: '/(_next/static|favicon.ico|robots.txt|sitemap.xml)',
+        source: '/(_next/static|favicon.ico|robots.txt|sitemap.xml|sitemap_index.xml)',
         headers: [
           {
             key: 'Cache-Control',

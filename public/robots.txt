@@ -60,5 +60,5 @@ Crawl-delay: 1
 Host: https://www.pgelephant.com
 
 # Sitemaps
+Sitemap: https://www.pgelephant.com/sitemap_index.xml
 Sitemap: https://www.pgelephant.com/sitemap.xml
-Sitemap: https://www.pgelephant.com/server-sitemap.xml

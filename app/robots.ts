@@ -77,6 +77,6 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1
       }
     ],
-    sitemap: 'https://www.pgelephant.com/sitemap.xml',
+    sitemap: 'https://www.pgelephant.com/sitemap_index.xml',
   }
 }
