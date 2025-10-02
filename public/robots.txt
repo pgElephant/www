@@ -1,4 +1,6 @@
-# *
+# pgElephant - Enterprise PostgreSQL Solutions
+# Optimized for search engine crawling
+
 User-agent: *
 Allow: /
 Allow: /ram
@@ -20,21 +22,28 @@ Allow: /*.svg
 Allow: /*.ico
 Allow: /*.webp
 Allow: /*.avif
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Block admin and private areas
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 Disallow: /private/
-# Disallow: /cpanel/
-# Disallow: /cpanel
 Disallow: /cgi-bin/
 Disallow: /webmail/
 Disallow: /mail/
 Disallow: /ftp/
 Disallow: /control/
 Disallow: /hosting/
-Disallow: /*.json$
 Disallow: /tmp/
 Disallow: /logs/
+
+# Allow important files
+Allow: /favicon.ico
+Allow: /manifest.json
+Allow: /og-image.jpg
+
 Crawl-delay: 1
 
 # Googlebot

@@ -55,7 +55,7 @@ export function SmallText({ children, className = '' }: TextProps) {
 
 export function Code({ children, className = '' }: TextProps) {
   return (
-    <code className={`font-mono text-sm bg-slate-100 px-1.5 py-0.5 rounded text-slate-800 ${className}`}>
+    <code className={`font-mono text-sm bg-white/10 backdrop-blur-sm px-1.5 py-0.5 rounded text-white border border-white/20 ${className}`}>
       {children}
     </code>
   );

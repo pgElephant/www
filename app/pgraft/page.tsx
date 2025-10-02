@@ -4,6 +4,42 @@ import { BookOpen, Github, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import PgraftDemoTerminal from '@/components/PgraftDemoTerminal';
 
+export const metadata = {
+  title: 'pgraft - PostgreSQL Raft Extension | Distributed Consensus | Leader Election',
+  description: 'pgraft: PostgreSQL extension implementing Raft consensus protocol for distributed database systems. Automatic leader election, failover, and high availability. Go-based Raft implementation for PostgreSQL clusters.',
+  keywords: [
+    'pgraft', 'PostgreSQL Raft', 'PostgreSQL extension', 'Raft consensus', 'distributed consensus',
+    'PostgreSQL leader election', 'PostgreSQL failover', 'PostgreSQL high availability', 'Raft algorithm',
+    'PostgreSQL clustering', 'distributed PostgreSQL', 'PostgreSQL consensus protocol', 'leader election',
+    'PostgreSQL extension development', 'Go Raft', 'PostgreSQL distributed systems', 'database consensus',
+    'pgraft extension', 'PostgreSQL Raft implementation', 'distributed database', 'PostgreSQL cluster',
+    'Raft PostgreSQL', 'PostgreSQL distributed consensus', 'database leader election', 'PostgreSQL failover'
+  ],
+  openGraph: {
+    title: 'pgraft - PostgreSQL Raft Extension for Distributed Consensus',
+    description: 'PostgreSQL extension implementing Raft consensus protocol. Automatic leader election and failover for distributed database systems.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/pgraft',
+    images: [
+      {
+        url: 'https://www.pgelephant.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'pgraft - PostgreSQL Raft Extension',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'pgraft - PostgreSQL Raft Extension for Distributed Consensus',
+    description: 'PostgreSQL extension implementing Raft consensus protocol. Automatic leader election and failover for distributed database systems.',
+    images: ['https://www.pgelephant.com/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/pgraft',
+  },
+}
+
 /* ===================== Small Reusable UI Parts ===================== */
 function SectionHeading({ children, kicker, className = '' }: { children: React.ReactNode; kicker?: string; className?: string }) {
   return (
@@ -87,13 +123,13 @@ const PgraftPage = () => {
             <div className="text-lg font-thin text-white/90 mt-2">
               Raft-Based PostgreSQL Extension For Leader Election
             </div>
-          </div>
+                  </div>
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold text-white mb-4">Command Line Examples</h3>
-          </div>
+                  </div>
           <div className="max-w-4xl mx-auto">
             <PgraftDemoTerminal />
-          </div>
+                  </div>
           <div className="mt-8 flex flex-wrap justify-center">
             <Badge>PostgreSQL 16–18</Badge>
             <Badge>Strong Consistency</Badge>
@@ -129,46 +165,46 @@ const PgraftPage = () => {
               <div>
                 <h4 className="font-bold text-lg mb-1 text-white">Native PostgreSQL Extension</h4>
                 <p className="text-white/90">Seamless in-core integration—no external daemons, no sidecars, no wrappers. Deploy and manage consensus directly inside PostgreSQL.</p>
-              </div>
-            </div>
+          </div>
+                  </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-sky-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
                 <h4 className="font-bold text-lg mb-1 text-white">Raft Consensus</h4>
                 <p className="text-white/90">Reliable leader election, log replication, and strong consistency using the proven Raft algorithm. No split-brain, deterministic failover.</p>
               </div>
-            </div>
+          </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-green-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
               <div>
                 <h4 className="font-bold text-lg mb-1 text-white">Crash-Safe Durability</h4>
                 <p className="text-white/90">All Raft state and logs are persisted for robust, crash-safe recovery. Survive restarts and failures without data loss or reconfiguration.</p>
-              </div>
-            </div>
+        </div>
+      </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-yellow-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/></svg></span>
               <div>
                 <h4 className="font-bold text-lg mb-1 text-white">SQL Management Functions</h4>
                 <p className="text-white/90">Full cluster lifecycle—init, membership, diagnostics, and monitoring—managed via simple SQL functions. No external control plane required.</p>
-              </div>
-            </div>
+          </div>
+                </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-pink-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
-              <div>
+                <div>
                 <h4 className="font-bold text-lg mb-1 text-white">Observability</h4>
                 <p className="text-white/90">Inspect cluster state, logs, and leader status with SQL queries. Built-in monitoring hooks for easy integration with dashboards and alerts.</p>
               </div>
-            </div>
+                </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-cyan-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="2"/><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
-              <div>
+                <div>
                 <h4 className="font-bold text-lg mb-1 text-white">Dynamic Node Membership</h4>
                 <p className="text-white/90">Add or remove nodes through consensus. Scale up or down safely, with all changes replicated and agreed by the cluster.</p>
               </div>
-            </div>
+                </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-red-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
-              <div>
+                <div>
                 <h4 className="font-bold text-lg mb-1 text-white">Debug & Audit</h4>
                 <p className="text-white/90">Toggle extended logging, access audit-friendly SQL surfaces, and trace cluster events for compliance and troubleshooting.</p>
               </div>
@@ -178,8 +214,8 @@ const PgraftPage = () => {
               <div>
                 <h4 className="font-bold text-lg mb-1 text-white">Minimal Configuration</h4>
                 <p className="text-white/90">Production-ready defaults, simple setup, and tuneable parameters. Get started quickly and adapt to your workload needs.</p>
-              </div>
-            </div>
+                </div>
+                </div>
             <div className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 border border-white/20">
               <span className="text-emerald-500"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg></span>
               <div>
@@ -240,7 +276,7 @@ const PgraftPage = () => {
             </table>
           </div>
           <p className="mt-4 text-xs text-slate-400">Full reference: <Link href="/docs/pgraft/user-guide/sql-functions" className="text-indigo-400 hover:underline">SQL Functions Guide</Link></p>
-        </div>
+      </div>
       </section>
 
       {/* Technical Details */}

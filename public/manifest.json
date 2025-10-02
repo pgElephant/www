@@ -4,8 +4,8 @@
   "description": "Enterprise-grade PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4f46e5",
+  "background_color": "#070d1a",
+  "theme_color": "#070d1a",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en-US",
@@ -13,22 +13,82 @@
   "categories": ["productivity", "developer", "database"],
   "icons": [
     {
-      "src": "/ico/pgElephant_no_com_HD.ico",
-      "sizes": "16x16 32x32 48x48 64x64 96x96 128x128 192x192 256x256 512x512",
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "16x16 24x24 32x32 48x48 64x64 96x96 128x128 144x144 152x152 160x160 180x180 192x192 256x256 384x384 512x512",
       "type": "image/x-icon",
       "purpose": "any"
     },
     {
-      "src": "/ico/pgElephant_no_com_HD.ico",
+      "src": "/ico/pgElephant_HD.ico",
       "sizes": "192x192",
       "type": "image/x-icon",
       "purpose": "maskable"
     },
     {
-      "src": "/ico/pgElephant_no_com_HD.ico",
+      "src": "/ico/pgElephant_HD.ico",
       "sizes": "512x512",
       "type": "image/x-icon",
       "purpose": "maskable"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "180x180",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "167x167",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "152x152",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "144x144",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "120x120",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "114x114",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "76x76",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "72x72",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "60x60",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/ico/pgElephant_HD.ico",
+      "sizes": "57x57",
+      "type": "image/x-icon",
+      "purpose": "any"
     }
   ]
 }

@@ -1,9 +1,83 @@
-'use client'
-
 import { useState } from 'react'
 import ProjectTemplate from '../_components/ProjectTemplate'
 import FauxDbDemoTerminal from '@/components/FauxDbDemoTerminal'
 import { Play, Terminal, Monitor, CheckCircle, Users, Star, Clock, BarChart3, Zap, Shield } from 'lucide-react'
+
+export const metadata = {
+  title: 'FauxDB - MongoDB Alternative | PostgreSQL Document Database | Wire Protocol Proxy',
+  description: 'FauxDB: MongoDB-compatible document database with PostgreSQL backend. Wire protocol proxy, query translation, Rust-powered performance. Drop-in MongoDB replacement with ACID transactions, geospatial support, and aggregation pipelines.',
+  keywords: [
+    'FauxDB', 'MongoDB alternative', 'MongoDB compatible', 'document database', 'PostgreSQL document store',
+    'wire protocol proxy', 'query translation', 'MongoDB to PostgreSQL', 'NoSQL database', 'document store',
+    'MongoDB replacement', 'PostgreSQL JSONB', 'Rust database', 'database proxy', 'query translator',
+    'MongoDB migration', 'document database PostgreSQL', 'MongoDB wire protocol', 'PostgreSQL NoSQL',
+    'FauxDB database', 'MongoDB compatible database', 'PostgreSQL document database', 'wire protocol',
+    'database translation', 'MongoDB PostgreSQL', 'document store PostgreSQL', 'NoSQL PostgreSQL'
+  ],
+  openGraph: {
+    title: 'FauxDB - MongoDB Alternative with PostgreSQL Backend',
+    description: 'Drop-in MongoDB replacement with PostgreSQL storage. Wire protocol proxy, query translation, and enterprise features.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/fauxdb',
+    images: [
+      {
+        url: 'https://www.pgelephant.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'FauxDB - MongoDB Alternative Database',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FauxDB - MongoDB Alternative with PostgreSQL Backend',
+    description: 'Drop-in MongoDB replacement with PostgreSQL storage. Wire protocol proxy, query translation, and enterprise features.',
+    images: ['https://www.pgelephant.com/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/fauxdb',
+  },
+}
+
+// Structured Data for FauxDB
+const fauxdbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+  "name": "FauxDB",
+  "alternateName": ["FauxDB Database", "MongoDB Alternative", "PostgreSQL Document Database"],
+  "description": "MongoDB-compatible document database with PostgreSQL backend. Wire protocol proxy, query translation, and enterprise features.",
+  "url": "https://www.pgelephant.com/fauxdb",
+    "applicationCategory": "DatabaseApplication",
+  "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "pgElephant Team",
+    "url": "https://www.pgelephant.com"
+    },
+    "featureList": [
+    "MongoDB Wire Protocol",
+    "Query Translation Engine", 
+    "PostgreSQL Backend",
+    "Rust-Powered Performance",
+    "ACID Transactions",
+    "Geospatial Support",
+    "Aggregation Pipelines",
+    "Real-time Sync",
+    "Enterprise Security",
+    "Production Ready"
+  ],
+  "softwareVersion": "1.0.0",
+  "datePublished": "2024-01-01",
+  "dateModified": new Date().toISOString().split('T')[0],
+  "downloadUrl": "https://www.pgelephant.com/download",
+  "screenshot": "https://www.pgelephant.com/og-image.jpg"
+}
 
 const fauxdbConfig = {
   hero: {
@@ -112,5 +186,16 @@ const fauxdbConfig = {
 };
 
 export default function FauxDbPage() {
-  return <ProjectTemplate {...fauxdbConfig} />;
+  return (
+    <div className="min-h-screen">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(fauxdbStructuredData)
+        }}
+      />
+      <ProjectTemplate {...fauxdbConfig} />
+    </div>
+  );
 }

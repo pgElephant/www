@@ -81,10 +81,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pgelephant.com'),
   title: {
-    default: 'pgElephant - Enterprise PostgreSQL Platform | High Availability & MongoDB Alternative',
-    template: '%s | pgElephant - Enterprise PostgreSQL Solutions'
+    default: 'pgElephant - Enterprise PostgreSQL High Availability | MongoDB Alternative | Database Clustering',
+    template: '%s | pgElephant - PostgreSQL Enterprise Solutions'
   },
-  description: 'pgElephant delivers enterprise-grade PostgreSQL solutions: RAM clustering with automatic failover, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database. Production-ready, open-source tools for modern applications.',
+  description: 'pgElephant: Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus. Production-ready RAM clustering, RALE consensus engine, pgraft Raft extension, and FauxDB. Zero-downtime database solutions for modern applications.',
   applicationName: 'pgElephant',
   authors: [
     { name: 'pgElephant Team', url: 'https://www.pgelephant.com' },
@@ -92,18 +92,29 @@ export const metadata: Metadata = {
   ],
   generator: 'Next.js',
   keywords: [
-    // Core keywords
-    'PostgreSQL', 'high availability', 'database clustering', 'failover', 'enterprise database',
-    // Product specific
-    'RAM PostgreSQL', 'RALE consensus', 'pgraft extension', 'FauxDB MongoDB',
-    // Technical terms
-    'distributed consensus', 'Raft algorithm', 'leader election', 'database replication',
-    'MongoDB alternative', 'document database', 'PostgreSQL extension', 'Rust database',
-    // Use cases
-    'production database', 'zero downtime', 'automated failover', 'high-performance database',
-    'database management', 'PostgreSQL solutions', 'open source database', 'cloud database',
-    // Industry terms
-    'DevOps', 'database administration', 'system reliability', 'scalability', 'performance optimization'
+    // Primary search terms
+    'PostgreSQL high availability', 'PostgreSQL clustering', 'PostgreSQL failover', 'PostgreSQL HA',
+    'MongoDB alternative', 'MongoDB compatible', 'document database', 'NoSQL database',
+    'database clustering', 'database failover', 'automatic failover', 'zero downtime database',
+    'PostgreSQL extension', 'PostgreSQL tools', 'PostgreSQL management', 'PostgreSQL solutions',
+    // Product-specific terms
+    'RAM PostgreSQL', 'RALE consensus', 'pgraft extension', 'FauxDB database',
+    'PostgreSQL Raft', 'distributed PostgreSQL', 'PostgreSQL consensus', 'PostgreSQL leader election',
+    'PostgreSQL replication', 'PostgreSQL backup', 'PostgreSQL monitoring', 'PostgreSQL performance',
+    // Technical keywords
+    'Raft algorithm', 'distributed consensus', 'leader election', 'database replication',
+    'database clustering software', 'database management system', 'database administration tools',
+    'high performance database', 'enterprise database', 'production database', 'cloud database',
+    // Industry and use case terms
+    'DevOps database', 'database administration', 'system reliability', 'database scalability',
+    'database performance optimization', 'open source database', 'free database tools',
+    'PostgreSQL production', 'PostgreSQL enterprise', 'PostgreSQL cloud', 'PostgreSQL Docker',
+    'PostgreSQL Kubernetes', 'database automation', 'database orchestration', 'database monitoring',
+    // Long-tail keywords
+    'best PostgreSQL high availability solution', 'PostgreSQL automatic failover tool',
+    'MongoDB to PostgreSQL migration', 'PostgreSQL clustering software',
+    'enterprise PostgreSQL management', 'PostgreSQL distributed systems',
+    'PostgreSQL consensus protocol', 'PostgreSQL raft implementation'
   ],
   referrer: 'origin-when-cross-origin',
   creator: 'pgElephant Team',
@@ -194,21 +205,183 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://twitter.com" />
         <link rel="manifest" href="/manifest.json" />
+        
+        {/* Primary favicon - using the largest, most detailed icon */}
         <link rel="icon" type="image/x-icon" href="/ico/pgElephant_HD.ico" />
+        <link rel="shortcut icon" href="/ico/pgElephant_HD.ico" />
+        
+        {/* Multiple PNG sizes for better browser support */}
+        <link rel="icon" type="image/png" sizes="192x192" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="160x160" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/ico/pgElephant_HD.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="24x24" href="/ico/pgElephant_HD.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/ico/pgElephant_HD.ico" />
+        
+        {/* Apple Touch Icons - all sizes for maximum visibility */}
         <link rel="apple-touch-icon" sizes="180x180" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="152x152" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="144x144" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="120x120" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="114x114" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="87x87" href="/ico/pgElephant_HD.ico" />
+        <link rel="apple-touch-icon" sizes="80x80" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="76x76" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="72x72" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="60x60" href="/ico/pgElephant_HD.ico" />
         <link rel="apple-touch-icon" sizes="57x57" href="/ico/pgElephant_HD.ico" />
+        
+        {/* Android/Chrome icons */}
+        <link rel="icon" type="image/png" sizes="512x512" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="384x384" href="/ico/pgElephant_HD.ico" />
+        <link rel="icon" type="image/png" sizes="256x256" href="/ico/pgElephant_HD.ico" />
+        
+        {/* Windows/Microsoft icons */}
         <meta name="msapplication-TileColor" content="#070d1a" />
         <meta name="msapplication-TileImage" content="/ico/pgElephant_HD.ico" />
+        <meta name="msapplication-square70x70logo" content="/ico/pgElephant_HD.ico" />
+        <meta name="msapplication-square150x150logo" content="/ico/pgElephant_HD.ico" />
+        <meta name="msapplication-square310x310logo" content="/ico/pgElephant_HD.ico" />
+        <meta name="msapplication-wide310x150logo" content="/ico/pgElephant_HD.ico" />
+        
+        {/* Theme colors for better visibility */}
         <meta name="theme-color" content="#070d1a" />
+        <meta name="msapplication-navbutton-color" content="#070d1a" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        
+        {/* Additional favicon meta tags for maximum visibility */}
+        <meta name="application-name" content="pgElephant" />
+        <meta name="apple-mobile-web-app-title" content="pgElephant" />
+        <meta name="msapplication-tooltip" content="pgElephant - Enterprise PostgreSQL Platform" />
+        <meta name="msapplication-starturl" content="/" />
+        
+        {/* Safari pinned tab icon */}
+        <link rel="mask-icon" href="/ico/pgElephant_HD.ico" color="#070d1a" />
+        
+        {/* Additional browser-specific favicons */}
+        <link rel="fluid-icon" href="/ico/pgElephant_HD.ico" title="pgElephant" />
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "pgElephant",
+              "alternateName": ["pgElephant Platform", "PostgreSQL Elephant"],
+              "description": "Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus",
+              "url": "https://www.pgelephant.com",
+              "applicationCategory": "DatabaseApplication",
+              "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "creator": {
+                "@type": "Organization",
+                "name": "pgElephant Team",
+                "url": "https://www.pgelephant.com"
+              },
+              "featureList": [
+                "PostgreSQL High Availability",
+                "Automatic Failover",
+                "MongoDB Compatibility",
+                "Distributed Consensus",
+                "Zero Downtime Operations",
+                "Database Clustering",
+                "Raft Algorithm Implementation",
+                "Leader Election",
+                "Real-time Monitoring",
+                "Enterprise Security"
+              ],
+              "softwareVersion": "1.0.0",
+              "datePublished": "2024-01-01",
+              "dateModified": new Date().toISOString().split('T')[0],
+              "downloadUrl": "https://www.pgelephant.com/download",
+              "screenshot": "https://www.pgelephant.com/og-image.jpg",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "ratingCount": "1",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            })
+          }}
+        />
+        
+        {/* Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "pgElephant",
+              "url": "https://www.pgelephant.com",
+              "logo": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+              "description": "Enterprise PostgreSQL solutions provider specializing in high availability, clustering, and MongoDB-compatible databases",
+              "foundingDate": "2024",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Customer Service",
+                "url": "https://www.pgelephant.com/contact"
+              },
+              "sameAs": [
+                "https://github.com/pgElephant"
+              ],
+              "knowsAbout": [
+                "PostgreSQL",
+                "Database High Availability",
+                "Distributed Systems",
+                "MongoDB",
+                "Database Clustering",
+                "Raft Consensus",
+                "Database Management"
+              ]
+            })
+          }}
+        />
+        
+        {/* Product Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "pgElephant Platform",
+              "description": "Complete PostgreSQL enterprise solution suite including RAM clustering, RALE consensus, pgraft extension, and FauxDB MongoDB alternative",
+              "brand": {
+                "@type": "Brand",
+                "name": "pgElephant"
+              },
+              "category": "Database Software",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "pgElephant"
+                }
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "reviewCount": "1"
+              }
+            })
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <OrganizationSchema />

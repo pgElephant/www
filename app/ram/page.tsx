@@ -1,9 +1,43 @@
-'use client'
-
 import React, { useState, useEffect } from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import RamDemoTerminal from '@/components/RamDemoTerminal';
 import { Terminal, Server, Activity, Users, Shield, Zap } from 'lucide-react';
+
+export const metadata = {
+  title: 'RAM - Resilient Adaptive Manager | PostgreSQL High Availability | Auto Failover | Clustering',
+  description: 'RAM: Resilient Adaptive Manager for PostgreSQL high availability and clustering. Auto-failover daemon with Raft consensus, real-time monitoring, and production-ready PostgreSQL clustering solution.',
+  keywords: [
+    'RAM PostgreSQL', 'Resilient Adaptive Manager', 'PostgreSQL high availability', 'PostgreSQL clustering',
+    'PostgreSQL auto failover', 'PostgreSQL HA', 'PostgreSQL cluster', 'database clustering',
+    'PostgreSQL failover', 'PostgreSQL monitoring', 'database high availability', 'PostgreSQL management',
+    'RAM daemon', 'PostgreSQL daemon', 'database auto failover', 'PostgreSQL clustering software',
+    'PostgreSQL cluster management', 'database cluster', 'PostgreSQL production', 'database reliability',
+    'PostgreSQL automatic failover', 'database monitoring', 'PostgreSQL enterprise', 'database clustering solution'
+  ],
+  openGraph: {
+    title: 'RAM - Resilient Adaptive Manager for PostgreSQL',
+    description: 'Auto-failover daemon with Raft consensus for PostgreSQL high availability and clustering. Production-ready database management.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/ram',
+    images: [
+      {
+        url: 'https://www.pgelephant.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'RAM - Resilient Adaptive Manager',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RAM - Resilient Adaptive Manager for PostgreSQL',
+    description: 'Auto-failover daemon with Raft consensus for PostgreSQL high availability and clustering. Production-ready database management.',
+    images: ['https://www.pgelephant.com/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/ram',
+  },
+}
 
 const ramConfig = {
   hero: {
@@ -22,7 +56,7 @@ const ramConfig = {
   demo: (
     <div className="max-w-6xl mx-auto mb-8">
       <RamDemoTerminal />
-    </div>
+                      </div>
   ),
   featurePillars: {
     kicker: 'Overview',

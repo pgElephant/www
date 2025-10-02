@@ -1,9 +1,43 @@
-'use client'
-
 import React, { useState, useEffect } from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import RaleDemoTerminal from '@/components/RaleDemoTerminal';
 import { Terminal, Database, Activity, Users, Shield, Zap, Server } from 'lucide-react';
+
+export const metadata = {
+  title: 'RALE - Resilient Adaptive Leader Election | Raft Log Engine | Distributed Consensus',
+  description: 'RALE: Resilient Adaptive Leader Election - Raft Log Engine for distributed consensus and leader election. Crash-safe, observable, and production-ready distributed systems consensus protocol implementation.',
+  keywords: [
+    'RALE', 'Resilient Adaptive Leader Election', 'Raft Log Engine', 'distributed consensus',
+    'leader election', 'distributed systems', 'consensus protocol', 'Raft algorithm',
+    'distributed consensus engine', 'leader election algorithm', 'crash safe consensus',
+    'distributed log', 'consensus engine', 'distributed leader election', 'Raft implementation',
+    'RALE consensus', 'distributed systems consensus', 'leader election protocol', 'consensus algorithm',
+    'distributed consensus protocol', 'Raft log engine', 'adaptive leader election', 'resilient consensus'
+  ],
+  openGraph: {
+    title: 'RALE - Resilient Adaptive Leader Election Engine',
+    description: 'Raft Log Engine for distributed consensus and leader election. Crash-safe, observable, and production-ready.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/rale',
+    images: [
+      {
+        url: 'https://www.pgelephant.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'RALE - Resilient Adaptive Leader Election',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RALE - Resilient Adaptive Leader Election Engine',
+    description: 'Raft Log Engine for distributed consensus and leader election. Crash-safe, observable, and production-ready.',
+    images: ['https://www.pgelephant.com/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/rale',
+  },
+}
 
 const raleConfig = {
   hero: {

@@ -32,7 +32,7 @@ const Features = () => {
       icon: Terminal,
       title: 'CLI & API',
       description: 'Powerful command-line interface and REST API for automation and integration workflows.',
-      color: 'bg-gray-100 text-gray-600'
+      color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Database,
@@ -65,8 +65,8 @@ const Features = () => {
         <div className="premium-grid mb-24">
           {features.map((feature, index) => (
             <div key={index} className="premium-card p-10">
-              <div className="w-20 h-20 bg-slate-100 rounded-3xl flex items-center justify-center mb-8">
-                <feature.icon className="w-10 h-10 text-slate-600" />
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-8 border border-white/20">
+                <feature.icon className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-6">
                 {feature.title}
