@@ -60,7 +60,7 @@ const Header = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div className="absolute top-full right-0 mt-2 w-64 bg-white backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="absolute top-full right-0 mt-2 w-64 bg-white/95 backdrop-blur-xl border border-slate-200/50 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="p-4 space-y-3">
                   {githubProjects.map((project) => (
                     <a
@@ -115,7 +115,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-slate-200 bg-white backdrop-blur-md">
+          <div className="md:hidden border-t border-slate-700 bg-white/95 backdrop-blur-md">
             <div className="px-4 pt-4 pb-6 space-y-2">
               {navigation.map((item) => (
                 <Link

@@ -168,7 +168,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
   return (
     <article className="group h-full">
       <Link href={`/blog/${post.slug}`} className="block h-full">
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-gray-200 h-full flex flex-col">
+        <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-white/30 h-full flex flex-col">
           {/* Large Stock Image */}
           <div className="relative w-full aspect-[3/2] bg-gray-200 overflow-hidden flex-shrink-0">
             <Image
@@ -179,19 +179,19 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               sizes="(max-width: 768px) 100vw, 33vw"
               priority={index < 3}
             />
-            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm/80 text-gray-900 px-3 py-1 rounded-full text-xs font-thin shadow-lg drop-shadow-lg">
+            <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm/80 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg drop-shadow-lg">
               {post.category}
             </div>
           </div>
           {/* Content */}
           <div className="p-7 flex flex-col flex-1">
-            <h3 className="text-2xl font-thin text-gray-900 mb-2 group-hover:text-primary-600 transition-colors flex-shrink-0 leading-tight drop-shadow-lg">
+            <h3 className="text-2xl font-thin text-white mb-2 group-hover:text-primary-300 transition-colors flex-shrink-0 leading-tight drop-shadow-2xl shadow-2xl">
               {post.title}
             </h3>
-            <p className="text-gray-700 mb-4 line-clamp-3 flex-1 text-lg font-thin drop-shadow-sm">
+            <p className="text-white/90 mb-4 line-clamp-3 flex-1 text-lg font-thin drop-shadow-2xl shadow-2xl">
               {post.excerpt}
             </p>
-            <div className="flex items-center justify-between text-sm text-gray-600 mt-auto flex-shrink-0 font-thin drop-shadow-sm">
+            <div className="flex items-center justify-between text-sm text-white/80 mt-auto flex-shrink-0 font-thin drop-shadow-2xl shadow-2xl">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4" />
@@ -202,7 +202,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
                   <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1 text-primary-600 group-hover:gap-2 transition-all font-thin">
+              <div className="flex items-center gap-1 text-primary-300 group-hover:gap-2 transition-all font-thin drop-shadow-2xl shadow-2xl">
                 <span>Read more</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
@@ -289,21 +289,21 @@ export default function BlogPage() {
       </div>
 
       {/* Blog Categories */}
-      <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-16">
+      <div className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #94a3b8 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-thin text-gray-900 mb-4">Categories</h2>
-              <p className="text-lg text-gray-600">Explore our content by topic and expertise area</p>
+              <h2 className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4">Categories</h2>
+              <p className="text-lg text-white/80 drop-shadow-2xl shadow-2xl">Explore our content by topic and expertise area</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {blogCategories.map((category, index) => (
-                <div key={index} className="bg-white/95 backdrop-blur-sm rounded-xl p-6 text-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
+                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center shadow-sm border border-white/20 hover:shadow-md transition-shadow cursor-pointer">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <category.icon className="w-6 h-6 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
-                  <h3 className="font-thin text-gray-900 mb-2">{category.name}</h3>
+                  <h3 className="font-thin text-white drop-shadow-2xl shadow-2xl mb-2">{category.name}</h3>
                   <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-thin ${category.color}`}>
                     {category.count} articles
                   </div>
@@ -317,12 +317,12 @@ export default function BlogPage() {
 
 
       {/* Blog Articles - Clean Modern Grid */}
-      <div className="bg-white/95 backdrop-blur-sm py-24">
+      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <h2 className="text-4xl md:text-5xl font-thin text-gray-900 mb-4 tracking-tight">Articles</h2>
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
+              <h2 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4 tracking-tight">Articles</h2>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto drop-shadow-2xl shadow-2xl">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {blogPosts.map((post, i) => (

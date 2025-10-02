@@ -181,7 +181,7 @@ Message: ${formData.message}
       </div>
 
       {/* Professional Contact Methods */}
-      <div className="bg-white/95 backdrop-blur-sm py-24">
+      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             {/* Professional Header */}
@@ -212,7 +212,7 @@ Message: ${formData.message}
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-blue-100">
+                  <div className="bg-white/10 backdrop-blur-sm/70 rounded-lg p-4 border border-white/20">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">General Support</div>
@@ -221,7 +221,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-blue-600" />
                     </div>
                   </div>
-                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-blue-100">
+                  <div className="bg-white/10 backdrop-blur-sm/70 rounded-lg p-4 border border-white/20">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Sales Inquiries</div>
@@ -230,7 +230,7 @@ Message: ${formData.message}
                       <ArrowRight className="w-4 h-4 text-blue-600" />
                     </div>
                   </div>
-                  <div className="bg-white/95 backdrop-blur-sm/70 rounded-lg p-4 border border-blue-100">
+                  <div className="bg-white/10 backdrop-blur-sm/70 rounded-lg p-4 border border-white/20">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-sm font-thin text-gray-900">Technical Support</div>

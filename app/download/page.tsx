@@ -221,7 +221,7 @@ const DownloadPage = () => {
       </section>
 
       {/* Professional Download Table/List */}
-      <section className="bg-white/95 backdrop-blur-sm py-24">
+      <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
         <div className="container-wide mx-auto">
           <div className="max-w-5xl mx-auto">
             <table className="w-full text-left border-separate border-spacing-y-0">
@@ -239,7 +239,7 @@ const DownloadPage = () => {
                     key={product.id}
                     className={
                       `transition ` +
-                      (idx % 2 === 0 ? 'bg-gradient-to-br from-slate-50 to-slate-100' : 'bg-white/95 backdrop-blur-sm') +
+                      (idx % 2 === 0 ? 'bg-gradient-to-br from-slate-50/80 to-slate-100/80 backdrop-blur-sm' : 'bg-white/20 backdrop-blur-sm') +
                       (product.featured ? ' ring-2 ring-cyan-400/40' : '') +
                       ' hover:bg-cyan-50'
                     }
@@ -248,7 +248,7 @@ const DownloadPage = () => {
                       <div className="flex items-center gap-3">
                         <Image src={product.icon} alt={`${product.name} icon`} width={40} height={40} className="w-10 h-10 object-contain rounded-lg border border-gray-200 shadow-sm" />
                         <div>
-                          <div className="font-bold text-lg text-gray-900 flex items-center gap-2">
+                          <div className="font-bold text-lg text-gray-900 flex items-center gap-2 drop-shadow-lg">
                             {product.name}
                             {product.featured && (
                               <span className="inline-block bg-cyan-100 text-cyan-700 text-xs font-thin px-2 py-0.5 rounded animate-pulse">New</span>
@@ -261,15 +261,15 @@ const DownloadPage = () => {
                     <td className="py-3 px-2 align-top text-sm text-gray-600 max-w-xs">
                       <div className="flex flex-col h-full min-h-[180px]">
                         <div className="flex-1">
-                          <div className="font-thin text-base text-gray-900 mb-1">{product.title}</div>
+                          <div className="font-semibold text-base text-gray-900 mb-1 drop-shadow-lg">{product.title}</div>
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 list-disc list-inside mb-4">
                             {product.features && product.features.map((feature, i) => (
-                              <li key={i} className="text-gray-600 text-xs leading-snug">{feature}</li>
+                              <li key={i} className="text-gray-700 text-xs leading-snug font-medium drop-shadow-sm">{feature}</li>
                             ))}
                           </ul>
                         </div>
                         <div className="flex items-end mt-auto">
-                          <Link href={product.details} className="inline-block mt-2 text-xs font-thin text-cyan-700 hover:underline hover:text-cyan-900 transition">View Enterprise Details</Link>
+                          <Link href={product.details} className="inline-block mt-2 text-xs font-semibold text-blue-600 hover:underline hover:text-blue-800 transition drop-shadow-sm">View Enterprise Details</Link>
                         </div>
                       </div>
                     </td>
@@ -288,7 +288,7 @@ const DownloadPage = () => {
                       </div>
                     </td>
                     <td className="py-3 px-2 align-top">
-                      <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-cyan-700 hover:underline">View</a>
+                      <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-blue-600 hover:underline font-semibold drop-shadow-sm">View</a>
                     </td>
                   </tr>
                 ))}
@@ -311,7 +311,7 @@ const DownloadPage = () => {
             <p className="text-lg text-white drop-shadow-2xl shadow-2xl/90 mb-12 leading-relaxed drop-shadow-md">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
-                <div key={i} className="bg-white/95 backdrop-blur-sm/10 rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
+                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
                   <method.icon className="w-10 h-10 mb-3 text-cyan-200" />
                   <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow">{method.title}</h3>
                   <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-3">{method.description}</p>
@@ -339,7 +339,7 @@ const DownloadPage = () => {
             <p className="text-lg text-gray-600 mb-8">All downloads are cryptographically signed, verified, and scanned for security. We provide open source, enterprise-grade software trusted by leading organizations worldwide.</p>
             <div className="flex flex-wrap justify-center gap-6">
               {trustBar.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/95 backdrop-blur-sm border border-gray-200 shadow-sm text-base font-thin text-gray-900">
+                <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-sm text-base font-semibold text-white drop-shadow-lg">
                   <item.icon className="w-6 h-6 text-cyan-600" />
                   {item.label}
                 </div>
