@@ -37,7 +37,7 @@ export default function RALEBlogPage() {
           </div>
           
           <div className="text-center">
-            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm text-white mb-4">
+            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/10 backdrop-blur-sm/20 backdrop-blur-sm text-white mb-4">
               Technical Deep Dive
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -70,7 +70,7 @@ export default function RALEBlogPage() {
         <article className="prose prose-lg max-w-none">
           
           {/* Introduction */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
               RALE (Resilient Adaptive Leader Election) is a distributed consensus and key-value store system built with modern C engineering practices. 
@@ -83,7 +83,7 @@ export default function RALEBlogPage() {
           </div>
 
           {/* Architecture Overview */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <Network className="w-8 h-8 text-teal-600" />
               System Architecture
@@ -138,7 +138,7 @@ export default function RALEBlogPage() {
             </div>
 
             {/* Architecture Diagram */}
-            <div className="bg-gray-50 rounded-lg p-6 mb-6">
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-6 mb-6">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Cluster Architecture</h4>
               <div className="text-sm text-gray-700 font-mono">
                 <pre className="whitespace-pre-wrap">{`┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -158,7 +158,7 @@ export default function RALEBlogPage() {
           </div>
 
           {/* Consensus Algorithm */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <Shield className="w-8 h-8 text-teal-600" />
               RALE Consensus Protocol
@@ -211,7 +211,7 @@ export default function RALEBlogPage() {
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-6">
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Log Replication Mechanism</h4>
               <ol className="space-y-3 list-decimal list-inside text-gray-700">
                 <li><strong>Client Request:</strong> Application submits operation to leader</li>
@@ -224,7 +224,7 @@ export default function RALEBlogPage() {
           </div>
 
           {/* Distributed Store */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <Database className="w-8 h-8 text-teal-600" />
               Distributed Store (DStore)
@@ -283,7 +283,7 @@ export default function RALEBlogPage() {
           </div>
 
           {/* API and Usage */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <Code className="w-8 h-8 text-teal-600" />
               API Design and Usage
@@ -292,7 +292,7 @@ export default function RALEBlogPage() {
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Core API Functions</h3>
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-4">
                   <pre className="text-sm text-gray-700 font-mono">{`/* Core RALE API */
 int rale_init(const config_t *config);
 int rale_finit(void);
@@ -307,7 +307,7 @@ int rale_quram_process(void);`}</pre>
               
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">RALE State Structure</h3>
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-4">
                   <pre className="text-sm text-gray-700 font-mono">{`typedef struct rale_state_t {
   int32_t current_term;
   int32_t voted_for;
@@ -324,7 +324,7 @@ int rale_quram_process(void);`}</pre>
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-6">
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">Quick Start Example</h4>
               <pre className="text-sm text-gray-700 font-mono">{`# Clone and build
 git clone https://github.com/pgElephant/rale.git
@@ -341,7 +341,7 @@ ralectrl ADD --node-id 1 --node-name "node1" \\
           </div>
 
           {/* Conclusion */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 p-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Conclusion</h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
               RALE represents a significant advancement in distributed consensus systems, specifically designed for PostgreSQL clustering scenarios. 

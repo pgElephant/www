@@ -208,7 +208,7 @@ db.sales.aggregate([
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mr-6">
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm/10 rounded-2xl flex items-center justify-center mr-6">
                 <Image
                   src="/ico/FauxDB_HD.ico"
                   alt="FauxDB icon"
@@ -235,7 +235,7 @@ db.sales.aggregate([
       </div>
 
       {/* Quick Start Steps */}
-      <div className="bg-white py-20">
+      <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl text-gray-900 mb-12 text-center">
@@ -268,7 +268,7 @@ db.sales.aggregate([
       </div>
 
       {/* Installation Steps */}
-      <div className="bg-gray-50 py-20">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl text-gray-900 mb-8 text-center">
@@ -348,7 +348,7 @@ db.sales.aggregate([
       </div>
 
       {/* Next Steps */}
-      <div className="bg-white py-20">
+      <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl text-gray-900 mb-6">
@@ -361,7 +361,7 @@ db.sales.aggregate([
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Link
                 href="/docs/fauxdb/configuration"
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
+                className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <Settings className="w-8 h-8 text-cyan-600 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -374,7 +374,7 @@ db.sales.aggregate([
 
               <Link
                 href="/docs/fauxdb/api"
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
+                className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <Code className="w-8 h-8 text-teal-600 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -387,7 +387,7 @@ db.sales.aggregate([
 
               <Link
                 href="/docs/fauxdb/examples"
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
+                className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <BookOpen className="w-8 h-8 text-orange-600 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">

@@ -120,7 +120,7 @@ const PrometheusPage = () => {
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mr-6">
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm/10 rounded-2xl flex items-center justify-center mr-6">
                 <BarChart3 className="w-10 h-10 text-white" />
               </div>
               <div className="text-left">
@@ -140,7 +140,7 @@ const PrometheusPage = () => {
       </div>
 
       {/* Controls */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white/10 backdrop-blur-sm border-b border-gray-200">
         <div className="container-wide py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -183,7 +183,7 @@ const PrometheusPage = () => {
       </div>
 
       {/* Key Metrics */}
-      <div className="bg-white py-12">
+      <div className="bg-white/10 backdrop-blur-sm py-12">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl text-gray-900 mb-8 text-center">
@@ -262,7 +262,7 @@ const PrometheusPage = () => {
 
             {/* Resource Usage */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
+              <div className="bg-white/10 backdrop-blur-sm border border-gray-200 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Memory Usage</h3>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-600">RAM Daemon</span>
@@ -278,7 +278,7 @@ const PrometheusPage = () => {
                 </div>
               </div>
 
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
+              <div className="bg-white/10 backdrop-blur-sm border border-gray-200 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">CPU Usage</h3>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-600">System Load</span>
@@ -294,7 +294,7 @@ const PrometheusPage = () => {
                 </div>
               </div>
 
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
+              <div className="bg-white/10 backdrop-blur-sm border border-gray-200 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Disk Usage</h3>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-600">Data Volume</span>
@@ -315,19 +315,19 @@ const PrometheusPage = () => {
       </div>
 
       {/* Node Status */}
-      <div className="bg-gray-50 py-12">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-12">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* RAM Nodes */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-gray-200">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
                   <Server className="w-5 h-5 mr-2 text-cyan-600" />
                   RAM Daemon Nodes
                 </h3>
                 <div className="space-y-4">
                   {nodes.map((node) => (
-                    <div key={node.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div key={node.id} className="flex items-center justify-between p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg">
                       <div className="flex items-center">
                         <div className={`w-3 h-3 rounded-full mr-3 ${
                           node.status === 'healthy' ? 'bg-green-500' : 'bg-red-500'
@@ -347,14 +347,14 @@ const PrometheusPage = () => {
               </div>
 
               {/* PostgreSQL Nodes */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-gray-200">
                 <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
                   <Database className="w-5 h-5 mr-2 text-teal-600" />
                   PostgreSQL Nodes
                 </h3>
                 <div className="space-y-4">
                   {postgresNodes.map((node) => (
-                    <div key={node.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div key={node.id} className="flex items-center justify-between p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg">
                       <div className="flex items-center">
                         <div className={`w-3 h-3 rounded-full mr-3 ${
                           node.status === 'healthy' ? 'bg-green-500' : 'bg-red-500'
@@ -378,7 +378,7 @@ const PrometheusPage = () => {
       </div>
 
       {/* Prometheus Integration */}
-      <div className="bg-white py-12">
+      <div className="bg-white/10 backdrop-blur-sm py-12">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl text-gray-900 mb-8 text-center">
@@ -394,7 +394,7 @@ const PrometheusPage = () => {
                 <p className="text-sm text-blue-800 mb-4">
                   Access RAM metrics via Prometheus-compatible endpoint.
                 </p>
-                <div className="bg-white rounded-lg p-3 mb-4">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 mb-4">
                   <code className="text-xs text-blue-900">
                     http://localhost:7400/metrics
                   </code>
@@ -417,13 +417,13 @@ const PrometheusPage = () => {
                   Pre-built dashboards for comprehensive monitoring.
                 </p>
                 <div className="space-y-2 mb-4">
-                  <div className="bg-white rounded p-2">
+                  <div className="bg-white/10 backdrop-blur-sm rounded p-2">
                     <span className="text-xs text-green-900">RAM Cluster Overview</span>
                   </div>
-                  <div className="bg-white rounded p-2">
+                  <div className="bg-white/10 backdrop-blur-sm rounded p-2">
                     <span className="text-xs text-green-900">PostgreSQL Performance</span>
                   </div>
-                  <div className="bg-white rounded p-2">
+                  <div className="bg-white/10 backdrop-blur-sm rounded p-2">
                     <span className="text-xs text-green-900">Failover Events</span>
                   </div>
                 </div>
@@ -445,13 +445,13 @@ const PrometheusPage = () => {
                   Configure alerts for critical events and thresholds.
                 </p>
                 <div className="space-y-2 mb-4">
-                  <div className="bg-white rounded p-2">
+                  <div className="bg-white/10 backdrop-blur-sm rounded p-2">
                     <span className="text-xs text-purple-900">High Replication Lag</span>
                   </div>
-                  <div className="bg-white rounded p-2">
+                  <div className="bg-white/10 backdrop-blur-sm rounded p-2">
                     <span className="text-xs text-purple-900">Node Failure</span>
                   </div>
-                  <div className="bg-white rounded p-2">
+                  <div className="bg-white/10 backdrop-blur-sm rounded p-2">
                     <span className="text-xs text-purple-900">Disk Space Low</span>
                   </div>
                 </div>
@@ -497,7 +497,7 @@ const PrometheusPage = () => {
               </Link>
               <Link
                 href="/docs/ram/grafana"
-                className="inline-flex items-center justify-center gap-2 bg-transparent text-gray-700 px-8 py-4 rounded-lg border border-gray-300 hover:bg-gray-50 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2 bg-transparent text-gray-700 px-8 py-4 rounded-lg border border-gray-300 hover:bg-gradient-to-br from-slate-50 to-slate-100 transition-all duration-200"
               >
                 <BarChart3 className="w-4 h-4" />
                 Grafana Setup

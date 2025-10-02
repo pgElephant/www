@@ -129,7 +129,7 @@ const Community = () => {
           {platforms.map((platform, index) => (
             <div
               key={platform.name}
-              className="bg-white rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300"
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300"
             >
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
@@ -206,7 +206,7 @@ const Community = () => {
               {recentUpdates.map((update, index) => (
                 <div
                   key={update.title}
-                  className="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-md transition-shadow"
+                  className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start justify-between mb-3">
                     <h4 className="font-semibold text-edbDark-900">{update.title}</h4>
@@ -228,7 +228,7 @@ const Community = () => {
           <div>
             <h3 className="text-2xl font-bold text-edbDark-900 mb-6">Get Involved</h3>
             <div className="space-y-6">
-              <div className="bg-white p-6 rounded-xl border border-gray-200">
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200">
                 <h4 className="font-semibold text-edbDark-900 mb-3">Contribute Code</h4>
                 <p className="text-edbGray-600 text-sm mb-4">
                   Help improve pgelephant by contributing code, documentation, or bug reports.
@@ -244,7 +244,7 @@ const Community = () => {
                 </a>
               </div>
 
-              <div className="bg-white p-6 rounded-xl border border-gray-200">
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200">
                 <h4 className="font-semibold text-edbDark-900 mb-3">Share Your Story</h4>
                 <p className="text-edbGray-600 text-sm mb-4">
                   Tell us how pgelephant helped your organization achieve high availability.
@@ -255,7 +255,7 @@ const Community = () => {
                 </button>
               </div>
 
-              <div className="bg-white p-6 rounded-xl border border-gray-200">
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200">
                 <h4 className="font-semibold text-edbDark-900 mb-3">Help Others</h4>
                 <p className="text-edbGray-600 text-sm mb-4">
                   Answer questions, share knowledge, and help new users in our community.

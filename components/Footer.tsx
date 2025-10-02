@@ -97,7 +97,7 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="md:col-span-1">
             <div className="flex justify-center md:justify-start mb-4">
-              <div className="w-20 h-20 bg-white rounded-xl flex items-center justify-center border border-white/20">
+              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
                 <Image 
                   src="/ico/pgElephant_no_com_HD.ico" 
                   alt="pgElephant" 

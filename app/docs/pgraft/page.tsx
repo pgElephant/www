@@ -69,7 +69,7 @@ const PgraftDocsPage = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white/10 backdrop-blur-sm">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-slate-50 to-white">
         <div className="container-wide py-16">

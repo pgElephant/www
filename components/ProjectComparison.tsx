@@ -196,7 +196,7 @@ const ProjectComparison = () => {
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-semibold text-primary-200 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-semibold text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
             Project Comparison
           </div>
@@ -215,7 +215,7 @@ const ProjectComparison = () => {
         </div>
 
         {/* Comparison Table */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-slate-400/30 overflow-hidden relative z-10">
+        <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-3xl shadow-lg border border-slate-400/30 overflow-hidden relative z-10">
           {/* Mobile scrollable wrapper */}
           <div className="overflow-x-auto">
             <div className="min-w-[800px]">
@@ -285,7 +285,7 @@ const ProjectComparison = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* RAMD */}
             <div className="text-center group">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
+              <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
                 <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-yellow-400/30">
                   <Zap className="w-8 h-8 text-yellow-400" />
                 </div>
@@ -302,7 +302,7 @@ const ProjectComparison = () => {
 
             {/* FauxDB */}
             <div className="text-center group">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-orange-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
+              <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-orange-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
                 <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-orange-400/30">
                   <Code className="w-8 h-8 text-orange-400" />
                 </div>
@@ -319,7 +319,7 @@ const ProjectComparison = () => {
 
             {/* pgraft */}
             <div className="text-center group">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-green-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
+              <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-green-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
                 <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-green-400/30">
                   <Crown className="w-8 h-8 text-green-400" />
                 </div>
@@ -338,7 +338,7 @@ const ProjectComparison = () => {
 
         {/* CTA Section */}
         <div className="mt-16 text-center">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30">
+          <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
               Choose the Right Tool for Your Needs
             </h3>
@@ -350,7 +350,7 @@ const ProjectComparison = () => {
                 <Database className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Download All Projects
               </a>
-              <a href="/docs" className="border-2 border-white text-white px-6 py-3 sm:px-8 rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center text-sm sm:text-base">
+              <a href="/docs" className="border-2 border-white text-white px-6 py-3 sm:px-8 rounded-lg font-semibold hover:bg-white/10 backdrop-blur-sm hover:text-slate-800 transition-colors flex items-center justify-center text-sm sm:text-base">
                 <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 View Documentation
               </a>

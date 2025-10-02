@@ -136,7 +136,7 @@ kubectl get storageclass`
         </div>
       </div>
       {/* Prerequisites */}
-      <div className="bg-white py-20">
+      <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -145,7 +145,7 @@ kubectl get storageclass`
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
-                <div className="bg-gray-50 rounded-xl p-8">
+                <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
                   <div className="flex items-center mb-6">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                       <Cloud className="w-6 h-6 text-blue-600" />
@@ -178,7 +178,7 @@ kubectl get storageclass`
               </div>
 
               <div>
-                <div className="bg-gray-50 rounded-xl p-8">
+                <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
                   <div className="flex items-center mb-6">
                     <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                       <Monitor className="w-6 h-6 text-purple-600" />
@@ -211,7 +211,7 @@ kubectl get storageclass`
       </div>
 
       {/* Helm Installation */}
-      <div className="bg-gray-50 py-20">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -220,7 +220,7 @@ kubectl get storageclass`
             
             <div className="space-y-12">
               {/* Step 1: Add Helm Repository */}
-              <div className="bg-white rounded-xl p-8 shadow-sm">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                     <Cloud className="w-6 h-6 text-blue-600" />
@@ -246,7 +246,7 @@ kubectl get storageclass`
               </div>
 
               {/* Step 2: Create Namespace */}
-              <div className="bg-white rounded-xl p-8 shadow-sm">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                     <Settings className="w-6 h-6 text-green-600" />
@@ -272,7 +272,7 @@ kubectl get storageclass`
               </div>
 
               {/* Step 3: Install RAM Cluster */}
-              <div className="bg-white rounded-xl p-8 shadow-sm">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                     <Database className="w-6 h-6 text-purple-600" />
@@ -302,7 +302,7 @@ kubectl get storageclass`
       </div>
 
       {/* Custom Configuration */}
-      <div className="bg-white py-20">
+      <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -311,7 +311,7 @@ kubectl get storageclass`
             
             <div className="space-y-12">
               {/* values.yaml Configuration */}
-              <div className="bg-gray-50 rounded-xl p-8">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
                     <Settings className="w-6 h-6 text-orange-600" />
@@ -337,7 +337,7 @@ kubectl get storageclass`
               </div>
 
               {/* Install with Custom Values */}
-              <div className="bg-gray-50 rounded-xl p-8">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                     <Terminal className="w-6 h-6 text-blue-600" />
@@ -367,14 +367,14 @@ kubectl get storageclass`
       </div>
 
       {/* Monitoring Setup */}
-      <div className="bg-gray-50 py-20">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
               Monitoring Setup
             </h2>
             
-            <div className="bg-white rounded-xl p-8 shadow-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-sm">
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                   <Monitor className="w-6 h-6 text-purple-600" />
@@ -403,7 +403,7 @@ kubectl get storageclass`
       </div>
 
       {/* Production Deployment */}
-      <div className="bg-white py-20">
+      <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -411,7 +411,7 @@ kubectl get storageclass`
             </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div className="bg-gray-50 rounded-xl p-8">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                     <Zap className="w-6 h-6 text-green-600" />
@@ -446,7 +446,7 @@ kubectl get storageclass`
                 </ul>
               </div>
 
-              <div className="bg-gray-50 rounded-xl p-8">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
                     <Shield className="w-6 h-6 text-red-600" />
@@ -486,7 +486,7 @@ kubectl get storageclass`
       </div>
 
       {/* Troubleshooting */}
-      <div className="bg-gray-50 py-20">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 py-20">
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -494,7 +494,7 @@ kubectl get storageclass`
             </h2>
             
             <div className="space-y-8">
-              <div className="bg-white rounded-xl p-8 shadow-sm">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-sm">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
                     <AlertCircle className="w-6 h-6 text-yellow-600" />
@@ -540,7 +540,7 @@ kubectl get storageclass`
       </div>
 
       {/* Next Steps */}
-      <div className="bg-white py-20">
+      <div className="bg-white/10 backdrop-blur-sm py-20">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl text-gray-900 mb-6">
