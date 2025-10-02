@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Github, MessageCircle, Users, BookOpen, ArrowRight, Code, Bug, FileText, Heart, Star, Zap, Trophy, Award, TrendingUp, Globe, Calendar, Clock, UserCheck, Shield, Lightbulb, Server } from 'lucide-react'
+import { Github, MessageCircle, Users, BookOpen, ArrowRight, Code, Bug, FileText, Heart, Star, Zap, Trophy, Award, TrendingUp, Globe, Calendar, Clock, UserCheck, Shield, Lightbulb, Server, Database } from 'lucide-react'
 import Link from 'next/link'
 
 // Colors from pgElephant icon (darker variants)

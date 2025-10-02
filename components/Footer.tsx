@@ -107,29 +107,29 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <p className="text-white/80 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0 drop-shadow-sm">
+            <p className="text-white drop-shadow-lg/80 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0 drop-shadow-sm">
               Enterprise-grade PostgreSQL platform.
             </p>
           </div>
 
           {/* Product Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-semibold mb-3 text-sm drop-shadow-sm">Products</h3>
+            <h3 className="text-white drop-shadow-lg font-semibold mb-3 text-sm drop-shadow-sm">Products</h3>
             <ul className="space-y-2">
-              <li><a href="/rale" className="text-white/70 hover:text-white transition-colors text-sm drop-shadow-sm">RALE</a></li>
-              <li><a href="/ram" className="text-white/70 hover:text-white transition-colors text-sm drop-shadow-sm">RAM</a></li>
-              <li><a href="/fauxdb" className="text-white/70 hover:text-white transition-colors text-sm drop-shadow-sm">FauxDB</a></li>
+              <li><a href="/rale" className="text-white drop-shadow-lg/70 hover:text-white drop-shadow-lg transition-colors text-sm drop-shadow-sm">RALE</a></li>
+              <li><a href="/ram" className="text-white drop-shadow-lg/70 hover:text-white drop-shadow-lg transition-colors text-sm drop-shadow-sm">RAM</a></li>
+              <li><a href="/fauxdb" className="text-white drop-shadow-lg/70 hover:text-white drop-shadow-lg transition-colors text-sm drop-shadow-sm">FauxDB</a></li>
             </ul>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-semibold mb-3 text-sm">Quick Links</h3>
+            <h3 className="text-white drop-shadow-lg font-semibold mb-3 text-sm">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="/download" className="text-slate-300 hover:text-white transition-colors text-sm">Download</a></li>
-              <li><a href="/blog" className="text-slate-300 hover:text-white transition-colors text-sm">Blog</a></li>
-              <li><a href="/docs" className="text-slate-300 hover:text-white transition-colors text-sm">Documentation</a></li>
-              <li><a href="/community" className="text-slate-300 hover:text-white transition-colors text-sm">Community</a></li>
+              <li><a href="/download" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Download</a></li>
+              <li><a href="/blog" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Blog</a></li>
+              <li><a href="/docs" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Documentation</a></li>
+              <li><a href="/community" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Community</a></li>
             </ul>
           </div>
         </div>
@@ -141,10 +141,10 @@ const Footer = () => {
               © 2024 pgElephant. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="/privacy" className="text-slate-400 hover:text-white transition-colors text-sm">
+              <a href="/privacy" className="text-slate-400 hover:text-white drop-shadow-lg transition-colors text-sm">
                 Privacy Policy
               </a>
-              <a href="/terms" className="text-slate-400 hover:text-white transition-colors text-sm">
+              <a href="/terms" className="text-slate-400 hover:text-white drop-shadow-lg transition-colors text-sm">
                 Terms of Service
               </a>
             </div>

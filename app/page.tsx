@@ -2,7 +2,6 @@ import React from 'react'
 import Hero from '@/components/Hero'
 import WhyPgElephant from '@/components/WhyPgElephant'
 import FeaturesList from '@/components/FeaturesList'
-import LiveDemoTerminal from '@/components/LiveDemoTerminal'
 import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
@@ -68,7 +67,6 @@ export default function Home() {
         <Hero />
         <WhyPgElephant />
         <FeaturesList />
-        <LiveDemoTerminal />
       </main>
     </>
   )
