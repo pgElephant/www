@@ -1,9 +1,0 @@
-{
-  "/api/indexing/bulk/route": "app/api/indexing/bulk/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/pgraft/page": "app/pgraft/page.js",
-  "/fauxdb/page": "app/fauxdb/page.js",
-  "/docs/page": "app/docs/page.js"
-}
