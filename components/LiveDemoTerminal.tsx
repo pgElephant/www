@@ -250,9 +250,9 @@ const LiveDemoTerminal = () => {
 
         {/* Terminal Container */}
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="bg-black rounded-lg  border border-gray-700 overflow-hidden">
+          <div className="bg-black rounded-lg  border border-white/30 overflow-hidden">
             {/* Terminal Header */}
-            <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
+            <div className="bg-white/20 px-4 py-3 flex items-center justify-between border-b border-white/30">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -316,7 +316,7 @@ const LiveDemoTerminal = () => {
             </div>
 
             {/* Terminal Controls */}
-            <div className="bg-gray-800 px-4 py-3 border-t border-gray-700">
+            <div className="bg-white/20 px-4 py-3 border-t border-white/30">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <button
@@ -363,7 +363,7 @@ const LiveDemoTerminal = () => {
 
         {/* Demo Description */}
         <div className="mt-12 text-center relative z-10">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 max-w-4xl mx-auto">
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/30/50 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold mb-4 text-white">
               What This Demo Shows
             </h3>

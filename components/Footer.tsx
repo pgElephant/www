@@ -17,28 +17,28 @@ const Footer = () => {
   const year = new Date().getFullYear()
   const navigation = {
     products: [
-      { name: 'RALE', href: '/rale', description: 'Distributed Consensus' },
-      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering' },
-      { name: 'pgraft', href: '/pgraft', description: 'Raft Extension' },
-      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Proxy' },
+      { name: 'RALE', href: '/rale', description: 'Distributed Consensus Engine', icon: '🏛️' },
+      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering Manager', icon: '⚡' },
+      { name: 'pgraft', href: '/pgraft', description: 'Raft Consensus Extension', icon: '🔗' },
+      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Wire Protocol Proxy', icon: '📄' },
     ],
     resources: [
-      { name: 'Documentation', href: '/docs', description: 'Technical guides' },
-      { name: 'Download', href: '/download', description: 'Get started' },
-      { name: 'Blog', href: '/blog', description: 'Latest insights' },
-      { name: 'Community', href: '/community', description: 'Join the community' },
+      { name: 'Documentation', href: '/docs', description: 'Complete technical guides', icon: '📚' },
+      { name: 'Download', href: '/download', description: 'Get started quickly', icon: '⬇️' },
+      { name: 'Blog', href: '/blog', description: 'Latest insights & updates', icon: '📝' },
+      { name: 'Community', href: '/community', description: 'Join our community', icon: '👥' },
     ],
     enterprise: [
-      { name: 'Enterprise Support', href: '/contact', description: '24/7 support' },
-      { name: 'Professional Services', href: '/contact', description: 'Consulting' },
-      { name: 'Training', href: '/contact', description: 'Expert training' },
-      { name: 'Partnership', href: '/contact', description: 'Become a partner' },
+      { name: 'Enterprise Support', href: '/contact', description: '24/7 dedicated support', icon: '🛡️' },
+      { name: 'Professional Services', href: '/contact', description: 'Expert consulting', icon: '🎯' },
+      { name: 'Training', href: '/contact', description: 'Comprehensive training', icon: '🎓' },
+      { name: 'Partnership', href: '/contact', description: 'Become a partner', icon: '🤝' },
     ],
     company: [
-      { name: 'About Us', href: '/', description: 'Our mission' },
-      { name: 'Careers', href: '/community', description: 'Join our team' },
-      { name: 'Press Kit', href: '/contact', description: 'Media resources' },
-      { name: 'Contact', href: '/contact', description: 'Get in touch' },
+      { name: 'About Us', href: '/', description: 'Our mission & vision', icon: '🏢' },
+      { name: 'Careers', href: '/community', description: 'Join our team', icon: '💼' },
+      { name: 'Press Kit', href: '/contact', description: 'Media resources', icon: '📰' },
+      { name: 'Contact', href: '/contact', description: 'Get in touch', icon: '📞' },
     ],
   }
 
@@ -96,9 +96,9 @@ const Footer = () => {
         />
       </div>
       <div className="container-wide relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Logo and Description */}
-          <div className="md:col-span-1">
+          <div className="lg:col-span-1">
             <div className="flex justify-center md:justify-start mb-4">
               <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
                 <Image 
@@ -110,8 +110,8 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <p className="text-white text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0">
-              Enterprise-grade PostgreSQL platform.
+            <p className="text-white/90 text-sm leading-relaxed mb-6 text-center md:text-left max-w-sm mx-auto md:mx-0">
+              Enterprise-grade PostgreSQL platform with distributed consensus, automatic failover, and MongoDB compatibility for modern applications.
             </p>
             {/* Social links */}
             <div className="flex justify-center md:justify-start gap-4" aria-label="Social links">
@@ -122,7 +122,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="w-11 h-11 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
                 >
                   <Icon className="h-5 w-5" />
                 </a>
@@ -132,27 +132,69 @@ const Footer = () => {
 
           {/* Product Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-semibold mb-3 text-sm">Products</h3>
+            <h3 className="text-white font-thin text-lg mb-4">Products</h3>
             <nav aria-label="Products">
-              <ul className="space-y-2">
-                <li><a href="/ram" className="text-white/90 hover:text-white transition-colors text-sm">RAM</a></li>
-                <li><a href="/pgraft" className="text-white/90 hover:text-white transition-colors text-sm">pgraft</a></li>
-                <li><a href="/fauxdb" className="text-white/90 hover:text-white transition-colors text-sm">FauxDB</a></li>
-                <li><a href="/rale" className="text-white/90 hover:text-white transition-colors text-sm">RALE</a></li>
+              <ul className="space-y-3">
+                {navigation.products.map((item) => (
+                  <li key={item.name}>
+                    <a 
+                      href={item.href} 
+                      className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-300 text-sm"
+                    >
+                      <span className="text-base group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                      <div>
+                        <div className="font-medium">{item.name}</div>
+                        <div className="text-xs text-white/70">{item.description}</div>
+                      </div>
+                    </a>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-semibold mb-3 text-sm">Quick Links</h3>
-            <nav aria-label="Quick Links">
-              <ul className="space-y-2">
-                <li><a href="/download" className="text-white/90 hover:text-white transition-colors text-sm">Download</a></li>
-                <li><a href="/docs" className="text-white/90 hover:text-white transition-colors text-sm">Documentation</a></li>
-                <li><a href="/blog" className="text-white/90 hover:text-white transition-colors text-sm">Blog</a></li>
-                <li><a href="/community" className="text-white/90 hover:text-white transition-colors text-sm">Community</a></li>
-                <li><a href="/contact" className="text-white/90 hover:text-white transition-colors text-sm">Contact</a></li>
+            <h3 className="text-white font-thin text-lg mb-4">Resources</h3>
+            <nav aria-label="Resources">
+              <ul className="space-y-3">
+                {navigation.resources.map((item) => (
+                  <li key={item.name}>
+                    <a 
+                      href={item.href} 
+                      className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-300 text-sm"
+                    >
+                      <span className="text-base group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                      <div>
+                        <div className="font-medium">{item.name}</div>
+                        <div className="text-xs text-white/70">{item.description}</div>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          {/* Enterprise Section */}
+          <div className="text-center md:text-left">
+            <h3 className="text-white font-thin text-lg mb-4">Enterprise</h3>
+            <nav aria-label="Enterprise">
+              <ul className="space-y-3">
+                {navigation.enterprise.map((item) => (
+                  <li key={item.name}>
+                    <a 
+                      href={item.href} 
+                      className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-300 text-sm"
+                    >
+                      <span className="text-base group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                      <div>
+                        <div className="font-medium">{item.name}</div>
+                        <div className="text-xs text-white/70">{item.description}</div>
+                      </div>
+                    </a>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>

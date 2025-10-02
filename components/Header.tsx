@@ -68,12 +68,12 @@ const Header = () => {
                       href={project.href}
                       className="flex items-start p-3 rounded-xl hover:bg-white/10 transition-colors duration-200 group/item"
                     >
-                      <Github className="w-5 h-5 text-slate-600 mt-0.5 mr-3 flex-shrink-0" />
+                      <Github className="w-5 h-5 text-white/70 mt-0.5 mr-3 flex-shrink-0" />
                       <div>
-                        <div className="font-medium text-slate-900 group-hover/item:text-slate-700 transition-colors">
+                        <div className="font-medium text-white group-hover/item:text-white/90 transition-colors">
                           {project.name}
                         </div>
-                        <div className="text-sm text-slate-600 group-hover/item:text-slate-500 transition-colors">
+                        <div className="text-sm text-white/70 group-hover/item:text-white/60 transition-colors">
                           {project.description}
                         </div>
                       </div>
@@ -85,12 +85,12 @@ const Header = () => {
                     rel="noopener noreferrer"
                     className="flex items-start p-3 rounded-xl hover:bg-white/10 transition-colors duration-200 group/item border-t border-white/20 pt-3"
                   >
-                    <Github className="w-5 h-5 text-slate-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <Github className="w-5 h-5 text-white/70 mt-0.5 mr-3 flex-shrink-0" />
                     <div>
-                      <div className="font-medium text-slate-900 group-hover/item:text-slate-700 transition-colors">
+                      <div className="font-medium text-white group-hover/item:text-white/90 transition-colors">
                         View All Projects
                       </div>
-                      <div className="text-sm text-slate-600 group-hover/item:text-slate-500 transition-colors">
+                      <div className="text-sm text-white/70 group-hover/item:text-white/60 transition-colors">
                         pgElephant Organization
                       </div>
                     </div>
@@ -107,7 +107,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-slate-800 transition-colors"
+            className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -141,7 +141,7 @@ const Header = () => {
               </div>
               {/* Mobile Projects */}
               <div className="border-t border-slate-200 pt-4 mt-4">
-                <div className="px-4 py-2 text-sm font-medium text-slate-500 uppercase tracking-wider">
+                <div className="px-4 py-2 text-sm font-medium text-white/60 uppercase tracking-wider">
                   Projects
                 </div>
                 {githubProjects.map((project) => (
