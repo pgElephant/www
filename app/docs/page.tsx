@@ -2008,8 +2008,8 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                                         <span className="flex-1">{doc.title}</span>
                                         <span className={`text-xs px-2 py-0.5 rounded-full ${
                                           activeProduct === product.id && activeSection === doc.title
-                                            ? 'bg-blue-200 text-blue-600'
-                                            : 'bg-gray-200 text-gray-500 group-hover:bg-gray-300'
+                                            ? 'bg-white/20 backdrop-blur-sm text-white border border-white/30'
+                                            : 'bg-white/10 backdrop-blur-sm text-white/80 group-hover:bg-white/20 border border-white/20'
                                         }`}>
                                           {doc.type}
                       </span>

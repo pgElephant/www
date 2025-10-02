@@ -228,7 +228,7 @@ kubectl get storageclass`
                   <h3 className="text-xl font-semibold text-gray-900">1. Add Helm Repository</h3>
                 </div>
                 
-                <div className="bg-gray-900 rounded-lg p-6 relative">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.helmRepo, 'helmRepo')}
                     className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
@@ -254,7 +254,7 @@ kubectl get storageclass`
                   <h3 className="text-xl font-semibold text-gray-900">2. Create Namespace</h3>
                 </div>
                 
-                <div className="bg-gray-900 rounded-lg p-6 relative">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.namespace, 'namespace')}
                     className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
@@ -280,7 +280,7 @@ kubectl get storageclass`
                   <h3 className="text-xl font-semibold text-gray-900">3. Install RAM Cluster</h3>
                 </div>
                 
-                <div className="bg-gray-900 rounded-lg p-6 relative">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.install, 'install')}
                     className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
@@ -319,7 +319,7 @@ kubectl get storageclass`
                   <h3 className="text-xl font-semibold text-gray-900">values.yaml Configuration</h3>
                 </div>
                 
-                <div className="bg-gray-900 rounded-lg p-6 relative">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.values, 'values')}
                     className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
@@ -345,7 +345,7 @@ kubectl get storageclass`
                   <h3 className="text-xl font-semibold text-gray-900">Install with Custom Values</h3>
                 </div>
                 
-                <div className="bg-gray-900 rounded-lg p-6 relative">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                   <button
                     onClick={() => copyToClipboard(codeBlocks.customInstall, 'customInstall')}
                     className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"

@@ -251,7 +251,7 @@ db.sales.aggregate([
                   >
                     <step.icon className="w-8 h-8" style={{ color: step.color }} />
                   </div>
-                  <div className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center mx-auto mb-3 text-sm font-bold">
+                  <div className="w-8 h-8 bg-white/10 backdrop-blur-sm text-white rounded-full flex items-center justify-center mx-auto mb-3 text-sm font-bold border border-white/20">
                     {step.number}
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -285,7 +285,7 @@ db.sales.aggregate([
                   Install FauxDB Binary
                 </h3>
               </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                 <pre className="text-gray-100 text-sm overflow-x-auto">
                   <code>{codeBlocks.install}</code>
                 </pre>
@@ -308,7 +308,7 @@ db.sales.aggregate([
                   Configure Database
                 </h3>
               </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                 <pre className="text-gray-100 text-sm overflow-x-auto">
                   <code>{codeBlocks.config}</code>
                 </pre>
@@ -331,7 +331,7 @@ db.sales.aggregate([
                   Start FauxDB Server
                 </h3>
               </div>
-              <div className="bg-gray-900 rounded-lg p-6 relative">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
                 <pre className="text-gray-100 text-sm overflow-x-auto">
                   <code>{codeBlocks.start}</code>
                 </pre>

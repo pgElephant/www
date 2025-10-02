@@ -139,7 +139,7 @@ const Comparison = () => {
           <div className="overflow-x-auto">
             <div className="min-w-[600px]">
               {/* Table Header */}
-              <div className="bg-slate-100/20 backdrop-blur-sm border-b border-slate-400/30 p-4 md:p-6 lg:p-8">
+              <div className="bg-white/10 backdrop-blur-sm border-b border-white/20 p-4 md:p-6 lg:p-8">
                 <div className="grid grid-cols-4 gap-4 items-center">
                   <div className="text-sm md:text-lg font-semibold text-white">Feature</div>
                   <div className="text-center">
@@ -165,7 +165,7 @@ const Comparison = () => {
                 {features.map((feature) => (
                   <div
                     key={feature.feature}
-                    className="grid grid-cols-4 gap-4 p-3 md:p-4 lg:p-6 hover:bg-slate-100/20 transition-colors"
+                    className="grid grid-cols-4 gap-4 p-3 md:p-4 lg:p-6 hover:bg-white/10 transition-colors"
                   >
                     <div className="font-medium text-white flex items-center text-sm md:text-base">
                       {feature.feature}
@@ -198,7 +198,7 @@ const Comparison = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-slate-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Zap className="w-8 h-8 text-teal-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Faster Setup</h4>
@@ -208,7 +208,7 @@ const Comparison = () => {
 
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-slate-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Shield className="w-8 h-8 text-teal-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Better Reliability</h4>
@@ -218,7 +218,7 @@ const Comparison = () => {
 
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-slate-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Terminal className="w-8 h-8 text-teal-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Better CLI</h4>
@@ -228,7 +228,7 @@ const Comparison = () => {
 
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-slate-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-slate-400/30">
+                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Code className="w-8 h-8 text-teal-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Modern Stack</h4>

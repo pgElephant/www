@@ -170,7 +170,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
       <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-white/30 h-full flex flex-col">
           {/* Large Stock Image */}
-          <div className="relative w-full aspect-[3/2] bg-gray-200 overflow-hidden flex-shrink-0">
+          <div className="relative w-full aspect-[3/2] bg-white/10 backdrop-blur-sm overflow-hidden flex-shrink-0 border border-white/20">
             <Image
               src={imageUrl}
               alt={post.title}

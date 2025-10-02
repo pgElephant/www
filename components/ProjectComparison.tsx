@@ -215,12 +215,12 @@ const ProjectComparison = () => {
         </div>
 
         {/* Comparison Table */}
-        <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-3xl shadow-lg border border-slate-400/30 overflow-hidden relative z-10">
+        <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden relative z-10">
           {/* Mobile scrollable wrapper */}
           <div className="overflow-x-auto">
             <div className="min-w-[800px]">
               {/* Table Header */}
-              <div className="bg-slate-100/20 backdrop-blur-sm border-b border-slate-400/30 p-4 md:p-6 lg:p-8">
+              <div className="bg-white/10 backdrop-blur-sm border-b border-white/20 p-4 md:p-6 lg:p-8">
                 <div className="grid grid-cols-4 gap-4 items-center">
                   <div className="text-sm md:text-lg font-semibold text-white">Feature</div>
                   <div className="text-center">
@@ -252,7 +252,7 @@ const ProjectComparison = () => {
                 {features.map((feature) => (
                   <div
                     key={feature.feature}
-                    className="grid grid-cols-4 gap-4 p-3 md:p-4 lg:p-6 hover:bg-slate-100/20 transition-colors"
+                    className="grid grid-cols-4 gap-4 p-3 md:p-4 lg:p-6 hover:bg-white/10 transition-colors"
                   >
                     <div className="font-medium text-white flex items-center text-sm md:text-base">
                       {feature.feature}
@@ -286,7 +286,7 @@ const ProjectComparison = () => {
             {/* RAMD */}
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-yellow-400/30">
+                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-yellow-400/30">
                   <Zap className="w-8 h-8 text-yellow-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">RAMD</h4>
@@ -303,7 +303,7 @@ const ProjectComparison = () => {
             {/* FauxDB */}
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-orange-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-orange-400/30">
+                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-orange-400/30">
                   <Code className="w-8 h-8 text-orange-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">FauxDB</h4>
@@ -320,7 +320,7 @@ const ProjectComparison = () => {
             {/* pgraft */}
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-green-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-slate-100/20 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-green-400/30">
+                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-green-400/30">
                   <Crown className="w-8 h-8 text-green-400" />
                 </div>
                 <h4 className="font-bold text-white mb-2">pgraft</h4>
@@ -338,7 +338,7 @@ const ProjectComparison = () => {
 
         {/* CTA Section */}
         <div className="mt-16 text-center">
-          <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30">
+          <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
               Choose the Right Tool for Your Needs
             </h3>

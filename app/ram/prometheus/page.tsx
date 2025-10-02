@@ -150,8 +150,8 @@ const PrometheusPage = () => {
                   onClick={() => setAutoRefresh(!autoRefresh)}
                   className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
                     autoRefresh 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-gray-100 text-gray-600'
+                      ? 'bg-white/20 backdrop-blur-sm text-white border border-white/30' 
+                      : 'bg-white/10 backdrop-blur-sm text-white/80 border border-white/20'
                   }`}
                 >
                   {autoRefresh ? 'ON' : 'OFF'}
@@ -173,7 +173,7 @@ const PrometheusPage = () => {
             </div>
             <button
               onClick={() => window.location.reload()}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors text-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-lg transition-colors text-sm border border-white/20"
             >
               <RefreshCw className="w-4 h-4" />
               Refresh
@@ -270,7 +270,7 @@ const PrometheusPage = () => {
                     {metrics.memoryUsage}%
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-white/10 backdrop-blur-sm rounded-full h-2 border border-white/20">
                   <div 
                     className="bg-gradient-to-r from-cyan-500 to-cyan-600 h-2 rounded-full transition-all duration-500"
                     style={{ width: `${metrics.memoryUsage}%` }}
@@ -286,7 +286,7 @@ const PrometheusPage = () => {
                     {metrics.cpuUsage}%
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-white/10 backdrop-blur-sm rounded-full h-2 border border-white/20">
                   <div 
                     className="bg-gradient-to-r from-teal-500 to-teal-600 h-2 rounded-full transition-all duration-500"
                     style={{ width: `${metrics.cpuUsage}%` }}
@@ -302,7 +302,7 @@ const PrometheusPage = () => {
                     {metrics.diskUsage}%
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-white/10 backdrop-blur-sm rounded-full h-2 border border-white/20">
                   <div 
                     className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-500"
                     style={{ width: `${metrics.diskUsage}%` }}
