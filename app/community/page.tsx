@@ -178,10 +178,10 @@ const CommunityPage = () => {
 
   <div className="container-wide py-28 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white drop-shadow-lg mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">
               Community
             </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white drop-shadow-lg/90 drop-shadow-md max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md max-w-4xl mx-auto">
               Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
             </p>
             
@@ -192,8 +192,8 @@ const CommunityPage = () => {
                   <div className="flex justify-center mb-2">
                     <stat.icon className={`w-8 h-8 ${stat.color}`} />
                   </div>
-                  <div className="text-3xl font-thin text-white drop-shadow-lg drop-shadow-sm">{stat.value}</div>
-                  <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">{stat.label}</div>
+                  <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl drop-shadow-sm">{stat.value}</div>
+                  <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -291,7 +291,7 @@ const CommunityPage = () => {
                     </Link>
                     <Link
                       href="/docs"
-                      className="inline-flex items-center px-6 py-3 rounded-lg text-white drop-shadow-lg transition-colors font-thin shadow-sm hover:shadow-md"
+                      className="inline-flex items-center px-6 py-3 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-colors font-thin shadow-sm hover:shadow-md"
                       style={{ backgroundColor: palette.cyan }}
                       onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.cyanDeep}
                       onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.cyan}
@@ -347,18 +347,18 @@ const CommunityPage = () => {
             <div className="text-center mb-16">
               <div className="flex items-center justify-center mb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
-                  <MessageCircle className="w-10 h-10 text-white drop-shadow-lg" />
+                  <MessageCircle className="w-10 h-10 text-white drop-shadow-2xl shadow-2xl" />
                 </div>
                 <div className="text-left">
-                  <h2 className="text-4xl md:text-5xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-lg">
+                  <h2 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-lg">
                     Discord
                   </h2>
-                  <p className="text-xl text-white drop-shadow-lg/90 drop-shadow-md">
+                  <p className="text-xl text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
                     Real-time Community Chat
                   </p>
                 </div>
               </div>
-              <p className="text-lg text-white drop-shadow-lg/80 max-w-3xl mx-auto drop-shadow-sm">
+              <p className="text-lg text-white drop-shadow-2xl shadow-2xl/80 max-w-3xl mx-auto drop-shadow-sm">
                 Join our active Discord server for instant support, discussions, and real-time collaboration.
               </p>
             </div>
@@ -366,20 +366,20 @@ const CommunityPage = () => {
             {/* Discord Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-sm">23</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">members</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">23</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">members</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-sm">3</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">online</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">3</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">online</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-sm">5</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">channels</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">5</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">channels</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-sm">3</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">languages</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">3</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">languages</div>
               </div>
             </div>
 
@@ -389,17 +389,17 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
-                    <MessageCircle className="w-5 h-5 text-white drop-shadow-lg" />
+                    <MessageCircle className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-thin text-white drop-shadow-lg">General Chat</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Support</p>
+                    <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl">General Chat</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Support</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Connect with the community
                 </p>
-                <p className="text-white drop-shadow-lg/60 text-xs">
+                <p className="text-white drop-shadow-2xl shadow-2xl/60 text-xs">
                   Casual discussions and introductions
                 </p>
               </div>
@@ -408,17 +408,17 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
-                    <Users className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Users className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-thin text-white drop-shadow-lg">Technical Support</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Support</p>
+                    <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl">Technical Support</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Support</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Get help with installation and usage
                 </p>
-                <p className="text-white drop-shadow-lg/60 text-xs">
+                <p className="text-white drop-shadow-2xl shadow-2xl/60 text-xs">
                   Expert assistance and troubleshooting
                 </p>
               </div>
@@ -427,17 +427,17 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
-                    <Code className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Code className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-thin text-white drop-shadow-lg">Development Channel</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Code</p>
+                    <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl">Development Channel</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Code</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Discuss code and architecture
                 </p>
-                <p className="text-white drop-shadow-lg/60 text-xs">
+                <p className="text-white drop-shadow-2xl shadow-2xl/60 text-xs">
                   Technical discussions and code reviews
                 </p>
               </div>
@@ -446,17 +446,17 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
-                    <BookOpen className="w-5 h-5 text-white drop-shadow-lg" />
+                    <BookOpen className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-thin text-white drop-shadow-lg">Announcements</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Documentation</p>
+                    <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl">Announcements</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Documentation</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Latest updates and releases
                 </p>
-                <p className="text-white drop-shadow-lg/60 text-xs">
+                <p className="text-white drop-shadow-2xl shadow-2xl/60 text-xs">
                   Stay informed about new features
                 </p>
               </div>
@@ -465,17 +465,17 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center mr-3">
-                    <Users className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Users className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-thin text-white drop-shadow-lg">Voice Channels</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Support</p>
+                    <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl">Voice Channels</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Support</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Voice calls and screen sharing
                 </p>
-                <p className="text-white drop-shadow-lg/60 text-xs">
+                <p className="text-white drop-shadow-2xl shadow-2xl/60 text-xs">
                   Real-time collaboration and meetings
                 </p>
               </div>
@@ -486,14 +486,14 @@ const CommunityPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   href="https://discord.gg/pgelephant"
-                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white drop-shadow-lg rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-thin shadow-lg hover:shadow-xl hover:scale-105"
+                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white drop-shadow-2xl shadow-2xl rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 font-thin shadow-lg hover:shadow-xl hover:scale-105"
                 >
                   <MessageCircle className="w-5 h-5" />
                   Join Discord
                 </Link>
                 <Link
                   href="/docs"
-                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white drop-shadow-lg border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-thin"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white drop-shadow-2xl shadow-2xl border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-thin"
                 >
                   Learn More
                   <ArrowRight className="w-4 h-4" />
@@ -544,18 +544,18 @@ const CommunityPage = () => {
             <div className="text-center mb-16">
               <div className="flex items-center justify-center mb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-gray-700 to-slate-800 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
-                  <Github className="w-10 h-10 text-white drop-shadow-lg" />
+                  <Github className="w-10 h-10 text-white drop-shadow-2xl shadow-2xl" />
                 </div>
                 <div className="text-left">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-lg">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-lg">
                     GitHub
                   </h2>
-                  <p className="text-xl text-white drop-shadow-lg/90 drop-shadow-md">
+                  <p className="text-xl text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
                     Source Code & Development
                   </p>
                 </div>
               </div>
-              <p className="text-lg text-white drop-shadow-lg/80 max-w-3xl mx-auto drop-shadow-sm">
+              <p className="text-lg text-white drop-shadow-2xl shadow-2xl/80 max-w-3xl mx-auto drop-shadow-sm">
                 Contribute to open source PostgreSQL clustering solutions. Fork, star, and collaborate on our projects.
               </p>
             </div>
@@ -563,20 +563,20 @@ const CommunityPage = () => {
             {/* GitHub Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">3</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Projects</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">3</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Projects</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">12</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Contributors</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">12</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Contributors</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">45</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Commits</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">45</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Commits</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">2</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Stars</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">2</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Stars</div>
               </div>
             </div>
 
@@ -586,18 +586,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
-                    <Code className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Code className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">RALE</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Consensus Engine</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">RALE</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Consensus Engine</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Distributed consensus and leader election
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-xs text-white drop-shadow-lg/60">
+                  <div className="flex items-center gap-4 text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     <span>⭐ 1</span>
                     <span>🍴 0</span>
                   </div>
@@ -614,18 +614,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
-                    <Server className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Server className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">RAM</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Clustering Manager</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">RAM</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Clustering Manager</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   PostgreSQL clustering with auto-failover
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-xs text-white drop-shadow-lg/60">
+                  <div className="flex items-center gap-4 text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     <span>⭐ 1</span>
                     <span>🍴 0</span>
                   </div>
@@ -642,18 +642,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
-                    <Database className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Database className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">FauxDB</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">MongoDB Proxy</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">FauxDB</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">MongoDB Proxy</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   MongoDB wire protocol proxy for PostgreSQL
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-xs text-white drop-shadow-lg/60">
+                  <div className="flex items-center gap-4 text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     <span>⭐ 0</span>
                     <span>🍴 0</span>
                   </div>
@@ -672,14 +672,14 @@ const CommunityPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   href="https://github.com/pgelephant"
-                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-700 to-slate-800 text-white drop-shadow-lg rounded-xl hover:from-gray-800 hover:to-slate-900 transition-all duration-200 font-bold shadow-lg hover:shadow-xl hover:scale-105"
+                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-700 to-slate-800 text-white drop-shadow-2xl shadow-2xl rounded-xl hover:from-gray-800 hover:to-slate-900 transition-all duration-200 font-bold shadow-lg hover:shadow-xl hover:scale-105"
                 >
                   <Github className="w-5 h-5" />
                   View Organization
                 </Link>
                 <Link
                   href="/docs"
-                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white drop-shadow-lg border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-bold"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white drop-shadow-2xl shadow-2xl border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-bold"
                 >
                   Contribute Guide
                   <ArrowRight className="w-4 h-4" />
@@ -730,18 +730,18 @@ const CommunityPage = () => {
             <div className="text-center mb-16">
               <div className="flex items-center justify-center mb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center mr-6 shadow-2xl">
-                  <MessageCircle className="w-10 h-10 text-white drop-shadow-lg" />
+                  <MessageCircle className="w-10 h-10 text-white drop-shadow-2xl shadow-2xl" />
                 </div>
                 <div className="text-left">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-lg">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-lg">
                     Community Forum
                   </h2>
-                  <p className="text-xl text-white drop-shadow-lg/90 drop-shadow-md">
+                  <p className="text-xl text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
                     Technical Discussions & Support
                   </p>
                 </div>
               </div>
-              <p className="text-lg text-white drop-shadow-lg/80 max-w-3xl mx-auto drop-shadow-sm">
+              <p className="text-lg text-white drop-shadow-2xl shadow-2xl/80 max-w-3xl mx-auto drop-shadow-sm">
                 Join our community forum for technical discussions, troubleshooting, and sharing knowledge about PostgreSQL clustering.
               </p>
             </div>
@@ -749,20 +749,20 @@ const CommunityPage = () => {
             {/* Forum Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">156</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Topics</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">156</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Topics</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">423</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Posts</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">423</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Posts</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">89</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Members</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">89</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Members</div>
               </div>
               <div className="text-center bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-white drop-shadow-lg mb-2 drop-shadow-sm">12</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Categories</div>
+                <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">12</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Categories</div>
               </div>
             </div>
 
@@ -772,18 +772,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
-                    <ArrowRight className="w-5 h-5 text-white drop-shadow-lg" />
+                    <ArrowRight className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">Installation & Setup</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Getting Started</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">Installation & Setup</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Getting Started</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Installation guides and initial setup
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="text-xs text-white drop-shadow-lg/60">
+                  <div className="text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     23 topics • 67 posts
                   </div>
                   <Link
@@ -799,18 +799,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
-                    <Users className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Users className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">Technical Support</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Help & Troubleshooting</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">Technical Support</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Help & Troubleshooting</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Get help with technical issues
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="text-xs text-white drop-shadow-lg/60">
+                  <div className="text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     45 topics • 123 posts
                   </div>
                   <Link
@@ -826,18 +826,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
-                    <Lightbulb className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Lightbulb className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">Feature Requests</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Suggestions & Ideas</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">Feature Requests</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Suggestions & Ideas</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Propose new features and improvements
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="text-xs text-white drop-shadow-lg/60">
+                  <div className="text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     18 topics • 34 posts
                   </div>
                   <Link
@@ -853,18 +853,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
-                    <Code className="w-5 h-5 text-white drop-shadow-lg" />
+                    <Code className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">Development</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Contributing</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">Development</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Contributing</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Developer discussions and contributions
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="text-xs text-white drop-shadow-lg/60">
+                  <div className="text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     32 topics • 89 posts
                   </div>
                   <Link
@@ -880,18 +880,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
-                    <BookOpen className="w-5 h-5 text-white drop-shadow-lg" />
+                    <BookOpen className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">Announcements</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">News & Updates</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">Announcements</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">News & Updates</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   Latest news and product updates
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="text-xs text-white drop-shadow-lg/60">
+                  <div className="text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     12 topics • 25 posts
                   </div>
                   <Link
@@ -907,18 +907,18 @@ const CommunityPage = () => {
               <div className="bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-300">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
-                    <MessageCircle className="w-5 h-5 text-white drop-shadow-lg" />
+                    <MessageCircle className="w-5 h-5 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg">General Discussion</h3>
-                    <p className="text-sm text-white drop-shadow-lg/70">Community Chat</p>
+                    <h3 className="text-lg font-bold text-white drop-shadow-2xl shadow-2xl">General Discussion</h3>
+                    <p className="text-sm text-white drop-shadow-2xl shadow-2xl/70">Community Chat</p>
                   </div>
                 </div>
-                <p className="text-white drop-shadow-lg/80 text-sm mb-4">
+                <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-4">
                   General discussions and community chat
                 </p>
                 <div className="flex items-center justify-between">
-                  <div className="text-xs text-white drop-shadow-lg/60">
+                  <div className="text-xs text-white drop-shadow-2xl shadow-2xl/60">
                     26 topics • 85 posts
                   </div>
                   <Link
@@ -936,14 +936,14 @@ const CommunityPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   href="/forum"
-                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white drop-shadow-lg rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 font-bold shadow-lg hover:shadow-xl hover:scale-105"
+                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white drop-shadow-2xl shadow-2xl rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 font-bold shadow-lg hover:shadow-xl hover:scale-105"
                 >
                   <MessageCircle className="w-5 h-5" />
                   Join Forum
                 </Link>
                 <Link
                   href="/docs"
-                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white drop-shadow-lg border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-bold"
+                  className="flex items-center gap-3 px-8 py-4 bg-white/95 backdrop-blur-sm/10 backdrop-blur-sm text-white drop-shadow-2xl shadow-2xl border border-white/20 rounded-xl hover:bg-white/95 backdrop-blur-sm/15 transition-all duration-200 font-bold"
                 >
                   Forum Guidelines
                   <ArrowRight className="w-4 h-4" />
@@ -967,7 +967,7 @@ const CommunityPage = () => {
               {guidelines.map((guideline, index) => (
                 <div key={index} className="text-center">
                   <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <guideline.icon className="w-8 h-8 text-white drop-shadow-lg" />
+                    <guideline.icon className="w-8 h-8 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <h3 className="text-lg font-thin text-gray-900 mb-3">{guideline.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{guideline.description}</p>

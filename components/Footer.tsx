@@ -63,7 +63,7 @@ const Footer = () => {
     <footer 
       className="pt-12 pb-6 relative overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+        background: `linear-gradient(135deg, #0c1220 0%, #1a2332 25%, #2d3748 50%, #3f4a5c 75%, #556270 100%)`,
         position: 'relative'
       }}
     >
@@ -71,16 +71,16 @@ const Footer = () => {
       <div 
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
         }}
       />
       
       {/* Elegant floating elements - same as Hero */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating orbs */}
-        <div className="absolute top-10 left-10 w-24 h-24 bg-gradient-to-r from-primary-500/15 to-secondary-500/15 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-secondary-500/10 to-accent-500/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-20 left-1/4 w-20 h-20 bg-gradient-to-r from-accent-500/8 to-primary-500/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-10 left-10 w-24 h-24 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-20 left-1/4 w-20 h-20 bg-gradient-to-r from-accent-500/12 to-primary-500/12 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         
         {/* Subtle pattern overlay */}
         <div
@@ -107,29 +107,29 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <p className="text-white drop-shadow-lg/80 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0 drop-shadow-sm">
+            <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm leading-relaxed mb-4 text-center md:text-left max-w-xs mx-auto md:mx-0 drop-shadow-sm">
               Enterprise-grade PostgreSQL platform.
             </p>
           </div>
 
           {/* Product Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white drop-shadow-lg font-semibold mb-3 text-sm drop-shadow-sm">Products</h3>
+            <h3 className="text-white drop-shadow-2xl shadow-2xl font-semibold mb-3 text-sm drop-shadow-sm">Products</h3>
             <ul className="space-y-2">
-              <li><a href="/rale" className="text-white drop-shadow-lg/70 hover:text-white drop-shadow-lg transition-colors text-sm drop-shadow-sm">RALE</a></li>
-              <li><a href="/ram" className="text-white drop-shadow-lg/70 hover:text-white drop-shadow-lg transition-colors text-sm drop-shadow-sm">RAM</a></li>
-              <li><a href="/fauxdb" className="text-white drop-shadow-lg/70 hover:text-white drop-shadow-lg transition-colors text-sm drop-shadow-sm">FauxDB</a></li>
+              <li><a href="/rale" className="text-white drop-shadow-2xl shadow-2xl/70 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm drop-shadow-sm">RALE</a></li>
+              <li><a href="/ram" className="text-white drop-shadow-2xl shadow-2xl/70 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm drop-shadow-sm">RAM</a></li>
+              <li><a href="/fauxdb" className="text-white drop-shadow-2xl shadow-2xl/70 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm drop-shadow-sm">FauxDB</a></li>
             </ul>
           </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white drop-shadow-lg font-semibold mb-3 text-sm">Quick Links</h3>
+            <h3 className="text-white drop-shadow-2xl shadow-2xl font-semibold mb-3 text-sm">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="/download" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Download</a></li>
-              <li><a href="/blog" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Blog</a></li>
-              <li><a href="/docs" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Documentation</a></li>
-              <li><a href="/community" className="text-slate-300 hover:text-white drop-shadow-lg transition-colors text-sm">Community</a></li>
+              <li><a href="/download" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Download</a></li>
+              <li><a href="/blog" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Blog</a></li>
+              <li><a href="/docs" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Documentation</a></li>
+              <li><a href="/community" className="text-slate-300 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">Community</a></li>
             </ul>
           </div>
         </div>
@@ -141,10 +141,10 @@ const Footer = () => {
               © 2024 pgElephant. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="/privacy" className="text-slate-400 hover:text-white drop-shadow-lg transition-colors text-sm">
+              <a href="/privacy" className="text-slate-400 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">
                 Privacy Policy
               </a>
-              <a href="/terms" className="text-slate-400 hover:text-white drop-shadow-lg transition-colors text-sm">
+              <a href="/terms" className="text-slate-400 hover:text-white drop-shadow-2xl shadow-2xl transition-colors text-sm">
                 Terms of Service
               </a>
             </div>

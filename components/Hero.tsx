@@ -88,7 +88,7 @@ const Hero = () => {
   const current = products[currentProduct]
   
   // Elegant gradient design
-  const heroGradient = `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`
+  const heroGradient = `linear-gradient(135deg, #0c1220 0%, #1a2332 25%, #2d3748 50%, #3f4a5c 75%, #556270 100%)`
   const tileGradient = `linear-gradient(135deg, ${palette.primary}, ${palette.secondary})`
 
   return (
@@ -103,15 +103,15 @@ const Hero = () => {
       <div 
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.1) 100%)'
+          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
         }}
       />
       {/* Elegant floating elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating orbs */}
-        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         
         {/* Subtle pattern overlay */}
         <div
@@ -142,16 +142,16 @@ const Hero = () => {
                       />
                     </div>
                     <div className="text-left">
-                      <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-lg drop-shadow-lg">
+                      <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-2xl shadow-2xl drop-shadow-lg">
                         {current.name}
                       </h2>
-                      <p className="text-lg font-thin text-white drop-shadow-lg/90 drop-shadow-md">
+                      <p className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
                         {current.title}
                       </p>
                     </div>
                   </div>
                 </div>
-                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16 text-white drop-shadow-lg/80 drop-shadow-sm">
+                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16 text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">
                       <p>{current.description}</p>
                       <p>{current.description2}</p>
                       <p>{current.description3}</p>
@@ -199,7 +199,7 @@ const Hero = () => {
                          style={{ filter: active ? 'none' : 'brightness(0.7)' }}
                        />
                        <span
-                         className="font-medium text-white drop-shadow-lg drop-shadow-sm"
+                         className="font-medium text-white drop-shadow-2xl shadow-2xl drop-shadow-sm"
                        >
                          {product.name}
                        </span>
