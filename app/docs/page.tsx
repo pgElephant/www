@@ -1507,7 +1507,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
     return (
       <div className="space-y-8">
         {docContent.sections.map((section: any, index: number) => (
-          <div key={index} className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-lg p-6">
+          <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
             <h3 className="text-xl font-thin text-gray-900 mb-4">
               {section.title}
             </h3>
@@ -1963,7 +1963,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
 
       {/* Two-Column Documentation Layout */}
-      <div className="bg-white/95 backdrop-blur-sm py-20">
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
                   <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
@@ -2053,7 +2053,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Download className="w-8 h-8" style={{ color: palette.cyan }} />
                     </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">
@@ -2065,7 +2065,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     </div>
 
               <div className="text-center">
-                <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <Code className="w-8 h-8" style={{ color: palette.teal }} />
                 </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">
@@ -2077,7 +2077,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </div>
 
               <div className="text-center">
-                <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
                   <ExternalLink className="w-8 h-8" style={{ color: palette.orange }} />
                 </div>
                 <h3 className="text-lg font-thin text-gray-900 mb-2">
@@ -2104,7 +2104,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             </div>
 
             {/* Additional Resources */}
-      <div className="bg-white/95 backdrop-blur-sm py-20 border-t border-gray-200">
+      <div className="py-20 relative overflow-hidden border-t border-gray-200" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-thin text-gray-900 mb-12 text-center">

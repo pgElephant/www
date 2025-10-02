@@ -194,14 +194,14 @@ const DownloadPage = () => {
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-cyan-200/10 to-transparent" />
         </div>
         <div className="container-wide mx-auto relative z-10 py-28">
-          <h1 className="text-5xl md:text-6xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4 drop-shadow-lg tracking-tight">Download Center</h1>
-          <p className="text-xl md:text-2xl text-white drop-shadow-2xl shadow-2xl/80 mb-8 max-w-2xl mx-auto drop-shadow-md">
+          <h1 className="text-5xl md:text-6xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4 tracking-tight">Download Center</h1>
+          <p className="text-xl md:text-2xl text-white drop-shadow-2xl shadow-2xl mb-8 max-w-2xl mx-auto">
             Official, production-grade releases. Secure, fast, and trusted by global enterprises.
           </p>
           {/* Trust Bar */}
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {trustBar.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 backdrop-blur-sm/10 text-white drop-shadow-2xl shadow-2xl border border-white/20 text-base font-thin shadow-sm">
+              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm/10 text-white drop-shadow-2xl shadow-2xl border border-white/20 text-base font-semibold shadow-sm">
                 <item.icon className="w-5 h-5" />
                 {item.label}
               </div>
@@ -210,7 +210,7 @@ const DownloadPage = () => {
           {/* Download Stats */}
           <div className="flex flex-wrap justify-center gap-4">
             {downloadStats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center bg-white/95 backdrop-blur-sm/10 px-6 py-4 rounded-xl min-w-[120px]">
+              <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm/10 px-6 py-4 rounded-xl min-w-[120px] border border-white/20">
                 <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
                 <span className="text-2xl font-thin text-white drop-shadow-2xl shadow-2xl">{stat.value}</span>
                 <span className="text-xs text-white drop-shadow-2xl shadow-2xl/80">{stat.label}</span>
