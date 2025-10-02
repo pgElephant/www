@@ -1893,23 +1893,23 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             <h1 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6">
               Documentation
             </h1>
-            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
+            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl">
               Complete guides and references for pgElephant products. Professional documentation following enterprise standards.
             </p>
             
             {/* Documentation Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
               <div className="text-center">
-                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">3</div>
-                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Products</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2">3</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Products</div>
           </div>
               <div className="text-center">
-                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">26</div>
-                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Documentation Pages</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2">26</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Documentation Pages</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">100%</div>
-                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Open Source</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2">100%</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Open Source</div>
               </div>
             </div>
           </div>
