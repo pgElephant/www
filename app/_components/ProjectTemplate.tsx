@@ -88,7 +88,7 @@ export default function ProjectTemplate({
 
       {/* High-Level Feature Pillars */}
       {featurePillars && (
-        <section className="py-20 bg-slate-50">
+        <section className="py-20" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' }}>
           <div className="container-wide">
             <SectionHeading kicker={featurePillars.kicker}>Why {hero.projectName}</SectionHeading>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -100,7 +100,7 @@ export default function ProjectTemplate({
 
       {/* Detailed Features List */}
       {features && (
-        <section className="py-16 bg-slate-50 border-t border-b">
+        <section className="py-16 border-t border-b" style={{ background: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)' }}>
           <div className="container-wide">
             <SectionHeading kicker="Features">Detailed Features List</SectionHeading>
             <div className="max-w-5xl mx-auto">
