@@ -91,17 +91,17 @@ export default function ProjectTemplate({
 
       {/* Detailed Features List */}
       {features && (
-        <section className="py-20 bg-slate-50 border-t border-b">
+        <section className="py-16 bg-slate-50 border-t border-b">
           <div className="container-wide">
             <SectionHeading kicker="Features">Detailed Features List</SectionHeading>
-            <div className="max-w-4xl mx-auto">
-              <div className="space-y-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-3">
                 {features.map((f: { icon: React.ReactNode; iconColor: string; title: string; desc: string }, i: number) => (
-                  <div key={i} className="flex items-start gap-4 p-4 rounded-lg hover:bg-white hover:shadow-sm transition-all border-l-4 border-transparent hover:border-indigo-400">
-                    <span className={`${f.iconColor} mt-1 flex-shrink-0`}>{f.icon}</span>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-lg mb-1 text-slate-900">{f.title}</h4>
-                      <p className="text-slate-600 leading-relaxed">{f.desc}</p>
+                  <div key={i} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white hover:shadow-sm transition-all border-l-3 border-transparent hover:border-indigo-400">
+                    <span className={`${f.iconColor} mt-0.5 flex-shrink-0`}>{f.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-base mb-1 text-slate-900 leading-tight">{f.title}</h4>
+                      <p className="text-slate-600 text-sm leading-relaxed">{f.desc}</p>
                     </div>
                   </div>
                 ))}
