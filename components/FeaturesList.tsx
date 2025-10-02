@@ -147,7 +147,7 @@ const FeaturesList = () => {
           bg: 'from-primary-500/20 to-primary-600/20',
           border: 'border-primary-400/30',
           icon: 'text-primary-400',
-          accent: 'text-primary-300',
+          accent: 'text-white/90',
           button: 'bg-primary-600 hover:bg-primary-700'
         }
       case 'secondary':
@@ -155,7 +155,7 @@ const FeaturesList = () => {
           bg: 'from-secondary-500/20 to-secondary-600/20',
           border: 'border-secondary-400/30',
           icon: 'text-secondary-400',
-          accent: 'text-secondary-300',
+          accent: 'text-white/90',
           button: 'bg-secondary-600 hover:bg-secondary-700'
         }
       case 'accent':
@@ -163,7 +163,7 @@ const FeaturesList = () => {
           bg: 'from-accent-500/20 to-accent-600/20',
           border: 'border-accent-400/30',
           icon: 'text-accent-400',
-          accent: 'text-accent-300',
+          accent: 'text-white/90',
           button: 'bg-accent-600 hover:bg-accent-700'
         }
       default:
@@ -171,7 +171,7 @@ const FeaturesList = () => {
           bg: 'from-neutral-500/20 to-neutral-600/20',
           border: 'border-neutral-400/30',
           icon: 'text-neutral-400',
-          accent: 'text-neutral-300',
+          accent: 'text-white/90',
           button: 'bg-neutral-600 hover:bg-neutral-700'
         }
     }

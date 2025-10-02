@@ -1411,6 +1411,392 @@ curl http://localhost:8080/api/v1/status
           ]
         }
       },
+      pgraft: {
+        'Getting Started': {
+          sections: [
+            {
+              title: 'Installation',
+              content: `pgraft is a PostgreSQL extension that implements Raft consensus for automatic leader election and failover.
+
+1. **Prerequisites**:
+   - PostgreSQL 16-18 with development headers
+   - Go 1.21+
+   - Build tools (GCC/Clang, Make, pkg-config)
+
+2. **Clone and build**:
+   \`\`\`bash
+   git clone https://github.com/pgElephant/pgraft.git
+   cd pgraft
+   make && sudo make install
+   \`\`\`
+
+3. **Configure PostgreSQL**:
+   \`\`\`conf
+   # Add to postgresql.conf
+   shared_preload_libraries = 'pgraft'
+   \`\`\`
+
+4. **Create extension**:
+   \`\`\`sql
+   CREATE EXTENSION pgraft;
+   \`\`\``
+            },
+            {
+              title: 'Quick Start',
+              content: `**Initialize cluster:**
+\`\`\`sql
+SELECT pgraft_init_cluster('my-cluster');
+\`\`\`
+
+**Add nodes:**
+\`\`\`sql
+SELECT pgraft_add_member('my-cluster', 'node1', 'host=192.168.1.10 port=5432');
+SELECT pgraft_add_member('my-cluster', 'node2', 'host=192.168.1.11 port=5432');
+SELECT pgraft_add_member('my-cluster', 'node3', 'host=192.168.1.12 port=5432');
+\`\`\`
+
+**Check status:**
+\`\`\`sql
+SELECT * FROM pgraft_cluster_status('my-cluster');
+SELECT * FROM pgraft_leader('my-cluster');
+\`\`\``
+            }
+          ]
+        },
+        'Installation': {
+          sections: [
+            {
+              title: 'Detailed Installation Guide',
+              content: `Complete installation guide for pgraft PostgreSQL Raft extension. Build from source, configure PostgreSQL, and enable the extension.
+
+**Prerequisites:**
+- PostgreSQL 16-18 with development headers
+- Go 1.21+ for Raft implementation
+- Build tools: GCC/Clang, Make, pkg-config
+
+**Installation Steps:**
+1. Clone repository and build
+2. Install extension files
+3. Configure PostgreSQL
+4. Create and verify extension
+
+Visit the full Installation page for detailed instructions.`
+            }
+          ]
+        },
+        'Configuration': {
+          sections: [
+            {
+              title: 'Configuration Guide',
+              content: `Configure pgraft extension and PostgreSQL for optimal Raft consensus performance.
+
+**PostgreSQL Configuration:**
+- shared_preload_libraries = 'pgraft'
+- Memory and connection settings
+- WAL configuration for replication
+
+**pgraft Parameters:**
+- heartbeat_interval: Leader heartbeat frequency
+- election_timeout: Timeout for leader election
+- snapshot_threshold: Log entries before snapshot
+
+Visit the full Configuration page for complete settings.`
+            }
+          ]
+        },
+        'SQL Functions': {
+          sections: [
+            {
+              title: 'SQL Function Reference',
+              content: `Complete reference for all pgraft SQL functions and procedures.
+
+**Cluster Management:**
+- pgraft_init_cluster(): Initialize new cluster
+- pgraft_add_member(): Add node to cluster
+- pgraft_remove_member(): Remove node from cluster
+
+**Leadership Functions:**
+- pgraft_leader(): Get current leader
+- pgraft_is_leader(): Check if node is leader
+- pgraft_force_election(): Trigger election
+
+Visit the full SQL Functions page for complete reference.`
+            }
+          ]
+        },
+        'Raft Protocol': {
+          sections: [
+            {
+              title: 'Raft Consensus Protocol',
+              content: `Understanding Raft consensus protocol implementation in pgraft PostgreSQL extension.
+
+**Raft Overview:**
+- Distributed consensus algorithm
+- Leader election and log replication
+- Safety properties and guarantees
+
+**Node States:**
+- Leader: Handles requests and replicates logs
+- Follower: Receives logs from leader
+- Candidate: Requests votes during election
+
+Visit the full Raft Protocol page for detailed explanation.`
+            }
+          ]
+        },
+        'Cluster Management': {
+          sections: [
+            {
+              title: 'Cluster Management Guide',
+              content: `Managing PostgreSQL clusters with pgraft Raft consensus for high availability and automatic failover.
+
+**Cluster Lifecycle:**
+1. Cluster creation and initialization
+2. Node addition and removal
+3. Health monitoring and maintenance
+
+**Failover Management:**
+- Automatic failover process
+- Manual failover procedures
+- Recovery and troubleshooting
+
+Visit the full Cluster Management page for operational procedures.`
+            }
+          ]
+        },
+        'Performance Tuning': {
+          sections: [
+            {
+              title: 'Performance Optimization',
+              content: `Optimize pgraft PostgreSQL Raft extension for maximum performance and throughput.
+
+**Configuration Strategies:**
+- High throughput configuration
+- Low latency configuration
+- Balanced performance settings
+
+**Monitoring and Tuning:**
+- Key performance metrics
+- Network optimization
+- PostgreSQL tuning
+
+Visit the full Performance Tuning page for optimization strategies.`
+            }
+          ]
+        },
+        'Troubleshooting': {
+          sections: [
+            {
+              title: 'Troubleshooting Guide',
+              content: `Resolve common issues and errors with pgraft PostgreSQL Raft extension.
+
+**Common Issues:**
+- Extension won't load
+- Cluster split-brain scenarios
+- High replication latency
+- Network connectivity problems
+
+**Diagnostic Commands:**
+- Health check procedures
+- Configuration validation
+- Performance analysis
+
+Visit the full Troubleshooting page for solutions and recovery procedures.`
+            }
+          ]
+        }
+      },
+      ram: {
+        'Getting Started': {
+          sections: [
+            {
+              title: 'RAM Installation',
+              content: `RAM (Resilient Adaptive Manager) provides PostgreSQL clustering with automatic failover.
+
+1. **Install components**:
+   - pgraft PostgreSQL extension
+   - ramd cluster management daemon
+   - ramctrl command-line interface
+
+2. **Configure cluster**:
+   \`\`\`bash
+   ramctrl cluster create --name production-cluster --node node1:8080
+   \`\`\`
+
+3. **Add nodes**:
+   \`\`\`bash
+   ramctrl nodes add --cluster production-cluster --node node2:8080
+   ramctrl nodes add --cluster production-cluster --node node3:8080
+   \`\`\``
+            }
+          ]
+        },
+        'ramd Documentation': {
+          sections: [
+            {
+              title: 'Cluster Management Daemon',
+              content: `ramd (Resilient Adaptive Manager Daemon) is the core component of RAM that manages PostgreSQL clusters.
+
+**Features:**
+- Automatic failover with sub-second detection
+- Real-time cluster health monitoring
+- HTTP API for cluster management
+- Integration with pgraft extension
+
+**Configuration:**
+- Cluster settings and node configuration
+- Network and security settings
+- Monitoring and logging options
+
+Visit the full ramd Documentation page for complete details.`
+            }
+          ]
+        },
+        'ramctrl Documentation': {
+          sections: [
+            {
+              title: 'Command Line Interface',
+              content: `ramctrl (Resilient Adaptive Manager Control) is the command-line interface for managing RAM clusters.
+
+**Key Features:**
+- Cluster creation and management
+- Node operations (add/remove)
+- Health monitoring and metrics
+- Configuration management
+
+**Common Commands:**
+- ramctrl status: Check cluster status
+- ramctrl nodes: Manage cluster nodes
+- ramctrl failover: Trigger manual failover
+
+Visit the full ramctrl Documentation page for complete command reference.`
+            }
+          ]
+        },
+        'Docker Setup': {
+          sections: [
+            {
+              title: 'Docker Deployment',
+              content: `Deploy RAM using Docker containers with docker-compose configurations for multi-node PostgreSQL clusters.
+
+**Components:**
+- PostgreSQL containers with pgraft
+- ramd daemon containers
+- Load balancer and monitoring
+
+**Configuration:**
+- Docker Compose setup
+- Network configuration
+- Volume management
+
+Visit the full Docker Setup page for containerized deployment.`
+            }
+          ]
+        },
+        'Kubernetes': {
+          sections: [
+            {
+              title: 'Kubernetes Deployment',
+              content: `Deploy RAM on Kubernetes using Helm charts for high availability PostgreSQL clusters.
+
+**Features:**
+- Helm chart deployment
+- StatefulSets for PostgreSQL
+- Service discovery and load balancing
+- Persistent volume management
+
+**Configuration:**
+- Kubernetes manifests
+- Helm chart values
+- Monitoring integration
+
+Visit the full Kubernetes page for container orchestration setup.`
+            }
+          ]
+        },
+        'Configuration': {
+          sections: [
+            {
+              title: 'Advanced Configuration',
+              content: `Advanced configuration options for RAM PostgreSQL clustering and high availability.
+
+**Cluster Configuration:**
+- ramd.conf settings
+- Environment variables
+- PostgreSQL configuration
+
+**Performance Tuning:**
+- High throughput settings
+- Low latency configuration
+- Security and authentication
+
+Visit the full Configuration page for complete configuration guide.`
+            }
+          ]
+        },
+        'Monitoring': {
+          sections: [
+            {
+              title: 'Monitoring and Metrics',
+              content: `Comprehensive monitoring solution for RAM PostgreSQL clustering with Prometheus metrics and Grafana dashboards.
+
+**Prometheus Integration:**
+- Metrics endpoints
+- Key performance indicators
+- Alert rules and thresholds
+
+**Grafana Dashboards:**
+- Cluster overview dashboard
+- Performance metrics
+- Health monitoring panels
+
+Visit the full Monitoring page for complete monitoring setup.`
+            }
+          ]
+        },
+        'API Reference': {
+          sections: [
+            {
+              title: 'REST API Documentation',
+              content: `Complete REST API documentation for RAM PostgreSQL clustering management.
+
+**API Endpoints:**
+- Cluster management operations
+- Node operations and monitoring
+- Failover and health checks
+- Configuration management
+
+**Authentication:**
+- Token-based authentication
+- TLS/SSL support
+- Rate limiting and security
+
+Visit the full API Reference page for complete API documentation.`
+            }
+          ]
+        },
+        'Troubleshooting': {
+          sections: [
+            {
+              title: 'Troubleshooting Guide',
+              content: `Common issues and solutions for RAM deployment including PostgreSQL connection problems and failover failures.
+
+**Common Issues:**
+- Cluster initialization problems
+- Node connectivity issues
+- Failover failures
+- Performance problems
+
+**Recovery Procedures:**
+- Node recovery steps
+- Cluster recovery procedures
+- Configuration validation
+
+Visit the full Troubleshooting page for solutions and recovery procedures.`
+            }
+          ]
+        }
+      },
       fauxdb: {
         'Getting Started': {
           sections: [
@@ -1486,6 +1872,127 @@ docker-compose up -d
 \`\`\`bash
 docker exec -it fauxdb_fauxdb_1 mongosh
 \`\`\``
+            }
+          ]
+        },
+        'Configuration': {
+          sections: [
+            {
+              title: 'Configuration Guide',
+              content: `Configure FauxDB server using TOML configuration files for database connections, authentication, and performance tuning.
+
+**Key Settings:**
+- Database connection configuration
+- MongoDB wire protocol settings
+- Performance and caching options
+- Security and authentication
+
+Visit the full Configuration page for complete configuration reference.`
+            }
+          ]
+        },
+        'MongoDB Compatibility': {
+          sections: [
+            {
+              title: 'MongoDB Wire Protocol',
+              content: `FauxDB implements MongoDB wire protocol for seamless compatibility with existing MongoDB drivers and applications.
+
+**Supported Features:**
+- MongoDB wire protocol compatibility
+- Driver compatibility (Node.js, Python, Java)
+- Query translation to PostgreSQL SQL
+- Aggregation pipeline support
+
+**Limitations:**
+- Some advanced MongoDB features
+- Performance considerations
+- Migration considerations
+
+Visit the full MongoDB Compatibility page for detailed compatibility information.`
+            }
+          ]
+        },
+        'API Reference': {
+          sections: [
+            {
+              title: 'Complete API Documentation',
+              content: `Complete API documentation for FauxDB including MongoDB-compatible operations, custom extensions, and administrative functions.
+
+**MongoDB Operations:**
+- CRUD operations (insert, find, update, delete)
+- Aggregation pipeline
+- Index management
+- Transaction support
+
+**Administrative Functions:**
+- Server management
+- Configuration updates
+- Monitoring and metrics
+
+Visit the full API Reference page for complete API documentation.`
+            }
+          ]
+        },
+        'Performance Tuning': {
+          sections: [
+            {
+              title: 'Performance Optimization',
+              content: `Optimize FauxDB performance including connection pooling, query optimization, and PostgreSQL backend tuning.
+
+**Performance Areas:**
+- Connection pooling configuration
+- Query optimization strategies
+- PostgreSQL backend tuning
+- Caching and indexing
+
+**Monitoring:**
+- Performance metrics
+- Query analysis
+- Resource utilization
+
+Visit the full Performance Tuning page for optimization strategies.`
+            }
+          ]
+        },
+        'Security': {
+          sections: [
+            {
+              title: 'Security Configuration',
+              content: `Configure authentication, authorization, and encryption for FauxDB deployments including SSL/TLS setup and user management.
+
+**Security Features:**
+- Authentication mechanisms
+- Authorization and access control
+- SSL/TLS encryption
+- User and role management
+
+**Best Practices:**
+- Security configuration
+- Network security
+- Data encryption
+
+Visit the full Security page for complete security setup.`
+            }
+          ]
+        },
+        'Troubleshooting': {
+          sections: [
+            {
+              title: 'Troubleshooting Guide',
+              content: `Common issues and solutions for FauxDB deployment including connection problems, performance issues, and compatibility problems.
+
+**Common Issues:**
+- Connection problems
+- Query translation errors
+- Performance issues
+- Compatibility problems
+
+**Diagnostic Tools:**
+- Log analysis
+- Performance monitoring
+- Configuration validation
+
+Visit the full Troubleshooting page for solutions and recovery procedures.`
             }
           ]
         }

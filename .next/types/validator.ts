@@ -227,6 +227,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/ram/api/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/api">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/api/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/ram/configuration/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/configuration">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/configuration/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/ram/docker/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/ram/docker">> = Specific
@@ -249,6 +267,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/ram/kubernetes">> = Specific
   const handler = {} as typeof import("../../app/docs/ram/kubernetes/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/ram/monitoring/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/monitoring">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/monitoring/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
