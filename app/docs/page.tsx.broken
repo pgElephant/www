@@ -1,0 +1,3654 @@
+'use client'
+
+import React, { useState } from 'react'
+import { BookOpen, ArrowRight, Code, Download, ExternalLink, Play, Container, FileText } from 'lucide-react'
+import Link from 'next/link'
+import Image from 'next/image'
+
+// Colors from pgElephant icon (darker variants)
+const palette = {
+  iconTeal: '#025A6B',
+  iconTealLight: '#036B7D',
+  iconTealMedium: '#045E70',
+  iconTealDark: '#054A56',
+  // Supporting colors
+  navy: '#1E293B',
+  navyDeep: '#0F172A',
+  slate: '#334155',
+  cyan: '#0EA5E9',
+  cyanDeep: '#0284C7',
+  teal: '#14B8A6',
+  tealDeep: '#0D9488',
+  gray100: '#F8FAFC',
+  gray300: '#CBD5E1',
+  white: '#FFFFFF',
+  orange: '#F97316',
+  orangeDark: '#EA580C'
+}
+
+const DocsPage = () => {
+  // State for active documentation section
+  const [activeSection, setActiveSection] = useState<string | null>('Getting Started')
+  const [activeProduct, setActiveProduct] = useState<string | null>('rale')
+
+  // Set default documentation on mount
+  React.useEffect(() => {
+    setActiveProduct('rale')
+    setActiveSection('Getting Started')
+  }, [])
+
+  // Function to get appropriate icon for documentation type
+  const getDocIcon = (type: string) => {
+    switch (type) {
+      case 'Guide':
+        return BookOpen
+      case 'Tutorial':
+        return Container
+      case 'Reference':
+        return FileText
+      default:
+        return BookOpen
+    }
+  }
+
+  // Function to handle sidebar link clicks
+  const handleSidebarClick = (productId: string, docTitle: string) => {
+    setActiveProduct(productId)
+    setActiveSection(docTitle)
+    
+    // Scroll to top of content area
+    setTimeout(() => {
+      const contentElement = document.getElementById('docs-content')
+      if (contentElement) {
+        contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 100)
+  }
+
+  // Function to render actual documentation content
+  const renderDocumentationContent = (productId: string, docTitle: string) => {
+    return (
+      <div className="space-y-8">
+        {/* Full documentation content based on the section */}
+        {getFullDocumentationContent(productId, docTitle)}
+      </div>
+    )
+  }
+
+  // Function to render formatted content with proper syntax highlighting
+  const renderFormattedContent = (content: string) => {
+    const parts = content.split(/(```[\w]*\n[\s\S]*?```)/g);
+    
+    return parts.map((part, index) => {
+      // Check if this is a code block
+      const codeBlockMatch = part.match(/```(\w+)?\n([\s\S]*?)```/);
+      if (codeBlockMatch) {
+        const language = codeBlockMatch[1] || 'text';
+        const code = codeBlockMatch[2].trim();
+        
+        return (
+          <pre key={index} className="bg-white/10 backdrop-blur-sm text-white p-4 rounded-lg overflow-x-auto text-sm border border-white/20 font-mono">
+            <code className={`language-${language}`}>
+              {renderHighlightedCode(code, language)}
+            </code>
+          </pre>
+        );
+      }
+      
+      // Regular text content
+      const formattedText = part
+        .replace(/`([^`]+)`/g, '<code class="bg-white/10 backdrop-blur-sm px-2 py-1 rounded text-sm font-mono border border-white/20">$1</code>')
+        .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-thin">$1</strong>')
+        .replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>')
+        .replace(/\n/g, '<br/>');
+      
+      return (
+        <div key={index} dangerouslySetInnerHTML={{ __html: formattedText }} />
+      );
+    });
+  }
+
+  // Function to render highlighted code as React elements
+  const renderHighlightedCode = (code: string, language: string) => {
+    if (language === 'bash' || language === 'sh') {
+      return code.split('\n').map((line, lineIndex) => {
+        const parts = line.split(/(#.*$|\$\s|git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn|--\w+|".*?")/);
+        return (
+          <div key={lineIndex}>
+            {parts.map((part, partIndex) => {
+              if (part.match(/^#.*$/)) {
+                return <span key={partIndex} className="text-green-600">{part}</span>;
+              } else if (part.match(/^\$\s/)) {
+                return <span key={partIndex} className="text-blue-600">{part}</span>;
+              } else if (part.match(/^(git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn)$/)) {
+                return <span key={partIndex} className="text-purple-600 font-thin">{part}</span>;
+              } else if (part.match(/^--\w+/)) {
+                return <span key={partIndex} className="text-orange-600">{part}</span>;
+              } else if (part.match(/^".*"$/)) {
+                return <span key={partIndex} className="text-red-600">{part}</span>;
+              }
+              return <span key={partIndex}>{part}</span>;
+            })}
+          </div>
+        );
+      });
+    } else if (language === 'sql') {
+      return code.split('\n').map((line, lineIndex) => {
+        const parts = line.split(/(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END|--.*$|\/\*[\s\S]*?\*\/|".*?"|'.*?'|\d+)/gi);
+        return (
+          <div key={lineIndex}>
+            {parts.map((part, partIndex) => {
+              if (part.match(/^(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END)$/i)) {
+                return <span key={partIndex} className="text-blue-600 font-thin">{part}</span>;
+              } else if (part.match(/^--.*$/)) {
+                return <span key={partIndex} className="text-green-600">{part}</span>;
+              } else if (part.match(/^\/\*[\s\S]*?\*\/$/)) {
+                return <span key={partIndex} className="text-green-600">{part}</span>;
+              } else if (part.match(/^".*"$|^'.*'$/)) {
+                return <span key={partIndex} className="text-red-600">{part}</span>;
+              } else if (part.match(/^\d+$/)) {
+                return <span key={partIndex} className="text-orange-600">{part}</span>;
+              }
+              return <span key={partIndex}>{part}</span>;
+            })}
+          </div>
+        );
+      });
+    }
+    
+    // Default: return plain text
+    return code.split('\n').map((line, index) => (
+      <div key={index}>{line}</div>
+    ));
+  }
+
+  // Function to apply basic syntax highlighting
+  const applySyntaxHighlighting = (code: string, language: string) => {
+    if (language === 'bash' || language === 'sh') {
+      return code
+        .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
+        .replace(/(\$\s)/g, '<span class="text-blue-600">$1</span>') // Command prompt
+        .replace(/(git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn)\b/g, '<span class="text-purple-600 font-thin">$1</span>') // Commands
+        .replace(/(--\w+)/g, '<span class="text-orange-600">$1</span>') // Options
+        .replace(/(".*?")/g, '<span class="text-red-600">$1</span>'); // Strings
+    } else if (language === 'sql') {
+      return code
+        .replace(/(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END)\b/gi, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
+        .replace(/(--.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
+        .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
+        .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
+        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
+    } else if (language === 'c' || language === 'cpp') {
+      return code
+        .replace(/(#include|#define|#ifdef|#ifndef|#endif|#if|#else|#elif)\b/g, '<span class="text-purple-600">$1</span>') // Preprocessor
+        .replace(/(int|char|float|double|void|struct|typedef|enum|const|static|extern|volatile|register|auto|signed|unsigned|long|short)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Types
+        .replace(/(if|else|while|for|do|switch|case|default|break|continue|return|goto)\b/g, '<span class="text-orange-600 font-thin">$1</span>') // Keywords
+        .replace(/(\/\/.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
+        .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
+        .replace(/(".*?")/g, '<span class="text-red-600">$1</span>'); // Strings
+    } else if (language === 'javascript' || language === 'js') {
+      return code
+        .replace(/(function|const|let|var|if|else|while|for|do|switch|case|default|break|continue|return|try|catch|finally|throw|new|this|class|extends|import|export|from|async|await)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
+        .replace(/(\/\/.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
+        .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
+        .replace(/(".*?"|'.*?'|`.*?`)/g, '<span class="text-red-600">$1</span>') // Strings
+        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
+    } else if (language === 'yaml' || language === 'yml') {
+      return code
+        .replace(/(version|services|ports|environment|volumes|networks|depends_on|build|image|command|restart|healthcheck)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
+        .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
+        .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
+        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
+    } else if (language === 'toml') {
+      return code
+        .replace(/(\[.*?\])/g, '<span class="text-blue-600 font-thin">$1</span>') // Sections
+        .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
+        .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
+        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
+    }
+    return code;
+  }
+
+  // Function to get full documentation content
+  const getFullDocumentationContent = (productId: string, docTitle: string) => {
+    const content: { [key: string]: { [key: string]: any } } = {
+      rale: {
+        'Getting Started': {
+          sections: [
+            {
+              title: 'Installation',
+              content: `RALE (Resilient Adaptive Leader Election) is a distributed consensus system written in C. To get started:
+
+1. **Clone the repository**:
+   \`\`\`bash
+   git clone https://github.com/pgElephant/rale.git
+   cd rale
+   \`\`\`
+
+2. **Build and install**:
+   \`\`\`bash
+   make && sudo make install
+   sudo ldconfig
+   \`\`\`
+
+3. **Verify installation**:
+   \`\`\`bash
+   ralectrl --version
+   \`\`\``
+            },
+            {
+              title: 'Components',
+              content: `RALE consists of three main components:
+
+- **librale**: Core C library providing consensus algorithms and distributed key-value store
+- **raled**: Cluster management daemon that runs on each node
+- **ralectrl**: Command-line interface for cluster management
+
+Each component serves a specific role in the distributed system architecture.`
+            }
+          ]
+        },
+        'librale Documentation': {
+          sections: [
+            {
+              title: 'Core Library Architecture',
+              content: `The librale C library provides the foundation for distributed consensus and key-value storage. It implements the Raft consensus algorithm with optimizations for high availability and performance.
+
+**Architecture Overview:**
+librale is built with a modular architecture consisting of several key components:
+
+1. **Consensus Engine**: Implements the Raft consensus algorithm with leader election, log replication, and safety guarantees
+2. **State Machine**: Manages the distributed key-value store state and applies committed log entries
+3. **Network Layer**: Handles inter-node communication with TCP connections and message serialization
+4. **Storage Engine**: Persists log entries and snapshots to disk for durability
+5. **Membership Manager**: Handles cluster membership changes and node addition/removal
+
+**Key Features:**
+- **Raft Consensus**: Full implementation of the Raft consensus algorithm
+- **Distributed Key-Value Store**: High-performance distributed storage with ACID properties
+- **Network Communication**: Efficient TCP-based communication with message batching
+- **State Machine Replication**: Consistent state replication across all nodes
+- **Membership Management**: Dynamic cluster membership with safe node addition/removal
+- **Snapshot Support**: Periodic snapshots for log compaction and recovery
+- **Leader Election**: Automatic leader election with configurable timeouts
+- **Log Replication**: Optimized log replication with pipelining and flow control
+
+**Performance Characteristics:**
+- **Throughput**: Up to 100,000 operations per second on modern hardware
+- **Latency**: Sub-millisecond latency for local operations, <10ms for distributed operations
+- **Scalability**: Supports clusters up to 100 nodes
+- **Durability**: All operations are persisted to disk before acknowledgment`
+            },
+            {
+              title: 'Installation and Setup',
+              content: `**Prerequisites:**
+- C compiler (GCC 7.0+ or Clang 6.0+)
+- CMake 3.12+
+- OpenSSL 1.1.1+ (for TLS support)
+- zlib (for compression)
+
+**Building from Source:**
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/pgElephant/rale.git
+cd rale
+
+# Create build directory
+mkdir build && cd build
+
+# Configure with CMake
+cmake .. -DCMAKE_BUILD_TYPE=Release \\
+         -DRALE_ENABLE_TLS=ON \\
+         -DRALE_ENABLE_METRICS=ON
+
+# Build the library
+make -j$(nproc)
+
+# Install system-wide
+sudo make install
+
+# Update library cache
+sudo ldconfig
+\`\`\`
+
+**Verification:**
+\`\`\`bash
+# Check library installation
+pkg-config --modversion librale
+
+# Verify symbols
+nm -D /usr/local/lib/librale.so | grep rale_init
+\`\`\``
+            },
+            {
+              title: 'Basic Usage and Examples',
+              content: `**Initialization:**
+\`\`\`c
+#include <librale.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // Initialize RALE context
+    rale_context_t *ctx = rale_init();
+    if (!ctx) {
+        fprintf(stderr, "Failed to initialize RALE context\\n");
+        return 1;
+    }
+
+    // Configure the node
+    rale_config_t config = {
+        .node_id = "node1",
+        .cluster_id = "my-cluster",
+        .listen_addr = "0.0.0.0:8080",
+        .data_dir = "/var/lib/rale",
+        .heartbeat_interval_ms = 100,
+        .election_timeout_ms = 1000,
+        .max_log_entries = 10000,
+        .snapshot_threshold = 1000
+    };
+
+    // Start the consensus node
+    int result = rale_start(ctx, &config);
+    if (result != RALE_SUCCESS) {
+        fprintf(stderr, "Failed to start RALE node: %s\\n", rale_error_string(result));
+        rale_destroy(ctx);
+        return 1;
+    }
+
+    printf("RALE node started successfully\\n");
+    
+    // Cleanup
+    rale_stop(ctx);
+    rale_destroy(ctx);
+    return 0;
+}
+\`\`\`
+
+**Key-Value Operations:**
+\`\`\`c
+// Store a key-value pair
+const char *key = "user:123";
+const char *value = "{\\"name\\": \\"John Doe\\", \\"email\\": \\"john@example.com\\"}";
+
+rale_result_t result = rale_put(ctx, key, strlen(key), value, strlen(value));
+if (result != RALE_SUCCESS) {
+    fprintf(stderr, "Failed to store key-value pair: %s\\n", rale_error_string(result));
+}
+
+// Retrieve a value
+char *retrieved_value = NULL;
+size_t value_len = 0;
+result = rale_get(ctx, key, strlen(key), (void**)&retrieved_value, &value_len);
+if (result == RALE_SUCCESS) {
+    printf("Retrieved value: %.*s\\n", (int)value_len, retrieved_value);
+    free(retrieved_value);
+} else {
+    fprintf(stderr, "Failed to retrieve value: %s\\n", rale_error_string(result));
+}
+
+// Delete a key
+result = rale_delete(ctx, key, strlen(key));
+if (result != RALE_SUCCESS) {
+    fprintf(stderr, "Failed to delete key: %s\\n", rale_error_string(result));
+}
+\`\`\``
+            },
+            {
+              title: 'Complete API Reference',
+              content: `**Context Management:**
+\`\`\`c
+// Initialize a new RALE context
+rale_context_t* rale_init(void);
+
+// Destroy a RALE context and free all resources
+void rale_destroy(rale_context_t *ctx);
+
+// Start the consensus node with given configuration
+rale_result_t rale_start(rale_context_t *ctx, const rale_config_t *config);
+
+// Stop the consensus node gracefully
+rale_result_t rale_stop(rale_context_t *ctx);
+
+// Check if the node is running
+bool rale_is_running(const rale_context_t *ctx);
+\`\`\`
+
+**Key-Value Store Operations:**
+\`\`\`c
+// Store a key-value pair (synchronous)
+rale_result_t rale_put(rale_context_t *ctx, const void *key, size_t key_len,
+                      const void *value, size_t value_len);
+
+// Store a key-value pair (asynchronous with callback)
+rale_result_t rale_put_async(rale_context_t *ctx, const void *key, size_t key_len,
+                            const void *value, size_t value_len,
+                            rale_callback_t callback, void *user_data);
+
+// Retrieve a value by key
+rale_result_t rale_get(rale_context_t *ctx, const void *key, size_t key_len,
+                      void **value, size_t *value_len);
+
+// Delete a key and its value
+rale_result_t rale_delete(rale_context_t *ctx, const void *key, size_t key_len);
+
+// Check if a key exists
+rale_result_t rale_exists(rale_context_t *ctx, const void *key, size_t key_len, bool *exists);
+
+// Get all keys matching a prefix
+rale_result_t rale_list_keys(rale_context_t *ctx, const void *prefix, size_t prefix_len,
+                            rale_key_iterator_t **iterator);
+\`\`\`
+
+**Cluster Management:**
+\`\`\`c
+// Add a new node to the cluster
+rale_result_t rale_add_node(rale_context_t *ctx, const char *node_id, const char *address);
+
+// Remove a node from the cluster
+rale_result_t rale_remove_node(rale_context_t *ctx, const char *node_id);
+
+// Get cluster membership information
+rale_result_t rale_get_cluster_info(rale_context_t *ctx, rale_cluster_info_t **info);
+
+// Get current leader information
+rale_result_t rale_get_leader(rale_context_t *ctx, char **leader_id, char **leader_addr);
+
+// Get current node state
+rale_result_t rale_get_state(rale_context_t *ctx, rale_node_state_t *state);
+\`\`\`
+
+**Configuration and Monitoring:**
+\`\`\`c
+// Get node statistics
+rale_result_t rale_get_stats(rale_context_t *ctx, rale_stats_t **stats);
+
+// Trigger a snapshot
+rale_result_t rale_trigger_snapshot(rale_context_t *ctx);
+
+// Set log level
+void rale_set_log_level(rale_log_level_t level);
+
+// Set custom logger
+void rale_set_logger(rale_logger_t logger, void *user_data);
+
+// Get error string for error code
+const char* rale_error_string(rale_result_t result);
+\`\`\``
+            },
+            {
+              title: 'Advanced Configuration',
+              content: `**Configuration Structure:**
+\`\`\`c
+typedef struct {
+    char node_id[64];              // Unique node identifier
+    char cluster_id[64];           // Cluster identifier
+    char listen_addr[256];         // Address to listen on
+    char data_dir[256];            // Data directory for persistence
+    uint32_t heartbeat_interval_ms; // Heartbeat interval in milliseconds
+    uint32_t election_timeout_ms;   // Election timeout in milliseconds
+    uint32_t max_log_entries;      // Maximum log entries before snapshot
+    uint32_t snapshot_threshold;   // Number of entries for snapshot trigger
+    bool enable_tls;               // Enable TLS encryption
+    char tls_cert_file[256];       // TLS certificate file
+    char tls_key_file[256];        // TLS private key file
+    char tls_ca_file[256];         // TLS CA certificate file
+    bool enable_metrics;           // Enable Prometheus metrics
+    uint16_t metrics_port;         // Metrics server port
+    uint32_t max_connections;      // Maximum concurrent connections
+    uint32_t send_buffer_size;     // Network send buffer size
+    uint32_t recv_buffer_size;     // Network receive buffer size
+} rale_config_t;
+\`\`\`
+
+**Performance Tuning:**
+\`\`\`c
+// Optimize for high throughput
+rale_config_t config = {
+    .heartbeat_interval_ms = 50,    // Faster heartbeats
+    .election_timeout_ms = 500,     // Shorter election timeout
+    .max_log_entries = 50000,       // Larger log before snapshot
+    .max_connections = 1000,        // More concurrent connections
+    .send_buffer_size = 1024 * 1024, // 1MB send buffer
+    .recv_buffer_size = 1024 * 1024  // 1MB receive buffer
+};
+
+// Optimize for low latency
+rale_config_t config = {
+    .heartbeat_interval_ms = 25,    // Very fast heartbeats
+    .election_timeout_ms = 250,     // Very short election timeout
+    .max_log_entries = 1000,        // Frequent snapshots
+    .send_buffer_size = 64 * 1024,  // Smaller buffers
+    .recv_buffer_size = 64 * 1024
+};
+\`\`\``
+            },
+            {
+              title: 'Error Handling and Debugging',
+              content: `**Error Codes:**
+\`\`\`c
+typedef enum {
+    RALE_SUCCESS = 0,              // Operation successful
+    RALE_ERROR_INVALID_ARG,        // Invalid argument
+    RALE_ERROR_OUT_OF_MEMORY,      // Memory allocation failed
+    RALE_ERROR_IO_ERROR,           // I/O operation failed
+    RALE_ERROR_NETWORK_ERROR,      // Network operation failed
+    RALE_ERROR_NOT_LEADER,         // Operation requires leader
+    RALE_ERROR_NOT_FOUND,          // Key not found
+    RALE_ERROR_ALREADY_EXISTS,     // Key already exists
+    RALE_ERROR_CLUSTER_NOT_READY,  // Cluster not ready
+    RALE_ERROR_TIMEOUT,            // Operation timeout
+    RALE_ERROR_INTERNAL            // Internal error
+} rale_result_t;
+\`\`\`
+
+**Error Handling Best Practices:**
+\`\`\`c
+rale_result_t result = rale_put(ctx, key, key_len, value, value_len);
+switch (result) {
+    case RALE_SUCCESS:
+        printf("Operation successful\\n");
+        break;
+    case RALE_ERROR_NOT_LEADER:
+        printf("Node is not the leader, retrying...\\n");
+        // Wait and retry
+        usleep(100000); // 100ms
+        result = rale_put(ctx, key, key_len, value, value_len);
+        break;
+    case RALE_ERROR_TIMEOUT:
+        printf("Operation timed out, increasing timeout...\\n");
+        // Increase timeout and retry
+        break;
+    default:
+        fprintf(stderr, "Operation failed: %s\\n", rale_error_string(result));
+        break;
+}
+\`\`\`
+
+**Debugging and Logging:**
+\`\`\`c
+// Set debug logging
+rale_set_log_level(RALE_LOG_DEBUG);
+
+// Custom logger
+void my_logger(rale_log_level_t level, const char *file, int line, const char *msg) {
+    const char *level_str[] = {"DEBUG", "INFO", "WARN", "ERROR"};
+    printf("[%s] %s:%d %s\\n", level_str[level], file, line, msg);
+}
+
+rale_set_logger(my_logger, NULL);
+\`\`\``
+            }
+          ]
+        },
+        'raled Documentation': {
+          sections: [
+            {
+              title: 'Daemon Process',
+              content: `raled is the cluster management daemon that runs on each node in the RALE cluster.
+
+**Configuration:**
+\`\`\`toml
+[cluster]
+name = "my-cluster"
+node_id = "node1"
+
+[raft]
+listen_addr = "0.0.0.0:8080"
+heartbeat_interval = 100ms
+election_timeout = 1000ms
+
+[storage]
+data_dir = "/var/lib/rale"
+\`\`\`
+
+**Starting the daemon:**
+\`\`\`bash
+raled --config /etc/rale/raled.conf
+\`\`\``
+            },
+            {
+              title: 'Cluster Management',
+              content: `raled handles:
+
+- **Leader Election**: Participates in Raft leader election
+- **Log Replication**: Replicates log entries across cluster
+- **Membership Changes**: Handles node addition/removal
+- **Network Communication**: Manages inter-node communication
+- **State Persistence**: Persists cluster state to disk
+
+The daemon automatically handles failover and recovery scenarios.`
+            }
+          ]
+        },
+        'ralectrl Documentation': {
+          sections: [
+            {
+              title: 'Command Line Interface Overview',
+              content: `ralectrl is the command-line interface for managing RALE clusters. It provides comprehensive cluster management, monitoring, and administrative capabilities through an intuitive CLI.
+
+**Key Features:**
+- **Cluster Management**: Create, configure, and manage RALE clusters
+- **Node Operations**: Add, remove, and monitor cluster nodes
+- **Key-Value Operations**: Store, retrieve, and manage distributed data
+- **Health Monitoring**: Real-time cluster health and performance monitoring
+- **Configuration Management**: Dynamic cluster configuration updates
+- **Backup and Recovery**: Cluster backup and disaster recovery operations
+- **Security Management**: Authentication, authorization, and TLS configuration
+
+**Architecture:**
+ralectrl communicates with RALE clusters through:
+1. **Direct Connection**: Connects to cluster nodes via TCP
+2. **Leader Discovery**: Automatically discovers and connects to the current leader
+3. **Failover Handling**: Automatically reconnects to new leader during failover
+4. **Batch Operations**: Supports batch operations for efficiency
+5. **Interactive Mode**: Provides interactive shell for complex operations`
+            },
+            {
+              title: 'Installation and Setup',
+              content: `**Installation:**
+ralectrl is installed as part of the RALE package:
+
+\`\`\`bash
+# Install RALE (includes ralectrl)
+git clone https://github.com/pgElephant/rale.git
+cd rale
+make && sudo make install
+
+# Verify installation
+ralectrl --version
+\`\`\`
+
+**Configuration:**
+\`\`\`bash
+# Set default cluster connection
+export RALE_CLUSTER="my-cluster"
+export RALE_NODE="node1:8080"
+
+# Or use configuration file
+cat > ~/.ralectrl.conf << EOF
+[default]
+cluster = my-cluster
+node = node1:8080
+timeout = 30s
+tls_enabled = false
+
+[clusters]
+my-cluster = node1:8080,node2:8080,node3:8080
+test-cluster = test1:8080,test2:8080
+EOF
+\`\`\`
+
+**Authentication:**
+\`\`\`bash
+# Set authentication credentials
+export RALE_USER="admin"
+export RALE_PASSWORD="secret"
+
+# Or use key file
+ralectrl auth login --username admin --password secret
+\`\`\``
+            },
+            {
+              title: 'Cluster Management Commands',
+              content: `**Cluster Creation and Configuration:**
+\`\`\`bash
+# Create a new cluster
+ralectrl cluster create --name my-cluster \\
+  --node node1:8080 \\
+  --replication-factor 3 \\
+  --heartbeat-interval 100ms \\
+  --election-timeout 1000ms
+
+# Get cluster information
+ralectrl cluster info --cluster my-cluster
+
+# List all clusters
+ralectrl cluster list
+
+# Delete a cluster
+ralectrl cluster delete --cluster my-cluster --force
+\`\`\`
+
+**Node Management:**
+\`\`\`bash
+# Add a node to cluster
+ralectrl cluster add-node --cluster my-cluster \\
+  --node node4:8080 \\
+  --data-dir /var/lib/rale/node4
+
+# Remove a node from cluster
+ralectrl cluster remove-node --cluster my-cluster \\
+  --node node4:8080 \\
+  --force
+
+# List cluster nodes
+ralectrl cluster nodes --cluster my-cluster
+
+# Get node status
+ralectrl cluster node-status --cluster my-cluster --node node1
+\`\`\`
+
+**Cluster Status and Health:**
+\`\`\`bash
+# Get cluster status
+ralectrl cluster status --cluster my-cluster
+
+# Get detailed cluster health
+ralectrl cluster health --cluster my-cluster --verbose
+
+# Monitor cluster in real-time
+ralectrl cluster monitor --cluster my-cluster --interval 5s
+
+# Get cluster statistics
+ralectrl cluster stats --cluster my-cluster
+\`\`\``
+            },
+            {
+              title: 'Key-Value Store Operations',
+              content: `**Basic Data Operations:**
+\`\`\`bash
+# Store a key-value pair
+ralectrl kv put --cluster my-cluster \\
+  --key "user:123" \\
+  --value '{"name": "John Doe", "email": "john@example.com", "age": 30}'
+
+# Store with TTL (time-to-live)
+ralectrl kv put --cluster my-cluster \\
+  --key "session:abc123" \\
+  --value "user_data" \\
+  --ttl 3600s
+
+# Retrieve a value
+ralectrl kv get --cluster my-cluster --key "user:123"
+
+# Retrieve with JSON formatting
+ralectrl kv get --cluster my-cluster --key "user:123" --format json
+
+# Delete a key
+ralectrl kv delete --cluster my-cluster --key "user:123"
+
+# Check if key exists
+ralectrl kv exists --cluster my-cluster --key "user:123"
+\`\`\`
+
+**Batch Operations:**
+\`\`\`bash
+# Batch put operations
+ralectrl kv batch-put --cluster my-cluster --file data.json
+
+# Batch get operations
+ralectrl kv batch-get --cluster my-cluster --keys key1,key2,key3
+
+# Batch delete operations
+ralectrl kv batch-delete --cluster my-cluster --keys key1,key2,key3
+\`\`\`
+
+**Key Listing and Searching:**
+\`\`\`bash
+# List all keys
+ralectrl kv list --cluster my-cluster
+
+# List keys with prefix
+ralectrl kv list --cluster my-cluster --prefix "user:"
+
+# List keys with pattern matching
+ralectrl kv list --cluster my-cluster --pattern "user:*"
+
+# Search keys with regex
+ralectrl kv search --cluster my-cluster --regex "user:[0-9]+"
+\`\`\``
+            },
+            {
+              title: 'Advanced Operations',
+              content: `**Snapshot and Backup:**
+\`\`\`bash
+# Create a cluster snapshot
+ralectrl snapshot create --cluster my-cluster \\
+  --output /backup/cluster-snapshot-$(date +%Y%m%d).tar.gz
+
+# Restore from snapshot
+ralectrl snapshot restore --cluster my-cluster \\
+  --input /backup/cluster-snapshot-20240101.tar.gz
+
+# List available snapshots
+ralectrl snapshot list --cluster my-cluster
+\`\`\`
+
+**Configuration Management:**
+\`\`\`bash
+# Get cluster configuration
+ralectrl config get --cluster my-cluster
+
+# Update cluster configuration
+ralectrl config set --cluster my-cluster \\
+  --heartbeat-interval 50ms \\
+  --election-timeout 500ms
+
+# Reset configuration to defaults
+ralectrl config reset --cluster my-cluster
+\`\`\`
+
+**Performance and Monitoring:**
+\`\`\`bash
+# Get performance metrics
+ralectrl metrics --cluster my-cluster
+
+# Monitor performance in real-time
+ralectrl metrics --cluster my-cluster --watch --interval 1s
+
+# Get detailed performance report
+ralectrl performance --cluster my-cluster --duration 60s
+\`\`\`
+
+**Security Operations:**
+\`\`\`bash
+# Enable TLS for cluster
+ralectrl security enable-tls --cluster my-cluster \\
+  --cert-file /etc/ssl/certs/rale.crt \\
+  --key-file /etc/ssl/private/rale.key
+
+# Add user authentication
+ralectrl security add-user --cluster my-cluster \\
+  --username admin \\
+  --password secret \\
+  --role administrator
+
+# List users
+ralectrl security list-users --cluster my-cluster
+\`\`\``
+            },
+            {
+              title: 'Interactive Mode and Scripting',
+              content: `**Interactive Mode:**
+\`\`\`bash
+# Start interactive mode
+ralectrl interactive --cluster my-cluster
+
+# In interactive mode:
+> cluster status
+> kv put user:456 '{"name": "Jane"}'
+> kv get user:456
+> exit
+\`\`\`
+
+**Scripting and Automation:**
+\`\`\`bash
+#!/bin/bash
+# Example automation script
+
+CLUSTER="my-cluster"
+
+# Check cluster health
+if ! ralectrl cluster health --cluster $CLUSTER --quiet; then
+    echo "Cluster is unhealthy!"
+    exit 1
+fi
+
+# Backup data
+ralectrl snapshot create --cluster $CLUSTER \\
+  --output "/backup/backup-$(date +%Y%m%d-%H%M%S).tar.gz"
+
+# Cleanup old keys
+ralectrl kv list --cluster $CLUSTER --prefix "temp:" | \\
+  xargs -I {} ralectrl kv delete --cluster $CLUSTER --key {}
+\`\`\`
+
+**Output Formatting:**
+\`\`\`bash
+# JSON output
+ralectrl cluster status --cluster my-cluster --format json
+
+# YAML output
+ralectrl cluster status --cluster my-cluster --format yaml
+
+# Table output (default)
+ralectrl cluster status --cluster my-cluster --format table
+
+# Custom output
+ralectrl kv list --cluster my-cluster --format custom \\
+  --template "{{.Key}}: {{.Value}}"
+\`\`\``
+            },
+            {
+              title: 'Troubleshooting and Debugging',
+              content: `**Common Issues and Solutions:**
+
+**1. Connection Issues:**
+\`\`\`bash
+# Test connectivity
+ralectrl cluster ping --cluster my-cluster
+
+# Check network connectivity
+ralectrl debug network --cluster my-cluster
+
+# Verbose connection logging
+ralectrl cluster status --cluster my-cluster --verbose --debug
+\`\`\`
+
+**2. Performance Issues:**
+\`\`\`bash
+# Check cluster performance
+ralectrl performance --cluster my-cluster --duration 60s
+
+# Monitor resource usage
+ralectrl metrics --cluster my-cluster --watch
+
+# Check for bottlenecks
+ralectrl debug bottlenecks --cluster my-cluster
+\`\`\`
+
+**3. Data Consistency Issues:**
+\`\`\`bash
+# Check data consistency
+ralectrl debug consistency --cluster my-cluster
+
+# Verify replication
+ralectrl debug replication --cluster my-cluster
+
+# Check for split-brain
+ralectrl debug split-brain --cluster my-cluster
+\`\`\`
+
+**Debug Commands:**
+\`\`\`bash
+# Enable debug logging
+ralectrl --debug cluster status --cluster my-cluster
+
+# Get detailed logs
+ralectrl logs --cluster my-cluster --node node1 --lines 100
+
+# Trace operations
+ralectrl trace --cluster my-cluster --operation kv-put --key test
+\`\`\``
+            }
+          ]
+        }
+      },
+      ram: {
+        'Getting Started': {
+          sections: [
+            {
+              title: 'Installation',
+              content: `RAM (Resilient Adaptive Manager) provides PostgreSQL clustering with automatic failover and Raft consensus.
+
+**Prerequisites:**
+- PostgreSQL 12+ (tested up to PostgreSQL 17)
+- Go 1.21+ (for building from source)
+- C compiler (GCC 7.0+ or Clang 6.0+)
+- PostgreSQL development headers
+- OpenSSL 1.1.1+ (for TLS support)
+
+**Build and Install:**
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/pgElephant/ram.git
+cd ram
+
+# Build all components
+make
+
+# Install system-wide
+sudo make install
+
+# Verify installation
+which ramd
+which ramctrl
+\`\`\`
+
+**Install pgraft Extension:**
+\`\`\`sql
+-- Connect to PostgreSQL
+\\c postgres
+
+-- Create the extension
+CREATE EXTENSION pgraft;
+
+-- Verify installation
+SELECT pgraft_version();
+\`\`\``
+            },
+            {
+              title: 'Components',
+              content: `RAM consists of three main components that work together to provide enterprise-grade PostgreSQL clustering:
+
+**1. pgraft (PostgreSQL Extension)**
+- Implements Raft consensus algorithm inside PostgreSQL
+- Provides automatic leader election and log replication
+- Ensures 100% split-brain protection
+- Runs as PostgreSQL background worker
+
+**2. ramd (Cluster Management Daemon)**
+- Monitors PostgreSQL instances and cluster health
+- Coordinates failover operations
+- Provides REST API for cluster management
+- Exposes Prometheus metrics for monitoring
+
+**3. ramctrl (Command-Line Control Utility)**
+- Command-line interface for cluster management
+- Supports cluster operations and configuration
+- Provides administrative functions
+- Enables scripting and automation
+
+**Architecture Overview:**
+\`\`\`
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   PostgreSQL    │    │   PostgreSQL    │    │   PostgreSQL    │
+│   + pgraft      │    │   + pgraft      │    │   + pgraft      │
+│   (Leader)      │◄──►│   (Follower)    │◄──►│   (Follower)    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         ▲                       ▲                       ▲
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│      ramd       │    │      ramd       │    │      ramd       │
+│  (Monitoring)   │    │  (Monitoring)   │    │  (Monitoring)   │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         ▲                       ▲                       ▲
+         └───────────────────────┼───────────────────────┘
+                                 ▼
+                    ┌─────────────────┐
+                    │    ramctrl      │
+                    │ (Administration)│
+                    └─────────────────┘
+\`\`\``
+            },
+            {
+              title: 'Quick Start',
+              content: `**Setting up a 3-node RAM cluster:**
+
+**1. Prepare all nodes:**
+\`\`\`bash
+# On each node, install PostgreSQL and RAM components
+# Configure PostgreSQL for replication
+\`\`\`
+
+**2. Configure PostgreSQL:**
+\`\`\`conf
+# postgresql.conf
+shared_preload_libraries = 'pgraft'
+wal_level = replica
+max_wal_senders = 10
+max_replication_slots = 10
+hot_standby = on
+\`\`\`
+
+**3. Initialize the cluster:**
+\`\`\`sql
+-- On node1 (will become leader)
+CREATE EXTENSION pgraft;
+SELECT pgraft_init();
+
+-- Check if leader
+SELECT pgraft_is_leader();
+\`\`\`
+
+**4. Add nodes to cluster:**
+\`\`\`sql
+-- From the leader node
+SELECT pgraft_add_node(2, '192.168.1.102', 7002);
+SELECT pgraft_add_node(3, '192.168.1.103', 7003);
+
+-- Verify cluster status
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**5. Start ramd on all nodes:**
+\`\`\`bash
+# Start cluster management daemon
+ramd --config /etc/ram/ramd.conf --daemon
+
+# Check status
+ramctrl status
+\`\`\`
+
+**6. Verify cluster health:**
+\`\`\`bash
+# Check cluster status
+ramctrl status
+
+# View cluster information
+ramctrl info
+
+# Check node health
+ramctrl health
+\`\`\``
+            }
+          ]
+        },
+        'pgraft Documentation': {
+          sections: [
+            {
+              title: 'Overview',
+              content: `**pgraft** is a PostgreSQL extension that implements the Raft consensus algorithm for distributed PostgreSQL clusters. It provides automatic leader election, log replication, and 100% split-brain protection.
+
+**Key Features:**
+- **Raft Consensus**: Based on etcd-io/raft implementation
+- **Leader Election**: Automatic with quorum-based voting
+- **Log Replication**: Consistent state across all nodes
+- **Split-Brain Protection**: 100% guaranteed via Raft quorum
+- **Leader-Only Node Addition**: Configuration changes only on leader, automatically replicated
+- **Worker-Driven Architecture**: PostgreSQL background worker actively drives Raft ticks
+- **Persistent Storage**: HardState, log entries, and snapshots survive crashes
+
+**Production Ready:**
+- 0 compilation errors/warnings
+- PostgreSQL C coding standards compliant
+- Persistent storage survives crashes
+- Worker-driven architecture`
+            },
+            {
+              title: 'Quick Example',
+              content: `\`\`\`sql
+-- Create extension
+CREATE EXTENSION pgraft;
+
+-- Initialize node
+SELECT pgraft_init();
+
+-- Check if current node is leader
+SELECT pgraft_is_leader();
+
+-- If leader, add other nodes
+SELECT pgraft_add_node(2, '127.0.0.1', 7002);
+SELECT pgraft_add_node(3, '127.0.0.1', 7003);
+
+-- Get cluster status
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\``
+            },
+            {
+              title: 'Architecture at a Glance',
+              content: `\`\`\`
+PostgreSQL Background Worker (C)
+    ↓ Every 100ms
+pgraft_go_tick() [C→Go]
+    ↓
+raftNode.Tick() [etcd-io/raft]
+    ↓
+Ready() messages
+    ↓
+raftProcessingLoop() [Goroutine]
+    ↓
+Persist → Send → Apply → Advance
+\`\`\`
+
+**Why pgraft?**
+
+**Split-Brain Protection:**
+pgraft provides **100% split-brain protection** through:
+- **Quorum Requirement**: Leader needs majority votes (N/2 + 1)
+- **Term Monotonicity**: Higher term always wins
+- **Log Completeness**: Only up-to-date nodes can be elected
+- **Single Leader Per Term**: Mathematical guarantee from Raft algorithm
+
+**Automatic Replication:**
+When you add a node to the leader, it **automatically appears on ALL other nodes**. You only need to run **ONE command on the leader**. The Raft consensus protocol handles everything else.
+
+**Performance:**
+- **Tick Interval**: 100ms (worker-driven)
+- **Election Timeout**: 1000ms (default, configurable)
+- **Heartbeat**: 100ms (default, configurable)
+- **Memory**: ~50MB per node
+- **CPU**: <1% idle, <5% during elections`
+            },
+            {
+              title: 'Installation',
+              content: `**Prerequisites:**
+- PostgreSQL 17+ (recommended)
+- Go 1.21+ (for building from source)
+- Standard build tools (gcc, make)
+- Root/sudo access for installation
+
+**Building from Source:**
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/pgElephant/pgraft.git
+cd pgraft
+
+# Build the extension
+make
+
+# Install the extension
+sudo make install
+
+# Verify installation
+ls -la $(pg_config --pkglibdir)/pgraft.so
+\`\`\`
+
+**Database Setup:**
+\`\`\`sql
+-- Connect to your PostgreSQL database
+\\c mydatabase
+
+-- Create the extension
+CREATE EXTENSION pgraft;
+
+-- Verify installation
+SELECT pgraft_version();
+\`\`\`
+
+**Quick Start:**
+\`\`\`sql
+-- Initialize the node
+SELECT pgraft_init();
+
+-- Check if current node is leader
+SELECT pgraft_is_leader();
+
+-- If leader, add other nodes
+SELECT pgraft_add_node(2, '127.0.0.1', 7002);
+SELECT pgraft_add_node(3, '127.0.0.1', 7003);
+
+-- Get cluster status
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\``
+            },
+            {
+              title: 'Core Functions',
+              content: `**Basic Operations:**
+\`\`\`sql
+-- Initialize a new node
+SELECT pgraft_init();
+
+-- Check if current node is leader
+SELECT pgraft_is_leader();
+
+-- Get cluster status
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Cluster Management:**
+\`\`\`sql
+-- Add a new node to the cluster (only on leader)
+SELECT pgraft_add_node(2, '127.0.0.1', 7002);
+SELECT pgraft_add_node(3, '127.0.0.1', 7003);
+
+-- Get cluster membership
+SELECT * FROM pgraft_get_cluster_info();
+
+-- Remove a node from the cluster
+SELECT pgraft_remove_node('node2');
+\`\`\`
+
+**Monitoring Functions:**
+\`\`\`sql
+-- Get detailed cluster status
+SELECT * FROM pgraft_cluster_status();
+
+-- Get node health information
+SELECT * FROM pgraft_node_health();
+
+-- Get consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+
+-- Get log information
+SELECT * FROM pgraft_get_log_info();
+\`\`\`
+
+**Administrative Functions:**
+\`\`\`sql
+-- Force a leader election (use with caution)
+SELECT pgraft_force_election();
+
+-- Pause consensus (for maintenance)
+SELECT pgraft_pause_consensus();
+
+-- Resume consensus
+SELECT pgraft_resume_consensus();
+
+-- Get consensus log entries
+SELECT * FROM pgraft_get_log_entries(100, 200);
+\`\`\``
+            },
+            {
+              title: 'Configuration',
+              content: `**Default Configuration:**
+\`\`\`sql
+-- Consensus parameters (defaults)
+pgraft.heartbeat_interval = '100ms'        -- Heartbeat interval
+pgraft.election_timeout = '1000ms'         -- Election timeout
+pgraft.max_log_entries = 10000            -- Max log entries before snapshot
+
+-- Network settings
+pgraft.listen_addr = '0.0.0.0:7001'       -- Address to listen on
+pgraft.data_dir = '/var/lib/pgraft'       -- Data directory for consensus state
+\`\`\`
+
+**Cluster Setup:**
+\`\`\`sql
+-- Set cluster configuration (if needed)
+ALTER SYSTEM SET pgraft.cluster_id = 'postgres-cluster';
+ALTER SYSTEM SET pgraft.node_id = 'node1';
+ALTER SYSTEM SET pgraft.listen_addr = '0.0.0.0:7001';
+
+-- Reload configuration
+SELECT pg_reload_conf();
+\`\`\`
+
+**Performance Tuning:**
+\`\`\`sql
+-- Adjust consensus parameters for your environment
+ALTER SYSTEM SET pgraft.heartbeat_interval = '50ms';   -- Faster heartbeats
+ALTER SYSTEM SET pgraft.election_timeout = '500ms';    -- Faster elections
+ALTER SYSTEM SET pgraft.max_log_entries = 5000;       -- Smaller log size
+
+-- Reload configuration
+SELECT pg_reload_conf();
+\`\`\``
+            },
+            {
+              title: 'Usage Examples',
+              content: `**Setting up a 3-node cluster:**
+\`\`\`sql
+-- On node1 (initial setup)
+CREATE EXTENSION pgraft;
+SELECT pgraft_init();
+
+-- Check if leader
+SELECT pgraft_is_leader();
+
+-- On node2
+CREATE EXTENSION pgraft;
+SELECT pgraft_init();
+
+-- On node3
+CREATE EXTENSION pgraft;
+SELECT pgraft_init();
+
+-- Add nodes to cluster (from leader)
+SELECT pgraft_add_node(2, '127.0.0.1', 7002);
+SELECT pgraft_add_node(3, '127.0.0.1', 7003);
+
+-- Get cluster status
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Monitoring cluster health:**
+\`\`\`sql
+-- Check cluster status
+SELECT * FROM pgraft_get_cluster_status();
+
+-- Check node health
+SELECT * FROM pgraft_node_health();
+
+-- Get consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+
+-- Monitor leader changes
+CREATE OR REPLACE FUNCTION monitor_leader_changes()
+RETURNS void AS $$
+DECLARE
+    current_leader text;
+    previous_leader text := '';
+BEGIN
+    LOOP
+        SELECT pgraft_is_leader() INTO current_leader;
+        
+        IF current_leader != previous_leader THEN
+            RAISE NOTICE 'Leader changed: %', current_leader;
+            previous_leader := current_leader;
+        END IF;
+        
+        PERFORM pg_sleep(1);
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+\`\`\`
+
+**Production Deployment:**
+\`\`\`sql
+-- Production-ready cluster setup
+CREATE EXTENSION pgraft;
+
+-- Initialize with production settings
+SELECT pgraft_init();
+
+-- Configure for production
+ALTER SYSTEM SET pgraft.heartbeat_interval = '50ms';
+ALTER SYSTEM SET pgraft.election_timeout = '500ms';
+SELECT pg_reload_conf();
+
+-- Add production nodes
+SELECT pgraft_add_node(2, 'prod-node2', 7002);
+SELECT pgraft_add_node(3, 'prod-node3', 7003);
+
+-- Verify cluster health
+SELECT * FROM pgraft_cluster_status();
+\`\`\``
+            },
+            {
+              title: 'Troubleshooting and Diagnostics',
+              content: `**Common Issues and Solutions:**
+
+**1. Node not joining cluster:**
+\`\`\`sql
+-- Check if node is initialized
+SELECT pgraft_is_leader();
+
+-- Check cluster status
+SELECT * FROM pgraft_get_cluster_status();
+
+-- Verify node is added correctly
+SELECT * FROM pgraft_get_cluster_info();
+\`\`\`
+
+**2. Cluster not forming:**
+\`\`\`sql
+-- Check if all nodes are initialized
+SELECT pgraft_init();
+
+-- Verify network connectivity
+-- Ensure all nodes can reach each other on configured ports
+
+-- Check consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+\`\`\`
+
+**3. Leader election issues:**
+\`\`\`sql
+-- Check current leader
+SELECT pgraft_is_leader();
+
+-- Force election if needed (use with caution)
+SELECT pgraft_force_election();
+
+-- Monitor consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+\`\`\`
+
+**Diagnostic Queries:**
+\`\`\`sql
+-- Get comprehensive cluster status
+SELECT 
+    c.node_id,
+    c.state,
+    c.is_leader,
+    h.last_heartbeat,
+    h.connection_count,
+    r.replication_lag,
+    m.election_count,
+    m.heartbeat_count
+FROM pgraft_cluster_status() c
+LEFT JOIN pgraft_node_health() h ON c.node_id = h.node_id
+LEFT JOIN pgraft_replication_lag() r ON c.node_id = r.node_id
+LEFT JOIN pgraft_consensus_metrics() m ON c.node_id = m.node_id;
+
+-- Check for split-brain conditions
+SELECT 
+    node_id,
+    state,
+    last_heartbeat,
+    CASE 
+        WHEN last_heartbeat < NOW() - INTERVAL '5 seconds' THEN 'STALE'
+        ELSE 'ACTIVE'
+    END as heartbeat_status
+FROM pgraft_node_health();
+\`\`\``
+            },
+            {
+              title: 'Architecture Deep Dive',
+              content: `**pgraft Architecture:**
+pgraft implements the Raft consensus algorithm as a PostgreSQL extension, providing distributed consensus with strong consistency guarantees.
+
+**Core Components:**
+1. **PostgreSQL Background Worker (C)**: Drives Raft ticks every 100ms
+2. **pgraft_go_tick() [C→Go]**: Bridge between C and Go components
+3. **raftNode.Tick() [etcd-io/raft]**: Core Raft implementation
+4. **raftProcessingLoop() [Goroutine]**: Handles Ready() messages
+5. **Persist → Send → Apply → Advance**: Raft state machine flow
+
+**Data Flow:**
+\`\`\`
+PostgreSQL Background Worker (C)
+    ↓ Every 100ms
+pgraft_go_tick() [C→Go]
+    ↓
+raftNode.Tick() [etcd-io/raft]
+    ↓
+Ready() messages
+    ↓
+raftProcessingLoop() [Goroutine]
+    ↓
+Persist → Send → Apply → Advance
+\`\`\`
+
+**Key Design Decisions:**
+- **Worker-Driven**: PostgreSQL background worker actively drives Raft ticks
+- **Persistent Storage**: HardState, log entries, and snapshots survive crashes
+- **Zero Configuration**: Minimal setup required for basic operation
+- **Production Ready**: 0 compilation errors/warnings, PostgreSQL C coding standards compliant`
+            },
+            {
+              title: 'Split-Brain Protection',
+              content: `**100% Split-Brain Protection:**
+pgraft provides mathematical guarantees against split-brain scenarios through the Raft consensus algorithm.
+
+**Protection Mechanisms:**
+1. **Quorum Requirement**: Leader needs majority votes (N/2 + 1)
+2. **Term Monotonicity**: Higher term always wins elections
+3. **Log Completeness**: Only up-to-date nodes can be elected leader
+4. **Single Leader Per Term**: Mathematical guarantee from Raft algorithm
+
+**Example Scenario:**
+\`\`\`sql
+-- 3-node cluster with network partition
+-- Node 1 and 2 can communicate, Node 3 is isolated
+
+-- Node 1 (Leader): Can maintain leadership with 2/3 votes
+SELECT pgraft_is_leader(); -- Returns true
+
+-- Node 3 (Isolated): Cannot become leader (only 1/3 votes)
+SELECT pgraft_is_leader(); -- Returns false
+
+-- When network heals, Node 3 catches up automatically
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Automatic Recovery:**
+- Isolated nodes automatically rejoin when connectivity is restored
+- Log replication ensures consistency across all nodes
+- No manual intervention required for split-brain recovery`
+            },
+            {
+              title: 'Performance Optimization',
+              content: `**Performance Characteristics:**
+- **Tick Interval**: 100ms (worker-driven)
+- **Election Timeout**: 1000ms (default, configurable)
+- **Heartbeat**: 100ms (default, configurable)
+- **Memory**: ~50MB per node
+- **CPU**: <1% idle, <5% during elections
+
+**Optimization Strategies:**
+\`\`\`sql
+-- For high-performance environments
+ALTER SYSTEM SET pgraft.heartbeat_interval = '50ms';   -- Faster heartbeats
+ALTER SYSTEM SET pgraft.election_timeout = '500ms';    -- Faster elections
+ALTER SYSTEM SET pgraft.max_log_entries = 5000;       -- Smaller log size
+
+-- For stability in unstable networks
+ALTER SYSTEM SET pgraft.heartbeat_interval = '200ms';  -- Slower heartbeats
+ALTER SYSTEM SET pgraft.election_timeout = '2000ms';   -- Longer elections
+ALTER SYSTEM SET pgraft.max_log_entries = 20000;      -- Larger log size
+
+SELECT pg_reload_conf();
+\`\`\`
+
+**Monitoring Performance:**
+\`\`\`sql
+-- Check consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+
+-- Monitor node health
+SELECT * FROM pgraft_node_health();
+
+-- Get cluster performance stats
+SELECT 
+    node_id,
+    is_leader,
+    heartbeat_count,
+    election_count,
+    log_size
+FROM pgraft_cluster_status();
+\`\`\``
+            },
+            {
+              title: 'Production Deployment',
+              content: `**Production Checklist:**
+
+**Prerequisites:**
+- PostgreSQL 17+ (recommended)
+- Go 1.21+ (for building from source)
+- Stable network connectivity between nodes
+- Sufficient disk space for logs and snapshots
+
+**Deployment Steps:**
+\`\`\`sql
+-- 1. Install extension on all nodes
+CREATE EXTENSION pgraft;
+
+-- 2. Initialize nodes
+SELECT pgraft_init();
+
+-- 3. Configure cluster (on leader)
+ALTER SYSTEM SET pgraft.cluster_id = 'production-cluster';
+ALTER SYSTEM SET pgraft.node_id = 'prod-node1';
+SELECT pg_reload_conf();
+
+-- 4. Add nodes to cluster (from leader)
+SELECT pgraft_add_node(2, 'prod-node2', 7002);
+SELECT pgraft_add_node(3, 'prod-node3', 7003);
+
+-- 5. Verify cluster health
+SELECT * FROM pgraft_cluster_status();
+\`\`\`
+
+**Monitoring Setup:**
+\`\`\`sql
+-- Create monitoring view
+CREATE VIEW pgraft_production_monitoring AS
+SELECT 
+    node_id,
+    is_leader,
+    last_heartbeat,
+    CASE 
+        WHEN last_heartbeat < NOW() - INTERVAL '5 seconds' THEN 'WARNING'
+        WHEN last_heartbeat < NOW() - INTERVAL '10 seconds' THEN 'CRITICAL'
+        ELSE 'OK'
+    END as health_status
+FROM pgraft_cluster_status();
+
+-- Schedule monitoring query
+SELECT * FROM pgraft_production_monitoring;
+\`\`\`
+
+**Backup Strategy:**
+- pgraft state is automatically persisted
+- Regular PostgreSQL backups include consensus state
+- Snapshots are taken automatically when log size exceeds threshold`
+            },
+            {
+              title: 'Best Practices',
+              content: `**Cluster Design:**
+- Use odd number of nodes (3, 5, 7) for optimal quorum
+- Ensure stable network connectivity between all nodes
+- Place nodes in different availability zones for fault tolerance
+
+**Configuration:**
+\`\`\`sql
+-- Recommended production settings
+ALTER SYSTEM SET pgraft.heartbeat_interval = '100ms';
+ALTER SYSTEM SET pgraft.election_timeout = '1000ms';
+ALTER SYSTEM SET pgraft.max_log_entries = 10000;
+
+-- For high-availability setups
+ALTER SYSTEM SET pgraft.heartbeat_interval = '50ms';
+ALTER SYSTEM SET pgraft.election_timeout = '500ms';
+\`\`\`
+
+**Operational Guidelines:**
+1. **Node Addition**: Always add nodes from the current leader
+2. **Maintenance**: Use pgraft_pause_consensus() for planned maintenance
+3. **Monitoring**: Set up alerts for heartbeat failures
+4. **Logs**: Monitor log size and snapshot frequency
+
+**Common Patterns:**
+\`\`\`sql
+-- Check cluster before maintenance
+SELECT * FROM pgraft_cluster_status();
+
+-- Pause consensus for maintenance
+SELECT pgraft_pause_consensus();
+
+-- Perform maintenance operations
+-- ...
+
+-- Resume consensus
+SELECT pgraft_resume_consensus();
+
+-- Verify cluster health
+SELECT * FROM pgraft_node_health();
+\`\`\``
+            }
+          ]
+        },
+        'ramd Documentation': {
+          sections: [
+            {
+              title: 'Cluster Daemon Overview',
+              content: `ramd is the cluster management daemon that monitors PostgreSQL instances and coordinates failover operations in RAM clusters.
+
+**Key Responsibilities:**
+- Monitor PostgreSQL instance health and availability
+- Coordinate failover operations when primary fails
+- Provide REST API for cluster management
+- Expose Prometheus metrics for monitoring
+- Manage cluster membership and node status
+- Handle automatic recovery and rebalancing
+
+**Architecture:**
+ramd runs as a system daemon on each cluster node and communicates with:
+- Local PostgreSQL instance via pgraft extension
+- Other ramd instances for cluster coordination
+- External monitoring systems via REST API and metrics
+- Load balancers and application clients for health checks`
+            },
+            {
+              title: 'Configuration',
+              content: `**Main Configuration File:** \`/etc/ram/ramd.conf\`
+
+\`\`\`toml
+# Cluster configuration
+[cluster]
+name = "postgres-cluster"
+node_id = "node1"
+data_dir = "/var/lib/ram"
+log_level = "info"
+
+# PostgreSQL connection settings
+[postgresql]
+host = "localhost"
+port = 5432
+database = "postgres"
+user = "postgres"
+password = "secure_password"
+ssl_mode = "prefer"
+
+# Raft consensus settings
+[raft]
+listen_addr = "0.0.0.0:8080"
+heartbeat_interval = "100ms"
+election_timeout = "1000ms"
+max_log_entries = 10000
+snapshot_threshold = 1000
+
+# Monitoring and metrics
+[monitoring]
+prometheus_port = 9090
+health_check_interval = "5s"
+metrics_retention = "24h"
+
+# API settings
+[api]
+listen_addr = "0.0.0.0:8081"
+enable_tls = false
+tls_cert_file = "/etc/ssl/certs/ramd.crt"
+tls_key_file = "/etc/ssl/private/ramd.key"
+
+# Logging configuration
+[logging]
+log_file = "/var/log/ram/ramd.log"
+max_file_size = "100MB"
+max_files = 5
+\`\`\`
+
+**Environment Variables:**
+\`\`\`bash
+export RAM_CLUSTER_NAME="postgres-cluster"
+export RAM_NODE_ID="node1"
+export RAM_DATA_DIR="/var/lib/ram"
+export RAM_LOG_LEVEL="info"
+\`\`\``
+            },
+            {
+              title: 'HTTP API Reference',
+              content: `ramd provides a comprehensive REST API for cluster management and monitoring.
+
+**Authentication:**
+All API endpoints support token-based authentication:
+\`\`\`bash
+curl -H "Authorization: Bearer <token>" http://localhost:8081/api/v1/status
+\`\`\`
+
+**Cluster Management Endpoints:**
+\`\`\`bash
+# Get cluster status
+GET /api/v1/cluster/status
+Response: {
+  "cluster_name": "postgres-cluster",
+  "leader": "node1",
+  "nodes": [
+    {"id": "node1", "role": "leader", "status": "healthy"},
+    {"id": "node2", "role": "follower", "status": "healthy"},
+    {"id": "node3", "role": "follower", "status": "healthy"}
+  ],
+  "health": "healthy"
+}
+
+# List all nodes
+GET /api/v1/cluster/nodes
+Response: [
+  {
+    "id": "node1",
+    "address": "192.168.1.101:5432",
+    "role": "leader",
+    "status": "healthy",
+    "last_heartbeat": "2024-01-27T10:30:00Z"
+  }
+]
+
+# Trigger manual failover
+POST /api/v1/cluster/failover
+Body: {"target_node": "node2", "force": false}
+
+# Add node to cluster
+POST /api/v1/cluster/nodes
+Body: {"id": "node4", "address": "192.168.1.104:5432"}
+
+# Remove node from cluster
+DELETE /api/v1/cluster/nodes/{node_id}
+\`\`\`
+
+**Monitoring Endpoints:**
+\`\`\`bash
+# Get Prometheus metrics
+GET /api/v1/metrics
+Response: Prometheus format metrics
+
+# Get cluster health
+GET /api/v1/health
+Response: {
+  "status": "healthy",
+  "checks": {
+    "postgresql": "ok",
+    "raft": "ok",
+    "disk_space": "ok"
+  }
+}
+
+# Get node health
+GET /api/v1/nodes/{node_id}/health
+Response: {
+  "node_id": "node1",
+  "status": "healthy",
+  "postgresql_uptime": "7d 12h 30m",
+  "replication_lag": "0ms",
+  "disk_usage": "45%"
+}
+\`\`\``
+            },
+            {
+              title: 'Operational Commands',
+              content: `**Starting ramd:**
+\`\`\`bash
+# Start as daemon
+ramd --config /etc/ram/ramd.conf --daemon
+
+# Start in foreground (for debugging)
+ramd --config /etc/ram/ramd.conf --foreground
+
+# Start with custom log level
+ramd --config /etc/ram/ramd.conf --log-level debug
+\`\`\`
+
+**Stopping ramd:**
+\`\`\`bash
+# Graceful shutdown
+ramd --stop
+
+# Force stop
+ramd --stop --force
+
+# Send SIGTERM to running daemon
+kill -TERM $(pidof ramd)
+\`\`\`
+
+**Status and Health Checks:**
+\`\`\`bash
+# Check daemon status
+ramd --status
+
+# Test configuration
+ramd --config /etc/ram/ramd.conf --test-config
+
+# Show version and build info
+ramd --version
+\`\`\`
+
+**Log Management:**
+\`\`\`bash
+# View logs in real-time
+tail -f /var/log/ram/ramd.log
+
+# Rotate logs
+ramd --rotate-logs
+
+# Check log file sizes
+ls -lh /var/log/ram/
+\`\`\``
+            },
+            {
+              title: 'Monitoring and Metrics',
+              content: `**Prometheus Metrics:**
+ramd exposes comprehensive metrics for monitoring cluster health and performance.
+
+**Key Metrics:**
+\`\`\`
+# Cluster metrics
+ram_cluster_nodes_total{cluster="postgres-cluster"} 3
+ram_cluster_leader_changes_total{cluster="postgres-cluster"} 2
+ram_cluster_health_status{cluster="postgres-cluster",status="healthy"} 1
+
+# Node metrics
+ram_node_status{cluster="postgres-cluster",node="node1",status="leader"} 1
+ram_node_uptime_seconds{cluster="postgres-cluster",node="node1"} 604800
+ram_node_replication_lag_ms{cluster="postgres-cluster",node="node2"} 5
+
+# PostgreSQL metrics
+ram_postgresql_connections{cluster="postgres-cluster",node="node1"} 25
+ram_postgresql_queries_per_second{cluster="postgres-cluster",node="node1"} 150
+ram_postgresql_wal_lag_bytes{cluster="postgres-cluster",node="node2"} 1024
+
+# Raft metrics
+ram_raft_term{cluster="postgres-cluster",node="node1"} 5
+ram_raft_committed_index{cluster="postgres-cluster",node="node1"} 10000
+ram_raft_applied_index{cluster="postgres-cluster",node="node1"} 9995
+\`\`\`
+
+**Health Check Endpoints:**
+\`\`\`bash
+# Basic health check
+curl http://localhost:8081/api/v1/health
+
+# Detailed health check
+curl http://localhost:8081/api/v1/health/detailed
+
+# Node-specific health
+curl http://localhost:8081/api/v1/nodes/node1/health
+\`\`\`
+
+**Alerting Rules (Prometheus):**
+\`\`\`yaml
+groups:
+- name: ram_cluster
+  rules:
+  - alert: ClusterDown
+    expr: ram_cluster_health_status == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "RAM cluster is down"
+      
+  - alert: NodeDown
+    expr: ram_node_status == 0
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "RAM node {{ $labels.node }} is down"
+      
+  - alert: HighReplicationLag
+    expr: ram_node_replication_lag_ms > 1000
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High replication lag on node {{ $labels.node }}"
+\`\`\``
+            }
+          ]
+        }
+      },
+      pgraft: {
+        'User Guide': {
+          sections: [
+            {
+              title: 'Complete Tutorial',
+              content: `**Step-by-step pgraft tutorial for setting up a production cluster.**
+
+**Prerequisites:**
+- 3 PostgreSQL servers (nodes)
+- Network connectivity between nodes
+- PostgreSQL 17+ installed on all nodes
+- Root/sudo access for installation
+
+**Step 1: Install pgraft on all nodes**
+\`\`\`bash
+# On each node
+git clone https://github.com/pgElephant/pgraft.git
+cd pgraft
+make && sudo make install
+\`\`\`
+
+**Step 2: Configure PostgreSQL**
+\`\`\`conf
+# postgresql.conf on all nodes
+shared_preload_libraries = 'pgraft'
+wal_level = replica
+max_wal_senders = 10
+max_replication_slots = 10
+hot_standby = on
+\`\`\`
+
+**Step 3: Initialize the cluster**
+\`\`\`sql
+-- On node1 (will become leader)
+\\c postgres
+CREATE EXTENSION pgraft;
+SELECT pgraft_init();
+\`\`\`
+
+**Step 4: Add nodes to cluster**
+\`\`\`sql
+-- From the leader (node1)
+SELECT pgraft_add_node(2, '192.168.1.102', 7002);
+SELECT pgraft_add_node(3, '192.168.1.103', 7003);
+
+-- Verify cluster formation
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Step 5: Test failover**
+\`\`\`sql
+-- Check current leader
+SELECT pgraft_is_leader();
+
+-- Simulate leader failure by stopping PostgreSQL on node1
+-- Watch automatic failover to node2 or node3
+\`\`\`
+
+**Step 6: Verify cluster health**
+\`\`\`sql
+-- Check cluster status
+SELECT * FROM pgraft_cluster_status();
+
+-- Check node health
+SELECT * FROM pgraft_node_health();
+
+-- Monitor consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+\`\`\``
+            },
+            {
+              title: 'Configuration Reference',
+              content: `**Complete configuration reference for pgraft.**
+
+**PostgreSQL Configuration:**
+\`\`\`conf
+# postgresql.conf
+shared_preload_libraries = 'pgraft'
+
+# WAL configuration for replication
+wal_level = replica
+max_wal_senders = 10
+max_replication_slots = 10
+hot_standby = on
+
+# Memory settings
+shared_buffers = 256MB
+work_mem = 4MB
+maintenance_work_mem = 64MB
+
+# Connection settings
+max_connections = 100
+\`\`\`
+
+**pgraft Configuration Parameters:**
+\`\`\`sql
+-- Consensus parameters
+pgraft.heartbeat_interval = '100ms'        -- Heartbeat frequency
+pgraft.election_timeout = '1000ms'         -- Election timeout
+pgraft.max_log_entries = 10000            -- Max log entries before snapshot
+
+-- Network settings
+pgraft.listen_addr = '0.0.0.0:7001'       -- Listen address
+pgraft.data_dir = '/var/lib/pgraft'       -- Data directory
+
+-- Performance tuning
+pgraft.batch_size = 100                   -- Replication batch size
+pgraft.pipeline_size = 10                 -- Pipeline size
+pgraft.compression_enabled = on           -- Enable log compression
+\`\`\`
+
+**Environment Variables:**
+\`\`\`bash
+export PGRAFT_CLUSTER_ID="my-cluster"
+export PGRAFT_NODE_ID="node1"
+export PGRAFT_LISTEN_ADDR="0.0.0.0:7001"
+export PGRAFT_DATA_DIR="/var/lib/pgraft"
+export PGRAFT_LOG_LEVEL="info"
+\`\`\`
+
+**Configuration Validation:**
+\`\`\`sql
+-- Check current configuration
+SELECT * FROM pgraft_get_config();
+
+-- Test configuration
+SELECT pgraft_test_config();
+
+-- Reload configuration
+SELECT pg_reload_conf();
+\`\`\``
+            },
+            {
+              title: 'SQL Functions',
+              content: `**Complete SQL function reference for pgraft.**
+
+**Cluster Management Functions:**
+\`\`\`sql
+-- Initialize a new node
+SELECT pgraft_init();
+
+-- Check if current node is leader
+SELECT pgraft_is_leader();
+
+-- Get cluster status
+SELECT * FROM pgraft_get_cluster_status();
+
+-- Get cluster information
+SELECT * FROM pgraft_get_cluster_info();
+\`\`\`
+
+**Node Management Functions:**
+\`\`\`sql
+-- Add a new node to the cluster (only on leader)
+SELECT pgraft_add_node(2, '127.0.0.1', 7002);
+SELECT pgraft_add_node(3, '127.0.0.1', 7003);
+
+-- Remove a node from the cluster
+SELECT pgraft_remove_node('node2');
+
+-- Get node health information
+SELECT * FROM pgraft_node_health();
+
+-- Get node statistics
+SELECT * FROM pgraft_get_node_stats('node1');
+\`\`\`
+
+**Leadership Functions:**
+\`\`\`sql
+-- Force a leader election (use with caution)
+SELECT pgraft_force_election();
+
+-- Get current leader information
+SELECT pgraft_get_leader();
+
+-- Check leadership status
+SELECT pgraft_is_leader();
+\`\`\`
+
+**Monitoring Functions:**
+\`\`\`sql
+-- Get consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+
+-- Get log information
+SELECT * FROM pgraft_get_log_info();
+
+-- Get log entries
+SELECT * FROM pgraft_get_log_entries(100, 200);
+
+-- Get performance statistics
+SELECT * FROM pgraft_get_performance_stats();
+\`\`\`
+
+**Administrative Functions:**
+\`\`\`sql
+-- Pause consensus (for maintenance)
+SELECT pgraft_pause_consensus();
+
+-- Resume consensus
+SELECT pgraft_resume_consensus();
+
+-- Trigger manual snapshot
+SELECT pgraft_trigger_snapshot();
+
+-- Get version information
+SELECT pgraft_version();
+\`\`\``
+            },
+            {
+              title: 'Cluster Operations',
+              content: `**Operations guide for managing pgraft clusters.**
+
+**Starting a Cluster:**
+\`\`\`sql
+-- 1. Initialize the first node (becomes leader)
+SELECT pgraft_init();
+
+-- 2. Add additional nodes
+SELECT pgraft_add_node(2, 'node2.example.com', 7002);
+SELECT pgraft_add_node(3, 'node3.example.com', 7003);
+
+-- 3. Verify cluster formation
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Adding Nodes:**
+\`\`\`sql
+-- Always add nodes from the current leader
+SELECT pgraft_is_leader(); -- Verify you're on leader
+
+-- Add new node
+SELECT pgraft_add_node(4, 'node4.example.com', 7002);
+
+-- Verify node was added
+SELECT * FROM pgraft_get_cluster_info();
+\`\`\`
+
+**Removing Nodes:**
+\`\`\`sql
+-- Remove a node (from leader)
+SELECT pgraft_remove_node('node4');
+
+-- Verify node was removed
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Manual Failover:**
+\`\`\`sql
+-- Check current leader
+SELECT pgraft_get_leader();
+
+-- Force failover to specific node
+SELECT pgraft_force_election();
+
+-- Monitor failover progress
+SELECT * FROM pgraft_consensus_metrics();
+\`\`\`
+
+**Maintenance Operations:**
+\`\`\`sql
+-- Pause consensus for maintenance
+SELECT pgraft_pause_consensus();
+
+-- Perform maintenance operations
+-- ...
+
+-- Resume consensus
+SELECT pgraft_resume_consensus();
+
+-- Verify cluster health after maintenance
+SELECT * FROM pgraft_cluster_status();
+\`\`\`
+
+**Backup Operations:**
+\`\`\`sql
+-- Trigger snapshot before backup
+SELECT pgraft_trigger_snapshot();
+
+-- Perform PostgreSQL backup
+-- pg_dump, pg_basebackup, etc.
+
+-- Verify cluster consistency
+SELECT * FROM pgraft_get_log_info();
+\`\`\``
+            }
+          ]
+        },
+        'Core Concepts': {
+          sections: [
+            {
+              title: 'Architecture',
+              content: `**Understanding pgraft's architecture and design principles.**
+
+**System Architecture:**
+pgraft implements the Raft consensus algorithm as a PostgreSQL extension, providing distributed consensus with strong consistency guarantees.
+
+**Core Components:**
+1. **PostgreSQL Background Worker (C)**: Drives Raft ticks every 100ms
+2. **pgraft_go_tick() [C→Go]**: Bridge between C and Go components  
+3. **raftNode.Tick() [etcd-io/raft]**: Core Raft implementation
+4. **raftProcessingLoop() [Goroutine]**: Handles Ready() messages
+5. **Persist → Send → Apply → Advance**: Raft state machine flow
+
+**Data Flow Architecture:**
+\`\`\`
+PostgreSQL Background Worker (C)
+    ↓ Every 100ms
+pgraft_go_tick() [C→Go]
+    ↓
+raftNode.Tick() [etcd-io/raft]
+    ↓
+Ready() messages
+    ↓
+raftProcessingLoop() [Goroutine]
+    ↓
+Persist → Send → Apply → Advance
+\`\`\`
+
+**Key Design Decisions:**
+- **Worker-Driven**: PostgreSQL background worker actively drives Raft ticks
+- **Persistent Storage**: HardState, log entries, and snapshots survive crashes
+- **Zero Configuration**: Minimal setup required for basic operation
+- **Production Ready**: 0 compilation errors/warnings, PostgreSQL C coding standards compliant
+
+**Integration with PostgreSQL:**
+- Runs as a PostgreSQL extension, not external process
+- Uses PostgreSQL's native storage and networking
+- Integrates with PostgreSQL's background worker system
+- Provides SQL interface for all operations`
+            },
+            {
+              title: 'Automatic Replication',
+              content: `**How pgraft handles automatic replication and consistency.**
+
+**Replication Model:**
+pgraft uses the Raft consensus algorithm to ensure consistent replication across all cluster nodes.
+
+**Automatic Replication Features:**
+- **Leader-Based Replication**: Only the leader accepts writes
+- **Log Replication**: All changes are replicated through Raft log
+- **Consistent State**: All nodes maintain identical state
+- **Automatic Recovery**: Failed nodes automatically catch up
+
+**Replication Process:**
+\`\`\`sql
+-- 1. Client writes to leader
+INSERT INTO users (name, email) VALUES ('John', 'john@example.com');
+
+-- 2. Leader replicates to followers via Raft
+-- This happens automatically in the background
+
+-- 3. All nodes maintain consistent state
+SELECT * FROM users; -- Returns same data on all nodes
+\`\`\`
+
+**Replication Guarantees:**
+- **Strong Consistency**: All reads see the latest committed writes
+- **Durability**: All writes are persisted before acknowledgment
+- **Ordering**: Writes are applied in the same order on all nodes
+- **Atomicity**: All-or-nothing semantics for multi-statement operations
+
+**Replication Monitoring:**
+\`\`\`sql
+-- Check replication lag
+SELECT * FROM pgraft_get_cluster_status();
+
+-- Monitor consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+
+-- Check node health
+SELECT * FROM pgraft_node_health();
+\`\`\`
+
+**Recovery Scenarios:**
+- **Node Recovery**: Failed nodes automatically rejoin and catch up
+- **Network Partition**: Split-brain protection ensures single leader
+- **Log Compaction**: Automatic snapshots prevent log growth
+- **State Reconciliation**: Conflicting states are resolved via Raft`
+            },
+            {
+              title: 'Split-Brain Protection',
+              content: `**How pgraft prevents split-brain scenarios.**
+
+**Split-Brain Prevention:**
+pgraft provides 100% split-brain protection through the Raft consensus algorithm.
+
+**Protection Mechanisms:**
+1. **Quorum Requirement**: Leader needs majority votes (N/2 + 1)
+2. **Term Monotonicity**: Higher term always wins elections
+3. **Log Completeness**: Only up-to-date nodes can be elected leader
+4. **Single Leader Per Term**: Mathematical guarantee from Raft algorithm
+
+**Example Scenarios:**
+\`\`\`sql
+-- 3-node cluster with network partition
+-- Nodes 1 and 2 can communicate, Node 3 is isolated
+
+-- Node 1 (Leader): Can maintain leadership with 2/3 votes
+SELECT pgraft_is_leader(); -- Returns true
+
+-- Node 3 (Isolated): Cannot become leader (only 1/3 votes)
+SELECT pgraft_is_leader(); -- Returns false
+
+-- When network heals, Node 3 catches up automatically
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Mathematical Guarantees:**
+- **Majority Requirement**: At least (N/2 + 1) nodes must agree
+- **Election Safety**: Only one leader can exist per term
+- **Leader Append-Only**: Leaders never overwrite or delete entries
+- **State Machine Safety**: All nodes apply same commands in same order
+
+**Network Partition Handling:**
+\`\`\`sql
+-- Monitor for network partitions
+SELECT 
+    node_id,
+    last_heartbeat,
+    CASE 
+        WHEN last_heartbeat < NOW() - INTERVAL '5 seconds' THEN 'PARTITIONED'
+        ELSE 'CONNECTED'
+    END as network_status
+FROM pgraft_node_health();
+\`\`\`
+
+**Recovery Procedures:**
+- **Automatic Recovery**: Isolated nodes rejoin when connectivity restored
+- **Log Synchronization**: All nodes synchronize to latest committed state
+- **State Reconciliation**: Conflicting states resolved via Raft protocol
+- **No Data Loss**: All committed operations are preserved`
+            }
+          ]
+        },
+        'Operations': {
+          sections: [
+            {
+              title: 'Monitoring',
+              content: `**Monitoring pgraft clusters in production.**
+
+**Key Metrics to Monitor:**
+- **Cluster Health**: Overall cluster status and node availability
+- **Leadership Status**: Current leader and election metrics
+- **Replication Lag**: Data synchronization across nodes
+- **Performance Metrics**: Throughput, latency, and resource usage
+
+**Built-in Monitoring Functions:**
+\`\`\`sql
+-- Get comprehensive cluster status
+SELECT * FROM pgraft_cluster_status();
+
+-- Monitor node health
+SELECT * FROM pgraft_node_health();
+
+-- Check consensus metrics
+SELECT * FROM pgraft_consensus_metrics();
+
+-- Get performance statistics
+SELECT * FROM pgraft_get_performance_stats();
+\`\`\`
+
+**Prometheus Metrics:**
+pgraft exposes metrics in Prometheus format for integration with monitoring systems.
+
+\`\`\`
+# Cluster metrics
+pgraft_cluster_nodes_total{cluster="my-cluster"} 3
+pgraft_cluster_leader_changes_total{cluster="my-cluster"} 2
+pgraft_cluster_health_status{cluster="my-cluster"} 1
+
+# Node metrics
+pgraft_node_status{cluster="my-cluster",node="node1",role="leader"} 1
+pgraft_node_uptime_seconds{cluster="my-cluster",node="node1"} 604800
+pgraft_node_replication_lag_ms{cluster="my-cluster",node="node2"} 5
+
+# Raft metrics
+pgraft_raft_term{cluster="my-cluster",node="node1"} 5
+pgraft_raft_committed_index{cluster="my-cluster",node="node1"} 10000
+pgraft_raft_applied_index{cluster="my-cluster",node="node1"} 9995
+\`\`\`
+
+**Health Check Queries:**
+\`\`\`sql
+-- Create monitoring views
+CREATE VIEW cluster_health AS
+SELECT 
+    node_id,
+    is_leader,
+    last_heartbeat,
+    CASE 
+        WHEN last_heartbeat < NOW() - INTERVAL '5 seconds' THEN 'STALE'
+        ELSE 'ACTIVE'
+    END as heartbeat_status
+FROM pgraft_node_health();
+
+-- Monitor for issues
+SELECT * FROM cluster_health WHERE heartbeat_status = 'STALE';
+\`\`\`
+
+**Alerting Rules:**
+\`\`\`yaml
+groups:
+- name: pgraft_alerts
+  rules:
+  - alert: ClusterDown
+    expr: pgraft_cluster_health_status == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "pgraft cluster is down"
+      
+  - alert: NodeDown
+    expr: pgraft_node_status == 0
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "pgraft node {{ $labels.node }} is down"
+      
+  - alert: HighReplicationLag
+    expr: pgraft_node_replication_lag_ms > 1000
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High replication lag on node {{ $labels.node }}"
+\`\`\``
+            },
+            {
+              title: 'Best Practices',
+              content: `**Production best practices for pgraft clusters.**
+
+**Cluster Design:**
+- **Node Count**: Use odd numbers (3, 5, 7) for optimal quorum
+- **Network**: Ensure stable, low-latency connectivity between nodes
+- **Hardware**: Use identical hardware for consistent performance
+- **Placement**: Distribute nodes across availability zones
+
+**Configuration Best Practices:**
+\`\`\`sql
+-- Recommended production settings
+ALTER SYSTEM SET pgraft.heartbeat_interval = '100ms';
+ALTER SYSTEM SET pgraft.election_timeout = '1000ms';
+ALTER SYSTEM SET pgraft.max_log_entries = 10000;
+
+-- For high-availability environments
+ALTER SYSTEM SET pgraft.heartbeat_interval = '50ms';
+ALTER SYSTEM SET pgraft.election_timeout = '500ms';
+
+-- For unstable networks
+ALTER SYSTEM SET pgraft.heartbeat_interval = '200ms';
+ALTER SYSTEM SET pgraft.election_timeout = '2000ms';
+\`\`\`
+
+**Operational Guidelines:**
+1. **Node Addition**: Always add nodes from the current leader
+2. **Maintenance**: Use pgraft_pause_consensus() for planned maintenance
+3. **Monitoring**: Set up comprehensive monitoring and alerting
+4. **Backups**: Regular backups include pgraft consensus state
+5. **Updates**: Test updates in staging environment first
+
+**Maintenance Procedures:**
+\`\`\`sql
+-- Pre-maintenance checklist
+SELECT * FROM pgraft_cluster_status();
+
+-- Pause consensus for maintenance
+SELECT pgraft_pause_consensus();
+
+-- Perform maintenance operations
+-- PostgreSQL updates, configuration changes, etc.
+
+-- Resume consensus
+SELECT pgraft_resume_consensus();
+
+-- Verify cluster health
+SELECT * FROM pgraft_node_health();
+\`\`\`
+
+**Security Considerations:**
+- **Network Security**: Use TLS for inter-node communication
+- **Authentication**: Implement proper authentication mechanisms
+- **Access Control**: Restrict administrative access to cluster functions
+- **Audit Logging**: Enable comprehensive audit logging
+
+**Performance Optimization:**
+\`\`\`sql
+-- Monitor performance metrics
+SELECT * FROM pgraft_get_performance_stats();
+
+-- Optimize for your workload
+-- Adjust batch sizes, timeouts, and resource limits
+
+-- Regular performance reviews
+-- Monitor trends and optimize based on usage patterns
+\`\`\`
+
+**Disaster Recovery:**
+- **Regular Backups**: Include pgraft state in backup procedures
+- **Recovery Testing**: Test recovery procedures regularly
+- **Documentation**: Maintain up-to-date operational documentation
+- **Runbooks**: Create detailed runbooks for common scenarios`
+            }
+          ]
+        },
+        'Development': {
+          sections: [
+            {
+              title: 'Building from Source',
+              content: `**Building pgraft from source code.**
+
+**Prerequisites:**
+- Go 1.21+
+- C compiler (GCC 7.0+ or Clang 6.0+)
+- PostgreSQL development headers
+- Git
+- Make
+
+**Build Process:**
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/pgElephant/pgraft.git
+cd pgraft
+
+# Build the extension
+make
+
+# Install system-wide
+sudo make install
+
+# Verify installation
+ls -la $(pg_config --pkglibdir)/pgraft.so
+\`\`\`
+
+**Development Build:**
+\`\`\`bash
+# Build with debug symbols
+make DEBUG=1
+
+# Build with custom PostgreSQL version
+make PG_CONFIG=/usr/local/pgsql/bin/pg_config
+
+# Build with specific Go version
+make GO_VERSION=1.21
+\`\`\`
+
+**Build Configuration:**
+\`\`\`bash
+# Enable development features
+make ENABLE_DEV_FEATURES=1
+
+# Build with custom flags
+make CFLAGS="-O2 -g" LDFLAGS="-Wl,--as-needed"
+
+# Cross-compilation support
+make GOOS=linux GOARCH=amd64
+\`\`\`
+
+**Verification:**
+\`\`\`bash
+# Check build artifacts
+ls -la pgraft.so
+file pgraft.so
+
+# Verify Go components
+go version
+go mod verify
+
+# Test installation
+make test-install
+\`\`\``
+            },
+            {
+              title: 'Testing',
+              content: `**Testing pgraft functionality.**
+
+**Unit Tests:**
+\`\`\`bash
+# Run Go unit tests
+go test ./...
+
+# Run with coverage
+go test -cover ./...
+
+# Run specific test packages
+go test ./raft ./storage ./network
+\`\`\`
+
+**Integration Tests:**
+\`\`\`bash
+# Run PostgreSQL extension tests
+make test
+
+# Run cluster tests
+make test-cluster
+
+# Run performance tests
+make test-performance
+\`\`\`
+
+**Test Configuration:**
+\`\`\`bash
+# Test with different PostgreSQL versions
+make test PG_VERSION=15
+make test PG_VERSION=16
+make test PG_VERSION=17
+
+# Test with different configurations
+make test CONFIG=minimal
+make test CONFIG=production
+make test CONFIG=debug
+\`\`\`
+
+**Manual Testing:**
+\`\`\`sql
+-- Test basic functionality
+CREATE EXTENSION pgraft;
+SELECT pgraft_version();
+
+-- Test cluster formation
+SELECT pgraft_init();
+SELECT pgraft_is_leader();
+
+-- Test node addition
+SELECT pgraft_add_node(2, '127.0.0.1', 7002);
+
+-- Test cluster operations
+SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
+
+**Performance Testing:**
+\`\`\`bash
+# Run benchmark tests
+go test -bench=. ./...
+
+# Run stress tests
+make test-stress
+
+# Run long-running tests
+make test-long
+\`\`\``
+            },
+            {
+              title: 'Contributing',
+              content: `**Contributing to pgraft development.**
+
+**Development Setup:**
+\`\`\`bash
+# Fork and clone the repository
+git clone https://github.com/your-username/pgraft.git
+cd pgraft
+
+# Set up development environment
+make dev-setup
+
+# Install development dependencies
+make dev-deps
+\`\`\`
+
+**Code Style:**
+- **C Code**: Follow PostgreSQL C coding standards
+- **Go Code**: Follow standard Go formatting (gofmt)
+- **Comments**: Use C-style comments (/* */) for C code
+- **Indentation**: Use tabs for C code, spaces for Go code
+
+**Development Workflow:**
+1. Create a feature branch
+2. Make your changes
+3. Add tests for new functionality
+4. Run the test suite
+5. Submit a pull request
+
+**Testing Requirements:**
+\`\`\`bash
+# All tests must pass
+make test
+
+# Code must be properly formatted
+make fmt
+
+# No linting errors
+make lint
+\`\`\`
+
+**Pull Request Process:**
+- **Description**: Provide clear description of changes
+- **Tests**: Include tests for new functionality
+- **Documentation**: Update documentation if needed
+- **Backwards Compatibility**: Consider impact on existing deployments
+
+**Issue Reporting:**
+When reporting issues, please include:
+- PostgreSQL version
+- Operating system
+- Steps to reproduce
+- Expected vs actual behavior
+- Relevant log output
+
+**Community Guidelines:**
+- Be respectful and constructive
+- Help others learn and grow
+- Follow the code of conduct
+- Contribute to discussions and reviews`
+            }
+          ]
+        }
+      },
+        'Getting Started': {
+          sections: [
+            {
+              title: 'Installation',
+              content: `pgraft is a PostgreSQL extension that implements Raft consensus for automatic leader election and failover.
+
+1. **Prerequisites**:
+   - PostgreSQL 16-18 with development headers
+   - Go 1.21+
+   - Build tools (GCC/Clang, Make, pkg-config)
+
+2. **Clone and build**:
+   \`\`\`bash
+   git clone https://github.com/pgElephant/pgraft.git
+   cd pgraft
+   make && sudo make install
+   \`\`\`
+
+3. **Configure PostgreSQL**:
+   \`\`\`conf
+   # Add to postgresql.conf
+   shared_preload_libraries = 'pgraft'
+   \`\`\`
+
+4. **Create extension**:
+   \`\`\`sql
+   CREATE EXTENSION pgraft;
+   \`\`\``
+            },
+            {
+              title: 'Quick Start',
+              content: `**Initialize cluster:**
+\`\`\`sql
+SELECT pgraft_init_cluster('my-cluster');
+\`\`\`
+
+**Add nodes:**
+\`\`\`sql
+SELECT pgraft_add_member('my-cluster', 'node1', 'host=192.168.1.10 port=5432');
+SELECT pgraft_add_member('my-cluster', 'node2', 'host=192.168.1.11 port=5432');
+SELECT pgraft_add_member('my-cluster', 'node3', 'host=192.168.1.12 port=5432');
+\`\`\`
+
+**Check status:**
+\`\`\`sql
+SELECT * FROM pgraft_cluster_status('my-cluster');
+SELECT * FROM pgraft_leader('my-cluster');
+\`\`\``
+            }
+          ]
+        },
+        'Installation': {
+          sections: [
+            {
+              title: 'Detailed Installation Guide',
+              content: `Complete installation guide for pgraft PostgreSQL Raft extension. Build from source, configure PostgreSQL, and enable the extension.
+
+**Prerequisites:**
+- PostgreSQL 16-18 with development headers
+- Go 1.21+ for Raft implementation
+- Build tools: GCC/Clang, Make, pkg-config
+
+**Installation Steps:**
+1. Clone repository and build
+2. Install extension files
+3. Configure PostgreSQL
+4. Create and verify extension
+
+Visit the full Installation page for detailed instructions.`
+            }
+          ]
+        },
+        'Configuration': {
+          sections: [
+            {
+              title: 'Configuration Guide',
+              content: `Configure pgraft extension and PostgreSQL for optimal Raft consensus performance.
+
+**PostgreSQL Configuration:**
+- shared_preload_libraries = 'pgraft'
+- Memory and connection settings
+- WAL configuration for replication
+
+**pgraft Parameters:**
+- heartbeat_interval: Leader heartbeat frequency
+- election_timeout: Timeout for leader election
+- snapshot_threshold: Log entries before snapshot
+
+Visit the full Configuration page for complete settings.`
+            }
+          ]
+        },
+        'SQL Functions': {
+          sections: [
+            {
+              title: 'SQL Function Reference',
+              content: `Complete reference for all pgraft SQL functions and procedures.
+
+**Cluster Management:**
+- pgraft_init_cluster(): Initialize new cluster
+- pgraft_add_member(): Add node to cluster
+- pgraft_remove_member(): Remove node from cluster
+
+**Leadership Functions:**
+- pgraft_leader(): Get current leader
+- pgraft_is_leader(): Check if node is leader
+- pgraft_force_election(): Trigger election
+
+Visit the full SQL Functions page for complete reference.`
+            }
+          ]
+        },
+        'Raft Protocol': {
+          sections: [
+            {
+              title: 'Raft Consensus Protocol',
+              content: `Understanding Raft consensus protocol implementation in pgraft PostgreSQL extension.
+
+**Raft Overview:**
+- Distributed consensus algorithm
+- Leader election and log replication
+- Safety properties and guarantees
+
+**Node States:**
+- Leader: Handles requests and replicates logs
+- Follower: Receives logs from leader
+- Candidate: Requests votes during election
+
+Visit the full Raft Protocol page for detailed explanation.`
+            }
+          ]
+        },
+        'Cluster Management': {
+          sections: [
+            {
+              title: 'Cluster Management Guide',
+              content: `Managing PostgreSQL clusters with pgraft Raft consensus for high availability and automatic failover.
+
+**Cluster Lifecycle:**
+1. Cluster creation and initialization
+2. Node addition and removal
+3. Health monitoring and maintenance
+
+**Failover Management:**
+- Automatic failover process
+- Manual failover procedures
+- Recovery and troubleshooting
+
+Visit the full Cluster Management page for operational procedures.`
+            }
+          ]
+        },
+        'Performance Tuning': {
+          sections: [
+            {
+              title: 'Performance Optimization',
+              content: `Optimize pgraft PostgreSQL Raft extension for maximum performance and throughput.
+
+**Configuration Strategies:**
+- High throughput configuration
+- Low latency configuration
+- Balanced performance settings
+
+**Monitoring and Tuning:**
+- Key performance metrics
+- Network optimization
+- PostgreSQL tuning
+
+Visit the full Performance Tuning page for optimization strategies.`
+            }
+          ]
+        },
+        'Troubleshooting': {
+          sections: [
+            {
+              title: 'Troubleshooting Guide',
+              content: `Resolve common issues and errors with pgraft PostgreSQL Raft extension.
+
+**Common Issues:**
+- Extension won't load
+- Cluster split-brain scenarios
+- High replication latency
+- Network connectivity problems
+
+**Diagnostic Commands:**
+- Health check procedures
+- Configuration validation
+- Performance analysis
+
+Visit the full Troubleshooting page for solutions and recovery procedures.`
+            }
+          ]
+        }
+      }
+    }
+
+  const docContent = content[productId]?.[docTitle]
+  if (!docContent) {
+    return (
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-8">
+        <p className="text-white/90">
+          Documentation content for "{docTitle}" is being prepared. 
+          Please check back soon or visit the full documentation page.
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-8">
+      {docContent.sections.map((section: any, index: number) => (
+        <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
+          <h3 className="text-xl font-thin text-white mb-4">
+            {section.title}
+          </h3>
+          <div className="prose prose-sm max-w-none">
+            {renderFormattedContent(section.content)}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+  // Function to get quick overview content
+  const getQuickOverview = (productId: string, docTitle: string) => {
+    const overviews: { [key: string]: { [key: string]: string } } = {
+      rale: {
+        'Getting Started': 'RALE (Resilient Adaptive Leader Election) is a distributed consensus system. Start by installing the core components: librale (C library), raled (daemon), and ralectrl (CLI tool).',
+        'librale Documentation': 'The librale C library provides the core consensus algorithms and distributed key-value store functionality. It implements Raft consensus with optimizations for high availability.',
+        'raled Documentation': 'raled is the cluster management daemon that runs on each node. It handles network communication, state management, and coordinates with other nodes in the cluster.',
+        'ralectrl Documentation': 'ralectrl is the command-line interface for managing RALE clusters. Use it to create clusters, add/remove nodes, and monitor cluster health.',
+        'Architecture Guide': 'RALE uses a distributed architecture with leader election, log replication, and membership management. The system is designed for high availability and fault tolerance.',
+        'API Reference': 'Complete API documentation for all RALE components including C library functions, daemon configuration, and CLI commands.',
+        'Examples': 'Code examples and use cases showing how to integrate RALE into your applications, from simple key-value operations to complex distributed systems.',
+        'Troubleshooting': 'Common issues and solutions for RALE deployment, including network problems, node failures, and configuration errors.'
+      },
+      fauxdb: {
+        'Getting Started': 'FauxDB is a MongoDB-compatible document database built in Rust with PostgreSQL backend. Install Rust, PostgreSQL, and configure FauxDB server.',
+        'Docker Setup': 'Deploy FauxDB using Docker containers. Includes docker-compose configurations for development and production environments.',
+        'Configuration': 'Configure FauxDB server using TOML configuration files. Set up database connections, authentication, and performance tuning.',
+        'MongoDB Compatibility': 'FauxDB implements MongoDB wire protocol for seamless compatibility with existing MongoDB drivers and applications.',
+        'API Reference': 'Complete API documentation for FauxDB including MongoDB-compatible operations, custom extensions, and administrative functions.',
+        'Performance Tuning': 'Optimize FauxDB performance including connection pooling, query optimization, and PostgreSQL backend tuning.',
+        'Security': 'Configure authentication, authorization, and encryption for FauxDB deployments. Includes SSL/TLS setup and user management.',
+        'Troubleshooting': 'Common issues and solutions for FauxDB deployment including connection problems, performance issues, and compatibility problems.'
+      }
+    }
+
+  return (
+      <p className="text-white/90 leading-relaxed">
+        {overviews[productId]?.[docTitle] || `This section covers ${docTitle} for ${productId.toUpperCase()}. Click "View Full Documentation" to see the complete guide.`}
+      </p>
+    )
+  }
+
+  const products = [
+    {
+      id: 'rale',
+      name: 'RALE',
+      title: 'Resilient Adaptive Leader Election',
+      icon: '/ico/RALE_HD.ico',
+      bg: { from: palette.navy, via: palette.slate, to: palette.navy },
+      description: 'Distributed consensus and key-value store system for high availability',
+      docs: [
+        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Guide', description: 'Install and configure RALE components' },
+        { title: 'librale Documentation', href: '/docs/rale/librale', type: 'Reference', description: 'Core C library API reference' },
+        { title: 'raled Documentation', href: '/docs/rale/raled', type: 'Reference', description: 'Daemon process configuration and management' },
+        { title: 'ralectrl Documentation', href: '/docs/rale/ralectrl', type: 'Reference', description: 'Command-line interface reference' },
+        { title: 'Architecture Guide', href: '/docs/rale/architecture', type: 'Guide', description: 'Understanding RALE architecture and design' },
+        { title: 'API Reference', href: '/docs/rale/api', type: 'Reference', description: 'Complete API documentation' },
+        { title: 'Examples', href: '/docs/rale/examples', type: 'Tutorial', description: 'Code examples and use cases' },
+        { title: 'Troubleshooting', href: '/docs/rale/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+      ]
+    },
+    {
+      id: 'ram',
+      name: 'RAM',
+      title: 'Resilient Adaptive Manager',
+      icon: '/ico/RAM_HD.ico',
+      bg: { from: palette.slate, via: palette.navy, to: palette.slate },
+      description: 'PostgreSQL clustering solution with automatic failover and Raft consensus',
+      docs: [
+        { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Guide', description: 'Install and configure RAM components' },
+        { title: 'ramd Documentation', href: '/docs/ram/ramd', type: 'Reference', description: 'Cluster management daemon' },
+        { title: 'ramctrl Documentation', href: '/docs/ram/ramctrl', type: 'Reference', description: 'Command-line control utility' },
+        { title: 'Docker Setup', href: '/docs/ram/docker', type: 'Tutorial', description: 'Containerized deployment guide' },
+        { title: 'Kubernetes', href: '/docs/ram/kubernetes', type: 'Tutorial', description: 'Kubernetes deployment with Helm' },
+        { title: 'Configuration', href: '/docs/ram/configuration', type: 'Guide', description: 'Advanced configuration options' },
+        { title: 'Monitoring', href: '/docs/ram/monitoring', type: 'Guide', description: 'Prometheus metrics and monitoring' },
+        { title: 'API Reference', href: '/docs/ram/api', type: 'Reference', description: 'REST API documentation' },
+        { title: 'Troubleshooting', href: '/docs/ram/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+      ]
+    },
+    {
+      id: 'pgraft',
+      name: 'pgraft',
+      title: 'PostgreSQL Raft Extension',
+      icon: '/ico/pgsql_raft_leader_HD.ico',
+      bg: { from: palette.tealDeep, via: palette.teal, to: palette.cyan },
+      description: 'PostgreSQL extension implementing Raft consensus protocol for distributed database systems',
+      docs: [
+        { title: 'Getting Started', href: '/docs/pgraft/getting-started', type: 'Guide', description: 'Install and configure pgraft extension' },
+        { title: 'Installation', href: '/docs/pgraft/installation', type: 'Guide', description: 'Build and install from source' },
+        { title: 'Configuration', href: '/docs/pgraft/configuration', type: 'Guide', description: 'PostgreSQL configuration settings' },
+        { title: 'SQL Functions', href: '/docs/pgraft/sql-functions', type: 'Reference', description: 'PostgreSQL SQL function reference' },
+        { title: 'Raft Protocol', href: '/docs/pgraft/raft-protocol', type: 'Guide', description: 'Understanding Raft consensus implementation' },
+        { title: 'Cluster Management', href: '/docs/pgraft/cluster-management', type: 'Guide', description: 'Managing PostgreSQL clusters with Raft' },
+        { title: 'Performance Tuning', href: '/docs/pgraft/performance', type: 'Guide', description: 'Optimization and performance considerations' },
+        { title: 'Troubleshooting', href: '/docs/pgraft/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+      ]
+    },
+    {
+      id: 'fauxdb',
+      name: 'FauxDB',
+      title: 'MongoDB Compatible Document Database',
+      icon: '/ico/FauxDB_HD.ico',
+      bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
+      description: 'MongoDB-compatible document database built in Rust with PostgreSQL backend',
+      docs: [
+        { title: 'Getting Started', href: '/docs/fauxdb/getting-started', type: 'Guide', description: 'Install and configure FauxDB' },
+        { title: 'Docker Setup', href: '/docs/fauxdb/docker', type: 'Tutorial', description: 'Containerized deployment guide' },
+        { title: 'Configuration', href: '/docs/fauxdb/configuration', type: 'Guide', description: 'Configuration file reference' },
+        { title: 'MongoDB Compatibility', href: '/docs/fauxdb/mongodb-compatibility', type: 'Guide', description: 'MongoDB wire protocol support' },
+        { title: 'API Reference', href: '/docs/fauxdb/api', type: 'Reference', description: 'Complete API documentation' },
+        { title: 'Performance Tuning', href: '/docs/fauxdb/performance', type: 'Guide', description: 'Optimization and tuning guide' },
+        { title: 'Security', href: '/docs/fauxdb/security', type: 'Guide', description: 'Authentication and authorization' },
+        { title: 'Troubleshooting', href: '/docs/fauxdb/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+      ]
+    }
+  ]
+
+  // Function to render content based on active section
+  const renderContent = () => {
+    if (!activeProduct || !activeSection) {
+      return (
+        <div>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-thin text-white mb-4">
+              Product Documentation
+            </h2>
+            <p className="text-lg text-white/90 max-w-3xl mx-auto">
+              Comprehensive documentation for all pgElephant products. Each product includes guides, API references, and tutorials to help you get started and master advanced features.
+            </p>
+            <div className="mt-4 inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-thin border border-white/30">
+              👈 Click on any documentation link in the sidebar to get started
+            </div>
+          </div>
+
+          {/* All Documentation Links - Simple List Layout */}
+          <div className="space-y-16">
+            {products.map((product) => (
+              <div key={product.id} className="border-b border-gray-200 pb-16 last:border-b-0">
+                {/* Product Header */}
+                <div className="flex items-center mb-6">
+                  <Image 
+                    src={product.icon} 
+                    alt={`${product.name} icon`}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 mr-4 object-contain"
+                  />
+                  <div>
+                    <h3 className="text-2xl font-thin text-white mb-1">
+                      {product.name}
+                    </h3>
+                    <p className="text-lg text-white/90">
+                      {product.title}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Product Description */}
+                <p className="text-white/90 mb-8 leading-relaxed">
+                  {product.description}
+                </p>
+
+                {/* Documentation Links - Simple Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  {product.docs.map((doc, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleSidebarClick(product.id, doc.title)}
+                      className="flex items-start gap-4 p-4 text-left bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-lg transition-colors group border border-white/20 hover:border-blue-300"
+                    >
+                      <div className="flex-shrink-0">
+                        <span className="inline-flex items-center px-2 py-1 rounded text-xs font-thin"
+                              style={{
+                                backgroundColor: doc.type === 'Guide' ? '#E0F2FE' : 
+                                               doc.type === 'Reference' ? '#F0FDF4' : '#FEF3C7',
+                                color: doc.type === 'Guide' ? '#0369A1' : 
+                                      doc.type === 'Reference' ? '#166534' : '#92400E'
+                              }}>
+                          {doc.type}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-thin text-white group-hover:text-blue-300 mb-1">
+                          {doc.title}
+                        </div>
+                        <p className="text-sm text-white/90">
+                          {doc.description}
+                        </p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-blue-300 transition-colors flex-shrink-0 mt-1" />
+                    </button>
+                  ))}
+                </div>
+
+                {/* Quick Actions */}
+                <div className="flex gap-4">
+                  <Link
+                    href={`/${product.id}`}
+                    className="inline-flex items-center px-4 py-2 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors font-thin"
+                  >
+                    Learn More
+                  </Link>
+                  <Link
+                    href="/download"
+                    className="inline-flex items-center px-4 py-2 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-colors font-thin"
+                    style={{ backgroundColor: palette.cyan }}
+                  >
+                    Download
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    // Find the active product and documentation
+    const product = products.find(p => p.id === activeProduct)
+    const doc = product?.docs.find(d => d.title === activeSection)
+
+    if (!product || !doc) return null
+
+  return (
+      <div>
+        {/* Breadcrumb */}
+        <nav className="flex mb-8" aria-label="Breadcrumb">
+          <ol className="inline-flex items-center space-x-1 md:space-x-3">
+            <li className="inline-flex items-center">
+              <button
+                onClick={() => { 
+                  setActiveProduct(null); 
+                  setActiveSection(null);
+                  setTimeout(() => {
+                    const contentElement = document.getElementById('docs-content')
+                    if (contentElement) {
+                      contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                  }, 100)
+                }}
+                className="inline-flex items-center text-sm font-thin text-white/90 hover:text-blue-300"
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                Documentation
+              </button>
+            </li>
+            <li>
+              <div className="flex items-center">
+                <ArrowRight className="w-4 h-4 text-white/60 mx-1" />
+                <button
+                  onClick={() => {
+                    setActiveSection(null);
+                    setTimeout(() => {
+                      const contentElement = document.getElementById('docs-content')
+                      if (contentElement) {
+                        contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      }
+                    }, 100)
+                  }}
+                  className="ml-1 text-sm font-thin text-white/90 hover:text-blue-300 md:ml-2"
+                >
+                  {product.name}
+                </button>
+              </div>
+            </li>
+            <li aria-current="page">
+              <div className="flex items-center">
+                <ArrowRight className="w-4 h-4 text-white/60 mx-1" />
+                <span className="ml-1 text-sm font-thin text-white/70 md:ml-2">
+                  {doc.title}
+                </span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+
+        {/* Content Header */}
+        <div className="mb-8">
+          <div className="flex items-center mb-4">
+            <Image 
+              src={product.icon} 
+              alt={`${product.name} icon`}
+              width={32}
+              height={32}
+              className="w-8 h-8 mr-3 object-contain"
+            />
+            <h1 className="text-3xl font-thin text-white">
+              {doc.title}
+            </h1>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-thin bg-white/20 backdrop-blur-sm text-white border border-white/30">
+              {doc.type}
+            </span>
+            <span className="text-sm text-white/60">•</span>
+            <span className="text-sm text-white/90">{product.name}</span>
+          </div>
+        </div>
+
+        {/* Content Body */}
+        <div className="prose prose-lg max-w-none">
+          <p className="text-lg text-white/90 mb-6">
+            {doc.description}
+          </p>
+          
+          {/* Dynamic content based on documentation type */}
+          {renderDocumentationContent(product.id, doc.title)}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="pt-16">
+      {/* Hero Section with elegant gradient background - same as main page */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
+          position: 'relative'
+        }}
+      >
+        {/* Elegant overlay gradient - same as Hero */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating orbs */}
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
+              backgroundSize: '48px 48px'
+            }}
+          />
+        </div>
+
+        <div className="container-wide py-28 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-thin text-white mb-6">
+              Documentation
+            </h1>
+            <p className="text-xl mb-8 leading-relaxed text-white">
+              Complete guides and references for pgElephant products. Professional documentation following enterprise standards.
+            </p>
+            
+            {/* Documentation Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <div className="text-center">
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2">3</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Products</div>
+          </div>
+              <div className="text-center">
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2">26</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Documentation Pages</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2">100%</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Open Source</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Overview */}
+      <div
+        className="py-16"
+        style={{ 
+          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
+        }}
+      >
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-thin text-white mb-8 text-center">
+              Documentation Structure
+            </h2>
+            <p className="text-lg text-white/90 text-center mb-12 max-w-3xl mx-auto">
+              Our documentation follows enterprise standards with comprehensive guides, API references, and tutorials for each product.
+            </p>
+            
+            {/* Documentation Categories - Simple List */}
+            <div className="flex flex-wrap justify-center gap-8 mb-16">
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-6 h-6" style={{ color: palette.cyan }} />
+                <div>
+                  <h3 className="font-thin text-white">Guides</h3>
+                  <p className="text-white/90 text-sm">Step-by-step installation and configuration</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <FileText className="w-6 h-6" style={{ color: palette.teal }} />
+                <div>
+                  <h3 className="font-thin text-white">Reference</h3>
+                  <p className="text-white/90 text-sm">Complete API documentation and functions</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <Container className="w-6 h-6" style={{ color: palette.orange }} />
+                <div>
+                  <h3 className="font-thin text-white">Tutorials</h3>
+                  <p className="text-white/90 text-sm">Docker, Kubernetes, and deployment guides</p>
+                </div>
+              </div>
+            </div>
+          </div>
+                    </div>
+                  </div>
+
+      {/* Two-Column Documentation Layout */}
+      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <div className="container-wide">
+          <div className="max-w-7xl mx-auto">
+                  <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
+              
+              {/* Left Sidebar - Navigation */}
+              <div className="lg:col-span-2">
+            <div className="sticky top-24">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <h3 className="text-lg font-thin text-white mb-4">Documentation</h3>
+                    
+                    {/* Navigation Menu */}
+                    <nav className="space-y-2">
+                      {products.map((product) => (
+                        <div key={product.id} className="mb-6">
+                          {/* Product Header */}
+                          <div className="flex items-center mb-3">
+                            <Image 
+                              src={product.icon} 
+                              alt={`${product.name} icon`}
+                              width={24}
+                              height={24}
+                              className="w-6 h-6 mr-2 object-contain"
+                            />
+                            <h4 className="text-sm font-thin text-white">
+                              {product.name}
+                            </h4>
+          </div>
+
+                                {/* Product Documentation Links */}
+                                <div className="ml-8 space-y-1">
+                                  {product.docs.map((doc, index) => (
+                                    <button
+                                      key={index}
+                                      onClick={() => handleSidebarClick(product.id, doc.title)}
+                                      className={`block w-full py-2 px-3 text-sm text-left rounded-md transition-colors group ${
+                                        activeProduct === product.id && activeSection === doc.title
+                                          ? 'bg-blue-50 text-blue-700 border-l-2 border-blue-500'
+                                          : 'text-white hover:text-white hover:bg-white/10 backdrop-blur-sm'
+                                      }`}
+                  >
+                    <div className="flex items-center justify-between">
+                                        <span className="flex-1">{doc.title}</span>
+                                        <span className={`text-xs px-2 py-0.5 rounded-full ${
+                                          activeProduct === product.id && activeSection === doc.title
+                                            ? 'bg-white/20 backdrop-blur-sm text-white border border-white/30'
+                                            : 'bg-white/10 backdrop-blur-sm text-white/80 group-hover:bg-white/20 border border-white/20'
+                                        }`}>
+                                          {doc.type}
+                      </span>
+                    </div>
+                                    </button>
+                ))}
+                                </div>
+                        </div>
+                    ))}
+                    </nav>
+              </div>
+            </div>
+          </div>
+
+              {/* Right Content - Dynamic Documentation */}
+              <div className="lg:col-span-4">
+                <div id="docs-content" className="max-w-6xl">
+                  {renderContent()}
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Start Section */}
+      <div 
+        className="py-20"
+        style={{ 
+          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
+        }}
+      >
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-thin text-white mb-6">
+              Quick Start
+            </h2>
+            <p className="text-xl text-white/90 mb-12 leading-relaxed">
+              Get up and running with pgElephant in minutes.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
+                  <Download className="w-8 h-8" style={{ color: palette.cyan }} />
+                    </div>
+                <h3 className="text-lg font-thin text-white mb-2">
+                  Download
+                </h3>
+                <p className="text-white/90">
+                  Get the latest version of pgElephant products.
+                </p>
+                    </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
+                  <Code className="w-8 h-8" style={{ color: palette.teal }} />
+                </div>
+                <h3 className="text-lg font-thin text-white mb-2">
+                  Install
+                </h3>
+                <p className="text-white/90">
+                  Follow our installation guides for your platform.
+                </p>
+                  </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
+                  <ExternalLink className="w-8 h-8" style={{ color: palette.orange }} />
+                </div>
+                <h3 className="text-lg font-thin text-white mb-2">
+                  Deploy
+                </h3>
+                <p className="text-white/90">
+                  Deploy to production with confidence.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <Link
+                href="/download"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-thin text-white drop-shadow-2xl shadow-2xl transition-all duration-200 shadow-lg"
+                style={{ backgroundColor: palette.orange }}
+              >
+                Get Started
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+                        </div>
+                  </div>
+                </div>
+            </div>
+
+            {/* Additional Resources */}
+      <div className="py-20 relative overflow-hidden border-t border-white/20" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <div className="container-wide">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-thin text-white mb-12 text-center">
+              Additional Resources
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                  <ExternalLink className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-thin text-white mb-2">GitHub</h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Source code, issues, and contributions
+                </p>
+                <Link
+                  href="https://github.com/pgElephant"
+                  className="text-sm font-thin"
+                  style={{ color: palette.cyan }}
+                >
+                  View on GitHub →
+                </Link>
+                  </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                  <Play className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-thin text-white mb-2">Community</h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Join our community for support
+                </p>
+                <Link
+                  href="/community"
+                  className="text-sm font-thin"
+                  style={{ color: palette.cyan }}
+                >
+                  Join Community →
+                </Link>
+                  </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                  <FileText className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-thin text-white mb-2">Blog</h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Latest updates and tutorials
+                </p>
+                <Link
+                  href="/blog"
+                  className="text-sm font-thin"
+                  style={{ color: palette.cyan }}
+                >
+                  Read Blog →
+                </Link>
+                  </div>
+              
+              <div className="text-center">
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                  <Code className="w-8 h-8 text-white" />
+              </div>
+                <h3 className="text-lg font-thin text-white mb-2">Support</h3>
+                <p className="text-white/90 text-sm mb-4">
+                  Get help and technical support
+                </p>
+                <Link
+                  href="/contact"
+                  className="text-sm font-thin"
+                  style={{ color: palette.cyan }}
+                >
+                  Contact Support →
+                </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default DocsPage 
