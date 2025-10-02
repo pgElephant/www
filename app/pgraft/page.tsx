@@ -45,7 +45,7 @@ function SectionHeading({ children, kicker, className = '' }: { children: React.
   return (
     <div className={`text-center mb-14 ${className}`}>
       {kicker && <div className="text-xs tracking-wider font-semibold text-indigo-500 uppercase mb-2">{kicker}</div>}
-      <h2 className={`text-3xl md:text-4xl font-bold ${className === 'text-white' ? 'text-white' : 'text-slate-900'} mb-3`}>{children}</h2>
+      <h2 className={`text-3xl md:text-4xl font-bold ${className.includes('text-white') ? 'text-white' : 'text-white'} mb-3`}>{children}</h2>
       <div className="mx-auto h-1 w-28 bg-gradient-to-r from-indigo-500 to-sky-500 rounded" />
     </div>
   );
