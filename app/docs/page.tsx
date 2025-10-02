@@ -1727,7 +1727,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                   </Link>
                   <Link
                     href="/download"
-                    className="inline-flex items-center px-4 py-2 rounded-lg text-white drop-shadow-lg transition-colors font-thin"
+                    className="inline-flex items-center px-4 py-2 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-colors font-thin"
                     style={{ backgroundColor: palette.cyan }}
                   >
                     Download
@@ -1847,7 +1847,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          background: `linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #94a3b8 100%)`,
           position: 'relative'
         }}
       >
@@ -1890,26 +1890,26 @@ docker exec -it fauxdb_fauxdb_1 mongosh
 
         <div className="container-wide py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-thin text-white drop-shadow-lg mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">
               Documentation
             </h1>
-            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-lg/90 drop-shadow-md">
+            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
               Complete guides and references for pgElephant products. Professional documentation following enterprise standards.
             </p>
             
             {/* Documentation Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
               <div className="text-center">
-                <div className="text-3xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-sm">3</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Products</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">3</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Products</div>
           </div>
               <div className="text-center">
-                <div className="text-3xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-sm">26</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Documentation Pages</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">26</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Documentation Pages</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-thin text-white drop-shadow-lg mb-2 drop-shadow-sm">100%</div>
-                <div className="text-sm text-white drop-shadow-lg/80 drop-shadow-sm">Open Source</div>
+                <div className="text-3xl font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow-sm">100%</div>
+                <div className="text-sm text-white drop-shadow-2xl shadow-2xl/80 drop-shadow-sm">Open Source</div>
               </div>
             </div>
           </div>
@@ -2092,7 +2092,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             <div className="mt-12">
               <Link
                 href="/download"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-thin text-white drop-shadow-lg transition-all duration-200 shadow-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-thin text-white drop-shadow-2xl shadow-2xl transition-all duration-200 shadow-lg"
                 style={{ backgroundColor: palette.orange }}
               >
                 Get Started

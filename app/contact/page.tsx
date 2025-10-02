@@ -127,7 +127,7 @@ Message: ${formData.message}
       <div 
         className="relative overflow-hidden"
         style={{ 
-          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          background: `linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #94a3b8 100%)`,
           position: 'relative'
         }}
       >
@@ -170,10 +170,10 @@ Message: ${formData.message}
 
   <div className="container-wide py-28 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-thin text-white drop-shadow-lg mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">
               Contact Us
             </h1>
-            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-lg/90 drop-shadow-md">
+            <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-2xl shadow-2xl/90 drop-shadow-md">
               Get in touch with our team for support, sales, or technical questions.
             </p>
           </div>
@@ -200,7 +200,7 @@ Message: ${formData.message}
               <div className="group bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="flex items-center mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mr-4 shadow-lg">
-                    <Mail className="w-7 h-7 text-white drop-shadow-lg" />
+                    <Mail className="w-7 h-7 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-thin text-gray-900 mb-1">
@@ -243,7 +243,7 @@ Message: ${formData.message}
                 <div className="mt-6 pt-6 border-t border-blue-100">
                   <Link
                     href="mailto:support@pgelephant.com"
-                    className="block w-full text-center py-3 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white drop-shadow-lg rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-thin"
+                    className="block w-full text-center py-3 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white drop-shadow-2xl shadow-2xl rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-thin"
                   >
                     Contact Support
                   </Link>
@@ -254,7 +254,7 @@ Message: ${formData.message}
               <div className="group bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="flex items-center mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-gray-700 to-slate-800 rounded-xl flex items-center justify-center mr-4 shadow-lg">
-                    <Github className="w-7 h-7 text-white drop-shadow-lg" />
+                    <Github className="w-7 h-7 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-thin text-gray-900 mb-1">
@@ -297,7 +297,7 @@ Message: ${formData.message}
                 <div className="mt-6 pt-6 border-t border-gray-100">
                   <Link
                     href="https://github.com/pgelephant"
-                    className="block w-full text-center py-3 px-6 bg-gradient-to-r from-gray-700 to-slate-800 text-white drop-shadow-lg rounded-lg hover:from-gray-800 hover:to-slate-900 transition-all duration-200 font-thin"
+                    className="block w-full text-center py-3 px-6 bg-gradient-to-r from-gray-700 to-slate-800 text-white drop-shadow-2xl shadow-2xl rounded-lg hover:from-gray-800 hover:to-slate-900 transition-all duration-200 font-thin"
                   >
                     Visit GitHub
                   </Link>
@@ -308,7 +308,7 @@ Message: ${formData.message}
               <div className="group bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="flex items-center mb-6">
                   <div className="w-14 h-14 bg-gradient-to-br from-green-600 to-emerald-600 rounded-xl flex items-center justify-center mr-4 shadow-lg">
-                    <MessageCircle className="w-7 h-7 text-white drop-shadow-lg" />
+                    <MessageCircle className="w-7 h-7 text-white drop-shadow-2xl shadow-2xl" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-thin text-gray-900 mb-1">
@@ -351,7 +351,7 @@ Message: ${formData.message}
                 <div className="mt-6 pt-6 border-t border-green-100">
                   <Link
                     href="/community"
-                    className="block w-full text-center py-3 px-6 bg-gradient-to-r from-green-600 to-emerald-600 text-white drop-shadow-lg rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 font-thin"
+                    className="block w-full text-center py-3 px-6 bg-gradient-to-r from-green-600 to-emerald-600 text-white drop-shadow-2xl shadow-2xl rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 font-thin"
                   >
                     Join Community
                   </Link>
@@ -468,7 +468,7 @@ Message: ${formData.message}
                 
                 <button
                   type="submit"
-                  className="w-full py-3 px-6 rounded-lg text-white drop-shadow-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+                  className="w-full py-3 px-6 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
                   style={{ backgroundColor: palette.orange }}
                   onMouseEnter={e => e.currentTarget.style.backgroundColor = palette.orangeDark}
                   onMouseLeave={e => e.currentTarget.style.backgroundColor = palette.orange}

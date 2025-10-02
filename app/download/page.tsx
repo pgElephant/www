@@ -194,14 +194,14 @@ const DownloadPage = () => {
           <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-cyan-200/10 to-transparent" />
         </div>
         <div className="container-wide mx-auto relative z-10 py-28">
-          <h1 className="text-5xl md:text-6xl font-thin text-white drop-shadow-lg mb-4 drop-shadow-lg tracking-tight">Download Center</h1>
-          <p className="text-xl md:text-2xl text-white drop-shadow-lg/80 mb-8 max-w-2xl mx-auto drop-shadow-md">
+          <h1 className="text-5xl md:text-6xl font-thin text-white drop-shadow-2xl shadow-2xl mb-4 drop-shadow-lg tracking-tight">Download Center</h1>
+          <p className="text-xl md:text-2xl text-white drop-shadow-2xl shadow-2xl/80 mb-8 max-w-2xl mx-auto drop-shadow-md">
             Official, production-grade releases. Secure, fast, and trusted by global enterprises.
           </p>
           {/* Trust Bar */}
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {trustBar.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 backdrop-blur-sm/10 text-white drop-shadow-lg border border-white/20 text-base font-thin shadow-sm">
+              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 backdrop-blur-sm/10 text-white drop-shadow-2xl shadow-2xl border border-white/20 text-base font-thin shadow-sm">
                 <item.icon className="w-5 h-5" />
                 {item.label}
               </div>
@@ -212,8 +212,8 @@ const DownloadPage = () => {
             {downloadStats.map((stat, i) => (
               <div key={i} className="flex flex-col items-center bg-white/95 backdrop-blur-sm/10 px-6 py-4 rounded-xl min-w-[120px]">
                 <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
-                <span className="text-2xl font-thin text-white drop-shadow-lg">{stat.value}</span>
-                <span className="text-xs text-white drop-shadow-lg/80">{stat.label}</span>
+                <span className="text-2xl font-thin text-white drop-shadow-2xl shadow-2xl">{stat.value}</span>
+                <span className="text-xs text-white drop-shadow-2xl shadow-2xl/80">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -307,15 +307,15 @@ const DownloadPage = () => {
         </div>
         <div className="container-wide mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-lg mb-6 drop-shadow-lg">Quick Start</h2>
-            <p className="text-lg text-white drop-shadow-lg/90 mb-12 leading-relaxed drop-shadow-md">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
+            <h2 className="text-3xl md:text-4xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6 drop-shadow-lg">Quick Start</h2>
+            <p className="text-lg text-white drop-shadow-2xl shadow-2xl/90 mb-12 leading-relaxed drop-shadow-md">Get up and running with pgElephant in minutes. Choose your preferred installation method below.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {installationMethods.map((method, i) => (
                 <div key={i} className="bg-white/95 backdrop-blur-sm/10 rounded-xl shadow p-6 flex flex-col items-center border border-white/20 backdrop-blur-sm">
                   <method.icon className="w-10 h-10 mb-3 text-cyan-200" />
-                  <h3 className="text-lg font-thin text-white drop-shadow-lg mb-2 drop-shadow">{method.title}</h3>
-                  <p className="text-white drop-shadow-lg/80 text-sm mb-3">{method.description}</p>
-                  <ol className="text-left text-xs text-white drop-shadow-lg/80 space-y-1 list-decimal list-inside">
+                  <h3 className="text-lg font-thin text-white drop-shadow-2xl shadow-2xl mb-2 drop-shadow">{method.title}</h3>
+                  <p className="text-white drop-shadow-2xl shadow-2xl/80 text-sm mb-3">{method.description}</p>
+                  <ol className="text-left text-xs text-white drop-shadow-2xl shadow-2xl/80 space-y-1 list-decimal list-inside">
                     {method.steps.map((step, j) => (
                       <li key={j}>{step}</li>
                     ))}
@@ -323,7 +323,7 @@ const DownloadPage = () => {
                 </div>
               ))}
             </div>
-            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white drop-shadow-lg transition-all duration-200 shadow-lg text-lg font-thin bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
+            <Link href="/docs" className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-all duration-200 shadow-lg text-lg font-thin bg-orange-500 hover:bg-orange-600 focus:bg-orange-600">
               Get Started
               <ArrowRight className="w-5 h-5" />
             </Link>
