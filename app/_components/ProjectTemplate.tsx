@@ -10,8 +10,8 @@ type SectionHeadingProps = {
 function SectionHeading({ children, kicker, className = '' }: SectionHeadingProps) {
   return (
     <div className={`text-center mb-14 ${className}`}>
-      {kicker && <div className="text-xs tracking-wider font-semibold text-indigo-500 uppercase mb-2">{kicker}</div>}
-      <h2 className={`text-3xl md:text-4xl font-bold ${className === 'text-white' ? 'text-white' : 'text-slate-900'} mb-3`}>{children}</h2>
+      {kicker && <div className="text-xs tracking-wider font-thin text-indigo-500 uppercase mb-2">{kicker}</div>}
+      <h2 className={`text-3xl md:text-4xl font-thin ${className === 'text-white' ? 'text-white' : 'text-slate-900'} mb-3`}>{children}</h2>
       <div className="mx-auto h-1 w-28 bg-gradient-to-r from-indigo-500 to-sky-500 rounded" />
     </div>
   );
@@ -24,7 +24,7 @@ type FeatureCardProps = {
 function FeatureCard({ title, desc }: FeatureCardProps) {
   return (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate-200 p-6 flex flex-col">
-      <h4 className="font-semibold text-lg mb-2 text-slate-900">{title}</h4>
+      <h4 className="font-thin text-lg mb-2 text-slate-900">{title}</h4>
       <p className="text-slate-600 text-sm leading-relaxed flex-1">{desc}</p>
     </div>
   );
@@ -34,7 +34,7 @@ type BadgeProps = {
   children: React.ReactNode;
 };
 function Badge({ children }: BadgeProps) {
-  return <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">{children}</span>;
+  return <span className="inline-block bg-slate-100 text-slate-700 text-xs font-thin px-2.5 py-1 rounded-md border border-slate-200 mr-2 mb-2">{children}</span>;
 }
 
 type ProjectTemplateProps = {
@@ -109,7 +109,7 @@ export default function ProjectTemplate({
                   <div key={i} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white hover:shadow-sm transition-all border-l-3 border-transparent hover:border-indigo-400">
                     <span className={`${f.iconColor} mt-0.5 flex-shrink-0`}>{f.icon}</span>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-base mb-1 text-slate-900 leading-tight">{f.title}</h4>
+                      <h4 className="font-thin text-base mb-1 text-slate-900 leading-tight">{f.title}</h4>
                       <p className="text-slate-600 text-sm leading-relaxed">{f.desc}</p>
                     </div>
                   </div>
@@ -145,7 +145,7 @@ export default function ProjectTemplate({
               <div className="grid sm:grid-cols-2 gap-6">
                 {docsLinks.map((doc: { href: string; title: string; desc: string }, i: number) => (
                   <Link key={i} href={doc.href} className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
-                    <h3 className="font-semibold text-lg text-slate-900 mb-2">{doc.title}</h3>
+                    <h3 className="font-thin text-lg text-slate-900 mb-2">{doc.title}</h3>
                     <p className="text-sm text-slate-600">{doc.desc}</p>
                   </Link>
                 ))}

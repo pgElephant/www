@@ -1652,7 +1652,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Comprehensive documentation for all pgElephant products. Each product includes guides, API references, and tutorials to help you get started and master advanced features.
             </p>
-            <div className="mt-4 inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">
+            <div className="mt-4 inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-thin">
               👈 Click on any documentation link in the sidebar to get started
             </div>
           </div>
@@ -1694,7 +1694,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                       className="flex items-start gap-4 p-4 text-left bg-gray-50 hover:bg-blue-50 rounded-lg transition-colors group border border-gray-200 hover:border-blue-300"
                     >
                       <div className="flex-shrink-0">
-                        <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium"
+                        <span className="inline-flex items-center px-2 py-1 rounded text-xs font-thin"
                               style={{
                                 backgroundColor: doc.type === 'Guide' ? '#E0F2FE' : 
                                                doc.type === 'Reference' ? '#F0FDF4' : '#FEF3C7',
@@ -1705,7 +1705,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                         </span>
                       </div>
                       <div className="flex-1">
-                        <div className="font-medium text-gray-900 group-hover:text-blue-700 mb-1">
+                        <div className="font-thin text-gray-900 group-hover:text-blue-700 mb-1">
                           {doc.title}
                         </div>
                         <p className="text-sm text-gray-600">
@@ -1721,13 +1721,13 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 <div className="flex gap-4">
                   <Link
                     href={`/${product.id}`}
-                    className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-medium"
+                    className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-thin"
                   >
                     Learn More
                   </Link>
                   <Link
                     href="/download"
-                    className="inline-flex items-center px-4 py-2 rounded-lg text-white transition-colors font-medium"
+                    className="inline-flex items-center px-4 py-2 rounded-lg text-white transition-colors font-thin"
                     style={{ backgroundColor: palette.cyan }}
                   >
                     Download
@@ -1763,7 +1763,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                     }
                   }, 100)
                 }}
-                className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
+                className="inline-flex items-center text-sm font-thin text-gray-700 hover:text-blue-600"
               >
                 <BookOpen className="w-4 h-4 mr-2" />
                 Documentation
@@ -1782,7 +1782,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                       }
                     }, 100)
                   }}
-                  className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2"
+                  className="ml-1 text-sm font-thin text-gray-700 hover:text-blue-600 md:ml-2"
                 >
                   {product.name}
                 </button>
@@ -1791,7 +1791,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             <li aria-current="page">
               <div className="flex items-center">
                 <ArrowRight className="w-4 h-4 text-gray-400 mx-1" />
-                <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2">
+                <span className="ml-1 text-sm font-thin text-gray-500 md:ml-2">
                   {doc.title}
                 </span>
               </div>
@@ -1814,7 +1814,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
             </h1>
           </div>
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-thin"
                   style={{
                     backgroundColor: doc.type === 'Guide' ? '#E0F2FE' : 
                                    doc.type === 'Reference' ? '#F0FDF4' : '#FEF3C7',
@@ -2122,7 +2122,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 </p>
                 <Link
                   href="https://github.com/pgElephant"
-                  className="text-sm font-medium"
+                  className="text-sm font-thin"
                   style={{ color: palette.cyan }}
                 >
                   View on GitHub →
@@ -2139,7 +2139,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 </p>
                 <Link
                   href="/community"
-                  className="text-sm font-medium"
+                  className="text-sm font-thin"
                   style={{ color: palette.cyan }}
                 >
                   Join Community →
@@ -2156,7 +2156,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 </p>
                 <Link
                   href="/blog"
-                  className="text-sm font-medium"
+                  className="text-sm font-thin"
                   style={{ color: palette.cyan }}
                 >
                   Read Blog →
@@ -2173,7 +2173,7 @@ docker exec -it fauxdb_fauxdb_1 mongosh
                 </p>
                 <Link
                   href="/contact"
-                  className="text-sm font-medium"
+                  className="text-sm font-thin"
                   style={{ color: palette.cyan }}
                 >
                   Contact Support →

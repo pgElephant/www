@@ -216,11 +216,11 @@ const FeaturesList = () => {
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-semibold text-primary-200 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-thin text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
             Enterprise Solutions
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-display font-thin mb-6 leading-tight">
             <span className="text-white">
               PostgreSQL Enterprise
             </span>
@@ -229,7 +229,7 @@ const FeaturesList = () => {
               Platform Suite
             </span>
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto font-medium">
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto font-thin">
             Comprehensive database solutions for enterprise-grade high availability, distributed consensus, and seamless data migration.
           </p>
         </div>
@@ -239,17 +239,17 @@ const FeaturesList = () => {
           {/* Enterprise Solutions Matrix */}
           <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 overflow-hidden mb-12">
             <div className="p-8 border-b border-slate-400/30">
-              <h3 className="text-2xl font-bold text-white mb-2">Enterprise Database Solutions</h3>
+              <h3 className="text-2xl font-thin text-white mb-2">Enterprise Database Solutions</h3>
               <p className="text-slate-300">Comprehensive platform comparison for enterprise database infrastructure</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-400/30 bg-white/5">
-                    <th className="text-left p-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Solution</th>
-                    <th className="text-left p-4 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/6">Category</th>
-                    <th className="text-left px-4 py-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/4">Enterprise Features</th>
-                    <th className="text-left px-8 py-6 text-slate-200 font-semibold text-sm uppercase tracking-wider w-1/3">Deployment</th>
+                    <th className="text-left p-6 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/4">Solution</th>
+                    <th className="text-left p-4 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/6">Category</th>
+                    <th className="text-left px-4 py-6 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/4">Enterprise Features</th>
+                    <th className="text-left px-8 py-6 text-slate-200 font-thin text-sm uppercase tracking-wider w-1/3">Deployment</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -263,7 +263,7 @@ const FeaturesList = () => {
                               {project.icon}
                             </div>
                             <div>
-                              <h3 className="text-lg font-bold text-white">{project.name}</h3>
+                              <h3 className="text-lg font-thin text-white">{project.name}</h3>
                               <p className={`text-sm ${colors.accent}`}>{project.description}</p>
                             </div>
                           </div>
@@ -272,20 +272,20 @@ const FeaturesList = () => {
                           <div className="space-y-2">
                             {project.name === 'RAM' && (
                               <>
-                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-medium rounded-full text-center">High Availability</span>
-                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-medium rounded-full text-center">Clustering</span>
+                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-thin rounded-full text-center">High Availability</span>
+                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-thin rounded-full text-center">Clustering</span>
                               </>
                             )}
                             {project.name === 'pgraft' && (
                               <>
-                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-medium rounded-full text-center">Consensus Protocol</span>
-                                <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-medium rounded-full text-center">Extension</span>
+                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-thin rounded-full text-center">Consensus Protocol</span>
+                                <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-thin rounded-full text-center">Extension</span>
                               </>
                             )}
                             {project.name === 'FauxDB' && (
                               <>
-                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-medium rounded-full text-center">Migration Tool</span>
-                                <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-medium rounded-full text-center">Compatibility</span>
+                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-thin rounded-full text-center">Migration Tool</span>
+                                <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-thin rounded-full text-center">Compatibility</span>
                               </>
                             )}
                           </div>
@@ -295,7 +295,7 @@ const FeaturesList = () => {
                             {project.features.slice(0, 3).map((feature, featureIndex) => (
                               <div key={featureIndex} className="flex items-center gap-2 text-slate-300">
                                 <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                                <span className="text-sm font-medium">{feature.title}</span>
+                                <span className="text-sm font-thin">{feature.title}</span>
                               </div>
                             ))}
                           </div>
@@ -344,7 +344,7 @@ const FeaturesList = () => {
                       {project.icon}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white">{project.name}</h3>
+                      <h3 className="text-xl font-thin text-white">{project.name}</h3>
                       <p className={`text-sm ${colors.accent}`}>{project.description}</p>
                     </div>
                   </div>
@@ -357,7 +357,7 @@ const FeaturesList = () => {
                             {feature.icon}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-white text-sm mb-2">{feature.title}</h4>
+                            <h4 className="font-thin text-white text-sm mb-2">{feature.title}</h4>
                             <p className="text-xs text-slate-300 leading-relaxed">{feature.description}</p>
                           </div>
                         </div>
@@ -366,7 +366,7 @@ const FeaturesList = () => {
                   </div>
                   
                   <div className="mt-8 pt-6 border-t border-slate-400/20">
-                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2`}>
+                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-thin transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2`}>
                       View Enterprise Details
                       <ArrowRight className="w-4 h-4" />
                     </button>
@@ -380,7 +380,7 @@ const FeaturesList = () => {
         {/* Internal Navigation Links for SEO */}
         <div className="mt-16 relative z-10">
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-slate-400/30 max-w-6xl mx-auto">
-            <h3 className="text-2xl font-bold mb-6 text-white text-center">
+            <h3 className="text-2xl font-thin mb-6 text-white text-center">
               Explore Our Enterprise Solutions
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -389,10 +389,10 @@ const FeaturesList = () => {
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-primary-400">
                     <Zap className="w-6 h-6" />
                   </div>
-                  <h4 className="text-lg font-bold text-white group-hover:text-primary-300 transition-colors">RAM</h4>
+                  <h4 className="text-lg font-thin text-white group-hover:text-primary-300 transition-colors">RAM</h4>
                 </div>
                 <p className="text-sm text-slate-300 mb-3">PostgreSQL clustering solution with automatic failover and Raft consensus for enterprise high availability.</p>
-                <div className="flex items-center text-primary-400 text-sm font-medium">
+                <div className="flex items-center text-primary-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>
@@ -402,10 +402,10 @@ const FeaturesList = () => {
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-secondary-400">
                     <Crown className="w-6 h-6" />
                   </div>
-                  <h4 className="text-lg font-bold text-white group-hover:text-secondary-300 transition-colors">pgraft</h4>
+                  <h4 className="text-lg font-thin text-white group-hover:text-secondary-300 transition-colors">pgraft</h4>
                 </div>
                 <p className="text-sm text-slate-300 mb-3">PostgreSQL extension implementing Raft consensus protocol for distributed database coordination.</p>
-                <div className="flex items-center text-secondary-400 text-sm font-medium">
+                <div className="flex items-center text-secondary-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>
@@ -415,10 +415,10 @@ const FeaturesList = () => {
                   <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-accent-400">
                     <Globe className="w-6 h-6" />
                   </div>
-                  <h4 className="text-lg font-bold text-white group-hover:text-accent-300 transition-colors">FauxDB</h4>
+                  <h4 className="text-lg font-thin text-white group-hover:text-accent-300 transition-colors">FauxDB</h4>
                 </div>
                 <p className="text-sm text-slate-300 mb-3">MongoDB-compatible document database built in Rust with PostgreSQL backend for seamless migration.</p>
-                <div className="flex items-center text-accent-400 text-sm font-medium">
+                <div className="flex items-center text-accent-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>
@@ -437,7 +437,7 @@ const FeaturesList = () => {
         {/* Enterprise CTA */}
         <div className="mt-20 text-center relative z-10">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30 max-w-5xl mx-auto">
-            <h3 className="text-3xl font-bold mb-4 text-white">
+            <h3 className="text-3xl font-thin mb-4 text-white">
               Enterprise Database Solutions
             </h3>
             <p className="text-lg text-slate-300 mb-8 max-w-3xl mx-auto">
@@ -446,28 +446,28 @@ const FeaturesList = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="text-center p-4">
-                <div className="text-2xl font-bold text-green-400 mb-2">99.99%</div>
+                <div className="text-2xl font-thin text-green-400 mb-2">99.99%</div>
                 <div className="text-sm text-slate-300">Uptime SLA</div>
               </div>
               <div className="text-center p-4">
-                <div className="text-2xl font-bold text-blue-400 mb-2">50%</div>
+                <div className="text-2xl font-thin text-blue-400 mb-2">50%</div>
                 <div className="text-sm text-slate-300">Cost Reduction</div>
               </div>
               <div className="text-center p-4">
-                <div className="text-2xl font-bold text-purple-400 mb-2">24/7</div>
+                <div className="text-2xl font-thin text-purple-400 mb-2">24/7</div>
                 <div className="text-sm text-slate-300">Enterprise Support</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/download" className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+              <a href="/download" className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-thin transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
                 <Database className="w-5 h-5" />
                 Download All Projects
               </a>
-              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
+              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-thin hover:bg-white hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5" />
                 View Documentation
               </a>
-              <a href="/contact" className="border-2 border-slate-400 text-slate-300 px-8 py-4 rounded-lg font-semibold hover:bg-slate-400 hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
+              <a href="/contact" className="border-2 border-slate-400 text-slate-300 px-8 py-4 rounded-lg font-thin hover:bg-slate-400 hover:text-slate-800 transition-colors flex items-center justify-center gap-2">
                 <Users className="w-5 h-5" />
                 Contact Sales
               </a>
