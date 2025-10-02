@@ -329,7 +329,7 @@ int main() {
       <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl text-gray-900 mb-12 text-center">
+            <h2 className="text-2xl text-white mb-12 text-center">
               Quick Start Guide
             </h2>
             
@@ -345,10 +345,10 @@ int main() {
                   <div className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center mx-auto mb-3 text-sm font-bold">
                     {step.number}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-white mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-white/90 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -362,7 +362,7 @@ int main() {
       <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl text-gray-900 mb-8 text-center">
+            <h2 className="text-2xl text-white mb-8 text-center">
               Installation Steps
             </h2>
 
@@ -372,7 +372,7 @@ int main() {
                 <div className="w-8 h-8 bg-cyan-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   1
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white">
                   Install RALE Binary
                 </h3>
               </div>
@@ -382,7 +382,7 @@ int main() {
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.install, 'install')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/80 hover:text-white transition-colors"
                 >
                   {copiedCode === 'install' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -395,7 +395,7 @@ int main() {
                 <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   2
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white">
                   Use librale Library in Your Application
                 </h3>
               </div>
@@ -405,7 +405,7 @@ int main() {
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.library, 'library')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/80 hover:text-white transition-colors"
                 >
                   {copiedCode === 'library' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -418,7 +418,7 @@ int main() {
                 <div className="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   3
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white">
                   Configure and Start raled Daemon
                 </h3>
               </div>
@@ -428,7 +428,7 @@ int main() {
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.config, 'config')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/80 hover:text-white transition-colors"
                 >
                   {copiedCode === 'config' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -441,7 +441,7 @@ int main() {
                 <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center mr-4 text-sm font-bold">
                   4
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-white">
                   Control Cluster with ralectrl
                 </h3>
               </div>
@@ -451,7 +451,7 @@ int main() {
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.start, 'start')}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/80 hover:text-white transition-colors"
                 >
                   {copiedCode === 'start' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -465,23 +465,23 @@ int main() {
       <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">
               RALE Architecture & Components
             </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
               {/* librale */}
-              <div className="bg-gray-50 rounded-xl p-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                     <Database className="w-6 h-6 text-blue-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">librale</h3>
+                  <h3 className="text-xl font-semibold text-white">librale</h3>
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-white/90 mb-4">
                   Core consensus and distributed store library written in C.
                 </p>
-                <ul className="text-sm text-gray-600 space-y-2">
+                <ul className="text-sm text-white/90 space-y-2">
                   <li>• RALE consensus algorithm for leader election</li>
                   <li>• Distributed key-value storage with replication</li>
                   <li>• Thread-safe API for multi-threaded applications</li>
@@ -491,17 +491,17 @@ int main() {
               </div>
 
               {/* raled */}
-              <div className="bg-gray-50 rounded-xl p-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                     <Server className="w-6 h-6 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">raled</h3>
+                  <h3 className="text-xl font-semibold text-white">raled</h3>
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-white/90 mb-4">
                   Cluster management daemon for coordination and monitoring.
                 </p>
-                <ul className="text-sm text-gray-600 space-y-2">
+                <ul className="text-sm text-white/90 space-y-2">
                   <li>• Cluster membership management</li>
                   <li>• Leader election and failover coordination</li>
                   <li>• Persistent cluster state and configuration</li>
@@ -511,17 +511,17 @@ int main() {
               </div>
 
               {/* ralectrl */}
-              <div className="bg-gray-50 rounded-xl p-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                     <Terminal className="w-6 h-6 text-purple-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">ralectrl</h3>
+                  <h3 className="text-xl font-semibold text-white">ralectrl</h3>
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-white/90 mb-4">
                   Command-line interface for cluster management and operations.
                 </p>
-                <ul className="text-sm text-gray-600 space-y-2">
+                <ul className="text-sm text-white/90 space-y-2">
                   <li>• Node management (ADD, REMOVE, LIST)</li>
                   <li>• Status queries and cluster health</li>
                   <li>• Runtime configuration updates</li>
@@ -594,8 +594,8 @@ int main() {
             {/* Key Features */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Consensus Algorithm</h3>
-                <ul className="text-gray-600 space-y-2">
+                <h3 className="text-xl font-semibold text-white mb-4">Consensus Algorithm</h3>
+                <ul className="text-white/90 space-y-2">
                   <li>• <strong>Leader Election:</strong> Automatic leader selection with majority voting</li>
                   <li>• <strong>Log Replication:</strong> Consistent state across all cluster nodes</li>
                   <li>• <strong>Split-Brain Prevention:</strong> Quorum-based decisions during network partitions</li>
@@ -604,8 +604,8 @@ int main() {
               </div>
 
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Distributed Store</h3>
-                <ul className="text-gray-600 space-y-2">
+                <h3 className="text-xl font-semibold text-white mb-4">Distributed Store</h3>
+                <ul className="text-white/90 space-y-2">
                   <li>• <strong>Strong Consistency:</strong> All reads return the most recent write</li>
                   <li>• <strong>High Performance:</strong> 10,000+ operations/second per node</li>
                   <li>• <strong>Durability:</strong> Write-ahead logging with periodic snapshots</li>
@@ -614,8 +614,8 @@ int main() {
               </div>
 
               <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Network Layer</h3>
-                <ul className="text-gray-600 space-y-2">
+                <h3 className="text-xl font-semibold text-white mb-4">Network Layer</h3>
+                <ul className="text-white/90 space-y-2">
                   <li>• <strong>Fault-Tolerant:</strong> Automatic reconnection with exponential backoff</li>
                   <li>• <strong>Protocol Support:</strong> TCP/UDP with heartbeat keepalives</li>
                   <li>• <strong>Security:</strong> Optional TLS encryption and authentication</li>
@@ -624,8 +624,8 @@ int main() {
               </div>
 
               <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Performance</h3>
-                <ul className="text-gray-600 space-y-2">
+                <h3 className="text-xl font-semibold text-white mb-4">Performance</h3>
+                <ul className="text-white/90 space-y-2">
                   <li>• <strong>Consensus:</strong> 1000+ operations/second per cluster</li>
                   <li>• <strong>Write Latency:</strong> &lt;10ms for local cluster writes</li>
                   <li>• <strong>Read Latency:</strong> &lt;1ms for local reads</li>
@@ -641,22 +641,22 @@ int main() {
       <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">
               Advanced Features & Troubleshooting
             </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Advanced Features */}
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-6">Advanced Features</h3>
+                <h3 className="text-2xl font-semibold text-white mb-6">Advanced Features</h3>
                 
                 <div className="space-y-6">
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
                       <Database className="w-5 h-5 text-blue-600 mr-2" />
                       Distributed Key-Value Store
                     </h4>
-                    <ul className="text-gray-600 space-y-2 text-sm">
+                    <ul className="text-white/90 space-y-2 text-sm">
                       <li>• <strong>Strong Consistency:</strong> Linearizable reads and writes</li>
                       <li>• <strong>Automatic Replication:</strong> Data replicated across all nodes</li>
                       <li>• <strong>Compression:</strong> Built-in data compression for efficiency</li>
@@ -664,12 +664,12 @@ int main() {
                     </ul>
                   </div>
 
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
                       <Shield className="w-5 h-5 text-green-600 mr-2" />
                       Security & TLS
                     </h4>
-                    <ul className="text-gray-600 space-y-2 text-sm">
+                    <ul className="text-white/90 space-y-2 text-sm">
                       <li>• <strong>TLS Encryption:</strong> End-to-end encryption for all communications</li>
                       <li>• <strong>Certificate Management:</strong> X.509 certificate support</li>
                       <li>• <strong>Access Control:</strong> Fine-grained permissions system</li>
@@ -677,12 +677,12 @@ int main() {
                     </ul>
                   </div>
 
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
                       <BarChart3 className="w-5 h-5 text-purple-600 mr-2" />
                       Monitoring & Metrics
                     </h4>
-                    <ul className="text-gray-600 space-y-2 text-sm">
+                    <ul className="text-white/90 space-y-2 text-sm">
                       <li>• <strong>Prometheus Metrics:</strong> Comprehensive metrics export</li>
                       <li>• <strong>Health Checks:</strong> Built-in health monitoring</li>
                       <li>• <strong>Performance Metrics:</strong> Latency, throughput, and error rates</li>
@@ -694,34 +694,34 @@ int main() {
 
               {/* Troubleshooting */}
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-6">Troubleshooting Guide</h3>
+                <h3 className="text-2xl font-semibold text-white mb-6">Troubleshooting Guide</h3>
                 
                 <div className="space-y-6">
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
                       <AlertTriangle className="w-5 h-5 text-red-600 mr-2" />
                       Common Issues
                     </h4>
                     <div className="space-y-4 text-sm">
                       <div>
-                        <strong className="text-gray-900">Node Won't Start:</strong>
-                        <ul className="text-gray-600 mt-1 ml-4 space-y-1">
+                        <strong className="text-white">Node Won't Start:</strong>
+                        <ul className="text-white/90 mt-1 ml-4 space-y-1">
                           <li>• Check port availability: <code>netstat -tulpn | grep :7400</code></li>
                           <li>• Verify data directory permissions</li>
                           <li>• Check configuration file syntax</li>
                         </ul>
                       </div>
                       <div>
-                        <strong className="text-gray-900">Cluster Split-Brain:</strong>
-                        <ul className="text-gray-600 mt-1 ml-4 space-y-1">
+                        <strong className="text-white">Cluster Split-Brain:</strong>
+                        <ul className="text-white/90 mt-1 ml-4 space-y-1">
                           <li>• Ensure odd number of nodes (3, 5, 7)</li>
                           <li>• Check network connectivity between nodes</li>
                           <li>• Verify firewall rules</li>
                         </ul>
                       </div>
                       <div>
-                        <strong className="text-gray-900">High Latency:</strong>
-                        <ul className="text-gray-600 mt-1 ml-4 space-y-1">
+                        <strong className="text-white">High Latency:</strong>
+                        <ul className="text-white/90 mt-1 ml-4 space-y-1">
                           <li>• Monitor network latency between nodes</li>
                           <li>• Check disk I/O performance</li>
                           <li>• Adjust heartbeat intervals</li>
@@ -730,8 +730,8 @@ int main() {
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
                       <Terminal className="w-5 h-5 text-blue-600 mr-2" />
                       Debug Commands
                     </h4>
@@ -761,12 +761,12 @@ ralectrl LIST --detailed`}
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
                       <Settings className="w-5 h-5 text-orange-600 mr-2" />
                       Performance Tuning
                     </h4>
-                    <ul className="text-gray-600 space-y-2 text-sm">
+                    <ul className="text-white/90 space-y-2 text-sm">
                       <li>• <strong>Election Timeout:</strong> Adjust based on network latency</li>
                       <li>• <strong>Heartbeat Interval:</strong> Balance between responsiveness and overhead</li>
                       <li>• <strong>Snapshot Frequency:</strong> Optimize for your data growth rate</li>
@@ -779,7 +779,7 @@ ralectrl LIST --detailed`}
 
             {/* Production Deployment Best Practices */}
             <div className="mt-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
+              <h3 className="text-2xl font-semibold text-white mb-6 text-center">
                 Production Deployment Best Practices
               </h3>
               
@@ -788,8 +788,8 @@ ralectrl LIST --detailed`}
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Server className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Infrastructure</h4>
-                  <ul className="text-gray-600 text-sm space-y-1">
+                  <h4 className="text-lg font-semibold text-white mb-2">Infrastructure</h4>
+                  <ul className="text-white/90 text-sm space-y-1">
                     <li>• Use dedicated servers for each node</li>
                     <li>• Ensure low-latency network connections</li>
                     <li>• Use SSDs for data directories</li>
@@ -801,8 +801,8 @@ ralectrl LIST --detailed`}
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Shield className="w-8 h-8 text-green-600" />
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Security</h4>
-                  <ul className="text-gray-600 text-sm space-y-1">
+                  <h4 className="text-lg font-semibold text-white mb-2">Security</h4>
+                  <ul className="text-white/90 text-sm space-y-1">
                     <li>• Enable TLS encryption</li>
                     <li>• Use strong authentication</li>
                     <li>• Regular security updates</li>
@@ -814,8 +814,8 @@ ralectrl LIST --detailed`}
                   <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <BarChart3 className="w-8 h-8 text-purple-600" />
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Monitoring</h4>
-                  <ul className="text-gray-600 text-sm space-y-1">
+                  <h4 className="text-lg font-semibold text-white mb-2">Monitoring</h4>
+                  <ul className="text-white/90 text-sm space-y-1">
                     <li>• Set up Prometheus metrics</li>
                     <li>• Configure alerting rules</li>
                     <li>• Monitor cluster health</li>
@@ -832,49 +832,49 @@ ralectrl LIST --detailed`}
       <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl text-gray-900 mb-6">
+            <h2 className="text-2xl text-white mb-6">
               What's Next?
             </h2>
-            <p className="text-lg text-gray-600 mb-12 leading-relaxed">
+            <p className="text-lg text-white/90 mb-12 leading-relaxed">
               Your RALE cluster is ready! Explore these next steps.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Link
                 href="/docs/rale/configuration"
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <Settings className="w-8 h-8 text-cyan-600 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   Configuration
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-white/90 text-sm">
                   Learn about advanced configuration options.
                 </p>
               </Link>
 
               <Link
                 href="/docs/rale/api"
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <Code className="w-8 h-8 text-teal-600 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   API Reference
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-white/90 text-sm">
                   Explore the REST API for cluster management.
                 </p>
               </Link>
 
               <Link
                 href="/docs/rale/examples"
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow text-left"
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:shadow-md transition-shadow text-left"
               >
                 <BookOpen className="w-8 h-8 text-orange-600 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   Examples
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-white/90 text-sm">
                   See practical usage examples and integrations.
                 </p>
               </Link>

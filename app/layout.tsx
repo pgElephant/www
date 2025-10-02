@@ -14,7 +14,7 @@ import './globals.css'
 // Lazy load components for better performance
 const Header = dynamic(() => import('@/components/Header'), {
   ssr: true,
-  loading: () => <div className="h-16 bg-white border-b border-cool-200" />
+  loading: () => <div className="h-16 bg-slate-900 border-b border-slate-700" />
 })
 
 const Footer = dynamic(() => import('@/components/Footer'), {

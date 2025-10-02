@@ -271,31 +271,6 @@ export default function BlogPage() {
         </div>
       </div>
 
-      {/* Blog Categories */}
-      <div className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-        <div className="container-wide">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-thin text-white mb-4">Categories</h2>
-              <p className="text-lg text-white/80">Explore our content by topic and expertise area</p>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {blogCategories.map((category, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center shadow-sm border border-white/20 hover:shadow-md transition-shadow cursor-pointer">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <category.icon className="w-6 h-6 text-white drop-shadow-2xl shadow-2xl" />
-                  </div>
-                  <h3 className="font-thin text-white drop-shadow-2xl shadow-2xl mb-2">{category.name}</h3>
-                  <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-thin ${category.color}`}>
-                    {category.count} articles
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
 
 
