@@ -44,7 +44,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="professional-nav-link"
+                className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors font-thin hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]"
                 target={item.href.startsWith('http') ? '_blank' : undefined}
                 rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
@@ -53,7 +53,7 @@ const Header = () => {
             ))}
             {/* GitHub Projects Dropdown */}
             <div className="relative group">
-              <button className="professional-nav-link flex items-center">
+              <button className="text-white drop-shadow-2xl shadow-2xl hover:text-white transition-colors flex items-center font-thin hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]">
                 <Github className="w-5 h-5 mr-2" />
                 Projects
                 <svg className="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -179,19 +179,19 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               sizes="(max-width: 768px) 100vw, 33vw"
               priority={index < 3}
             />
-            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm/80 text-gray-900 px-3 py-1 rounded-full text-xs font-thin shadow">
+            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm/80 text-gray-900 px-3 py-1 rounded-full text-xs font-thin shadow-lg drop-shadow-lg">
               {post.category}
             </div>
           </div>
           {/* Content */}
           <div className="p-7 flex flex-col flex-1">
-            <h3 className="text-2xl font-thin text-gray-900 mb-2 group-hover:text-primary-600 transition-colors flex-shrink-0 leading-tight">
+            <h3 className="text-2xl font-thin text-gray-900 mb-2 group-hover:text-primary-600 transition-colors flex-shrink-0 leading-tight drop-shadow-lg">
               {post.title}
             </h3>
-            <p className="text-gray-600 mb-4 line-clamp-3 flex-1 text-lg">
+            <p className="text-gray-700 mb-4 line-clamp-3 flex-1 text-lg font-thin drop-shadow-sm">
               {post.excerpt}
             </p>
-            <div className="flex items-center justify-between text-sm text-gray-500 mt-auto flex-shrink-0">
+            <div className="flex items-center justify-between text-sm text-gray-600 mt-auto flex-shrink-0 font-thin drop-shadow-sm">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4" />
