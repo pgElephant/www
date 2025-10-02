@@ -98,29 +98,12 @@ export default function RamApiPage() {
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
                         # Include token in Authorization header<br/>
-                        curl -H "Authorization: Bearer your-token-here" \\<br/>
+                        curl -H "Authorization: Bearer your-token-here" \<br/>
                         &nbsp;&nbsp;&nbsp;&nbsp;http://localhost:8080/api/v1/status<br/><br/>
                         # Or use API key header<br/>
-                        curl -H "X-API-Key: your-api-key-here" \\<br/>
+                        curl -H "X-API-Key: your-api-key-here" \<br/>
                         &nbsp;&nbsp;&nbsp;&nbsp;http://localhost:8080/api/v1/status
                       </code>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-3">Authentication Endpoints</h3>
-                    <div className="space-y-4">
-                      <div className="border-l-4 border-blue-500 pl-4">
-                        <h4 className="text-lg font-thin text-white mb-2">POST /api/v1/auth/login</h4>
-                        <p className="text-white/90 text-sm mb-2">Authenticate and get access token</p>
-                        <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
-                          <code className="text-green-400 text-sm">
-                            curl -X POST http://localhost:8080/api/v1/auth/login \\<br/>
-                            &nbsp;&nbsp;-H "Content-Type: application/json" \\<br/>
-                            &nbsp;&nbsp;-d '{"username": "admin", "password": "secret"}'
-                          </code>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -136,19 +119,7 @@ export default function RamApiPage() {
                     <p className="text-white/90 text-sm mb-3">Get comprehensive cluster status</p>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
-                        curl http://localhost:8080/api/v1/status<br/><br/>
-                        # Response:<br/>
-                        {<br/>
-                        &nbsp;&nbsp;"cluster": "production-cluster",<br/>
-                        &nbsp;&nbsp;"leader": "node1",<br/>
-                        &nbsp;&nbsp;"term": 42,<br/>
-                        &nbsp;&nbsp;"nodes": [<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{"id": "node1", "state": "leader", "address": "192.168.1.10:8080"},<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{"id": "node2", "state": "follower", "address": "192.168.1.11:8080"},<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{"id": "node3", "state": "follower", "address": "192.168.1.12:8080"}<br/>
-                        &nbsp;&nbsp;],<br/>
-                        &nbsp;&nbsp;"health": "healthy"<br/>
-                        }
+                        curl http://localhost:8080/api/v1/status
                       </code>
                     </div>
                   </div>
@@ -158,18 +129,7 @@ export default function RamApiPage() {
                     <p className="text-white/90 text-sm mb-3">List all cluster nodes</p>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
-                        curl http://localhost:8080/api/v1/nodes<br/><br/>
-                        # Response:<br/>
-                        {<br/>
-                        &nbsp;&nbsp;"nodes": [<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "node1",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"state": "leader",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"address": "192.168.1.10:8080",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"last_heartbeat": "2024-01-15T10:30:00Z"<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-                        &nbsp;&nbsp;]<br/>
-                        }
+                        curl http://localhost:8080/api/v1/nodes
                       </code>
                     </div>
                   </div>
@@ -179,16 +139,9 @@ export default function RamApiPage() {
                     <p className="text-white/90 text-sm mb-3">Add a new node to the cluster</p>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
-                        curl -X POST http://localhost:8080/api/v1/nodes \\<br/>
-                        &nbsp;&nbsp;-H "Content-Type: application/json" \\<br/>
-                        &nbsp;&nbsp;-d '{<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"id": "node4",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"address": "192.168.1.13:8080",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"postgres_host": "192.168.1.13",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"postgres_port": 5432<br/>
-                        &nbsp;&nbsp;}'<br/><br/>
-                        # Response:<br/>
-                        {"status": "success", "message": "Node added successfully"}
+                        {`curl -X POST http://localhost:8080/api/v1/nodes \\
+  -H "Content-Type: application/json" \\
+  -d '{"id": "node4", "address": "192.168.1.13:8080"}'`}
                       </code>
                     </div>
                   </div>
@@ -205,38 +158,7 @@ export default function RamApiPage() {
                     <p className="text-white/90 text-sm mb-3">Trigger manual failover</p>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
-                        curl -X POST http://localhost:8080/api/v1/failover<br/><br/>
-                        # Optional: specify target node<br/>
-                        curl -X POST http://localhost:8080/api/v1/failover \\<br/>
-                        &nbsp;&nbsp;-H "Content-Type: application/json" \\<br/>
-                        &nbsp;&nbsp;-d '{"target_node": "node2"}'<br/><br/>
-                        # Response:<br/>
-                        {<br/>
-                        &nbsp;&nbsp;"status": "success",<br/>
-                        &nbsp;&nbsp;"new_leader": "node2",<br/>
-                        &nbsp;&nbsp;"failover_time": "2024-01-15T10:30:00Z"<br/>
-                        }
-                      </code>
-                    </div>
-                  </div>
-
-                  <div className="border-l-4 border-red-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">GET /api/v1/failover/history</h3>
-                    <p className="text-white/90 text-sm mb-3">Get failover history</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                      <code className="text-green-400 text-sm">
-                        curl http://localhost:8080/api/v1/failover/history<br/><br/>
-                        # Response:<br/>
-                        {<br/>
-                        &nbsp;&nbsp;"failovers": [<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timestamp": "2024-01-15T10:30:00Z",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"old_leader": "node1",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"new_leader": "node2",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"reason": "manual"<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-                        &nbsp;&nbsp;]<br/>
-                        }
+                        curl -X POST http://localhost:8080/api/v1/failover
                       </code>
                     </div>
                   </div>
@@ -253,19 +175,7 @@ export default function RamApiPage() {
                     <p className="text-white/90 text-sm mb-3">Cluster health check</p>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
-                        curl http://localhost:8080/api/v1/health<br/><br/>
-                        # Response:<br/>
-                        {<br/>
-                        &nbsp;&nbsp;"status": "healthy",<br/>
-                        &nbsp;&nbsp;"cluster": "production-cluster",<br/>
-                        &nbsp;&nbsp;"leader": "node1",<br/>
-                        &nbsp;&nbsp;"uptime": "72h30m15s",<br/>
-                        &nbsp;&nbsp;"checks": {<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"postgresql": "healthy",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"raft": "healthy",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"network": "healthy"<br/>
-                        &nbsp;&nbsp;}<br/>
-                        }
+                        curl http://localhost:8080/api/v1/health
                       </code>
                     </div>
                   </div>
@@ -275,55 +185,7 @@ export default function RamApiPage() {
                     <p className="text-white/90 text-sm mb-3">Prometheus metrics</p>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
-                        curl http://localhost:8080/api/v1/metrics<br/><br/>
-                        # Response (Prometheus format):<br/>
-                        # HELP ram_cluster_nodes_total Total number of nodes in cluster<br/>
-                        # TYPE ram_cluster_nodes_total gauge<br/>
-                        ram_cluster_nodes_total{cluster="production"} 3<br/>
-                        # HELP ram_failover_events_total Total number of failover events<br/>
-                        # TYPE ram_failover_events_total counter<br/>
-                        ram_failover_events_total{cluster="production"} 5
-                      </code>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Configuration Management */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Configuration Management</h2>
-                
-                <div className="space-y-6">
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">GET /api/v1/config</h3>
-                    <p className="text-white/90 text-sm mb-3">Get cluster configuration</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                      <code className="text-green-400 text-sm">
-                        curl http://localhost:8080/api/v1/config<br/><br/>
-                        # Response:<br/>
-                        {<br/>
-                        &nbsp;&nbsp;"heartbeat_interval": "100ms",<br/>
-                        &nbsp;&nbsp;"election_timeout": "1000ms",<br/>
-                        &nbsp;&nbsp;"snapshot_threshold": 1000,<br/>
-                        &nbsp;&nbsp;"max_log_entries": 10000<br/>
-                        }
-                      </code>
-                    </div>
-                  </div>
-
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">PUT /api/v1/config</h3>
-                    <p className="text-white/90 text-sm mb-3">Update cluster configuration</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                      <code className="text-green-400 text-sm">
-                        curl -X PUT http://localhost:8080/api/v1/config \\<br/>
-                        &nbsp;&nbsp;-H "Content-Type: application/json" \\<br/>
-                        &nbsp;&nbsp;-d '{<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"heartbeat_interval": "50ms",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"election_timeout": "500ms"<br/>
-                        &nbsp;&nbsp;}'<br/><br/>
-                        # Response:<br/>
-                        {"status": "success", "message": "Configuration updated"}
+                        curl http://localhost:8080/api/v1/metrics
                       </code>
                     </div>
                   </div>
@@ -379,24 +241,6 @@ export default function RamApiPage() {
                           </tr>
                         </tbody>
                       </table>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-3">Error Response Format</h3>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-                      <code className="text-green-400 text-sm">
-                        # Error response example<br/>
-                        {<br/>
-                        &nbsp;&nbsp;"error": {<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"code": "CLUSTER_NOT_READY",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"message": "Cluster is not ready for operations",<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;"details": "Leader election in progress"<br/>
-                        &nbsp;&nbsp;},<br/>
-                        &nbsp;&nbsp;"timestamp": "2024-01-15T10:30:00Z",<br/>
-                        &nbsp;&nbsp;"request_id": "req-12345"<br/>
-                        }
-                      </code>
                     </div>
                   </div>
                 </div>

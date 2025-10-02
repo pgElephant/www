@@ -8,25 +8,25 @@ const Features = () => {
       icon: Zap,
       title: 'Automated Failover',
       description: 'Intelligent leader election with RALE consensus. Automatic failover in under 30 seconds with zero data loss.',
-      color: 'bg-yellow-100 text-yellow-600'
+      color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Shield,
       title: 'Advanced Security',
       description: 'TLS encryption, role-based access control, and comprehensive audit logging for production environments.',
-      color: 'bg-green-100 text-green-600'
+      color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Globe,
       title: 'Multi-Zone Replication',
       description: 'Distribute your database across multiple availability zones for maximum resilience and performance.',
-      color: 'bg-blue-100 text-blue-600'
+      color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: BarChart3,
       title: 'Advanced Monitoring',
       description: 'Real-time metrics, health checks, and comprehensive observability with Prometheus integration.',
-      color: 'bg-purple-100 text-purple-600'
+      color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Terminal,
@@ -38,7 +38,7 @@ const Features = () => {
       icon: Database,
       title: 'Zero Downtime',
       description: 'Seamless failover with no service interruption. Built for production environments that cannot tolerate downtime.',
-      color: 'bg-teal-100 text-teal-600'
+      color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     }
   ]
 

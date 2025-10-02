@@ -1,456 +1,383 @@
-import React from 'react';
-import { CheckCircle, AlertCircle, Info, Terminal, Database, Settings, Monitor, Shield, Cloud, GitBranch, Zap, Globe } from 'lucide-react';
+import { Metadata } from 'next'
 
-export default function RamDockerSetup() {
+export const metadata: Metadata = {
+  title: 'RAM Docker Setup - Containerized Deployment | pgElephant',
+  description: 'Complete Docker deployment guide for RAM PostgreSQL clustering. Docker Compose configurations and multi-node setups.',
+}
+
+export default function RamDockerPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-700 via-green-600 to-teal-600 py-16">
-      <div className="max-w-6xl mx-auto px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-white mb-4">RAM Docker Setup</h1>
-          <p className="text-xl text-slate-200 max-w-3xl mx-auto">
-            Complete guide to deploying RAM PostgreSQL clustering solution using Docker and Docker Compose
-          </p>
+    <div className="pt-16">
+      {/* Hero Section */}
+      <div 
+        className="relative overflow-hidden py-28"
+        style={{ 
+          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
+        }}
+      >
+        {/* Elegant overlay gradient */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
+          }}
+        />
+        
+        {/* Floating orbs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
-        {/* Prerequisites */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6 flex items-center">
-            <AlertCircle className="w-8 h-8 mr-3" />
-            Prerequisites
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-3">Docker Requirements</h3>
-              <ul className="text-slate-300 space-y-2">
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />Docker 20.10+ installed</li>
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />Docker Compose 2.0+</li>
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />4GB+ RAM available</li>
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />10GB+ disk space</li>
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />Ports 5432-5435, 8080, 9090 available</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-3">System Requirements</h3>
-              <ul className="text-slate-300 space-y-2">
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />Linux, macOS, or Windows with WSL2</li>
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />Multi-core CPU recommended</li>
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />SSD storage for better performance</li>
-                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-green-400 mr-2" />Network connectivity for cluster communication</li>
-              </ul>
-            </div>
+        <div className="container-wide mx-auto px-6 relative z-10">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
+              RAM Docker Setup
+            </h1>
+            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+              Containerized deployment guide for RAM PostgreSQL clustering with Docker Compose.
+            </p>
+          </div>
           </div>
         </div>
 
-        {/* Quick Start */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6 flex items-center">
-            <Zap className="w-8 h-8 mr-3" />
-            Quick Start
-          </h2>
+      {/* Content */}
+      <div 
+        className="py-20"
+        style={{ 
+          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+        }}
+      >
+        <div className="container-wide mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-8">
+              {/* Single Node Setup */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
+                <h2 className="text-2xl font-thin text-white mb-6">Single Node Setup</h2>
           
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">1. Clone and Setup</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
-                <div className="text-green-400 mb-4"># Clone the repository</div>
-                <div className="text-slate-300 mb-2">git clone https://github.com/pgElephant/ram.git</div>
-                <div className="text-slate-300 mb-2">cd ram</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Copy environment configuration</div>
-                <div className="text-slate-300 mb-2">cp docker/.env.example .env</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Edit configuration (optional)</div>
-                <div className="text-slate-300 mb-2">nano .env</div>
+                    <h3 className="text-lg font-thin text-white mb-3">Basic Docker Compose</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        version: '3.8'<br/><br/>
+                        services:<br/>
+                        &nbsp;&nbsp;postgres:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: postgres:16<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: password<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "5432:5432"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- postgres_data:/var/lib/postgresql/data<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./postgresql.conf:/etc/postgresql/postgresql.conf<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./init.sql:/docker-entrypoint-initdb.d/init.sql<br/><br/>
+                        &nbsp;&nbsp;ramd:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: pgelephant/ramd:latest<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "8080:8080"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "9090:9090"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAM_CLUSTER_NAME: "single-cluster"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAM_NODE_ID: "node1"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAM_POSTGRES_HOST: "postgres"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAM_POSTGRES_PORT: "5432"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;depends_on:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- postgres<br/><br/>
+                        volumes:<br/>
+                        &nbsp;&nbsp;postgres_data:
+                      </code>
               </div>
             </div>
             
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">2. Start the Cluster</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
-                <div className="text-green-400 mb-4"># Start all services</div>
-                <div className="text-slate-300 mb-2">docker-compose up -d</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Check service status</div>
-                <div className="text-slate-300 mb-2">docker-compose ps</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># View logs</div>
-                <div className="text-slate-300 mb-2">docker-compose logs -f</div>
+                    <h3 className="text-lg font-thin text-white mb-3">PostgreSQL Configuration</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        # postgresql.conf<br/>
+                        shared_preload_libraries = 'pgraft'<br/>
+                        max_connections = 200<br/>
+                        listen_addresses = '*'<br/>
+                        wal_level = replica<br/>
+                        max_wal_senders = 10<br/>
+                        hot_standby = on
+                      </code>
               </div>
             </div>
             
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">3. Verify Installation</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
-                <div className="text-green-400 mb-4"># Test PostgreSQL connections</div>
-                <div className="text-slate-300 mb-2">docker-compose exec postgres-primary psql -U postgres -c "SELECT version();"</div>
-                <div className="text-slate-300 mb-2">docker-compose exec postgres-standby1 psql -U postgres -c "SELECT pg_is_in_recovery();"</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Test RAM API</div>
-                <div className="text-slate-300 mb-2">curl http://localhost:8080/health</div>
-                <div className="text-slate-300 mb-2">curl http://localhost:8080/cluster/info</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Docker Compose Configuration */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6 flex items-center">
-            <Settings className="w-8 h-8 mr-3" />
-            Docker Compose Configuration
-          </h2>
-          
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-3">Basic docker-compose.yml</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm overflow-x-auto">
-                <div className="text-slate-300 mb-2">version: '3.8'</div>
-                <div className="text-slate-300 mb-2">services:</div>
-                <div className="text-slate-300 mb-2">  postgres-primary:</div>
-                <div className="text-slate-300 mb-2">    image: postgres:15</div>
-                <div className="text-slate-300 mb-2">    environment:</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_DB: postgres</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_USER: postgres</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_PASSWORD: postgres</div>
-                <div className="text-slate-300 mb-2">      PGRaft_NODE_ID: 1</div>
-                <div className="text-slate-300 mb-2">      PGRaft_NODE_NAME: primary</div>
-                <div className="text-slate-300 mb-2">      PGRaft_CLUSTER_NAME: docker-cluster</div>
-                <div className="text-slate-300 mb-2">    ports:</div>
-                <div className="text-slate-300 mb-2">      - "5432:5432"</div>
-                <div className="text-slate-300 mb-2">      - "5433:5433"</div>
-                <div className="text-slate-300 mb-2">    volumes:</div>
-                <div className="text-slate-300 mb-2">      - postgres_primary_data:/var/lib/postgresql/data</div>
-                <div className="text-slate-300 mb-2">      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql</div>
-                <div className="text-slate-300 mb-2">    networks:</div>
-                <div className="text-slate-300 mb-2">      - ram-network</div>
-                <div className="text-slate-300 mb-4"></div>
-                <div className="text-slate-300 mb-2">  ramd-primary:</div>
-                <div className="text-slate-300 mb-2">    image: pgelephant/ramd:latest</div>
-                <div className="text-slate-300 mb-2">    depends_on:</div>
-                <div className="text-slate-300 mb-2">      - postgres-primary</div>
-                <div className="text-slate-300 mb-2">    ports:</div>
-                <div className="text-slate-300 mb-2">      - "8080:8080"</div>
-                <div className="text-slate-300 mb-2">    environment:</div>
-                <div className="text-slate-300 mb-2">      RAMD_NODE_ID: 1</div>
-                <div className="text-slate-300 mb-2">      RAMD_CLUSTER_NAME: docker-cluster</div>
-                <div className="text-slate-300 mb-2">      RAMD_DATABASE_URL: postgresql://postgres:postgres@postgres-primary:5432/postgres</div>
-                <div className="text-slate-300 mb-2">    networks:</div>
-                <div className="text-slate-300 mb-2">      - ram-network</div>
-                <div className="text-slate-300 mb-4"></div>
-                <div className="text-slate-300 mb-2">volumes:</div>
-                <div className="text-slate-300 mb-2">  postgres_primary_data:</div>
-                <div className="text-slate-300 mb-2">  postgres_standby1_data:</div>
-                <div className="text-slate-300 mb-2">  postgres_standby2_data:</div>
-                <div className="text-slate-300 mb-4"></div>
-                <div className="text-slate-300 mb-2">networks:</div>
-                <div className="text-slate-300 mb-2">  ram-network:</div>
-                <div className="text-slate-300 mb-2">    driver: bridge</div>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-3">Environment Variables (.env)</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
-                <div className="text-green-400 mb-4"># PostgreSQL Configuration</div>
-                <div className="text-slate-300 mb-2">POSTGRES_DB=postgres</div>
-                <div className="text-slate-300 mb-2">POSTGRES_USER=postgres</div>
-                <div className="text-slate-300 mb-2">POSTGRES_PASSWORD=your_secure_password</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># RAM Configuration</div>
-                <div className="text-slate-300 mb-2">RAMD_CLUSTER_NAME=docker-cluster</div>
-                <div className="text-slate-300 mb-2">RAMD_API_PORT=8080</div>
-                <div className="text-slate-300 mb-2">RAMD_METRICS_PORT=9090</div>
-                <div className="text-slate-300 mb-2">RAMD_LOG_LEVEL=INFO</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Security</div>
-                <div className="text-slate-300 mb-2">RAMD_AUTH_TOKEN=your-secure-token</div>
-                <div className="text-slate-300 mb-2">RAMD_SSL_ENABLED=false</div>
+                    <h3 className="text-lg font-thin text-white mb-3">Initialization Script</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        -- init.sql<br/>
+                        CREATE EXTENSION IF NOT EXISTS pgraft;<br/>
+                        SELECT pgraft_init_cluster('single-cluster');<br/>
+                        SELECT pgraft_add_member('single-cluster', 'node1', 'host=postgres port=5432');
+                      </code>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Multi-Node Setup */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6 flex items-center">
-            <Database className="w-8 h-8 mr-3" />
-            Multi-Node Cluster Setup
-          </h2>
+              {/* Multi-Node Cluster */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
+                <h2 className="text-2xl font-thin text-white mb-6">Multi-Node Cluster</h2>
           
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">3-Node Cluster Configuration</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm overflow-x-auto">
-                <div className="text-slate-300 mb-2"># Add to docker-compose.yml</div>
-                <div className="text-slate-300 mb-2">  postgres-standby1:</div>
-                <div className="text-slate-300 mb-2">    image: postgres:15</div>
-                <div className="text-slate-300 mb-2">    environment:</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_DB: postgres</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_USER: postgres</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_PASSWORD: postgres</div>
-                <div className="text-slate-300 mb-2">      PGRaft_NODE_ID: 2</div>
-                <div className="text-slate-300 mb-2">      PGRaft_NODE_NAME: standby1</div>
-                <div className="text-slate-300 mb-2">      PGRaft_CLUSTER_NAME: docker-cluster</div>
-                <div className="text-slate-300 mb-2">      PGRaft_PRIMARY_HOST: postgres-primary</div>
-                <div className="text-slate-300 mb-2">    ports:</div>
-                <div className="text-slate-300 mb-2">      - "5434:5432"</div>
-                <div className="text-slate-300 mb-2">      - "5436:5433"</div>
-                <div className="text-slate-300 mb-2">    volumes:</div>
-                <div className="text-slate-300 mb-2">      - postgres_standby1_data:/var/lib/postgresql/data</div>
-                <div className="text-slate-300 mb-2">    depends_on:</div>
-                <div className="text-slate-300 mb-2">      - postgres-primary</div>
-                <div className="text-slate-300 mb-2">    networks:</div>
-                <div className="text-slate-300 mb-2">      - ram-network</div>
-                <div className="text-slate-300 mb-4"></div>
-                <div className="text-slate-300 mb-2">  postgres-standby2:</div>
-                <div className="text-slate-300 mb-2">    image: postgres:15</div>
-                <div className="text-slate-300 mb-2">    environment:</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_DB: postgres</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_USER: postgres</div>
-                <div className="text-slate-300 mb-2">      POSTGRES_PASSWORD: postgres</div>
-                <div className="text-slate-300 mb-2">      PGRaft_NODE_ID: 3</div>
-                <div className="text-slate-300 mb-2">      PGRaft_NODE_NAME: standby2</div>
-                <div className="text-slate-300 mb-2">      PGRaft_CLUSTER_NAME: docker-cluster</div>
-                <div className="text-slate-300 mb-2">      PGRaft_PRIMARY_HOST: postgres-primary</div>
-                <div className="text-slate-300 mb-2">    ports:</div>
-                <div className="text-slate-300 mb-2">      - "5435:5432"</div>
-                <div className="text-slate-300 mb-2">      - "5437:5433"</div>
-                <div className="text-slate-300 mb-2">    volumes:</div>
-                <div className="text-slate-300 mb-2">      - postgres_standby2_data:/var/lib/postgresql/data</div>
-                <div className="text-slate-300 mb-2">    depends_on:</div>
-                <div className="text-slate-300 mb-2">      - postgres-primary</div>
-                <div className="text-slate-300 mb-2">    networks:</div>
-                <div className="text-slate-300 mb-2">      - ram-network</div>
+                    <h3 className="text-lg font-thin text-white mb-3">3-Node Cluster Setup</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        version: '3.8'<br/><br/>
+                        services:<br/>
+                        &nbsp;&nbsp;postgres1:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: postgres:16<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: password<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "5432:5432"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- postgres1_data:/var/lib/postgresql/data<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;command: ["postgres", "-c", "shared_preload_libraries=pgraft"]<br/><br/>
+                        &nbsp;&nbsp;postgres2:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: postgres:16<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: password<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "5433:5432"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- postgres2_data:/var/lib/postgresql/data<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;command: ["postgres", "-c", "shared_preload_libraries=pgraft"]<br/><br/>
+                        &nbsp;&nbsp;postgres3:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: postgres:16<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: password<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "5434:5432"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- postgres3_data:/var/lib/postgresql/data<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;command: ["postgres", "-c", "shared_preload_libraries=pgraft"]<br/><br/>
+                        volumes:<br/>
+                        &nbsp;&nbsp;postgres1_data:<br/>
+                        &nbsp;&nbsp;postgres2_data:<br/>
+                        &nbsp;&nbsp;postgres3_data:
+                      </code>
               </div>
             </div>
             
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">Initialize Cluster</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
-                <div className="text-green-400 mb-4"># Start all nodes</div>
-                <div className="text-slate-300 mb-2">docker-compose up -d</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Wait for all nodes to be ready</div>
-                <div className="text-slate-300 mb-2">docker-compose logs -f</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Initialize cluster on primary</div>
-                <div className="text-slate-300 mb-2">docker-compose exec postgres-primary psql -U postgres -c "CREATE EXTENSION pgraft;"</div>
-                <div className="text-slate-300 mb-2">docker-compose exec postgres-primary psql -U postgres -c "SELECT pgraft_init_cluster('docker-cluster', 1, 'primary');"</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Add standby nodes</div>
-                <div className="text-slate-300 mb-2">docker-compose exec postgres-primary psql -U postgres -c "SELECT pgraft_add_node(2, 'standby1', 'postgres-standby1', 5432, 5433);"</div>
-                <div className="text-slate-300 mb-2">docker-compose exec postgres-primary psql -U postgres -c "SELECT pgraft_add_node(3, 'standby2', 'postgres-standby2', 5432, 5433);"</div>
+                    <h3 className="text-lg font-thin text-white mb-3">RAM Daemon Configuration</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        # ramd.conf for node1<br/>
+                        [cluster]<br/>
+                        name = "production-cluster"<br/>
+                        node_id = "node1"<br/><br/>
+                        [postgresql]<br/>
+                        host = "postgres1"<br/>
+                        port = 5432<br/>
+                        user = "postgres"<br/>
+                        password = "password"<br/><br/>
+                        [raft]<br/>
+                        listen_addr = "0.0.0.0:8080"<br/>
+                        peers = ["node1:8080", "node2:8080", "node3:8080"]
+                      </code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+              {/* Production Setup */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
+                <h2 className="text-2xl font-thin text-white mb-6">Production Setup</h2>
+          
+          <div className="space-y-6">
+            <div>
+                    <h3 className="text-lg font-thin text-white mb-3">Production Docker Compose</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        {`version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: \${POSTGRES_DB}
+      POSTGRES_USER: \${POSTGRES_USER}
+      POSTGRES_PASSWORD: \${POSTGRES_PASSWORD}
+    ports:
+      - "\${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./ssl:/etc/ssl/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ramd:
+    image: pgelephant/ramd:latest
+    restart: unless-stopped
+    ports:
+      - "\${RAM_PORT}:8080"
+      - "\${METRICS_PORT}:9090"
+    environment:
+      RAM_CLUSTER_NAME: \${CLUSTER_NAME}
+      RAM_NODE_ID: \${NODE_ID}
+      RAM_POSTGRES_HOST: postgres
+      RAM_POSTGRES_PORT: 5432
+      RAM_LOG_LEVEL: info
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3`}
+                      </code>
+                    </div>
+            </div>
+            
+            <div>
+                    <h3 className="text-lg font-thin text-white mb-3">Environment Variables</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        # .env file<br/>
+                        POSTGRES_DB=production<br/>
+                        POSTGRES_USER=postgres<br/>
+                        POSTGRES_PASSWORD=secure_password<br/>
+                        POSTGRES_PORT=5432<br/><br/>
+                        CLUSTER_NAME=production-cluster<br/>
+                        NODE_ID=node1<br/>
+                        RAM_PORT=8080<br/>
+                        METRICS_PORT=9090
+                      </code>
               </div>
             </div>
           </div>
         </div>
 
         {/* Monitoring Setup */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6 flex items-center">
-            <Monitor className="w-8 h-8 mr-3" />
-            Monitoring Setup
-          </h2>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
+                <h2 className="text-2xl font-thin text-white mb-6">Monitoring with Docker</h2>
           
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">Add Prometheus and Grafana</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm overflow-x-auto">
-                <div className="text-slate-300 mb-2"># Add to docker-compose.yml</div>
-                <div className="text-slate-300 mb-2">  prometheus:</div>
-                <div className="text-slate-300 mb-2">    image: prom/prometheus:latest</div>
-                <div className="text-slate-300 mb-2">    ports:</div>
-                <div className="text-slate-300 mb-2">      - "9090:9090"</div>
-                <div className="text-slate-300 mb-2">    volumes:</div>
-                <div className="text-slate-300 mb-2">      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml</div>
-                <div className="text-slate-300 mb-2">      - prometheus_data:/prometheus</div>
-                <div className="text-slate-300 mb-2">    command:</div>
-                <div className="text-slate-300 mb-2">      - '--config.file=/etc/prometheus/prometheus.yml'</div>
-                <div className="text-slate-300 mb-2">      - '--storage.tsdb.path=/prometheus'</div>
-                <div className="text-slate-300 mb-2">      - '--web.console.libraries=/etc/prometheus/console_libraries'</div>
-                <div className="text-slate-300 mb-2">      - '--web.console.templates=/etc/prometheus/consoles'</div>
-                <div className="text-slate-300 mb-2">    networks:</div>
-                <div className="text-slate-300 mb-2">      - ram-network</div>
-                <div className="text-slate-300 mb-4"></div>
-                <div className="text-slate-300 mb-2">  grafana:</div>
-                <div className="text-slate-300 mb-2">    image: grafana/grafana:latest</div>
-                <div className="text-slate-300 mb-2">    ports:</div>
-                <div className="text-slate-300 mb-2">      - "3000:3000"</div>
-                <div className="text-slate-300 mb-2">    environment:</div>
-                <div className="text-slate-300 mb-2">      - GF_SECURITY_ADMIN_PASSWORD=admin</div>
-                <div className="text-slate-300 mb-2">    volumes:</div>
-                <div className="text-slate-300 mb-2">      - grafana_data:/var/lib/grafana</div>
-                <div className="text-slate-300 mb-2">      - ./docker/grafana/dashboards:/etc/grafana/provisioning/dashboards</div>
-                <div className="text-slate-300 mb-2">      - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources</div>
-                <div className="text-slate-300 mb-2">    networks:</div>
-                <div className="text-slate-300 mb-2">      - ram-network</div>
+                    <h3 className="text-lg font-thin text-white mb-3">Prometheus & Grafana</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        &nbsp;&nbsp;prometheus:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: prom/prometheus:latest<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "9090:9090"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./config/prometheus.yml:/etc/prometheus/prometheus.yml<br/><br/>
+                        &nbsp;&nbsp;grafana:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;image: grafana/grafana:latest<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ports:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "3000:3000"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;environment:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GF_SECURITY_ADMIN_PASSWORD: admin<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;volumes:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- grafana_data:/var/lib/grafana<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ./config/grafana/datasources:/etc/grafana/provisioning/datasources
+                      </code>
               </div>
             </div>
             
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">Access Monitoring</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
-                <div className="text-green-400 mb-4"># Start monitoring stack</div>
-                <div className="text-slate-300 mb-2">docker-compose up -d prometheus grafana</div>
-                <div className="text-slate-300 mb-4"></div>
-                
-                <div className="text-green-400 mb-4"># Access services</div>
-                <div className="text-slate-300 mb-2"># Prometheus: http://localhost:9090</div>
-                <div className="text-slate-300 mb-2"># Grafana: http://localhost:3000 (admin/admin)</div>
-                <div className="text-slate-300 mb-2"># RAM API: http://localhost:8080/health</div>
-                <div className="text-slate-300 mb-2"># RAM Metrics: http://localhost:8080/metrics</div>
+                    <h3 className="text-lg font-thin text-white mb-3">Prometheus Configuration</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        # prometheus.yml<br/>
+                        global:<br/>
+                        &nbsp;&nbsp;scrape_interval: 15s<br/><br/>
+                        scrape_configs:<br/>
+                        &nbsp;&nbsp;- job_name: 'ram-cluster'<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;static_configs:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- targets: ['ramd:9090']<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;scrape_interval: 5s<br/><br/>
+                        &nbsp;&nbsp;- job_name: 'postgresql'<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;static_configs:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- targets: ['postgres:9187']
+                      </code>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Production Considerations */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6 flex items-center">
-            <Shield className="w-8 h-8 mr-3" />
-            Production Considerations
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Security</h3>
-              <ul className="text-slate-300 space-y-2">
-                <li>• Use strong passwords and secrets</li>
-                <li>• Enable SSL/TLS for all communications</li>
-                <li>• Use Docker secrets for sensitive data</li>
-                <li>• Implement network segmentation</li>
-                <li>• Regular security updates</li>
-                <li>• Backup encryption</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Performance</h3>
-              <ul className="text-slate-300 space-y-2">
-                <li>• Use SSD storage for data volumes</li>
-                <li>• Allocate sufficient CPU and memory</li>
-                <li>• Configure PostgreSQL parameters</li>
-                <li>• Monitor resource usage</li>
-                <li>• Use connection pooling</li>
-                <li>• Implement caching strategies</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-4">High Availability</h3>
-              <ul className="text-slate-300 space-y-2">
-                <li>• Deploy across multiple hosts</li>
-                <li>• Use Docker Swarm or Kubernetes</li>
-                <li>• Implement health checks</li>
-                <li>• Configure restart policies</li>
-                <li>• Set up automated backups</li>
-                <li>• Monitor cluster health</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Backup & Recovery</h3>
-              <ul className="text-slate-300 space-y-2">
-                <li>• Automated daily backups</li>
-                <li>• Point-in-time recovery</li>
-                <li>• Cross-region replication</li>
-                <li>• Test restore procedures</li>
-                <li>• Backup verification</li>
-                <li>• Disaster recovery plan</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Troubleshooting */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6 flex items-center">
-            <Info className="w-8 h-8 mr-3" />
-            Troubleshooting
-          </h2>
+              {/* Deployment Commands */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
+                <h2 className="text-2xl font-thin text-white mb-6">Deployment Commands</h2>
           
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-white mb-3">Common Issues</h3>
-              <div className="space-y-4">
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
-                  <h4 className="text-lg font-semibold text-green-300 mb-2">Container won't start</h4>
-                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm mt-2">
-                    <div className="text-green-400"># Check logs</div>
-                    <div className="text-slate-300">docker-compose logs postgres-primary</div>
-                    <div className="text-slate-300"></div>
-                    <div className="text-green-400"># Check port conflicts</div>
-                    <div className="text-slate-300">netstat -tulpn | grep :5432</div>
+                    <h3 className="text-lg font-thin text-white mb-3">Basic Deployment</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        # Start the cluster<br/>
+                        docker-compose up -d<br/><br/>
+                        # Check status<br/>
+                        docker-compose ps<br/><br/>
+                        # View logs<br/>
+                        docker-compose logs -f ramd<br/><br/>
+                        # Stop the cluster<br/>
+                        docker-compose down<br/><br/>
+                        # Stop and remove volumes<br/>
+                        docker-compose down -v
+                      </code>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
-                  <h4 className="text-lg font-semibold text-green-300 mb-2">Cluster formation fails</h4>
-                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm mt-2">
-                    <div className="text-green-400"># Check network connectivity</div>
-                    <div className="text-slate-300">docker-compose exec postgres-primary ping postgres-standby1</div>
-                    <div className="text-slate-300"></div>
-                    <div className="text-green-400"># Check pgraft status</div>
-                    <div className="text-slate-300">docker-compose exec postgres-primary psql -U postgres -c "SELECT * FROM pgraft.cluster_overview;"</div>
-                  </div>
-                </div>
-                
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
-                  <h4 className="text-lg font-semibold text-green-300 mb-2">Performance issues</h4>
-                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 font-mono text-sm mt-2">
-                    <div className="text-green-400"># Check resource usage</div>
-                    <div className="text-slate-300">docker stats</div>
-                    <div className="text-slate-300"></div>
-                    <div className="text-green-400"># Check PostgreSQL performance</div>
-                    <div className="text-slate-300">docker-compose exec postgres-primary psql -U postgres -c "SELECT * FROM pg_stat_activity;"</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Next Steps */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-green-400/30">
-          <h2 className="text-3xl font-bold text-green-300 mb-6">Next Steps</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-400/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-green-400/30">
-                <Cloud className="w-8 h-8 text-green-400" />
+                  <div>
+                    <h3 className="text-lg font-thin text-white mb-3">Cluster Management</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        # Check cluster status<br/>
+                        docker exec -it ramd_ramd_1 ramctrl status --cluster production-cluster<br/><br/>
+                        # Add node to cluster<br/>
+                        docker exec -it ramd_ramd_1 ramctrl nodes add --cluster production-cluster --node node2:8080<br/><br/>
+                        # Trigger failover<br/>
+                        docker exec -it ramd_ramd_1 ramctrl failover --cluster production-cluster<br/><br/>
+                        # View metrics<br/>
+                        curl http://localhost:9090/metrics
+                      </code>
+                </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-thin text-white mb-3">Health Checks</h3>
+                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+                      <code className="text-green-400 text-sm">
+                        # Check PostgreSQL health<br/>
+                        docker exec -it ramd_postgres_1 pg_isready -U postgres<br/><br/>
+                        # Check RAM health<br/>
+                        curl http://localhost:8080/api/v1/health<br/><br/>
+                        # Check cluster health<br/>
+                        docker exec -it ramd_ramd_1 ramctrl health --cluster production-cluster
+                      </code>
+                </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Kubernetes Deployment</h3>
-              <p className="text-slate-300 text-sm">Deploy RAM cluster on Kubernetes for production scalability</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-400/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-green-400/30">
-                <Monitor className="w-8 h-8 text-green-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Advanced Monitoring</h3>
-              <p className="text-slate-300 text-sm">Set up comprehensive monitoring with custom dashboards</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-400/20 rounded-xl flex items-center justify-center mx-auto mb-4 border border-green-400/30">
-                <Shield className="w-8 h-8 text-green-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Security Hardening</h3>
-              <p className="text-slate-300 text-sm">Implement enterprise-grade security and compliance</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

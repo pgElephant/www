@@ -66,13 +66,13 @@ export default function RamMonitoringPage() {
                         # Example metrics output<br/>
                         # HELP ram_cluster_nodes_total Total number of nodes in cluster<br/>
                         # TYPE ram_cluster_nodes_total gauge<br/>
-                        ram_cluster_nodes_total{cluster="production"} 3<br/><br/>
+                        ram_cluster_nodes_total&#123;cluster="production"&#125; 3<br/><br/>
                         # HELP ram_cluster_leader_term Current leader term<br/>
                         # TYPE ram_cluster_leader_term gauge<br/>
-                        ram_cluster_leader_term{cluster="production"} 42<br/><br/>
+                        ram_cluster_leader_term&#123;cluster="production"&#125; 42<br/><br/>
                         # HELP ram_failover_events_total Total number of failover events<br/>
                         # TYPE ram_failover_events_total counter<br/>
-                        ram_failover_events_total{cluster="production"} 5
+                        ram_failover_events_total&#123;cluster="production"&#125; 5
                       </code>
                     </div>
                   </div>
@@ -292,23 +292,24 @@ export default function RamMonitoringPage() {
                     <h3 className="text-lg font-thin text-white mb-3">Prometheus Alert Rules</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                       <code className="text-green-400 text-sm">
-                        groups:<br/>
-                        - name: ram-cluster<br/>
-                        &nbsp;&nbsp;rules:<br/>
-                        &nbsp;&nbsp;- alert: RAMClusterDown<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;expr: up{job="ram-cluster"} == 0<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;for: 1m<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;labels:<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;severity: critical<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;annotations:<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;summary: "RAM cluster node is down"<br/><br/>
-                        &nbsp;&nbsp;- alert: RAMHighFailoverRate<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;expr: rate(ram_failover_events_total[5m]) > 0.1<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;for: 2m<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;labels:<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;severity: warning<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;annotations:<br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;summary: "High failover rate detected"
+                        {`groups:
+- name: ram-cluster
+  rules:
+  - alert: RAMClusterDown
+    expr: up{job="ram-cluster"} == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "RAM cluster node is down"
+
+  - alert: RAMHighFailoverRate
+    expr: rate(ram_failover_events_total[5m]) > 0.1
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High failover rate detected"`}
                       </code>
                     </div>
                   </div>

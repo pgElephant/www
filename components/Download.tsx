@@ -153,7 +153,7 @@ const Download = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Download
             </h1>
-            <p className="text-xl text-slate-300 mb-8">
+            <p className="text-xl text-white/90 mb-8">
               Get pgelephant and start building high-availability PostgreSQL clusters.
             </p>
           </div>
@@ -169,7 +169,7 @@ const Download = () => {
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Repository Setup
             </h3>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
               Add the official pgelephant repository for easy package management and updates.
             </p>
           </div>
@@ -184,10 +184,10 @@ const Download = () => {
               <div className="space-y-3">
                 <div className="bg-slate-100/20 rounded-lg p-3 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-slate-400">Add GPG Key</span>
+                    <span className="text-xs font-medium text-white/70">Add GPG Key</span>
                     <button
                       onClick={() => copyToClipboard(repositoryInfo.debian.addRepo)}
-                      className="text-slate-400 hover:text-teal-300 transition-colors"
+                      className="text-white/70 hover:text-teal-300 transition-colors"
                     >
                       {copiedCommand === repositoryInfo.debian.addRepo ? (
                         <Check className="w-4 h-4" />
@@ -196,16 +196,16 @@ const Download = () => {
                       )}
                     </button>
                   </div>
-                  <code className="text-xs text-slate-300 font-mono break-all">
+                  <code className="text-xs text-white/90 font-mono break-all">
                     {repositoryInfo.debian.addRepo}
                   </code>
                 </div>
                 <div className="bg-slate-100/20 rounded-lg p-3 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-slate-400">Add Repository</span>
+                    <span className="text-xs font-medium text-white/70">Add Repository</span>
                     <button
                       onClick={() => copyToClipboard(repositoryInfo.debian.addSource)}
-                      className="text-slate-400 hover:text-teal-300 transition-colors"
+                      className="text-white/70 hover:text-teal-300 transition-colors"
                     >
                       {copiedCommand === repositoryInfo.debian.addSource ? (
                         <Check className="w-4 h-4" />
@@ -214,16 +214,16 @@ const Download = () => {
                       )}
                     </button>
                   </div>
-                  <code className="text-xs text-slate-300 font-mono break-all">
+                  <code className="text-xs text-white/90 font-mono break-all">
                     {repositoryInfo.debian.addSource}
                   </code>
                 </div>
                 <div className="bg-slate-100/20 rounded-lg p-3 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-slate-400">Update & Install</span>
+                    <span className="text-xs font-medium text-white/70">Update & Install</span>
                     <button
                       onClick={() => copyToClipboard(`${repositoryInfo.debian.update}\n${repositoryInfo.debian.install}`)}
-                      className="text-slate-400 hover:text-teal-300 transition-colors"
+                      className="text-white/70 hover:text-teal-300 transition-colors"
                     >
                       {copiedCommand === `${repositoryInfo.debian.update}\n${repositoryInfo.debian.install}` ? (
                         <Check className="w-4 h-4" />
@@ -232,7 +232,7 @@ const Download = () => {
                       )}
                     </button>
                   </div>
-                  <code className="text-xs text-slate-300 font-mono break-all">
+                  <code className="text-xs text-white/90 font-mono break-all">
                     {repositoryInfo.debian.update}<br/>
                     {repositoryInfo.debian.install}
                   </code>
@@ -249,10 +249,10 @@ const Download = () => {
               <div className="space-y-3">
                 <div className="bg-slate-100/20 rounded-lg p-3 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-slate-400">Add Repository</span>
+                    <span className="text-xs font-medium text-white/70">Add Repository</span>
                     <button
                       onClick={() => copyToClipboard(repositoryInfo.rpm.addRepo)}
-                      className="text-slate-400 hover:text-teal-300 transition-colors"
+                      className="text-white/70 hover:text-teal-300 transition-colors"
                     >
                       {copiedCommand === repositoryInfo.rpm.addRepo ? (
                         <Check className="w-4 h-4" />
@@ -261,16 +261,16 @@ const Download = () => {
                       )}
                     </button>
                   </div>
-                  <code className="text-xs text-slate-300 font-mono break-all">
+                  <code className="text-xs text-white/90 font-mono break-all">
                     {repositoryInfo.rpm.addRepo}
                   </code>
                 </div>
                 <div className="bg-slate-100/20 rounded-lg p-3 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-slate-400">Update & Install</span>
+                    <span className="text-xs font-medium text-white/70">Update & Install</span>
                     <button
                       onClick={() => copyToClipboard(`${repositoryInfo.rpm.update}\n${repositoryInfo.rpm.install}`)}
-                      className="text-slate-400 hover:text-teal-300 transition-colors"
+                      className="text-white/70 hover:text-teal-300 transition-colors"
                     >
                       {copiedCommand === `${repositoryInfo.rpm.update}\n${repositoryInfo.rpm.install}` ? (
                         <Check className="w-4 h-4" />
@@ -279,7 +279,7 @@ const Download = () => {
                       )}
                     </button>
                   </div>
-                  <code className="text-xs text-slate-300 font-mono break-all">
+                  <code className="text-xs text-white/90 font-mono break-all">
                     {repositoryInfo.rpm.update}<br/>
                     {repositoryInfo.rpm.install}
                   </code>
@@ -302,7 +302,7 @@ const Download = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white">{component.title}</h3>
-                  <p className="text-sm text-slate-300">{component.description}</p>
+                  <p className="text-sm text-white/90">{component.description}</p>
                 </div>
               </div>
               
@@ -310,14 +310,14 @@ const Download = () => {
                 {/* Debian Package */}
                 <div className="bg-slate-100/20 rounded-xl p-4 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-slate-400 flex items-center">
+                    <span className="text-xs font-medium text-white/70 flex items-center">
                       <Package className="w-3 h-3 mr-1" />
                       Debian Package
                     </span>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => copyToClipboard(`apt install ${component.packages.debian}`)}
-                        className="text-slate-400 hover:text-teal-300 transition-colors"
+                        className="text-white/70 hover:text-teal-300 transition-colors"
                       >
                         {copiedCommand === `apt install ${component.packages.debian}` ? (
                           <Check className="w-4 h-4" />
@@ -329,13 +329,13 @@ const Download = () => {
                         href={component.downloadLinks.deb}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-teal-300 transition-colors"
+                        className="text-white/70 hover:text-teal-300 transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     </div>
                   </div>
-                  <code className="text-sm text-slate-300 font-mono break-all">
+                  <code className="text-sm text-white/90 font-mono break-all">
                     apt install {component.packages.debian}
                   </code>
                 </div>
@@ -343,14 +343,14 @@ const Download = () => {
                 {/* RPM Package */}
                 <div className="bg-slate-100/20 rounded-xl p-4 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-slate-400 flex items-center">
+                    <span className="text-xs font-medium text-white/70 flex items-center">
                       <Package className="w-3 h-3 mr-1" />
                       RPM Package
                     </span>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => copyToClipboard(`yum install ${component.packages.rpm}`)}
-                        className="text-slate-400 hover:text-teal-300 transition-colors"
+                        className="text-white/70 hover:text-teal-300 transition-colors"
                       >
                         {copiedCommand === `yum install ${component.packages.rpm}` ? (
                           <Check className="w-4 h-4" />
@@ -362,13 +362,13 @@ const Download = () => {
                         href={component.downloadLinks.rpm}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-teal-300 transition-colors"
+                        className="text-white/70 hover:text-teal-300 transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     </div>
                   </div>
-                  <code className="text-sm text-slate-300 font-mono break-all">
+                  <code className="text-sm text-white/90 font-mono break-all">
                     yum install {component.packages.rpm}
                   </code>
                 </div>
@@ -383,7 +383,7 @@ const Download = () => {
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Package Distribution
             </h3>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
               All pgelephant components are available as Debian (.deb) and RPM (.rpm) packages for easy deployment.
             </p>
           </div>
@@ -394,7 +394,7 @@ const Download = () => {
                 <Package className="w-5 h-5 mr-2 text-teal-400" />
                 Debian/Ubuntu Packages
               </h4>
-              <ul className="space-y-2 text-sm text-slate-300">
+              <ul className="space-y-2 text-sm text-white/90">
                 <li>• pgelephant-rale - RALE consensus distributed store</li>
                 <li>• pgelephant-ram - RAM resilient adaptive manager</li>
                 <li>• pgelephant-postgresql - Secure PostgreSQL</li>
@@ -407,7 +407,7 @@ const Download = () => {
                 <Package className="w-5 h-5 mr-2 text-teal-400" />
                 RHEL/CentOS Packages
               </h4>
-              <ul className="space-y-2 text-sm text-slate-300">
+              <ul className="space-y-2 text-sm text-white/90">
                 <li>• pgelephant-rale - RALE consensus distributed store</li>
                 <li>• pgelephant-ram - RAM resilient adaptive manager</li>
                 <li>• pgelephant-postgresql - Secure PostgreSQL</li>
@@ -430,16 +430,16 @@ const Download = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white">{method.title}</h3>
-                  <p className="text-sm text-slate-300">{method.description}</p>
+                  <p className="text-sm text-white/90">{method.description}</p>
                 </div>
               </div>
               
               <div className="bg-slate-100/20 rounded-xl p-4 border border-slate-400/30">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium text-slate-400">Command</span>
+                  <span className="text-xs font-medium text-white/70">Command</span>
                   <button
                     onClick={() => copyToClipboard(method.command)}
-                    className="text-slate-400 hover:text-teal-300 transition-colors"
+                    className="text-white/70 hover:text-teal-300 transition-colors"
                   >
                     {copiedCommand === method.command ? (
                       <Check className="w-4 h-4" />
@@ -448,7 +448,7 @@ const Download = () => {
                     )}
                   </button>
                 </div>
-                <code className="text-sm text-slate-300 font-mono break-all">
+                <code className="text-sm text-white/90 font-mono break-all">
                   {method.command}
                 </code>
               </div>
@@ -462,7 +462,7 @@ const Download = () => {
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Quick Start Guide
             </h3>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
               Get your first PostgreSQL cluster running in under 5 minutes.
             </p>
           </div>
@@ -479,13 +479,13 @@ const Download = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-semibold text-white mb-2">{step.title}</h4>
-                    <p className="text-slate-300 text-sm mb-4">{step.description}</p>
+                    <p className="text-white/90 text-sm mb-4">{step.description}</p>
                     <div className="bg-slate-100/20 rounded-lg p-4 border border-slate-400/30">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-medium text-slate-400">Terminal</span>
+                        <span className="text-xs font-medium text-white/70">Terminal</span>
                         <button
                           onClick={() => copyToClipboard(step.command)}
-                          className="text-slate-400 hover:text-teal-300 transition-colors"
+                          className="text-white/70 hover:text-teal-300 transition-colors"
                         >
                           {copiedCommand === step.command ? (
                             <Check className="w-4 h-4" />
@@ -494,7 +494,7 @@ const Download = () => {
                           )}
                         </button>
                       </div>
-                      <code className="text-sm text-slate-300 font-mono">
+                      <code className="text-sm text-white/90 font-mono">
                         {step.command}
                       </code>
                     </div>

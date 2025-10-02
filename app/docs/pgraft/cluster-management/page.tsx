@@ -274,7 +274,7 @@ export default function PgraftClusterManagementPage() {
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                           <code className="text-green-400 text-sm">
                             # PostgreSQL backup<br/>
-                            pg_dump -h leader-node -U postgres database_name > backup.sql<br/><br/>
+                            pg_dump -h leader-node -U postgres database_name &gt; backup.sql<br/><br/>
                             # Raft log backup<br/>
                             SELECT pgraft_backup_logs('production-cluster');
                           </code>
@@ -286,7 +286,7 @@ export default function PgraftClusterManagementPage() {
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
                           <code className="text-green-400 text-sm">
                             # Restore from backup<br/>
-                            psql -h new-node -U postgres database_name < backup.sql<br/><br/>
+                            psql -h new-node -U postgres database_name &lt; backup.sql<br/><br/>
                             # Rebuild cluster<br/>
                             SELECT pgraft_init_cluster('production-cluster');<br/>
                             SELECT pgraft_add_member('production-cluster', 'node1', 'host=new-node port=5432');
