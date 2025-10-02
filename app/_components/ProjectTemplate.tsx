@@ -146,7 +146,7 @@ export default function ProjectTemplate({
                 {docsLinks.map((doc: { href: string; title: string; desc: string }, i: number) => (
                   <Link key={i} href={doc.href} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-indigo-300 transition-colors">
                     <h3 className="font-thin text-lg text-slate-900 mb-2 drop-shadow-lg">{doc.title}</h3>
-                    <p className="text-sm text-slate-600">{doc.desc}</p>
+                    <p className="text-sm text-slate-700 drop-shadow-sm">{doc.desc}</p>
                   </Link>
                 ))}
               </div>
