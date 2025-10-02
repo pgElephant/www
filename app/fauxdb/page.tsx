@@ -147,33 +147,33 @@ const fauxdbConfig = {
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">MongoDB Wire Protocol</td>
-          <td className="px-4 py-3 text-slate-300">Full MongoDB wire protocol support with mongosh compatibility.</td>
-          <td className="px-4 py-3 text-slate-300">Drop-in MongoDB replacement.</td>
+          <td className="px-4 py-3 text-white/90">Full MongoDB wire protocol support with mongosh compatibility.</td>
+          <td className="px-4 py-3 text-white/90">Drop-in MongoDB replacement.</td>
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">Query Translation</td>
-          <td className="px-4 py-3 text-slate-300">Real-time MongoDB queries translated to PostgreSQL SQL.</td>
-          <td className="px-4 py-3 text-slate-300">Transparent query execution.</td>
+          <td className="px-4 py-3 text-white/90">Real-time MongoDB queries translated to PostgreSQL SQL.</td>
+          <td className="px-4 py-3 text-white/90">Transparent query execution.</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Rust Performance</td>
-          <td className="px-4 py-3 text-slate-300">High-performance, memory-safe proxy engine.</td>
-          <td className="px-4 py-3 text-slate-300">Minimal latency overhead.</td>
+          <td className="px-4 py-3 text-white/90">High-performance, memory-safe proxy engine.</td>
+          <td className="px-4 py-3 text-white/90">Minimal latency overhead.</td>
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Storage</td>
-          <td className="px-4 py-3 text-slate-300">Pure PostgreSQL backend with JSONB and ACID transactions.</td>
-          <td className="px-4 py-3 text-slate-300">Reliable, battle-tested storage.</td>
+          <td className="px-4 py-3 text-white/90">Pure PostgreSQL backend with JSONB and ACID transactions.</td>
+          <td className="px-4 py-3 text-white/90">Reliable, battle-tested storage.</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Advanced Features</td>
-          <td className="px-4 py-3 text-slate-300">Aggregation pipelines, geospatial, indexes, MongoDB 4.4+ compatibility.</td>
-          <td className="px-4 py-3 text-slate-300">Full feature parity.</td>
+          <td className="px-4 py-3 text-white/90">Aggregation pipelines, geospatial, indexes, MongoDB 4.4+ compatibility.</td>
+          <td className="px-4 py-3 text-white/90">Full feature parity.</td>
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">Production Ready</td>
-          <td className="px-4 py-3 text-slate-300">Enterprise monitoring, logging, metrics, configuration.</td>
-          <td className="px-4 py-3 text-slate-300">Operational excellence.</td>
+          <td className="px-4 py-3 text-white/90">Enterprise monitoring, logging, metrics, configuration.</td>
+          <td className="px-4 py-3 text-white/90">Operational excellence.</td>
         </tr>
       </tbody>
     </table>

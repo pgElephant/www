@@ -64,7 +64,7 @@ function SqlCard({ fn, desc }: { fn: string; desc: string }) {
   return (
     <div className="bg-slate-900 rounded-xl p-5 text-white border border-slate-700 flex flex-col">
       <div className="font-mono text-green-400 text-sm mb-2 break-all">{fn}</div>
-      <div className="text-slate-300 text-xs leading-relaxed flex-1">{desc}</div>
+      <div className="text-white/90 text-xs leading-relaxed flex-1">{desc}</div>
     </div>
   );
 }
@@ -319,7 +319,7 @@ const PgraftPage = () => {
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-xs text-slate-400">Full reference: <Link href="/docs/pgraft/user-guide/sql-functions" className="text-indigo-400 hover:underline">SQL Functions Guide</Link></p>
+          <p className="mt-4 text-xs text-white/80">Full reference: <Link href="/docs/pgraft/user-guide/sql-functions" className="text-indigo-400 hover:underline">SQL Functions Guide</Link></p>
       </div>
       </section>
 

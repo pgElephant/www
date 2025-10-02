@@ -229,7 +229,7 @@ const FeaturesList = () => {
               Platform Suite
             </span>
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto font-thin">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto font-thin">
             Comprehensive database solutions for enterprise-grade high availability, distributed consensus, and seamless data migration.
           </p>
         </div>
@@ -240,7 +240,7 @@ const FeaturesList = () => {
           <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 overflow-hidden mb-12">
             <div className="p-8 border-b border-slate-400/30">
               <h3 className="text-2xl font-thin text-white mb-2">Enterprise Database Solutions</h3>
-              <p className="text-slate-300">Comprehensive platform comparison for enterprise database infrastructure</p>
+              <p className="text-white/90">Comprehensive platform comparison for enterprise database infrastructure</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -293,7 +293,7 @@ const FeaturesList = () => {
                         <td className="px-4 py-6">
                           <div className="space-y-2">
                             {project.features.slice(0, 3).map((feature, featureIndex) => (
-                              <div key={featureIndex} className="flex items-center gap-2 text-slate-300">
+                              <div key={featureIndex} className="flex items-center gap-2 text-white/90">
                                 <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
                                 <span className="text-sm font-thin">{feature.title}</span>
                               </div>
@@ -304,23 +304,23 @@ const FeaturesList = () => {
                           <div className="space-y-2">
                             {project.name === 'RAM' && (
                               <>
-                                <div className="text-sm text-slate-300">• Docker & Kubernetes</div>
-                                <div className="text-sm text-slate-300">• Cloud-native architecture</div>
-                                <div className="text-sm text-slate-300">• Enterprise monitoring</div>
+                                <div className="text-sm text-white/90">• Docker & Kubernetes</div>
+                                <div className="text-sm text-white/90">• Cloud-native architecture</div>
+                                <div className="text-sm text-white/90">• Enterprise monitoring</div>
                               </>
                             )}
                             {project.name === 'pgraft' && (
                               <>
-                                <div className="text-sm text-slate-300">• PostgreSQL extension</div>
-                                <div className="text-sm text-slate-300">• Go-based implementation</div>
-                                <div className="text-sm text-slate-300">• Zero-configuration setup</div>
+                                <div className="text-sm text-white/90">• PostgreSQL extension</div>
+                                <div className="text-sm text-white/90">• Go-based implementation</div>
+                                <div className="text-sm text-white/90">• Zero-configuration setup</div>
                               </>
                             )}
                             {project.name === 'FauxDB' && (
                               <>
-                                <div className="text-sm text-slate-300">• Rust-based performance</div>
-                                <div className="text-sm text-slate-300">• PostgreSQL backend</div>
-                                <div className="text-sm text-slate-300">• Container-ready</div>
+                                <div className="text-sm text-white/90">• Rust-based performance</div>
+                                <div className="text-sm text-white/90">• PostgreSQL backend</div>
+                                <div className="text-sm text-white/90">• Container-ready</div>
                               </>
                             )}
                           </div>
@@ -358,7 +358,7 @@ const FeaturesList = () => {
                           </div>
                           <div className="flex-1">
                             <h4 className="font-thin text-white text-sm mb-2">{feature.title}</h4>
-                            <p className="text-xs text-slate-300 leading-relaxed">{feature.description}</p>
+                            <p className="text-xs text-white/90 leading-relaxed">{feature.description}</p>
                           </div>
                         </div>
                       </div>
@@ -391,7 +391,7 @@ const FeaturesList = () => {
                   </div>
                   <h4 className="text-lg font-thin text-white group-hover:text-primary-300 transition-colors">RAM</h4>
                 </div>
-                <p className="text-sm text-slate-300 mb-3">PostgreSQL clustering solution with automatic failover and Raft consensus for enterprise high availability.</p>
+                <p className="text-sm text-white/90 mb-3">PostgreSQL clustering solution with automatic failover and Raft consensus for enterprise high availability.</p>
                 <div className="flex items-center text-primary-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -404,7 +404,7 @@ const FeaturesList = () => {
                   </div>
                   <h4 className="text-lg font-thin text-white group-hover:text-secondary-300 transition-colors">pgraft</h4>
                 </div>
-                <p className="text-sm text-slate-300 mb-3">PostgreSQL extension implementing Raft consensus protocol for distributed database coordination.</p>
+                <p className="text-sm text-white/90 mb-3">PostgreSQL extension implementing Raft consensus protocol for distributed database coordination.</p>
                 <div className="flex items-center text-secondary-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -417,7 +417,7 @@ const FeaturesList = () => {
                   </div>
                   <h4 className="text-lg font-thin text-white group-hover:text-accent-300 transition-colors">FauxDB</h4>
                 </div>
-                <p className="text-sm text-slate-300 mb-3">MongoDB-compatible document database built in Rust with PostgreSQL backend for seamless migration.</p>
+                <p className="text-sm text-white/90 mb-3">MongoDB-compatible document database built in Rust with PostgreSQL backend for seamless migration.</p>
                 <div className="flex items-center text-accent-400 text-sm font-thin">
                   Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -425,7 +425,7 @@ const FeaturesList = () => {
             </div>
             
             <div className="text-center">
-              <a href="/docs" className="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm">
+              <a href="/docs" className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors text-sm">
                 <BookOpen className="w-4 h-4" />
                 View Complete Documentation
                 <ArrowRight className="w-4 h-4" />
@@ -440,22 +440,22 @@ const FeaturesList = () => {
             <h3 className="text-3xl font-thin mb-4 text-white">
               Complete Database Solution Suite
             </h3>
-            <p className="text-lg text-slate-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-lg text-white/90 mb-8 max-w-3xl mx-auto">
               Transform your database infrastructure with enterprise-grade PostgreSQL solutions. 
               Reduce costs, improve reliability, and accelerate your digital transformation.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="text-center p-4">
                 <div className="text-2xl font-thin text-green-400 mb-2">99.99%</div>
-                <div className="text-sm text-slate-300">Uptime SLA</div>
+                <div className="text-sm text-white/90">Uptime SLA</div>
               </div>
               <div className="text-center p-4">
                 <div className="text-2xl font-thin text-blue-400 mb-2">50%</div>
-                <div className="text-sm text-slate-300">Cost Reduction</div>
+                <div className="text-sm text-white/90">Cost Reduction</div>
               </div>
               <div className="text-center p-4">
                 <div className="text-2xl font-thin text-purple-400 mb-2">24/7</div>
-                <div className="text-sm text-slate-300">Enterprise Support</div>
+                <div className="text-sm text-white/90">Enterprise Support</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

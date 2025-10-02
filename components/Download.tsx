@@ -518,7 +518,7 @@ const Download = () => {
             >
               <BookOpen className="w-8 h-8 text-teal-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
               <h4 className="font-semibold text-white mb-2">Documentation</h4>
-              <p className="text-sm text-slate-300">Comprehensive guides and API reference</p>
+              <p className="text-sm text-white/90">Comprehensive guides and API reference</p>
             </a>
             
             <a
@@ -527,7 +527,7 @@ const Download = () => {
             >
               <Users className="w-8 h-8 text-teal-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
               <h4 className="font-semibold text-white mb-2">Community</h4>
-              <p className="text-sm text-slate-300">Join our community for support</p>
+              <p className="text-sm text-white/90">Join our community for support</p>
             </a>
             
             <a
@@ -536,7 +536,7 @@ const Download = () => {
             >
               <Github className="w-8 h-8 text-teal-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
               <h4 className="font-semibold text-white mb-2">GitHub</h4>
-              <p className="text-sm text-slate-300">Open source and contributions</p>
+              <p className="text-sm text-white/90">Open source and contributions</p>
             </a>
           </div>
         </div>

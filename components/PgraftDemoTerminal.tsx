@@ -538,19 +538,19 @@ const PgraftDemoTerminal = () => {
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
-          <span className="text-gray-300 text-sm ml-4 font-mono">pgraft-demo</span>
+          <span className="text-white/90 text-sm ml-4 font-mono">pgraft-demo</span>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={copyToClipboard}
-            className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
+            className="p-1 hover:bg-white/20 rounded text-white/70 hover:text-white transition-colors"
             title="Copy to clipboard"
           >
             <Copy className="w-4 h-4" />
           </button>
           <button
             onClick={resetDemo}
-            className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
+            className="p-1 hover:bg-white/20 rounded text-white/70 hover:text-white transition-colors"
             title="Reset demo"
           >
             <RotateCcw className="w-4 h-4" />
@@ -603,7 +603,7 @@ const PgraftDemoTerminal = () => {
               disabled={isRunning}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                 isRunning 
-                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                  ? 'bg-white/20 text-white/70 cursor-not-allowed' 
                   : 'bg-secondary-600 hover:bg-secondary-700 text-white hover:scale-105'
               }`}
             >
@@ -616,7 +616,7 @@ const PgraftDemoTerminal = () => {
               disabled={!isRunning}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                 !isRunning 
-                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                  ? 'bg-white/20 text-white/70 cursor-not-allowed' 
                   : 'bg-red-600 hover:bg-red-700 text-white hover:scale-105'
               }`}
             >
@@ -625,7 +625,7 @@ const PgraftDemoTerminal = () => {
             </button>
 
             <div className="flex items-center gap-2 ml-4">
-              <span className="text-gray-400 text-sm">Speed:</span>
+              <span className="text-white/70 text-sm">Speed:</span>
               <div className="flex gap-1">
                 {[1, 2, 3].map((speed) => (
                   <button
@@ -635,7 +635,7 @@ const PgraftDemoTerminal = () => {
                     className={`px-2 py-1 rounded text-sm font-mono transition-all ${
                       speedMultiplier === speed
                         ? 'bg-secondary-600 text-white'
-                        : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
+                        : 'bg-white/20 text-white/70 hover:bg-white/20'
                     } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
                   >
                     {speed}x
@@ -645,7 +645,7 @@ const PgraftDemoTerminal = () => {
             </div>
           </div>
 
-          <div className="text-gray-400 text-sm">
+          <div className="text-white/70 text-sm">
             {isRunning ? (
               <span className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse"></div>

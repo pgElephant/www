@@ -129,23 +129,23 @@ const ramConfig = {
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Auto-Failover</td>
-          <td className="px-4 py-3 text-slate-300">Intelligent failover with sub-second detection and recovery.</td>
-          <td className="px-4 py-3 text-slate-300">Zero-downtime operations.</td>
+          <td className="px-4 py-3 text-white/90">Intelligent failover with sub-second detection and recovery.</td>
+          <td className="px-4 py-3 text-white/90">Zero-downtime operations.</td>
                   </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">Raft Consensus</td>
-          <td className="px-4 py-3 text-slate-300">Leader election, log replication, term monotonicity.</td>
-          <td className="px-4 py-3 text-slate-300">Deterministic failover; no split-brain.</td>
+          <td className="px-4 py-3 text-white/90">Leader election, log replication, term monotonicity.</td>
+          <td className="px-4 py-3 text-white/90">Deterministic failover; no split-brain.</td>
                   </tr>
                   <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Real-time Monitoring</td>
-          <td className="px-4 py-3 text-slate-300">Comprehensive health checks and performance metrics.</td>
-          <td className="px-4 py-3 text-slate-300">Proactive issue detection.</td>
+          <td className="px-4 py-3 text-white/90">Comprehensive health checks and performance metrics.</td>
+          <td className="px-4 py-3 text-white/90">Proactive issue detection.</td>
                   </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
-          <td className="px-4 py-3 text-slate-300">Native PostgreSQL clustering with seamless integration.</td>
-          <td className="px-4 py-3 text-slate-300">Native DB admin UX.</td>
+          <td className="px-4 py-3 text-white/90">Native PostgreSQL clustering with seamless integration.</td>
+          <td className="px-4 py-3 text-white/90">Native DB admin UX.</td>
                   </tr>
                 </tbody>
               </table>

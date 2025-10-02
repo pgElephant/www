@@ -288,7 +288,7 @@ Message: ${formData.message}
                         <div className="text-sm font-thin text-white">Report Bug</div>
                         <div className="text-xs text-white/70">GitHub Issues</div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-600" />
+                      <ArrowRight className="w-4 h-4 text-white/70" />
                     </div>
                   </div>
                   <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
@@ -297,7 +297,7 @@ Message: ${formData.message}
                         <div className="text-sm font-thin text-white">Feature Request</div>
                         <div className="text-xs text-white/70">GitHub Discussions</div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-600" />
+                      <ArrowRight className="w-4 h-4 text-white/70" />
                     </div>
                   </div>
                   <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
@@ -306,7 +306,7 @@ Message: ${formData.message}
                         <div className="text-sm font-thin text-white">Code Discussion</div>
                         <div className="text-xs text-white/70">Developer Community</div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-600" />
+                      <ArrowRight className="w-4 h-4 text-white/70" />
                     </div>
                   </div>
                 </div>

@@ -7,7 +7,7 @@ interface TextProps {
 
 export function H1({ children, className = '' }: TextProps) {
   return (
-    <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 ${className}`}>
+    <h1 className={`text-4xl md:text-5xl lg:text-6xl font-thin text-white ${className}`}>
       {children}
     </h1>
   );
@@ -15,7 +15,7 @@ export function H1({ children, className = '' }: TextProps) {
 
 export function H2({ children, className = '' }: TextProps) {
   return (
-    <h2 className={`text-3xl md:text-4xl font-bold text-slate-900 ${className}`}>
+    <h2 className={`text-3xl md:text-4xl font-thin text-white ${className}`}>
       {children}
     </h2>
   );
@@ -23,7 +23,7 @@ export function H2({ children, className = '' }: TextProps) {
 
 export function H3({ children, className = '' }: TextProps) {
   return (
-    <h3 className={`text-2xl md:text-3xl font-semibold text-slate-900 ${className}`}>
+    <h3 className={`text-2xl md:text-3xl font-thin text-white ${className}`}>
       {children}
     </h3>
   );
@@ -31,7 +31,7 @@ export function H3({ children, className = '' }: TextProps) {
 
 export function H4({ children, className = '' }: TextProps) {
   return (
-    <h4 className={`text-xl md:text-2xl font-semibold text-slate-900 ${className}`}>
+    <h4 className={`text-xl md:text-2xl font-thin text-white ${className}`}>
       {children}
     </h4>
   );
@@ -39,7 +39,7 @@ export function H4({ children, className = '' }: TextProps) {
 
 export function Paragraph({ children, className = '' }: TextProps) {
   return (
-    <p className={`text-base md:text-lg text-slate-600 leading-relaxed ${className}`}>
+    <p className={`text-base md:text-lg text-white/90 leading-relaxed ${className}`}>
       {children}
     </p>
   );
@@ -47,7 +47,7 @@ export function Paragraph({ children, className = '' }: TextProps) {
 
 export function SmallText({ children, className = '' }: TextProps) {
   return (
-    <p className={`text-sm text-slate-500 ${className}`}>
+    <p className={`text-sm text-white/80 ${className}`}>
       {children}
     </p>
   );

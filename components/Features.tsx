@@ -53,10 +53,10 @@ const Features = () => {
     <section className="premium-section">
       <div className="container-wide">
         <div className="max-w-4xl mx-auto text-center mb-20">
-          <h2 className="text-5xl font-bold premium-heading mb-8">
+          <h2 className="text-5xl font-thin text-white mb-8">
             Enterprise-Grade Features
           </h2>
-          <p className="text-xl premium-subheading leading-relaxed">
+          <p className="text-xl text-white/90 leading-relaxed">
             Built for production environments that demand reliability, security, and performance at scale.
           </p>
         </div>
@@ -68,10 +68,10 @@ const Features = () => {
               <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center mb-8 border border-white/20">
                 <feature.icon className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">
+              <h3 className="text-2xl font-thin text-white mb-6">
                 {feature.title}
               </h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
+              <p className="text-white/90 leading-relaxed text-lg">
                 {feature.description}
               </p>
             </div>
@@ -81,10 +81,10 @@ const Features = () => {
         {/* Stats Section */}
         <div className="premium-card p-16">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold premium-heading mb-6">
+            <h3 className="text-4xl font-thin text-white mb-6">
               Proven Performance
             </h3>
-            <p className="text-xl premium-subheading">
+            <p className="text-xl text-white/90">
               Real-world metrics from production deployments
             </p>
           </div>
@@ -95,7 +95,7 @@ const Features = () => {
                 <div className="text-5xl font-bold professional-text-gradient mb-4">
                   {stat.number}
                 </div>
-                <div className="text-slate-600 font-semibold text-lg">
+                <div className="text-white/90 font-semibold text-lg">
                   {stat.label}
                 </div>
               </div>
