@@ -15,24 +15,29 @@ const palette = {
 
 const Footer = () => {
   const navigation = {
-    product: [
-      { name: 'Features', href: '/#features' },
-      { name: 'Architecture', href: '/#architecture' },
-      { name: 'Download', href: '/download' },
+    products: [
+      { name: 'RALE', href: '/rale', description: 'Distributed Consensus' },
+      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering' },
+      { name: 'pgraft', href: '/pgraft', description: 'Raft Extension' },
+      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Proxy' },
     ],
     resources: [
-      { name: 'Documentation', href: '/docs' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Community', href: '/community' },
-      { name: 'RALE - High Availability', href: '/rale' },
-      { name: 'RAM - Resource Management', href: '/ram' },
-      { name: 'FauxDB - Document Database', href: '/fauxdb' },
+      { name: 'Documentation', href: '/docs', description: 'Technical guides' },
+      { name: 'Download', href: '/download', description: 'Get started' },
+      { name: 'Blog', href: '/blog', description: 'Latest insights' },
+      { name: 'Community', href: '/community', description: 'Join the community' },
+    ],
+    enterprise: [
+      { name: 'Enterprise Support', href: '/contact', description: '24/7 support' },
+      { name: 'Professional Services', href: '/contact', description: 'Consulting' },
+      { name: 'Training', href: '/contact', description: 'Expert training' },
+      { name: 'Partnership', href: '/contact', description: 'Become a partner' },
     ],
     company: [
-      { name: 'About', href: '/' },
-      { name: 'Contact', href: '/contact' },
-      { name: 'Careers', href: '/community' },
-      { name: 'Support', href: '/community' },
+      { name: 'About Us', href: '/', description: 'Our mission' },
+      { name: 'Careers', href: '/community', description: 'Join our team' },
+      { name: 'Press Kit', href: '/contact', description: 'Media resources' },
+      { name: 'Contact', href: '/contact', description: 'Get in touch' },
     ],
   }
 
