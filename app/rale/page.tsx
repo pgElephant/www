@@ -2,18 +2,19 @@
 
 import React, { useState, useEffect } from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import RaleDemoTerminal from '@/components/RaleDemoTerminal';
 import { Terminal, Database, Activity, Users, Shield, Zap, Server } from 'lucide-react';
 
 const raleConfig = {
   hero: {
-    title: 'RALE: Raft Log Engine',
-    subtitle: 'Distributed Write-Ahead Log for PostgreSQL',
+    title: 'RALE: Resilient Adaptive Leader Election',
+    subtitle: 'Raft Log Engine for Distributed Consensus',
     projectName: 'RALE',
   },
   badges: [
-    'Distributed WAL',
-    'Raft Consensus',
-    'PostgreSQL Integration',
+    'Raft Log Engine',
+    'Leader Election',
+    'Distributed Consensus',
     'Crash Safe',
     'Observability',
   ],
@@ -43,8 +44,8 @@ const raleConfig = {
 > raled --config conf/raled2.conf &
 > raled --config conf/raled3.conf &
 `}</pre>
-        </div>
-        
+      </div>
+
         {/* ralectrl CLI terminal */}
         <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
           <div className="flex items-center mb-3">
@@ -76,8 +77,8 @@ Node ID | Name  | IP         | RALE Port | DStore Port
       3 | node3 | 127.0.0.1  | 7404      | 7405
       4 | node4 | 127.0.0.1  | 7406      | 7407
 `}</pre>
-        </div>
-        
+      </div>
+
         {/* librale library terminal */}
         <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
           <div className="flex items-center mb-3">
@@ -132,31 +133,31 @@ Success: Retrieved "value1" (6 bytes)
           <th className="px-4 py-3 font-semibold text-white">Capability</th>
           <th className="px-4 py-3 font-semibold text-white">Description</th>
           <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
-        </tr>
-      </thead>
+                  </tr>
+                </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Distributed WAL</td>
           <td className="px-4 py-3 text-slate-300">Write-ahead log replication across nodes.</td>
           <td className="px-4 py-3 text-slate-300">Durable, consistent log.</td>
-        </tr>
+                  </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">Raft Consensus</td>
           <td className="px-4 py-3 text-slate-300">Reliable log ordering and durability.</td>
           <td className="px-4 py-3 text-slate-300">No split-brain, deterministic failover.</td>
-        </tr>
-        <tr>
+                  </tr>
+                  <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Crash Safe</td>
           <td className="px-4 py-3 text-slate-300">Persistent logs for robust recovery.</td>
           <td className="px-4 py-3 text-slate-300">Crash-safe recovery.</td>
-        </tr>
+                  </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
           <td className="px-4 py-3 text-slate-300">Native extension for PostgreSQL.</td>
           <td className="px-4 py-3 text-slate-300">Seamless integration.</td>
-        </tr>
-      </tbody>
-    </table>
+                  </tr>
+                </tbody>
+              </table>
   ),
   docsLinks: [
     { href: '/docs/rale/architecture', title: 'Architecture', desc: 'Learn about RALE’s internal architecture.' },
