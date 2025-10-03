@@ -1,121 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
-import RaleDemoTerminal from '@/components/RaleDemoTerminal';
-import { Terminal, Database, Activity, Users, Shield, Zap, Server } from 'lucide-react';
-
-export const metadata = {
-  title: 'RALE - Raft Log Engine | Distributed Consensus | Leader Election',
-  description: 'Raft Log Engine for distributed consensus and leader election. RALE provides crash-safe, observable, and production-ready distributed systems consensus protocol implementation.',
-  keywords: [
-    'RALE', 'Resilient Adaptive Leader Election', 'Raft Log Engine', 'distributed consensus',
-    'leader election', 'distributed systems', 'consensus protocol', 'Raft algorithm',
-    'distributed consensus engine', 'leader election algorithm', 'crash safe consensus',
-    'distributed log', 'consensus engine', 'distributed leader election', 'Raft implementation',
-    'RALE consensus', 'distributed systems consensus', 'leader election protocol', 'consensus algorithm',
-    'distributed consensus protocol', 'Raft log engine', 'adaptive leader election', 'resilient consensus'
-  ],
-  openGraph: {
-    title: 'RALE - Resilient Adaptive Leader Election Engine',
-    description: 'Raft Log Engine for distributed consensus and leader election. Crash-safe, observable, and production-ready.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/rale',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'RALE - Resilient Adaptive Leader Election',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'RALE - Resilient Adaptive Leader Election Engine',
-    description: 'Raft Log Engine for distributed consensus and leader election. Crash-safe, observable, and production-ready.',
-    images: ['https://www.pgelephant.com/og-image.jpg'],
-  },
-  alternates: {
-    canonical: 'https://www.pgelephant.com/rale',
-  },
-}
-
-// Structured Data for RALE
-const raleStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-  "name": "RALE",
-  "alternateName": ["Resilient Adaptive Leader Election", "Raft Log Engine", "Distributed Consensus Engine"],
-  "description": "Raft Log Engine for distributed consensus and leader election. RALE provides crash-safe, observable, and production-ready distributed systems consensus protocol implementation.",
-  "url": "https://www.pgelephant.com/rale",
-    "applicationCategory": "DatabaseApplication",
-  "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  },
-  "creator": {
-    "@type": "Organization",
-    "name": "pgElephant Team",
-    "url": "https://www.pgelephant.com"
-    },
-    "featureList": [
-    "Raft Log Engine",
-    "Leader Election",
-      "Distributed Consensus",
-    "Crash Safe",
-    "Observability",
-    "Production Ready",
-    "Consensus Protocol",
-    "Distributed Systems",
-      "High Availability",
-    "Fault Tolerance"
-  ],
-  "softwareVersion": "1.0.0",
-  "datePublished": "2024-01-01",
-  "dateModified": new Date().toISOString().split('T')[0],
-  "downloadUrl": "https://www.pgelephant.com/download",
-  "screenshot": "https://www.pgelephant.com/og-image.jpg"
-}
 
 const raleConfig = {
   hero: {
-    title: 'RALE: Resilient Adaptive Leader Election',
-    subtitle: 'Raft Log Engine for Distributed Consensus',
+    title: 'RALE: Raft Log Engine',
+    subtitle: 'Distributed Write-Ahead Log for PostgreSQL',
     projectName: 'RALE',
-    icon: '/ico/RALE_HD.ico',
   },
   badges: [
-    'Raft Log Engine',
-    'Leader Election',
-    'Distributed Consensus',
+    'Distributed WAL',
+    'Raft Consensus',
+    'PostgreSQL Integration',
     'Crash Safe',
     'Observability',
   ],
   demo: (
-    <div className="max-w-6xl mx-auto mb-8">
-      <RaleDemoTerminal />
+    <div className="max-w-4xl mx-auto mb-8">
+      <div className="bg-gray-900 rounded-xl p-8 text-white font-mono text-sm">
+        <div className="flex items-center mb-6">
+          <div className="flex gap-2 mr-4">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+          <span className="text-gray-300">RALE Demo Terminal</span>
+        </div>
+          <pre className="bg-transparent p-0 m-0 mb-4 text-green-300 whitespace-pre-line">
+{`> raled status
+Cluster: Healthy
+Leader: node1
+Term: 42
+Nodes: node1, node2, node3
+
+> raled log append "set x=1"
+Entry appended to log. Index: 1234
+
+> raled leader-election
+Leader election initiated...
+New Leader: node3
+`}
+          </pre>
+      </div>
     </div>
   ),
   featurePillars: {
     kicker: 'Overview',
     items: [
-      { title: 'Raft Log Engine', desc: 'Distributed write-ahead log for consensus operations.' },
-      { title: 'Leader Election', desc: 'Automatic leader election with split-brain prevention.' },
-      { title: 'Crash Safe', desc: 'Persistent logs for robust recovery and consistency.' },
-      { title: 'Distributed Consensus', desc: 'Strong consistency guarantees across nodes.' },
-      { title: 'Observability', desc: 'Monitor log state, replication, and cluster health.' },
-      { title: 'Minimal Configuration', desc: 'Easy setup and scaling with sensible defaults.' },
+      { title: 'Distributed WAL', desc: 'Write-ahead log replication across nodes.' },
+      { title: 'Raft Consensus', desc: 'Reliable log ordering and durability.' },
+      { title: 'Crash Safe', desc: 'Persistent logs for robust recovery.' },
+      { title: 'PostgreSQL Integration', desc: 'Seamless integration with PostgreSQL.' },
+      { title: 'Observability', desc: 'Monitor log state and replication.' },
+      { title: 'Minimal Configuration', desc: 'Easy setup and scaling.' },
     ],
   },
   features: [
-    { icon: <Database className="w-5 h-5" />, iconColor: 'text-indigo-500', title: 'Distributed Key-Value Store', desc: 'High-performance replicated key-value storage with strong consistency.' },
-    { icon: <Users className="w-5 h-5" />, iconColor: 'text-sky-500', title: 'Raft Consensus', desc: 'Reliable leader election and log replication with split-brain prevention.' },
-    { icon: <Shield className="w-5 h-5" />, iconColor: 'text-green-500', title: 'Thread Safety', desc: 'Full multi-threading support with proper synchronization mechanisms.' },
-    { icon: <Activity className="w-5 h-5" />, iconColor: 'text-yellow-500', title: 'Network Layer', desc: 'TCP/UDP communication with automatic failover and fault tolerance.' },
-    { icon: <Zap className="w-5 h-5" />, iconColor: 'text-pink-500', title: 'Memory Safety', desc: 'Safe allocation/deallocation with comprehensive leak prevention.' },
-    { icon: <Terminal className="w-5 h-5" />, iconColor: 'text-cyan-500', title: 'Professional CLI', desc: 'Clean logging without colors or terminal dependencies.' },
+    { icon: '', iconColor: 'text-indigo-500', title: 'Raft Log', desc: 'Distributed, strongly consistent log.' },
+    { icon: '', iconColor: 'text-sky-500', title: 'Crash Safe', desc: 'Persistent, durable log entries.' },
+    { icon: '', iconColor: 'text-green-500', title: 'PostgreSQL Integration', desc: 'Native extension for PostgreSQL.' },
+    { icon: '', iconColor: 'text-yellow-500', title: 'Observability', desc: 'Monitor log state and replication.' },
+    { icon: '', iconColor: 'text-pink-500', title: 'Minimal Configuration', desc: 'Production-ready defaults.' },
+    { icon: '', iconColor: 'text-cyan-500', title: 'Scaling', desc: 'Add/remove nodes easily.' },
+    { icon: '', iconColor: 'text-red-500', title: 'Debugging', desc: 'Extended logging and audit.' },
+    { icon: '', iconColor: 'text-violet-500', title: 'Open Source', desc: 'MIT licensed, community-driven.' },
+    { icon: '', iconColor: 'text-emerald-500', title: 'Extensible', desc: 'Plugin architecture for custom features.' },
   ],
   featureMatrix: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
@@ -124,62 +72,38 @@ const raleConfig = {
           <th className="px-4 py-3 font-semibold text-white">Capability</th>
           <th className="px-4 py-3 font-semibold text-white">Description</th>
           <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
-                  </tr>
-                </thead>
+        </tr>
+      </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Raft Log Engine</td>
-          <td className="px-4 py-3 text-white/90">Distributed write-ahead log for consensus operations.</td>
-          <td className="px-4 py-3 text-white/90">Durable, consistent log replication.</td>
-                  </tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Distributed WAL</td>
+          <td className="px-4 py-3 text-slate-300">Write-ahead log replication across nodes.</td>
+          <td className="px-4 py-3 text-slate-300">Durable, consistent log.</td>
+        </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Leader Election</td>
-          <td className="px-4 py-3 text-white/90">Automatic leader election with split-brain prevention.</td>
-          <td className="px-4 py-3 text-white/90">Deterministic leadership transitions.</td>
-                  </tr>
-                  <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Raft Consensus</td>
+          <td className="px-4 py-3 text-slate-300">Reliable log ordering and durability.</td>
+          <td className="px-4 py-3 text-slate-300">No split-brain, deterministic failover.</td>
+        </tr>
+        <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Crash Safe</td>
-          <td className="px-4 py-3 text-white/90">Persistent logs for robust recovery.</td>
-          <td className="px-4 py-3 text-white/90">Crash-safe recovery.</td>
-                  </tr>
+          <td className="px-4 py-3 text-slate-300">Persistent logs for robust recovery.</td>
+          <td className="px-4 py-3 text-slate-300">Crash-safe recovery.</td>
+        </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Distributed Consensus</td>
-          <td className="px-4 py-3 text-white/90">Strong consistency guarantees across nodes.</td>
-          <td className="px-4 py-3 text-white/90">Reliable distributed operations.</td>
-                  </tr>
-                </tbody>
-              </table>
+          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
+          <td className="px-4 py-3 text-slate-300">Native extension for PostgreSQL.</td>
+          <td className="px-4 py-3 text-slate-300">Seamless integration.</td>
+        </tr>
+      </tbody>
+    </table>
   ),
   docsLinks: [
-    { href: '/docs/rale/architecture', title: 'Architecture', desc: 'Learn about RALE\'s internal architecture.' },
+    { href: '/docs/rale/architecture', title: 'Architecture', desc: 'Learn about RALE’s internal architecture.' },
     { href: '/docs/rale/api', title: 'API Reference', desc: 'Explore the RALE API.' },
   ],
 };
 
-export default function RalePage() {
-  return (
-    <div className="min-h-screen">
-      {/* Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(raleStructuredData)
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pgelephant.com/" },
-              { "@type": "ListItem", "position": 2, "name": "RALE", "item": "https://www.pgelephant.com/rale" }
-            ]
-          })
-        }}
-      />
-      <ProjectTemplate {...raleConfig} />
-    </div>
-  );
-}
+  export default function RalePage() {
+    return <ProjectTemplate {...raleConfig} />;
+  }

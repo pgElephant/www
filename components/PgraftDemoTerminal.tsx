@@ -214,208 +214,6 @@ const PgraftDemoTerminal = () => {
         '',
         '-- Log entries on follower (5432)'
       ]
-    },
-    // Cluster Health and Monitoring
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_cluster_health();"',
-      output: [
-        'node_id | status    | uptime        | last_seen            | lag_ms | role',
-        '--------+-----------+---------------+---------------------+--------+-------',
-        '1       | healthy   | 00:05:23      | 2025-10-02 10:35:18 |      0 | leader',
-        '2       | healthy   | 00:05:20      | 2025-10-02 10:35:17 |     12 | follower',
-        '3       | healthy   | 00:05:18      | 2025-10-02 10:35:16 |     25 | follower',
-        '(3 rows)'
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_get_metrics();"',
-      output: [
-        'metric_name                    | value | unit',
-        '------------------------------+-------+------',
-        'raft_heartbeat_sent           |   150 | count',
-        'raft_heartbeat_received       |   150 | count',
-        'raft_log_entries_appended     |    11 | count',
-        'raft_log_entries_committed    |    11 | count',
-        'raft_election_timeout_count   |     1 | count',
-        'raft_leader_changes           |     1 | count',
-        'raft_cluster_size             |     3 | nodes',
-        '(7 rows)'
-      ]
-    },
-    // Advanced Configuration
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT name, setting, unit, context FROM pg_settings WHERE name LIKE \'pgraft%\';"',
-      output: [
-        'name                         | setting | unit | context',
-        '-----------------------------+---------+------+--------',
-        'pgraft.cluster_id            | prod-cluster | | postmaster',
-        'pgraft.node_id               | 1       | | postmaster',
-        'pgraft.address               | 127.0.0.1 | | postmaster',
-        'pgraft.port                  | 7000    | | postmaster',
-        'pgraft.election_timeout      | 1000    | ms   | postmaster',
-        'pgraft.heartbeat_interval    | 100     | ms   | postmaster',
-        'pgraft.log_level             | info    | | postmaster',
-        'pgraft.snapshot_threshold    | 1000    | entries | postmaster',
-        '(8 rows)'
-      ]
-    },
-    // More Data Operations with Replication
-    {
-      command: 'psql -p 5431 -d postgres -c "CREATE TABLE orders (id serial primary key, customer_id int, amount decimal(10,2), status text);"',
-      output: [
-        'CREATE TABLE'
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "INSERT INTO orders (customer_id, amount, status) VALUES (1, 99.99, \'pending\'), (2, 149.50, \'shipped\'), (3, 79.99, \'completed\');"',
-      output: [
-        'INSERT 0 3'
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "UPDATE orders SET status = \'completed\' WHERE id = 1;"',
-      output: [
-        'UPDATE 1'
-      ]
-    },
-    {
-      command: 'psql -p 5432 -d postgres -c "SELECT * FROM orders ORDER BY id;"',
-      output: [
-        'id | customer_id | amount | status   ',
-        '---+-------------+--------+----------',
-        ' 1 |           1 |  99.99 | completed',
-        ' 2 |           2 | 149.50 | shipped  ',
-        ' 3 |           3 |  79.99 | completed',
-        '(3 rows)',
-        '',
-        '-- Updates replicated to follower (5432)'
-      ]
-    },
-    // Performance and Statistics
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_performance_stats();"',
-      output: [
-        'stat_name                | value | unit',
-        '------------------------+-------+------',
-        'avg_replication_lag     |    15 | ms',
-        'max_replication_lag     |    45 | ms',
-        'avg_heartbeat_rtt       |     2 | ms',
-        'max_heartbeat_rtt       |     8 | ms',
-        'log_entries_per_second  |    12 | entries/s',
-        'committed_entries_rate  |    12 | entries/s',
-        '(6 rows)'
-      ]
-    },
-    // Node Management
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_remove_node(3);"',
-      output: [
-        'pgraft_remove_node',
-        '------------------',
-        't',
-        '(1 row)'
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_cluster_status();"',
-      output: [
-        'node_id | state    | leader_id | current_term | last_heartbeat',
-        '--------+----------+-----------+--------------+---------------',
-        '1       | leader   | 1         | 2            | 2025-10-02 10:36:45',
-        '2       | follower | 1         | 2            | 2025-10-02 10:36:44',
-        '(2 rows)',
-        '',
-        '-- Node 3 removed from cluster'
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_add_node(4, \'127.0.0.1\', 7003);"',
-      output: [
-        'pgraft_add_node',
-        '----------------',
-        't',
-        '(1 row)'
-      ]
-    },
-    // Failover Simulation
-    {
-      command: 'echo "Simulating leader failure..." && sleep 2',
-      output: [
-        'Simulating leader failure...',
-        ''
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_step_down();"',
-      output: [
-        'pgraft_step_down',
-        '----------------',
-        't',
-        '(1 row)'
-      ]
-    },
-    {
-      command: 'psql -p 5432 -d postgres -c "SELECT pgraft_is_leader(), pgraft_get_term(), pgraft_get_leader();"',
-      output: [
-        'pgraft_is_leader | pgraft_get_term | pgraft_get_leader',
-        '-----------------+----------------+------------------',
-        't                |              3 |                2',
-        '(1 row)',
-        '',
-        '-- Node 2 is now the new leader after step-down'
-      ]
-    },
-    {
-      command: 'psql -p 5432 -d postgres -c "INSERT INTO users (name) VALUES (\'david\'), (\'eve\');"',
-      output: [
-        'INSERT 0 2'
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT * FROM users ORDER BY id;"',
-      output: [
-        'id | name',
-        '---+----------',
-        ' 1 | alice',
-        ' 2 | bob',
-        ' 3 | charlie',
-        ' 4 | david',
-        ' 5 | eve',
-        '(5 rows)',
-        '',
-        '-- Data replicated from new leader (5432) to former leader (5431)'
-      ]
-    },
-    // Cluster Recovery and Status
-    {
-      command: 'psql -p 5432 -d postgres -c "SELECT * FROM pgraft_get_cluster_status();"',
-      output: [
-        'node_id | state    | leader_id | current_term | last_heartbeat',
-        '--------+----------+-----------+--------------+---------------',
-        '1       | follower | 2         | 3            | 2025-10-02 10:37:12',
-        '2       | leader   | 2         | 3            | 2025-10-02 10:37:13',
-        '4       | follower | 2         | 3            | 2025-10-02 10:37:11',
-        '(3 rows)',
-        '',
-        '-- Cluster successfully recovered with new leader'
-      ]
-    },
-    // Final Verification
-    {
-      command: 'psql -p 5431 -d postgres -c "SELECT COUNT(*) as total_users FROM users; SELECT COUNT(*) as total_orders FROM orders;"',
-      output: [
-        'total_users',
-        '-----------',
-        '          5',
-        '(1 row)',
-        '',
-        'total_orders',
-        '------------',
-        '          3',
-        '(1 row)',
-        '',
-        '-- Final data consistency check across all nodes'
-      ]
     }
   ]
 
@@ -531,26 +329,26 @@ const PgraftDemoTerminal = () => {
   }
 
   return (
-    <div className="bg-black rounded-lg  border border-white/30 overflow-hidden">
+    <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
       {/* Terminal Header */}
-      <div className="bg-white/20 px-4 py-3 flex items-center justify-between border-b border-white/30">
+      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
-          <span className="text-white/90 text-sm ml-4 font-mono">pgraft-demo</span>
+          <span className="text-gray-300 text-sm ml-4 font-mono">pgraft-demo</span>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={copyToClipboard}
-            className="p-1 hover:bg-white/20 rounded text-white/70 hover:text-white transition-colors"
+            className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
             title="Copy to clipboard"
           >
             <Copy className="w-4 h-4" />
           </button>
           <button
             onClick={resetDemo}
-            className="p-1 hover:bg-white/20 rounded text-white/70 hover:text-white transition-colors"
+            className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
             title="Reset demo"
           >
             <RotateCcw className="w-4 h-4" />
@@ -595,7 +393,7 @@ const PgraftDemoTerminal = () => {
       </div>
 
       {/* Terminal Controls */}
-      <div className="bg-white/20 px-4 py-3 border-t border-white/30">
+      <div className="bg-gray-800 px-4 py-3 border-t border-gray-700">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
@@ -603,7 +401,7 @@ const PgraftDemoTerminal = () => {
               disabled={isRunning}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                 isRunning 
-                  ? 'bg-white/20 text-white/70 cursor-not-allowed' 
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
                   : 'bg-secondary-600 hover:bg-secondary-700 text-white hover:scale-105'
               }`}
             >
@@ -616,7 +414,7 @@ const PgraftDemoTerminal = () => {
               disabled={!isRunning}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                 !isRunning 
-                  ? 'bg-white/20 text-white/70 cursor-not-allowed' 
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
                   : 'bg-red-600 hover:bg-red-700 text-white hover:scale-105'
               }`}
             >
@@ -625,7 +423,7 @@ const PgraftDemoTerminal = () => {
             </button>
 
             <div className="flex items-center gap-2 ml-4">
-              <span className="text-white/70 text-sm">Speed:</span>
+              <span className="text-gray-400 text-sm">Speed:</span>
               <div className="flex gap-1">
                 {[1, 2, 3].map((speed) => (
                   <button
@@ -635,7 +433,7 @@ const PgraftDemoTerminal = () => {
                     className={`px-2 py-1 rounded text-sm font-mono transition-all ${
                       speedMultiplier === speed
                         ? 'bg-secondary-600 text-white'
-                        : 'bg-white/20 text-white/70 hover:bg-white/20'
+                        : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
                     } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
                   >
                     {speed}x
@@ -645,7 +443,7 @@ const PgraftDemoTerminal = () => {
             </div>
           </div>
 
-          <div className="text-white/70 text-sm">
+          <div className="text-gray-400 text-sm">
             {isRunning ? (
               <span className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse"></div>

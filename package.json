@@ -17,8 +17,10 @@
     "sitemap": "next-sitemap",
     "seo:audit": "npm run build && npm run lighthouse",
     "lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html --view",
+    "validate:schemas": "./scripts/validate-schemas.sh",
     "clean": "rm -rf node_modules .next out",
-    "test": "npm run type-check && npm run lint:check && npm run build"
+    "test": "npm run type-check && npm run lint:check && npm run validate:schemas && npm run build",
+    "precommit": "npm run type-check && npm run lint:check && npm run validate:schemas"
   },
   "dependencies": {
     "@vercel/analytics": "^1.3.7",

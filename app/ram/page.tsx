@@ -41,26 +41,66 @@ export const metadata = {
 
 // Structured Data for RAM
 const ramStructuredData = {
-  "@context": "https://schema.org",
+    "@context": "https://schema.org",
   "@type": "Product",
-  "name": "RAM - Resilient Adaptive Manager",
+    "name": "RAM - Resilient Adaptive Manager",
   "alternateName": ["RAM", "Resilient Adaptive Manager", "PostgreSQL High Availability"],
   "description": "PostgreSQL high availability solution with automatic failover and clustering. RAM provides enterprise-grade PostgreSQL clustering with Raft consensus and real-time monitoring.",
   "url": "https://www.pgelephant.com/ram",
+  "image": [
+    "https://www.pgelephant.com/og-image.jpg",
+    "https://www.pgelephant.com/ico/RAM_HD.ico"
+  ],
   "brand": {
     "@type": "Brand",
     "name": "pgElephant"
   },
   "category": "Database Software",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
+    "url": "https://www.pgelephant.com/download",
     "seller": {
       "@type": "Organization",
       "name": "pgElephant",
       "url": "https://www.pgelephant.com"
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "USD"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "US"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 0,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 0,
+          "unitCode": "DAY"
+        }
+      }
     }
   },
   "manufacturer": {

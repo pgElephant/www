@@ -63,6 +63,10 @@ const AdvancedSEO: React.FC<AdvancedSEOProps> = ({
     "applicationSubCategory": "Database Management",
     "downloadUrl": `${baseUrl}/download`,
     "screenshot": fullOgImage,
+    "image": [
+      fullOgImage,
+      `${baseUrl}/logo.png`
+    ],
     "author": {
       "@type": "Organization",
       "name": "pgElephant",
@@ -73,7 +77,43 @@ const AdvancedSEO: React.FC<AdvancedSEOProps> = ({
       "price": product.price || "0",
       "priceCurrency": product.currency || "USD",
       "availability": `https://schema.org/${product.availability || 'InStock'}`,
-      "itemCondition": `https://schema.org/${product.condition || 'NewCondition'}`
+      "itemCondition": `https://schema.org/${product.condition || 'NewCondition'}`,
+      "url": `${baseUrl}/download`,
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "US",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "USD"
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "US"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          }
+        }
+      }
     },
     "aggregateRating": {
       "@type": "AggregateRating",

@@ -56,6 +56,10 @@ const ProductSchema: React.FC<ProductSchemaProps> = ({
     url: baseUrl,
     downloadUrl: downloadUrl || `${baseUrl}/download`,
     screenshot: `${baseUrl}/og-image.jpg`,
+    image: [
+      `${baseUrl}/og-image.jpg`,
+      `${baseUrl}/logo.png`
+    ],
     author: {
       '@type': 'Organization',
       name: author,
@@ -75,7 +79,43 @@ const ProductSchema: React.FC<ProductSchemaProps> = ({
       price,
       priceCurrency: currency,
       availability: 'https://schema.org/InStock',
-      itemCondition: 'https://schema.org/NewCondition'
+      itemCondition: 'https://schema.org/NewCondition',
+      url: downloadUrl || `${baseUrl}/download`,
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'US',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        merchantReturnDays: 30,
+        returnMethod: 'https://schema.org/ReturnByMail',
+        returnFees: 'https://schema.org/FreeReturn'
+      },
+      shippingDetails: {
+        '@type': 'OfferShippingDetails',
+        shippingRate: {
+          '@type': 'MonetaryAmount',
+          value: '0',
+          currency: 'USD'
+        },
+        shippingDestination: {
+          '@type': 'DefinedRegion',
+          addressCountry: 'US'
+        },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 0,
+            maxValue: 0,
+            unitCode: 'DAY'
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 0,
+            maxValue: 0,
+            unitCode: 'DAY'
+          }
+        }
+      }
     },
     datePublished,
     dateModified: dateModified || datePublished,
