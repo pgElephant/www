@@ -43,39 +43,61 @@ const Hero = () => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
   const products: Product[] = [
-      {
-        id: 'rale',
-        name: 'RALE',
-        title: 'Resilient Adaptive Leader Election',
-        description: '• Distributed consensus for high availability in distributed systems.',
-        description2: '• Automated leader election and failover for any distributed database.',
-        description3: '• Zero data loss during node failures with strong consistency guarantees.',
-        icon: '/ico/RALE_HD.ico',
-        color: `from-[${palette.primary}] to-[${palette.primaryLight}]`,
-        bg: { from: palette.primaryDark, via: palette.primary, to: palette.primaryLight }
-      },
-      {
-        id: 'ram',
-        name: 'RAM',
-        title: 'Resilient Adaptive Manager',
-        description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
-        description2: '• Intelligent resource management and load balancing across nodes.',
-        description3: '• Real-time monitoring and automated scaling capabilities.',
-        icon: '/ico/RAM_HD.ico',
-        color: `from-[${palette.secondary}] to-[${palette.secondaryLight}]`,
-        bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.secondaryLight }
-      },
-      {
-        id: 'fauxdb',
-        name: 'FauxDB',
-        title: 'MongoDB Compatible Document Database',
-        description: '• High-performance MongoDB-compatible database built in Rust.',
-        description2: '• Native JSON support with ACID transaction guarantees.',
-        description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
-        icon: '/ico/FauxDB_HD.ico',
-        color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
-        bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
-      }
+    {
+      id: 'rale',
+      name: 'RALE',
+      title: 'Resilient Adaptive Leader Election',
+      description: '• Distributed consensus for high availability in distributed systems.',
+      description2: '• Automated leader election and failover for any distributed database.',
+      description3: '• Zero data loss during node failures with strong consistency guarantees.',
+      icon: '/ico/RALE_HD.ico',
+      color: `from-[${palette.primary}] to-[${palette.primaryLight}]`,
+      bg: { from: palette.primaryDark, via: palette.primary, to: palette.primaryLight }
+    },
+    {
+      id: 'ram',
+      name: 'RAM',
+      title: 'Resilient Adaptive Manager',
+      description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
+      description2: '• Intelligent resource management and load balancing across nodes.',
+      description3: '• Real-time monitoring and automated scaling capabilities.',
+      icon: '/ico/RAM_HD.ico',
+      color: `from-[${palette.secondary}] to-[${palette.secondaryLight}]`,
+      bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.secondaryLight }
+    },
+    {
+      id: 'pgraft',
+      name: 'pgraft',
+      title: 'Raft Consensus Extension for PostgreSQL',
+      description: '• Native Raft consensus for PostgreSQL clusters.',
+      description2: '• Strong consistency, automatic leader election, and seamless failover.',
+      description3: '• Built-in cluster management and observability.',
+      icon: '/ico/pgsql_raft_leader_HD.ico',
+      color: `from-[${palette.primaryDark}] to-[${palette.secondaryDark}]`,
+      bg: { from: palette.primaryDark, via: palette.primary, to: palette.secondaryDark }
+    },
+    {
+      id: 'pgbalancer',
+      name: 'pgbalancer',
+      title: 'Connection Pooling & Load Balancing',
+      description: '• High-performance connection pooling for PostgreSQL.',
+      description2: '• Load balancing, failover, and observability in one lightweight service.',
+      description3: '• YAML configuration, Prometheus metrics, and cloud-native ready.',
+      icon: '/ico/pgbalancer_HD.ico',
+      color: `from-[${palette.accentDark}] to-[${palette.primaryLight}]`,
+      bg: { from: palette.accentDark, via: palette.primary, to: palette.primaryLight }
+    },
+    {
+      id: 'fauxdb',
+      name: 'FauxDB',
+      title: 'MongoDB Compatible Document Database',
+      description: '• High-performance MongoDB-compatible database built in Rust.',
+      description2: '• Native JSON support with ACID transaction guarantees.',
+      description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
+      icon: '/ico/FauxDB_HD.ico',
+      color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
+      bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
+    }
   ]
 
   useEffect(() => {

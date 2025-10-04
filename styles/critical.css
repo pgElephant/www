@@ -68,15 +68,9 @@ img, video, iframe, embed, object {
 /* Optimize image loading */
 img {
   display: block;
-  loading: lazy;
-  decoding: async;
 }
 
 /* Critical path images should not be lazy loaded */
-.hero img,
-.above-fold img {
-  loading: eager;
-}
 
 /* Performance optimizations for animations */
 * {
