@@ -2,14 +2,31 @@ import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import RaleDemoTerminal from '@/components/RaleDemoTerminal';
 import { Users, Crown, Network, Activity } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'RALE - Raft Log Engine for PostgreSQL | pgElephant',
+  description: 'RALE provides distributed consensus for high availability in distributed systems. Automated leader election and failover with zero data loss and strong consistency guarantees.',
+  keywords: 'distributed consensus, leader election, failover, strong consistency, zero data loss, distributed systems, high availability',
+  openGraph: {
+    title: 'RALE - Raft Log Engine for PostgreSQL',
+    description: 'Distributed consensus for high availability with automated leader election and failover.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RALE - Raft Log Engine for PostgreSQL',
+    description: 'Distributed consensus for high availability with automated leader election and failover.',
+  },
+};
 
 // Custom RALE icon component
-const RaleIcon = ({ size = 64 }: { size?: number }) => (
+const RaleIcon = ({ size = 80 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Users className="text-indigo-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Activity className="text-cyan-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+    <Users className="text-indigo-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.4s' }} />
+    <Network className="text-green-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.9s' }} />
+    <Activity className="text-cyan-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.3s' }} />
   </div>
 )
 
@@ -18,7 +35,7 @@ const raleConfig = {
     title: 'RALE: Raft Log Engine',
     subtitle: 'Distributed Write-Ahead Log for PostgreSQL',
     projectName: 'RALE',
-    icon: <RaleIcon size={64} />,
+    icon: <RaleIcon size={80} />,
   },
   badges: [
     'Distributed WAL',

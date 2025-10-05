@@ -2,14 +2,31 @@ import React from 'react';
 import { BookOpen, Github, ExternalLink, Database, Crown, Network, Shield } from 'lucide-react';
 import Link from 'next/link';
 import PgraftDemoTerminal from '@/components/PgraftDemoTerminal';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'pgraft - Raft-Based PostgreSQL Extension | pgElephant',
+  description: 'pgraft brings automatic leader election, split-brain prevention, and high availability to PostgreSQL clusters with mathematical guarantees. Native Raft consensus for PostgreSQL.',
+  keywords: 'PostgreSQL, Raft consensus, leader election, high availability, distributed systems, database clustering',
+  openGraph: {
+    title: 'pgraft - Raft-Based PostgreSQL Extension',
+    description: 'Native Raft consensus for PostgreSQL clusters with automatic leader election and split-brain prevention.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'pgraft - Raft-Based PostgreSQL Extension',
+    description: 'Native Raft consensus for PostgreSQL clusters with automatic leader election and split-brain prevention.',
+  },
+};
 
 /* ===================== Custom Icon Components ===================== */
-const PgraftIcon = ({ size = 64 }: { size?: number }) => (
+const PgraftIcon = ({ size = 80 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+    <Database className="text-blue-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.5s' }} />
+    <Network className="text-green-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '1s' }} />
+    <Shield className="text-purple-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.5s' }} />
   </div>
 )
 
@@ -64,7 +81,7 @@ const PgraftPage = () => {
         <div className="container-wide relative z-10 text-center">
           <div className="flex flex-col items-center justify-center mb-5">
             <div className="mb-4">
-              <PgraftIcon size={64} />
+              <PgraftIcon size={80} />
             </div>
             <h1 className="text-5xl font-bold tracking-tight">
               <b>pgraft</b>: Raft based postgresql extension for leader election

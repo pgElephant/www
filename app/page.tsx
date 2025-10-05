@@ -5,64 +5,60 @@ import FeaturesList from '@/components/FeaturesList'
 import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
-  title: 'pgElephant | Enterprise PostgreSQL Platform',
-  description: 'Enterprise PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible database.',
+  title: 'pgElephant | Enterprise PostgreSQL Platform - High Availability & MongoDB Alternative',
+  description: 'pgElephant delivers enterprise-grade PostgreSQL solutions: RAM clustering with automatic failover, RALE distributed consensus, pgraft Raft extension for leader election, and FauxDB MongoDB-compatible document database. Zero-downtime database operations for production environments.',
   keywords: [
     'enterprise postgresql', 'postgresql platform', 'database clustering', 'high availability',
     'postgresql failover', 'mongodb alternative', 'document database', 'distributed consensus',
     'raft algorithm', 'postgresql extension', 'database management', 'production database',
-    'postgresql solutions', 'ram clustering', 'rale consensus', 'pgraft extension', 'fauxdb'
+    'postgresql solutions', 'ram clustering', 'rale consensus', 'pgraft extension', 'fauxdb',
+    'automatic failover', 'zero downtime', 'database replication', 'leader election',
+    'postgresql ha', 'database clustering software', 'mongodb compatible database',
+    'distributed postgresql', 'postgresql consensus', 'database reliability'
   ].join(', '),
   openGraph: {
-    title: 'Enterprise PostgreSQL Platform | pgElephant',
-    description: 'Enterprise-grade PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
-    images: ['/og-home.jpg'],
+    title: 'pgElephant - Enterprise PostgreSQL Platform | High Availability & MongoDB Alternative',
+    description: 'Enterprise-grade PostgreSQL solutions: RAM clustering with automatic failover, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'pgElephant Enterprise PostgreSQL Platform',
+      }
+    ],
     type: 'website',
+    locale: 'en_US',
+    siteName: 'pgElephant',
   },
   twitter: {
-    title: 'Enterprise PostgreSQL Platform | pgElephant',
+    card: 'summary_large_image',
+    title: 'pgElephant - Enterprise PostgreSQL Platform',
     description: 'Enterprise-grade PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
-    images: ['/twitter-home.jpg'],
+    images: ['/og-image.jpg'],
+    creator: '@pgElephant',
+    site: '@pgElephant',
   },
   alternates: {
     canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
 export default function Home() {
   return (
     <>
-      <ProductSchema
-        name="pgElephant Platform"
-        description="Enterprise-grade PostgreSQL solutions including RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database."
-        category="DatabaseApplication"
-        operatingSystem={['Linux', 'macOS', 'Windows']}
-        downloadUrl="/download"
-        keywords={[
-          'PostgreSQL', 'high availability', 'database clustering', 'failover',
-          'distributed consensus', 'MongoDB alternative', 'document database'
-        ]}
-        features={[
-          'Automatic failover with RAM clustering',
-          'Distributed consensus with RALE',
-          'Raft consensus protocol with pgraft',
-          'MongoDB-compatible queries with FauxDB',
-          'Production-ready reliability',
-          'Open-source transparency'
-        ]}
-        requirements={[
-          'PostgreSQL 12+',
-          'Linux, macOS, or Windows',
-          'Minimum 2GB RAM',
-          'Network connectivity for clustering'
-        ]}
-        rating={{
-          value: 4.8,
-          count: 127,
-          bestRating: 5,
-          worstRating: 1
-        }}
-      />
+      <ProductSchema />
       <main className="min-h-screen">
         <Hero />
         <WhyPgElephant />

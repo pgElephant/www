@@ -1,94 +1,101 @@
 {
   "name": "pgElephant - Enterprise PostgreSQL Platform",
   "short_name": "pgElephant",
-  "description": "Enterprise-grade PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.",
+  "description": "Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#070d1a",
-  "theme_color": "#070d1a",
+  "theme_color": "#4f46e5",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en-US",
   "dir": "ltr",
-  "categories": ["productivity", "developer", "database"],
+  "categories": ["productivity", "developer", "business"],
   "icons": [
-    {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "16x16 24x24 32x32 48x48 64x64 96x96 128x128 144x144 152x152 160x160 180x180 192x192 256x256 384x384 512x512",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
     {
       "src": "/ico/pgElephant_HD.ico",
       "sizes": "192x192",
       "type": "image/x-icon",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "/ico/pgElephant_HD.ico",
       "sizes": "512x512",
       "type": "image/x-icon",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "/ico/pgElephant_HD.ico",
-      "sizes": "180x180",
+      "sizes": "384x384",
       "type": "image/x-icon",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "/ico/pgElephant_HD.ico",
-      "sizes": "167x167",
+      "sizes": "256x256",
       "type": "image/x-icon",
-      "purpose": "any"
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Download",
+      "short_name": "Download",
+      "description": "Download pgElephant products",
+      "url": "/download",
+      "icons": [
+        {
+          "src": "/ico/pgElephant_HD.ico",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "152x152",
-      "type": "image/x-icon",
-      "purpose": "any"
+      "name": "Documentation",
+      "short_name": "Docs",
+      "description": "View documentation",
+      "url": "/docs",
+      "icons": [
+        {
+          "src": "/ico/pgElephant_HD.ico",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "144x144",
-      "type": "image/x-icon",
-      "purpose": "any"
+      "name": "pgraft",
+      "short_name": "pgraft",
+      "description": "Raft-Based PostgreSQL Extension",
+      "url": "/pgraft",
+      "icons": [
+        {
+          "src": "/ico/pgElephant_HD.ico",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "120x120",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
+      "name": "FauxDB",
+      "short_name": "FauxDB",
+      "description": "MongoDB Compatible Document Database",
+      "url": "/fauxdb",
+      "icons": [
+        {
+          "src": "/ico/pgElephant_HD.ico",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "screenshots": [
     {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "114x114",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
-    {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "76x76",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
-    {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "72x72",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
-    {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "60x60",
-      "type": "image/x-icon",
-      "purpose": "any"
-    },
-    {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "57x57",
-      "type": "image/x-icon",
-      "purpose": "any"
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "pgElephant Platform Overview"
     }
   ]
 }

@@ -68,19 +68,36 @@ export default function ProjectTemplate({
       {/* Hero */}
       <section className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
-        <div className="container-wide relative z-10 text-center">
-          <div className="flex flex-col items-center justify-center mb-5">
+        <div className="container-wide relative z-10">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
+            {/* Left side - Icon */}
             {hero.icon && (
-              <div className="mb-4">
-                {hero.icon}
+              <div className="flex-shrink-0">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-2xl">
+                  {hero.icon}
+                </div>
               </div>
             )}
-            <div className="text-5xl font-bold tracking-tight">{hero.title}</div>
-          </div>
-          {hero.subtitle && <div className="text-center mb-8"><h3 className="text-2xl font-semibold text-white mb-4">{hero.subtitle}</h3></div>}
-          {demo && <div className="max-w-4xl mx-auto">{demo}</div>}
-          <div className="mt-8 flex flex-wrap justify-center">
-            {badges && badges.map((b: string, i: number) => <Badge key={i}>{b}</Badge>)}
+            
+            {/* Right side - Content */}
+            <div className="flex-1 text-center lg:text-left">
+              <div className="text-5xl lg:text-6xl font-bold tracking-tight mb-4">{hero.title}</div>
+              {hero.subtitle && (
+                <div className="text-xl lg:text-2xl font-semibold text-white/90 mb-8 leading-relaxed">
+                  {hero.subtitle}
+                </div>
+              )}
+              
+              {demo && (
+                <div className="max-w-4xl mx-auto lg:mx-0">
+                  {demo}
+                </div>
+              )}
+              
+              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-2">
+                {badges && badges.map((b: string, i: number) => <Badge key={i}>{b}</Badge>)}
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -1,55 +1,56 @@
-# *
 User-agent: *
 Allow: /
-Allow: /ram
-Allow: /rale
-Allow: /pgraft
-Allow: /fauxdb
-Allow: /docs
-Allow: /blog
-Allow: /community
-Allow: /download
-Allow: /contact
-Allow: /cpanel
-Allow: /cpanel/
-Allow: /*.css
-Allow: /*.js
-Allow: /*.png
-Allow: /*.jpg
-Allow: /*.jpeg
-Allow: /*.gif
-Allow: /*.svg
-Allow: /*.ico
-Allow: /*.webp
-Allow: /*.avif
-Disallow: /api/
-Disallow: /_next/
-Disallow: /admin/
-Disallow: /private/
-Disallow: /cgi-bin/
-Disallow: /webmail/
-Disallow: /mail/
-Disallow: /ftp/
-Disallow: /control/
-Disallow: /hosting/
-Disallow: /*.json$
-Disallow: /tmp/
-Disallow: /logs/
+
+# Sitemap location
+Sitemap: https://www.pgelephant.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
 Crawl-delay: 1
 
-# Googlebot
+# Block admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /api/
+Disallow: /test/
+
+# Allow important pages
+Allow: /
+Allow: /pgraft/
+Allow: /fauxdb/
+Allow: /pgbalancer/
+Allow: /ram/
+Allow: /rale/
+Allow: /download/
+Allow: /docs/
+Allow: /blog/
+Allow: /contact/
+
+# Specific bot instructions
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
-# Bingbot
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
-# Host
-Host: https://www.pgelephant.com
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
 
-# Sitemaps
-Sitemap: https://www.pgelephant.com/sitemap.xml
-Sitemap: https://www.pgelephant.com/server-sitemap.xml
+# Block AI training crawlers (optional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /

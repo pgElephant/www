@@ -2,13 +2,30 @@ import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import PgbalancerDemoTerminal from '@/components/PgbalancerDemoTerminal';
 import { Database, Loader2, Zap } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'pgbalancer - Connection Pooling & Load Balancing for PostgreSQL | pgElephant',
+  description: 'pgbalancer provides high-performance connection pooling, load balancing, and failover for PostgreSQL. YAML configuration, Prometheus metrics, and cloud-native ready.',
+  keywords: 'PostgreSQL, connection pooling, load balancing, failover, YAML configuration, Prometheus metrics, cloud-native',
+  openGraph: {
+    title: 'pgbalancer - Connection Pooling & Load Balancing for PostgreSQL',
+    description: 'High-performance connection pooling, load balancing, and failover for PostgreSQL.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'pgbalancer - Connection Pooling & Load Balancing for PostgreSQL',
+    description: 'High-performance connection pooling, load balancing, and failover for PostgreSQL.',
+  },
+};
 
 // Custom pgbalancer icon component
-const PgbalancerIcon = ({ size = 64 }: { size?: number }) => (
+const PgbalancerIcon = ({ size = 80 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-cyan-400" style={{ width: size * 0.7, height: size * 0.7 }} />
-    <Loader2 className="text-green-400 absolute -top-1 -right-1 animate-spin" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Zap className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Database className="text-cyan-400 animate-pulse" style={{ width: size * 0.7, height: size * 0.7 }} />
+    <Loader2 className="text-green-400 absolute -top-2 -right-2 animate-spin" style={{ width: size * 0.35, height: size * 0.35 }} />
+    <Zap className="text-yellow-400 absolute -bottom-2 -left-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.5s' }} />
   </div>
 )
 
@@ -17,7 +34,7 @@ const pgbalancerConfig = {
     title: 'pgbalancer: Connection Pooling & Load Balancing for PostgreSQL',
     subtitle: 'High-performance, cloud-native connection pooler and load balancer for PostgreSQL',
     projectName: 'pgbalancer',
-    icon: <PgbalancerIcon size={64} />,
+    icon: <PgbalancerIcon size={80} />,
   },
   badges: [
     'Open Source',

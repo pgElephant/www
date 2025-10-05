@@ -2,14 +2,31 @@ import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import FauxDbDemoTerminal from '@/components/FauxDbDemoTerminal';
 import { Database, FileText, Layers, Activity } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'FauxDB - MongoDB Compatible Document Database | pgElephant',
+  description: 'FauxDB is a high-performance MongoDB-compatible document database built in Rust with PostgreSQL storage. Full wire protocol support, ACID transactions, and geospatial queries.',
+  keywords: 'MongoDB compatible, document database, Rust, PostgreSQL, ACID transactions, geospatial, wire protocol',
+  openGraph: {
+    title: 'FauxDB - MongoDB Compatible Document Database',
+    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL storage.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FauxDB - MongoDB Compatible Document Database',
+    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL storage.',
+  },
+};
 
 // Custom FauxDB icon component
-const FauxDbIcon = ({ size = 64 }: { size?: number }) => (
+const FauxDbIcon = ({ size = 80 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-emerald-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <FileText className="text-orange-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Layers className="text-blue-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+    <Database className="text-emerald-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <FileText className="text-orange-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.3s' }} />
+    <Layers className="text-blue-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.8s' }} />
+    <Activity className="text-red-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.2s' }} />
   </div>
 )
 
@@ -18,7 +35,7 @@ const fauxdbConfig = {
     title: 'FauxDB: MongoDB Wire Protocol + PostgreSQL Storage',
     subtitle: 'MongoDB-compatible document database powered by Rust and PostgreSQL',
     projectName: 'FauxDB',
-    icon: <FauxDbIcon size={64} />,
+    icon: <FauxDbIcon size={80} />,
   },
   badges: [
     'MongoDB Compatible',

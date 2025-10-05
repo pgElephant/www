@@ -2,14 +2,31 @@ import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import RamDemoTerminal from '@/components/RamDemoTerminal';
 import { Server, Cpu, Activity, Shield } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'RAM - Resilient Adaptive Manager for PostgreSQL | pgElephant',
+  description: 'RAM provides enterprise-grade PostgreSQL clustering with automatic failover, intelligent resource management, and real-time monitoring. Raft consensus for reliable leader election.',
+  keywords: 'PostgreSQL clustering, automatic failover, Raft consensus, resource management, real-time monitoring, enterprise-grade',
+  openGraph: {
+    title: 'RAM - Resilient Adaptive Manager for PostgreSQL',
+    description: 'Enterprise-grade PostgreSQL clustering with automatic failover and intelligent resource management.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RAM - Resilient Adaptive Manager for PostgreSQL',
+    description: 'Enterprise-grade PostgreSQL clustering with automatic failover and intelligent resource management.',
+  },
+};
 
 // Custom RAM icon component
-const RamIcon = ({ size = 64 }: { size?: number }) => (
+const RamIcon = ({ size = 80 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Server className="text-cyan-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Cpu className="text-green-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Activity className="text-orange-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+    <Server className="text-cyan-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Cpu className="text-green-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.2s' }} />
+    <Activity className="text-orange-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.7s' }} />
+    <Shield className="text-purple-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.1s' }} />
   </div>
 )
 
@@ -18,7 +35,7 @@ const ramConfig = {
     title: 'RAM: Resilient Adaptive Manager',
     subtitle: 'PostgreSQL Auto-Failover Daemon with Raft Consensus',
     projectName: 'RAM',
-    icon: <RamIcon size={64} />,
+    icon: <RamIcon size={80} />,
   },
   badges: [
     'PostgreSQL Clustering',

@@ -2,11 +2,11 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square70x70logo src="/icons/tile-70x70.png"/>
-            <square150x150logo src="/icons/tile-150x150.png"/>
-            <wide310x150logo src="/icons/tile-310x150.png"/>
-            <square310x310logo src="/icons/tile-310x310.png"/>
-            <TileColor>#4f46e5</TileColor>
+            <square70x70logo src="/ico/pgElephant_HD.ico"/>
+            <square150x150logo src="/ico/pgElephant_HD.ico"/>
+            <square310x310logo src="/ico/pgElephant_HD.ico"/>
+            <wide310x150logo src="/ico/pgElephant_HD.ico"/>
+            <TileColor>#070d1a</TileColor>
         </tile>
     </msapplication>
 </browserconfig>

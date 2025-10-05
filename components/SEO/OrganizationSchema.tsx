@@ -1,71 +1,105 @@
 import React from 'react'
 
-const OrganizationSchema: React.FC = () => {
-  const baseUrl = 'https://www.pgelephant.com'
-  
-  const organizationData = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'pgElephant',
-    alternateName: 'pgElephant Team',
-    url: baseUrl,
-    logo: {
-      '@type': 'ImageObject',
-      url: `${baseUrl}/logo.png`,
-      width: 200,
-      height: 200
+const OrganizationSchema = () => {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "pgElephant",
+    "alternateName": "PostgreSQL Elephant",
+    "url": "https://www.pgelephant.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+      "width": 512,
+      "height": 512
     },
-    image: {
-      '@type': 'ImageObject',
-      url: `${baseUrl}/og-image.jpg`,
-      width: 1200,
-      height: 630
-    },
-    description: 'pgElephant provides enterprise-grade PostgreSQL solutions including RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
-    foundingDate: '2024',
-    founder: {
-      '@type': 'Person',
-      name: 'pgElephant Team'
-    },
-    contactPoint: [
+    "description": "Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus",
+    "foundingDate": "2024",
+    "sameAs": [
+      "https://github.com/pgElephant"
+    ],
+    "contactPoint": [
       {
-        '@type': 'ContactPoint',
-        contactType: 'customer service',
-        url: `${baseUrl}/contact`,
-        availableLanguage: 'English'
+        "@type": "ContactPoint",
+        "contactType": "Technical Support",
+        "url": "https://www.pgelephant.com/contact"
       },
       {
-        '@type': 'ContactPoint',
-        contactType: 'technical support',
-        url: 'https://github.com/pgElephant',
-        availableLanguage: 'English'
+        "@type": "ContactPoint", 
+        "contactType": "Customer Service",
+        "url": "https://www.pgelephant.com/contact"
       }
     ],
-    sameAs: [
-      'https://github.com/pgElephant',
-      'https://twitter.com/pgElephant',
-      'https://linkedin.com/company/pgelephant'
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    },
+    "knowsAbout": [
+      "PostgreSQL",
+      "Database High Availability",
+      "Distributed Systems",
+      "MongoDB",
+      "Database Clustering",
+      "Raft Consensus",
+      "Database Management",
+      "Database Replication",
+      "Leader Election",
+      "Automatic Failover"
     ],
-    knowsAbout: [
-      'PostgreSQL',
-      'Database Management',
-      'High Availability',
-      'Distributed Systems',
-      'Raft Consensus',
-      'MongoDB Compatibility',
-      'Database Clustering',
-      'Failover Systems',
-      'Document Databases',
-      'Relational Databases'
-    ],
-    areaServed: 'Worldwide',
-    serviceType: 'Database Software Development'
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "pgElephant Products",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "SoftwareApplication",
+            "name": "RAM",
+            "description": "Resilient Adaptive Manager for PostgreSQL clustering"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "SoftwareApplication", 
+            "name": "RALE",
+            "description": "Resilient Adaptive Leader Election for distributed consensus"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "SoftwareApplication",
+            "name": "pgraft", 
+            "description": "Raft-based PostgreSQL extension for leader election"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "SoftwareApplication",
+            "name": "pgbalancer",
+            "description": "Connection pooling and load balancing for PostgreSQL"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "SoftwareApplication",
+            "name": "FauxDB",
+            "description": "MongoDB-compatible document database"
+          }
+        }
+      ]
+    }
   }
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData, null, 2) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(organizationSchema)
+      }}
     />
   )
 }

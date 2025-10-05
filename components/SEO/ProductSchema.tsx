@@ -1,161 +1,157 @@
 import React from 'react'
 
-interface ProductSchemaProps {
-  name: string
-  description: string
-  version?: string
-  category?: string
-  operatingSystem?: string[]
-  price?: string
-  currency?: string
-  downloadUrl?: string
-  author?: string
-  datePublished?: string
-  dateModified?: string
-  keywords?: string[]
-  features?: string[]
-  requirements?: string[]
-  license?: string
-  rating?: {
-    value: number
-    count: number
-    bestRating?: number
-    worstRating?: number
-  }
-}
-
-const ProductSchema: React.FC<ProductSchemaProps> = ({
-  name,
-  description,
-  version = 'latest',
-  category = 'DatabaseApplication',
-  operatingSystem = ['Linux', 'macOS', 'Windows'],
-  price = '0',
-  currency = 'USD',
-  downloadUrl,
-  author = 'pgElephant',
-  datePublished,
-  dateModified,
-  keywords = [],
-  features = [],
-  requirements = [],
-  license = 'Open Source',
-  rating
-}) => {
-  const baseUrl = 'https://www.pgelephant.com'
-  
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name,
-    description,
-    softwareVersion: version,
-    applicationCategory: category,
-    applicationSubCategory: 'Database Management System',
-    operatingSystem: operatingSystem.join(', '),
-    url: baseUrl,
-    downloadUrl: downloadUrl || `${baseUrl}/download`,
-    screenshot: `${baseUrl}/og-image.jpg`,
-    image: [
-      `${baseUrl}/og-image.jpg`,
-      `${baseUrl}/logo.png`
-    ],
-    author: {
-      '@type': 'Organization',
-      name: author,
-      url: baseUrl,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${baseUrl}/logo.png`
+const ProductSchema = () => {
+  const products = [
+    {
+      name: "RAM",
+      description: "Resilient Adaptive Manager for PostgreSQL clustering with automatic failover and Raft consensus",
+      category: "Database Management Software",
+      url: "https://www.pgelephant.com/ram/",
+      image: "https://www.pgelephant.com/ico/RAM_HD.ico",
+      offers: {
+        price: "0",
+        priceCurrency: "USD",
+        availability: "InStock"
       }
     },
-    publisher: {
-      '@type': 'Organization',
-      name: 'pgElephant',
-      url: baseUrl
+    {
+      name: "RALE",
+      description: "Resilient Adaptive Leader Election for distributed consensus and high availability",
+      category: "Database Management Software", 
+      url: "https://www.pgelephant.com/rale/",
+      image: "https://www.pgelephant.com/ico/RALE_HD.ico",
+      offers: {
+        price: "0",
+        priceCurrency: "USD",
+        availability: "InStock"
+      }
     },
-    offers: {
-      '@type': 'Offer',
-      price,
-      priceCurrency: currency,
-      availability: 'https://schema.org/InStock',
-      itemCondition: 'https://schema.org/NewCondition',
-      url: downloadUrl || `${baseUrl}/download`,
-      hasMerchantReturnPolicy: {
-        '@type': 'MerchantReturnPolicy',
-        applicableCountry: 'US',
-        returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-        merchantReturnDays: 30,
-        returnMethod: 'https://schema.org/ReturnByMail',
-        returnFees: 'https://schema.org/FreeReturn'
+    {
+      name: "pgraft",
+      description: "Raft-based PostgreSQL extension for leader election and distributed consensus",
+      category: "Database Extension",
+      url: "https://www.pgelephant.com/pgraft/",
+      image: "https://www.pgelephant.com/ico/pgsql_raft_leader_HD.ico",
+      offers: {
+        price: "0",
+        priceCurrency: "USD",
+        availability: "InStock"
+      }
+    },
+    {
+      name: "pgbalancer",
+      description: "Connection pooling and load balancing solution for PostgreSQL",
+      category: "Database Management Software",
+      url: "https://www.pgelephant.com/pgbalancer/",
+      image: "https://www.pgelephant.com/ico/pgbalancer_HD.ico",
+      offers: {
+        price: "0",
+        priceCurrency: "USD",
+        availability: "InStock"
+      }
+    },
+    {
+      name: "FauxDB",
+      description: "MongoDB-compatible document database powered by Rust and PostgreSQL",
+      category: "Database Management Software",
+      url: "https://www.pgelephant.com/fauxdb/",
+      image: "https://www.pgelephant.com/ico/FauxDB_HD.ico",
+      offers: {
+        price: "0",
+        priceCurrency: "USD",
+        availability: "InStock"
+      }
+    }
+  ]
+
+  const productSchemas = products.map((product, index) => ({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": product.name,
+    "description": product.description,
+    "url": product.url,
+    "image": product.image,
+    "applicationCategory": product.category,
+    "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
+    "offers": {
+      "@type": "Offer",
+      "price": product.offers.price,
+      "priceCurrency": product.offers.priceCurrency,
+      "availability": `https://schema.org/${product.offers.availability}`,
+      "url": product.url,
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "US",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
       },
-      shippingDetails: {
-        '@type': 'OfferShippingDetails',
-        shippingRate: {
-          '@type': 'MonetaryAmount',
-          value: '0',
-          currency: 'USD'
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "USD"
         },
-        shippingDestination: {
-          '@type': 'DefinedRegion',
-          addressCountry: 'US'
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "US"
         },
-        deliveryTime: {
-          '@type': 'ShippingDeliveryTime',
-          handlingTime: {
-            '@type': 'QuantitativeValue',
-            minValue: 0,
-            maxValue: 0,
-            unitCode: 'DAY'
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
           },
-          transitTime: {
-            '@type': 'QuantitativeValue',
-            minValue: 0,
-            maxValue: 0,
-            unitCode: 'DAY'
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
           }
         }
       }
     },
-    datePublished,
-    dateModified: dateModified || datePublished,
-    keywords: keywords.join(', '),
-    featureList: features,
-    softwareRequirements: requirements,
-    license,
-    ...(rating && {
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: rating.value,
-        reviewCount: rating.count,
-        bestRating: rating.bestRating || 5,
-        worstRating: rating.worstRating || 1
-      }
-    }),
-    additionalProperty: [
-      {
-        '@type': 'PropertyValue',
-        name: 'Programming Language',
-        value: name === 'FauxDB' ? 'Rust' : 'C, Go'
-      },
-      {
-        '@type': 'PropertyValue',
-        name: 'Database Type',
-        value: name === 'FauxDB' ? 'Document Database' : 'Relational Database'
-      },
-      {
-        '@type': 'PropertyValue',
-        name: 'License Type',
-        value: 'Open Source'
-      }
+    "creator": {
+      "@type": "Organization",
+      "name": "pgElephant Team",
+      "url": "https://www.pgelephant.com"
+    },
+    "softwareVersion": "1.0.0",
+    "datePublished": "2024-01-01",
+    "dateModified": new Date().toISOString().split('T')[0],
+    "downloadUrl": "https://www.pgelephant.com/download",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "ratingCount": "1",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "featureList": [
+      "PostgreSQL High Availability",
+      "Automatic Failover", 
+      "Distributed Consensus",
+      "Zero Downtime Operations",
+      "Enterprise Security"
     ]
-  }
+  }))
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData, null, 2) }}
-    />
+    <>
+      {productSchemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema)
+          }}
+        />
+      ))}
+    </>
   )
 }
 
