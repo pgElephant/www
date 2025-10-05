@@ -9,7 +9,7 @@ interface TerminalCommand {
   timestamp: string
 }
 
-const RamDemoTerminal = () => {
+const PgbalancerDemoTerminal = () => {
   const [isRunning, setIsRunning] = useState(false)
   const [currentCommand, setCurrentCommand] = useState('')
   const [commandHistory, setCommandHistory] = useState<TerminalCommand[]>([])
@@ -26,48 +26,48 @@ const RamDemoTerminal = () => {
     betweenCommands: 2000
   }
 
-  // RAM-specific demo commands and their outputs
+  // pgbalancer-specific demo commands and their outputs
   const demoCommands = [
     {
-      command: 'git clone https://github.com/pgelephant/ram.git && cd ram',
+      command: 'git clone https://github.com/pgelephant/pgbalancer.git && cd pgbalancer',
       output: [
-        'Cloning into \'ram\'...',
-        'remote: Enumerating objects: 2156, done.',
-        'remote: Counting objects: 100% (2156/2156), done.',
-        'remote: Compressing objects: 100% (1234/1234), done.',
-        'remote: Total 2156 (delta 789), reused 2100 (delta 756)',
-        'Receiving objects: 100% (2156/2156), done.',
-        'Resolving deltas: 100% (789/789), done.'
+        'Cloning into \'pgbalancer\'...',
+        'remote: Enumerating objects: 4567, done.',
+        'remote: Counting objects: 100% (4567/4567), done.',
+        'remote: Compressing objects: 100% (2345/2345), done.',
+        'remote: Total 4567 (delta 1890), reused 4200 (delta 1650)',
+        'Receiving objects: 100% (4567/4567), done.',
+        'Resolving deltas: 100% (1890/1890), done.'
       ]
     },
     {
-      command: './configure --prefix=/usr/local/ram && make -j && sudo make install',
+      command: './configure --prefix=/usr/local/pgbalancer && make -j && sudo make install',
       output: [
         'checking for gcc... gcc',
         'checking whether the C compiler works... yes',
-        'checking for C compiler default output file name... a.out',
-        'checking for suffix of executables...',
-        'checking whether we are cross compiling... no',
-        'checking for suffix of object files... o',
-        'checking whether the compiler supports GNU C... yes',
-        'checking for pg_config... /usr/local/pgsql/bin/pg_config',
+        'checking for PostgreSQL development headers... yes',
+        'checking for libyaml... yes',
+        'checking for libcurl... yes',
+        'checking for json-c... yes',
         'configure: creating ./config.status',
         'config.status: creating Makefile',
         '',
-        'Building RAM daemon and control tools...',
-        'CC src/ramd/ramd_main.c',
-        'CC src/ramd/ramd_cluster.c',
-        'CC src/ramd/ramd_watchdog.c',
-        'CC src/ramd/ramd_failover.c',
-        'CC src/ramctrl/ramctrl.c',
-        'CC src/ramctrl/ramctrl_cluster.c',
-        'LINK ramd',
-        'LINK ramctrl',
+        'Building pgbalancer connection pooler...',
+        'CC src/main.c',
+        'CC src/connection_pool.c',
+        'CC src/load_balancer.c',
+        'CC src/health_checker.c',
+        'CC src/config.c',
+        'CC src/rest_api.c',
+        'CC bctl/main.c',
+        'CC bctl/rest_client.c',
+        'LINK pgbalancer',
+        'LINK bctl',
         '',
-        'Installing RAM...',
-        'cp ramd /usr/local/ram/bin/',
-        'cp ramctrl /usr/local/ram/bin/',
-        'cp conf/ram.conf.example /usr/local/ram/etc/ram.conf'
+        'Installing pgbalancer...',
+        'cp pgbalancer /usr/local/pgbalancer/bin/',
+        'cp bctl /usr/local/pgbalancer/bin/',
+        'cp conf/pgbalancer.yaml.example /usr/local/pgbalancer/etc/pgbalancer.yaml'
       ]
     },
     {
@@ -95,78 +95,110 @@ const RamDemoTerminal = () => {
       ]
     },
     {
-      command: 'cat /usr/local/ram/etc/ram.conf',
+      command: 'cat /usr/local/pgbalancer/etc/pgbalancer.yaml',
       output: [
-        '# RAM Configuration',
-        'ram_port = 6432',
-        'backend_host0 = \'127.0.0.1\'',
-        'backend_port0 = 5432',
-        'backend_weight0 = 1',
-        'backend_flag0 = \'ALLOW_TO_FAILOVER\'',
+        '# pgbalancer Configuration',
+        'listen_addresses: "0.0.0.0"',
+        'port: 6432',
+        'pool_mode: session',
+        'max_connections: 100',
+        'default_pool_size: 25',
+        'min_pool_size: 5',
+        'reserve_pool_size: 5',
+        'reserve_pool_timeout: 5',
         '',
-        'backend_host1 = \'127.0.0.1\'',
-        'backend_port1 = 5433',
-        'backend_weight1 = 1',
-        'backend_flag1 = \'ALLOW_TO_FAILOVER\'',
+        'backend_servers:',
+        '  - host: "127.0.0.1"',
+        '    port: 5432',
+        '    weight: 1',
+        '    database: "postgres"',
+        '    user: "postgres"',
+        '    password: "postgres"',
+        '    application_name: "pgbalancer"',
+        '    pool_size: 25',
         '',
-        'backend_host2 = \'127.0.0.1\'',
-        'backend_port2 = 5434',
-        'backend_weight2 = 1',
-        'backend_flag2 = \'ALLOW_TO_FAILOVER\'',
+        '  - host: "127.0.0.1"',
+        '    port: 5433',
+        '    weight: 1',
+        '    database: "postgres"',
+        '    user: "postgres"',
+        '    password: "postgres"',
+        '    application_name: "pgbalancer"',
+        '    pool_size: 25',
         '',
-        'failover_on_backend_error = on',
-        'health_check_period = 10',
-        'health_check_user = \'postgres\'',
-        'health_check_password = \'postgres\'',
-        'health_check_database = \'postgres\'',
-        'failover_command = \'/usr/local/ram/bin/failover.sh\'',
-        'failback_command = \'/usr/local/ram/bin/failback.sh\'',
+        '  - host: "127.0.0.1"',
+        '    port: 5434',
+        '    weight: 1',
+        '    database: "postgres"',
+        '    user: "postgres"',
+        '    password: "postgres"',
+        '    application_name: "pgbalancer"',
+        '    pool_size: 25',
         '',
-        'recovery_user = \'postgres\'',
-        'recovery_password = \'postgres\'',
-        'recovery_1st_stage_command = \'pg_basebackup -D /var/lib/postgresql/16/main -Ft -z -P -v\'',
-        'recovery_2nd_stage_command = \'echo \'recovery_target_timeline = latest\' >> /var/lib/postgresql/16/main/recovery.conf\'',
-        'recovery_timeout = 90'
+        'health_check:',
+        '  interval: 10',
+        '  timeout: 5',
+        '  retry: 3',
+        '  query: "SELECT 1"',
+        '',
+        'failover:',
+        '  enabled: true',
+        '  timeout: 30',
+        '  retry_interval: 10',
+        '',
+        'rest_api:',
+        '  enabled: true',
+        '  port: 8080',
+        '  bind_address: "127.0.0.1"',
+        '  auth_required: false'
       ]
     },
     {
-      command: '/usr/local/ram/bin/ramd -f /usr/local/ram/etc/ram.conf',
+      command: '/usr/local/pgbalancer/bin/pgbalancer -c /usr/local/pgbalancer/etc/pgbalancer.yaml -d',
       output: [
-        '[INFO] Starting RAM daemon...',
-        '[INFO] RAM daemon started (PID: 12345)',
+        '[INFO] Starting pgbalancer...',
+        '[INFO] pgbalancer started (PID: 34567)',
         '[INFO] Listening on 0.0.0.0:6432',
-        '[INFO] Backend node 0 (127.0.0.1:5432) is in recovery',
-        '[INFO] Backend node 1 (127.0.0.1:5433) is in recovery',
-        '[INFO] Backend node 2 (127.0.0.1:5434) is in recovery',
-        '[INFO] Backend node 0 (127.0.0.1:5432) is up',
-        '[INFO] Backend node 1 (127.0.0.1:5433) is up',
-        '[INFO] Backend node 2 (127.0.0.1:5434) is up',
-        '[INFO] Load balancing pool is ready'
+        '[INFO] REST API enabled on 127.0.0.1:8080',
+        '[INFO] Backend server 127.0.0.1:5432 is up',
+        '[INFO] Backend server 127.0.0.1:5433 is up',
+        '[INFO] Backend server 127.0.0.1:5434 is up',
+        '[INFO] Connection pools initialized',
+        '[INFO] Health checker started',
+        '[INFO] Load balancer ready'
       ]
     },
     {
-      command: 'ramctrl -h 127.0.0.1 -p 6432 -u postgres -w postgres -d postgres show status',
+      command: 'bctl -h 127.0.0.1 -p 8080 status',
       output: [
-        'RAM Status:',
-        '===========',
-        'RAM daemon: 127.0.0.1:6432',
-        'Backend node 0: 127.0.0.1:5432 (weight: 1, status: up, role: master)',
-        'Backend node 1: 127.0.0.1:5433 (weight: 1, status: up, role: slave)',
-        'Backend node 2: 127.0.0.1:5434 (weight: 1, status: up, role: slave)',
+        'pgbalancer Status:',
+        '==================',
+        'Server: 127.0.0.1:6432',
+        'REST API: 127.0.0.1:8080',
+        'Uptime: 00:00:15',
         'Total connections: 0',
         'Active connections: 0',
         'Idle connections: 0',
-        'Health check period: 10 seconds'
+        '',
+        'Backend Servers:',
+        '  - 127.0.0.1:5432 (weight: 1, status: up, connections: 0/25)',
+        '  - 127.0.0.1:5433 (weight: 1, status: up, connections: 0/25)',
+        '  - 127.0.0.1:5434 (weight: 1, status: up, connections: 0/25)',
+        '',
+        'Pool Statistics:',
+        '  - Total pool size: 75',
+        '  - Available connections: 75',
+        '  - Pool utilization: 0%'
       ]
     },
     {
-      command: 'psql -h 127.0.0.1 -p 6432 -U postgres -d postgres -c "CREATE TABLE users (id serial primary key, name text);"',
+      command: 'psql -h 127.0.0.1 -p 6432 -U postgres -d postgres -c "CREATE TABLE users (id serial primary key, name text, email text);"',
       output: [
         'CREATE TABLE'
       ]
     },
     {
-      command: 'psql -h 127.0.0.1 -p 6432 -U postgres -d postgres -c "INSERT INTO users (name) VALUES (\'Alice\'), (\'Bob\'), (\'Charlie\');"',
+      command: 'psql -h 127.0.0.1 -p 6432 -U postgres -d postgres -c "INSERT INTO users (name, email) VALUES (\'Alice\', \'alice@example.com\'), (\'Bob\', \'bob@example.com\'), (\'Charlie\', \'charlie@example.com\');"',
       output: [
         'INSERT 0 3'
       ]
@@ -174,96 +206,146 @@ const RamDemoTerminal = () => {
     {
       command: 'psql -h 127.0.0.1 -p 6432 -U postgres -d postgres -c "SELECT * FROM users;"',
       output: [
-        'id | name',
-        '---+----------',
-        ' 1 | Alice',
-        ' 2 | Bob',
-        ' 3 | Charlie',
+        'id | name    | email',
+        '---+---------+-------------------',
+        ' 1 | Alice   | alice@example.com',
+        ' 2 | Bob     | bob@example.com',
+        ' 3 | Charlie | charlie@example.com',
         '(3 rows)'
       ]
     },
     {
-      command: 'ramctrl -h 127.0.0.1 -p 6432 -u postgres -w postgres -d postgres show pool',
+      command: 'bctl -h 127.0.0.1 -p 8080 status',
       output: [
-        'RAM Connection Pool:',
-        '===================',
-        'Backend node 0: 127.0.0.1:5432',
+        'pgbalancer Status:',
+        '==================',
+        'Server: 127.0.0.1:6432',
+        'REST API: 127.0.0.1:8080',
+        'Uptime: 00:01:30',
+        'Total connections: 3',
+        'Active connections: 1',
+        'Idle connections: 2',
+        '',
+        'Backend Servers:',
+        '  - 127.0.0.1:5432 (weight: 1, status: up, connections: 1/25)',
+        '  - 127.0.0.1:5433 (weight: 1, status: up, connections: 1/25)',
+        '  - 127.0.0.1:5434 (weight: 1, status: up, connections: 1/25)',
+        '',
+        'Pool Statistics:',
+        '  - Total pool size: 75',
+        '  - Available connections: 72',
+        '  - Pool utilization: 4%'
+      ]
+    },
+    {
+      command: 'bctl -h 127.0.0.1 -p 8080 pool-stats',
+      output: [
+        'Connection Pool Statistics:',
+        '==========================',
+        'Backend 127.0.0.1:5432:',
+        '  - Pool size: 25',
         '  - Active connections: 1',
-        '  - Idle connections: 2',
-        '  - Total connections: 3',
-        '  - Connection pool size: 10',
-        '  - Connection pool available: 7',
-        '',
-        'Backend node 1: 127.0.0.1:5433',
-        '  - Active connections: 0',
         '  - Idle connections: 1',
-        '  - Total connections: 1',
-        '  - Connection pool size: 10',
-        '  - Connection pool available: 9',
+        '  - Available: 23',
+        '  - Utilization: 8%',
         '',
-        'Backend node 2: 127.0.0.1:5434',
-        '  - Active connections: 0',
+        'Backend 127.0.0.1:5433:',
+        '  - Pool size: 25',
+        '  - Active connections: 1',
         '  - Idle connections: 1',
-        '  - Total connections: 1',
-        '  - Connection pool size: 10',
-        '  - Connection pool available: 9'
+        '  - Available: 23',
+        '  - Utilization: 8%',
+        '',
+        'Backend 127.0.0.1:5434:',
+        '  - Pool size: 25',
+        '  - Active connections: 1',
+        '  - Idle connections: 0',
+        '  - Available: 24',
+        '  - Utilization: 4%'
       ]
     },
     {
-      command: 'ramctrl -h 127.0.0.1 -p 6432 -u postgres -w postgres -d postgres detach node 0',
+      command: 'bctl -h 127.0.0.1 -p 8080 reload-config',
       output: [
-        '[INFO] Detaching backend node 0 (127.0.0.1:5432)...',
-        '[INFO] Backend node 0 detached successfully'
+        '[INFO] Reloading configuration...',
+        '[INFO] Configuration reloaded successfully',
+        '[INFO] All backend servers verified',
+        '[INFO] Connection pools updated'
       ]
     },
     {
-      command: 'ramctrl -h 127.0.0.1 -p 6432 -u postgres -w postgres -d postgres show status',
+      command: 'bctl -h 127.0.0.1 -p 8080 backend-disable 127.0.0.1 5432',
       output: [
-        'RAM Status:',
-        '===========',
-        'RAM daemon: 127.0.0.1:6432',
-        'Backend node 0: 127.0.0.1:5432 (weight: 1, status: detached, role: master)',
-        'Backend node 1: 127.0.0.1:5433 (weight: 1, status: up, role: slave)',
-        'Backend node 2: 127.0.0.1:5434 (weight: 1, status: up, role: slave)',
-        'Total connections: 0',
-        'Active connections: 0',
-        'Idle connections: 0',
-        'Health check period: 10 seconds'
+        '[INFO] Disabling backend server 127.0.0.1:5432...',
+        '[INFO] Backend server 127.0.0.1:5432 disabled',
+        '[INFO] Existing connections will be gracefully closed'
+      ]
+    },
+    {
+      command: 'bctl -h 127.0.0.1 -p 8080 status',
+      output: [
+        'pgbalancer Status:',
+        '==================',
+        'Server: 127.0.0.1:6432',
+        'REST API: 127.0.0.1:8080',
+        'Uptime: 00:02:15',
+        'Total connections: 2',
+        'Active connections: 1',
+        'Idle connections: 1',
+        '',
+        'Backend Servers:',
+        '  - 127.0.0.1:5432 (weight: 1, status: disabled, connections: 0/0)',
+        '  - 127.0.0.1:5433 (weight: 1, status: up, connections: 1/25)',
+        '  - 127.0.0.1:5434 (weight: 1, status: up, connections: 1/25)',
+        '',
+        'Pool Statistics:',
+        '  - Total pool size: 50',
+        '  - Available connections: 48',
+        '  - Pool utilization: 4%'
       ]
     },
     {
       command: 'psql -h 127.0.0.1 -p 6432 -U postgres -d postgres -c "SELECT * FROM users;"',
       output: [
-        'id | name',
-        '---+----------',
-        ' 1 | Alice',
-        ' 2 | Bob',
-        ' 3 | Charlie',
+        'id | name    | email',
+        '---+---------+-------------------',
+        ' 1 | Alice   | alice@example.com',
+        ' 2 | Bob     | bob@example.com',
+        ' 3 | Charlie | charlie@example.com',
         '(3 rows)',
         '',
-        '-- Query successfully routed to healthy backend node'
+        '-- Query successfully routed to available backend'
       ]
     },
     {
-      command: 'ramctrl -h 127.0.0.1 -p 6432 -u postgres -w postgres -d postgres attach node 0',
+      command: 'bctl -h 127.0.0.1 -p 8080 backend-enable 127.0.0.1 5432',
       output: [
-        '[INFO] Attaching backend node 0 (127.0.0.1:5432)...',
-        '[INFO] Backend node 0 attached successfully'
+        '[INFO] Enabling backend server 127.0.0.1:5432...',
+        '[INFO] Backend server 127.0.0.1:5432 enabled',
+        '[INFO] Connection pool initialized'
       ]
     },
     {
-      command: 'ramctrl -h 127.0.0.1 -p 6432 -u postgres -w postgres -d postgres show status',
+      command: 'bctl -h 127.0.0.1 -p 8080 status',
       output: [
-        'RAM Status:',
-        '===========',
-        'RAM daemon: 127.0.0.1:6432',
-        'Backend node 0: 127.0.0.1:5432 (weight: 1, status: up, role: master)',
-        'Backend node 1: 127.0.0.1:5433 (weight: 1, status: up, role: slave)',
-        'Backend node 2: 127.0.0.1:5434 (weight: 1, status: up, role: slave)',
-        'Total connections: 0',
-        'Active connections: 0',
-        'Idle connections: 0',
-        'Health check period: 10 seconds'
+        'pgbalancer Status:',
+        '==================',
+        'Server: 127.0.0.1:6432',
+        'REST API: 127.0.0.1:8080',
+        'Uptime: 00:03:00',
+        'Total connections: 3',
+        'Active connections: 1',
+        'Idle connections: 2',
+        '',
+        'Backend Servers:',
+        '  - 127.0.0.1:5432 (weight: 1, status: up, connections: 1/25)',
+        '  - 127.0.0.1:5433 (weight: 1, status: up, connections: 1/25)',
+        '  - 127.0.0.1:5434 (weight: 1, status: up, connections: 1/25)',
+        '',
+        'Pool Statistics:',
+        '  - Total pool size: 75',
+        '  - Available connections: 72',
+        '  - Pool utilization: 4%'
       ]
     }
   ]
@@ -387,7 +469,7 @@ const RamDemoTerminal = () => {
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
-          <span className="text-gray-300 text-sm ml-4 font-mono">ram-demo</span>
+          <span className="text-gray-300 text-sm ml-4 font-mono">pgbalancer-demo</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -510,4 +592,4 @@ const RamDemoTerminal = () => {
   )
 }
 
-export default RamDemoTerminal
+export default PgbalancerDemoTerminal

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Terminal, Play, Square, RotateCcw, Copy, Database, Activity, Users } from 'lucide-react'
+import { Terminal, Play, Square, RotateCcw, Copy } from 'lucide-react'
 
 interface TerminalCommand {
   command: string
@@ -20,122 +20,304 @@ const RaleDemoTerminal = () => {
 
   // Base timing values (in ms)
   const baseTimings = {
-    typeSpeed: 90,
-    commandDelay: 1600,
-    outputDelay: 350,
+    typeSpeed: 100,
+    commandDelay: 2000,
+    outputDelay: 400,
     betweenCommands: 2000
   }
 
   // RALE-specific demo commands and their outputs
   const demoCommands = [
     {
-      command: 'raled --config conf/raled1.conf',
+      command: 'git clone https://github.com/pgelephant/rale.git && cd rale',
       output: [
-        '[INFO] RALE daemon starting...',
-        '[INFO] Node ID: 1, Name: node1',
-        '[INFO] RALE port: 7400, DStore port: 7401',
-        '[INFO] Data directory: ./data',
-        '[INFO] Consensus initialized',
-        '[INFO] Distributed store ready',
-        '[INFO] Listening on 127.0.0.1:7400',
-        '[INFO] Cluster ready'
+        'Cloning into \'rale\'...',
+        'remote: Enumerating objects: 3456, done.',
+        'remote: Counting objects: 100% (3456/3456), done.',
+        'remote: Compressing objects: 100% (1890/1890), done.',
+        'remote: Total 3456 (delta 1234), reused 3200 (delta 1100)',
+        'Receiving objects: 100% (3456/3456), done.',
+        'Resolving deltas: 100% (1234/1234), done.'
       ]
     },
     {
-      command: 'raled --config conf/raled2.conf &',
+      command: 'ls -la && ./configure --prefix=/usr/local/rale && make -j && sudo make install',
       output: [
-        '[INFO] RALE daemon starting...',
-        '[INFO] Node ID: 2, Name: node2',
-        '[INFO] RALE port: 7402, DStore port: 7403',
-        '[INFO] Data directory: ./data2',
-        '[INFO] Consensus initialized',
-        '[INFO] Connecting to leader...',
-        '[INFO] Follower role established',
-        '[INFO] Cluster ready'
-      ]
-    },
-    {
-      command: 'raled --config conf/raled3.conf &',
-      output: [
-        '[INFO] RALE daemon starting...',
-        '[INFO] Node ID: 3, Name: node3',
-        '[INFO] RALE port: 7404, DStore port: 7405',
-        '[INFO] Data directory: ./data3',
-        '[INFO] Consensus initialized',
-        '[INFO] Connecting to leader...',
-        '[INFO] Follower role established',
-        '[INFO] Cluster ready'
-      ]
-    },
-    {
-      command: 'ralectrl STATUS',
-      output: [
-        'Cluster State: Healthy',
-        'Leader: node1 (127.0.0.1:7400)',
-        'Term: 15',
-        'Nodes: 3',
-        '  - node1 (Leader)',
-        '  - node2 (Follower)',
-        '  - node3 (Follower)',
+        'total 156',
+        'drwxr-xr-x  15 user user  4096 Oct 15 10:30 .',
+        'drwxr-xr-x   3 user user  4096 Oct 15 10:30 ..',
+        '-rw-r--r--   1 user user  1234 Oct 15 10:30 README.md',
+        '-rw-r--r--   1 user user  5678 Oct 15 10:30 configure.ac',
+        'drwxr-xr-x   8 user user  4096 Oct 15 10:30 src',
+        'drwxr-xr-x   6 user user  4096 Oct 15 10:30 conf',
+        'drwxr-xr-x   4 user user  4096 Oct 15 10:30 doc',
         '',
-        'Consensus: ACTIVE',
-        'Log replication: HEALTHY'
-      ]
-    },
-    {
-      command: 'ralectrl ADD --node-id 4 --node-name "node4"',
-      output: [
-        'Adding node4 to cluster...',
-        'Node node4 added to cluster',
-        'Cluster size: 4 nodes',
-        'Starting replication to new node...',
-        'Node4 is now following leader',
+        'checking for gcc... gcc',
+        'checking whether the C compiler works... yes',
+        'checking for libraft... yes',
+        'checking for PostgreSQL development headers... yes',
+        'configure: creating ./config.status',
+        'config.status: creating Makefile',
         '',
-        'Cluster expansion completed successfully'
-      ]
-    },
-    {
-      command: 'ralectrl LIST',
-      output: [
-        'Node ID | Name  | IP         | RALE Port | DStore Port',
-        '--------|-------|------------|-----------|------------',
-        '       1 | node1 | 127.0.0.1  | 7400      | 7401',
-        '       2 | node2 | 127.0.0.1  | 7402      | 7403',
-        '       3 | node3 | 127.0.0.1  | 7404      | 7405',
-        '       4 | node4 | 127.0.0.1  | 7406      | 7407'
-      ]
-    },
-    {
-      command: './benchmark_tool',
-      output: [
-        'RALE Performance Benchmark',
-        '==========================',
-        'Consensus Operations: 1000 ops/sec',
-        'Storage Operations: 10000 ops/sec',
-        'Write Latency: <10ms',
-        'Read Latency: <1ms',
+        'Building RALE distributed log engine...',
+        'CC src/raled/raled_main.c',
+        'CC src/raled/raled_raft.c',
+        'CC src/raled/raled_storage.c',
+        'CC src/raled/raled_replication.c',
+        'CC src/raled/raled_wal.c',
+        'CC src/ralectrl/ralectrl.c',
+        'CC src/ralectrl/ralectrl_cluster.c',
+        'LINK raled',
+        'LINK ralectrl',
         '',
-        'Memory Usage: 45MB',
-        'CPU Usage: 12%',
-        'Network I/O: 2.3MB/s'
+        'Installing RALE...',
+        'cp raled /usr/local/rale/bin/',
+        'cp ralectrl /usr/local/rale/bin/',
+        'cp conf/rale.conf.example /usr/local/rale/etc/rale.conf'
       ]
     },
     {
-      command: 'librale_dstore_put("key1", "value1", 6)',
+      command: 'sudo systemctl start postgresql@16-main',
       output: [
-        'Success: Entry stored at index 1024',
-        'Replication status: COMPLETED',
-        'Consensus term: 15',
-        'Commit index: 1025'
+        'Starting PostgreSQL cluster 16-main...',
+        ' * Starting PostgreSQL 16 database server',
+        '   ...done.'
       ]
     },
     {
-      command: 'librale_dstore_get("key1", buffer, &len)',
+      command: 'sudo systemctl start postgresql@17-main',
       output: [
-        'Success: Retrieved "value1" (6 bytes)',
-        'Read from: Leader node',
-        'Consistency: Strong',
-        'Latency: 0.8ms'
+        'Starting PostgreSQL cluster 17-main...',
+        ' * Starting PostgreSQL 17 database server',
+        '   ...done.'
+      ]
+    },
+    {
+      command: 'sudo systemctl start postgresql@18-main',
+      output: [
+        'Starting PostgreSQL cluster 18-main...',
+        ' * Starting PostgreSQL 18 database server',
+        '   ...done.'
+      ]
+    },
+    {
+      command: 'cat /usr/local/rale/etc/rale.conf',
+      output: [
+        '# RALE Configuration',
+        'listen_addresses = \'0.0.0.0\'',
+        'port = 7000',
+        'data_dir = \'/var/lib/rale\'',
+        'log_level = \'info\'',
+        '',
+        '# Cluster configuration',
+        'cluster_id = \'rale-cluster\'',
+        'node_id = 1',
+        '',
+        '# Raft configuration',
+        'election_timeout = 1000',
+        'heartbeat_interval = 100',
+        'snapshot_threshold = 1000',
+        'max_snapshot_size = 1048576',
+        '',
+        '# PostgreSQL integration',
+        'postgresql_host = \'127.0.0.1\'',
+        'postgresql_port = 5432',
+        'postgresql_user = \'postgres\'',
+        'postgresql_password = \'postgres\'',
+        'postgresql_database = \'postgres\'',
+        '',
+        '# WAL configuration',
+        'wal_buffer_size = 8192',
+        'wal_flush_interval = 100',
+        'wal_sync_method = \'fsync\''
+      ]
+    },
+    {
+      command: '/usr/local/rale/bin/raled -c /usr/local/rale/etc/rale.conf -d',
+      output: [
+        '[INFO] Starting RALE daemon...',
+        '[INFO] RALE daemon started (PID: 23456)',
+        '[INFO] Listening on 0.0.0.0:7000',
+        '[INFO] Data directory: /var/lib/rale',
+        '[INFO] Cluster ID: rale-cluster',
+        '[INFO] Node ID: 1',
+        '[INFO] Raft state: Candidate',
+        '[INFO] Starting leader election...',
+        '[INFO] Raft state: Leader',
+        '[INFO] WAL engine initialized',
+        '[INFO] PostgreSQL integration ready'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 status',
+      output: [
+        'RALE Cluster Status:',
+        '===================',
+        'Cluster ID: rale-cluster',
+        'Node ID: 1',
+        'State: Leader',
+        'Term: 1',
+        'Commit Index: 0',
+        'Last Log Index: 0',
+        'Peers: 0',
+        'WAL Entries: 0',
+        'Uptime: 00:00:15'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 add-peer 2 127.0.0.1 7001',
+      output: [
+        '[INFO] Adding peer node 2 (127.0.0.1:7001)...',
+        '[INFO] Peer node 2 added successfully'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 add-peer 3 127.0.0.1 7002',
+      output: [
+        '[INFO] Adding peer node 3 (127.0.0.1:7002)...',
+        '[INFO] Peer node 3 added successfully'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 status',
+      output: [
+        'RALE Cluster Status:',
+        '===================',
+        'Cluster ID: rale-cluster',
+        'Node ID: 1',
+        'State: Leader',
+        'Term: 1',
+        'Commit Index: 0',
+        'Last Log Index: 0',
+        'Peers: 2',
+        '  - Node 2: 127.0.0.1:7001 (Follower)',
+        '  - Node 3: 127.0.0.1:7002 (Follower)',
+        'WAL Entries: 0',
+        'Uptime: 00:00:45'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 append-log "CREATE TABLE users (id serial primary key, name text);"',
+      output: [
+        '[INFO] Appending log entry...',
+        '[INFO] Log entry appended at index: 1',
+        '[INFO] Replicating to 2 followers...',
+        '[INFO] Entry committed to majority (3/3 nodes)',
+        'Log Index: 1',
+        'Entry: CREATE TABLE users (id serial primary key, name text);',
+        'Status: Committed'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 append-log "INSERT INTO users (name) VALUES (\'Alice\'), (\'Bob\');"',
+      output: [
+        '[INFO] Appending log entry...',
+        '[INFO] Log entry appended at index: 2',
+        '[INFO] Replicating to 2 followers...',
+        '[INFO] Entry committed to majority (3/3 nodes)',
+        'Log Index: 2',
+        'Entry: INSERT INTO users (name) VALUES (\'Alice\'), (\'Bob\');',
+        'Status: Committed'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 append-log "UPDATE users SET name = \'Alice Smith\' WHERE name = \'Alice\';"',
+      output: [
+        '[INFO] Appending log entry...',
+        '[INFO] Log entry appended at index: 3',
+        '[INFO] Replicating to 2 followers...',
+        '[INFO] Entry committed to majority (3/3 nodes)',
+        'Log Index: 3',
+        'Entry: UPDATE users SET name = \'Alice Smith\' WHERE name = \'Alice\';',
+        'Status: Committed'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 get-log 1',
+      output: [
+        'Log Entry Details:',
+        '==================',
+        'Index: 1',
+        'Term: 1',
+        'Command: CREATE TABLE users (id serial primary key, name text);',
+        'Committed: true',
+        'Timestamp: 2025-10-15 10:35:12',
+        'Replicated to: 3/3 nodes'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 get-log-range 1 3',
+      output: [
+        'Log Entries (1-3):',
+        '==================',
+        'Index 1: CREATE TABLE users (id serial primary key, name text);',
+        'Index 2: INSERT INTO users (name) VALUES (\'Alice\'), (\'Bob\');',
+        'Index 3: UPDATE users SET name = \'Alice Smith\' WHERE name = \'Alice\';',
+        '',
+        'Total entries: 3',
+        'All entries committed: true'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 status',
+      output: [
+        'RALE Cluster Status:',
+        '===================',
+        'Cluster ID: rale-cluster',
+        'Node ID: 1',
+        'State: Leader',
+        'Term: 1',
+        'Commit Index: 3',
+        'Last Log Index: 3',
+        'Peers: 2',
+        '  - Node 2: 127.0.0.1:7001 (Follower, match_index: 3)',
+        '  - Node 3: 127.0.0.1:7002 (Follower, match_index: 3)',
+        'WAL Entries: 3',
+        'Uptime: 00:02:30'
+      ]
+    },
+    {
+      command: 'psql -h 127.0.0.1 -p 5432 -U postgres -d postgres -c "SELECT * FROM users;"',
+      output: [
+        'id | name',
+        '---+--------------',
+        ' 1 | Alice Smith',
+        ' 2 | Bob',
+        '(2 rows)',
+        '',
+        '-- Data successfully replicated from RALE WAL'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 snapshot',
+      output: [
+        '[INFO] Creating snapshot...',
+        '[INFO] Snapshot created at index: 3',
+        '[INFO] Snapshot size: 2.5KB',
+        '[INFO] Snapshot saved to: /var/lib/rale/snapshots/snapshot-3-1.ral',
+        'Snapshot Index: 3',
+        'Snapshot Term: 1',
+        'Snapshot Size: 2.5KB',
+        'Status: Success'
+      ]
+    },
+    {
+      command: 'ralectrl -h 127.0.0.1 -p 7000 status',
+      output: [
+        'RALE Cluster Status:',
+        '===================',
+        'Cluster ID: rale-cluster',
+        'Node ID: 1',
+        'State: Leader',
+        'Term: 1',
+        'Commit Index: 3',
+        'Last Log Index: 3',
+        'Peers: 2',
+        '  - Node 2: 127.0.0.1:7001 (Follower, match_index: 3)',
+        '  - Node 3: 127.0.0.1:7002 (Follower, match_index: 3)',
+        'WAL Entries: 3',
+        'Snapshots: 1',
+        'Uptime: 00:03:15'
       ]
     }
   ]
@@ -193,21 +375,21 @@ const RaleDemoTerminal = () => {
   // Run demo sequence
   const runDemo = () => {
     if (isRunning) return
-
+    
     setIsRunning(true)
     setCommandHistory([])
     setCurrentCommand('')
-
+    
     let commandIndex = 0
-
+    
     const runNextCommand = () => {
       if (commandIndex >= demoCommands.length) {
         setIsRunning(false)
         return
       }
-
+      
       const cmd = demoCommands[commandIndex]
-
+      
       // Add command to history
       setCommandHistory(prev => [
         ...prev,
@@ -217,7 +399,7 @@ const RaleDemoTerminal = () => {
           timestamp: new Date().toLocaleTimeString()
         }
       ])
-
+      
       // Type the command
       typeCommand(cmd.command, () => {
         // Show output only (do not echo command again)
@@ -229,7 +411,7 @@ const RaleDemoTerminal = () => {
         }, baseTimings.commandDelay / speedMultiplier)
       })
     }
-
+    
     runNextCommand()
   }
 
@@ -252,9 +434,9 @@ const RaleDemoTerminal = () => {
   }
 
   return (
-    <div className="bg-black rounded-lg border border-white/30 overflow-hidden">
+    <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
       {/* Terminal Header */}
-      <div className="bg-white/20 px-4 py-3 flex items-center justify-between border-b border-white/30">
+      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -280,9 +462,9 @@ const RaleDemoTerminal = () => {
       </div>
 
       {/* Terminal Content */}
-      <div
+      <div 
         ref={terminalRef}
-        className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400 text-left whitespace-pre"
+        className="h-[500px] overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400 text-left whitespace-pre"
       >
         {/* Command History */}
         {commandHistory.map((cmd, index) => (
@@ -316,28 +498,28 @@ const RaleDemoTerminal = () => {
       </div>
 
       {/* Terminal Controls */}
-      <div className="bg-white/20 px-4 py-3 border-t border-white/30">
+      <div className="bg-gray-800 px-4 py-3 border-t border-gray-700">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               onClick={runDemo}
               disabled={isRunning}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
-                isRunning
-                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                isRunning 
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
                   : 'bg-secondary-600 hover:bg-secondary-700 text-white hover:scale-105'
               }`}
             >
               <Play className="w-4 h-4" />
               {isRunning ? 'Running...' : 'Run Demo'}
             </button>
-
+            
             <button
               onClick={stopDemo}
               disabled={!isRunning}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
-                !isRunning
-                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                !isRunning 
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
                   : 'bg-red-600 hover:bg-red-700 text-white hover:scale-105'
               }`}
             >

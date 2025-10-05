@@ -359,7 +359,7 @@ const PgraftDemoTerminal = () => {
       {/* Terminal Content */}
       <div 
         ref={terminalRef}
-        className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400 text-left whitespace-pre"
+        className="h-[500px] overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400 text-left whitespace-pre"
       >
         {/* Command History */}
         {commandHistory.map((cmd, index) => (

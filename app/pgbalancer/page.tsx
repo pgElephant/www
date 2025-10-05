@@ -1,9 +1,23 @@
 import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import PgbalancerDemoTerminal from '@/components/PgbalancerDemoTerminal';
+import { Database, Loader2, Zap } from 'lucide-react';
 
 const pgbalancerConfig = {
   hero: {
-    title: 'pgbalancer: Connection Pooling & Load Balancing for PostgreSQL',
+    title: (
+      <div className="flex items-center justify-center gap-4">
+        <div className="relative">
+          <Database className="w-16 h-16 text-cyan-400" />
+          <Loader2 className="w-8 h-8 text-green-400 absolute -top-1 -right-1 animate-spin" />
+          <Zap className="w-6 h-6 text-yellow-400 absolute -bottom-1 -left-1" />
+        </div>
+        <div>
+          <div className="text-5xl font-bold mb-2">pgbalancer</div>
+          <div className="text-xl text-slate-300">Connection Pooling & Load Balancing for PostgreSQL</div>
+        </div>
+      </div>
+    ),
     subtitle: 'High-performance, cloud-native connection pooler and load balancer for PostgreSQL',
     projectName: 'pgbalancer',
   },
@@ -16,48 +30,7 @@ const pgbalancerConfig = {
     'YAML Config',
     'Prometheus Metrics',
   ],
-  demo: (
-    <div className="max-w-6xl mx-auto mb-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Client terminal */}
-        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
-          <div className="flex items-center mb-3">
-            <div className="flex gap-1 mr-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-gray-300">psql (client)</span>
-          </div>
-          <pre className="whitespace-pre-line text-green-300">{`$ psql -h 127.0.0.1 -p 6432 -U appuser appdb\nPassword for user appuser: \nappdb=> SELECT count(*) FROM users;\n count \n-------\n   42\n`}</pre>
-        </div>
-        {/* pgbalancer terminal */}
-        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
-          <div className="flex items-center mb-3">
-            <div className="flex gap-1 mr-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-cyan-300">pgbalancer</span>
-          </div>
-          <pre className="whitespace-pre-line text-cyan-200">{`$ pgbalancer -c pgbalancer.yaml\n[INFO] Starting pgbalancer...\n[INFO] Listening on 0.0.0.0:6432\n[INFO] Connected to PostgreSQL backend(s)\n[INFO] Pool mode: session\n[INFO] Load balancing enabled\n[INFO] Accepting client connections\n`}</pre>
-        </div>
-        {/* postgresql terminal */}
-        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
-          <div className="flex items-center mb-3">
-            <div className="flex gap-1 mr-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-yellow-200">postgresql</span>
-          </div>
-          <pre className="whitespace-pre-line text-yellow-100">{`2025-10-05 12:00:00 [INFO] connection from pgbalancer (127.0.0.1:6432)\n2025-10-05 12:00:00 [INFO] query: SELECT count(*) FROM users;\n2025-10-05 12:00:00 [INFO] result: 42 rows\n`}</pre>
-        </div>
-      </div>
-    </div>
-  ),
+  demo: <PgbalancerDemoTerminal />,
   featurePillars: {
     kicker: 'Overview',
     items: [

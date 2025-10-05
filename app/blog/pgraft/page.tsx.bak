@@ -195,14 +195,18 @@ Wait approximately 10 seconds for leader election to complete. Check the leader:
 
 \`\`\`sql
 SELECT pgraft_is_leader();
+\`\`\`
 
-Output on Leader:
+**Output on Leader:**
+\`\`\`
  pgraft_is_leader 
 ------------------
  t
 (1 row)
+\`\`\`
 
-Output on Followers:
+**Output on Followers:**
+\`\`\`
  pgraft_is_leader 
 ------------------
  f
@@ -261,8 +265,10 @@ Add a new node to the cluster. **Must be executed on the leader.**
 
 \`\`\`sql
 SELECT pgraft_add_node(4, '192.168.1.13', 7004);
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_add_node 
 -----------------
  t
@@ -275,8 +281,10 @@ Remove a node from the cluster. **Must be executed on the leader.**
 
 \`\`\`sql
 SELECT pgraft_remove_node(4);
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_remove_node 
 --------------------
  t
@@ -291,8 +299,10 @@ Check if the current node is the cluster leader.
 
 \`\`\`sql
 SELECT pgraft_is_leader();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_is_leader 
 ------------------
  t
@@ -305,8 +315,10 @@ Get the node ID of the current leader.
 
 \`\`\`sql
 SELECT pgraft_get_leader();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_get_leader 
 -------------------
                  1
@@ -319,8 +331,10 @@ Get the current Raft term number.
 
 \`\`\`sql
 SELECT pgraft_get_term();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_get_term 
 -----------------
                3
@@ -335,8 +349,10 @@ List all nodes in the cluster.
 
 \`\`\`sql
 SELECT * FROM pgraft_get_nodes();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  node_id |   address    | port | is_leader 
 ---------+--------------+------+-----------
        1 | 192.168.1.10 | 7001 | t
@@ -351,8 +367,10 @@ Get comprehensive cluster status information.
 
 \`\`\`sql
 SELECT * FROM pgraft_get_cluster_status();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  node_id |   address    | port | is_leader |  state   | term | commit_index | last_log_index | last_heartbeat 
 ---------+--------------+------+-----------+----------+------+--------------+----------------+----------------
        1 | 192.168.1.10 | 7001 | t         | Leader   |    3 |          247 |            247 | 0.042s
@@ -379,8 +397,10 @@ Replicate a log entry through the Raft consensus protocol.
 
 \`\`\`sql
 SELECT pgraft_replicate_entry('{"action": "update", "table": "users", "id": 123}');
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_replicate_entry 
 ------------------------
  t
@@ -395,8 +415,10 @@ Get statistics about the Raft log.
 
 \`\`\`sql
 SELECT * FROM pgraft_log_get_stats();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  log_size | last_index | commit_index | last_applied 
 ----------+------------+--------------+--------------
      2048 |        247 |          247 |          247
@@ -415,8 +437,10 @@ Retrieve a specific log entry by its index.
 
 \`\`\`sql
 SELECT pgraft_log_get_entry(15);
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
                     pgraft_log_get_entry                     
 -------------------------------------------------------------
  {"action": "update", "table": "users", "id": 123}
@@ -429,8 +453,10 @@ Get replication status for all follower nodes.
 
 \`\`\`sql
 SELECT * FROM pgraft_log_get_replication_status();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  node_id | match_index | next_index | is_replicating | last_heartbeat 
 ---------+-------------+------------+----------------+----------------
        2 |         247 |        248 | t              | 0.041s
@@ -452,8 +478,10 @@ Get the background worker's current state.
 
 \`\`\`sql
 SELECT pgraft_get_worker_state();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_get_worker_state 
 -------------------------
  running
@@ -468,8 +496,10 @@ Get the pgraft extension version.
 
 \`\`\`sql
 SELECT pgraft_get_version();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_get_version 
 --------------------
  1.0.0
@@ -483,8 +513,10 @@ Enable or disable debug logging.
 \`\`\`sql
 SELECT pgraft_set_debug(true);   -- Enable
 SELECT pgraft_set_debug(false);  -- Disable
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  pgraft_set_debug 
 ------------------
  t
@@ -647,8 +679,10 @@ $$ LANGUAGE plpgsql;
 \`\`\`sql
 -- Set configuration values (on leader)
 SELECT config_set('database.max_connections', '{"value": 100}'::jsonb);
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
                           config_set                           
 ---------------------------------------------------------------
  {"key": "database.max_connections", "success": true, 
@@ -658,8 +692,10 @@ Output:
 
 \`\`\`sql
 SELECT config_set('cache.ttl_seconds', '{"value": 3600}'::jsonb);
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
                           config_set                           
 ---------------------------------------------------------------
  {"key": "cache.ttl_seconds", "success": true, 
@@ -670,8 +706,10 @@ Output:
 \`\`\`sql
 -- Retrieve configuration (can be done on any node)
 SELECT config_get('database.max_connections');
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
                               config_get                               
 -----------------------------------------------------------------------
  {"key": "database.max_connections", "value": {"value": 100}, 
@@ -682,8 +720,10 @@ Output:
 \`\`\`sql
 -- View all configurations
 SELECT key, value, version, updated_at FROM config_store ORDER BY key;
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
           key           |     value      | version |       updated_at        
 ------------------------+----------------+---------+-------------------------
  cache.ttl_seconds      | {"value": 3600}|       1 | 2025-10-05 10:31:12.456
@@ -694,8 +734,10 @@ Output:
 \`\`\`sql
 -- Check replication status
 SELECT * FROM pgraft_log_get_stats();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
  log_size | last_index | commit_index | last_applied 
 ----------+------------+--------------+--------------
      3072 |         52 |           52 |           52
@@ -752,8 +794,10 @@ $$ LANGUAGE plpgsql;
 
 \`\`\`sql
 SELECT * FROM pgraft_health_check();
+\`\`\`
 
-Output:
+**Output:**
+\`\`\`
        metric        |          value          | status  
 ---------------------+-------------------------+---------
  Leader Status       | LEADER                  | OK
@@ -885,13 +929,48 @@ GRANT SELECT ON pgraft_get_nodes TO pgraft_monitor;
 - Disk: NVMe SSD with 5000+ IOPS
 - Network: 10 Gbps with <1ms latency between nodes
 
-## Why pgraft Over Traditional Solutions
+## Comparison with Alternatives
 
-Traditional PostgreSQL high availability solutions like Patroni require external coordination services such as etcd, Consul, or Zookeeper to manage cluster consensus and failover decisions. These external dependencies introduce significant operational complexity and additional points of failure. etcd, for example, is a standalone application that operates independently of PostgreSQL, requiring separate installation, configuration, and maintenance. This architectural separation means that cluster coordination happens outside the database, creating network hops and potential synchronization issues between the coordination layer and the actual database state.
+### pgraft vs. Patroni
 
-pgraft eliminates these external dependencies entirely by embedding the Raft consensus protocol directly within PostgreSQL as a native extension. Unlike Patroni's approach of relying on external tools like etcd, pgraft provides built-in consensus capabilities without requiring any standalone applications or additional infrastructure components. The consensus engine runs as part of PostgreSQL's background worker architecture, ensuring tight integration with the database's internal state and operations.
+| Feature | pgraft | Patroni |
+|---------|--------|---------|
+| **Architecture** | Native PostgreSQL extension | External Python daemon |
+| **Consensus** | Embedded Raft (etcd-io/raft) | Requires external DCS (etcd/Consul/Zookeeper) |
+| **Dependencies** | None (self-contained) | Requires DCS cluster |
+| **Failover Speed** | Sub-second | 1-30 seconds (configurable) |
+| **Split-Brain Prevention** | Mathematical guarantee | Depends on DCS configuration |
+| **Complexity** | Low (single component) | Medium (multiple components) |
+| **Resource Usage** | ~50MB per node | ~100MB+ (Patroni + DCS) |
 
-This native integration approach means that pgraft operates as a single, self-contained component within PostgreSQL, rather than requiring multiple separate systems to coordinate cluster behavior. While Patroni and etcd must communicate over the network to maintain cluster state, pgraft's consensus operations happen within the same process space as PostgreSQL, providing faster failover detection and more reliable cluster coordination. The result is a simpler deployment model with fewer moving parts, reduced resource overhead, and stronger guarantees about cluster consistency and availability.
+### pgraft vs. Stolon
+
+| Feature | pgraft | Stolon |
+|---------|--------|---------|
+| **Language** | C + Go | Go |
+| **Integration** | Native extension | External orchestrator |
+| **Consensus** | Built-in Raft | Requires external store |
+| **Kubernetes Native** | StatefulSet compatible | Kubernetes operator |
+| **Operational Complexity** | Low | Medium |
+
+## The pgElephant Ecosystem
+
+pgraft is part of the broader pgElephant suite of PostgreSQL high-availability tools:
+
+### RAM (Replication And Management)
+PostgreSQL clustering and failover manager focused on streaming replication management.
+
+### RALE (Raft-based Log Engine)
+Distributed consensus and key-value store built on Raft, complementing pgraft's cluster coordination.
+
+### FauxDB
+MongoDB-compatible query proxy for PostgreSQL, enabling MongoDB workloads on PostgreSQL infrastructure with pgraft-powered HA.
+
+**Unified Benefits:**
+- Consistent documentation and user experience
+- Compatible deployment architectures
+- Shared best practices
+- Integrated monitoring and operations
 
 ## Conclusion
 
@@ -947,14 +1026,9 @@ Join the community and start building more reliable PostgreSQL infrastructure to
 export default function PgraftBlogPost() {
   return (
     <div className="pt-16">
-      {/* Blog Content - Using gradient's right bottom color */}
-      <div style={{ backgroundColor: '#4b5563' }}>
-        <BlogMarkdown>{markdown}</BlogMarkdown>
-      </div>
-
-      {/* Comments Section with gradient background */}
+      {/* Hero Section with consistent background */}
       <div 
-        className="relative overflow-hidden py-16 px-6"
+        className="relative overflow-hidden"
         style={{ 
           background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
           position: 'relative'
@@ -973,7 +1047,7 @@ export default function PgraftBlogPost() {
           <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
           <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-
+          
           {/* Subtle pattern overlay */}
           <div
             className="absolute inset-0 opacity-10"
@@ -984,7 +1058,7 @@ export default function PgraftBlogPost() {
             }}
           />
         </div>
-
+        
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -997,85 +1071,9 @@ export default function PgraftBlogPost() {
           />
         </div>
 
-        {/* Comments Content */}
+        {/* Blog Content */}
         <div className="relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-              Comments
-            </h2>
-            
-            {/* Comment Form */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-8 mb-8">
-              <h3 className="text-xl font-semibold text-white mb-6">Leave a Comment</h3>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="comment" className="block text-sm font-medium text-white/90 mb-2">
-                    Comment *
-                  </label>
-                  <textarea
-                    id="comment"
-                    name="comment"
-                    rows={6}
-                    required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-vertical"
-                    placeholder="Share your thoughts about pgraft, your experiences with PostgreSQL high availability, or any questions you might have..."
-                  />
-                </div>
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="notify"
-                    name="notify"
-                    className="w-4 h-4 text-primary-600 bg-white/10 border-white/20 rounded focus:ring-primary-500 focus:ring-2"
-                  />
-                  <label htmlFor="notify" className="ml-2 text-sm text-white/80">
-                    Notify me of replies to this comment
-                  </label>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full md:w-auto px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-                >
-                  Post Comment
-                </button>
-              </form>
-            </div>
-
-            {/* Comments will appear here */}
-            <div className="text-center py-12">
-              <p className="text-white/60 text-lg">
-                Be the first to comment on this post!
-              </p>
-            </div>
-          </div>
+          <BlogMarkdown>{markdown}</BlogMarkdown>
         </div>
       </div>
     </div>

@@ -7,10 +7,9 @@ interface TerminalCommand {
   command: string
   output: string[]
   timestamp: string
-  terminal: 'mongosh' | 'fauxdb-proxy' | 'postgresql' | 'postgresql.log'
 }
 
-const FauxDbDemoTerminal = () => {
+const FauxdbDemoTerminal = () => {
   const [isRunning, setIsRunning] = useState(false)
   const [currentCommand, setCurrentCommand] = useState('')
   const [commandHistory, setCommandHistory] = useState<TerminalCommand[]>([])
@@ -21,82 +20,310 @@ const FauxDbDemoTerminal = () => {
 
   // Base timing values (in ms)
   const baseTimings = {
-    typeSpeed: 80,
-    commandDelay: 1500,
-    outputDelay: 300,
+    typeSpeed: 100,
+    commandDelay: 2000,
+    outputDelay: 400,
     betweenCommands: 2000
   }
 
   // FauxDB-specific demo commands and their outputs
   const demoCommands = [
     {
-      terminal: 'mongosh' as const,
-      command: 'db.users.insertMany([{ name: "Alice", age: 27 }, { name: "Bob", age: 32 }, { name: "Charlie", age: 25 }])',
+      command: 'git clone https://github.com/pgelephant/fauxdb.git && cd fauxdb',
+      output: [
+        'Cloning into \'fauxdb\'...',
+        'remote: Enumerating objects: 1234, done.',
+        'remote: Counting objects: 100% (1234/1234), done.',
+        'remote: Compressing objects: 100% (567/567), done.',
+        'remote: Total 1234 (delta 445), reused 1100 (delta 400)',
+        'Receiving objects: 100% (1234/1234), done.',
+        'Resolving deltas: 100% (445/445), done.'
+      ]
+    },
+    {
+      command: 'cargo build --release',
+      output: [
+        '   Compiling proc-macro2 v1.0.70',
+        '   Compiling quote v1.0.33',
+        '   Compiling syn v2.0.39',
+        '   Compiling serde_derive v1.0.193',
+        '   Compiling serde v1.0.193',
+        '   Compiling tokio v1.35.1',
+        '   Compiling postgres v0.19.7',
+        '   Compiling bson v2.9.0',
+        '   Compiling mongodb v2.8.0',
+        '   Compiling fauxdb v0.1.0 (/home/user/fauxdb)',
+        '    Finished release [optimized] target/release in 45.67s'
+      ]
+    },
+    {
+      command: 'sudo systemctl start postgresql@16-main',
+      output: [
+        'Starting PostgreSQL cluster 16-main...',
+        ' * Starting PostgreSQL 16 database server',
+        '   ...done.'
+      ]
+    },
+    {
+      command: 'cat config/fauxdb.toml',
+      output: [
+        '# FauxDB Configuration',
+        '[server]',
+        'host = "127.0.0.1"',
+        'port = 27017',
+        'max_connections = 100',
+        'worker_threads = 4',
+        '',
+        '[postgresql]',
+        'host = "127.0.0.1"',
+        'port = 5432',
+        'database = "fauxdb"',
+        'username = "fauxdb_user"',
+        'password = "fauxdb_password"',
+        'pool_size = 20',
+        '',
+        '[logging]',
+        'level = "info"',
+        'format = "json"',
+        '',
+        '[features]',
+        'enable_geospatial = true',
+        'enable_aggregation = true',
+        'enable_transactions = true',
+        'enable_change_streams = false'
+      ]
+    },
+    {
+      command: 'sudo -u postgres createdb fauxdb',
+      output: [
+        'CREATE DATABASE'
+      ]
+    },
+    {
+      command: 'sudo -u postgres psql -d fauxdb -c "CREATE USER fauxdb_user WITH PASSWORD \'fauxdb_password\';"',
+      output: [
+        'CREATE ROLE'
+      ]
+    },
+    {
+      command: 'sudo -u postgres psql -d fauxdb -c "GRANT ALL PRIVILEGES ON DATABASE fauxdb TO fauxdb_user;"',
+      output: [
+        'GRANT'
+      ]
+    },
+    {
+      command: './target/release/fauxdb --config config/fauxdb.toml',
+      output: [
+        '[INFO] Starting FauxDB server...',
+        '[INFO] FauxDB version 0.1.0',
+        '[INFO] Listening on 127.0.0.1:27017',
+        '[INFO] Connected to PostgreSQL at 127.0.0.1:5432/fauxdb',
+        '[INFO] Connection pool initialized (20 connections)',
+        '[INFO] MongoDB wire protocol enabled',
+        '[INFO] Geospatial features enabled',
+        '[INFO] Aggregation pipeline enabled',
+        '[INFO] Transaction support enabled',
+        '[INFO] Server ready to accept connections'
+      ]
+    },
+    {
+      command: 'mongosh --port 27017',
+      output: [
+        'Current Mongosh Log ID: 64f1c2e1a1b2c3d4e5f6a7b8',
+        'Connecting to: mongodb://127.0.0.1:27017/',
+        'Using MongoDB: 6.0.0 (compatible)',
+        'Using Mongosh: 1.10.0',
+        '',
+        'For mongosh info see: https://docs.mongodb.com/mongodb-shell/',
+        '',
+        'To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).',
+        'You can opt-out by running disableTelemetry() from within the shell or by setting the environment variable MONGOSH_DISABLE_TELEMETRY=1.',
+        '',
+        '---',
+        '   The server generated these startup warnings when booting: ',
+        '   2025-10-15T10:30:00.000Z: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine',
+        '   2025-10-15T10:30:00.000Z: Access control is not enabled for the database',
+        '',
+        '---',
+        'test>'
+      ]
+    },
+    {
+      command: 'use ecommerce',
+      output: [
+        'switched to db ecommerce'
+      ]
+    },
+    {
+      command: 'db.products.insertOne({ name: "Laptop", price: 999.99, category: "Electronics", inStock: true, tags: ["computer", "laptop", "electronics"] })',
+      output: [
+        '{',
+        '  acknowledged: true,',
+        '  insertedId: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8")',
+        '}'
+      ]
+    },
+    {
+      command: 'db.products.insertMany([{ name: "Smartphone", price: 699.99, category: "Electronics", inStock: true, tags: ["phone", "mobile", "electronics"] }, { name: "Coffee Mug", price: 12.99, category: "Home", inStock: true, tags: ["kitchen", "drinkware"] }])',
       output: [
         '{',
         '  acknowledged: true,',
         '  insertedIds: {',
-        '    \'0\': ObjectId("64f1c2e1a1b2c3d4e5f6a7b8"),',
-        '    \'1\': ObjectId("64f1c2e1a1b2c3d4e5f6a7b9"),',
-        '    \'2\': ObjectId("64f1c2e1a1b2c3d4e5f6a7ba")',
+        '    "0": ObjectId("64f1c2e1a1b2c3d4e5f6a7b9"),',
+        '    "1": ObjectId("64f1c2e1a1b2c3d4e5f6a7ba")',
         '  }',
         '}'
       ]
     },
     {
-      terminal: 'postgresql' as const,
-      command: 'SELECT * FROM users;',
-      output: [
-        ' id |  name   | age ',
-        '----+---------+-----',
-        '  1 | Alice   |  27 ',
-        '  2 | Bob     |  32 ',
-        '  3 | Charlie |  25 ',
-        '(3 rows)',
-        '',
-        '-- 3 rows from MongoDB insertMany()'
-      ]
-    },
-    {
-      terminal: 'postgresql' as const,
-      command: 'INSERT INTO users (name, age) VALUES (\'Diana\', 28), (\'Eve\', 35), (\'Frank\', 22);',
-      output: [
-        'INSERT 0 3',
-        '',
-        '-- Adding 3 more rows directly in PostgreSQL'
-      ]
-    },
-    {
-      terminal: 'mongosh' as const,
-      command: 'db.users.find({})',
+      command: 'db.products.find({})',
       output: [
         '[',
-        '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8"), name: "Alice", age: 27 },',
-        '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b9"), name: "Bob", age: 32 },',
-        '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7ba"), name: "Charlie", age: 25 },',
-        '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7bb"), name: "Diana", age: 28 },',
-        '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7bc"), name: "Eve", age: 35 },',
-        '  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7bd"), name: "Frank", age: 22 }',
-        ']',
-        '',
-        '-- All 6 rows visible from MongoDB (3 from MongoDB + 3 from PostgreSQL)'
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8"),',
+        '    name: "Laptop",',
+        '    price: 999.99,',
+        '    category: "Electronics",',
+        '    inStock: true,',
+        '    tags: [ "computer", "laptop", "electronics" ]',
+        '  },',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b9"),',
+        '    name: "Smartphone",',
+        '    price: 699.99,',
+        '    category: "Electronics",',
+        '    inStock: true,',
+        '    tags: [ "phone", "mobile", "electronics" ]',
+        '  },',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7ba"),',
+        '    name: "Coffee Mug",',
+        '    price: 12.99,',
+        '    category: "Home",',
+        '    inStock: true,',
+        '    tags: [ "kitchen", "drinkware" ]',
+        '  }',
+        ']'
       ]
     },
     {
-      terminal: 'postgresql' as const,
-      command: 'SELECT * FROM users;',
+      command: 'db.products.find({ category: "Electronics" })',
       output: [
-        ' id |  name   | age ',
-        '----+---------+-----',
-        '  1 | Alice   |  27 ',
-        '  2 | Bob     |  32 ',
-        '  3 | Charlie |  25 ',
-        '  4 | Diana   |  28 ',
-        '  5 | Eve     |  35 ',
-        '  6 | Frank   |  22 ',
-        '(6 rows)',
+        '[',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8"),',
+        '    name: "Laptop",',
+        '    price: 999.99,',
+        '    category: "Electronics",',
+        '    inStock: true,',
+        '    tags: [ "computer", "laptop", "electronics" ]',
+        '  },',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b9"),',
+        '    name: "Smartphone",',
+        '    price: 699.99,',
+        '    category: "Electronics",',
+        '    inStock: true,',
+        '    tags: [ "phone", "mobile", "electronics" ]',
+        '  }',
+        ']'
+      ]
+    },
+    {
+      command: 'db.products.updateOne({ name: "Laptop" }, { $set: { price: 899.99 } })',
+      output: [
+        '{',
+        '  acknowledged: true,',
+        '  modifiedCount: 1,',
+        '  upsertedId: null,',
+        '  upsertedCount: 0,',
+        '  matchedCount: 1',
+        '}'
+      ]
+    },
+    {
+      command: 'db.products.aggregate([{ $group: { _id: "$category", totalProducts: { $sum: 1 }, avgPrice: { $avg: "$price" } } }])',
+      output: [
+        '[',
+        '  { _id: "Electronics", totalProducts: 2, avgPrice: 799.99 },',
+        '  { _id: "Home", totalProducts: 1, avgPrice: 12.99 }',
+        ']'
+      ]
+    },
+    {
+      command: 'db.products.createIndex({ "location": "2dsphere" })',
+      output: [
+        '{',
+        '  createdCollectionAutomatically: false,',
+        '  numIndexesBefore: 1,',
+        '  numIndexesAfter: 2,',
+        '  ok: 1',
+        '}'
+      ]
+    },
+    {
+      command: 'db.products.insertOne({ name: "Store Location", location: { type: "Point", coordinates: [-122.4194, 37.7749] } })',
+      output: [
+        '{',
+        '  acknowledged: true,',
+        '  insertedId: ObjectId("64f1c2e1a1b2c3d4e5f6a7bb")',
+        '}'
+      ]
+    },
+    {
+      command: 'db.products.find({ location: { $near: { $geometry: { type: "Point", coordinates: [-122.4194, 37.7749] }, $maxDistance: 1000 } } })',
+      output: [
+        '[',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7bb"),',
+        '    name: "Store Location",',
+        '    location: {',
+        '      type: "Point",',
+        '      coordinates: [ -122.4194, 37.7749 ]',
+        '    }',
+        '  }',
+        ']'
+      ]
+    },
+    {
+      command: 'db.stats()',
+      output: [
+        '{',
+        '  db: "ecommerce",',
+        '  collections: 1,',
+        '  views: 0,',
+        '  objects: 4,',
+        '  avgObjSize: 156.25,',
+        '  dataSize: 625,',
+        '  storageSize: 4096,',
+        '  totalSize: 45056,',
+        '  indexes: 2,',
+        '  indexSize: 8192,',
+        '  scaleFactor: 1,',
+        '  fsUsedSize: 1048576,',
+        '  fsTotalSize: 1073741824,',
+        '  ok: 1',
+        '}'
+      ]
+    },
+    {
+      command: 'exit',
+      output: [
+        'Goodbye'
+      ]
+    },
+    {
+      command: 'psql -h 127.0.0.1 -p 5432 -U fauxdb_user -d fauxdb -c "SELECT * FROM ecommerce_products;"',
+      output: [
+        'id | name           | price  | category   | in_stock | tags                           | location',
+        '---+----------------+--------+------------+----------+--------------------------------+----------',
+        ' 1 | Laptop         | 899.99 | Electronics| t        | ["computer","laptop","electronics"] | NULL',
+        ' 2 | Smartphone     | 699.99 | Electronics| t        | ["phone","mobile","electronics"]   | NULL',
+        ' 3 | Coffee Mug     |  12.99 | Home       | t        | ["kitchen","drinkware"]            | NULL',
+        ' 4 | Store Location |    NULL| NULL       | NULL     | NULL                              | {"type":"Point","coordinates":[-122.4194,37.7749]}',
+        '(4 rows)',
         '',
-        '-- All 6 rows visible from PostgreSQL'
+        '-- Data stored in PostgreSQL, accessed via MongoDB protocol'
       ]
     }
   ]
@@ -175,30 +402,20 @@ const FauxDbDemoTerminal = () => {
         {
           command: cmd.command,
           output: [],
-          timestamp: new Date().toLocaleTimeString(),
-          terminal: cmd.terminal
+          timestamp: new Date().toLocaleTimeString()
         }
       ])
       
-      // Only type command if it's not empty (for interactive terminals)
-      if (cmd.command) {
-        typeCommand(cmd.command, () => {
-          setTimeout(() => {
-            showOutput(cmd.output, () => {
-              commandIndex++
-              setTimeout(runNextCommand, baseTimings.betweenCommands / speedMultiplier)
-            })
-          }, baseTimings.commandDelay / speedMultiplier)
-        })
-      } else {
-        // For non-interactive commands, just show output immediately
+      // Type the command
+      typeCommand(cmd.command, () => {
+        // Show output only (do not echo command again)
         setTimeout(() => {
           showOutput(cmd.output, () => {
             commandIndex++
             setTimeout(runNextCommand, baseTimings.betweenCommands / speedMultiplier)
           })
         }, baseTimings.commandDelay / speedMultiplier)
-      }
+      })
     }
     
     runNextCommand()
@@ -217,29 +434,19 @@ const FauxDbDemoTerminal = () => {
 
   const copyToClipboard = () => {
     const text = commandHistory
-      .map(cmd => `${cmd.terminal}: $ ${cmd.command}\n${cmd.output.join('\n')}`)
+      .map(cmd => `$ ${cmd.command}\n${cmd.output.join('\n')}`)
       .join('\n\n')
     navigator.clipboard.writeText(text)
   }
 
-  const getTerminalColor = (terminal: string) => {
-    switch (terminal) {
-      case 'mongosh': return 'text-green-400'
-      case 'fauxdb-proxy': return 'text-cyan-400'
-      case 'postgresql': return 'text-yellow-400'
-      case 'postgresql.log': return 'text-purple-400'
-      default: return 'text-white'
-    }
-  }
-
   return (
-    <div className="bg-black rounded-lg  border border-white/30 overflow-hidden">
+    <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
       {/* Terminal Header */}
-      <div className="bg-white/20 px-4 py-3 flex items-center justify-between border-b border-white/30">
+      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
           <span className="text-gray-300 text-sm ml-4 font-mono">fauxdb-demo</span>
         </div>
         <div className="flex items-center gap-2">
@@ -263,19 +470,16 @@ const FauxDbDemoTerminal = () => {
       {/* Terminal Content */}
       <div 
         ref={terminalRef}
-        className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black text-left"
+        className="h-[500px] overflow-y-auto p-4 font-mono text-sm bg-black text-secondary-400 text-left whitespace-pre"
       >
         {/* Command History */}
         {commandHistory.map((cmd, index) => (
           <div key={index} className="mb-2">
-            {cmd.command && (
-              <div className={`${getTerminalColor(cmd.terminal)} flex items-center gap-2`}>
-                <span className="text-xs opacity-70">[{cmd.terminal}]</span>
-                <span>$ {cmd.command}</span>
-              </div>
-            )}
+            <div className="text-blue-400">
+              $ {cmd.command}
+            </div>
             {cmd.output.map((line, lineIndex) => (
-              <div key={lineIndex} className="text-gray-300 font-mono text-left">
+              <div key={lineIndex} className="text-secondary-400 font-mono">
                 {line}
               </div>
             ))}
@@ -284,24 +488,23 @@ const FauxDbDemoTerminal = () => {
 
         {/* Current Command */}
         {isTyping && (
-          <div className={`${getTerminalColor(commandHistory[commandHistory.length - 1]?.terminal || 'mongosh')} flex items-center gap-2`}>
-            <span className="text-xs opacity-70">[{commandHistory[commandHistory.length - 1]?.terminal || 'mongosh'}]</span>
-            <span>$ {currentCommand}</span>
-            <span className={`inline-block w-2 h-4 bg-gray-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+          <div className="text-blue-400">
+            $ {currentCommand}
+            <span className={`inline-block w-2 h-4 bg-secondary-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
           </div>
         )}
 
         {/* Prompt */}
         {!isRunning && (
           <div className="flex items-center">
-            <span className="text-green-400">[mongosh] $ </span>
-            <span className={`inline-block w-2 h-4 bg-gray-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+            <span className="text-blue-400">$ </span>
+            <span className={`inline-block w-2 h-4 bg-secondary-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
           </div>
         )}
       </div>
 
       {/* Terminal Controls */}
-      <div className="bg-white/20 px-4 py-3 border-t border-white/30">
+      <div className="bg-gray-800 px-4 py-3 border-t border-gray-700">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
@@ -310,7 +513,7 @@ const FauxDbDemoTerminal = () => {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                 isRunning 
                   ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                  : 'bg-green-600 hover:bg-green-700 text-white hover:scale-105'
+                  : 'bg-secondary-600 hover:bg-secondary-700 text-white hover:scale-105'
               }`}
             >
               <Play className="w-4 h-4" />
@@ -340,7 +543,7 @@ const FauxDbDemoTerminal = () => {
                     disabled={isRunning}
                     className={`px-2 py-1 rounded text-sm font-mono transition-all ${
                       speedMultiplier === speed
-                        ? 'bg-green-600 text-white'
+                        ? 'bg-secondary-600 text-white'
                         : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
                     } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
                   >
@@ -354,7 +557,7 @@ const FauxDbDemoTerminal = () => {
           <div className="text-gray-400 text-sm">
             {isRunning ? (
               <span className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse"></div>
                 Demo Running ({speedMultiplier}x)
               </span>
             ) : (
@@ -367,4 +570,4 @@ const FauxDbDemoTerminal = () => {
   )
 }
 
-export default FauxDbDemoTerminal
+export default FauxdbDemoTerminal

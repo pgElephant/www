@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import FauxDbDemoTerminal from '@/components/FauxDbDemoTerminal';
 
 const fauxdbConfig = {
   hero: {
@@ -14,77 +15,7 @@ const fauxdbConfig = {
     'ACID Transactions',
     'Geospatial',
   ],
-  demo: (
-    <div className="max-w-6xl mx-auto mb-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* mongosh terminal */}
-        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
-          <div className="flex items-center mb-3">
-            <div className="flex gap-1 mr-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-gray-300">mongosh</span>
-          </div>
-          <pre className="whitespace-pre-line text-green-300">{`> db.users.insertOne({ name: "Alice", age: 27 })
-{ acknowledged: true, insertedId: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8") }
-
-> db.users.find({ age: { $gt: 20 } })
-[
-  { _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8"), name: "Alice", age: 27 }
-]
-
-> db.stats()
-{ collections: 1, objects: 1, avgObjSize: 32, storageSize: 4096 }
-`}</pre>
-        </div>
-        {/* fauxdb terminal */}
-        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
-          <div className="flex items-center mb-3">
-            <div className="flex gap-1 mr-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-cyan-300">fauxdb</span>
-          </div>
-          <pre className="whitespace-pre-line text-cyan-200">{`> fauxdb-cli insert users '{"name": "Alice", "age": 27}'
-Inserted document with id 64f1c2e1a1b2c3d4e5f6a7b8
-
-> fauxdb-cli find users '{"age": { "$gt": 20 }}'
-[
-  { _id: "64f1c2e1a1b2c3d4e5f6a7b8", name: "Alice", age: 27 }
-]
-
-> fauxdb-cli stats
-{ collections: 1, objects: 1, avgObjSize: 32, storageSize: 4096 }
-`}</pre>
-        </div>
-        {/* postgresql terminal */}
-        <div className="bg-gray-900 rounded-xl p-4 text-white font-mono text-xs shadow-lg border border-gray-800">
-          <div className="flex items-center mb-3">
-            <div className="flex gap-1 mr-2">
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-yellow-200">postgresql</span>
-          </div>
-          <pre className="whitespace-pre-line text-yellow-100">{`> psql -d fauxdb -c "SELECT * FROM users;"
- _id | name  | age
------+-------+-----
- 1   | Alice |  27
-
-> SELECT count(*) FROM users WHERE age > 20;
- count
--------
-     1
-`}</pre>
-        </div>
-      </div>
-    </div>
-  ),
+  demo: <FauxDbDemoTerminal />,
   featurePillars: {
     kicker: 'Overview',
     items: [
