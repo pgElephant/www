@@ -56,17 +56,6 @@ const fauxdbConfig = {
       { title: 'Minimal Configuration', desc: 'Easy setup and scaling.' },
     ],
   },
-  features: [
-    { icon: '', iconColor: 'text-indigo-500', title: 'MongoDB Compatible', desc: 'Wire protocol, drivers, and tools compatibility.' },
-    { icon: '', iconColor: 'text-sky-500', title: 'Rust Engine', desc: 'Modern, safe, and fast backend.' },
-    { icon: '', iconColor: 'text-green-500', title: 'PostgreSQL Storage', desc: 'Battle-tested, reliable storage.' },
-    { icon: '', iconColor: 'text-yellow-500', title: 'ACID Transactions', desc: 'Multi-document ACID compliance.' },
-    { icon: '', iconColor: 'text-pink-500', title: 'Geospatial', desc: 'Advanced geospatial queries.' },
-    { icon: '', iconColor: 'text-cyan-500', title: 'Aggregation', desc: 'Powerful aggregation pipeline.' },
-    { icon: '', iconColor: 'text-red-500', title: 'Indexing', desc: 'Fast queries with advanced indexing.' },
-    { icon: '', iconColor: 'text-violet-500', title: 'Open Source', desc: 'MIT licensed, community-driven.' },
-    { icon: '', iconColor: 'text-emerald-500', title: 'Production Ready', desc: 'Proven in production environments.' },
-  ],
   featureMatrix: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
@@ -101,6 +90,77 @@ const fauxdbConfig = {
           <td className="px-4 py-3 font-medium text-cyan-300">Geospatial</td>
           <td className="px-4 py-3 text-slate-300">Advanced geospatial queries.</td>
           <td className="px-4 py-3 text-slate-300">Location-based features.</td>
+        </tr>
+      </tbody>
+    </table>
+  ),
+  featureComparison: (
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+      <thead className="bg-slate-800/60">
+        <tr className="text-left">
+          <th className="px-4 py-3 font-semibold text-white">Feature</th>
+          <th className="px-4 py-3 font-semibold text-white">FauxDB</th>
+          <th className="px-4 py-3 font-semibold text-white">MongoDB</th>
+          <th className="px-4 py-3 font-semibold text-white">PostgreSQL JSON</th>
+          <th className="px-4 py-3 font-semibold text-white">CouchDB</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">MongoDB Wire Protocol</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">ACID Transactions</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Geospatial Queries</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Aggregation Pipeline</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Advanced Indexing</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Rust Performance</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Storage</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Multi-Document Transactions</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
         </tr>
       </tbody>
     </table>

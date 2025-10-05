@@ -56,17 +56,6 @@ const pgraftConfig = {
       { title: 'Native Integration', desc: 'Seamlessly integrates with PostgreSQL using background workers and shared memory IPC.' },
     ],
   },
-  features: [
-    { icon: '', iconColor: 'text-indigo-400', title: 'Native PostgreSQL Extension', desc: 'Seamless in-core integration—no external daemons, no sidecars, no wrappers. Deploy and manage consensus directly inside PostgreSQL.' },
-    { icon: '', iconColor: 'text-sky-400', title: 'Raft Consensus', desc: 'Reliable leader election, log replication, and strong consistency using the proven Raft algorithm. No split-brain, deterministic failover.' },
-    { icon: '', iconColor: 'text-green-400', title: 'Crash-Safe Durability', desc: 'All Raft state and logs are persisted for robust, crash-safe recovery. Survive restarts and failures without data loss or reconfiguration.' },
-    { icon: '', iconColor: 'text-yellow-400', title: 'SQL Management Functions', desc: 'Full cluster lifecycle—init, membership, diagnostics, and monitoring—managed via simple SQL functions. No external control plane required.' },
-    { icon: '', iconColor: 'text-pink-400', title: 'Observability', desc: 'Inspect cluster state, logs, and leader status with SQL queries. Built-in monitoring hooks for easy integration with dashboards and alerts.' },
-    { icon: '', iconColor: 'text-cyan-400', title: 'Dynamic Node Membership', desc: 'Add or remove nodes through consensus. Scale up or down safely, with all changes replicated and agreed by the cluster.' },
-    { icon: '', iconColor: 'text-red-400', title: 'Debug & Audit', desc: 'Toggle extended logging, access audit-friendly SQL surfaces, and trace cluster events for compliance and troubleshooting.' },
-    { icon: '', iconColor: 'text-violet-400', title: 'Minimal Configuration', desc: 'Production-ready defaults, simple setup, and tuneable parameters. Get started quickly and adapt to your workload needs.' },
-    { icon: '', iconColor: 'text-emerald-400', title: 'Background Worker Architecture', desc: 'Efficient, low-overhead operation inside PostgreSQL. Leverages background workers and shared memory for high performance.' },
-  ],
   featureMatrix: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
