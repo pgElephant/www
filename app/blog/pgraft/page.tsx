@@ -7,7 +7,7 @@ export const metadata = {
 
 const markdown = `![pgraft blog header](/blog/pgraft/header.svg)
 
-# pgraft: Production-Ready Raft Consensus for PostgreSQL
+# pgraft: Raft-Based PostgreSQL Extension
 
 ## Executive Summary
 

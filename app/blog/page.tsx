@@ -40,7 +40,7 @@ const blogStats = [
 const blogPosts = [
   {
     slug: 'pgraft',
-    title: 'pgraft: Production-Ready Raft Consensus for PostgreSQL',
+    title: 'pgraft: Raft-Based PostgreSQL Extension',
     excerpt: 'Executive Summary: In distributed database systems, achieving consensus across multiple nodes while maintaining data consistency and preventing split-brain scenarios is one of the most challenging engineering problems.',
     content: 'pgraft addresses this challenge by embedding the battle-tested Raft consensus protocol directly into PostgreSQL as a native extension.',
     author: 'pgElephant Team',
