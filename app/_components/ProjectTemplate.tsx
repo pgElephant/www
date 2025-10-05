@@ -63,7 +63,7 @@ export default function ProjectTemplate({
   docsLinks
 }: ProjectTemplateProps) {
   return (
-    <div className="pb-24">
+    <div>
       {/* Hero */}
       <section className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
@@ -129,18 +129,18 @@ export default function ProjectTemplate({
 
       {/* Docs Links */}
       {docsLinks && (
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
           <div className="container-wide">
-            <SectionHeading kicker="Internals">Technical Documentation</SectionHeading>
+            <SectionHeading kicker="Internals" className="text-white">Technical Documentation</SectionHeading>
             <div className="text-center max-w-3xl mx-auto">
-              <p className="text-slate-600 mb-8">
+              <p className="text-white/90 mb-8">
                 Dive deep into {hero.projectName}'s technical details, architecture, and internal workings with our comprehensive documentation.
               </p>
               <div className="grid sm:grid-cols-2 gap-6">
                 {docsLinks.map((doc: { href: string; title: string; desc: string }, i: number) => (
-                  <Link key={i} href={doc.href} className="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-300 transition-colors">
-                    <h3 className="font-semibold text-lg text-slate-900 mb-2">{doc.title}</h3>
-                    <p className="text-sm text-slate-600">{doc.desc}</p>
+                  <Link key={i} href={doc.href} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/15 transition-all duration-300">
+                    <h3 className="font-semibold text-lg text-white mb-2">{doc.title}</h3>
+                    <p className="text-sm text-white/80">{doc.desc}</p>
                   </Link>
                 ))}
               </div>

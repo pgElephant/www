@@ -363,15 +363,15 @@ const PgraftDemoTerminal = () => {
           </div>
         </div>
         
-        {/* Tabs */}
+        {/* EDB-Style Tabs */}
         <div className="flex gap-1">
           <button
             onClick={() => setActiveTab('build')}
             disabled={isRunning}
-            className={`px-3 py-1 text-sm font-mono rounded-t-md transition-colors ${
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'build'
-                ? 'bg-gray-700 text-white border-b-2 border-cyan-400'
-                : 'bg-gray-600 text-gray-300 hover:bg-gray-650'
+                ? 'bg-white text-gray-900 border border-gray-300'
+                : 'bg-transparent text-gray-400 hover:text-white hover:bg-gray-700 border border-transparent'
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
             Building & Installation
@@ -379,10 +379,10 @@ const PgraftDemoTerminal = () => {
           <button
             onClick={() => setActiveTab('usage')}
             disabled={isRunning}
-            className={`px-3 py-1 text-sm font-mono rounded-t-md transition-colors ${
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'usage'
-                ? 'bg-gray-700 text-white border-b-2 border-cyan-400'
-                : 'bg-gray-600 text-gray-300 hover:bg-gray-650'
+                ? 'bg-white text-gray-900 border border-gray-300'
+                : 'bg-transparent text-gray-400 hover:text-white hover:bg-gray-700 border border-transparent'
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
             Usage & Operations

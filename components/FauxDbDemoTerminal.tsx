@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Terminal, Play, Square, RotateCcw, Copy } from 'lucide-react'
+import { Terminal, Play, Square, RotateCcw, Copy, Code, Database, Cpu, Server, Cloud, HardDrive, Settings } from 'lucide-react'
 
 interface TerminalCommand {
   command: string
@@ -16,6 +16,7 @@ const FauxdbDemoTerminal = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
+  const [activeTab, setActiveTab] = useState<'build' | 'usage'>('build')
   const terminalRef = useRef<HTMLDivElement>(null)
 
   // Base timing values (in ms)
@@ -27,7 +28,7 @@ const FauxdbDemoTerminal = () => {
   }
 
   // FauxDB-specific demo commands and their outputs
-  const demoCommands = [
+  const buildCommands = [
     {
       command: 'git clone https://github.com/pgelephant/fauxdb.git && cd fauxdb',
       output: [
@@ -328,6 +329,146 @@ const FauxdbDemoTerminal = () => {
     }
   ]
 
+  const usageCommands = [
+    {
+      command: 'fauxdb --version',
+      output: [
+        'FauxDB v1.0.0',
+        'MongoDB-compatible document database',
+        'Built with Rust for high performance'
+      ]
+    },
+    {
+      command: 'fauxdb --config config/fauxdb.toml --daemon',
+      output: [
+        '[INFO] Starting FauxDB server...',
+        '[INFO] Loading configuration from config/fauxdb.toml',
+        '[INFO] Connecting to PostgreSQL backend at 127.0.0.1:5432',
+        '[INFO] MongoDB wire protocol enabled on port 27017',
+        '[INFO] REST API enabled on port 8080',
+        '[INFO] Server started successfully',
+        '[INFO] Ready to accept connections'
+      ]
+    },
+    {
+      command: 'mongosh --host 127.0.0.1 --port 27017',
+      output: [
+        'Current Mongosh Log ID: 64f1c2e1a1b2c3d4e5f6a7b8',
+        'Connecting to: mongodb://127.0.0.1:27017/',
+        'Using MongoDB: 6.0.0',
+        'Using Mongosh: 1.8.2',
+        '',
+        'For mongosh info see: https://docs.mongodb.com/mongodb-shell/',
+        '',
+        'To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).',
+        'You can opt-out by running db.disableFreeMonitoring().',
+        '',
+        '---',
+        'The server generated these startup warnings when booting:',
+        '2025-01-15T10:30:45.123Z: FauxDB is running in compatibility mode',
+        '2025-01-15T10:30:45.124Z: Backend: PostgreSQL 17.0',
+        '---'
+      ]
+    },
+    {
+      command: 'show dbs',
+      output: [
+        'admin      40.00 KiB',
+        'config     72.00 KiB',
+        'ecommerce  2.31 KiB',
+        'local      72.00 KiB'
+      ]
+    },
+    {
+      command: 'use ecommerce',
+      output: [
+        'switched to db ecommerce'
+      ]
+    },
+    {
+      command: 'db.products.find({}).limit(3)',
+      output: [
+        '[',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b8"),',
+        '    name: "Laptop",',
+        '    price: 899.99,',
+        '    category: "Electronics",',
+        '    inStock: true,',
+        '    tags: [ "computer", "laptop", "electronics" ]',
+        '  },',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7b9"),',
+        '    name: "Smartphone",',
+        '    price: 699.99,',
+        '    category: "Electronics",',
+        '    inStock: true,',
+        '    tags: [ "phone", "mobile", "electronics" ]',
+        '  },',
+        '  {',
+        '    _id: ObjectId("64f1c2e1a1b2c3d4e5f6a7ba"),',
+        '    name: "Coffee Mug",',
+        '    price: 12.99,',
+        '    category: "Home",',
+        '    inStock: true,',
+        '    tags: [ "kitchen", "drinkware" ]',
+        '  }',
+        ']'
+      ]
+    },
+    {
+      command: 'db.products.aggregate([{ $group: { _id: "$category", count: { $sum: 1 }, avgPrice: { $avg: "$price" } } }])',
+      output: [
+        '[',
+        '  { _id: "Electronics", count: 2, avgPrice: 799.99 },',
+        '  { _id: "Home", count: 1, avgPrice: 12.99 }',
+        ']'
+      ]
+    },
+    {
+      command: 'db.products.createIndex({ "name": "text", "category": "text" })',
+      output: [
+        '{',
+        '  createdCollectionAutomatically: false,',
+        '  numIndexesBefore: 1,',
+        '  numIndexesAfter: 2,',
+        '  ok: 1',
+        '}'
+      ]
+    },
+    {
+      command: 'curl -X GET http://localhost:8080/api/v1/stats',
+      output: [
+        '{',
+        '  "server": "FauxDB v1.0.0",',
+        '  "uptime": "00:05:23",',
+        '  "connections": {',
+        '    "active": 3,',
+        '    "total": 15',
+        '  },',
+        '  "databases": 4,',
+        '  "collections": 12,',
+        '  "operations": {',
+        '    "reads": 1247,',
+        '    "writes": 89,',
+        '    "errors": 0',
+        '  },',
+        '  "backend": {',
+        '    "type": "PostgreSQL",',
+        '    "version": "17.0",',
+        '    "status": "connected"',
+        '  }',
+        '}'
+      ]
+    },
+    {
+      command: 'exit',
+      output: [
+        'Goodbye'
+      ]
+    }
+  ]
+
   // Cursor blinking effect
   useEffect(() => {
     const interval = setInterval(() => {
@@ -387,14 +528,15 @@ const FauxdbDemoTerminal = () => {
     setCurrentCommand('')
     
     let commandIndex = 0
+    const commands = activeTab === 'build' ? buildCommands : usageCommands
     
     const runNextCommand = () => {
-      if (commandIndex >= demoCommands.length) {
+      if (commandIndex >= commands.length) {
         setIsRunning(false)
         return
       }
       
-      const cmd = demoCommands[commandIndex]
+      const cmd = commands[commandIndex]
       
       // Add command to history
       setCommandHistory(prev => [
@@ -407,7 +549,7 @@ const FauxdbDemoTerminal = () => {
       ])
       
       // Type the command
-      typeCommand(cmd.command, () => {
+        typeCommand(cmd.command, () => {
         // Show output only (do not echo command again)
         setTimeout(() => {
           showOutput(cmd.output, () => {
@@ -430,6 +572,7 @@ const FauxdbDemoTerminal = () => {
     setIsRunning(false)
     setCommandHistory([])
     setCurrentCommand('')
+    setActiveTab('build')
   }
 
   const copyToClipboard = () => {
@@ -467,6 +610,34 @@ const FauxdbDemoTerminal = () => {
         </div>
       </div>
 
+      {/* EDB-Style Tabs */}
+      <div className="bg-gray-800 px-4 py-3 border-b border-gray-700">
+        <div className="flex gap-1">
+          <button
+            onClick={() => setActiveTab('build')}
+            disabled={isRunning}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              activeTab === 'build'
+                ? 'bg-white text-gray-900 border border-gray-300'
+                : 'bg-transparent text-gray-400 hover:text-white hover:bg-gray-700 border border-transparent'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            Building & Installation
+          </button>
+          <button
+            onClick={() => setActiveTab('usage')}
+            disabled={isRunning}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              activeTab === 'usage'
+                ? 'bg-white text-gray-900 border border-gray-300'
+                : 'bg-transparent text-gray-400 hover:text-white hover:bg-gray-700 border border-transparent'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            Usage & Operations
+          </button>
+        </div>
+      </div>
+
       {/* Terminal Content */}
       <div 
         ref={terminalRef}
@@ -477,7 +648,7 @@ const FauxdbDemoTerminal = () => {
           <div key={index} className="mb-2">
             <div className="text-blue-400">
               $ {cmd.command}
-            </div>
+              </div>
             {cmd.output.map((line, lineIndex) => (
               <div key={lineIndex} className="text-secondary-400 font-mono">
                 {line}
