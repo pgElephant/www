@@ -10,7 +10,7 @@ function SectionHeading({ children, kicker, className = '' }: SectionHeadingProp
   return (
     <div className={`text-center mb-14 ${className}`}>
       {kicker && <div className="text-xs tracking-wider font-semibold text-indigo-500 uppercase mb-2">{kicker}</div>}
-      <h2 className={`text-3xl md:text-4xl font-bold ${className === 'text-white' ? 'text-white' : 'text-slate-900'} mb-3`}>{children}</h2>
+      <h2 className={`text-2xl md:text-3xl font-bold ${className === 'text-white' ? 'text-white' : 'text-slate-900'} mb-3`}>{children}</h2>
       <div className="mx-auto h-1 w-28 bg-gradient-to-r from-indigo-500 to-sky-500 rounded" />
     </div>
   );
@@ -81,9 +81,9 @@ export default function ProjectTemplate({
             
             {/* Right side - Content */}
             <div className="flex-1 text-center lg:text-left">
-              <div className="text-5xl lg:text-6xl font-bold tracking-tight mb-4">{hero.title}</div>
+              <div className="text-4xl lg:text-5xl font-bold tracking-tight mb-4">{hero.title}</div>
               {hero.subtitle && (
-                <div className="text-xl lg:text-2xl font-semibold text-white/90 mb-8 leading-relaxed">
+                <div className="text-lg lg:text-xl font-semibold text-white/90 mb-8 leading-relaxed">
                   {hero.subtitle}
                 </div>
               )}
@@ -110,8 +110,8 @@ export default function ProjectTemplate({
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featurePillars.items.map((f: { title: string; desc: string }, i: number) => (
                 <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 flex flex-col">
-                  <h4 className="font-semibold text-lg mb-2 text-white">{f.title}</h4>
-                  <p className="text-white/90 text-sm leading-relaxed flex-1">{f.desc}</p>
+                  <h4 className="font-semibold text-base mb-2 text-white">{f.title}</h4>
+                  <p className="text-white/90 text-xs leading-relaxed flex-1">{f.desc}</p>
                 </div>
               ))}
             </div>
@@ -129,7 +129,7 @@ export default function ProjectTemplate({
                 <div key={i} className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
                   <span className={f.iconColor}>{f.icon}</span>
                   <div>
-                    <h4 className="font-bold text-lg mb-1 text-white">{f.title}</h4>
+                    <h4 className="font-bold text-base mb-1 text-white">{f.title}</h4>
                     <p className="text-white/90">{f.desc}</p>
                   </div>
                 </div>
@@ -164,8 +164,8 @@ export default function ProjectTemplate({
               <div className="grid sm:grid-cols-2 gap-6">
                 {docsLinks.map((doc: { href: string; title: string; desc: string }, i: number) => (
                   <Link key={i} href={doc.href} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/15 transition-all duration-300">
-                    <h3 className="font-semibold text-lg text-white mb-2">{doc.title}</h3>
-                    <p className="text-sm text-white/80">{doc.desc}</p>
+                    <h3 className="font-semibold text-base text-white mb-2">{doc.title}</h3>
+                    <p className="text-xs text-white/80">{doc.desc}</p>
                   </Link>
                 ))}
               </div>

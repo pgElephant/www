@@ -218,7 +218,7 @@ const FeaturesList = () => {
         <div className="text-center mb-16 relative z-10">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-thin text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
-            Enterprise Solutions
+            🚀 Enterprise Solutions
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-thin mb-6 leading-tight">
             <span className="text-white">
@@ -239,19 +239,19 @@ const FeaturesList = () => {
           {/* Enterprise Solutions Matrix */}
           <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 overflow-hidden mb-12">
             <div className="p-8 border-b border-slate-400/30">
-              <h3 className="text-2xl font-thin text-white mb-2">Enterprise Database Solutions</h3>
+              <h3 className="text-2xl font-thin text-white mb-2">🎯 Enterprise Database Solutions</h3>
               <p className="text-white/90">Comprehensive platform comparison for enterprise database infrastructure</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-400/30 bg-white/5">
-                    <th className="text-left p-4 text-white font-thin text-sm uppercase tracking-wider w-1/6">Solution</th>
-                    <th className="text-left p-3 text-white font-thin text-sm uppercase tracking-wider w-1/8">Category</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/5">Core Features</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/5">Performance</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/6">Deployment</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/8">Use Cases</th>
+                    <th className="text-left p-4 text-white font-thin text-sm uppercase tracking-wider w-1/6">🚀 Product</th>
+                    <th className="text-left p-3 text-white font-thin text-sm uppercase tracking-wider w-1/8">⚡ Focus Area</th>
+                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/5">🎯 Key Capabilities</th>
+                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/5">📊 Performance Metrics</th>
+                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/6">🛠️ Implementation</th>
+                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/8">💼 Enterprise Use</th>
                   </tr>
                 </thead>
                 <tbody>
