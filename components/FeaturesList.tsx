@@ -377,62 +377,6 @@ const FeaturesList = () => {
           </div>
         </div>
 
-        {/* Internal Navigation Links for SEO */}
-        <div className="mt-16 relative z-10">
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-slate-400/30 max-w-6xl mx-auto">
-            <h3 className="text-2xl font-thin mb-6 text-white text-center">
-              Explore Our Enterprise Solutions
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <a href="/ram" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-primary-400/40 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-primary-400">
-                    <Zap className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-lg font-thin text-white group-hover:text-primary-300 transition-colors">RAM</h4>
-                </div>
-                <p className="text-sm text-white/90 mb-3 flex-grow">PostgreSQL clustering solution with automatic failover and Raft consensus for enterprise high availability.</p>
-                <div className="flex items-center text-primary-400 text-sm font-thin">
-                  Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </a>
-              
-              <a href="/pgraft" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-secondary-400/40 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-secondary-400">
-                    <Crown className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-lg font-thin text-white group-hover:text-secondary-300 transition-colors">pgraft</h4>
-                </div>
-                <p className="text-sm text-white/90 mb-3 flex-grow">PostgreSQL extension implementing Raft consensus protocol for distributed database coordination.</p>
-                <div className="flex items-center text-secondary-400 text-sm font-thin">
-                  Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </a>
-              
-              <a href="/fauxdb" className="group block p-6 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-slate-400/20 hover:border-accent-400/40 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-accent-400">
-                    <Globe className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-lg font-thin text-white group-hover:text-accent-300 transition-colors">FauxDB</h4>
-                </div>
-                <p className="text-sm text-white/90 mb-3 flex-grow">MongoDB-compatible document database built in Rust with PostgreSQL backend for seamless migration.</p>
-                <div className="flex items-center text-accent-400 text-sm font-thin">
-                  Learn More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </a>
-            </div>
-            
-            <div className="text-center">
-              <a href="/docs" className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors text-sm">
-                <BookOpen className="w-4 h-4" />
-                View Complete Documentation
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>
 
         {/* Enterprise CTA */}
         <div className="mt-20 text-center relative z-10">
