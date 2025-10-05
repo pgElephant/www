@@ -69,13 +69,14 @@ const pgbalancerConfig = {
     { icon: '', iconColor: 'text-emerald-500', title: 'Open Source', desc: 'MIT licensed, community-driven.' },
   ],
   featureMatrix: (
-    <>
-      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden mb-12">
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
         <thead className="bg-slate-800/60">
           <tr className="text-left">
             <th className="px-4 py-3 font-semibold text-white">Capability</th>
             <th className="px-4 py-3 font-semibold text-white">Description</th>
             <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
+            <th className="px-4 py-3 font-semibold text-white">Performance</th>
+            <th className="px-4 py-3 font-semibold text-white">Scalability</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-700 bg-slate-800/40">
@@ -83,115 +84,119 @@ const pgbalancerConfig = {
             <td className="px-4 py-3 font-medium text-cyan-300">Connection Pooling</td>
             <td className="px-4 py-3 text-slate-300">Session, transaction, and statement pooling modes.</td>
             <td className="px-4 py-3 text-slate-300">Reduces backend load, increases throughput.</td>
+            <td className="px-4 py-3 text-slate-300">Up to 10x connection reduction</td>
+            <td className="px-4 py-3 text-slate-300">1000+ concurrent connections</td>
           </tr>
           <tr className="bg-slate-800/60">
             <td className="px-4 py-3 font-medium text-cyan-300">Load Balancing</td>
             <td className="px-4 py-3 text-slate-300">Distributes queries across multiple servers.</td>
             <td className="px-4 py-3 text-slate-300">High availability, scale-out.</td>
+            <td className="px-4 py-3 text-slate-300">Round-robin, least-conn algorithms</td>
+            <td className="px-4 py-3 text-slate-300">Unlimited backend servers</td>
           </tr>
           <tr>
             <td className="px-4 py-3 font-medium text-cyan-300">Failover</td>
             <td className="px-4 py-3 text-slate-300">Automatic detection and rerouting on backend failure.</td>
             <td className="px-4 py-3 text-slate-300">Minimizes downtime.</td>
+            <td className="px-4 py-3 text-slate-300">Sub-second failover detection</td>
+            <td className="px-4 py-3 text-slate-300">Multi-tier failover chains</td>
           </tr>
           <tr className="bg-slate-800/60">
             <td className="px-4 py-3 font-medium text-cyan-300">Observability</td>
             <td className="px-4 py-3 text-slate-300">Prometheus metrics, logging, health checks.</td>
             <td className="px-4 py-3 text-slate-300">Full visibility, easy monitoring.</td>
+            <td className="px-4 py-3 text-slate-300">Real-time metrics collection</td>
+            <td className="px-4 py-3 text-slate-300">Multi-instance monitoring</td>
           </tr>
           <tr>
             <td className="px-4 py-3 font-medium text-cyan-300">Cloud Native</td>
             <td className="px-4 py-3 text-slate-300">Lightweight, embeddable, container-ready.</td>
             <td className="px-4 py-3 text-slate-300">Easy deployment, scaling.</td>
+            <td className="px-4 py-3 text-slate-300">Low memory footprint</td>
+            <td className="px-4 py-3 text-slate-300">Kubernetes-native</td>
           </tr>
         </tbody>
       </table>
-
-      {/* Feature Comparison Table */}
-      <div className="mb-8">
-        <h3 className="text-2xl font-bold mb-4 text-white">Feature Comparison</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
-            <thead className="bg-slate-800/60">
-              <tr className="text-left">
-                <th className="px-4 py-3 font-semibold text-white">Feature</th>
-                <th className="px-4 py-3 font-semibold text-white">pgbalancer</th>
-                <th className="px-4 py-3 font-semibold text-white">pgbouncer</th>
-                <th className="px-4 py-3 font-semibold text-white">pgpool-II</th>
-                <th className="px-4 py-3 font-semibold text-white">Odyssey</th>
-                <th className="px-4 py-3 font-semibold text-white">Supavisor</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-700 bg-slate-800/40">
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Connection Pooling Modes</td>
-                <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
-                <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
-                <td className="px-4 py-3 text-green-400">Session, Transaction</td>
-                <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
-                <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Load Balancing</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Automatic Failover</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Manual</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Read/Write Split</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Prometheus Metrics</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Plugin</td>
-                <td className="px-4 py-3 text-yellow-300">Plugin</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Dynamic Reconfiguration</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Reload</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Cloud Native</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-cyan-300">Extensibility/Plugins</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-green-400">✔️</td>
-                <td className="px-4 py-3 text-yellow-300">Limited</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </>
+  ),
+  featureComparison: (
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+      <thead className="bg-slate-800/60">
+        <tr className="text-left">
+          <th className="px-4 py-3 font-semibold text-white">Feature</th>
+          <th className="px-4 py-3 font-semibold text-white">pgbalancer</th>
+          <th className="px-4 py-3 font-semibold text-white">pgbouncer</th>
+          <th className="px-4 py-3 font-semibold text-white">pgpool-II</th>
+          <th className="px-4 py-3 font-semibold text-white">Odyssey</th>
+          <th className="px-4 py-3 font-semibold text-white">Supavisor</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Connection Pooling Modes</td>
+          <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
+          <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
+          <td className="px-4 py-3 text-green-400">Session, Transaction</td>
+          <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
+          <td className="px-4 py-3 text-green-400">Session, Transaction, Statement</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Load Balancing</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Automatic Failover</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Manual</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Read/Write Split</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Prometheus Metrics</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Plugin</td>
+          <td className="px-4 py-3 text-yellow-300">Plugin</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Dynamic Reconfiguration</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Reload</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Cloud Native</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Extensibility/Plugins</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+      </tbody>
+    </table>
   ),
   docsLinks: [
     { href: '/docs/pgbalancer/getting-started', title: 'Getting Started', desc: 'Quick start guide for pgbalancer.' },

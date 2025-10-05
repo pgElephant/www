@@ -51,6 +51,7 @@ type ProjectTemplateProps = {
   };
   features?: { icon: React.ReactNode; iconColor: string; title: string; desc: string }[];
   featureMatrix?: React.ReactNode;
+  featureComparison?: React.ReactNode;
   docsLinks?: { href: string; title: string; desc: string }[];
 };
 
@@ -61,6 +62,7 @@ export default function ProjectTemplate({
   featurePillars,
   features,
   featureMatrix,
+  featureComparison,
   docsLinks
 }: ProjectTemplateProps) {
   return (
@@ -147,6 +149,18 @@ export default function ProjectTemplate({
             <SectionHeading kicker="Depth" className="text-white">Feature Matrix</SectionHeading>
             <div className="overflow-x-auto">
               {featureMatrix}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Feature Comparison */}
+      {featureComparison && (
+        <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+          <div className="container-wide relative z-10">
+            <SectionHeading kicker="Comparison" className="text-white">Feature Comparison</SectionHeading>
+            <div className="overflow-x-auto">
+              {featureComparison}
             </div>
           </div>
         </section>

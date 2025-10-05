@@ -218,7 +218,7 @@ const FeaturesList = () => {
         <div className="text-center mb-16 relative z-10">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-thin text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
-            🚀 Enterprise Solutions
+Enterprise Solutions
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-thin mb-6 leading-tight">
             <span className="text-white">
@@ -239,19 +239,19 @@ const FeaturesList = () => {
           {/* Enterprise Solutions Matrix */}
           <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 overflow-hidden mb-12">
             <div className="p-8 border-b border-slate-400/30">
-              <h3 className="text-2xl font-thin text-white mb-2">🎯 Enterprise Database Solutions</h3>
+              <h3 className="text-2xl font-semibold text-white mb-2">Enterprise Database Solutions</h3>
               <p className="text-white/90">Comprehensive platform comparison for enterprise database infrastructure</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-400/30 bg-white/5">
-                    <th className="text-left p-4 text-white font-thin text-sm uppercase tracking-wider w-1/6">🚀 Product</th>
-                    <th className="text-left p-3 text-white font-thin text-sm uppercase tracking-wider w-1/8">⚡ Focus Area</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/5">🎯 Key Capabilities</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/5">📊 Performance Metrics</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/6">🛠️ Implementation</th>
-                    <th className="text-left px-3 py-4 text-white font-thin text-sm uppercase tracking-wider w-1/8">💼 Enterprise Use</th>
+                    <th className="text-left p-4 text-white font-semibold text-sm uppercase tracking-wide w-1/6">Product</th>
+                    <th className="text-left p-3 text-white font-semibold text-sm uppercase tracking-wide w-1/8">Focus Area</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/5">Key Capabilities</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/5">Performance Metrics</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/6">Implementation</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/8">Enterprise Use</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -394,6 +394,48 @@ const FeaturesList = () => {
             </div>
           </div>
 
+          {/* Enterprise Capabilities Overview */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => {
+              const colors = getColorClasses(project.color)
+              return (
+                <div key={project.name} className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-slate-400/30 h-full flex flex-col">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className={`w-16 h-16 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
+                      {project.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-thin text-white">{project.name}</h3>
+                      <p className={`text-sm ${colors.accent}`}>{project.description}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-6 flex-grow">
+                    {project.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="border-l-2 border-slate-400/30 pl-4">
+                        <div className="flex items-start gap-3">
+                          <div className={`w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mt-0.5 ${colors.icon}`}>
+                            {feature.icon}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-thin text-white text-sm mb-2">{feature.title}</h4>
+                            <p className="text-xs text-white/90 leading-relaxed">{feature.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-8 pt-6 border-t border-slate-400/20">
+                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-thin transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
+                      View Enterprise Details
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
 
 

@@ -95,7 +95,7 @@ const Hero = () => {
     {
       id: 'fauxdb',
       name: 'FauxDB',
-      title: 'MongoDB Compatible Document Database',
+      title: '🚀 Lightning-Fast MongoDB Alternative',
       description: '• High-performance MongoDB-compatible database built in Rust.',
       description2: '• Native JSON support with ACID transaction guarantees.',
       description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
@@ -106,7 +106,7 @@ const Hero = () => {
     {
       id: 'pgraft',
       name: 'pgraft',
-      title: 'Raft Consensus Extension for PostgreSQL',
+      title: '⚡ Bulletproof PostgreSQL Clustering',
       description: '• Native Raft consensus for PostgreSQL clusters.',
       description2: '• Strong consistency, automatic leader election, and seamless failover.',
       description3: '• Built-in cluster management and observability.',
@@ -117,7 +117,7 @@ const Hero = () => {
     {
       id: 'pgbalancer',
       name: 'pgbalancer',
-      title: 'Connection Pooling & Load Balancing',
+      title: '🎯 Zero-Downtime Connection Intelligence',
       description: '• High-performance connection pooling for PostgreSQL.',
       description2: '• Load balancing, failover, and observability in one lightweight service.',
       description3: '• YAML configuration, Prometheus metrics, and cloud-native ready.',
@@ -128,7 +128,7 @@ const Hero = () => {
     {
       id: 'ram',
       name: 'RAM',
-      title: 'Resilient Adaptive Manager',
+      title: '🏆 Enterprise-Grade Cluster Orchestration',
       description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
       description2: '• Intelligent resource management and load balancing across nodes.',
       description3: '• Real-time monitoring and automated scaling capabilities.',
@@ -139,7 +139,7 @@ const Hero = () => {
     {
       id: 'rale',
       name: 'RALE',
-      title: 'Resilient Adaptive Leader Election',
+      title: '🛡️ Unbreakable Distributed Consensus',
       description: '• Distributed consensus for high availability in distributed systems.',
       description2: '• Automated leader election and failover for any distributed database.',
       description3: '• Zero data loss during node failures with strong consistency guarantees.',
