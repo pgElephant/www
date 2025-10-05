@@ -6,19 +6,19 @@ import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
   title: 'pgElephant | Enterprise PostgreSQL Platform - High Availability & MongoDB Alternative',
-  description: 'pgElephant delivers enterprise-grade PostgreSQL solutions: RAM clustering with automatic failover, RALE distributed consensus, pgraft Raft extension for leader election, and FauxDB MongoDB-compatible document database. Zero-downtime database operations for production environments.',
+  description: 'pgElephant delivers enterprise-grade PostgreSQL solutions: pgbalancer connection pooling with load balancing, RALE distributed consensus, pgraft Raft extension for leader election, and FauxDB MongoDB-compatible document database. Zero-downtime database operations for production environments.',
   keywords: [
     'enterprise postgresql', 'postgresql platform', 'database clustering', 'high availability',
     'postgresql failover', 'mongodb alternative', 'document database', 'distributed consensus',
     'raft algorithm', 'postgresql extension', 'database management', 'production database',
-    'postgresql solutions', 'ram clustering', 'rale consensus', 'pgraft extension', 'fauxdb',
+    'postgresql solutions', 'pgbalancer pooling', 'rale consensus', 'pgraft extension', 'fauxdb',
     'automatic failover', 'zero downtime', 'database replication', 'leader election',
     'postgresql ha', 'database clustering software', 'mongodb compatible database',
     'distributed postgresql', 'postgresql consensus', 'database reliability'
   ].join(', '),
   openGraph: {
     title: 'pgElephant - Enterprise PostgreSQL Platform | High Availability & MongoDB Alternative',
-    description: 'Enterprise-grade PostgreSQL solutions: RAM clustering with automatic failover, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
+    description: 'Enterprise-grade PostgreSQL solutions: pgbalancer connection pooling with load balancing, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
     images: [
       {
         url: '/og-image.jpg',
@@ -34,7 +34,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'pgElephant - Enterprise PostgreSQL Platform',
-    description: 'Enterprise-grade PostgreSQL solutions: RAM clustering, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
+    description: 'Enterprise-grade PostgreSQL solutions: pgbalancer connection pooling, RALE distributed consensus, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
     images: ['/og-image.jpg'],
     creator: '@pgElephant',
     site: '@pgElephant',

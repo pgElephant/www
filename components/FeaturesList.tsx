@@ -25,40 +25,40 @@ import {
 const FeaturesList = () => {
   const projects = [
     {
-      name: 'RAM',
-      description: 'Resilient Adaptive Manager',
-      icon: <Zap className="w-8 h-8" />,
+      name: 'pgbalancer',
+      description: 'PostgreSQL Connection Pooler & Load Balancer',
+      icon: <Settings className="w-8 h-8" />,
       color: 'primary',
       features: [
         {
-          title: 'Automatic Failover',
-          description: 'Zero-downtime failover with sub-second detection',
-          icon: <Zap className="w-5 h-5" />
+          title: 'Connection Pooling',
+          description: 'Efficient connection management with configurable pool sizes',
+          icon: <Database className="w-5 h-5" />
         },
         {
-          title: 'Leader Election',
-          description: 'Raft-based consensus for reliable leader selection',
-          icon: <Crown className="w-5 h-5" />
-        },
-        {
-          title: 'Distributed Consensus',
-          description: 'Multi-node coordination with split-brain prevention',
-          icon: <Network className="w-5 h-5" />
-        },
-        {
-          title: 'Real-time Monitoring',
-          description: 'Prometheus metrics and Grafana dashboards',
+          title: 'Load Balancing',
+          description: 'Intelligent query distribution across multiple PostgreSQL servers',
           icon: <Activity className="w-5 h-5" />
         },
         {
-          title: 'Enterprise Security',
-          description: 'Token-based auth, SSL/TLS, rate limiting',
+          title: 'Failover & Recovery',
+          description: 'Automatic failover detection and seamless recovery',
           icon: <Shield className="w-5 h-5" />
         },
         {
-          title: 'Cloud-Native',
-          description: 'Docker, Kubernetes, and Helm chart support',
-          icon: <Server className="w-5 h-5" />
+          title: 'Health Monitoring',
+          description: 'Real-time server health checks and status monitoring',
+          icon: <Activity className="w-5 h-5" />
+        },
+        {
+          title: 'Advanced Configuration',
+          description: 'Flexible routing rules and connection parameters',
+          icon: <Settings className="w-5 h-5" />
+        },
+        {
+          title: 'High Performance',
+          description: 'Optimized for high-throughput database workloads',
+          icon: <Zap className="w-5 h-5" />
         }
       ]
     },
@@ -270,10 +270,10 @@ const FeaturesList = () => {
                         </td>
                         <td className="p-4">
                           <div className="space-y-2">
-                            {project.name === 'RAM' && (
+                            {project.name === 'pgbalancer' && (
                               <>
-                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-thin rounded-full text-center">High Availability</span>
-                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-thin rounded-full text-center">Clustering</span>
+                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-thin rounded-full text-center">Connection Pooling</span>
+                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-thin rounded-full text-center">Load Balancing</span>
                               </>
                             )}
                             {project.name === 'pgraft' && (
@@ -302,11 +302,11 @@ const FeaturesList = () => {
                         </td>
                         <td className="px-8 py-6">
                           <div className="space-y-2">
-                            {project.name === 'RAM' && (
+                            {project.name === 'pgbalancer' && (
                               <>
-                                <div className="text-sm text-white/90">• Docker & Kubernetes</div>
-                                <div className="text-sm text-white/90">• Cloud-native architecture</div>
-                                <div className="text-sm text-white/90">• Enterprise monitoring</div>
+                                <div className="text-sm text-white/90">• C-based high performance</div>
+                                <div className="text-sm text-white/90">• PostgreSQL extension</div>
+                                <div className="text-sm text-white/90">• Production-ready deployment</div>
                               </>
                             )}
                             {project.name === 'pgraft' && (
