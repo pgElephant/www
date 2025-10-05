@@ -307,7 +307,7 @@ const FeaturesList = () => {
                             {project.name === 'pgbalancer' && (
                               <>
                                 <div className="text-xs text-white/90">• 10K+ connections/sec</div>
-                                <div className="text-xs text-white/90">• <1ms latency</div>
+                                <div className="text-xs text-white/90">• &lt;1ms latency</div>
                                 <div className="text-xs text-white/90">• 99.9% uptime</div>
                                 <div className="text-xs text-white/90">• C-optimized</div>
                               </>
