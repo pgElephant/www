@@ -105,6 +105,63 @@ const ramConfig = {
       </tbody>
     </table>
   ),
+  featureComparison: (
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+      <thead className="bg-slate-800/60">
+        <tr className="text-left">
+          <th className="px-4 py-3 font-semibold text-white">Feature</th>
+          <th className="px-4 py-3 font-semibold text-white">RAM</th>
+          <th className="px-4 py-3 font-semibold text-white">Patroni</th>
+          <th className="px-4 py-3 font-semibold text-white">Stolon</th>
+          <th className="px-4 py-3 font-semibold text-white">RepMgr</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Raft Consensus</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">etcd/Consul</td>
+          <td className="px-4 py-3 text-yellow-300">etcd</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
+          <td className="px-4 py-3 text-green-400">Native Extension</td>
+          <td className="px-4 py-3 text-yellow-300">External Agent</td>
+          <td className="px-4 py-3 text-yellow-300">External Agent</td>
+          <td className="px-4 py-3 text-yellow-300">External Agent</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Split-Brain Prevention</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">SQL Interface</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Zero External Dependencies</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Background Workers</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+      </tbody>
+    </table>
+  ),
   docsLinks: [
     { href: '/docs/ram/architecture', title: 'Architecture', desc: 'Learn about RAM’s internal architecture.' },
     { href: '/docs/ram/api', title: 'API Reference', desc: 'Explore the RAM API.' },

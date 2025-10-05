@@ -100,9 +100,9 @@ const fauxdbConfig = {
         <tr className="text-left">
           <th className="px-4 py-3 font-semibold text-white">Feature</th>
           <th className="px-4 py-3 font-semibold text-white">FauxDB</th>
+          <th className="px-4 py-3 font-semibold text-white">FerretDB</th>
           <th className="px-4 py-3 font-semibold text-white">MongoDB</th>
           <th className="px-4 py-3 font-semibold text-white">PostgreSQL JSON</th>
-          <th className="px-4 py-3 font-semibold text-white">CouchDB</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
@@ -110,7 +110,7 @@ const fauxdbConfig = {
           <td className="px-4 py-3 font-medium text-cyan-300">MongoDB Wire Protocol</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-red-300">✗</td>
         </tr>
         <tr>
@@ -118,20 +118,20 @@ const fauxdbConfig = {
           <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Geospatial Queries</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-yellow-300">Limited</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Aggregation Pipeline</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Partial</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-yellow-300">Limited</td>
           <td className="px-4 py-3 text-yellow-300">Limited</td>
         </tr>
         <tr>
@@ -144,23 +144,30 @@ const fauxdbConfig = {
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Rust Performance</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-yellow-300">Go</td>
           <td className="px-4 py-3 text-red-300">✗</td>
           <td className="px-4 py-3 text-red-300">✗</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Storage</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">Multi-Document Transactions</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Partial</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-yellow-300">Limited</td>
-          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Production Ready</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
         </tr>
       </tbody>
     </table>

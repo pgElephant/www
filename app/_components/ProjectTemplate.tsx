@@ -121,18 +121,6 @@ export default function ProjectTemplate({
         </section>
       )}
 
-      {/* Feature Comparisons */}
-      {featureComparison && (
-        <section className="py-20 relative overflow-hidden border-t border-b border-white/10" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-          <div className="container-wide">
-            <SectionHeading kicker="Features" className="text-white">Feature Comparisons</SectionHeading>
-            <div className="overflow-x-auto">
-              {featureComparison}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Feature Matrix */}
       {featureMatrix && (
         <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">

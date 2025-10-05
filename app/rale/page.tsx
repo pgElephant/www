@@ -100,6 +100,63 @@ const raleConfig = {
       </tbody>
     </table>
   ),
+  featureComparison: (
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+      <thead className="bg-slate-800/60">
+        <tr className="text-left">
+          <th className="px-4 py-3 font-semibold text-white">Feature</th>
+          <th className="px-4 py-3 font-semibold text-white">RALE</th>
+          <th className="px-4 py-3 font-semibold text-white">PostgreSQL WAL</th>
+          <th className="px-4 py-3 font-semibold text-white">etcd</th>
+          <th className="px-4 py-3 font-semibold text-white">Consul</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Distributed Log</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-yellow-300">Limited</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Raft Consensus</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Crash Safe</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">SQL Interface</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Zero External Dependencies</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+      </tbody>
+    </table>
+  ),
   docsLinks: [
     { href: '/docs/rale/architecture', title: 'Architecture', desc: 'Learn about RALE’s internal architecture.' },
     { href: '/docs/rale/api', title: 'API Reference', desc: 'Explore the RALE API.' },
