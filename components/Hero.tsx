@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ArrowRight, Database, Loader2, Zap } from 'lucide-react'
+import { ArrowRight, Database, Loader2, Zap, Crown, Network, Shield, FileText, Cpu, Server, Users, Activity, Layers } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -48,6 +48,46 @@ const PgbalancerIcon = ({ size = 24 }: { size?: number }) => (
   </div>
 )
 
+// Custom pgraft icon component
+const PgraftIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
+// Custom FauxDB icon component
+const FauxDbIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-emerald-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <FileText className="text-orange-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Layers className="text-blue-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
+// Custom RALE icon component
+const RaleIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Users className="text-indigo-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Activity className="text-cyan-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
+// Custom RAM icon component
+const RamIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Server className="text-cyan-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Cpu className="text-green-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Activity className="text-orange-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
 const Hero = () => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
@@ -59,7 +99,7 @@ const Hero = () => {
       description: '• High-performance MongoDB-compatible database built in Rust.',
       description2: '• Native JSON support with ACID transaction guarantees.',
       description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
-      icon: '/ico/FauxDB_HD.ico',
+      icon: 'fauxdb-custom',
       color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
       bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
     },
@@ -70,7 +110,7 @@ const Hero = () => {
       description: '• Native Raft consensus for PostgreSQL clusters.',
       description2: '• Strong consistency, automatic leader election, and seamless failover.',
       description3: '• Built-in cluster management and observability.',
-      icon: '/ico/pgsql_raft_leader_HD.ico',
+      icon: 'pgraft-custom',
       color: `from-[${palette.primaryDark}] to-[${palette.secondaryDark}]`,
       bg: { from: palette.primaryDark, via: palette.primary, to: palette.secondaryDark }
     },
@@ -92,7 +132,7 @@ const Hero = () => {
       description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
       description2: '• Intelligent resource management and load balancing across nodes.',
       description3: '• Real-time monitoring and automated scaling capabilities.',
-      icon: '/ico/RAM_HD.ico',
+      icon: 'ram-custom',
       color: `from-[${palette.secondary}] to-[${palette.secondaryLight}]`,
       bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.secondaryLight }
     },
@@ -103,7 +143,7 @@ const Hero = () => {
       description: '• Distributed consensus for high availability in distributed systems.',
       description2: '• Automated leader election and failover for any distributed database.',
       description3: '• Zero data loss during node failures with strong consistency guarantees.',
-      icon: '/ico/RALE_HD.ico',
+      icon: 'rale-custom',
       color: `from-[${palette.primary}] to-[${palette.primaryLight}]`,
       bg: { from: palette.primaryDark, via: palette.primary, to: palette.primaryLight }
     }
@@ -166,6 +206,14 @@ const Hero = () => {
                     <div className="w-24 h-24 flex items-center justify-center">
                       {current.icon === 'pgbalancer-custom' ? (
                         <PgbalancerIcon size={96} />
+                      ) : current.icon === 'pgraft-custom' ? (
+                        <PgraftIcon size={96} />
+                      ) : current.icon === 'fauxdb-custom' ? (
+                        <FauxDbIcon size={96} />
+                      ) : current.icon === 'rale-custom' ? (
+                        <RaleIcon size={96} />
+                      ) : current.icon === 'ram-custom' ? (
+                        <RamIcon size={96} />
                       ) : (
                         <Image 
                           src={current.icon} 
@@ -230,6 +278,14 @@ const Hero = () => {
                      >
                        {product.icon === 'pgbalancer-custom' ? (
                          <PgbalancerIcon size={20} />
+                       ) : product.icon === 'pgraft-custom' ? (
+                         <PgraftIcon size={20} />
+                       ) : product.icon === 'fauxdb-custom' ? (
+                         <FauxDbIcon size={20} />
+                       ) : product.icon === 'rale-custom' ? (
+                         <RaleIcon size={20} />
+                       ) : product.icon === 'ram-custom' ? (
+                         <RamIcon size={20} />
                        ) : (
                          <Image 
                            src={product.icon} 

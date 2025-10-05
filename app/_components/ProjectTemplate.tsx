@@ -41,6 +41,7 @@ type ProjectTemplateProps = {
     title: string | React.ReactNode;
     subtitle?: string;
     projectName: string;
+    icon?: React.ReactNode;
   };
   badges?: string[];
   demo?: React.ReactNode;
@@ -68,7 +69,14 @@ export default function ProjectTemplate({
       <section className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
         <div className="container-wide relative z-10 text-center">
-          <div className="text-5xl font-bold mb-5 tracking-tight">{hero.title}</div>
+          <div className="flex flex-col items-center justify-center mb-5">
+            {hero.icon && (
+              <div className="mb-4">
+                {hero.icon}
+              </div>
+            )}
+            <div className="text-5xl font-bold tracking-tight">{hero.title}</div>
+          </div>
           {hero.subtitle && <div className="text-center mb-8"><h3 className="text-2xl font-semibold text-white mb-4">{hero.subtitle}</h3></div>}
           {demo && <div className="max-w-4xl mx-auto">{demo}</div>}
           <div className="mt-8 flex flex-wrap justify-center">

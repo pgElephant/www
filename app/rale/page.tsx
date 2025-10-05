@@ -1,12 +1,24 @@
 import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import RaleDemoTerminal from '@/components/RaleDemoTerminal';
+import { Users, Crown, Network, Activity } from 'lucide-react';
+
+// Custom RALE icon component
+const RaleIcon = ({ size = 64 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Users className="text-indigo-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Activity className="text-cyan-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
 
 const raleConfig = {
   hero: {
     title: 'RALE: Raft Log Engine',
     subtitle: 'Distributed Write-Ahead Log for PostgreSQL',
     projectName: 'RALE',
+    icon: <RaleIcon size={64} />,
   },
   badges: [
     'Distributed WAL',

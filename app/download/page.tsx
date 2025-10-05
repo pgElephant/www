@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github, FileText, Play, Shield, CheckCircle, Clock, Users, Star, Zap, Globe, Monitor, Smartphone, Tablet, Lock, Briefcase, Award, Globe2, Loader2 } from 'lucide-react'
+import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github, FileText, Play, Shield, CheckCircle, Clock, Users, Star, Zap, Globe, Monitor, Smartphone, Tablet, Lock, Briefcase, Award, Globe2, Loader2, Crown, Network, Layers, Activity, Cpu } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -42,12 +42,48 @@ const trustBar = [
 
 const unifiedHeroGradient = 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
 
-// Custom pgbalancer icon component
+// Custom icon components
 const PgbalancerIcon = () => (
   <div className="relative w-12 h-12 flex items-center justify-center">
     <Database className="w-8 h-8 text-cyan-400" />
     <Loader2 className="w-4 h-4 text-green-400 absolute -top-1 -right-1 animate-spin" />
     <Zap className="w-3 h-3 text-yellow-400 absolute -bottom-1 -left-1" />
+  </div>
+)
+
+const PgraftIcon = () => (
+  <div className="relative w-12 h-12 flex items-center justify-center">
+    <Database className="w-7 h-7 text-blue-400" />
+    <Crown className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
+    <Network className="w-3 h-3 text-green-400 absolute -bottom-1 -left-1" />
+    <Shield className="w-3 h-3 text-purple-400 absolute -bottom-1 -right-1" />
+  </div>
+)
+
+const FauxDbIcon = () => (
+  <div className="relative w-12 h-12 flex items-center justify-center">
+    <Database className="w-7 h-7 text-emerald-400" />
+    <FileText className="w-4 h-4 text-orange-400 absolute -top-1 -right-1" />
+    <Layers className="w-3 h-3 text-blue-400 absolute -bottom-1 -left-1" />
+    <Activity className="w-3 h-3 text-red-400 absolute -bottom-1 -right-1" />
+  </div>
+)
+
+const RaleIcon = () => (
+  <div className="relative w-12 h-12 flex items-center justify-center">
+    <Users className="w-7 h-7 text-indigo-400" />
+    <Crown className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
+    <Network className="w-3 h-3 text-green-400 absolute -bottom-1 -left-1" />
+    <Activity className="w-3 h-3 text-cyan-400 absolute -bottom-1 -right-1" />
+  </div>
+)
+
+const RamIcon = () => (
+  <div className="relative w-12 h-12 flex items-center justify-center">
+    <Server className="w-7 h-7 text-cyan-400" />
+    <Cpu className="w-4 h-4 text-green-400 absolute -top-1 -right-1" />
+    <Activity className="w-3 h-3 text-orange-400 absolute -bottom-1 -left-1" />
+    <Shield className="w-3 h-3 text-purple-400 absolute -bottom-1 -right-1" />
   </div>
 )
 
@@ -117,7 +153,7 @@ const DownloadPage = () => {
       id: 'ram',
       name: 'RAM',
       title: 'Resilient Adaptive Manager',
-      icon: '/ico/RAM_HD.ico',
+      icon: 'ram-custom',
       features: [
         'Automatic Failover: Zero-downtime failover with sub-second detection',
         'Leader Election: Raft-based consensus for reliable leader selection',
@@ -137,7 +173,7 @@ const DownloadPage = () => {
       id: 'pgraft',
       name: 'pgraft',
       title: 'PostgreSQL Raft Consensus Extension',
-      icon: '/ico/pgsql_raft_leader_HD.ico',
+      icon: 'pgraft-custom',
       featured: true,
       features: [
         'Raft Consensus Protocol: Implements the Raft algorithm for distributed consensus',
@@ -158,7 +194,7 @@ const DownloadPage = () => {
       id: 'fauxdb',
       name: 'FauxDB',
       title: 'MongoDB Compatible Document Database',
-      icon: '/ico/FauxDB_HD.ico',
+      icon: 'fauxdb-custom',
       features: [
         '100% MongoDB Compatibility: Full wire protocol support with mongosh compatibility',
         'High Performance: Built in Rust for superior speed and memory efficiency',
@@ -198,7 +234,7 @@ const DownloadPage = () => {
       id: 'rale',
       name: 'RALE',
       title: 'Resilient Adaptive Leader Election',
-      icon: '/ico/RALE_HD.ico',
+      icon: 'rale-custom',
       features: [
         'Distributed Leader Election: Reliable, adaptive leader selection',
         'Split-Brain Prevention: Ensures cluster consistency',
@@ -295,7 +331,29 @@ const DownloadPage = () => {
                   >
                     <td className="py-3 px-2 align-top whitespace-nowrap">
                       <div className="flex items-center gap-3">
-                        <Image src={product.icon} alt={`${product.name} icon`} width={48} height={48} className="w-12 h-12 object-contain rounded-lg border border-white/20" />
+                        {product.icon === 'pgbalancer-custom' ? (
+                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                            <PgbalancerIcon />
+                          </div>
+                        ) : product.icon === 'pgraft-custom' ? (
+                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                            <PgraftIcon />
+                          </div>
+                        ) : product.icon === 'fauxdb-custom' ? (
+                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                            <FauxDbIcon />
+                          </div>
+                        ) : product.icon === 'rale-custom' ? (
+                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                            <RaleIcon />
+                          </div>
+                        ) : product.icon === 'ram-custom' ? (
+                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                            <RamIcon />
+                          </div>
+                        ) : (
+                          <Image src={product.icon} alt={`${product.name} icon`} width={48} height={48} className="w-12 h-12 object-contain rounded-lg border border-white/20" />
+                        )}
                         <div>
                           <div className="font-bold text-lg text-white flex items-center gap-2">
                             {product.name}

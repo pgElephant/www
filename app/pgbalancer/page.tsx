@@ -3,23 +3,21 @@ import ProjectTemplate from '../_components/ProjectTemplate';
 import PgbalancerDemoTerminal from '@/components/PgbalancerDemoTerminal';
 import { Database, Loader2, Zap } from 'lucide-react';
 
+// Custom pgbalancer icon component
+const PgbalancerIcon = ({ size = 64 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-cyan-400" style={{ width: size * 0.7, height: size * 0.7 }} />
+    <Loader2 className="text-green-400 absolute -top-1 -right-1 animate-spin" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Zap className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+  </div>
+)
+
 const pgbalancerConfig = {
   hero: {
-    title: (
-      <div className="flex items-center justify-center gap-4">
-        <div className="relative">
-          <Database className="w-16 h-16 text-cyan-400" />
-          <Loader2 className="w-8 h-8 text-green-400 absolute -top-1 -right-1 animate-spin" />
-          <Zap className="w-6 h-6 text-yellow-400 absolute -bottom-1 -left-1" />
-        </div>
-        <div>
-          <div className="text-5xl font-bold mb-2">pgbalancer</div>
-          <div className="text-xl text-slate-300">Connection Pooling & Load Balancing for PostgreSQL</div>
-        </div>
-      </div>
-    ),
+    title: 'pgbalancer: Connection Pooling & Load Balancing for PostgreSQL',
     subtitle: 'High-performance, cloud-native connection pooler and load balancer for PostgreSQL',
     projectName: 'pgbalancer',
+    icon: <PgbalancerIcon size={64} />,
   },
   badges: [
     'Open Source',

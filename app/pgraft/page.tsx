@@ -1,7 +1,17 @@
 import React from 'react';
-import { BookOpen, Github, ExternalLink } from 'lucide-react';
+import { BookOpen, Github, ExternalLink, Database, Crown, Network, Shield } from 'lucide-react';
 import Link from 'next/link';
 import PgraftDemoTerminal from '@/components/PgraftDemoTerminal';
+
+/* ===================== Custom Icon Components ===================== */
+const PgraftIcon = ({ size = 64 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
 
 /* ===================== Small Reusable UI Parts ===================== */
 function SectionHeading({ children, kicker, className = '' }: { children: React.ReactNode; kicker?: string; className?: string }) {
@@ -54,7 +64,7 @@ const PgraftPage = () => {
         <div className="container-wide relative z-10 text-center">
           <div className="flex flex-col items-center justify-center mb-5">
             <div className="mb-4">
-              <img src="/ico/pgraft.ico" alt="pgraft icon" width={64} height={64} className="inline-block align-middle" />
+              <PgraftIcon size={64} />
             </div>
             <h1 className="text-5xl font-bold tracking-tight">
               <b>pgraft</b>: Raft based postgresql extension for leader election

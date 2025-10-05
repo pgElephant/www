@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { Github, Twitter, Linkedin, Mail, Globe, Users, BookOpen, Download } from 'lucide-react'
+import { Github, Twitter, Linkedin, Mail, Globe, Users, BookOpen, Download, Database, Loader2, Zap, Crown, Network, Shield, FileText, Layers, Activity, Cpu, Server } from 'lucide-react'
 
 // Colors from pgElephant icon (darker variants)
 const palette = {
@@ -13,15 +13,60 @@ const palette = {
   iconTealDark: '#054A56',
 }
 
+// Custom icon components
+const PgbalancerIcon = ({ size = 16 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-cyan-400" style={{ width: size * 0.7, height: size * 0.7 }} />
+    <Loader2 className="text-green-400 absolute -top-1 -right-1 animate-spin" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Zap className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+  </div>
+)
+
+const PgraftIcon = ({ size = 16 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
+const FauxDbIcon = ({ size = 16 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-emerald-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <FileText className="text-orange-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Layers className="text-blue-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
+const RaleIcon = ({ size = 16 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Users className="text-indigo-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Activity className="text-cyan-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
+const RamIcon = ({ size = 16 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Server className="text-cyan-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Cpu className="text-green-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Activity className="text-orange-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
 const Footer = () => {
   const year = new Date().getFullYear()
   const navigation = {
     products: [
-      { name: 'RALE', href: '/rale', description: 'Distributed Consensus Engine', icon: '/ico/RALE_HD.ico' },
-      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering Manager', icon: '/ico/RAM_HD.ico' },
-      { name: 'pgraft', href: '/pgraft', description: 'Raft Consensus Extension', icon: '/ico/pgsql_raft_leader_HD.ico' },
-      { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling & Load Balancing', icon: '/ico/pgbalancer_HD.ico' },
-      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Wire Protocol Proxy', icon: '/ico/FauxDB_HD.ico' },
+      { name: 'RALE', href: '/rale', description: 'Distributed Consensus Engine', icon: 'rale-custom' },
+      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering Manager', icon: 'ram-custom' },
+      { name: 'pgraft', href: '/pgraft', description: 'Raft Consensus Extension', icon: 'pgraft-custom' },
+      { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling & Load Balancing', icon: 'pgbalancer-custom' },
+      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Wire Protocol Proxy', icon: 'fauxdb-custom' },
     ],
     resources: [
       { name: 'Documentation', href: '/docs', description: 'Complete technical guides', icon: '📚' },
@@ -143,13 +188,25 @@ const Footer = () => {
                       className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-300 text-sm"
                     >
                       <div className="w-5 h-5 group-hover:scale-110 transition-transform duration-300 bg-white/20 backdrop-blur-sm rounded border border-white/30 flex items-center justify-center">
-                        <Image 
-                          src={item.icon} 
-                          alt={`${item.name} icon`} 
-                          width={16} 
-                          height={16} 
-                          className="w-4 h-4 object-contain"
-                        />
+                        {item.icon === 'pgbalancer-custom' ? (
+                          <PgbalancerIcon size={16} />
+                        ) : item.icon === 'pgraft-custom' ? (
+                          <PgraftIcon size={16} />
+                        ) : item.icon === 'fauxdb-custom' ? (
+                          <FauxDbIcon size={16} />
+                        ) : item.icon === 'rale-custom' ? (
+                          <RaleIcon size={16} />
+                        ) : item.icon === 'ram-custom' ? (
+                          <RamIcon size={16} />
+                        ) : (
+                          <Image 
+                            src={item.icon} 
+                            alt={`${item.name} icon`} 
+                            width={16} 
+                            height={16} 
+                            className="w-4 h-4 object-contain"
+                          />
+                        )}
                       </div>
                       <div>
                         <div className="font-medium">{item.name}</div>
