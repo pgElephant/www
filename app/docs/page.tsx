@@ -1928,6 +1928,24 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
       ]
     },
     {
+      id: 'pgbalancer',
+      name: 'pgbalancer',
+      title: 'Connection Pooling & Load Balancing',
+      icon: '/ico/pgbalancer_HD.ico',
+      bg: { from: palette.orangeDark, via: palette.orange, to: palette.cyan },
+      description: 'High-performance connection pooling and load balancing for PostgreSQL with YAML configuration',
+      docs: [
+        { title: 'Getting Started', href: '/docs/pgbalancer/getting-started', type: 'Guide', description: 'Install and configure pgbalancer' },
+        { title: 'Configuration', href: '/docs/pgbalancer/configuration', type: 'Guide', description: 'YAML configuration options and settings' },
+        { title: 'Metrics & Observability', href: '/docs/pgbalancer/metrics', type: 'Guide', description: 'Prometheus metrics and monitoring' },
+        { title: 'Architecture & Internals', href: '/docs/pgbalancer/internals', type: 'Guide', description: 'Learn about pgbalancer internals and architecture' },
+        { title: 'bctl Reference', href: '/docs/pgbalancer/bctl', type: 'Reference', description: 'Command-line control utility reference' },
+        { title: 'REST API', href: '/docs/pgbalancer/api', type: 'Reference', description: 'REST API documentation' },
+        { title: 'Performance Tuning', href: '/docs/pgbalancer/performance', type: 'Guide', description: 'Optimization and performance tuning' },
+        { title: 'Troubleshooting', href: '/docs/pgbalancer/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+      ]
+    },
+    {
       id: 'fauxdb',
       name: 'FauxDB',
       title: 'MongoDB Compatible Document Database',

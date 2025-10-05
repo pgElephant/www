@@ -18,6 +18,7 @@ const Header = () => {
     { name: 'RALE', href: '/rale', description: 'Distributed Consensus' },
     { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering' },
     { name: 'pgraft', href: '/pgraft', description: 'Raft Extension' },
+    { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling' },
     { name: 'FauxDB', href: '/fauxdb', description: 'Document Database' },
   ]
 

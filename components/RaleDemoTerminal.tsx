@@ -16,6 +16,7 @@ const RaleDemoTerminal = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
+  const [activeTab, setActiveTab] = useState<'build' | 'usage'>('build')
   const terminalRef = useRef<HTMLDivElement>(null)
 
   // Base timing values (in ms)
@@ -27,7 +28,7 @@ const RaleDemoTerminal = () => {
   }
 
   // RALE-specific demo commands and their outputs
-  const demoCommands = [
+  const buildCommands = [
     {
       command: 'git clone https://github.com/pgelephant/rale.git && cd rale',
       output: [
@@ -131,7 +132,10 @@ const RaleDemoTerminal = () => {
         'wal_flush_interval = 100',
         'wal_sync_method = \'fsync\''
       ]
-    },
+    }
+  ]
+
+  const usageCommands = [
     {
       command: '/usr/local/rale/bin/raled -c /usr/local/rale/etc/rale.conf -d',
       output: [
@@ -381,14 +385,15 @@ const RaleDemoTerminal = () => {
     setCurrentCommand('')
     
     let commandIndex = 0
+    const commands = activeTab === 'build' ? buildCommands : usageCommands
     
     const runNextCommand = () => {
-      if (commandIndex >= demoCommands.length) {
+      if (commandIndex >= commands.length) {
         setIsRunning(false)
         return
       }
       
-      const cmd = demoCommands[commandIndex]
+      const cmd = commands[commandIndex]
       
       // Add command to history
       setCommandHistory(prev => [
@@ -424,6 +429,7 @@ const RaleDemoTerminal = () => {
     setIsRunning(false)
     setCommandHistory([])
     setCurrentCommand('')
+    setActiveTab('build')
   }
 
   const copyToClipboard = () => {
@@ -436,27 +442,55 @@ const RaleDemoTerminal = () => {
   return (
     <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
       {/* Terminal Header */}
-      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
-          <span className="text-gray-300 text-sm ml-4 font-mono">rale-demo</span>
+      <div className="bg-gray-800 px-4 py-3 border-b border-gray-700">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
+            <span className="text-gray-300 text-sm ml-4 font-mono">rale-demo</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={copyToClipboard}
+              className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
+              title="Copy to clipboard"
+            >
+              <Copy className="w-4 h-4" />
+            </button>
+            <button
+              onClick={resetDemo}
+              className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
+              title="Reset demo"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
+        
+        {/* Tabs */}
+        <div className="flex gap-1">
           <button
-            onClick={copyToClipboard}
-            className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
-            title="Copy to clipboard"
+            onClick={() => setActiveTab('build')}
+            disabled={isRunning}
+            className={`px-3 py-1 text-sm font-mono rounded-t-md transition-colors ${
+              activeTab === 'build'
+                ? 'bg-gray-700 text-white border-b-2 border-cyan-400'
+                : 'bg-gray-600 text-gray-300 hover:bg-gray-650'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-            <Copy className="w-4 h-4" />
+            Building & Installation
           </button>
           <button
-            onClick={resetDemo}
-            className="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white transition-colors"
-            title="Reset demo"
+            onClick={() => setActiveTab('usage')}
+            disabled={isRunning}
+            className={`px-3 py-1 text-sm font-mono rounded-t-md transition-colors ${
+              activeTab === 'usage'
+                ? 'bg-gray-700 text-white border-b-2 border-cyan-400'
+                : 'bg-gray-600 text-gray-300 hover:bg-gray-650'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-            <RotateCcw className="w-4 h-4" />
+            Usage & Operations
           </button>
         </div>
       </div>

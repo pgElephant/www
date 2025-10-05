@@ -16,6 +16,7 @@ const PgbalancerDemoTerminal = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
+  const [activeTab, setActiveTab] = useState<'build' | 'usage'>('build')
   const terminalRef = useRef<HTMLDivElement>(null)
 
   // Base timing values (in ms)
@@ -27,7 +28,7 @@ const PgbalancerDemoTerminal = () => {
   }
 
   // pgbalancer-specific demo commands and their outputs
-  const demoCommands = [
+  const buildCommands = [
     {
       command: 'git clone https://github.com/pgelephant/pgbalancer.git && cd pgbalancer',
       output: [
@@ -153,6 +154,24 @@ const PgbalancerDemoTerminal = () => {
         '  auth_required: false'
       ]
     },
+    {
+      command: '/usr/local/pgbalancer/bin/pgbalancer -c /usr/local/pgbalancer/etc/pgbalancer.yaml -d',
+      output: [
+        '[INFO] Starting pgbalancer...',
+        '[INFO] pgbalancer started (PID: 34567)',
+        '[INFO] Listening on 0.0.0.0:6432',
+        '[INFO] REST API enabled on 127.0.0.1:8080',
+        '[INFO] Backend server 127.0.0.1:5432 is up',
+        '[INFO] Backend server 127.0.0.1:5433 is up',
+        '[INFO] Backend server 127.0.0.1:5434 is up',
+        '[INFO] Connection pools initialized',
+        '[INFO] Health checker started',
+        '[INFO] Load balancer ready'
+      ]
+    }
+  ]
+
+  const usageCommands = [
     {
       command: '/usr/local/pgbalancer/bin/pgbalancer -c /usr/local/pgbalancer/etc/pgbalancer.yaml -d',
       output: [
@@ -409,14 +428,15 @@ const PgbalancerDemoTerminal = () => {
     setCurrentCommand('')
     
     let commandIndex = 0
+    const commands = activeTab === 'build' ? buildCommands : usageCommands
     
     const runNextCommand = () => {
-      if (commandIndex >= demoCommands.length) {
+      if (commandIndex >= commands.length) {
         setIsRunning(false)
         return
       }
       
-      const cmd = demoCommands[commandIndex]
+      const cmd = commands[commandIndex]
       
       // Add command to history
       setCommandHistory(prev => [
@@ -452,6 +472,7 @@ const PgbalancerDemoTerminal = () => {
     setIsRunning(false)
     setCommandHistory([])
     setCurrentCommand('')
+    setActiveTab('build')
   }
 
   const copyToClipboard = () => {
@@ -487,6 +508,32 @@ const PgbalancerDemoTerminal = () => {
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 bg-gray-800 px-4 pb-2">
+        <button
+          onClick={() => setActiveTab('build')}
+          disabled={isRunning}
+          className={`px-3 py-1 text-sm font-mono rounded-t-md transition-colors ${
+            activeTab === 'build'
+              ? 'bg-gray-700 text-white border-b-2 border-cyan-400'
+              : 'bg-gray-600 text-gray-300 hover:bg-gray-650'
+          } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+        >
+          Building & Installation
+        </button>
+        <button
+          onClick={() => setActiveTab('usage')}
+          disabled={isRunning}
+          className={`px-3 py-1 text-sm font-mono rounded-t-md transition-colors ${
+            activeTab === 'usage'
+              ? 'bg-gray-700 text-white border-b-2 border-cyan-400'
+              : 'bg-gray-600 text-gray-300 hover:bg-gray-650'
+          } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+        >
+          Usage & Operations
+        </button>
       </div>
 
       {/* Terminal Content */}

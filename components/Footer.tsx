@@ -17,10 +17,11 @@ const Footer = () => {
   const year = new Date().getFullYear()
   const navigation = {
     products: [
-      { name: 'RALE', href: '/rale', description: 'Distributed Consensus Engine', icon: '🏛️' },
-      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering Manager', icon: '⚡' },
-      { name: 'pgraft', href: '/pgraft', description: 'Raft Consensus Extension', icon: '🔗' },
-      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Wire Protocol Proxy', icon: '📄' },
+      { name: 'RALE', href: '/rale', description: 'Distributed Consensus Engine', icon: '/ico/RALE_HD.ico' },
+      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering Manager', icon: '/ico/RAM_HD.ico' },
+      { name: 'pgraft', href: '/pgraft', description: 'Raft Consensus Extension', icon: '/ico/pgsql_raft_leader_HD.ico' },
+      { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling & Load Balancing', icon: '/ico/pgbalancer_HD.ico' },
+      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Wire Protocol Proxy', icon: '/ico/FauxDB_HD.ico' },
     ],
     resources: [
       { name: 'Documentation', href: '/docs', description: 'Complete technical guides', icon: '📚' },
@@ -141,7 +142,15 @@ const Footer = () => {
                       href={item.href} 
                       className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-300 text-sm"
                     >
-                      <span className="text-base group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                      <div className="w-5 h-5 group-hover:scale-110 transition-transform duration-300 bg-white/20 backdrop-blur-sm rounded border border-white/30 flex items-center justify-center">
+                        <Image 
+                          src={item.icon} 
+                          alt={`${item.name} icon`} 
+                          width={16} 
+                          height={16} 
+                          className="w-4 h-4 object-contain"
+                        />
+                      </div>
                       <div>
                         <div className="font-medium">{item.name}</div>
                         <div className="text-xs text-white/70">{item.description}</div>

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github, FileText, Play, Shield, CheckCircle, Clock, Users, Star, Zap, Globe, Monitor, Smartphone, Tablet, Lock, Briefcase, Award, Globe2 } from 'lucide-react'
+import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github, FileText, Play, Shield, CheckCircle, Clock, Users, Star, Zap, Globe, Monitor, Smartphone, Tablet, Lock, Briefcase, Award, Globe2, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -41,6 +41,15 @@ const trustBar = [
 ]
 
 const unifiedHeroGradient = 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
+
+// Custom pgbalancer icon component
+const PgbalancerIcon = () => (
+  <div className="relative w-12 h-12 flex items-center justify-center">
+    <Database className="w-8 h-8 text-cyan-400" />
+    <Loader2 className="w-4 h-4 text-green-400 absolute -top-1 -right-1 animate-spin" />
+    <Zap className="w-3 h-3 text-yellow-400 absolute -bottom-1 -left-1" />
+  </div>
+)
 
 const DownloadPage = () => {
   // Function to get appropriate icon for download type
@@ -163,6 +172,26 @@ const DownloadPage = () => {
         { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/fauxdb', type: 'Source' },
         { title: 'Docker Image', href: '/download/fauxdb', type: 'Docker' }
+      ]
+    },
+    {
+      id: 'pgbalancer',
+      name: 'pgbalancer',
+      title: 'Connection Pooling & Load Balancing for PostgreSQL',
+      icon: 'pgbalancer-custom',
+      features: [
+        'High Performance: Enterprise-grade connection pooling with minimal latency',
+        'Load Balancing: Intelligent query distribution across multiple PostgreSQL nodes',
+        'YAML Configuration: Modern, human-readable configuration format',
+        'REST API: Professional control interface with bctl client utility',
+        'Health Monitoring: Real-time backend health checks and failover',
+        'Zero Dependencies: Self-contained with no external coordination services',
+      ],
+      details: '/pgbalancer/enterprise',
+      downloads: [
+        { title: 'Linux Binary', href: '/download/pgbalancer', type: 'Binary' },
+        { title: 'Source Code', href: 'https://github.com/pgelephant/pgbalancer', type: 'Source' },
+        { title: 'Docker Image', href: '/download/pgbalancer', type: 'Docker' }
       ]
     },
     {

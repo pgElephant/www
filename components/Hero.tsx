@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Database, Loader2, Zap } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -39,31 +39,29 @@ type Product = {
   bg: BG
 }
 
+// Custom pgbalancer icon component
+const PgbalancerIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Database className="text-cyan-400" style={{ width: size * 0.7, height: size * 0.7 }} />
+    <Loader2 className="text-green-400 absolute -top-1 -right-1 animate-spin" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Zap className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+  </div>
+)
+
 const Hero = () => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
   const products: Product[] = [
     {
-      id: 'rale',
-      name: 'RALE',
-      title: 'Resilient Adaptive Leader Election',
-      description: '• Distributed consensus for high availability in distributed systems.',
-      description2: '• Automated leader election and failover for any distributed database.',
-      description3: '• Zero data loss during node failures with strong consistency guarantees.',
-      icon: '/ico/RALE_HD.ico',
-      color: `from-[${palette.primary}] to-[${palette.primaryLight}]`,
-      bg: { from: palette.primaryDark, via: palette.primary, to: palette.primaryLight }
-    },
-    {
-      id: 'ram',
-      name: 'RAM',
-      title: 'Resilient Adaptive Manager',
-      description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
-      description2: '• Intelligent resource management and load balancing across nodes.',
-      description3: '• Real-time monitoring and automated scaling capabilities.',
-      icon: '/ico/RAM_HD.ico',
-      color: `from-[${palette.secondary}] to-[${palette.secondaryLight}]`,
-      bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.secondaryLight }
+      id: 'fauxdb',
+      name: 'FauxDB',
+      title: 'MongoDB Compatible Document Database',
+      description: '• High-performance MongoDB-compatible database built in Rust.',
+      description2: '• Native JSON support with ACID transaction guarantees.',
+      description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
+      icon: '/ico/FauxDB_HD.ico',
+      color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
+      bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
     },
     {
       id: 'pgraft',
@@ -83,20 +81,31 @@ const Hero = () => {
       description: '• High-performance connection pooling for PostgreSQL.',
       description2: '• Load balancing, failover, and observability in one lightweight service.',
       description3: '• YAML configuration, Prometheus metrics, and cloud-native ready.',
-      icon: '/ico/pgbalancer_HD.ico',
+      icon: 'pgbalancer-custom',
       color: `from-[${palette.accentDark}] to-[${palette.primaryLight}]`,
       bg: { from: palette.accentDark, via: palette.primary, to: palette.primaryLight }
     },
     {
-      id: 'fauxdb',
-      name: 'FauxDB',
-      title: 'MongoDB Compatible Document Database',
-      description: '• High-performance MongoDB-compatible database built in Rust.',
-      description2: '• Native JSON support with ACID transaction guarantees.',
-      description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
-      icon: '/ico/FauxDB_HD.ico',
-      color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
-      bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
+      id: 'ram',
+      name: 'RAM',
+      title: 'Resilient Adaptive Manager',
+      description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
+      description2: '• Intelligent resource management and load balancing across nodes.',
+      description3: '• Real-time monitoring and automated scaling capabilities.',
+      icon: '/ico/RAM_HD.ico',
+      color: `from-[${palette.secondary}] to-[${palette.secondaryLight}]`,
+      bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.secondaryLight }
+    },
+    {
+      id: 'rale',
+      name: 'RALE',
+      title: 'Resilient Adaptive Leader Election',
+      description: '• Distributed consensus for high availability in distributed systems.',
+      description2: '• Automated leader election and failover for any distributed database.',
+      description3: '• Zero data loss during node failures with strong consistency guarantees.',
+      icon: '/ico/RALE_HD.ico',
+      color: `from-[${palette.primary}] to-[${palette.primaryLight}]`,
+      bg: { from: palette.primaryDark, via: palette.primary, to: palette.primaryLight }
     }
   ]
 
@@ -155,13 +164,17 @@ const Hero = () => {
                 <div className="mb-6">
                   <div className="flex items-center gap-6 mb-4">
                     <div className="w-24 h-24 flex items-center justify-center">
-                      <Image 
-                        src={current.icon} 
-                        alt={`${current.name} icon`}
-                        width={96}
-                        height={96}
-                        className="w-24 h-24"
-                      />
+                      {current.icon === 'pgbalancer-custom' ? (
+                        <PgbalancerIcon size={96} />
+                      ) : (
+                        <Image 
+                          src={current.icon} 
+                          alt={`${current.name} icon`}
+                          width={96}
+                          height={96}
+                          className="w-24 h-24"
+                        />
+                      )}
                     </div>
                     <div className="text-left">
                       <h1 className="text-3xl md:text-4xl font-thin text-white">
@@ -215,14 +228,18 @@ const Hero = () => {
                          boxShadow: active ? '0 8px 32px rgba(79, 70, 229, 0.3)' : '0 4px 16px rgba(0,0,0,0.1)'
                        }}
                      >
-                       <Image 
-                         src={product.icon} 
-                         alt={`${product.name} icon`}
-                         width={20}
-                         height={20}
-                         className="w-5 h-5"
-                         style={{ filter: active ? 'none' : 'brightness(0.7)' }}
-                       />
+                       {product.icon === 'pgbalancer-custom' ? (
+                         <PgbalancerIcon size={20} />
+                       ) : (
+                         <Image 
+                           src={product.icon} 
+                           alt={`${product.name} icon`}
+                           width={20}
+                           height={20}
+                           className="w-5 h-5"
+                           style={{ filter: active ? 'none' : 'brightness(0.7)' }}
+                         />
+                       )}
                        <span
                          className="font-medium text-white"
                        >

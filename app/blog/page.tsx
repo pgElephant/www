@@ -30,115 +30,30 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '47', icon: BookOpen, color: 'text-white' },
+  { label: 'Total Articles', value: '1', icon: BookOpen, color: 'text-white' },
   { label: 'Monthly Readers', value: '2.1k', icon: Eye, color: 'text-white' },
-  { label: 'Categories', value: '8', icon: Tag, color: 'text-white' },
-  { label: 'Authors', value: '12', icon: Users, color: 'text-white' }
+  { label: 'Categories', value: '1', icon: Tag, color: 'text-white' },
+  { label: 'Authors', value: '1', icon: Users, color: 'text-white' }
 ]
 
 
 const blogPosts = [
   {
-    slug: 'rale',
-    title: 'RALE - Resilient Adaptive Leader Election',
-    excerpt: 'Deep dive into how pgElephant uses RALE consensus algorithm for leader election and maintaining consistency across PostgreSQL nodes.',
-    content: 'RALE (Resilient Adaptive Leader Election) is a distributed consensus protocol designed specifically for PostgreSQL clustering...',
-    author: 'Dr. Sarah Chen',
-    authorRole: 'Lead Database Engineer',
-    date: '2024-12-15',
-    readTime: '8 min read',
+    slug: 'pgraft',
+    title: 'pgraft: Production-Ready Raft Consensus for PostgreSQL',
+    excerpt: 'Executive Summary: In distributed database systems, achieving consensus across multiple nodes while maintaining data consistency and preventing split-brain scenarios is one of the most challenging engineering problems.',
+    content: 'pgraft addresses this challenge by embedding the battle-tested Raft consensus protocol directly into PostgreSQL as a native extension.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-01-15',
+    readTime: '15 min read',
     category: 'Technical',
     featured: true,
-    icon: 'RALE',
-    views: 1247,
-    likes: 89,
-    comments: 23,
-    tags: ['Consensus', 'PostgreSQL', 'Distributed Systems']
-  },
-  {
-    slug: 'ram',
-    title: 'RAM - Resilient Adaptive Manager',
-    excerpt: 'Learn about RAM, the management layer that orchestrates PostgreSQL clusters using RALE consensus for automated failover and monitoring.',
-    content: 'RAM (Resilient Adaptive Manager) is an enterprise-grade PostgreSQL clustering solution that provides automatic failover...',
-    author: 'Marcus Rodriguez',
-    authorRole: 'Senior Systems Architect',
-    date: '2024-12-14',
-    readTime: '6 min read',
-    category: 'Technical',
-    featured: true,
-    icon: 'RAM',
-    views: 892,
-    likes: 67,
-    comments: 15,
-    tags: ['Clustering', 'Failover', 'Monitoring']
-  },
-  {
-    slug: 'fauxdb',
-    title: 'FauxDB - MongoDB Compatible Document Database',
-    excerpt: 'Discover FauxDB, a PostgreSQL-based document database that provides MongoDB API compatibility with ACID compliance and better reliability.',
-    content: 'FauxDB is a high-performance, production-ready MongoDB-compatible database server built in Rust...',
-    author: 'Alex Kim',
-    authorRole: 'Database Developer',
-    date: '2024-12-13',
-    readTime: '7 min read',
-    category: 'Technical',
-    featured: true,
-    icon: 'FauxDB',
-    views: 1567,
-    likes: 124,
-    comments: 31,
-    tags: ['MongoDB', 'Document Database', 'Compatibility']
-  },
-  {
-    slug: 'performance-optimization',
-    title: 'PostgreSQL Performance Optimization Techniques',
-    excerpt: 'Essential techniques for optimizing PostgreSQL performance in production environments, including indexing, query optimization, and configuration tuning.',
-    content: 'PostgreSQL performance optimization is crucial for maintaining high-throughput applications...',
-    author: 'Emma Thompson',
-    authorRole: 'Performance Engineer',
-    date: '2024-12-12',
-    readTime: '12 min read',
-    category: 'Performance',
-    featured: false,
-    icon: 'Performance',
-    views: 2103,
-    likes: 156,
-    comments: 42,
-    tags: ['Performance', 'Optimization', 'PostgreSQL']
-  },
-  {
-    slug: 'security-best-practices',
-    title: 'Database Security Best Practices for Enterprise',
-    excerpt: 'Comprehensive guide to securing PostgreSQL databases in enterprise environments, covering authentication, encryption, and access control.',
-    content: 'Database security is paramount in enterprise environments where sensitive data must be protected...',
-    author: 'Dr. Michael Zhang',
-    authorRole: 'Security Specialist',
-    date: '2024-12-11',
-    readTime: '10 min read',
-    category: 'Security',
-    featured: false,
-    icon: 'Security',
-    views: 1789,
-    likes: 98,
-    comments: 27,
-    tags: ['Security', 'Enterprise', 'Best Practices']
-  },
-  {
-    slug: 'docker-deployment',
-    title: 'Deploying PostgreSQL Clusters with Docker',
-    excerpt: 'Step-by-step guide to deploying high-availability PostgreSQL clusters using Docker and Docker Compose for development and production.',
-    content: 'Docker has revolutionized how we deploy and manage database clusters...',
-    author: 'Jennifer Lee',
-    authorRole: 'DevOps Engineer',
-    date: '2024-12-10',
-    readTime: '9 min read',
-    category: 'Tutorials',
-    featured: false,
-    icon: 'Docker',
-    views: 1345,
-    likes: 87,
-    comments: 19,
-    tags: ['Docker', 'Deployment', 'Tutorial']
+    icon: 'pgraft',
+    views: 2847,
+    likes: 189,
+    comments: 45,
+    tags: ['Raft Consensus', 'PostgreSQL', 'High Availability', 'Distributed Systems']
   }
 ]
 
@@ -150,10 +65,18 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-white/30 h-full flex flex-col">
           {/* Large Stock Image */}
           <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20 overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center">
-            <div className="text-center p-6">
-              <div className="text-4xl mb-2">📄</div>
-              <div className="text-white/80 text-sm font-thin">{post.category}</div>
-            </div>
+            {post.slug === 'pgraft' ? (
+              <img 
+                src="/blog/pgraft/header.svg" 
+                alt="pgraft blog header" 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="text-center p-6">
+                <div className="text-4xl mb-2">📄</div>
+                <div className="text-white/80 text-sm font-thin">{post.category}</div>
+              </div>
+            )}
             <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm/80 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg drop-shadow-lg">
               {post.category}
             </div>

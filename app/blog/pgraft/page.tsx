@@ -1,7 +1,7 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
 
 export const metadata = {
-  title: 'pgraft: Production-Ready Raft Consensus for PostgreSQL',
+  title: 'pgraft: Raft-Based PostgreSQL Extension',
   description: 'How pgraft brings automatic leader election, split-brain prevention, and high availability to PostgreSQL clusters with mathematical guarantees.'
 };
 
@@ -11,19 +11,19 @@ const markdown = `![pgraft blog header](/blog/pgraft/header.svg)
 
 ## Executive Summary
 
-In distributed database systems, achieving consensus across multiple nodes while maintaining data consistency and preventing split-brain scenarios is one of the most challenging engineering problems. **pgraft** addresses this challenge by embedding the battle-tested Raft consensus protocol directly into PostgreSQL as a native extension. Built on the same etcd-io/raft library that powers Kubernetes' etcd, pgraft delivers automatic leader election, crash-safe log replication, and mathematical guarantees against split-brain conditions—all without requiring external coordination services.
+PostgreSQL clusters need reliable consensus to prevent data corruption and split-brain scenarios. **pgraft** solves this by implementing the Raft consensus protocol as a PostgreSQL extension. It uses the same etcd-io/raft library that powers Kubernetes, providing automatic leader election, log replication, and split-brain prevention without external dependencies.
 
 ## Introduction: The High Availability Challenge
 
-Modern applications demand databases that can withstand failures without losing data or availability. Traditional PostgreSQL high availability solutions often rely on external tools, complex configurations, or manual intervention during failovers. These approaches introduce additional points of failure and complexity.
+Applications need databases that stay available when nodes fail. Most PostgreSQL HA solutions require external tools or manual failover steps, adding complexity and failure points.
 
-pgraft takes a different approach by bringing consensus directly into the database. As a PostgreSQL extension supporting versions 16, 17, and 18, it provides enterprise-grade cluster coordination with zero external dependencies. The extension is part of the pgElephant high-availability suite, offering a unified approach to building resilient PostgreSQL infrastructure.
+pgraft brings consensus directly into PostgreSQL. It works as an extension for PostgreSQL 16, 17, and 18, providing cluster coordination without external dependencies. It's part of the pgElephant suite for PostgreSQL high availability.
 
 ## What Makes pgraft Different?
 
 ### Native PostgreSQL Integration
 
-Unlike external clustering solutions that sit alongside PostgreSQL, pgraft runs as a native extension using PostgreSQL's background worker architecture. This deep integration means:
+pgraft runs as a PostgreSQL extension using background workers, not as a separate process. This integration provides:
 
 - No additional processes to manage
 - Direct access to PostgreSQL's shared memory and storage
@@ -32,7 +32,7 @@ Unlike external clustering solutions that sit alongside PostgreSQL, pgraft runs 
 
 ### Proven Consensus Algorithm
 
-pgraft doesn't reinvent the wheel. It leverages etcd-io/raft, the same Raft implementation used by etcd—the coordination service trusted by millions of Kubernetes clusters worldwide. This means you get:
+pgraft uses etcd-io/raft, the same Raft implementation used by etcd in Kubernetes clusters. This gives you:
 
 - Years of production hardening
 - Well-understood failure modes
@@ -41,7 +41,7 @@ pgraft doesn't reinvent the wheel. It leverages etcd-io/raft, the same Raft impl
 
 ### Mathematical Guarantees
 
-Split-brain scenarios—where multiple nodes simultaneously believe they're the leader—can cause catastrophic data corruption. pgraft provides mathematical guarantees that this cannot happen:
+Split-brain happens when multiple nodes think they're the leader, causing data corruption. pgraft prevents this with mathematical guarantees:
 
 - **Quorum Requirement**: A leader must receive votes from the majority of nodes (N/2 + 1)
 - **Term Monotonicity**: Each election increases the term number; higher terms always win

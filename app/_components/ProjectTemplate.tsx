@@ -79,11 +79,16 @@ export default function ProjectTemplate({
 
       {/* High-Level Feature Pillars */}
       {featurePillars && (
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
           <div className="container-wide">
-            <SectionHeading kicker={featurePillars.kicker}>Why {hero.projectName}</SectionHeading>
+            <SectionHeading kicker={featurePillars.kicker} className="text-white">Why {hero.projectName}</SectionHeading>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {featurePillars.items.map((f: { title: string; desc: string }, i: number) => <FeatureCard key={i} title={f.title} desc={f.desc} />)}
+              {featurePillars.items.map((f: { title: string; desc: string }, i: number) => (
+                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 flex flex-col">
+                  <h4 className="font-semibold text-lg mb-2 text-white">{f.title}</h4>
+                  <p className="text-white/90 text-sm leading-relaxed flex-1">{f.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -91,16 +96,16 @@ export default function ProjectTemplate({
 
       {/* Detailed Features List */}
       {features && (
-        <section className="py-20 bg-slate-50 border-t border-b">
+        <section className="py-20 relative overflow-hidden border-t border-b border-white/10" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
           <div className="container-wide">
-            <SectionHeading kicker="Features">Detailed Features List</SectionHeading>
+            <SectionHeading kicker="Features" className="text-white">Detailed Features List</SectionHeading>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {features.map((f: { icon: React.ReactNode; iconColor: string; title: string; desc: string }, i: number) => (
-                <div key={i} className="flex items-start gap-4 bg-white rounded-xl shadow p-6 border border-slate-200">
+                <div key={i} className="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
                   <span className={f.iconColor}>{f.icon}</span>
                   <div>
-                    <h4 className="font-bold text-lg mb-1">{f.title}</h4>
-                    <p className="text-slate-600">{f.desc}</p>
+                    <h4 className="font-bold text-lg mb-1 text-white">{f.title}</h4>
+                    <p className="text-white/90">{f.desc}</p>
                   </div>
                 </div>
               ))}
