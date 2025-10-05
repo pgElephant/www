@@ -178,7 +178,7 @@ const Footer = () => {
 
           {/* Product Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-thin text-lg mb-4">Products</h3>
+            <h3 className="text-white font-light text-lg mb-4">Products</h3>
             <nav aria-label="Products">
               <ul className="space-y-3">
                 {navigation.products.map((item) => (
@@ -221,7 +221,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-thin text-lg mb-4">Resources</h3>
+            <h3 className="text-white font-light text-lg mb-4">Resources</h3>
             <nav aria-label="Resources">
               <ul className="space-y-3">
                 {navigation.resources.map((item) => (
@@ -244,7 +244,7 @@ const Footer = () => {
 
           {/* Enterprise Section */}
           <div className="text-center md:text-left">
-            <h3 className="text-white font-thin text-lg mb-4">Enterprise</h3>
+            <h3 className="text-white font-light text-lg mb-4">Enterprise</h3>
             <nav aria-label="Enterprise">
               <ul className="space-y-3">
                 {navigation.enterprise.map((item) => (

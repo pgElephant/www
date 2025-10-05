@@ -48,10 +48,10 @@ const WhyPgElephant = () => {
       
       <div className="container-extra-wide relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-thin text-white drop-shadow-2xl shadow-2xl mb-6">
+          <h2 className="text-4xl md:text-5xl font-light text-white drop-shadow-2xl shadow-2xl mb-6">
             Why PgElephant?
           </h2>
-          <p className="text-xl text-white/90 leading-relaxed font-thin drop-shadow-lg">
+          <p className="text-xl text-white/90 leading-relaxed font-light drop-shadow-lg">
             Enterprise-grade PostgreSQL solutions that combine the reliability of PostgreSQL 
             with the flexibility of modern distributed systems and document databases.
           </p>
@@ -68,10 +68,10 @@ const WhyPgElephant = () => {
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-6 border border-white/20">
                   <IconComponent className="w-6 h-6 text-white drop-shadow-lg" />
                 </div>
-                <h3 className="text-xl font-thin text-white mb-4 drop-shadow-lg">
+                <h3 className="text-xl font-light text-white mb-4 drop-shadow-lg">
                   {benefit.title}
                 </h3>
-                <p className="text-white/90 leading-relaxed font-thin drop-shadow-sm">
+                <p className="text-white/90 leading-relaxed font-light drop-shadow-sm">
                   {benefit.description}
                 </p>
               </div>
@@ -80,7 +80,7 @@ const WhyPgElephant = () => {
         </div>
 
         <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-2 text-white/80 text-sm font-thin drop-shadow-lg">
+          <div className="inline-flex items-center gap-2 text-white/80 text-sm font-light drop-shadow-lg">
             <div className="w-2 h-2 bg-green-400 rounded-full drop-shadow-lg"></div>
             Trusted by enterprises worldwide
           </div>

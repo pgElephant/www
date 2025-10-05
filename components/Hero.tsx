@@ -231,7 +231,7 @@ const Hero = () => {
                       <h2 className="text-2xl md:text-3xl font-bold text-white/90 mt-2">
                         {current.title}
                       </h2>
-                      <p className="text-lg font-thin text-white/80 mt-1">
+                      <p className="text-lg font-light text-white/80 mt-1">
                         Enterprise PostgreSQL Platform
                       </p>
                     </div>

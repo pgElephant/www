@@ -587,10 +587,7 @@ const FauxdbDemoTerminal = () => {
       {/* Terminal Header */}
       <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
-          <span className="text-gray-300 text-sm ml-4 font-mono">fauxdb-demo</span>
+          <span className="text-gray-300 text-sm font-mono">fauxdb-demo</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -697,7 +694,7 @@ const FauxdbDemoTerminal = () => {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                 !isRunning 
                   ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                  : 'bg-red-600 hover:bg-red-700 text-white hover:scale-105'
+                  : 'bg-gray-700 hover:bg-gray-600 text-white hover:scale-105'
               }`}
             >
               <Square className="w-4 h-4" />

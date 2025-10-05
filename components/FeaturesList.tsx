@@ -216,11 +216,11 @@ const FeaturesList = () => {
 
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-thin text-primary-200 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-light text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
 Enterprise Solutions
           </div>
-          <h2 className="text-4xl md:text-5xl font-display font-thin mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-display font-light mb-6 leading-tight">
             <span className="text-white">
               PostgreSQL Enterprise
             </span>
@@ -229,7 +229,7 @@ Enterprise Solutions
               Platform Suite
             </span>
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto font-thin">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto font-light">
             Comprehensive database solutions for enterprise-grade high availability, distributed consensus, and seamless data migration.
           </p>
         </div>
@@ -237,35 +237,35 @@ Enterprise Solutions
         {/* Professional Features Overview */}
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Enterprise Solutions Matrix */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 overflow-hidden mb-12">
-            <div className="p-8 border-b border-slate-400/30">
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-slate-400/20 overflow-hidden mb-12 shadow-xl">
+            <div className="p-8 border-b border-slate-400/20">
               <h3 className="text-2xl font-semibold text-white mb-2">Enterprise Database Solutions</h3>
               <p className="text-white/90">Comprehensive platform comparison for enterprise database infrastructure</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-slate-400/30 bg-white/5">
-                    <th className="text-left p-4 text-white font-semibold text-sm uppercase tracking-wide w-1/6">Product</th>
-                    <th className="text-left p-3 text-white font-semibold text-sm uppercase tracking-wide w-1/8">Focus Area</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/5">Key Capabilities</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/5">Performance Metrics</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/6">Implementation</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wide w-1/8">Enterprise Use</th>
+                  <tr className="border-b border-slate-400/20 bg-white/5">
+                    <th className="text-left p-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Product</th>
+                    <th className="text-left p-3 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Focus Area</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Key Capabilities</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Performance Metrics</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Implementation</th>
+                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Enterprise Use</th>
                   </tr>
                 </thead>
                 <tbody>
                   {projects.map((project, index) => {
                     const colors = getColorClasses(project.color)
                     return (
-                      <tr key={project.name} className="border-b border-slate-400/20 hover:bg-white/5 transition-colors">
+                      <tr key={project.name} className="border-b border-slate-400/10 hover:bg-white/5 transition-all duration-200">
                         <td className="p-4">
                           <div className="flex items-center gap-3">
                             <div className={`w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
                               {project.icon}
                             </div>
                             <div>
-                              <h3 className="text-base font-thin text-white">{project.name}</h3>
+                              <h3 className="text-base font-light text-white">{project.name}</h3>
                               <p className={`text-xs ${colors.accent}`}>{project.description}</p>
                             </div>
                           </div>
@@ -274,20 +274,20 @@ Enterprise Solutions
                           <div className="space-y-1">
                             {project.name === 'pgbalancer' && (
                               <>
-                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-thin rounded-full text-center">Pooling</span>
-                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-thin rounded-full text-center">Load Balance</span>
+                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Pooling</span>
+                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-light rounded-full text-center">Load Balance</span>
                               </>
                             )}
                             {project.name === 'pgraft' && (
                               <>
-                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-thin rounded-full text-center">Consensus</span>
-                                <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-thin rounded-full text-center">Extension</span>
+                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Consensus</span>
+                                <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-light rounded-full text-center">Extension</span>
                               </>
                             )}
                             {project.name === 'FauxDB' && (
                               <>
-                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-thin rounded-full text-center">Migration</span>
-                                <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-thin rounded-full text-center">Compatibility</span>
+                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Migration</span>
+                                <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-light rounded-full text-center">Compatibility</span>
                               </>
                             )}
                           </div>
@@ -297,7 +297,7 @@ Enterprise Solutions
                             {project.features.slice(0, 4).map((feature, featureIndex) => (
                               <div key={featureIndex} className="flex items-center gap-2 text-white/90">
                                 <CheckCircle className="w-3 h-3 text-green-400 flex-shrink-0" />
-                                <span className="text-xs font-thin">{feature.title}</span>
+                                <span className="text-xs font-light">{feature.title}</span>
                               </div>
                             ))}
                           </div>
@@ -405,7 +405,7 @@ Enterprise Solutions
                       {project.icon}
                     </div>
                     <div>
-                      <h3 className="text-xl font-thin text-white">{project.name}</h3>
+                      <h3 className="text-xl font-light text-white">{project.name}</h3>
                       <p className={`text-sm ${colors.accent}`}>{project.description}</p>
                     </div>
                   </div>
@@ -418,7 +418,7 @@ Enterprise Solutions
                             {feature.icon}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-thin text-white text-sm mb-2">{feature.title}</h4>
+                            <h4 className="font-light text-white text-sm mb-2">{feature.title}</h4>
                             <p className="text-xs text-white/90 leading-relaxed">{feature.description}</p>
                           </div>
                         </div>
@@ -427,7 +427,7 @@ Enterprise Solutions
                   </div>
                   
                   <div className="mt-8 pt-6 border-t border-slate-400/20">
-                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-thin transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
+                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
                       View Enterprise Details
                       <ArrowRight className="w-4 h-4" />
                     </button>
@@ -442,7 +442,7 @@ Enterprise Solutions
         {/* Enterprise CTA */}
         <div className="mt-20 text-center relative z-10">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30 max-w-5xl mx-auto">
-            <h3 className="text-3xl font-thin mb-4 text-white">
+            <h3 className="text-3xl font-light mb-4 text-white">
               Complete Database Solution Suite
             </h3>
             <p className="text-lg text-white/90 mb-8 max-w-3xl mx-auto">
@@ -451,28 +451,28 @@ Enterprise Solutions
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="text-center p-4">
-                <div className="text-2xl font-thin text-green-400 mb-2">99.99%</div>
+                <div className="text-2xl font-light text-green-400 mb-2">99.99%</div>
                 <div className="text-sm text-white/90">Uptime SLA</div>
               </div>
               <div className="text-center p-4">
-                <div className="text-2xl font-thin text-blue-400 mb-2">50%</div>
+                <div className="text-2xl font-light text-blue-400 mb-2">50%</div>
                 <div className="text-sm text-white/90">Cost Reduction</div>
               </div>
               <div className="text-center p-4">
-                <div className="text-2xl font-thin text-purple-400 mb-2">24/7</div>
+                <div className="text-2xl font-light text-purple-400 mb-2">24/7</div>
                 <div className="text-sm text-white/90">Enterprise Support</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/download" className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-thin transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+              <a href="/download" className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
                 <Database className="w-5 h-5" />
                 Download All Projects
               </a>
-              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-thin hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-light hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5" />
                 View Documentation
               </a>
-              <a href="/contact" className="border-2 border-white/40 text-white px-8 py-4 rounded-lg font-thin hover:bg-white/20 hover:text-white transition-colors flex items-center justify-center gap-2">
+              <a href="/contact" className="border-2 border-white/40 text-white px-8 py-4 rounded-lg font-light hover:bg-white/20 hover:text-white transition-colors flex items-center justify-center gap-2">
                 <Users className="w-5 h-5" />
                 Contact Sales
               </a>

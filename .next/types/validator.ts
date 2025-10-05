@@ -101,6 +101,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/fauxdb/api/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/api">> = Specific
+  const handler = {} as typeof import("../../app/docs/fauxdb/api/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/fauxdb/docker/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/docker">> = Specific
@@ -263,6 +272,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/rale/api/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/rale/api">> = Specific
+  const handler = {} as typeof import("../../app/docs/rale/api/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/rale/architecture/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/rale/architecture">> = Specific
+  const handler = {} as typeof import("../../app/docs/rale/architecture/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/rale/getting-started/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/rale/getting-started">> = Specific
@@ -285,6 +312,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/ram/api">> = Specific
   const handler = {} as typeof import("../../app/docs/ram/api/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/ram/architecture/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/ram/architecture">> = Specific
+  const handler = {} as typeof import("../../app/docs/ram/architecture/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
