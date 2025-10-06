@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import PgbalancerDemoTerminal from '@/components/PgbalancerDemoTerminal';
 import { Database, Network, Zap, BarChart3 } from 'lucide-react';
 import { Metadata } from 'next';
 
@@ -43,6 +44,7 @@ const pgbalancerConfig = {
     'REST API',
     'Production Ready',
   ],
+  demo: <PgbalancerDemoTerminal />,
   featurePillars: {
     kicker: 'Overview',
     items: [
@@ -61,6 +63,8 @@ const pgbalancerConfig = {
           <th className="px-4 py-3 font-semibold text-white">Feature</th>
           <th className="px-4 py-3 font-semibold text-white">Description</th>
           <th className="px-4 py-3 font-semibold text-white">Benefit</th>
+          <th className="px-4 py-3 font-semibold text-white">Performance</th>
+          <th className="px-4 py-3 font-semibold text-white">Scalability</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
@@ -68,31 +72,43 @@ const pgbalancerConfig = {
           <td className="px-4 py-3 font-medium text-blue-300">Connection Pooling</td>
           <td className="px-4 py-3 text-slate-300">Reuses database connections across client requests</td>
           <td className="px-4 py-3 text-slate-300">10x connection efficiency, reduced latency</td>
+          <td className="px-4 py-3 text-slate-300">&lt;1ms overhead per query</td>
+          <td className="px-4 py-3 text-slate-300">1000s of concurrent clients</td>
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-blue-300">Load Balancing</td>
           <td className="px-4 py-3 text-slate-300">Distributes queries across backend servers</td>
           <td className="px-4 py-3 text-slate-300">Horizontal scaling, optimized resource usage</td>
+          <td className="px-4 py-3 text-slate-300">Smart algorithm selection</td>
+          <td className="px-4 py-3 text-slate-300">100+ backend nodes</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-blue-300">Health Monitoring</td>
           <td className="px-4 py-3 text-slate-300">Continuous backend health checks</td>
           <td className="px-4 py-3 text-slate-300">Automatic failover, high availability</td>
+          <td className="px-4 py-3 text-slate-300">Configurable intervals</td>
+          <td className="px-4 py-3 text-slate-300">Multi-backend monitoring</td>
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-blue-300">Query Cache</td>
           <td className="px-4 py-3 text-slate-300">In-memory caching for frequently used queries</td>
           <td className="px-4 py-3 text-slate-300">Reduced database load, faster responses</td>
+          <td className="px-4 py-3 text-slate-300">Memory-backed, microsecond retrieval</td>
+          <td className="px-4 py-3 text-slate-300">Configurable cache size</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-blue-300">REST API</td>
           <td className="px-4 py-3 text-slate-300">Modern HTTP API for management and monitoring</td>
           <td className="px-4 py-3 text-slate-300">Easy integration, standard protocols</td>
+          <td className="px-4 py-3 text-slate-300">Async, non-blocking</td>
+          <td className="px-4 py-3 text-slate-300">Stateless, cloud-native</td>
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-blue-300">Statement Routing</td>
           <td className="px-4 py-3 text-slate-300">Smart routing of read/write queries</td>
           <td className="px-4 py-3 text-slate-300">Optimized replica usage, primary protection</td>
+          <td className="px-4 py-3 text-slate-300">Query parsing & classification</td>
+          <td className="px-4 py-3 text-slate-300">Read replica fan-out</td>
         </tr>
       </tbody>
     </table>
