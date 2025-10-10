@@ -10,12 +10,17 @@ export default function robots(): MetadataRoute.Robots {
           '/ram',
           '/rale', 
           '/pgraft',
+          '/pgbalancer',
           '/fauxdb',
           '/docs',
+          '/docs/*',
           '/blog',
+          '/blog/*',
           '/community',
           '/download',
           '/contact',
+          '/privacy',
+          '/terms',
           '/cpanel',
           '/cpanel/',
           '/*.css',
@@ -27,7 +32,11 @@ export default function robots(): MetadataRoute.Robots {
           '/*.svg',
           '/*.ico',
           '/*.webp',
-          '/*.avif'
+          '/*.avif',
+          '/*.woff',
+          '/*.woff2',
+          '/sitemap.xml',
+          '/sitemap_index.xml'
         ],
         disallow: [
           '/api/',
@@ -42,19 +51,41 @@ export default function robots(): MetadataRoute.Robots {
           '/hosting/',
           '/*.json$',
           '/tmp/',
-          '/logs/'
+          '/logs/',
+          '/cache/',
+          '/config/',
+          '/includes/',
+          '/wp-admin/',
+          '/wp-includes/',
+          '/cgi-bin/',
+          '/search?*',
+          '/*?utm_*',
+          '/*?ref=*',
+          '/*?source=*'
         ],
-        crawlDelay: 1
+        crawlDelay: 0.5
       },
       {
         userAgent: 'Googlebot',
         allow: '/',
-        crawlDelay: 1
+        crawlDelay: 0.2
+      },
+      {
+        userAgent: 'Googlebot-Image',
+        allow: [
+          '/*.png',
+          '/*.jpg',
+          '/*.jpeg',
+          '/*.gif',
+          '/*.svg',
+          '/*.webp',
+          '/*.avif'
+        ]
       },
       {
         userAgent: 'Bingbot',
         allow: '/',
-        crawlDelay: 1
+        crawlDelay: 0.5
       },
       {
         userAgent: 'Slurp',
@@ -64,7 +95,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'DuckDuckBot',
         allow: '/',
-        crawlDelay: 1
+        crawlDelay: 0.5
       },
       {
         userAgent: 'Baiduspider',
@@ -75,8 +106,24 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'YandexBot',
         allow: '/',
         crawlDelay: 1
+      },
+      {
+        userAgent: 'facebookexternalhit',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'Twitterbot',
+        allow: '/',
+        crawlDelay: 0
+      },
+      {
+        userAgent: 'LinkedInBot',
+        allow: '/',
+        crawlDelay: 0
       }
     ],
-    sitemap: 'https://www.pgelephant.com/sitemap_index.xml',
+    sitemap: ['https://www.pgelephant.com/sitemap.xml', 'https://www.pgelephant.com/sitemap_index.xml'],
+    host: 'https://www.pgelephant.com'
   }
 }

@@ -40,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: priorities.mainProducts,
     },
     {
+      url: `${baseUrl}/pgbalancer`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: priorities.mainProducts,
+    },
+    {
       url: `${baseUrl}/fauxdb`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
@@ -66,6 +72,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.docs,
+    },
+    // pgbalancer documentation
+    {
+      url: `${baseUrl}/docs/pgbalancer/getting-started`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgbalancer/installation`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgbalancer/configuration`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgbalancer/ai-configuration`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgbalancer/metrics`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgbalancer/performance-tuning`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
     },
     // RAM documentation
     {

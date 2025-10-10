@@ -16,7 +16,7 @@ const PgbalancerDemoTerminal = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
-  const [activeTab, setActiveTab] = useState<'build' | 'usage'>('build')
+  const [activeTab, setActiveTab] = useState<'build' | 'usage' | 'ai'>('build')
   const terminalRef = useRef<HTMLDivElement>(null)
 
   // Base timing values (in ms)
@@ -369,6 +369,192 @@ const PgbalancerDemoTerminal = () => {
     }
   ]
 
+  const aiCommands = [
+    {
+      command: '/usr/local/pgbalancer/bin/pgbalancer -c /usr/local/pgbalancer/etc/pgbalancer.yaml -d --enable-ai',
+      output: [
+        '[INFO] Starting pgbalancer with AI Intelligence...',
+        '[INFO] Loading machine learning models...',
+        '[AI] Query pattern recognition model loaded',
+        '[AI] Connection optimization model loaded',
+        '[AI] Predictive scaling model loaded',
+        '[INFO] pgbalancer started (PID: 34567)',
+        '[INFO] Listening on 0.0.0.0:6432',
+        '[INFO] REST API enabled on 127.0.0.1:8080',
+        '[AI] ML inference engine initialized',
+        '[AI] Starting pattern analysis...',
+        '[INFO] Backend server 127.0.0.1:5432 is up',
+        '[INFO] Backend server 127.0.0.1:5433 is up',
+        '[INFO] Backend server 127.0.0.1:5434 is up',
+        '[AI] Building initial workload profile...',
+        '[INFO] Connection pools initialized',
+        '[INFO] Health checker started',
+        '[INFO] Load balancer ready',
+        '[AI] AI Intelligence Engine: ACTIVE'
+      ]
+    },
+    {
+      command: 'bctl -h 127.0.0.1 -p 8080 ai-status',
+      output: [
+        'pgbalancer AI Intelligence Status:',
+        '=================================',
+        'AI Engine Status: ACTIVE',
+        'Model Version: v2.1.4',
+        'Learning Mode: ENABLED',
+        'Inference Latency: 0.15ms',
+        '',
+        'Active ML Models:',
+        '  - Query Pattern Recognition: 94.7% accuracy',
+        '  - Connection Optimization: 97.2% efficiency',
+        '  - Predictive Scaling: 91.8% accuracy',
+        '  - Workload Classification: 96.1% accuracy',
+        '',
+        'Current Insights:',
+        '  - Detected 3 query patterns',
+        '  - Optimal pool size: 28 (vs configured 25)',
+        '  - Predicted load increase in 15 minutes',
+        '  - Recommended backend redistribution: 40/30/30'
+      ]
+    },
+    {
+      command: 'bctl -h 127.0.0.1 -p 8080 ai-insights',
+      output: [
+        'AI Performance Insights:',
+        '========================',
+        'Analysis Period: Last 5 minutes',
+        'Queries Analyzed: 15,847',
+        '',
+        'Query Patterns Detected:',
+        '  Pattern A (Read-Heavy): 67% of traffic',
+        '    - Optimal backend: 127.0.0.1:5433',
+        '    - Avg response time: 12.3ms',
+        '    - Cache hit rate: 89%',
+        '',
+        '  Pattern B (Write-Heavy): 23% of traffic',
+        '    - Optimal backend: 127.0.0.1:5432',
+        '    - Avg response time: 8.7ms',
+        '    - Transaction success: 99.9%',
+        '',
+        '  Pattern C (Analytics): 10% of traffic',
+        '    - Optimal backend: 127.0.0.1:5434',
+        '    - Avg response time: 245ms',
+        '    - Resource usage: HIGH',
+        '',
+        'AI Recommendations:',
+        '  1. Increase read replica connections by 15%',
+        '  2. Pre-warm cache for Pattern A queries',
+        '  3. Schedule analytics queries during low traffic'
+      ]
+    },
+    {
+      command: 'bctl -h 127.0.0.1 -p 8080 ai-predict',
+      output: [
+        'AI Predictive Analysis:',
+        '======================',
+        'Prediction Window: Next 30 minutes',
+        'Confidence Level: 94.3%',
+        '',
+        'Traffic Forecast:',
+        '  +5 min:  Current load (baseline)',
+        '  +10 min: 15% increase expected',
+        '  +15 min: 35% increase expected (PEAK)',
+        '  +20 min: 25% increase expected',
+        '  +25 min: 10% increase expected',
+        '  +30 min: Return to baseline',
+        '',
+        'Resource Recommendations:',
+        '  - Pre-scale connection pools by 20%',
+        '  - Increase cache allocation by 512MB',
+        '  - Alert standby servers for activation',
+        '',
+        'Auto-Scaling Actions:',
+        '  - Pool size adjustment: SCHEDULED (+8 min)',
+        '  - Cache optimization: SCHEDULED (+5 min)',
+        '  - Load redistribution: SCHEDULED (+10 min)'
+      ]
+    },
+    {
+      command: 'psql -h 127.0.0.1 -p 6432 -U postgres -d postgres -c "SELECT * FROM users ORDER BY created_at DESC LIMIT 10;"',
+      output: [
+        'id | name      | email                 | created_at',
+        '---+-----------+-----------------------+------------------------',
+        ' 8 | Hannah    | hannah@example.com    | 2024-10-10 14:23:15',
+        ' 7 | George    | george@example.com    | 2024-10-10 14:22:45',
+        ' 6 | Fiona     | fiona@example.com     | 2024-10-10 14:21:30',
+        ' 5 | Ethan     | ethan@example.com     | 2024-10-10 14:20:12',
+        ' 4 | Diana     | diana@example.com     | 2024-10-10 14:19:55',
+        ' 3 | Charlie   | charlie@example.com   | 2024-10-10 14:18:20',
+        ' 2 | Bob       | bob@example.com       | 2024-10-10 14:17:10',
+        ' 1 | Alice     | alice@example.com     | 2024-10-10 14:16:00',
+        '(8 rows)',
+        '',
+        '[AI] Query pattern recognized: READ_RECENT_DATA',
+        '[AI] Routed to optimized read replica: 127.0.0.1:5433',
+        '[AI] Cache strategy: TEMPORAL_LOCALITY applied',
+        '[AI] Execution time: 8.2ms (15% faster than baseline)'
+      ]
+    },
+    {
+      command: 'bctl -h 127.0.0.1 -p 8080 ai-optimize',
+      output: [
+        '[AI] Running intelligent optimization...',
+        '[AI] Analyzing current workload patterns...',
+        '[AI] Evaluating connection pool efficiency...',
+        '',
+        'Optimization Results:',
+        '====================',
+        'Connection Pool Adjustments:',
+        '  - 127.0.0.1:5432: 25 → 28 connections (+12%)',
+        '  - 127.0.0.1:5433: 25 → 32 connections (+28%)',
+        '  - 127.0.0.1:5434: 25 → 22 connections (-12%)',
+        '',
+        'Query Cache Optimization:',
+        '  - Cache size increased: 256MB → 384MB',
+        '  - TTL adjusted for temporal patterns',
+        '  - Prefetch enabled for Pattern A queries',
+        '',
+        'Load Balancing Weights:',
+        '  - Read traffic: 45% → 5433, 35% → 5432, 20% → 5434',
+        '  - Write traffic: 80% → 5432, 20% → 5433',
+        '  - Analytics: 100% → 5434',
+        '',
+        '[AI] Optimization complete. Performance improvement: +22%'
+      ]
+    },
+    {
+      command: 'bctl -h 127.0.0.1 -p 8080 ai-learn',
+      output: [
+        'AI Learning & Training Status:',
+        '==============================',
+        'Learning Mode: ACTIVE',
+        'Training Dataset: 2.4M queries (last 7 days)',
+        '',
+        'Model Performance:',
+        '  Query Pattern Recognition:',
+        '    - Accuracy: 94.7% (+2.1% from last week)',
+        '    - Precision: 96.2%',
+        '    - Recall: 93.8%',
+        '',
+        '  Connection Optimization:',
+        '    - Efficiency gain: 97.2%',
+        '    - Pool utilization: 89.4% (optimal range)',
+        '    - Latency reduction: 31.5%',
+        '',
+        '  Predictive Scaling:',
+        '    - Forecast accuracy: 91.8%',
+        '    - False positives: 4.2%',
+        '    - Resource waste reduction: 26.7%',
+        '',
+        'Recent Learning Updates:',
+        '  - New query pattern identified: BULK_ANALYTICS',
+        '  - Updated connection timeout predictions',
+        '  - Improved weekend traffic forecasting',
+        '',
+        '[AI] Continuous learning active. Next model update in 2.3 hours.'
+      ]
+    }
+  ]
+
   // Cursor blinking effect
   useEffect(() => {
     const interval = setInterval(() => {
@@ -428,7 +614,7 @@ const PgbalancerDemoTerminal = () => {
     setCurrentCommand('')
     
     let commandIndex = 0
-    const commands = activeTab === 'build' ? buildCommands : usageCommands
+    const commands = activeTab === 'build' ? buildCommands : activeTab === 'usage' ? usageCommands : aiCommands
     
     const runNextCommand = () => {
       if (commandIndex >= commands.length) {
@@ -534,6 +720,17 @@ const PgbalancerDemoTerminal = () => {
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
             Usage & Operations
+          </button>
+          <button
+            onClick={() => setActiveTab('ai')}
+            disabled={isRunning}
+            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              activeTab === 'ai'
+                ? 'bg-purple-600 text-white border border-purple-500'
+                : 'bg-transparent text-gray-400 hover:text-white hover:bg-purple-700 border border-transparent'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            🧠 AI Intelligence
           </button>
         </div>
       </div>

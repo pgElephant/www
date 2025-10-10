@@ -8,6 +8,7 @@ import {
   Outfit
 } from 'next/font/google'
 import dynamic from 'next/dynamic'
+import PerformanceOptimizations from '@/components/PerformanceOptimizations'
 import ClientOnlyComponents from '@/components/ClientOnlyComponents'
 import './globals.css'
 
@@ -313,42 +314,7 @@ export default function RootLayout({
                 "price": "0",
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/InStock",
-                "url": "https://www.pgelephant.com/download",
-                "hasMerchantReturnPolicy": {
-                  "@type": "MerchantReturnPolicy",
-                  "applicableCountry": "US",
-                  "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                  "merchantReturnDays": 30,
-                  "returnMethod": "https://schema.org/ReturnByMail",
-                  "returnFees": "https://schema.org/FreeReturn"
-                },
-                "shippingDetails": {
-                  "@type": "OfferShippingDetails",
-                  "shippingRate": {
-                    "@type": "MonetaryAmount",
-                    "value": "0",
-                    "currency": "USD"
-                  },
-                  "shippingDestination": {
-                    "@type": "DefinedRegion",
-                    "addressCountry": "US"
-                  },
-                  "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": {
-                      "@type": "QuantitativeValue",
-                      "minValue": 0,
-                      "maxValue": 0,
-                      "unitCode": "DAY"
-                    },
-                    "transitTime": {
-                      "@type": "QuantitativeValue",
-                      "minValue": 0,
-                      "maxValue": 0,
-                      "unitCode": "DAY"
-                    }
-                  }
-                }
+                "url": "https://www.pgelephant.com/download"
               },
               "creator": {
                 "@type": "Organization",
@@ -439,6 +405,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
+        <PerformanceOptimizations />
         <OrganizationSchema />
         <Header />
         <main role="main">
