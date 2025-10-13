@@ -34,6 +34,8 @@ type Product = {
   description: string
   description2: string
   description3: string
+  description4: string
+  description5: string
   icon: string
   color: string
   bg: BG
@@ -95,10 +97,12 @@ const Hero = () => {
     {
       id: 'fauxdb',
       name: 'FauxDB',
-      title: 'Lightning-Fast MongoDB Alternative',
-      description: '• High-performance MongoDB-compatible database built in Rust.',
-      description2: '• Native JSON support with ACID transaction guarantees.',
-      description3: '• Drop-in replacement for MongoDB with PostgreSQL reliability.',
+      title: 'MongoDB-Compatible Document Database',
+      description: '• Full MongoDB wire protocol compatibility for seamless migration',
+      description2: '• Rust-powered high-performance engine with PostgreSQL storage',
+      description3: '• ACID transactions with multi-document consistency guarantees',
+      description4: '• Advanced geospatial queries and MongoDB aggregation pipeline',
+      description5: '• Native JSON indexing with enterprise-grade reliability',
       icon: 'fauxdb-custom',
       color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
       bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
@@ -106,10 +110,12 @@ const Hero = () => {
     {
       id: 'pgraft',
       name: 'pgraft',
-      title: 'Bulletproof PostgreSQL Clustering',
-      description: '• Native Raft consensus for PostgreSQL clusters.',
-      description2: '• Strong consistency, automatic leader election, and seamless failover.',
-      description3: '• Built-in cluster management and observability.',
+      title: 'PostgreSQL Raft Consensus Clustering',
+      description: '• Native Raft consensus algorithm for PostgreSQL clusters',
+      description2: '• Automatic leader election with split-brain prevention',
+      description3: '• Strong consistency guarantees across all cluster nodes',
+      description4: '• Zero-downtime failover with mathematical fault tolerance',
+      description5: '• Production-grade clustering with background worker integration',
       icon: 'pgraft-custom',
       color: `from-[${palette.primaryDark}] to-[${palette.secondaryDark}]`,
       bg: { from: palette.primaryDark, via: palette.primary, to: palette.secondaryDark }
@@ -117,35 +123,15 @@ const Hero = () => {
     {
       id: 'pgbalancer',
       name: 'pgbalancer',
-      title: 'Zero-Downtime Connection Intelligence',
-      description: '• High-performance connection pooling for PostgreSQL.',
-      description2: '• Load balancing, failover, and observability in one lightweight service.',
-      description3: '• YAML configuration, Prometheus metrics, and cloud-native ready.',
+      title: 'AI-Enhanced PostgreSQL Connection Pooling',
+      description: '• Machine learning-powered connection optimization and load balancing',
+      description2: '• Intelligent query routing with predictive performance scaling',
+      description3: '• Real-time traffic analysis with adaptive connection management',
+      description4: '• REST API for monitoring and automated optimization insights',
+      description5: '• AI-driven pooling strategies with health monitoring integration',
       icon: 'pgbalancer-custom',
       color: `from-[${palette.accentDark}] to-[${palette.primaryLight}]`,
       bg: { from: palette.accentDark, via: palette.primary, to: palette.primaryLight }
-    },
-    {
-      id: 'ram',
-      name: 'RAM',
-      title: 'Enterprise-Grade Cluster Orchestration',
-      description: '• Enterprise-grade PostgreSQL clustering with automatic failover.',
-      description2: '• Intelligent resource management and load balancing across nodes.',
-      description3: '• Real-time monitoring and automated scaling capabilities.',
-      icon: 'ram-custom',
-      color: `from-[${palette.secondary}] to-[${palette.secondaryLight}]`,
-      bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.secondaryLight }
-    },
-    {
-      id: 'rale',
-      name: 'RALE',
-      title: 'Unbreakable Distributed Consensus',
-      description: '• Distributed consensus for high availability in distributed systems.',
-      description2: '• Automated leader election and failover for any distributed database.',
-      description3: '• Zero data loss during node failures with strong consistency guarantees.',
-      icon: 'rale-custom',
-      color: `from-[${palette.primary}] to-[${palette.primaryLight}]`,
-      bg: { from: palette.primaryDark, via: palette.primary, to: palette.primaryLight }
     }
   ]
 
@@ -157,95 +143,79 @@ const Hero = () => {
   }, [products.length])
 
   const current = products[currentProduct]
-  
-  // Elegant gradient design
-  const heroGradient = `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`
-  const tileGradient = `linear-gradient(135deg, ${palette.primary}, ${palette.secondary})`
 
   return (
     <section
       className="relative overflow-hidden"
       style={{ 
-        background: heroGradient,
+        backgroundImage: 'url(/hero-bg-technical.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         position: 'relative'
       }}
     >
-      {/* Elegant overlay gradient */}
+      {/* Additional overlay for better text contrast */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
+          background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.3) 0%, rgba(26, 26, 46, 0.4) 50%, rgba(83, 52, 131, 0.2) 100%)'
         }}
       />
-      {/* Elegant floating elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating orbs */}
-        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        
-        {/* Subtle pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
-            backgroundSize: '32px 32px'
-          }}
-        />
-      </div>
 
-      <div className="container-extra-wide py-28 relative z-10">
-        <div className="max-w-6xl mx-auto">
+      <div className="container-extra-wide pt-20 pb-16 relative z-10">
+        <div className="max-w-7xl mx-auto">
 
           {/* Product showcase */}
-          <div className="max-w-4xl mx-auto mt-8">
-              <div className="mb-8">
+          <div className="max-w-5xl mx-auto mt-4">
+              <div className="mb-6 backdrop-blur-sm bg-black/20 rounded-2xl p-8 border border-white/10">
                 <div className="mb-6">
-                  <div className="flex items-center gap-6 mb-4">
-                    <div className="w-24 h-24 flex items-center justify-center">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-20 h-20 flex items-center justify-center">
                       {current.icon === 'pgbalancer-custom' ? (
-                        <PgbalancerIcon size={96} />
+                        <PgbalancerIcon size={80} />
                       ) : current.icon === 'pgraft-custom' ? (
-                        <PgraftIcon size={96} />
+                        <PgraftIcon size={80} />
                       ) : current.icon === 'fauxdb-custom' ? (
-                        <FauxDbIcon size={96} />
+                        <FauxDbIcon size={80} />
                       ) : current.icon === 'rale-custom' ? (
-                        <RaleIcon size={96} />
+                        <RaleIcon size={80} />
                       ) : current.icon === 'ram-custom' ? (
-                        <RamIcon size={96} />
+                        <RamIcon size={80} />
                       ) : (
                         <Image 
                           src={current.icon} 
                           alt={`${current.name} icon`}
-                          width={96}
-                          height={96}
-                          className="w-24 h-24"
+                          width={80}
+                          height={80}
+                          className="w-20 h-20"
                         />
                       )}
                     </div>
                     <div className="text-left">
-                      <h1 className="text-3xl md:text-4xl font-light text-white">
+                      <h1 className="text-2xl md:text-3xl font-light text-white drop-shadow-lg">
                         {current.name}
                       </h1>
-                      <h2 className="text-2xl md:text-3xl font-bold text-white/90 mt-2">
+                      <h2 className="text-xl md:text-2xl font-bold text-white/95 mt-1 drop-shadow-lg">
                         {current.title}
                       </h2>
-                      <p className="text-lg font-light text-white/80 mt-1">
-                        Enterprise PostgreSQL Platform
+                      <p className="text-base font-light text-white/85 mt-1 drop-shadow-lg">
+                        Enterprise-grade PostgreSQL solutions combining reliability with modern flexibility
                       </p>
                     </div>
                   </div>
                 </div>
-                    <div className="text-xl max-w-3xl space-y-2 text-left pl-16 text-white">
+                    <div className="text-lg max-w-4xl space-y-2 text-left pl-12 text-white/95 drop-shadow-lg">
                       <p>{current.description}</p>
                       <p>{current.description2}</p>
                       <p>{current.description3}</p>
+                      <p>{current.description4}</p>
+                      <p>{current.description5}</p>
                     </div>
               </div>
 
               {/* Dots */}
-              <div className="flex justify-center gap-2 mb-8">
+              <div className="flex justify-center gap-2 mb-4">
                 {products.map((p, index) => (
                   <button
                     key={p.id}
@@ -269,11 +239,11 @@ const Hero = () => {
                      <Link
                        key={product.id}
                        href={`/${product.id}`}
-                       className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-all duration-300 backdrop-blur-sm hover:scale-105"
+                       className="flex items-center gap-3 px-6 py-3 rounded-xl border transition-all duration-300 backdrop-blur-md hover:scale-105 hover:backdrop-blur-lg"
                        style={{
-                         borderColor: active ? 'rgba(79, 70, 229, 0.6)' : 'rgba(255,255,255,0.2)',
-                         backgroundColor: active ? 'rgba(79, 70, 229, 0.15)' : 'rgba(255,255,255,0.05)',
-                         boxShadow: active ? '0 8px 32px rgba(79, 70, 229, 0.3)' : '0 4px 16px rgba(0,0,0,0.1)'
+                         borderColor: active ? 'rgba(139, 92, 246, 0.8)' : 'rgba(255,255,255,0.3)',
+                         backgroundColor: active ? 'rgba(139, 92, 246, 0.25)' : 'rgba(255,255,255,0.1)',
+                         boxShadow: active ? '0 8px 32px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)' : '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
                        }}
                      >
                        {product.icon === 'pgbalancer-custom' ? (
@@ -293,11 +263,11 @@ const Hero = () => {
                            width={20}
                            height={20}
                            className="w-5 h-5"
-                           style={{ filter: active ? 'none' : 'brightness(0.7)' }}
+                           style={{ filter: active ? 'none' : 'brightness(0.8)' }}
                          />
                        )}
                        <span
-                         className="font-medium text-white"
+                         className="font-medium text-white drop-shadow-sm"
                        >
                          {product.name}
                        </span>

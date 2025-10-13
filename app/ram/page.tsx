@@ -5,18 +5,18 @@ import { Server, Cpu, Activity, Shield } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'RAM - Resilient Adaptive Manager for PostgreSQL | pgElephant',
-  description: 'RAM provides enterprise-grade PostgreSQL clustering with automatic failover, intelligent resource management, and real-time monitoring. Raft consensus for reliable leader election.',
-  keywords: 'PostgreSQL clustering, automatic failover, Raft consensus, resource management, real-time monitoring, enterprise-grade',
+  title: 'RAM - AI-Powered Resilient Adaptive Manager for PostgreSQL | pgElephant',
+  description: 'RAM provides AI-driven PostgreSQL clustering with intelligent automatic failover, machine learning-powered resource management, and AI-enhanced real-time monitoring with predictive scaling.',
+  keywords: 'AI PostgreSQL clustering, intelligent automatic failover, machine learning database, AI resource management, predictive scaling, enterprise-grade, artificial intelligence',
   openGraph: {
-    title: 'RAM - Resilient Adaptive Manager for PostgreSQL',
-    description: 'Enterprise-grade PostgreSQL clustering with automatic failover and intelligent resource management.',
+    title: 'RAM - AI-Powered Resilient Adaptive Manager for PostgreSQL',
+    description: 'AI-driven PostgreSQL clustering with intelligent automatic failover and machine learning-powered resource management.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'RAM - Resilient Adaptive Manager for PostgreSQL',
-    description: 'Enterprise-grade PostgreSQL clustering with automatic failover and intelligent resource management.',
+    title: 'RAM - AI-Powered Resilient Adaptive Manager for PostgreSQL',
+    description: 'AI-driven PostgreSQL clustering with intelligent automatic failover and machine learning-powered resource management.',
   },
 };
 
@@ -32,75 +32,75 @@ const RamIcon = ({ size = 80 }: { size?: number }) => (
 
 const ramConfig = {
   hero: {
-    title: 'RAM: Resilient Adaptive Manager',
-    subtitle: 'PostgreSQL Auto-Failover Daemon with Raft Consensus',
+    title: 'RAM: AI-Powered Resilient Adaptive Manager',
+    subtitle: 'Intelligent PostgreSQL Auto-Failover with Machine Learning',
     projectName: 'RAM',
     icon: <RamIcon size={80} />,
   },
   badges: [
-    'PostgreSQL Clustering',
-    'Raft Consensus',
-    'Auto Failover',
-    'Real-time Monitoring',
-    'Production Ready',
+    'AI-Powered Clustering',
+    'Machine Learning',
+    'Intelligent Failover',
+    'Predictive Monitoring',
+    'Self-Healing',
   ],
     demo: <RamDemoTerminal />,
   featurePillars: {
     kicker: 'Overview',
     items: [
-      { title: 'Native PostgreSQL Extension', desc: 'Seamless in-core integration—no external daemons.' },
-      { title: 'Raft Consensus', desc: 'Reliable leader election and strong consistency.' },
-      { title: 'Crash-Safe Durability', desc: 'Persistent state and logs for robust recovery.' },
-      { title: 'SQL Management', desc: 'Full cluster lifecycle managed via SQL.' },
-      { title: 'Observability', desc: 'Inspect cluster state and leader status with SQL.' },
-      { title: 'Minimal Configuration', desc: 'Production-ready defaults, simple setup.' },
+      { title: 'AI-Native PostgreSQL Extension', desc: 'Intelligent in-core integration with machine learning capabilities.' },
+      { title: 'Predictive Consensus', desc: 'AI-enhanced Raft consensus with predictive leader election.' },
+      { title: 'Self-Healing Architecture', desc: 'AI-driven crash recovery and persistent state management.' },
+      { title: 'Intelligent SQL Management', desc: 'AI-powered cluster lifecycle management via SQL.' },
+      { title: 'Predictive Observability', desc: 'Machine learning-based cluster monitoring and anomaly detection.' },
+      { title: 'Zero-Touch Configuration', desc: 'AI-optimized defaults with intelligent auto-configuration.' },
     ],
   },
   features: [
-    { icon: '', iconColor: 'text-indigo-500', title: 'Raft Consensus', desc: 'Leader election, log replication, term monotonicity.' },
-    { icon: '', iconColor: 'text-sky-500', title: 'State Durability', desc: 'Persistent HardState, entries, snapshots.' },
-    { icon: '', iconColor: 'text-green-500', title: 'Command Interface', desc: 'SQL functions for init, membership, diagnostics.' },
-    { icon: '', iconColor: 'text-yellow-500', title: 'Monitoring Hooks', desc: 'Cluster status, log stats, leader checks.' },
-    { icon: '', iconColor: 'text-pink-500', title: 'Node Membership', desc: 'Add/remove nodes through leader replication.' },
-    { icon: '', iconColor: 'text-cyan-500', title: 'Debug Mode', desc: 'Toggle extended logging via SQL.' },
-    { icon: '', iconColor: 'text-red-500', title: 'Crash-Safe', desc: 'Crash-safe recovery.' },
-    { icon: '', iconColor: 'text-violet-500', title: 'Native DB Admin', desc: 'Native DB admin UX.' },
-    { icon: '', iconColor: 'text-emerald-500', title: 'Background Worker', desc: 'Efficient, low-overhead operation.' },
+    { icon: '', iconColor: 'text-indigo-500', title: 'AI-Enhanced Consensus', desc: 'Machine learning-optimized leader election and log replication.' },
+    { icon: '', iconColor: 'text-sky-500', title: 'Intelligent State Management', desc: 'AI-driven persistent state and predictive snapshots.' },
+    { icon: '', iconColor: 'text-green-500', title: 'Smart Command Interface', desc: 'AI-powered SQL functions for intelligent cluster management.' },
+    { icon: '', iconColor: 'text-yellow-500', title: 'Predictive Monitoring', desc: 'Machine learning-based anomaly detection and health prediction.' },
+    { icon: '', iconColor: 'text-pink-500', title: 'Adaptive Membership', desc: 'AI-driven node scaling with intelligent resource allocation.' },
+    { icon: '', iconColor: 'text-cyan-500', title: 'Intelligent Debug Mode', desc: 'AI-enhanced logging with smart diagnostic insights.' },
+    { icon: '', iconColor: 'text-red-500', title: 'Self-Healing Recovery', desc: 'Machine learning-powered crash recovery and auto-repair.' },
+    { icon: '', iconColor: 'text-violet-500', title: 'AI-Native Admin UX', desc: 'Intelligent database administration with ML insights.' },
+    { icon: '', iconColor: 'text-emerald-500', title: 'Adaptive Background Worker', desc: 'AI-optimized, self-tuning operation with minimal overhead.' },
   ],
   featureMatrix: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
-          <th className="px-4 py-3 font-semibold text-white">Capability</th>
+          <th className="px-4 py-3 font-semibold text-white">AI Capability</th>
           <th className="px-4 py-3 font-semibold text-white">Description</th>
           <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Consensus (Raft)</td>
-          <td className="px-4 py-3 text-slate-300">Leader election, log replication, term monotonicity.</td>
-          <td className="px-4 py-3 text-slate-300">Deterministic failover; no split-brain.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">AI-Enhanced Consensus</td>
+          <td className="px-4 py-3 text-slate-300">Machine learning-optimized leader election and intelligent log replication.</td>
+          <td className="px-4 py-3 text-slate-300">Predictive failover; intelligent split-brain prevention.</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">State Durability</td>
-          <td className="px-4 py-3 text-slate-300">Persistent HardState, entries, snapshots.</td>
-          <td className="px-4 py-3 text-slate-300">Crash-safe recovery.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Intelligent State Management</td>
+          <td className="px-4 py-3 text-slate-300">AI-driven persistent state with predictive snapshots and smart recovery.</td>
+          <td className="px-4 py-3 text-slate-300">Self-healing crash recovery with minimal downtime.</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Command Interface</td>
-          <td className="px-4 py-3 text-slate-300">SQL functions for init, membership, diagnostics.</td>
-          <td className="px-4 py-3 text-slate-300">Native DB admin UX.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Smart Command Interface</td>
+          <td className="px-4 py-3 text-slate-300">AI-powered SQL functions with intelligent cluster management and diagnostics.</td>
+          <td className="px-4 py-3 text-slate-300">Autonomous database administration with ML insights.</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Monitoring Hooks</td>
-          <td className="px-4 py-3 text-slate-300">Cluster status, log stats, leader checks.</td>
-          <td className="px-4 py-3 text-slate-300">Simplifies observability.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Predictive Monitoring</td>
+          <td className="px-4 py-3 text-slate-300">Machine learning-based health monitoring with anomaly detection and prediction.</td>
+          <td className="px-4 py-3 text-slate-300">Proactive issue prevention and intelligent alerting.</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Node Membership</td>
-          <td className="px-4 py-3 text-slate-300">Add/remove nodes through leader replication.</td>
-          <td className="px-4 py-3 text-slate-300">Controlled scaling.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Adaptive Node Management</td>
+          <td className="px-4 py-3 text-slate-300">AI-driven node scaling with intelligent resource allocation and replication.</td>
+          <td className="px-4 py-3 text-slate-300">Autonomous scaling with optimal resource utilization.</td>
         </tr>
       </tbody>
     </table>
@@ -118,43 +118,43 @@ const ramConfig = {
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Raft Consensus</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">AI-Enhanced Consensus</td>
+          <td className="px-4 py-3 text-green-400">✔️ ML-Optimized</td>
           <td className="px-4 py-3 text-yellow-300">etcd/Consul</td>
           <td className="px-4 py-3 text-yellow-300">etcd</td>
           <td className="px-4 py-3 text-red-300">None</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
-          <td className="px-4 py-3 text-green-400">Native Extension</td>
+          <td className="px-4 py-3 text-green-400">AI-Native Extension</td>
           <td className="px-4 py-3 text-yellow-300">External Agent</td>
           <td className="px-4 py-3 text-yellow-300">External Agent</td>
           <td className="px-4 py-3 text-yellow-300">External Agent</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Split-Brain Prevention</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Predictive Monitoring</td>
+          <td className="px-4 py-3 text-green-400">✔️ ML-Powered</td>
+          <td className="px-4 py-3 text-yellow-300">Basic</td>
+          <td className="px-4 py-3 text-yellow-300">Basic</td>
           <td className="px-4 py-3 text-red-300">✗</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">SQL Interface</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Intelligent SQL Interface</td>
+          <td className="px-4 py-3 text-green-400">✔️ AI-Enhanced</td>
           <td className="px-4 py-3 text-red-300">✗</td>
           <td className="px-4 py-3 text-red-300">✗</td>
           <td className="px-4 py-3 text-red-300">✗</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Zero External Dependencies</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Self-Healing Architecture</td>
+          <td className="px-4 py-3 text-green-400">✔️ AI-Driven</td>
+          <td className="px-4 py-3 text-yellow-300">Manual</td>
+          <td className="px-4 py-3 text-yellow-300">Manual</td>
           <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Background Workers</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Adaptive Resource Management</td>
+          <td className="px-4 py-3 text-green-400">✔️ ML-Based</td>
           <td className="px-4 py-3 text-red-300">✗</td>
           <td className="px-4 py-3 text-red-300">✗</td>
           <td className="px-4 py-3 text-red-300">✗</td>

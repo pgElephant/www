@@ -6,34 +6,34 @@ import { Shield, Zap, Database, Users, Globe, Lock } from 'lucide-react'
 const WhyPgElephant = () => {
   const benefits = [
     {
+      icon: Database,
+      title: 'MongoDB Compatibility',
+      description: 'FauxDB provides full MongoDB wire protocol compatibility with PostgreSQL storage reliability and ACID transactions.'
+    },
+    {
       icon: Shield,
-      title: 'Enterprise Security',
-      description: 'Bank-grade security with advanced encryption, access controls, and compliance features.'
+      title: 'Raft Consensus Clustering',
+      description: 'pgraft delivers native Raft consensus for PostgreSQL with automatic leader election and split-brain prevention.'
     },
     {
       icon: Zap,
-      title: 'High Performance',
-      description: 'Optimized for speed and scalability with intelligent caching and query optimization.'
-    },
-    {
-      icon: Database,
-      title: 'Multi-Database Support',
-      description: 'PostgreSQL clustering, MongoDB compatibility, and distributed consensus all in one platform.'
-    },
-    {
-      icon: Users,
-      title: 'Expert Support',
-      description: '24/7 professional support from PostgreSQL and distributed systems experts.'
-    },
-    {
-      icon: Globe,
-      title: 'Global Scale',
-      description: 'Built for enterprise workloads with automatic scaling and global distribution.'
+      title: 'AI-Powered Connection Pooling',
+      description: 'pgbalancer uses machine learning for intelligent load balancing, query routing, and predictive scaling.'
     },
     {
       icon: Lock,
-      title: 'Data Integrity',
-      description: 'ACID compliance and strong consistency guarantees across all components.'
+      title: 'Production-Grade Reliability',
+      description: 'Battle-tested components with strong consistency guarantees and zero-downtime operations.'
+    },
+    {
+      icon: Globe,
+      title: 'Modern Architecture',
+      description: 'Rust-powered performance, distributed systems design, and cloud-native deployment capabilities.'
+    },
+    {
+      icon: Users,
+      title: 'Open Source Foundation',
+      description: 'Transparent development, community-driven features, and enterprise support options available.'
     }
   ]
 
@@ -52,8 +52,8 @@ const WhyPgElephant = () => {
             Why PgElephant?
           </h2>
           <p className="text-xl text-white/90 leading-relaxed font-light drop-shadow-lg">
-            Enterprise-grade PostgreSQL solutions that combine the reliability of PostgreSQL 
-            with the flexibility of modern distributed systems and document databases.
+            Three specialized PostgreSQL tools: FauxDB (MongoDB-compatible document database), 
+            pgraft (Raft consensus clustering), and pgbalancer (AI-powered connection pooling).
           </p>
         </div>
 

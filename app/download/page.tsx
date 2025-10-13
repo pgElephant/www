@@ -252,37 +252,52 @@ const DownloadPage = () => {
   return (
     <div className="pt-0">
       {/* Unified Professional Hero */}
-      <section className="relative text-center overflow-hidden" style={{ background: unifiedHeroGradient }}>
-        {/* Elegant overlay gradient - same as Hero */}
+      <section 
+        className="relative text-center overflow-hidden"
+        style={{ 
+          backgroundImage: 'url(/hero-bg-technical.svg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position: 'relative'
+        }}
+      >
+        {/* Additional overlay for better text contrast */}
         <div 
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
+            background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.3) 0%, rgba(26, 26, 46, 0.4) 50%, rgba(83, 52, 131, 0.2) 100%)'
           }}
         />
-        
-        {/* Elegant floating elements - same as Hero */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating orbs */}
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-indigo-500/25 to-cyan-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-emerald-500/15 to-indigo-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          
-          {/* Subtle pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
-              backgroundSize: '32px 32px'
-            }}
-          />
+
+        <div className="container-extra-wide mx-auto relative z-10 pt-20 pb-16">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">Download Center</h1>
+            <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow-lg">
+              Official, production-grade releases. Secure, fast, and trusted by global enterprises.
+            </p>
+            {/* Trust Bar */}
+            <div className="flex flex-wrap justify-center gap-6 mb-10">
+              {trustBar.map((item, i) => (
+                <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20 text-base font-semibold">
+                  <item.icon className="w-5 h-5" />
+                  {item.label}
+                </div>
+              ))}
+            </div>
+            {/* Download Stats */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {downloadStats.map((stat, i) => (
+                <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm px-6 py-4 rounded-xl min-w-[120px] border border-white/20">
+                  <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
+                  <span className="text-2xl font-thin text-white">{stat.value}</span>
+                  <span className="text-xs text-white">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="container-wide mx-auto relative z-10 py-28">
-          <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight">Download Center</h1>
-          <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto">
-            Official, production-grade releases. Secure, fast, and trusted by global enterprises.
-          </p>
+      </section>
           {/* Trust Bar */}
           <div className="flex flex-wrap justify-center gap-6 mb-10">
             {trustBar.map((item, i) => (

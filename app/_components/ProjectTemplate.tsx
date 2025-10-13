@@ -68,36 +68,53 @@ export default function ProjectTemplate({
   return (
     <div>
       {/* Hero */}
-      <section className="py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
-        <div className="container-wide relative z-10">
-          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
-            {/* Left side - Icon */}
-            {hero.icon && (
-              <div className="flex-shrink-0">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-2xl">
-                  {hero.icon}
-                </div>
-              </div>
-            )}
-            
-            {/* Right side - Content */}
-            <div className="flex-1 text-center lg:text-left">
-              <div className="text-4xl lg:text-5xl font-bold tracking-tight mb-4">{hero.title}</div>
-              {hero.subtitle && (
-                <div className="text-lg lg:text-xl font-semibold text-white/90 mb-8 leading-relaxed">
-                  {hero.subtitle}
+      <section 
+        className="py-16 text-white relative overflow-hidden"
+        style={{ 
+          backgroundImage: 'url(/hero-bg-technical.svg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position: 'relative'
+        }}
+      >
+        {/* Additional overlay for better text contrast */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.3) 0%, rgba(26, 26, 46, 0.4) 50%, rgba(83, 52, 131, 0.2) 100%)'
+          }}
+        />
+                <div className="container-extra-wide pt-20 pb-16 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
+              {/* Left side - Icon */}
+              {hero.icon && (
+                <div className="flex-shrink-0">
+                  <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-2xl">
+                    {hero.icon}
+                  </div>
                 </div>
               )}
               
-              {demo && (
-                <div className="max-w-4xl mx-auto lg:mx-0">
-                  {demo}
+              {/* Right side - Content */}
+              <div className="flex-1 text-center lg:text-left">
+                <div className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 drop-shadow-lg">{hero.title}</div>
+                {hero.subtitle && (
+                  <div className="text-lg lg:text-xl font-semibold text-white/90 mb-8 leading-relaxed drop-shadow-lg">
+                    {hero.subtitle}
+                  </div>
+                )}
+                
+                {demo && (
+                  <div className="max-w-4xl mx-auto lg:mx-0">
+                    {demo}
+                  </div>
+                )}
+                
+                <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-2">
+                  {badges && badges.map((b: string, i: number) => <Badge key={i}>{b}</Badge>)}
                 </div>
-              )}
-              
-              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-2">
-                {badges && badges.map((b: string, i: number) => <Badge key={i}>{b}</Badge>)}
               </div>
             </div>
           </div>
