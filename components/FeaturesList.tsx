@@ -19,7 +19,8 @@ import {
   HardDrive,
   Network,
   Activity,
-  BookOpen
+  BookOpen,
+  Search
 } from 'lucide-react'
 
 const FeaturesList = () => {
@@ -59,6 +60,82 @@ const FeaturesList = () => {
           title: 'High Performance',
           description: 'Optimized for high-throughput database workloads',
           icon: <Zap className="w-5 h-5" />
+        }
+      ]
+    },
+    {
+      name: 'pgSentinel',
+      description: 'Professional pgbalancer Management & Monitoring',
+      icon: <Activity className="w-8 h-8" />,
+      color: 'primary',
+      features: [
+        {
+          title: 'Real-Time Dashboard',
+          description: 'Live metrics with WebSocket updates every 5 seconds',
+          icon: <Activity className="w-5 h-5" />
+        },
+        {
+          title: 'Prometheus Metrics',
+          description: '30+ custom metrics for comprehensive monitoring',
+          icon: <Network className="w-5 h-5" />
+        },
+        {
+          title: 'Grafana Dashboards',
+          description: '22 pre-built visualization panels',
+          icon: <BookOpen className="w-5 h-5" />
+        },
+        {
+          title: 'pg_stat_insights',
+          description: 'Deep PostgreSQL performance analytics',
+          icon: <Database className="w-5 h-5" />
+        },
+        {
+          title: 'REST API',
+          description: '25+ endpoints for programmatic control',
+          icon: <Code className="w-5 h-5" />
+        },
+        {
+          title: 'Docker Ready',
+          description: '8-service stack with one-command deployment',
+          icon: <Server className="w-5 h-5" />
+        }
+      ]
+    },
+    {
+      name: 'pg_stat_insights',
+      description: 'Deep PostgreSQL Performance Analytics',
+      icon: <BookOpen className="w-8 h-8" />,
+      color: 'secondary',
+      features: [
+        {
+          title: 'Query Analytics',
+          description: 'Identify slow queries and optimization opportunities',
+          icon: <Search className="w-5 h-5" />
+        },
+        {
+          title: 'Table Statistics',
+          description: 'Bloat detection and vacuum recommendations',
+          icon: <HardDrive className="w-5 h-5" />
+        },
+        {
+          title: 'Index Analysis',
+          description: 'Missing and unused index detection',
+          icon: <CheckCircle className="w-5 h-5" />
+        },
+        {
+          title: 'Cache Monitoring',
+          description: 'Buffer cache hit ratios and optimization',
+          icon: <Cpu className="w-5 h-5" />
+        },
+        {
+          title: 'Replication Insights',
+          description: 'Real-time lag monitoring across replicas',
+          icon: <Network className="w-5 h-5" />
+        },
+        {
+          title: 'Smart Recommendations',
+          description: 'Intelligent optimization suggestions',
+          icon: <Activity className="w-5 h-5" />
         }
       ]
     },
@@ -278,6 +355,18 @@ Enterprise Solutions
                                 <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-light rounded-full text-center">Load Balance</span>
                               </>
                             )}
+                            {project.name === 'pgSentinel' && (
+                              <>
+                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Monitoring</span>
+                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Management</span>
+                              </>
+                            )}
+                            {project.name === 'pg_stat_insights' && (
+                              <>
+                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Analytics</span>
+                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-light rounded-full text-center">Performance</span>
+                              </>
+                            )}
                             {project.name === 'pgraft' && (
                               <>
                                 <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Consensus</span>
@@ -312,6 +401,22 @@ Enterprise Solutions
                                 <div className="text-xs text-white/90">• C-optimized</div>
                               </>
                             )}
+                            {project.name === 'pgSentinel' && (
+                              <>
+                                <div className="text-xs text-white/90">• 5s update interval</div>
+                                <div className="text-xs text-white/90">• &lt;50ms API response</div>
+                                <div className="text-xs text-white/90">• 30+ metrics</div>
+                                <div className="text-xs text-white/90">• Real-time WebSocket</div>
+                              </>
+                            )}
+                            {project.name === 'pg_stat_insights' && (
+                              <>
+                                <div className="text-xs text-white/90">• &lt;100ms analysis</div>
+                                <div className="text-xs text-white/90">• 50+ tracked metrics</div>
+                                <div className="text-xs text-white/90">• 10+ data sources</div>
+                                <div className="text-xs text-white/90">• Intelligent recommendations</div>
+                              </>
+                            )}
                             {project.name === 'pgraft' && (
                               <>
                                 <div className="text-xs text-white/90">• Sub-second failover</div>
@@ -340,6 +445,22 @@ Enterprise Solutions
                                 <div className="text-xs text-white/90">• Zero downtime</div>
                               </>
                             )}
+                            {project.name === 'pgSentinel' && (
+                              <>
+                                <div className="text-xs text-white/90">• Next.js 14 + React 18</div>
+                                <div className="text-xs text-white/90">• FastAPI Python backend</div>
+                                <div className="text-xs text-white/90">• Docker Compose</div>
+                                <div className="text-xs text-white/90">• Production-ready</div>
+                              </>
+                            )}
+                            {project.name === 'pg_stat_insights' && (
+                              <>
+                                <div className="text-xs text-white/90">• Python asyncpg</div>
+                                <div className="text-xs text-white/90">• PostgreSQL extensions</div>
+                                <div className="text-xs text-white/90">• API integrated</div>
+                                <div className="text-xs text-white/90">• Cloud native</div>
+                              </>
+                            )}
                             {project.name === 'pgraft' && (
                               <>
                                 <div className="text-xs text-white/90">• PostgreSQL extension</div>
@@ -366,6 +487,22 @@ Enterprise Solutions
                                 <div className="text-xs text-white/90">• Multi-tenant systems</div>
                                 <div className="text-xs text-white/90">• Load distribution</div>
                                 <div className="text-xs text-white/90">• Connection scaling</div>
+                              </>
+                            )}
+                            {project.name === 'pgSentinel' && (
+                              <>
+                                <div className="text-xs text-white/90">• Production monitoring</div>
+                                <div className="text-xs text-white/90">• DevOps automation</div>
+                                <div className="text-xs text-white/90">• Performance tuning</div>
+                                <div className="text-xs text-white/90">• Capacity planning</div>
+                              </>
+                            )}
+                            {project.name === 'pg_stat_insights' && (
+                              <>
+                                <div className="text-xs text-white/90">• Query optimization</div>
+                                <div className="text-xs text-white/90">• Performance troubleshooting</div>
+                                <div className="text-xs text-white/90">• Capacity planning</div>
+                                <div className="text-xs text-white/90">• Production analytics</div>
                               </>
                             )}
                             {project.name === 'pgraft' && (

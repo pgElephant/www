@@ -19,6 +19,8 @@ const Header = () => {
     { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering' },
     { name: 'pgraft', href: '/pgraft', description: 'Raft Extension' },
     { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling' },
+    { name: 'pgSentinel', href: '/pgsentinel', description: 'Monitoring Platform' },
+    { name: 'pg_stat_insights', href: '/pg-stat-insights', description: 'Performance Analytics' },
     { name: 'FauxDB', href: '/fauxdb', description: 'Document Database' },
   ]
 
