@@ -985,6 +985,7 @@ const CommunityPage = () => {
         </div>
       </div>
     </div>
+    </div>
   )
 }
 

@@ -298,27 +298,6 @@ const DownloadPage = () => {
           </div>
         </div>
       </section>
-          {/* Trust Bar */}
-          <div className="flex flex-wrap justify-center gap-6 mb-10">
-            {trustBar.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20 text-base font-semibold">
-                <item.icon className="w-5 h-5" />
-                {item.label}
-              </div>
-            ))}
-          </div>
-          {/* Download Stats */}
-          <div className="flex flex-wrap justify-center gap-4">
-            {downloadStats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm px-6 py-4 rounded-xl min-w-[120px] border border-white/20">
-                <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
-                <span className="text-2xl font-thin text-white">{stat.value}</span>
-                <span className="text-xs text-white">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Professional Download Table/List */}
       <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
