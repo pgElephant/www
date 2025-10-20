@@ -162,7 +162,7 @@ const DownloadPage = () => {
         'Enterprise Security: Token-based auth, SSL/TLS, rate limiting',
         'Cloud-Native: Docker, Kubernetes, and Helm chart support',
       ],
-      details: '/ram/enterprise',
+      details: '/ram',
       downloads: [
         { title: 'Linux Binary', href: '/download/ram', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/ram', type: 'Source' },
@@ -183,7 +183,7 @@ const DownloadPage = () => {
         'Zero-Downtime Operations: Non-disruptive cluster operations',
         "Go Integration: Leverages Go's robust Raft implementation",
       ],
-      details: '/pgraft/enterprise',
+      details: '/pgraft',
       downloads: [
         { title: 'Linux Binary', href: '/download/pgraft', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/pgraft', type: 'Source' },
@@ -203,7 +203,7 @@ const DownloadPage = () => {
         'Production Ready: Enterprise-grade monitoring, logging, and configuration',
         'Docker Support: Comprehensive Docker support for dev, test, and production',
       ],
-      details: '/fauxdb/enterprise',
+      details: '/fauxdb',
       downloads: [
         { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/fauxdb', type: 'Source' },
@@ -223,7 +223,7 @@ const DownloadPage = () => {
         'Health Monitoring: Real-time backend health checks and failover',
         'Zero Dependencies: Self-contained with no external coordination services',
       ],
-      details: '/pgbalancer/enterprise',
+      details: '/pgbalancer',
       downloads: [
         { title: 'Linux Binary', href: '/download/pgbalancer', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/pgbalancer', type: 'Source' },
@@ -240,7 +240,7 @@ const DownloadPage = () => {
         'Split-Brain Prevention: Ensures cluster consistency',
         'Production Proven: Used in mission-critical deployments',
       ],
-      details: '/rale/enterprise',
+      details: '/rale',
       downloads: [
         { title: 'Linux Binary', href: '/download/rale', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/rale', type: 'Source' },

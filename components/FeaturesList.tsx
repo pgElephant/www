@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { 
   Database, 
   Zap, 
@@ -30,6 +31,7 @@ const FeaturesList = () => {
       description: 'PostgreSQL Connection Pooler & Load Balancer',
       icon: <Settings className="w-8 h-8" />,
       color: 'primary',
+      link: '/pgbalancer',
       features: [
         {
           title: 'Connection Pooling',
@@ -60,6 +62,16 @@ const FeaturesList = () => {
           title: 'High Performance',
           description: 'Optimized for high-throughput database workloads',
           icon: <Zap className="w-5 h-5" />
+        },
+        {
+          title: 'REST API Control',
+          description: 'Complete programmatic control via RESTful API endpoints',
+          icon: <Code className="w-5 h-5" />
+        },
+        {
+          title: 'MQTT Cluster Management',
+          description: 'Distributed cluster coordination via MQTT messaging',
+          icon: <Globe className="w-5 h-5" />
         }
       ]
     },
@@ -68,6 +80,7 @@ const FeaturesList = () => {
       description: 'Professional pgbalancer Management & Monitoring',
       icon: <Activity className="w-8 h-8" />,
       color: 'primary',
+      link: '/pgsentinel',
       features: [
         {
           title: 'Real-Time Dashboard',
@@ -106,6 +119,7 @@ const FeaturesList = () => {
       description: 'Deep PostgreSQL Performance Analytics',
       icon: <BookOpen className="w-8 h-8" />,
       color: 'secondary',
+      link: '/pg-stat-insights',
       features: [
         {
           title: 'Query Analytics',
@@ -144,6 +158,7 @@ const FeaturesList = () => {
       description: 'PostgreSQL Raft Consensus Extension',
       icon: <Crown className="w-8 h-8" />,
       color: 'secondary',
+      link: '/pgraft',
       features: [
         {
           title: 'Raft Consensus Protocol',
@@ -182,6 +197,7 @@ const FeaturesList = () => {
       description: 'MongoDB Wire Protocol Proxy & Query Translator',
       icon: <Globe className="w-8 h-8" />,
       color: 'accent',
+      link: '/fauxdb',
       features: [
         {
           title: 'MongoDB Wire Protocol Proxy',
@@ -564,10 +580,10 @@ Enterprise Solutions
                   </div>
                   
                   <div className="mt-8 pt-6 border-t border-slate-400/20">
-                    <button className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
+                    <Link href={project.link} className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
                       View Enterprise Details
                       <ArrowRight className="w-4 h-4" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               )

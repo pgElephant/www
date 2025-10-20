@@ -109,8 +109,9 @@ const pgbalancerConfig = {
     'Load Balancing',
     'Machine Learning',
     'Predictive Scaling',
+    'REST API Control',
+    'MQTT Clustering',
     'High Performance',
-    'REST API',
     'Production Ready',
   ],
   demo: <PgbalancerDemoTerminal />,
@@ -122,7 +123,10 @@ const pgbalancerConfig = {
     { icon: '🎯', iconColor: 'text-yellow-500', title: 'Adaptive Query Routing', desc: 'Intelligent query analysis with complexity estimation, read/write detection, and optimal backend selection.' },
     { icon: '📈', iconColor: 'text-orange-500', title: 'Health Prediction', desc: 'ML-based health scoring with decay metrics, error rate analysis, and predictive failure detection.' },
     { icon: '🔧', iconColor: 'text-pink-500', title: 'Self-Learning System', desc: 'Continuous learning from feedback with automatic parameter tuning and model performance optimization.' },
-    { icon: '🚀', iconColor: 'text-violet-500', title: 'REST API with AI', desc: 'Modern HTTP API providing ML insights, model statistics, and intelligent performance recommendations.' },
+    { icon: '🚀', iconColor: 'text-violet-500', title: 'REST API Control', desc: 'Complete programmatic control via RESTful API with cluster management, configuration updates, and real-time monitoring.' },
+    { icon: '📡', iconColor: 'text-cyan-500', title: 'MQTT Clustering', desc: 'Distributed cluster coordination via MQTT messaging for multi-node deployments with automatic discovery and failover.' },
+    { icon: '🔧', iconColor: 'text-orange-500', title: 'bctl Management Tool', desc: 'Command-line utility for cluster administration, configuration management, and operational control.' },
+    { icon: '📊', iconColor: 'text-pink-500', title: 'Real-Time Metrics', desc: 'Comprehensive monitoring with Prometheus metrics, health checks, and performance analytics.' },
     { icon: '⚡', iconColor: 'text-red-500', title: 'High Performance', desc: 'Ultra-fast C implementation enhanced with AI algorithms for maximum throughput and minimal latency.' },
   ],
   featurePillars: {
@@ -135,7 +139,10 @@ const pgbalancerConfig = {
       { title: 'Self-Learning System', desc: 'Continuous learning from query feedback with automatic model adjustments, decay metrics, and dynamic parameter tuning.' },
       { title: 'AI-Enhanced Monitoring', desc: 'Real-time health scoring, predictive failure detection, and intelligent alerting with ML-based anomaly detection.' },
       { title: 'Adaptive Query Routing', desc: 'AI analyzes query complexity, estimated rows, and backend health to route queries to optimal servers automatically.' },
-      { title: 'REST API with ML Insights', desc: 'Modern HTTP API providing AI statistics, model performance metrics, and intelligent recommendations for optimization.' },
+      { title: 'REST API Control', desc: 'Complete programmatic control via RESTful API with cluster management, configuration updates, real-time monitoring, and AI insights.' },
+      { title: 'MQTT Clustering', desc: 'Distributed cluster coordination via MQTT messaging for multi-node deployments with automatic discovery, health monitoring, and failover.' },
+      { title: 'bctl Management Tool', desc: 'Command-line utility for cluster administration, configuration management, operational control, and monitoring integration.' },
+      { title: 'Real-Time Metrics', desc: 'Comprehensive monitoring with Prometheus metrics, health checks, performance analytics, and AI-driven insights.' },
     ],
   },
   featureMatrix: (
@@ -205,6 +212,27 @@ const pgbalancerConfig = {
           <td className="px-4 py-3 text-slate-300">Intelligent replica usage, ML-based routing</td>
           <td className="px-4 py-3 text-slate-300">AI query parsing & optimization</td>
           <td className="px-4 py-3 text-slate-300">Smart read replica distribution</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-green-300">MQTT Clustering</td>
+          <td className="px-4 py-3 text-slate-300">Distributed cluster coordination via MQTT messaging</td>
+          <td className="px-4 py-3 text-slate-300">Multi-node coordination, automatic discovery</td>
+          <td className="px-4 py-3 text-slate-300">Event-driven, real-time updates</td>
+          <td className="px-4 py-3 text-slate-300">Horizontal scaling, fault tolerance</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-purple-300">bctl Management</td>
+          <td className="px-4 py-3 text-slate-300">Command-line utility for cluster administration</td>
+          <td className="px-4 py-3 text-slate-300">Easy configuration, monitoring integration</td>
+          <td className="px-4 py-3 text-slate-300">Fast CLI operations, real-time monitoring</td>
+          <td className="px-4 py-3 text-slate-300">DevOps-friendly, automation ready</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-orange-300">Real-Time Metrics</td>
+          <td className="px-4 py-3 text-slate-300">Comprehensive monitoring with Prometheus integration</td>
+          <td className="px-4 py-3 text-slate-300">AI insights, performance analytics</td>
+          <td className="px-4 py-3 text-slate-300">Low-latency metrics, ML-enhanced</td>
+          <td className="px-4 py-3 text-slate-300">Cloud-native monitoring, scalable</td>
         </tr>
       </tbody>
     </table>
@@ -292,10 +320,183 @@ const pgbalancerConfig = {
             <td className="px-4 py-3 text-green-400">Very High (C)</td>
             <td className="px-4 py-3 text-green-400">High (Rust)</td>
           </tr>
+          <tr className="bg-slate-800/40">
+            <td className="px-4 py-3 font-medium text-slate-200">MQTT Clustering</td>
+            <td className="px-4 py-3 text-purple-400">✓ Distributed</td>
+            <td className="px-4 py-3 text-red-400">✗</td>
+            <td className="px-4 py-3 text-red-400">✗</td>
+            <td className="px-4 py-3 text-red-400">✗</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-slate-200">Management CLI</td>
+            <td className="px-4 py-3 text-purple-400">✓ bctl Tool</td>
+            <td className="px-4 py-3 text-yellow-400">~ pgpool commands</td>
+            <td className="px-4 py-3 text-red-400">✗</td>
+            <td className="px-4 py-3 text-yellow-400">~ Basic CLI</td>
+          </tr>
+          <tr className="bg-slate-800/40">
+            <td className="px-4 py-3 font-medium text-slate-200">Real-Time Metrics</td>
+            <td className="px-4 py-3 text-purple-400">✓ Prometheus + AI</td>
+            <td className="px-4 py-3 text-yellow-400">~ Basic stats</td>
+            <td className="px-4 py-3 text-yellow-400">~ Simple metrics</td>
+            <td className="px-4 py-3 text-yellow-400">~ Basic monitoring</td>
+          </tr>
         </tbody>
       </table>
     </div>
   ),
+  codeExamples: [
+    {
+      title: 'REST API - Cluster Management',
+      code: `# Get cluster status
+curl -X GET http://localhost:8080/api/v1/cluster/status
+
+# Add new backend node
+curl -X POST http://localhost:8080/api/v1/backends \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "host": "192.168.1.100",
+    "port": 5432,
+    "database": "mydb",
+    "user": "postgres",
+    "weight": 1.0,
+    "max_connections": 100
+  }'
+
+# Update load balancing strategy
+curl -X PUT http://localhost:8080/api/v1/config/load_balancing \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "strategy": "ai_weighted",
+    "health_check_interval": 30,
+    "failover_threshold": 3
+  }'
+
+# Get AI model statistics
+curl -X GET http://localhost:8080/api/v1/ai/stats`,
+      language: 'bash',
+    },
+    {
+      title: 'MQTT Cluster Coordination',
+      code: `# MQTT Configuration
+mqtt:
+  broker: "mqtt://cluster-broker:1883"
+  client_id: "pgbalancer-node-1"
+  topics:
+    cluster_health: "pgbalancer/cluster/health"
+    config_updates: "pgbalancer/cluster/config"
+    failover_events: "pgbalancer/cluster/failover"
+  
+# Subscribe to cluster events
+mosquitto_sub -h cluster-broker -t "pgbalancer/cluster/health" \\
+  -t "pgbalancer/cluster/failover"
+
+# Publish health status
+mosquitto_pub -h cluster-broker \\
+  -t "pgbalancer/cluster/health" \\
+  -m '{"node": "pgbalancer-1", "status": "healthy", "connections": 45}'
+
+# Trigger failover via MQTT
+mosquitto_pub -h cluster-broker \\
+  -t "pgbalancer/cluster/failover" \\
+  -m '{"backend": "db-1", "action": "disable", "reason": "high_latency"}'`,
+      language: 'yaml',
+    },
+    {
+      title: 'bctl Management Tool',
+      code: `# Install bctl
+go install github.com/pgelephant/pgbalancer/cmd/bctl@latest
+
+# Connect to cluster
+bctl connect --broker mqtt://cluster-broker:1883
+
+# List all backends
+bctl backends list
+
+# Add new backend
+bctl backends add \\
+  --host 192.168.1.100 \\
+  --port 5432 \\
+  --database mydb \\
+  --user postgres \\
+  --weight 1.0
+
+# Update AI model parameters
+bctl ai update \\
+  --learning-rate 0.01 \\
+  --exploration-rate 0.1 \\
+  --decay-factor 0.95
+
+# Monitor cluster health
+bctl monitor --watch
+
+# Export configuration
+bctl config export --format yaml > cluster-config.yaml`,
+      language: 'bash',
+    },
+    {
+      title: 'Python Integration',
+      code: `import requests
+import paho.mqtt.client as mqtt
+import json
+
+class PgbalancerClient:
+    def __init__(self, api_url, mqtt_broker):
+        self.api_url = api_url
+        self.mqtt_client = mqtt.Client()
+        self.mqtt_client.connect(mqtt_broker, 1883, 60)
+        
+    def get_cluster_status(self):
+        response = requests.get(f"{self.api_url}/api/v1/cluster/status")
+        return response.json()
+    
+    def add_backend(self, host, port, database, user, weight=1.0):
+        data = {
+            "host": host,
+            "port": port,
+            "database": database,
+            "user": user,
+            "weight": weight
+        }
+        response = requests.post(f"{self.api_url}/api/v1/backends", json=data)
+        return response.json()
+    
+    def subscribe_to_events(self, callback):
+        def on_message(client, userdata, msg):
+            data = json.loads(msg.payload.decode())
+            callback(data)
+        
+        self.mqtt_client.on_message = on_message
+        self.mqtt_client.subscribe("pgbalancer/cluster/#")
+        self.mqtt_client.loop_start()
+    
+    def publish_health_status(self, node_id, status, connections):
+        data = {
+            "node": node_id,
+            "status": status,
+            "connections": connections
+        }
+        self.mqtt_client.publish("pgbalancer/cluster/health", json.dumps(data))
+
+# Usage
+client = PgbalancerClient("http://localhost:8080", "cluster-broker")
+
+# Get cluster status
+status = client.get_cluster_status()
+print(f"Active backends: {status['active_backends']}")
+
+# Add new backend
+result = client.add_backend("192.168.1.100", 5432, "mydb", "postgres")
+print(f"Backend added: {result['success']}")
+
+# Subscribe to cluster events
+def handle_event(event):
+    print(f"Cluster event: {event}")
+
+client.subscribe_to_events(handle_event)`,
+      language: 'python',
+    },
+  ],
   docsLinks: [
     {
       title: 'Getting Started',

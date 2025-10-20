@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ArrowRight, Database, Loader2, Zap, Crown, Network, Shield, FileText, Cpu, Server, Users, Activity, Layers } from 'lucide-react'
+import { ArrowRight, Database, Loader2, Zap, Crown, Network, Shield, FileText, Cpu, Server, Users, Activity, Layers, Monitor, BarChart3, Eye, Bell } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -90,6 +90,26 @@ const RamIcon = ({ size = 24 }: { size?: number }) => (
   </div>
 )
 
+// Custom pgSentinel icon component
+const PgSentinelIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Monitor className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Eye className="text-green-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Bell className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
+// Custom pg_stat_insights icon component
+const PgStatInsightsIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <BarChart3 className="text-purple-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <Database className="text-blue-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Activity className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+    <Eye className="text-orange-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
+  </div>
+)
+
 const Hero = () => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
@@ -132,6 +152,32 @@ const Hero = () => {
       icon: 'pgbalancer-custom',
       color: `from-[${palette.accentDark}] to-[${palette.primaryLight}]`,
       bg: { from: palette.accentDark, via: palette.primary, to: palette.primaryLight }
+    },
+    {
+      id: 'pgsentinel',
+      name: 'pgSentinel',
+      title: 'Professional PostgreSQL Monitoring Platform',
+      description: '• Comprehensive real-time monitoring with Grafana dashboards',
+      description2: '• Advanced alerting system with Prometheus integration',
+      description3: '• Performance analytics with query optimization insights',
+      description4: '• Docker-based deployment with complete observability stack',
+      description5: '• Enterprise-grade monitoring with automated health checks',
+      icon: 'pgsentinel-custom',
+      color: `from-[${palette.primary}] to-[${palette.secondary}]`,
+      bg: { from: palette.primary, via: palette.primaryLight, to: palette.secondary }
+    },
+    {
+      id: 'pg-stat-insights',
+      name: 'pg_stat_insights',
+      title: 'Deep PostgreSQL Performance Analytics',
+      description: '• Advanced query performance analysis with pg_stat_statements',
+      description2: '• Table and index usage statistics with optimization recommendations',
+      description3: '• Cache hit ratio monitoring with buffer pool analysis',
+      description4: '• Replication lag tracking with failover insights',
+      description5: '• Comprehensive database health metrics and reporting',
+      icon: 'pg-stat-insights-custom',
+      color: `from-[${palette.secondaryDark}] to-[${palette.accent}]`,
+      bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.accent }
     }
   ]
 
@@ -182,6 +228,10 @@ const Hero = () => {
                         <RaleIcon size={80} />
                       ) : current.icon === 'ram-custom' ? (
                         <RamIcon size={80} />
+                      ) : current.icon === 'pgsentinel-custom' ? (
+                        <PgSentinelIcon size={80} />
+                      ) : current.icon === 'pg-stat-insights-custom' ? (
+                        <PgStatInsightsIcon size={80} />
                       ) : (
                         <Image 
                           src={current.icon} 
@@ -256,6 +306,10 @@ const Hero = () => {
                          <RaleIcon size={20} />
                        ) : product.icon === 'ram-custom' ? (
                          <RamIcon size={20} />
+                       ) : product.icon === 'pgsentinel-custom' ? (
+                         <PgSentinelIcon size={20} />
+                       ) : product.icon === 'pg-stat-insights-custom' ? (
+                         <PgStatInsightsIcon size={20} />
                        ) : (
                          <Image 
                            src={product.icon} 
