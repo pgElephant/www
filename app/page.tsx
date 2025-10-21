@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from '@/components/Hero'
 import WhyPgElephant from '@/components/WhyPgElephant'
+import ClusterArchitecture from '@/components/ClusterArchitecture'
 import FeaturesList from '@/components/FeaturesList'
 import ProductSchema from '@/components/SEO/ProductSchema'
 
@@ -63,6 +64,7 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <WhyPgElephant />
+        <ClusterArchitecture />
         <FeaturesList />
       </main>
     </>
