@@ -2,9 +2,11 @@
 const nextConfig = {
   // Performance optimizations
   experimental: {
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'react-markdown'],
     webpackBuildWorker: true,
     gzipSize: true,
+    optimizeCss: true,
+    scrollRestoration: true,
   },
   // Temporarily disable ESLint during build
   eslint: {
@@ -12,7 +14,10 @@ const nextConfig = {
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
+  // Enable SWC minification
+  swcMinify: true,
   images: {
     remotePatterns: [
       {
