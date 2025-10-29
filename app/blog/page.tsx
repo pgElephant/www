@@ -30,14 +30,31 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '1', icon: BookOpen, color: 'text-white' },
-  { label: 'Monthly Readers', value: '2.1k', icon: Eye, color: 'text-white' },
+  { label: 'Total Articles', value: '2', icon: BookOpen, color: 'text-white' },
+  { label: 'Monthly Readers', value: '3.8k', icon: Eye, color: 'text-white' },
   { label: 'Categories', value: '1', icon: Tag, color: 'text-white' },
   { label: 'Authors', value: '1', icon: Users, color: 'text-white' }
 ]
 
 
 const blogPosts = [
+  {
+    slug: 'pg-stat-insights',
+    title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
+    excerpt: 'Comprehensive PostgreSQL performance monitoring with 52 metrics, 11 pre-built views, and deep insights into query execution, cache efficiency, WAL generation, and JIT compilation.',
+    content: 'pg_stat_insights is a drop-in replacement for pg_stat_statements that provides enhanced PostgreSQL performance monitoring with response time categorization, advanced cache analysis, and comprehensive query insights.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-01-29',
+    readTime: '20 min read',
+    category: 'Technical',
+    featured: true,
+    icon: 'pg_stat_insights',
+    views: 1423,
+    likes: 98,
+    comments: 27,
+    tags: ['Performance Monitoring', 'PostgreSQL', 'Query Analytics', 'Observability']
+  },
   {
     slug: 'pgraft',
     title: 'pgraft: Raft-Based PostgreSQL Extension',
@@ -69,6 +86,12 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               <img 
                 src="/blog/pgraft/header.svg" 
                 alt="pgraft blog header" 
+                className="w-full h-full object-cover"
+              />
+            ) : post.slug === 'pg-stat-insights' ? (
+              <img 
+                src="/blog/pg-stat-insights/header.svg" 
+                alt="pg_stat_insights blog header" 
                 className="w-full h-full object-cover"
               />
             ) : (

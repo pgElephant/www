@@ -365,13 +365,13 @@ const pgStatInsightsConfig = {
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-slate-200">Response Time Categories</td>
           <td className="px-4 py-3 text-red-400">✗ No</td>
-          <td className="px-4 py-3 text-red-400">✗ No</td>
+          <td className="px-4 py-3 text-green-400">✓ Yes (10 buckets)</td>
           <td className="px-4 py-3 text-green-400">✓ Yes (6 buckets)</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-slate-200">Time-Series Tracking</td>
           <td className="px-4 py-3 text-red-400">✗ No</td>
-          <td className="px-4 py-3 text-red-400">✗ No</td>
+          <td className="px-4 py-3 text-green-400">✓ Bucket-based</td>
           <td className="px-4 py-3 text-green-400">✓ Bucket-based</td>
         </tr>
         <tr className="bg-slate-800/60">
