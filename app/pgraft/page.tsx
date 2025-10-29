@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     title: 'pgraft - PostgreSQL Raft Consensus Extension',
     description: 'Production-ready Raft consensus for PostgreSQL clusters with automatic leader election, crash-safe replication, and 100% split-brain prevention.',
   },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/pgraft',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 // Custom pgraft icon component

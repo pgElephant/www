@@ -62,6 +62,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.mainProducts,
+    },
+    {
+      url: `${baseUrl}/pgsentinel`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: priorities.mainProducts,
+    },
+    {
+      url: `${baseUrl}/pg-stat-insights`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: priorities.mainProducts,
     }
   ]
 
@@ -288,43 +300,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/blog/ram`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: priorities.utility,
-    },
-    {
-      url: `${baseUrl}/blog/fauxdb`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.utility,
+      priority: priorities.blog,
     },
     {
       url: `${baseUrl}/blog/rale`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: priorities.utility,
+      priority: priorities.blog,
     },
     {
       url: `${baseUrl}/blog/pgraft`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: priorities.utility,
+      priority: priorities.blog,
     },
     {
-      url: `${baseUrl}/blog/postgresql`,
+      url: `${baseUrl}/blog/pg-stat-insights`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: priorities.utility,
-    },
-    {
-      url: `${baseUrl}/blog/high-availability`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.utility,
-    },
-    {
-      url: `${baseUrl}/blog/tutorials`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.utility,
+      priority: priorities.blog,
     }
   ]
 

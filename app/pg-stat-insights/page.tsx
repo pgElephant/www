@@ -170,8 +170,8 @@ const pgStatInsightsConfig = {
               <div className="text-xs text-slate-400 mt-2">Slowest queries</div>
               <div className="mt-2 text-xs text-slate-300">By total_exec_time</div>
             </div>
-          </div>
-          
+      </div>
+      
           {/* View 3 */}
           <div className="bg-green-600/10 border-2 border-green-500 rounded-lg p-4">
             <div className="text-center">
@@ -219,9 +219,9 @@ const pgStatInsightsConfig = {
               <div className="font-bold text-pink-300 text-sm">errors</div>
               <div className="text-xs text-slate-400 mt-2">Failed queries</div>
               <div className="mt-2 text-xs text-slate-300">Error tracking</div>
-            </div>
           </div>
-          
+        </div>
+        
           {/* View 8 */}
           <div className="bg-yellow-600/10 border-2 border-yellow-500 rounded-lg p-4">
             <div className="text-center">
@@ -334,7 +334,7 @@ const pgStatInsightsConfig = {
       </div>
       
       {/* Comparison Table */}
-      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
           <th className="px-4 py-3 font-semibold text-white">Feature</th>

@@ -62,11 +62,11 @@ const Footer = () => {
   const year = new Date().getFullYear()
   const navigation = {
     products: [
-      { name: 'RALE', href: '/rale', description: 'Distributed Consensus Engine', icon: 'rale-custom' },
-      { name: 'RAM', href: '/ram', description: 'PostgreSQL Clustering Manager', icon: 'ram-custom' },
-      { name: 'pgraft', href: '/pgraft', description: 'Raft Consensus Extension', icon: 'pgraft-custom' },
-      { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling & Load Balancing', icon: 'pgbalancer-custom' },
-      { name: 'FauxDB', href: '/fauxdb', description: 'MongoDB Wire Protocol Proxy', icon: 'fauxdb-custom' },
+      { name: 'pgSentinel', href: '/pgsentinel', description: 'Monitoring Platform', icon: '👁️' },
+      { name: 'pg_stat_insights', href: '/pg-stat-insights', description: 'Performance Analytics', icon: '📊' },
+      { name: 'pgraft', href: '/pgraft', description: 'Raft Extension', icon: 'pgraft-custom' },
+      { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling', icon: 'pgbalancer-custom' },
+      { name: 'FauxDB', href: '/fauxdb', description: 'Document Database', icon: 'fauxdb-custom' },
     ],
     resources: [
       { name: 'Documentation', href: '/docs', description: 'Complete technical guides', icon: '📚' },
