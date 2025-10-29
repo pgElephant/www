@@ -6,31 +6,36 @@ import { Database, Network, Zap, BarChart3, Brain, Cpu } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'pgbalancer - AI-Powered PostgreSQL Connection Pooling & Load Balancing | Enterprise Database Performance',
-  description: 'pgbalancer delivers next-generation AI-driven PostgreSQL connection pooling with intelligent load balancing, machine learning-based optimization, and predictive scaling. Enterprise-grade performance with built-in AI intelligence for production databases. Free, open-source alternative to pgpool-II and PgBouncer.',
+  title: 'pgbalancer - AI-Powered PostgreSQL Connection Pooler | Machine Learning Load Balancing',
+  description: 'AI-powered PostgreSQL connection pooler with machine learning load balancing, REST API, MQTT clustering, and JWT authentication. Adaptive learning (10% rate), predictive query routing, health scoring, and intelligent backend selection. Production-ready with <10ms response time.',
   keywords: [
-    // Primary AI and ML keywords
-    'AI PostgreSQL connection pooling', 'machine learning load balancing', 'intelligent database optimization', 
-    'predictive scaling PostgreSQL', 'AI-driven performance tuning', 'smart connection management',
-    'PostgreSQL AI optimization', 'machine learning database pooling', 'intelligent query routing',
+    // AI and ML keywords
+    'AI PostgreSQL pooling', 'machine learning load balancing', 'AI-powered connection pooler',
+    'predictive query routing', 'adaptive learning database', 'intelligent load balancing',
+    'AI health scoring', 'ML-based backend selection', 'PostgreSQL AI optimization',
     
     // Core product keywords
     'pgbalancer', 'PostgreSQL connection pooler', 'PostgreSQL load balancer', 'database connection pooling',
     'PostgreSQL performance optimization', 'database load balancing', 'connection pool management',
     'PostgreSQL clustering', 'database high availability', 'PostgreSQL failover',
     
+    // Modern Features
+    'REST API database management', 'PostgreSQL REST API', 'JWT authentication database',
+    'MQTT clustering', 'event-driven database', 'bctl CLI tool', 'HTTP JSON API pooler',
+    
     // Competitive keywords
-    'pgpool-II alternative', 'PgBouncer alternative', 'Pgcat alternative', 'PostgreSQL pooling software',
-    'best PostgreSQL connection pooler', 'enterprise PostgreSQL pooling', 'production PostgreSQL pooler',
+    'pgpool-II fork', 'pgpool-II alternative', 'PgBouncer alternative', 'Pgcat alternative', 
+    'PostgreSQL pooling software', 'best PostgreSQL connection pooler', 'enterprise PostgreSQL pooling',
     
     // Technical keywords
-    'REST API database management', 'PostgreSQL health monitoring', 'automatic database failover',
-    'query cache optimization', 'database performance monitoring', 'PostgreSQL metrics',
+    'PostgreSQL health monitoring', 'automatic database failover', 'query cache optimization',
+    'database performance monitoring', 'PostgreSQL metrics', 'watchdog support',
+    'exploration vs exploitation', 'weighted selection algorithm', 'health score prediction',
     
     // Long-tail keywords
     'how to optimize PostgreSQL connections', 'PostgreSQL connection pooling best practices',
-    'enterprise database connection management', 'PostgreSQL production optimization',
-    'AI-powered database performance', 'machine learning database optimization'
+    'enterprise database connection management', 'AI-powered database pooling',
+    'machine learning database optimization', 'predictive database performance'
   ].join(', '),
   authors: [
     { name: 'pgElephant Team', url: 'https://www.pgelephant.com' }
@@ -38,8 +43,8 @@ export const metadata: Metadata = {
   category: 'Database Management Software',
   classification: 'Database Tools',
   openGraph: {
-    title: 'pgbalancer - AI-Powered PostgreSQL Connection Pooling & Load Balancing',
-    description: 'Next-generation AI-driven PostgreSQL connection pooling with machine learning optimization and intelligent load balancing. Free, open-source enterprise database performance solution.',
+    title: 'pgbalancer - Modern PostgreSQL Connection Pooler with REST API',
+    description: 'Production-ready PostgreSQL connection pooler and load balancer with REST API, CLI tool, YAML configuration, and JWT authentication. Modern fork of pgpool-II.',
     type: 'website',
     url: 'https://www.pgelephant.com/pgbalancer',
     siteName: 'pgElephant',
@@ -48,7 +53,7 @@ export const metadata: Metadata = {
         url: 'https://www.pgelephant.com/og-pgbalancer.jpg',
         width: 1200,
         height: 630,
-        alt: 'pgbalancer - AI-Powered PostgreSQL Connection Pooling',
+        alt: 'pgbalancer - Modern PostgreSQL Connection Pooler',
         type: 'image/jpeg',
       }
     ],
@@ -58,12 +63,12 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@pgElephant',
     creator: '@pgElephant',
-    title: 'pgbalancer - AI-Powered PostgreSQL Connection Pooling & Load Balancing',
-    description: 'Next-generation AI-driven PostgreSQL connection pooling with machine learning optimization and intelligent load balancing.',
+    title: 'pgbalancer - Modern PostgreSQL Connection Pooler with REST API',
+    description: 'Production-ready PostgreSQL connection pooler with REST API, CLI tool, YAML configuration, and watchdog support. Modern fork of pgpool-II.',
     images: [
       {
         url: 'https://www.pgelephant.com/twitter-pgbalancer.jpg',
-        alt: 'pgbalancer - AI-Powered PostgreSQL Connection Pooling',
+        alt: 'pgbalancer - Modern PostgreSQL Connection Pooler',
         width: 1200,
         height: 600,
       }
@@ -84,69 +89,288 @@ export const metadata: Metadata = {
   },
 };
 
-// Custom pgbalancer AI icon component
+// Custom pgbalancer icon component
 const PgbalancerIcon = ({ size = 80 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
     <Database className="text-blue-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Brain className="text-purple-400 absolute -top-2 -left-2 animate-pulse" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.1s' }} />
     <Network className="text-green-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.2s' }} />
     <Zap className="text-yellow-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.7s' }} />
     <BarChart3 className="text-orange-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.1s' }} />
-    <Cpu className="text-pink-400 absolute top-0 right-0 animate-spin" style={{ width: size * 0.15, height: size * 0.15, animationDuration: '3s', animationDelay: '0.5s' }} />
   </div>
 )
 
 const pgbalancerConfig = {
   hero: {
-    title: 'pgbalancer: AI-Powered Connection Pooling & Load Balancing',
-    subtitle: 'Next-Generation PostgreSQL Performance with Machine Learning Intelligence',
+    title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
+    subtitle: 'Production-ready connection pooling with AI load balancing, REST API, MQTT clustering, and JWT authentication',
     projectName: 'pgbalancer',
     icon: <PgbalancerIcon size={80} />,
   },
   badges: [
-    'AI Intelligence',
-    'Connection Pooling',
-    'Load Balancing',
-    'Machine Learning',
-    'Predictive Scaling',
-    'REST API Control',
+    'PostgreSQL 13-18',
+    'AI Load Balancing',
+    'REST API',
     'MQTT Clustering',
-    'High Performance',
+    'Connection Pooling',
+    'JWT Authentication',
+    'bctl CLI',
+    'Watchdog Support',
     'Production Ready',
   ],
   demo: <PgbalancerDemoTerminal />,
   features: [
-    { icon: '🧠', iconColor: 'text-purple-500', title: 'AI Intelligence Engine', desc: 'Advanced machine learning with adaptive learning rates, exploration strategies, and continuous model optimization.' },
-    { icon: '🔄', iconColor: 'text-blue-500', title: 'Intelligent Connection Pooling', desc: 'AI-driven connection management with predictive scaling and exponential moving averages for optimal resource utilization.' },
-    { icon: '⚖️', iconColor: 'text-green-500', title: 'Smart Load Balancing', desc: 'ML-powered query distribution using health scoring, weighted selection, and adaptive workload optimization.' },
-    { icon: '📊', iconColor: 'text-cyan-500', title: 'Predictive Analytics', desc: 'AI forecasts query execution times based on complexity analysis, historical patterns, and backend performance.' },
-    { icon: '🎯', iconColor: 'text-yellow-500', title: 'Adaptive Query Routing', desc: 'Intelligent query analysis with complexity estimation, read/write detection, and optimal backend selection.' },
-    { icon: '📈', iconColor: 'text-orange-500', title: 'Health Prediction', desc: 'ML-based health scoring with decay metrics, error rate analysis, and predictive failure detection.' },
-    { icon: '🔧', iconColor: 'text-pink-500', title: 'Self-Learning System', desc: 'Continuous learning from feedback with automatic parameter tuning and model performance optimization.' },
-    { icon: '🚀', iconColor: 'text-violet-500', title: 'REST API Control', desc: 'Complete programmatic control via RESTful API with cluster management, configuration updates, and real-time monitoring.' },
-    { icon: '📡', iconColor: 'text-cyan-500', title: 'MQTT Clustering', desc: 'Distributed cluster coordination via MQTT messaging for multi-node deployments with automatic discovery and failover.' },
-    { icon: '🔧', iconColor: 'text-orange-500', title: 'bctl Management Tool', desc: 'Command-line utility for cluster administration, configuration management, and operational control.' },
-    { icon: '📊', iconColor: 'text-pink-500', title: 'Real-Time Metrics', desc: 'Comprehensive monitoring with Prometheus metrics, health checks, and performance analytics.' },
-    { icon: '⚡', iconColor: 'text-red-500', title: 'High Performance', desc: 'Ultra-fast C implementation enhanced with AI algorithms for maximum throughput and minimal latency.' },
+    { icon: '🧠', iconColor: 'text-purple-500', title: 'AI Load Balancing', desc: 'Machine learning algorithm with adaptive learning, response time prediction, and health scoring. Learns from query patterns.' },
+    { icon: '📊', iconColor: 'text-cyan-500', title: 'Predictive Analytics', desc: 'AI forecasts query execution times, analyzes complexity, and predicts backend performance based on historical data.' },
+    { icon: '⚖️', iconColor: 'text-green-500', title: 'Adaptive Routing', desc: 'Intelligent query distribution using exploration vs exploitation strategy, weighted selection, and health scoring.' },
+    { icon: '🚀', iconColor: 'text-blue-500', title: 'REST API', desc: 'Production-ready HTTP/JSON API with 17 endpoints including /api/v1/nodes, /api/v1/status, and AI statistics.' },
+    { icon: '📡', iconColor: 'text-orange-500', title: 'MQTT Clustering', desc: 'Distributed coordination via MQTT with event publishing for node status, failover events, and health checks.' },
+    { icon: '🔧', iconColor: 'text-teal-500', title: 'bctl CLI Tool', desc: 'Command-line client with box-drawing tables, JSON output, and MQTT integration for cluster management.' },
+    { icon: '🔐', iconColor: 'text-pink-500', title: 'JWT Authentication', desc: 'Optional HMAC-SHA256 JWT tokens with Bearer format, 1-hour expiry, and backwards-compatible password auth.' },
+    { icon: '🔄', iconColor: 'text-indigo-500', title: 'Connection Pooling', desc: 'Efficient connection reuse with configurable pool sizes (num_init_children, max_pool), connection timeouts, and cleanup.' },
+    { icon: '🏥', iconColor: 'text-red-500', title: 'Health Monitoring', desc: 'Continuous backend health checks with configurable intervals, timeout detection, and automatic node recovery.' },
+    { icon: '🐕', iconColor: 'text-yellow-500', title: 'Watchdog Support', desc: 'Multi-node coordination with leader election, automatic failover, and coordinated recovery across instances.' },
+    { icon: '🎯', iconColor: 'text-violet-500', title: 'Query Analysis', desc: 'Smart query parsing with read/write detection, complexity estimation (0-100 scale), and optimal backend selection.' },
+    { icon: '⚡', iconColor: 'text-red-500', title: 'High Performance', desc: 'Ultra-fast C implementation with <10ms REST API response time and <0.5ms query routing overhead.' },
   ],
   featurePillars: {
-    kicker: 'AI-Powered Features',
+    kicker: 'AI-Powered Features & Architecture',
     items: [
-      { title: 'AI Intelligence Engine', desc: 'Machine learning algorithms continuously optimize connection patterns and query routing with adaptive learning rates and predictive modeling.' },
-      { title: 'Intelligent Connection Pooling', desc: 'AI-driven connection reuse with predictive scaling, exponential moving averages, and weighted random selection for optimal performance.' },
-      { title: 'Smart Load Balancing', desc: 'ML-powered query distribution with adaptive workload optimization, health scoring, and exploration vs exploitation strategies.' },
-      { title: 'Predictive Analytics', desc: 'AI forecasts query execution times, analyzes patterns, and predicts backend performance using historical data and complexity analysis.' },
-      { title: 'Self-Learning System', desc: 'Continuous learning from query feedback with automatic model adjustments, decay metrics, and dynamic parameter tuning.' },
-      { title: 'AI-Enhanced Monitoring', desc: 'Real-time health scoring, predictive failure detection, and intelligent alerting with ML-based anomaly detection.' },
-      { title: 'Adaptive Query Routing', desc: 'AI analyzes query complexity, estimated rows, and backend health to route queries to optimal servers automatically.' },
-      { title: 'REST API Control', desc: 'Complete programmatic control via RESTful API with cluster management, configuration updates, real-time monitoring, and AI insights.' },
-      { title: 'MQTT Clustering', desc: 'Distributed cluster coordination via MQTT messaging for multi-node deployments with automatic discovery, health monitoring, and failover.' },
-      { title: 'bctl Management Tool', desc: 'Command-line utility for cluster administration, configuration management, operational control, and monitoring integration.' },
-      { title: 'Real-Time Metrics', desc: 'Comprehensive monitoring with Prometheus metrics, health checks, performance analytics, and AI-driven insights.' },
+      { title: 'AI Load Balancing Engine', desc: 'Machine learning algorithm with adaptive learning rate (10%), exploration vs exploitation (20%), and weighted random selection. Learns from query execution patterns and automatically optimizes routing decisions.' },
+      { title: 'Predictive Query Routing', desc: 'AI analyzes query complexity (0-100 scale), estimates rows, detects read/write operations, and predicts execution time. Routes queries to optimal backends based on health scores and current load (0.0-1.0 scale).' },
+      { title: 'Health Scoring & Metrics', desc: 'Each backend node tracked with avg_response_time, current_load, total_queries, success/failed queries, error_rate, predicted_load, and health_score. Metrics decay over time for freshness.' },
+      { title: 'Adaptive Learning System', desc: 'AI updates node metrics after each query execution. Learns from feedback (response time, success/failure) and adjusts health scores. Continuous model improvement with success rate tracking.' },
+      { title: 'REST API Management', desc: 'Production HTTP/JSON API with 17 endpoints: /api/v1/status (server stats), /api/v1/nodes (backend management), /api/v1/health/stats, /api/v1/control/reload, /api/v1/watchdog/info, and AI statistics.' },
+      { title: 'MQTT Event Publishing', desc: 'Distributed coordination via MQTT protocol. Publishes node_status changes, failover_events, and health_check results to topics: pgbalancer/cluster/health, pgbalancer/cluster/failover, pgbalancer/cluster/config.' },
+      { title: 'bctl CLI Tool', desc: 'Command-line client with MQTT integration. Commands: bctl nodes, bctl status, bctl health, bctl watchdog-status. Supports --table (box-drawing), --json, and --verbose output formats.' },
+      { title: 'JWT Authentication', desc: 'Optional HMAC-SHA256 JWT tokens. Login endpoint: POST /api/v1/auth/login. Bearer token format with 1-hour expiry (3600s). Backwards compatible with password authentication.' },
+      { title: 'Connection Pooling', desc: 'Efficient connection reuse with configurable parameters: num_init_children (32), max_pool (4 per child), child_life_time (300s), child_max_connections (0=unlimited). Automatic cleanup and session management.' },
+      { title: 'Watchdog Clustering', desc: 'Multi-node watchdog coordination with leader election, heartbeat monitoring, automatic failover coordination, and recovery management. Supports VIP (Virtual IP) management and distributed consensus.' },
+      { title: 'Query Cache', desc: 'Intelligent query result caching with cache invalidation, memory management, and TTL support. AI-driven cache warming and prefetching based on query patterns.' },
     ],
   },
   featureMatrix: (
-    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+    <div className="space-y-8">
+      {/* Architecture Diagram */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700">
+        <h3 className="text-2xl font-bold text-white mb-6 text-center">3-Node PostgreSQL Cluster Architecture</h3>
+        
+        <div className="space-y-6">
+          {/* Clients Layer */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-4 px-6 py-3 bg-blue-600/20 border-2 border-blue-500 rounded-lg">
+              <span className="text-lg font-semibold text-blue-300">Application Clients</span>
+              <span className="text-sm text-slate-400">(psql, web apps, services)</span>
+            </div>
+          </div>
+          
+          {/* Arrow Down */}
+          <div className="flex justify-center">
+            <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+          </div>
+          
+          {/* pgbalancer Layer */}
+          <div className="bg-purple-600/10 border-2 border-purple-500 rounded-xl p-6">
+            <div className="text-center mb-4">
+              <h4 className="text-xl font-bold text-purple-300">pgbalancer (Port 5432)</h4>
+              <p className="text-sm text-slate-400">AI-Powered Connection Pooler & Load Balancer</p>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-4 mt-4">
+              {/* AI Engine */}
+              <div className="bg-slate-800/60 border border-purple-400 rounded-lg p-4">
+                <div className="text-center">
+                  <div className="text-3xl mb-2">🧠</div>
+                  <div className="font-semibold text-purple-300">AI Engine</div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    • Learning Rate: 10%<br/>
+                    • Exploration: 20%<br/>
+                    • Health Scoring<br/>
+                    • Query Analysis
+                  </div>
+                </div>
+              </div>
+              
+              {/* REST API */}
+              <div className="bg-slate-800/60 border border-blue-400 rounded-lg p-4">
+                <div className="text-center">
+                  <div className="text-3xl mb-2">🚀</div>
+                  <div className="font-semibold text-blue-300">REST API</div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    • Port 8080<br/>
+                    • 17 Endpoints<br/>
+                    • JWT Auth<br/>
+                    • AI Statistics
+                  </div>
+                </div>
+              </div>
+              
+              {/* MQTT */}
+              <div className="bg-slate-800/60 border border-orange-400 rounded-lg p-4">
+                <div className="text-center">
+                  <div className="text-3xl mb-2">📡</div>
+                  <div className="font-semibold text-orange-300">MQTT</div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    • Event Publishing<br/>
+                    • Node Status<br/>
+                    • Failover Events<br/>
+                    • Health Checks
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Connection Pools */}
+            <div className="mt-4 bg-slate-800/40 border border-cyan-400 rounded-lg p-4">
+              <div className="text-center">
+                <div className="font-semibold text-cyan-300 mb-2">Connection Pools</div>
+                <div className="flex justify-around text-xs text-slate-400">
+                  <span>32 Init Children</span>
+                  <span>4 Max Pool/Child</span>
+                  <span>300s Child Lifetime</span>
+                  <span>Session Reuse</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Arrow Down */}
+          <div className="flex justify-center">
+            <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-green-500"></div>
+          </div>
+          
+          {/* PostgreSQL Nodes Layer */}
+          <div className="grid grid-cols-3 gap-4">
+            {/* Node 1 - Primary */}
+            <div className="bg-green-600/10 border-2 border-green-500 rounded-xl p-4">
+              <div className="text-center">
+                <div className="text-3xl mb-2">👑</div>
+                <h5 className="font-bold text-green-300">PostgreSQL Primary</h5>
+                <div className="text-sm text-slate-400 mt-2">localhost:5433</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-400">●</span>
+                    <span className="text-slate-300">Read/Write</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-400">●</span>
+                    <span className="text-slate-300">Weight: 1.0</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-400">●</span>
+                    <span className="text-slate-300">Health: 100%</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-400">●</span>
+                    <span className="text-slate-300">Streaming Rep</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Node 2 - Standby 1 */}
+            <div className="bg-blue-600/10 border-2 border-blue-500 rounded-xl p-4">
+              <div className="text-center">
+                <div className="text-3xl mb-2">📘</div>
+                <h5 className="font-bold text-blue-300">PostgreSQL Standby 1</h5>
+                <div className="text-sm text-slate-400 mt-2">localhost:5434</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-blue-400">●</span>
+                    <span className="text-slate-300">Read Only</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-blue-400">●</span>
+                    <span className="text-slate-300">Weight: 1.0</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-blue-400">●</span>
+                    <span className="text-slate-300">Health: 98%</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-blue-400">●</span>
+                    <span className="text-slate-300">Hot Standby</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Node 3 - Standby 2 */}
+            <div className="bg-indigo-600/10 border-2 border-indigo-500 rounded-xl p-4">
+              <div className="text-center">
+                <div className="text-3xl mb-2">📙</div>
+                <h5 className="font-bold text-indigo-300">PostgreSQL Standby 2</h5>
+                <div className="text-sm text-slate-400 mt-2">localhost:5435</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-indigo-400">●</span>
+                    <span className="text-slate-300">Read Only</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-indigo-400">●</span>
+                    <span className="text-slate-300">Weight: 1.0</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-indigo-400">●</span>
+                    <span className="text-slate-300">Health: 99%</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-indigo-400">●</span>
+                    <span className="text-slate-300">Hot Standby</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* AI Routing Logic */}
+          <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-4">
+            <div className="text-center mb-3">
+              <h5 className="font-bold text-purple-300">AI Routing Logic</h5>
+            </div>
+            <div className="grid grid-cols-3 gap-4 text-xs">
+              <div className="text-center">
+                <div className="font-semibold text-green-300 mb-1">Write Queries</div>
+                <div className="text-slate-400">→ Primary Only<br/>(Node 1)</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-blue-300 mb-1">Read Queries</div>
+                <div className="text-slate-400">→ AI Weighted Selection<br/>(All 3 Nodes)</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-purple-300 mb-1">Complex Queries</div>
+                <div className="text-slate-400">→ Lowest Load Node<br/>(AI Predicted)</div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Components Layer */}
+          <div className="grid grid-cols-4 gap-3 mt-4">
+            <div className="bg-slate-800/40 border border-yellow-500/50 rounded p-3 text-center">
+              <div className="text-2xl mb-1">🔧</div>
+              <div className="text-xs font-semibold text-yellow-300">bctl CLI</div>
+              <div className="text-xs text-slate-400">Management</div>
+            </div>
+            <div className="bg-slate-800/40 border border-red-500/50 rounded p-3 text-center">
+              <div className="text-2xl mb-1">🏥</div>
+              <div className="text-xs font-semibold text-red-300">Health Checks</div>
+              <div className="text-xs text-slate-400">30s Interval</div>
+            </div>
+            <div className="bg-slate-800/40 border border-orange-500/50 rounded p-3 text-center">
+              <div className="text-2xl mb-1">🐕</div>
+              <div className="text-xs font-semibold text-orange-300">Watchdog</div>
+              <div className="text-xs text-slate-400">Auto Failover</div>
+            </div>
+            <div className="bg-slate-800/40 border border-cyan-500/50 rounded p-3 text-center">
+              <div className="text-2xl mb-1">💾</div>
+              <div className="text-xs font-semibold text-cyan-300">Query Cache</div>
+              <div className="text-xs text-slate-400">AI-Driven</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Feature Comparison Table */}
+      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
           <th className="px-4 py-3 font-semibold text-white">Feature</th>
@@ -236,6 +460,7 @@ const pgbalancerConfig = {
         </tr>
       </tbody>
     </table>
+    </div>
   ),
   featureComparison: (
     <div className="overflow-x-auto">

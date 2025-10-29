@@ -96,8 +96,8 @@ const PgSentinelIcon = ({ size = 80 }: { size?: number }) => (
 
 const pgSentinelConfig = {
   hero: {
-    title: 'pgSentinel: Professional pgbalancer Management Platform',
-    subtitle: 'Enterprise-Grade Web-Based Monitoring with Real-Time Metrics & Advanced Analytics',
+    title: 'pgSentinel: Professional Web-Based Monitoring for pgbalancer',
+    subtitle: 'Enterprise monitoring platform with real-time WebSocket updates, Prometheus metrics, Grafana dashboards, and pg_stat_insights analytics',
     projectName: 'pgSentinel',
     icon: <PgSentinelIcon size={80} />,
   },
@@ -187,7 +187,362 @@ const pgSentinelConfig = {
     ],
   },
   featureMatrix: (
-    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+    <div className="space-y-8">
+      {/* Architecture Diagram */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700">
+        <h3 className="text-2xl font-bold text-white mb-6 text-center">pgSentinel Platform Architecture</h3>
+        
+        <div className="space-y-6">
+          {/* Users/Clients Layer */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-4 px-6 py-3 bg-blue-600/20 border-2 border-blue-500 rounded-lg">
+              <Globe className="w-6 h-6 text-blue-300" />
+              <span className="text-lg font-semibold text-blue-300">DevOps / SRE / Database Administrators</span>
+            </div>
+          </div>
+          
+          {/* Arrow Down */}
+          <div className="flex justify-center">
+            <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-green-500"></div>
+          </div>
+          
+          {/* Frontend Layer */}
+          <div className="bg-green-600/10 border-2 border-green-500 rounded-xl p-6">
+            <div className="text-center mb-4">
+              <h4 className="text-xl font-bold text-green-300">Frontend Dashboard (Port 3000)</h4>
+              <p className="text-sm text-slate-400">Next.js 14 + React 18 + TypeScript + Tailwind CSS</p>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-4 mt-4">
+              <div className="bg-slate-800/60 border border-green-400 rounded-lg p-4">
+                <div className="text-center">
+                  <Activity className="w-8 h-8 mx-auto mb-2 text-green-400" />
+                  <div className="font-semibold text-green-300">Real-Time Metrics</div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    • Live Updates<br/>
+                    • WebSocket<br/>
+                    • Recharts<br/>
+                    • Interactive UI
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-800/60 border border-cyan-400 rounded-lg p-4">
+                <div className="text-center">
+                  <BarChart3 className="w-8 h-8 mx-auto mb-2 text-cyan-400" />
+                  <div className="font-semibold text-cyan-300">Dashboards</div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    • System Metrics<br/>
+                    • Pool Stats<br/>
+                    • Node Status<br/>
+                    • Custom Charts
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-800/60 border border-purple-400 rounded-lg p-4">
+                <div className="text-center">
+                  <Eye className="w-8 h-8 mx-auto mb-2 text-purple-400" />
+                  <div className="font-semibold text-purple-300">Node Management</div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    • Attach/Detach<br/>
+                    • Health Check<br/>
+                    • Config Editor<br/>
+                    • One-Click Ops
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Arrow Down */}
+          <div className="flex justify-center">
+            <div className="w-1 h-8 bg-gradient-to-b from-green-500 to-purple-500"></div>
+          </div>
+          
+          {/* Backend Layer */}
+          <div className="bg-purple-600/10 border-2 border-purple-500 rounded-xl p-6">
+            <div className="text-center mb-4">
+              <h4 className="text-xl font-bold text-purple-300">Backend API (Port 8000)</h4>
+              <p className="text-sm text-slate-400">FastAPI + Python 3.12 + Uvicorn + WebSocket</p>
+            </div>
+            
+            <div className="grid grid-cols-4 gap-3 mt-4">
+              <div className="bg-slate-800/60 border border-blue-400 rounded-lg p-3">
+                <div className="text-center">
+                  <Zap className="w-6 h-6 mx-auto mb-1 text-blue-400" />
+                  <div className="text-xs font-semibold text-blue-300">REST API</div>
+                  <div className="text-xs text-slate-400 mt-1">25+ Endpoints</div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-800/60 border border-green-400 rounded-lg p-3">
+                <div className="text-center">
+                  <Network className="w-6 h-6 mx-auto mb-1 text-green-400" />
+                  <div className="text-xs font-semibold text-green-300">WebSocket</div>
+                  <div className="text-xs text-slate-400 mt-1">Live Updates</div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-800/60 border border-cyan-400 rounded-lg p-3">
+                <div className="text-center">
+                  <LineChart className="w-6 h-6 mx-auto mb-1 text-cyan-400" />
+                  <div className="text-xs font-semibold text-cyan-300">Metrics</div>
+                  <div className="text-xs text-slate-400 mt-1">30+ Custom</div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-800/60 border border-orange-400 rounded-lg p-3">
+                <div className="text-center">
+                  <CheckCircle className="w-6 h-6 mx-auto mb-1 text-orange-400" />
+                  <div className="text-xs font-semibold text-orange-300">Health</div>
+                  <div className="text-xs text-slate-400 mt-1">Auto-Check</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Arrow Down - Split into 3 */}
+          <div className="flex justify-center gap-8">
+            <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-orange-500"></div>
+            <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-red-500"></div>
+            <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-blue-500"></div>
+          </div>
+          
+          {/* Monitoring Stack Layer */}
+          <div className="grid grid-cols-3 gap-4">
+            {/* Prometheus */}
+            <div className="bg-orange-600/10 border-2 border-orange-500 rounded-xl p-4">
+              <div className="text-center">
+                <BarChart3 className="w-10 h-10 mx-auto mb-2 text-orange-400" />
+                <h5 className="font-bold text-orange-300">Prometheus</h5>
+                <div className="text-sm text-slate-400 mt-2">Port 9090</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-orange-400">●</span>
+                    <span className="text-slate-300">30+ Custom Metrics</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-orange-400">●</span>
+                    <span className="text-slate-300">PromQL Queries</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-orange-400">●</span>
+                    <span className="text-slate-300">Alert Rules</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-orange-400">●</span>
+                    <span className="text-slate-300">30-Day Retention</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Grafana */}
+            <div className="bg-red-600/10 border-2 border-red-500 rounded-xl p-4">
+              <div className="text-center">
+                <TrendingUp className="w-10 h-10 mx-auto mb-2 text-red-400" />
+                <h5 className="font-bold text-red-300">Grafana</h5>
+                <div className="text-sm text-slate-400 mt-2">Port 3001</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-400">●</span>
+                    <span className="text-slate-300">2 Dashboards</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-400">●</span>
+                    <span className="text-slate-300">22 Panels</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-400">●</span>
+                    <span className="text-slate-300">Custom Queries</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-400">●</span>
+                    <span className="text-slate-300">Visualization</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Alertmanager */}
+            <div className="bg-yellow-600/10 border-2 border-yellow-500 rounded-xl p-4">
+              <div className="text-center">
+                <Bell className="w-10 h-10 mx-auto mb-2 text-yellow-400" />
+                <h5 className="font-bold text-yellow-300">Alertmanager</h5>
+                <div className="text-sm text-slate-400 mt-2">Port 9093</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-yellow-400">●</span>
+                    <span className="text-slate-300">12 Alert Rules</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-yellow-400">●</span>
+                    <span className="text-slate-300">Routing Config</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-yellow-400">●</span>
+                    <span className="text-slate-300">Grouping</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-yellow-400">●</span>
+                    <span className="text-slate-300">Notifications</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Arrow Down */}
+          <div className="flex justify-center">
+            <div className="w-1 h-8 bg-gradient-to-b from-cyan-500 to-indigo-500"></div>
+          </div>
+          
+          {/* Infrastructure Layer */}
+          <div className="grid grid-cols-3 gap-4">
+            {/* PostgreSQL */}
+            <div className="bg-cyan-600/10 border-2 border-cyan-500 rounded-xl p-4">
+              <div className="text-center">
+                <Server className="w-10 h-10 mx-auto mb-2 text-cyan-400" />
+                <h5 className="font-bold text-cyan-300">PostgreSQL 17</h5>
+                <div className="text-sm text-slate-400 mt-2">Metadata Storage</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-cyan-400">●</span>
+                    <span className="text-slate-300">Config Storage</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-cyan-400">●</span>
+                    <span className="text-slate-300">pg_stat_insights</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-cyan-400">●</span>
+                    <span className="text-slate-300">Query Analytics</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Redis */}
+            <div className="bg-pink-600/10 border-2 border-pink-500 rounded-xl p-4">
+              <div className="text-center">
+                <Zap className="w-10 h-10 mx-auto mb-2 text-pink-400" />
+                <h5 className="font-bold text-pink-300">Redis 7</h5>
+                <div className="text-sm text-slate-400 mt-2">Cache & Sessions</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-pink-400">●</span>
+                    <span className="text-slate-300">Session Cache</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-pink-400">●</span>
+                    <span className="text-slate-300">Data Caching</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-pink-400">●</span>
+                    <span className="text-slate-300">Fast Retrieval</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Node Exporter */}
+            <div className="bg-indigo-600/10 border-2 border-indigo-500 rounded-xl p-4">
+              <div className="text-center">
+                <Cpu className="w-10 h-10 mx-auto mb-2 text-indigo-400" />
+                <h5 className="font-bold text-indigo-300">Node Exporter</h5>
+                <div className="text-sm text-slate-400 mt-2">System Metrics</div>
+                <div className="mt-3 space-y-1 text-xs text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-indigo-400">●</span>
+                    <span className="text-slate-300">CPU Metrics</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-indigo-400">●</span>
+                    <span className="text-slate-300">Memory Usage</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-indigo-400">●</span>
+                    <span className="text-slate-300">Disk I/O</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Arrow Down */}
+          <div className="flex justify-center">
+            <div className="w-1 h-8 bg-gradient-to-b from-indigo-500 to-green-500"></div>
+          </div>
+          
+          {/* pgbalancer Target */}
+          <div className="bg-green-600/10 border-2 border-green-500 rounded-xl p-6">
+            <div className="text-center">
+              <Server className="w-12 h-12 mx-auto mb-2 text-green-400" />
+              <h5 className="text-xl font-bold text-green-300">pgbalancer Cluster</h5>
+              <div className="text-sm text-slate-400 mt-2">Connection Pooler & Load Balancer</div>
+              <div className="mt-4 grid grid-cols-3 gap-4 text-xs">
+                <div className="text-center">
+                  <div className="font-semibold text-green-300 mb-1">PostgreSQL Node 1</div>
+                  <div className="text-slate-400">Primary (5433)</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-semibold text-blue-300 mb-1">PostgreSQL Node 2</div>
+                  <div className="text-slate-400">Standby (5434)</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-semibold text-indigo-300 mb-1">PostgreSQL Node 3</div>
+                  <div className="text-slate-400">Standby (5435)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* 8 Services Summary */}
+          <div className="bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-green-900/30 border border-slate-600 rounded-lg p-4">
+            <div className="text-center mb-3">
+              <h5 className="font-bold text-white">8-Service Docker Architecture</h5>
+            </div>
+            <div className="grid grid-cols-4 gap-3 text-xs">
+              <div className="text-center">
+                <div className="font-semibold text-green-300 mb-1">✓ Frontend</div>
+                <div className="text-slate-400">Next.js:3000</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-purple-300 mb-1">✓ Backend</div>
+                <div className="text-slate-400">FastAPI:8000</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-orange-300 mb-1">✓ Prometheus</div>
+                <div className="text-slate-400">Metrics:9090</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-red-300 mb-1">✓ Grafana</div>
+                <div className="text-slate-400">Dashboards:3001</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-yellow-300 mb-1">✓ Alertmanager</div>
+                <div className="text-slate-400">Alerts:9093</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-cyan-300 mb-1">✓ PostgreSQL</div>
+                <div className="text-slate-400">Metadata:5432</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-pink-300 mb-1">✓ Redis</div>
+                <div className="text-slate-400">Cache:6379</div>
+              </div>
+              <div className="text-center">
+                <div className="font-semibold text-indigo-300 mb-1">✓ Node Exporter</div>
+                <div className="text-slate-400">System:9100</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Component Table */}
+      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
           <th className="px-4 py-3 font-semibold text-white">Component</th>
@@ -247,6 +602,7 @@ const pgSentinelConfig = {
         </tr>
       </tbody>
     </table>
+    </div>
   ),
   useCases: [
     {

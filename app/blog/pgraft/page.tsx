@@ -132,32 +132,28 @@ Each node requires unique configuration in \`postgresql.conf\`:
 # Load the extension
 shared_preload_libraries = 'pgraft'
 
-# Cluster identification
-pgraft.cluster_id = 'production-cluster'
-pgraft.node_id = 1
-
-# Network configuration
-pgraft.address = '192.168.1.10'
-pgraft.port = 7001
+# Cluster identification and networking
+pgraft.name = 'node1'                        # Unique node name
+pgraft.listen_address = '0.0.0.0:7001'       # Raft communication port
+pgraft.initial_cluster = 'node1=10.0.1.11:7001,node2=10.0.1.12:7002,node3=10.0.1.13:7003'
 
 # Storage location
 pgraft.data_dir = '/var/lib/postgresql/pgraft'
 
-# Timing parameters
+# Timing parameters (optional)
 pgraft.election_timeout = 1000    # milliseconds
 pgraft.heartbeat_interval = 100   # milliseconds
-
-# Logging
-pgraft.log_level = 'info'
 \`\`\`
 
 **Node 2 Configuration:**
 \`\`\`ini
 shared_preload_libraries = 'pgraft'
-pgraft.cluster_id = 'production-cluster'
-pgraft.node_id = 2
-pgraft.address = '192.168.1.11'
-pgraft.port = 7002
+
+# Only change: unique node name
+pgraft.name = 'node2'                        # Must match initial_cluster
+pgraft.listen_address = '0.0.0.0:7002'       # Different port
+pgraft.initial_cluster = 'node1=10.0.1.11:7001,node2=10.0.1.12:7002,node3=10.0.1.13:7003'
+
 pgraft.data_dir = '/var/lib/postgresql/pgraft'
 pgraft.election_timeout = 1000
 pgraft.heartbeat_interval = 100
@@ -166,14 +162,20 @@ pgraft.heartbeat_interval = 100
 **Node 3 Configuration:**
 \`\`\`ini
 shared_preload_libraries = 'pgraft'
-pgraft.cluster_id = 'production-cluster'
-pgraft.node_id = 3
-pgraft.address = '192.168.1.12'
-pgraft.port = 7003
+
+pgraft.name = 'node3'                        # Must match initial_cluster
+pgraft.listen_address = '0.0.0.0:7003'       # Different port
+pgraft.initial_cluster = 'node1=10.0.1.11:7001,node2=10.0.1.12:7002,node3=10.0.1.13:7003'
+
 pgraft.data_dir = '/var/lib/postgresql/pgraft'
 pgraft.election_timeout = 1000
 pgraft.heartbeat_interval = 100
 \`\`\`
+
+**Important Notes:**
+- Node IDs are automatically assigned based on position in \`initial_cluster\` (node1=1, node2=2, node3=3)
+- \`pgraft.name\` must be unique and match a name in \`initial_cluster\`
+- \`initial_cluster\` must be **identical** on all nodes
 
 ### Bootstrap Process
 

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Terminal, Play, Square, RotateCcw, Copy } from 'lucide-react'
+import { Play, Square, RotateCcw, Copy } from 'lucide-react'
 
 interface TerminalCommand {
   command: string
@@ -9,7 +9,7 @@ interface TerminalCommand {
   timestamp: string
 }
 
-const PgraftDemoTerminal = () => {
+const PgStatInsightsDemoTerminal = () => {
   const [isRunning, setIsRunning] = useState(false)
   const [currentCommand, setCurrentCommand] = useState('')
   const [commandHistory, setCommandHistory] = useState<TerminalCommand[]>([])
@@ -27,183 +27,170 @@ const PgraftDemoTerminal = () => {
     betweenCommands: 2000
   }
 
-  // Pgraft-specific demo commands and their outputs
+  // pg_stat_insights-specific demo commands
   const buildCommands = [
     {
-      command: 'git clone https://github.com/pgelephant/pgraft.git && cd pgraft',
+      command: 'git clone https://github.com/pgelephant/pg_stat_insights.git && cd pg_stat_insights',
       output: [
-        'Cloning into \'pgraft\'...',
-        'remote: Enumerating objects: 1234, done.',
-        'remote: Counting objects: 100% (1234/1234), done.',
-        'remote: Compressing objects: 100% (789/789), done.',
-        'remote: Total 1234 (delta 445), reused 1233 (delta 444)',
-        'Receiving objects: 100% (1234/1234), done.',
-        'Resolving deltas: 100% (445/445), done.'
+        'Cloning into \'pg_stat_insights\'...',
+        'remote: Enumerating objects: 456, done.',
+        'remote: Total 456 (delta 234), done.',
+        'Receiving objects: 100% (456/456), done.',
+        'Resolving deltas: 100% (234/234), done.'
       ]
     },
     {
-      command: 'ls -R && make clean && make -j && sudo make install',
+      command: 'make clean && make && sudo make install',
       output: [
-        '.:',
-        'ARCHITECTURE.md  Makefile         README.md        examples/        pgraft--1.0.sql  src/',
-        'go.mod          pgraft.control    TUTORIAL.md      include/',
+        'rm -f pg_stat_insights.so *.o',
         '',
-        './include:',
-        'pgraft.h        raft.h           worker.h',
-        '',
-        './src:',
-        'pgraft.c        raft.c           worker.c',
-        'raft_helpers.c  raft_protocol.c  worker_queue.c',
-        '',
-        './examples:',
-        'basic_cluster/  failover/        scale_out/',
-        '',
-        'Cleaning build files...',
-        'rm -f pgraft.so',
-        'rm -f src/*.o',
-        '',
-        'Building pgraft extension...',
-        'CC src/pgraft.c',
-        'CC src/raft.c',
-        'CC src/raft_helpers.c',
-        'CC src/raft_protocol.c',
-        'CC src/worker.c',
-        'CC src/worker_queue.c',
-        'LINK pgraft.so',
+        'Building pg_stat_insights extension (PostgreSQL 16-18)...',
+        'gcc -Wall -Wmissing-prototypes -Wpointer-arith -fPIC',
+        '    -c -o pg_stat_insights.o pg_stat_insights.c',
+        'gcc -shared -o pg_stat_insights.so pg_stat_insights.o',
         '',
         'Installing extension...',
-        'cp pgraft.so /usr/local/pgsql/lib/',
-        'cp pgraft.control /usr/local/pgsql/share/extension/',
-        'cp pgraft--1.0.sql /usr/local/pgsql/share/extension/'
+        'install pg_stat_insights.so /usr/lib/postgresql/17/lib/',
+        'install pg_stat_insights.control /usr/share/postgresql/17/extension/',
+        'install pg_stat_insights--1.0.sql /usr/share/postgresql/17/extension/',
+        '',
+        'pg_stat_insights installed successfully!'
       ]
     },
     {
-      command: 'cat postgresql.conf',
+      command: 'echo "shared_preload_libraries = \'pg_stat_insights\'" >> /etc/postgresql/17/main/postgresql.conf',
       output: [
-        '# pgraft configuration',
-        'shared_preload_libraries = \'pgraft\'',
-        '',
-        '# Cluster identification and networking',
-        'pgraft.name = \'node1\'                        # Unique node name',
-        'pgraft.listen_address = \'0.0.0.0:7001\'       # Raft port',
-        'pgraft.initial_cluster = \'node1=10.0.1.11:7001,node2=10.0.1.12:7002,node3=10.0.1.13:7003\'',
-        '',
-        '# Storage',
-        'pgraft.data_dir = \'/var/lib/postgresql/pgraft\'',
-        '',
-        '# Consensus settings (optional)',
-        'pgraft.election_timeout = 1000           # milliseconds',
-        'pgraft.heartbeat_interval = 100          # milliseconds'
+        '-- Added to postgresql.conf',
+        '-- Restart PostgreSQL for changes to take effect'
       ]
     },
     {
-      command: 'psql -p 5431 -d postgres -c "CREATE EXTENSION pgraft;"',
+      command: 'sudo systemctl restart postgresql@17-main',
       output: [
-        'CREATE EXTENSION'
+        'Restarting PostgreSQL 17...',
+        'PostgreSQL 17 restarted successfully'
+      ]
+    },
+    {
+      command: 'psql -d postgres -c "CREATE EXTENSION pg_stat_insights;"',
+      output: [
+        'CREATE EXTENSION',
+        '',
+        '-- pg_stat_insights v1.0 loaded',
+        '-- 52 metrics across 11 views available'
       ]
     }
   ]
 
   const usageCommands = [
     {
-      command: 'psql -p 5431 -d postgres -c "CREATE EXTENSION pgraft;"',
+      command: 'psql -d postgres -c "SELECT query, calls, total_exec_time, mean_exec_time FROM pg_stat_insights_top_by_time LIMIT 5;"',
       output: [
-        'CREATE EXTENSION',
-        '-- Extension automatically initializes from postgresql.conf settings'
+        ' query                              | calls | total_exec_time | mean_exec_time',
+        '------------------------------------+-------+-----------------+---------------',
+        ' SELECT * FROM orders WHERE status  |  1247 |        12456.78 |           9.99',
+        ' UPDATE inventory SET quantity =    |   892 |         8934.12 |          10.02',
+        ' SELECT COUNT(*) FROM events WHERE  |  2341 |         7823.45 |           3.34',
+        ' INSERT INTO logs (timestamp, msg)  | 15678 |         6712.34 |           0.43',
+        ' DELETE FROM temp_data WHERE date   |   234 |         3421.56 |          14.62',
+        '(5 rows)'
       ]
     },
     {
-      command: 'psql -p 5431 -d postgres -c "SELECT pgraft_is_leader(), pgraft_get_leader();"',
+      command: 'psql -d postgres -c "SELECT query, calls, cache_hit_ratio FROM pg_stat_insights_top_cache_misses LIMIT 5;"',
       output: [
-        'pgraft_is_leader | pgraft_get_leader',
-        '-----------------+------------------',
-        't                |                1',
-        '(1 row)',
+        ' query                              | calls | cache_hit_ratio',
+        '------------------------------------+-------+----------------',
+        ' SELECT * FROM large_table WHERE id | 15234 |          45.23%',
+        ' SELECT * FROM archived_orders      |  8923 |          52.17%',
+        ' SELECT data FROM cold_storage      |  3421 |          38.91%',
+        ' SELECT * FROM historical_events    |  7234 |          61.45%',
+        ' SELECT logs FROM old_logs WHERE    |  2341 |          54.32%',
+        '(5 rows)',
         '',
-        '-- Node 1 is the leader'
+        '-- Low cache hit ratio indicates need for more shared_buffers'
       ]
     },
     {
-      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_cluster_status();"',
+      command: 'psql -d postgres -c "SELECT query, shared_blks_read, temp_blks_read, total_io FROM pg_stat_insights_top_by_io LIMIT 5;"',
       output: [
-        'node_id | state    | leader_id | current_term | last_heartbeat',
-        '--------+----------+-----------+--------------+---------------',
-        '1       | leader   | 1         | 1            | 2025-10-02 10:30:15',
-        '2       | follower | 1         | 1            | 2025-10-02 10:30:14',
-        '3       | follower | 1         | 1            | 2025-10-02 10:30:13',
-        '(3 rows)'
+        ' query                         | shared_blks_read | temp_blks_read | total_io',
+        '-------------------------------+------------------+----------------+---------',
+        ' CREATE INDEX CONCURRENTLY ON  |        1234567 |        987654 |  2222221',
+        ' SELECT * FROM events ORDER BY |         892345 |        123456 |  1015801',
+        ' VACUUM ANALYZE large_table    |         567890 |              0 |   567890',
+        ' SELECT DISTINCT user_id FROM  |         345678 |         98765 |   444443',
+        ' SELECT COUNT(*) GROUP BY date |         234567 |         12345 |   246912',
+        '(5 rows)',
+        '',
+        '-- High I/O queries—consider indexing or query optimization'
       ]
     },
     {
-      command: 'psql -p 5431 -d postgres -c "SELECT * FROM pgraft_get_nodes();"',
+      command: 'psql -d postgres -c "SELECT * FROM pg_stat_insights_histogram_summary;"',
       output: [
-        'node_id | address    | port | is_leader',
-        '--------+------------+------+----------',
-        '1       | 127.0.0.1  | 7000 | t',
-        '2       | 127.0.0.1  | 7001 | f',
-        '3       | 127.0.0.1  | 7002 | f',
-        '(3 rows)'
-      ]
-    },
-    // Log Replication Example
-    {
-      command: 'psql -p 5431 -d postgres -c "CREATE TABLE users (id serial primary key, name text);"',
-      output: [
-        'CREATE TABLE'
-      ]
-    },
-    {
-      command: 'psql -p 5431 -d postgres -c "INSERT INTO users (name) VALUES (\'alice\'), (\'bob\'), (\'charlie\');"',
-      output: [
-        'INSERT 0 3'
+        ' bucket_name | query_count | total_time | avg_time | percentage',
+        '-------------+-------------+------------+----------+-----------',
+        ' <1ms        |       45234 |   12.34 ms |  0.27 ms |     62.3%',
+        ' 1-10ms      |       18923 |  123.45 ms |  6.52 ms |     26.1%',
+        ' 10-100ms    |        5678 |  345.67 ms | 60.89 ms |      7.8%',
+        ' 100ms-1s    |        1892 |  678.90 ms |358.59 ms |      2.6%',
+        ' 1-10s       |         567 | 2345.67 ms |4138.18 ms |      0.8%',
+        ' >10s        |         123 |12345.00 ms|100365.8 ms|      0.4%',
+        '(6 rows)',
+        '',
+        '-- Response time distribution for SLA monitoring'
       ]
     },
     {
-      command: 'psql -p 5431 -d postgres -c "SELECT * FROM users;"',
+      command: 'psql -d postgres -c "SELECT * FROM pg_stat_insights_slow_queries LIMIT 3;"',
       output: [
-        'id | name',
-        '---+----------',
-        ' 1 | alice',
-        ' 2 | bob',
-        ' 3 | charlie',
-        '(3 rows)'
-      ]
-    },
-    {
-      command: 'psql -p 5432 -d postgres -c "SELECT * FROM users;"',
-      output: [
-        'id | name',
-        '---+----------',
-        ' 1 | alice',
-        ' 2 | bob',
-        ' 3 | charlie',
+        ' query                              | calls | mean_exec_time | total_exec_time',
+        '------------------------------------+-------+----------------+----------------',
+        ' SELECT * FROM orders WHERE status  |  1247 |         999.12 |       1245678.9',
+        ' UPDATE inventory SET quantity =    |   892 |         567.23 |        505969.2',
+        ' SELECT COUNT(*) FROM events WHERE  |  2341 |         234.56 |        549089.0',
         '(3 rows)',
         '',
-        '-- Data replicated to follower node (5432)'
+        '-- Queries with mean_exec_time > 100ms'
       ]
     },
     {
-      command: 'psql -p 5431 -d postgres -c "SELECT log_index, command, committed FROM pgraft_get_log_entries();"',
+      command: 'psql -d postgres -c "SELECT queryid, wal_records, wal_bytes, wal_fpi FROM pg_stat_insights WHERE wal_bytes > 0 ORDER BY wal_bytes DESC LIMIT 5;"',
       output: [
-        'log_index | command                        | committed',
-        '----------+-------------------------------+----------',
-        '       10 | CREATE TABLE users ...         | t',
-        '       11 | INSERT INTO users ...          | t',
-        '(2 rows)',
+        ' queryid      | wal_records | wal_bytes  | wal_fpi',
+        '--------------+-------------+------------+--------',
+        ' 123456789012 |      234567 | 1234567890 |   12345',
+        ' 234567890123 |      189234 |  987654321 |    8923',
+        ' 345678901234 |      145678 |  765432109 |    5678',
+        ' 456789012345 |       98765 |  543210987 |    3421',
+        ' 567890123456 |       67890 |  432109876 |    2345',
+        '(5 rows)',
         '',
-        '-- Log entries on leader (5431)'
+        '-- WAL generation tracking for write-heavy queries'
       ]
     },
     {
-      command: 'psql -p 5432 -d postgres -c "SELECT log_index, command, committed FROM pgraft_get_log_entries();"',
+      command: 'psql -d postgres -c "SELECT * FROM pg_stat_insights_replication;"',
       output: [
-        'log_index | command                        | committed',
-        '----------+-------------------------------+----------',
-        '       10 | CREATE TABLE users ...         | t',
-        '       11 | INSERT INTO users ...          | t',
+        ' pid   | usename  | application_name | client_addr | repl_state | write_lag_bytes | flush_lag_bytes',
+        '-------+----------+------------------+-------------+------------+-----------------+----------------',
+        ' 12345 | postgres | node2            | 10.0.1.12   | streaming  |          123456 |          98765',
+        ' 12346 | postgres | node3            | 10.0.1.13   | streaming  |           98765 |          87654',
         '(2 rows)',
         '',
-        '-- Log entries on follower (5432)'
+        '-- Replication lag monitoring across all standbys'
+      ]
+    },
+    {
+      command: 'psql -d postgres -c "SELECT count(*) as total_views, count(DISTINCT queryid) as unique_queries FROM pg_stat_insights;"',
+      output: [
+        ' total_views | unique_queries',
+        '-------------+---------------',
+        '       72456 |           1892',
+        '(1 row)',
+        '',
+        '-- All 52 metrics tracked for 1,892 unique queries'
       ]
     }
   ]
@@ -289,7 +276,6 @@ const PgraftDemoTerminal = () => {
       
       // Type the command
       typeCommand(cmd.command, () => {
-        // Show output only (do not echo command again)
         setTimeout(() => {
           showOutput(cmd.output, () => {
             commandIndex++
@@ -330,7 +316,7 @@ const PgraftDemoTerminal = () => {
             <div className="w-3 h-3 bg-red-500 rounded-full"></div>
             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
             <div className="w-3 h-3 bg-accent-500 rounded-full"></div>
-            <span className="text-gray-300 text-sm ml-4 font-mono">pgraft-demo</span>
+            <span className="text-gray-300 text-sm ml-4 font-mono">pg_stat_insights-demo</span>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -350,7 +336,7 @@ const PgraftDemoTerminal = () => {
           </div>
         </div>
         
-        {/* EDB-Style Tabs */}
+        {/* Tabs */}
         <div className="flex gap-1">
           <button
             onClick={() => setActiveTab('build')}
@@ -361,7 +347,7 @@ const PgraftDemoTerminal = () => {
                 : 'bg-transparent text-gray-400 hover:text-white hover:bg-gray-700 border border-transparent'
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-            Building & Installation
+            Installation
           </button>
           <button
             onClick={() => setActiveTab('usage')}
@@ -372,7 +358,7 @@ const PgraftDemoTerminal = () => {
                 : 'bg-transparent text-gray-400 hover:text-white hover:bg-gray-700 border border-transparent'
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-            Usage & Operations
+            52 Metrics & 11 Views
           </button>
         </div>
       </div>
@@ -480,4 +466,5 @@ const PgraftDemoTerminal = () => {
   )
 }
 
-export default PgraftDemoTerminal
+export default PgStatInsightsDemoTerminal
+

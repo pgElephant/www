@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import PgStatInsightsDemoTerminal from '@/components/PgStatInsightsDemoTerminal';
 import { Metadata } from 'next';
 import { 
   TrendingUp, Database, Zap, Target, Eye, AlertTriangle,
@@ -8,28 +9,33 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'pg_stat_insights - Deep PostgreSQL Performance Analytics | Query Optimization & Database Intelligence',
-  description: 'pg_stat_insights provides comprehensive PostgreSQL performance analytics with query statistics, table/index analysis, cache hit ratios, replication monitoring, and intelligent optimization recommendations. Deep insights into database performance for production PostgreSQL.',
+  title: 'pg_stat_insights - PostgreSQL Performance Monitoring Extension | 52 Metrics, 11 Views',
+  description: 'Advanced PostgreSQL query performance monitoring extension with 52 comprehensive metrics across 11 pre-built views. Track slow queries, cache efficiency, WAL generation, and optimize database performance. Drop-in replacement for pg_stat_statements with enhanced analytics. PostgreSQL 16-18 compatible.',
   keywords: [
     // Primary keywords
-    'pg_stat_insights', 'PostgreSQL performance analytics', 'database performance monitoring',
-    'query optimization', 'PostgreSQL insights', 'database analytics',
+    'pg_stat_insights', 'PostgreSQL performance monitoring', 'PostgreSQL query analytics',
+    'pg_stat_statements alternative', 'database performance extension', 'SQL optimization',
+    
+    // Core metrics
+    '52 metrics', '11 views', 'query performance tracking', 'execution time monitoring',
+    'cache hit analysis', 'WAL generation tracking', 'JIT statistics', 'buffer I/O metrics',
     
     // Technical keywords
-    'pg_stat_statements', 'PostgreSQL query analysis', 'table statistics', 'index usage analysis',
-    'cache hit ratio', 'replication lag monitoring', 'PostgreSQL metrics',
+    'pg_stat_statements', 'PostgreSQL query analysis', 'slow query detection', 'cache misses',
+    'buffer cache efficiency', 'response time categorization', 'time-series data',
     
     // Feature keywords
-    'slow query detection', 'query performance tuning', 'table bloat analysis', 'index recommendations',
-    'vacuum monitoring', 'lock analysis', 'connection statistics', 'database health monitoring',
+    'query optimization', 'performance monitoring extension', 'database analytics',
+    'execution statistics', 'plan optimization', 'parallel query monitoring',
+    'replication lag tracking', 'WAL monitoring', 'JIT compilation stats',
     
     // Integration keywords
-    'Prometheus PostgreSQL metrics', 'Grafana PostgreSQL', 'PostgreSQL extensions',
-    'pg_buffercache', 'pg_stat_kcache', 'pg_qualstats',
+    'Prometheus PostgreSQL', 'Grafana dashboards', 'PostgreSQL 16', 'PostgreSQL 17', 'PostgreSQL 18',
+    'postgres_exporter', 'TAP testing', 'database monitoring tools',
     
     // Use case keywords
-    'database performance tuning', 'PostgreSQL optimization', 'production database monitoring',
-    'query optimization recommendations', 'database health checks', 'performance troubleshooting'
+    'database performance tuning', 'PostgreSQL optimization', 'production monitoring',
+    'query performance analysis', 'database health monitoring', 'SQL performance tracking'
   ].join(', '),
   authors: [
     { name: 'pgElephant Team', url: 'https://www.pgelephant.com' }
@@ -96,145 +102,295 @@ const PgStatInsightsIcon = ({ size = 80 }: { size?: number }) => (
 
 const pgStatInsightsConfig = {
   hero: {
-    title: 'pg_stat_insights: Deep PostgreSQL Performance Analytics',
-    subtitle: 'Comprehensive Database Intelligence with Query Optimization & Intelligent Recommendations',
+    title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
+    subtitle: '52 comprehensive metrics across 11 pre-built views for query optimization, cache analysis, and WAL monitoring',
     projectName: 'pg_stat_insights',
     icon: <PgStatInsightsIcon size={80} />,
   },
   badges: [
-    'Query Analytics',
-    'Table Statistics',
-    'Index Analysis',
-    'Cache Monitoring',
-    'Replication Insights',
-    'Bloat Detection',
-    'Lock Analysis',
-    'Recommendations',
+    'PostgreSQL 16-18',
+    '52 Metrics',
+    '11 Views',
+    '11 Parameters',
+    'pg_stat_statements Drop-in',
+    'TAP Testing',
+    'Prometheus Ready',
+    'Grafana Dashboards',
   ],
-  demo: (
-    <div className="bg-slate-900 rounded-xl p-6 shadow-2xl border border-slate-700">
-      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-700">
-        <TrendingUp className="w-5 h-5 text-green-400" />
-        <span className="text-green-400 font-semibold">pg_stat_insights Dashboard</span>
-        <span className="ml-auto text-xs text-slate-400">Live Analytics</span>
-      </div>
-      
-      <div className="space-y-4 font-mono text-sm">
-        {/* Query Insights */}
-        <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
-          <div className="text-cyan-300 mb-3 flex items-center gap-2">
-            <Search className="w-4 h-4" />
-            <span>Top Slow Queries</span>
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs">
-              <span className="text-slate-400">SELECT * FROM large_table WHERE ...</span>
-              <span className="text-red-400">2.4s avg</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-slate-400">UPDATE orders SET status = ...</span>
-              <span className="text-orange-400">1.8s avg</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-slate-400">SELECT COUNT(*) FROM events ...</span>
-              <span className="text-yellow-400">1.2s avg</span>
-            </div>
-          </div>
-        </div>
-        
-        {/* Performance Metrics */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-blue-900/20 border border-blue-700/30 p-3 rounded">
-            <div className="text-blue-300 text-xs mb-1">Cache Hit Ratio</div>
-            <div className="text-2xl font-bold text-blue-400">98.7%</div>
-          </div>
-          <div className="bg-green-900/20 border border-green-700/30 p-3 rounded">
-            <div className="text-green-300 text-xs mb-1">Total Queries</div>
-            <div className="text-2xl font-bold text-green-400">1.2M</div>
-          </div>
-          <div className="bg-purple-900/20 border border-purple-700/30 p-3 rounded">
-            <div className="text-purple-300 text-xs mb-1">Active Connections</div>
-            <div className="text-2xl font-bold text-purple-400">127</div>
-          </div>
-          <div className="bg-orange-900/20 border border-orange-700/30 p-3 rounded">
-            <div className="text-orange-300 text-xs mb-1">Replication Lag</div>
-            <div className="text-2xl font-bold text-orange-400">0.2s</div>
-          </div>
-        </div>
-        
-        {/* Recommendations */}
-        <div className="bg-green-900/20 border border-green-700/30 p-4 rounded-lg">
-          <div className="text-green-300 mb-2 flex items-center gap-2">
-            <CheckCircle className="w-4 h-4" />
-            <span className="font-semibold">Optimization Recommendations</span>
-          </div>
-          <div className="space-y-2 text-xs text-slate-400">
-            <div>• Create index on users.email (80% queries)</div>
-            <div>• Vacuum table orders (15% bloat detected)</div>
-            <div>• Consider partitioning events table (50M rows)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  ),
+  demo: <PgStatInsightsDemoTerminal />,
   features: [
-    { icon: '🔍', iconColor: 'text-blue-500', title: 'Query Insights', desc: 'Detailed statistics from pg_stat_statements including execution times, call counts, and query patterns with automatic slow query detection.' },
-    { icon: '📊', iconColor: 'text-purple-500', title: 'Table Statistics', desc: 'Comprehensive table-level metrics including row counts, live/dead tuples, bloat detection, and sequential vs index scan ratios.' },
-    { icon: '🎯', iconColor: 'text-green-500', title: 'Index Analysis', desc: 'Index usage statistics, scan counts, size tracking, and recommendations for missing or unused indexes.' },
-    { icon: '💾', iconColor: 'text-cyan-500', title: 'Cache Monitoring', desc: 'Buffer cache hit ratios, shared buffer usage, and cache efficiency analysis with optimization suggestions.' },
-    { icon: '🔄', iconColor: 'text-orange-500', title: 'Replication Insights', desc: 'Real-time replication lag monitoring, WAL sender/receiver stats, and streaming replication health analysis.' },
-    { icon: '🗑️', iconColor: 'text-pink-500', title: 'Bloat Detection', desc: 'Automatic detection of table and index bloat with size impact analysis and vacuum recommendations.' },
-    { icon: '🔒', iconColor: 'text-red-500', title: 'Lock Analysis', desc: 'Active lock monitoring, blocking query detection, and lock type analysis for deadlock prevention.' },
-    { icon: '💡', iconColor: 'text-yellow-500', title: 'Smart Recommendations', desc: 'Intelligent optimization suggestions based on query patterns, table usage, and performance bottlenecks.' },
-    { icon: '📈', iconColor: 'text-indigo-500', title: 'Trend Analysis', desc: 'Historical performance trends with time-series data for capacity planning and anomaly detection.' },
+    { icon: '📊', iconColor: 'text-blue-500', title: '52 Comprehensive Metrics', desc: 'Execution time, plan time, cache hits, WAL generation, JIT stats, buffer I/O, parallel workers, and timing data—all in one extension.' },
+    { icon: '🎯', iconColor: 'text-purple-500', title: '11 Pre-Built Views', desc: 'Instant access to top slow queries, cache misses, I/O intensive operations, errors, histogram summaries, and time-series aggregation.' },
+    { icon: '⚡', iconColor: 'text-green-500', title: 'Response Time Categories', desc: 'Categorize queries by execution time: <1ms, 1-10ms, 10-100ms, 100ms-1s, 1-10s, >10s for SLA monitoring.' },
+    { icon: '💾', iconColor: 'text-cyan-500', title: 'Cache Efficiency Analysis', desc: 'Enhanced cache analysis with hit/miss ratios, shared_blks_hit, shared_blks_read, and buffer cache optimization insights.' },
+    { icon: '📝', iconColor: 'text-orange-500', title: 'WAL Generation Tracking', desc: 'Monitor write-ahead log per query: wal_records, wal_fpi, wal_bytes, wal_buffers_full for write optimization.' },
+    { icon: '⚙️', iconColor: 'text-pink-500', title: 'JIT Compilation Stats', desc: 'Track JIT functions, generation time, inlining, optimization, emission, and deform operations for query performance.' },
+    { icon: '🔄', iconColor: 'text-red-500', title: 'Parallel Query Monitoring', desc: 'Track parallel_workers_to_launch vs parallel_workers_launched for parallel query efficiency analysis.' },
+    { icon: '🧪', iconColor: 'text-yellow-500', title: '150 TAP Tests', desc: 'Comprehensive test suite with 16 test files, 150 test cases, 100% code coverage, and PostgreSQL 18 compatibility.' },
+    { icon: '📈', iconColor: 'text-indigo-500', title: 'Prometheus & Grafana', desc: 'Pre-built Prometheus queries, Grafana dashboards (8 panels), and 11 alert rules for production monitoring integration.' },
   ],
   featurePillars: {
-    kicker: 'Complete Database Analytics',
+    kicker: '52 Metrics Across 11 Views',
     items: [
-      { title: 'Query Performance Analytics', desc: 'Leverage pg_stat_statements to identify slow queries, analyze execution patterns, and track query performance over time. Automatic detection of queries exceeding thresholds with detailed statistics.' },
-      { title: 'Table & Index Insights', desc: 'Monitor table growth, detect bloat, analyze vacuum effectiveness, and track index usage. Get recommendations for missing indexes and identify unused indexes consuming space.' },
-      { title: 'Cache Efficiency Analysis', desc: 'Track buffer cache hit ratios, analyze cache effectiveness, and optimize shared_buffers configuration. Detect cache misses and recommend memory adjustments.' },
-      { title: 'Replication Monitoring', desc: 'Real-time lag detection across all replicas, WAL sender/receiver monitoring, and streaming replication health checks with automatic alerting for lag spikes.' },
-      { title: 'Connection Statistics', desc: 'Monitor active, idle, and idle-in-transaction connections. Detect connection leaks, analyze connection patterns, and optimize max_connections settings.' },
-      { title: 'Lock & Bloat Detection', desc: 'Identify blocking queries, analyze lock types, detect table/index bloat, and recommend maintenance operations like VACUUM or REINDEX.' },
-      { title: 'Vacuum Analytics', desc: 'Track autovacuum progress, analyze vacuum effectiveness, detect vacuum candidates, and optimize autovacuum settings for better performance.' },
-      { title: 'Intelligent Recommendations', desc: 'Get actionable insights powered by pattern analysis including index suggestions, vacuum recommendations, configuration optimizations, and query rewrites.' },
+      { title: 'Main Statistics View (pg_stat_insights)', desc: '52 columns including userid, dbid, queryid, query text, plans, total/min/max/mean/stddev plan/exec times, rows, all buffer I/O metrics, WAL stats, JIT stats, parallel workers, and timestamps.' },
+      { title: 'Top Queries by Time', desc: 'pg_stat_insights_top_by_time view shows slowest queries by total_exec_time. Perfect for identifying performance bottlenecks and optimization opportunities.' },
+      { title: 'Top Queries by Calls', desc: 'pg_stat_insights_top_by_calls view shows most frequently executed queries. Ideal for finding high-frequency operations that need caching or optimization.' },
+      { title: 'I/O Intensive Operations', desc: 'pg_stat_insights_top_by_io view identifies highest I/O consumers based on shared_blks_read + temp_blks_read. Find disk-heavy queries.' },
+      { title: 'Cache Miss Analysis', desc: 'pg_stat_insights_top_cache_misses view shows poor cache performers. Includes cache_hit_ratio calculation for buffer optimization.' },
+      { title: 'Slow Query Detection', desc: 'pg_stat_insights_slow_queries view filters queries with mean_exec_time > 100ms. Automatic slow query identification for tuning.' },
+      { title: 'Error Tracking', desc: 'pg_stat_insights_errors view shows queries with execution errors. Track failed queries for debugging and reliability improvement.' },
+      { title: 'Plan Estimation Issues', desc: 'pg_stat_insights_plan_errors view identifies plan estimation problems. Compare estimated vs actual rows for query planner accuracy.' },
+      { title: 'Response Time Histograms', desc: 'pg_stat_insights_histogram_summary aggregates queries into time buckets: <1ms, 1-10ms, 10-100ms, 100ms-1s, 1-10s, >10s for SLA tracking.' },
+      { title: 'Time-Series Aggregation', desc: 'pg_stat_insights_by_bucket view provides time-series data with bucket-based aggregation for trend analysis and capacity planning.' },
+      { title: 'Replication Monitoring', desc: 'pg_stat_insights_replication view tracks WAL sender/receiver stats, lag (write/flush/replay), sync_state, and replication health across all standbys.' },
     ],
   },
   featureMatrix: (
-    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+    <div className="space-y-8">
+      {/* 11 Views Overview */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700">
+        <h3 className="text-2xl font-bold text-white mb-6 text-center">11 Pre-Built Views for Complete Performance Visibility</h3>
+        
+        <div className="grid grid-cols-3 gap-4">
+          {/* View 1 */}
+          <div className="bg-blue-600/10 border-2 border-blue-500 rounded-lg p-4">
+            <div className="text-center">
+              <Database className="w-8 h-8 mx-auto mb-2 text-blue-400" />
+              <div className="font-bold text-blue-300 text-sm">pg_stat_insights</div>
+              <div className="text-xs text-slate-400 mt-2">Main view - 52 columns</div>
+              <div className="mt-2 text-xs text-slate-300">All metrics in one place</div>
+            </div>
+          </div>
+          
+          {/* View 2 */}
+          <div className="bg-purple-600/10 border-2 border-purple-500 rounded-lg p-4">
+            <div className="text-center">
+              <Clock className="w-8 h-8 mx-auto mb-2 text-purple-400" />
+              <div className="font-bold text-purple-300 text-sm">top_by_time</div>
+              <div className="text-xs text-slate-400 mt-2">Slowest queries</div>
+              <div className="mt-2 text-xs text-slate-300">By total_exec_time</div>
+            </div>
+          </div>
+          
+          {/* View 3 */}
+          <div className="bg-green-600/10 border-2 border-green-500 rounded-lg p-4">
+            <div className="text-center">
+              <Activity className="w-8 h-8 mx-auto mb-2 text-green-400" />
+              <div className="font-bold text-green-300 text-sm">top_by_calls</div>
+              <div className="text-xs text-slate-400 mt-2">Most frequent</div>
+              <div className="mt-2 text-xs text-slate-300">High-frequency queries</div>
+            </div>
+          </div>
+          
+          {/* View 4 */}
+          <div className="bg-cyan-600/10 border-2 border-cyan-500 rounded-lg p-4">
+            <div className="text-center">
+              <HardDrive className="w-8 h-8 mx-auto mb-2 text-cyan-400" />
+              <div className="font-bold text-cyan-300 text-sm">top_by_io</div>
+              <div className="text-xs text-slate-400 mt-2">I/O intensive</div>
+              <div className="mt-2 text-xs text-slate-300">Disk-heavy queries</div>
+            </div>
+          </div>
+          
+          {/* View 5 */}
+          <div className="bg-orange-600/10 border-2 border-orange-500 rounded-lg p-4">
+            <div className="text-center">
+              <Target className="w-8 h-8 mx-auto mb-2 text-orange-400" />
+              <div className="font-bold text-orange-300 text-sm">top_cache_misses</div>
+              <div className="text-xs text-slate-400 mt-2">Poor cache hits</div>
+              <div className="mt-2 text-xs text-slate-300">Buffer optimization</div>
+            </div>
+          </div>
+          
+          {/* View 6 */}
+          <div className="bg-red-600/10 border-2 border-red-500 rounded-lg p-4">
+            <div className="text-center">
+              <AlertTriangle className="w-8 h-8 mx-auto mb-2 text-red-400" />
+              <div className="font-bold text-red-300 text-sm">slow_queries</div>
+              <div className="text-xs text-slate-400 mt-2">Mean time &gt; 100ms</div>
+              <div className="mt-2 text-xs text-slate-300">Performance alerts</div>
+            </div>
+          </div>
+          
+          {/* View 7 */}
+          <div className="bg-pink-600/10 border-2 border-pink-500 rounded-lg p-4">
+            <div className="text-center">
+              <AlertTriangle className="w-8 h-8 mx-auto mb-2 text-pink-400" />
+              <div className="font-bold text-pink-300 text-sm">errors</div>
+              <div className="text-xs text-slate-400 mt-2">Failed queries</div>
+              <div className="mt-2 text-xs text-slate-300">Error tracking</div>
+            </div>
+          </div>
+          
+          {/* View 8 */}
+          <div className="bg-yellow-600/10 border-2 border-yellow-500 rounded-lg p-4">
+            <div className="text-center">
+              <Search className="w-8 h-8 mx-auto mb-2 text-yellow-400" />
+              <div className="font-bold text-yellow-300 text-sm">plan_errors</div>
+              <div className="text-xs text-slate-400 mt-2">Estimation issues</div>
+              <div className="mt-2 text-xs text-slate-300">Planner accuracy</div>
+            </div>
+          </div>
+          
+          {/* View 9 */}
+          <div className="bg-indigo-600/10 border-2 border-indigo-500 rounded-lg p-4">
+            <div className="text-center">
+              <BarChart3 className="w-8 h-8 mx-auto mb-2 text-indigo-400" />
+              <div className="font-bold text-indigo-300 text-sm">histogram_summary</div>
+              <div className="text-xs text-slate-400 mt-2">Time distribution</div>
+              <div className="mt-2 text-xs text-slate-300">6 time buckets</div>
+            </div>
+          </div>
+          
+          {/* View 10 */}
+          <div className="bg-teal-600/10 border-2 border-teal-500 rounded-lg p-4">
+            <div className="text-center">
+              <Layers className="w-8 h-8 mx-auto mb-2 text-teal-400" />
+              <div className="font-bold text-teal-300 text-sm">by_bucket</div>
+              <div className="text-xs text-slate-400 mt-2">Time-series</div>
+              <div className="mt-2 text-xs text-slate-300">Bucket aggregation</div>
+            </div>
+          </div>
+          
+          {/* View 11 */}
+          <div className="bg-violet-600/10 border-2 border-violet-500 rounded-lg p-4">
+            <div className="text-center">
+              <TrendingUp className="w-8 h-8 mx-auto mb-2 text-violet-400" />
+              <div className="font-bold text-violet-300 text-sm">replication</div>
+              <div className="text-xs text-slate-400 mt-2">Standby lag</div>
+              <div className="mt-2 text-xs text-slate-300">WAL monitoring</div>
+            </div>
+          </div>
+        </div>
+        
+        {/* 52 Metrics Breakdown */}
+        <div className="mt-6 bg-slate-800/40 border border-slate-600 rounded-lg p-6">
+          <h4 className="text-lg font-bold text-white text-center mb-4">52 Comprehensive Metrics</h4>
+          <div className="grid grid-cols-4 gap-4 text-xs">
+            <div>
+              <div className="font-semibold text-blue-300 mb-2">Execution Metrics (10)</div>
+              <div className="space-y-1 text-slate-400">
+                <div>• plans, calls, rows</div>
+                <div>• total/min/max times</div>
+                <div>• mean/stddev times</div>
+                <div>• plan + exec times</div>
+              </div>
+            </div>
+            <div>
+              <div className="font-semibold text-green-300 mb-2">Buffer I/O (14)</div>
+              <div className="space-y-1 text-slate-400">
+                <div>• shared_blks (hit/read)</div>
+                <div>• dirtied/written</div>
+                <div>• local_blks (4 types)</div>
+                <div>• temp_blks (2 types)</div>
+                <div>• read/write times (6)</div>
+              </div>
+            </div>
+            <div>
+              <div className="font-semibold text-purple-300 mb-2">WAL Stats (4)</div>
+              <div className="space-y-1 text-slate-400">
+                <div>• wal_records</div>
+                <div>• wal_fpi</div>
+                <div>• wal_bytes</div>
+                <div>• wal_buffers_full</div>
+              </div>
+            </div>
+            <div>
+              <div className="font-semibold text-orange-300 mb-2">JIT Stats (10)</div>
+              <div className="space-y-1 text-slate-400">
+                <div>• jit_functions</div>
+                <div>• generation_time</div>
+                <div>• inlining (count/time)</div>
+                <div>• optimization (count/time)</div>
+                <div>• emission (count/time)</div>
+                <div>• deform (count/time)</div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-4 text-xs mt-4">
+            <div>
+              <div className="font-semibold text-cyan-300 mb-2">Parallel (2)</div>
+              <div className="space-y-1 text-slate-400">
+                <div>• workers_to_launch</div>
+                <div>• workers_launched</div>
+              </div>
+            </div>
+            <div>
+              <div className="font-semibold text-pink-300 mb-2">Metadata (5)</div>
+              <div className="space-y-1 text-slate-400">
+                <div>• userid, dbid, queryid</div>
+                <div>• toplevel, query text</div>
+              </div>
+            </div>
+            <div>
+              <div className="font-semibold text-yellow-300 mb-2">Timestamps (2)</div>
+              <div className="space-y-1 text-slate-400">
+                <div>• stats_since</div>
+                <div>• minmax_stats_since</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Comparison Table */}
+      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
-          <th className="px-4 py-3 font-semibold text-white">Analytics Category</th>
-          <th className="px-4 py-3 font-semibold text-white">Data Sources</th>
-          <th className="px-4 py-3 font-semibold text-white">Key Metrics</th>
-          <th className="px-4 py-3 font-semibold text-white">Output</th>
+          <th className="px-4 py-3 font-semibold text-white">Feature</th>
+          <th className="px-4 py-3 font-semibold text-white">pg_stat_statements</th>
+          <th className="px-4 py-3 font-semibold text-white">pg_stat_monitor</th>
+          <th className="px-4 py-3 font-semibold text-white">pg_stat_insights</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
-          <td className="px-4 py-3 font-medium text-blue-300">Query Analytics</td>
-          <td className="px-4 py-3 text-slate-300">pg_stat_statements</td>
-          <td className="px-4 py-3 text-slate-300">Execution time, calls, rows, cache hits</td>
-          <td className="px-4 py-3 text-slate-300">Slow query list, performance trends</td>
+          <td className="px-4 py-3 font-medium text-slate-200">Metric Columns</td>
+          <td className="px-4 py-3 text-slate-300">44</td>
+          <td className="px-4 py-3 text-slate-300">58</td>
+          <td className="px-4 py-3 text-green-400 font-bold">52</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-purple-300">Table Statistics</td>
-          <td className="px-4 py-3 text-slate-300">pg_stat_user_tables</td>
-          <td className="px-4 py-3 text-slate-300">Rows, scans, tuples, bloat percentage</td>
-          <td className="px-4 py-3 text-slate-300">Bloat analysis, vacuum recommendations</td>
+          <td className="px-4 py-3 font-medium text-slate-200">Pre-built Views</td>
+          <td className="px-4 py-3 text-slate-300">2</td>
+          <td className="px-4 py-3 text-slate-300">5</td>
+          <td className="px-4 py-3 text-green-400 font-bold">11</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-green-300">Index Usage</td>
-          <td className="px-4 py-3 text-slate-300">pg_stat_user_indexes</td>
-          <td className="px-4 py-3 text-slate-300">Scans, tuples, size, usage patterns</td>
-          <td className="px-4 py-3 text-slate-300">Missing/unused index recommendations</td>
+          <td className="px-4 py-3 font-medium text-slate-200">Configuration Options</td>
+          <td className="px-4 py-3 text-slate-300">5</td>
+          <td className="px-4 py-3 text-slate-300">12</td>
+          <td className="px-4 py-3 text-green-400 font-bold">11</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Cache Efficiency</td>
-          <td className="px-4 py-3 text-slate-300">pg_stat_database, pg_buffercache</td>
-          <td className="px-4 py-3 text-slate-300">Hit ratio, blocks read/hit, cache usage</td>
-          <td className="px-4 py-3 text-slate-300">Memory optimization suggestions</td>
+          <td className="px-4 py-3 font-medium text-slate-200">Response Time Categories</td>
+          <td className="px-4 py-3 text-red-400">✗ No</td>
+          <td className="px-4 py-3 text-red-400">✗ No</td>
+          <td className="px-4 py-3 text-green-400">✓ Yes (6 buckets)</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-slate-200">Time-Series Tracking</td>
+          <td className="px-4 py-3 text-red-400">✗ No</td>
+          <td className="px-4 py-3 text-red-400">✗ No</td>
+          <td className="px-4 py-3 text-green-400">✓ Bucket-based</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-slate-200">TAP Test Coverage</td>
+          <td className="px-4 py-3 text-yellow-400">~ Standard</td>
+          <td className="px-4 py-3 text-yellow-400">~ Limited</td>
+          <td className="px-4 py-3 text-green-400">✓ 150 tests, 100%</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-slate-200">Documentation</td>
+          <td className="px-4 py-3 text-yellow-400">~ Basic</td>
+          <td className="px-4 py-3 text-yellow-400">~ Medium</td>
+          <td className="px-4 py-3 text-green-400">✓ 30+ pages</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-slate-200">Prometheus Integration</td>
+          <td className="px-4 py-3 text-yellow-400">~ Manual</td>
+          <td className="px-4 py-3 text-yellow-400">~ Manual</td>
+          <td className="px-4 py-3 text-green-400">✓ Pre-built queries</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-orange-300">Replication Health</td>
@@ -262,6 +418,7 @@ const pgStatInsightsConfig = {
         </tr>
       </tbody>
     </table>
+    </div>
   ),
   useCases: [
     {

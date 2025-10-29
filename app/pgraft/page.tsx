@@ -5,18 +5,20 @@ import { Database, Crown, Network, Shield } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'pgraft - Raft-Based PostgreSQL Extension | pgElephant',
-  description: 'pgraft brings automatic leader election, split-brain prevention, and high availability to PostgreSQL clusters with mathematical guarantees. Native Raft consensus for PostgreSQL.',
-  keywords: 'PostgreSQL, Raft consensus, leader election, high availability, distributed systems, database clustering',
+  title: 'pgraft - PostgreSQL Raft Consensus Extension | Automatic Leader Election & Zero Split-Brain',
+  description: 'Production-ready Raft consensus for distributed PostgreSQL clusters. Built on etcd-io/raft with automatic leader election, crash-safe replication, 100% split-brain prevention, zero-downtime failover, and comprehensive SQL API. Native background worker architecture with no external dependencies.',
+  keywords: 'PostgreSQL, Raft consensus, leader election, high availability, distributed systems, database clustering, etcd-io/raft, split-brain prevention, automatic failover, crash-safe replication, background worker, distributed consensus, PostgreSQL extension, key-value store, cluster management',
   openGraph: {
-    title: 'pgraft - Raft-Based PostgreSQL Extension',
-    description: 'Native Raft consensus for PostgreSQL clusters with automatic leader election and split-brain prevention.',
+    title: 'pgraft - PostgreSQL Raft Consensus Extension',
+    description: 'Production-ready Raft consensus for PostgreSQL with automatic leader election, crash-safe replication, and 100% split-brain prevention. Built on proven etcd-io/raft library.',
     type: 'website',
+    url: 'https://www.pgelephant.com/pgraft',
+    siteName: 'pgElephant',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'pgraft - Raft-Based PostgreSQL Extension',
-    description: 'Native Raft consensus for PostgreSQL clusters with automatic leader election and split-brain prevention.',
+    title: 'pgraft - PostgreSQL Raft Consensus Extension',
+    description: 'Production-ready Raft consensus for PostgreSQL clusters with automatic leader election, crash-safe replication, and 100% split-brain prevention.',
   },
 };
 
@@ -32,28 +34,32 @@ const PgraftIcon = ({ size = 80 }: { size?: number }) => (
 
 const pgraftConfig = {
   hero: {
-    title: 'pgraft: Raft-Based PostgreSQL Extension',
-    subtitle: 'Native Raft consensus for PostgreSQL clusters with automatic leader election and split-brain prevention',
+    title: 'pgraft: PostgreSQL Raft Consensus Extension',
+    subtitle: 'Production-ready Raft consensus for distributed PostgreSQL clusters with automatic leader election, crash-safe replication, and 100% split-brain prevention',
     projectName: 'pgraft',
     icon: <PgraftIcon size={80} />,
   },
   badges: [
-    'PostgreSQL 16–18',
-    'Strong Consistency',
+    'PostgreSQL 14-17',
+    'etcd-io/raft',
     'Zero Split-Brain',
-    'Raft Consensus',
+    'Auto Leader Election',
     'Background Worker',
+    'etcd-Compatible KV',
   ],
   demo: <PgraftDemoTerminal />,
   featurePillars: {
-    kicker: 'Overview',
+    kicker: 'Key Features',
     items: [
-      { title: 'Production-Grade Consensus', desc: 'Built on proven libraft implementation for reliable leader election and distributed consensus.' },
-      { title: 'Transparent Operations', desc: 'All cluster state is inspectable through SQL functions—no external dependencies or control planes.' },
-      { title: 'Fast Recovery', desc: 'Automatic failover with deterministic leader elections and quick recovery during network partitions.' },
-      { title: 'Operational Simplicity', desc: 'Pure PostgreSQL extension with minimal configuration. Ideal for both development and production.' },
-      { title: 'Durable & Crash Safe', desc: 'Persistent Raft state and log entries ensure cluster consistency after restarts or failures.' },
-      { title: 'Native Integration', desc: 'Seamlessly integrates with PostgreSQL using background workers and shared memory IPC.' },
+      { title: 'Automatic Leader Election', desc: 'Quorum-based, deterministic, fully automated leader election using proven etcd-io/raft implementation.' },
+      { title: 'Crash-Safe Replication', desc: 'All state changes replicated and persisted across nodes. Survives crashes and network partitions.' },
+      { title: '100% Split-Brain Prevention', desc: 'Mathematical guarantee via Raft consensus protocol—never more than one leader per term.' },
+      { title: 'Zero-Downtime Failover', desc: 'Sub-second detection and automatic recovery. Seamless failover with no service interruption.' },
+      { title: 'Production-Grade Raft', desc: 'Built on proven etcd-io/raft library used in production by etcd, Kubernetes, and other systems.' },
+      { title: 'Native PostgreSQL Integration', desc: 'Background worker architecture with no external dependencies. Pure PostgreSQL extension.' },
+      { title: 'Comprehensive SQL API', desc: 'Full cluster management via SQL functions. Monitor, manage, and control through standard SQL.' },
+      { title: 'Built-in Observability', desc: 'Status functions, metrics, detailed logging, and monitoring hooks for complete cluster visibility.' },
+      { title: 'etcd-Compatible KV Store', desc: 'Raft-replicated key-value storage included. Perfect for distributed configuration and coordination.' },
     ],
   },
   featureMatrix: (
