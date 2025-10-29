@@ -2,6 +2,7 @@
 // This file contains optimizations that can be applied to layout.tsx
 
 import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 
 // Lazy load components that are not immediately visible
 export const LazyFooter = dynamic(() => import('@/components/Footer'), {

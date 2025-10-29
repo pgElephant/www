@@ -1,4 +1,5 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
+import CommentSystem from '../../../components/CommentSystem';
 
 export const metadata = {
   title: 'pgraft: Raft-Based PostgreSQL Extension',
@@ -1006,77 +1007,8 @@ export default function PgraftBlogPost() {
               Comments
             </h2>
             
-            {/* Comment Form */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-8 mb-8">
-              <h3 className="text-xl font-semibold text-white mb-6">Leave a Comment</h3>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="comment" className="block text-sm font-medium text-white/90 mb-2">
-                    Comment *
-                  </label>
-                  <textarea
-                    id="comment"
-                    name="comment"
-                    rows={6}
-                    required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-vertical"
-                    placeholder="Share your thoughts about pgraft, your experiences with PostgreSQL high availability, or any questions you might have..."
-                  />
-                </div>
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="notify"
-                    name="notify"
-                    className="w-4 h-4 text-primary-600 bg-white/10 border-white/20 rounded focus:ring-primary-500 focus:ring-2"
-                  />
-                  <label htmlFor="notify" className="ml-2 text-sm text-white/80">
-                    Notify me of replies to this comment
-                  </label>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full md:w-auto px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-                >
-                  Post Comment
-                </button>
-              </form>
-            </div>
-
-            {/* Comments will appear here */}
-            <div className="text-center py-12">
-              <p className="text-white/60 text-lg">
-                Be the first to comment on this post!
-              </p>
-            </div>
+            {/* Comment System */}
+            <CommentSystem postSlug="pgraft" />
           </div>
         </div>
       </div>

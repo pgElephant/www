@@ -198,7 +198,7 @@ const Footer = () => {
                           <RaleIcon size={16} />
                         ) : item.icon === 'ram-custom' ? (
                           <RamIcon size={16} />
-                        ) : (
+                        ) : item.icon.startsWith('/') || item.icon.startsWith('http') ? (
                           <Image 
                             src={item.icon} 
                             alt={`${item.name} icon`} 
@@ -206,6 +206,8 @@ const Footer = () => {
                             height={16} 
                             className="w-4 h-4 object-contain"
                           />
+                        ) : (
+                          <span className="text-sm">{item.icon}</span>
                         )}
                       </div>
                       <div>
