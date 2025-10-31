@@ -20,6 +20,7 @@ const NeurondBDemoTerminal = () => {
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
   const [activeTab, setActiveTab] = useState<'build' | 'usage'>('build')
   const [copied, setCopied] = useState(false)
+  const [inPsqlMode, setInPsqlMode] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const timeoutRefs = useRef<NodeJS.Timeout[]>([])
@@ -151,7 +152,8 @@ const NeurondBDemoTerminal = () => {
         'Type "help" for help.',
         ''
       ],
-      isShellCommand: true
+      isShellCommand: true,
+      entersPsql: true
     },
     {
       command: 'CREATE TABLE documents (id SERIAL PRIMARY KEY, title TEXT, content TEXT, embedding vector(384));',
@@ -418,6 +420,11 @@ const NeurondBDemoTerminal = () => {
       
       const cmd = commands[commandIndex]
       
+      // Check if this command enters psql mode
+      if ((cmd as any).entersPsql) {
+        setInPsqlMode(true)
+      }
+      
       // Type the command first (no history entry yet)
       typeCommand(cmd.command, () => {
         // After typing completes, add to history with output
@@ -578,16 +585,16 @@ const NeurondBDemoTerminal = () => {
         {commandHistory.map((cmd, index) => (
           <div key={index} className="mb-3">
             {/* Command prompt with timestamp */}
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-start gap-2 mb-1 font-mono">
               {cmd.isPsqlCommand ? (
                 <>
-                  <span className="text-emerald-400 font-bold">vectordb=#</span>
-                  <span className="text-gray-200">{cmd.command}</span>
+                  <span className="text-emerald-400 font-bold whitespace-nowrap">vectordb=#</span>
+                  <span className="text-gray-200 break-all">{cmd.command}</span>
                 </>
               ) : (
                 <>
                   <span className="text-emerald-400 font-bold">$</span>
-                  <span className="text-gray-200 ml-2">{cmd.command}</span>
+                  <span className="text-gray-200 ml-2 break-all">{cmd.command}</span>
                 </>
               )}
             </div>
@@ -634,7 +641,7 @@ const NeurondBDemoTerminal = () => {
               }
 
               return (
-                <div key={lineIndex} className="font-mono text-sm pl-4">
+                <div key={lineIndex} className="font-mono text-sm pl-4 whitespace-pre">
                   {renderLine(line)}
                 </div>
               )
@@ -644,19 +651,29 @@ const NeurondBDemoTerminal = () => {
 
         {/* Current Command Being Typed */}
         {isTyping && (
-          <div className="flex items-center gap-2">
-            <span className="text-emerald-400 font-bold">$</span>
-            <span className="text-gray-200">{currentCommand}</span>
-            <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+          <div className="flex items-center gap-2 font-mono">
+            {inPsqlMode ? (
+              <>
+                <span className="text-emerald-400 font-bold whitespace-nowrap">vectordb=#</span>
+                <span className="text-gray-200 ml-2">{currentCommand}</span>
+                <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+              </>
+            ) : (
+              <>
+                <span className="text-emerald-400 font-bold">$</span>
+                <span className="text-gray-200 ml-2">{currentCommand}</span>
+                <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+              </>
+            )}
           </div>
         )}
 
         {/* Idle Prompt */}
         {!isRunning && !isTyping && commandHistory.length > 0 && (
-          <div className="flex items-center gap-2 mt-2">
-            {activeTab === 'usage' && commandHistory.some(cmd => cmd.isPsqlCommand) ? (
+          <div className="flex items-center gap-2 mt-2 font-mono">
+            {inPsqlMode ? (
               <>
-                <span className="text-emerald-400 font-bold">vectordb=#</span>
+                <span className="text-emerald-400 font-bold whitespace-nowrap">vectordb=#</span>
                 <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
               </>
             ) : (
