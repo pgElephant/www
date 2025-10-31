@@ -5,18 +5,18 @@ import { Database, FileText, Layers, Activity } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'FauxDB - MongoDB Compatible Document Database | pgElephant',
-  description: 'FauxDB is a high-performance MongoDB-compatible document database built in Rust with PostgreSQL storage. Full wire protocol support, ACID transactions, and geospatial queries.',
-  keywords: 'MongoDB compatible, document database, Rust, PostgreSQL, ACID transactions, geospatial, wire protocol',
+  title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL | pgElephant',
+  description: 'FauxDB is the ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Built in Rust with pure PostgreSQL backend. Connect with mongosh OR mysql client—access the same data through both protocols with ACID guarantees, SQL translator, and zero external dependencies.',
+  keywords: 'FauxDB, dual-protocol database, MongoDB compatible, MySQL compatible, MongoDB wire protocol, MySQL wire protocol, Rust database, PostgreSQL backend, ACID transactions, SQL translator, document database, mongosh, mysql client, NoSQL alternative, wire protocol compatibility',
   openGraph: {
-    title: 'FauxDB - MongoDB Compatible Document Database',
-    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL storage.',
+    title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL',
+    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously, backed by pure PostgreSQL.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FauxDB - MongoDB Compatible Document Database',
-    description: 'High-performance MongoDB-compatible document database built in Rust with PostgreSQL storage.',
+    title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL',
+    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Connect with mongosh OR mysql client—access the same data.',
   },
 };
 
@@ -32,28 +32,32 @@ const FauxDbIcon = ({ size = 80 }: { size?: number }) => (
 
 const fauxdbConfig = {
   hero: {
-    title: 'FauxDB: MongoDB Wire Protocol + PostgreSQL Storage',
-    subtitle: 'MongoDB-compatible document database powered by Rust and PostgreSQL',
+    title: 'FauxDB: Dual-Protocol Database Server',
+    subtitle: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously—backed by pure PostgreSQL. Connect with MongoDB clients OR MySQL clients, access the same data through both protocols.',
     projectName: 'FauxDB',
     icon: <FauxDbIcon size={80} />,
   },
   badges: [
-    'MongoDB Compatible',
+    'MongoDB + MySQL Protocols',
+    'Dual-Protocol Access',
     'Rust Engine',
-    'PostgreSQL Storage',
+    'PostgreSQL Backend',
+    'SQL Translator',
     'ACID Transactions',
-    'Geospatial',
   ],
   demo: <FauxDbDemoTerminal />,
   featurePillars: {
-    kicker: 'Overview',
+    kicker: 'Key Features',
     items: [
-      { title: 'MongoDB Compatibility', desc: 'Full MongoDB wire protocol support for seamless migration.' },
-      { title: 'Rust-Powered Engine', desc: 'High-performance, safe, and modern backend.' },
-      { title: 'PostgreSQL Storage', desc: 'Reliable, battle-tested storage engine.' },
-      { title: 'ACID Transactions', desc: 'Multi-document ACID compliance.' },
-      { title: 'Geospatial', desc: 'Advanced geospatial queries.' },
-      { title: 'Minimal Configuration', desc: 'Easy setup and scaling.' },
+      { title: 'Dual-Protocol Support', desc: 'MongoDB AND MySQL wire protocols simultaneously! Connect with mongosh OR mysql client—access the SAME data through both protocols.' },
+      { title: 'MongoDB Wire Protocol', desc: 'Full MongoDB compatibility. Use mongosh, PyMongo, Node.js driver, and all MongoDB clients with zero changes.' },
+      { title: 'MySQL Wire Protocol', desc: 'Standard MySQL protocol support via msql-srv. Connect with mysql client, Tableau, PowerBI, and all MySQL tools.' },
+      { title: 'SQL Query Translator', desc: 'Automatic MySQL → PostgreSQL query translation. Handles backticks, data types, functions, LIMIT syntax, and 20+ patterns.' },
+      { title: 'Rust Performance', desc: 'Built in Rust for memory safety and concurrency. 10,000+ ops/sec MongoDB throughput, 5,000+ ops/sec MySQL throughput.' },
+      { title: 'Pure PostgreSQL Backend', desc: 'Native JSONB storage with PostgreSQL power. ACID transactions, data integrity, and enterprise features. Zero external dependencies.' },
+      { title: 'Production Ready', desc: 'Enterprise-grade monitoring, Prometheus metrics, Grafana dashboards, health checks, and comprehensive logging.' },
+      { title: 'Advanced Features', desc: 'Transactions, geospatial queries (PostGIS), aggregation pipeline, change streams, and connection pooling.' },
+      { title: 'Cross-Protocol Consistency', desc: 'Insert via MongoDB, query via MySQL. Write via MySQL, read via MongoDB. Always consistent with PostgreSQL ACID.' },
     ],
   },
   featureMatrix: (
@@ -62,34 +66,46 @@ const fauxdbConfig = {
         <tr className="text-left">
           <th className="px-4 py-3 font-semibold text-white">Capability</th>
           <th className="px-4 py-3 font-semibold text-white">Description</th>
-          <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
+          <th className="px-4 py-3 font-semibold text-white">Performance</th>
+          <th className="px-4 py-3 font-semibold text-white">Status</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">MongoDB Compatibility</td>
-          <td className="px-4 py-3 text-slate-300">Wire protocol, drivers, and tools compatibility.</td>
-          <td className="px-4 py-3 text-slate-300">Seamless migration.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">Dual-Protocol</td>
+          <td className="px-4 py-3 text-slate-300">MongoDB AND MySQL protocols simultaneously on ports 27018 + 3306</td>
+          <td className="px-4 py-3 text-slate-300">10K+ MongoDB ops/sec, 5K+ MySQL ops/sec</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Rust Engine</td>
-          <td className="px-4 py-3 text-slate-300">Modern, safe, and fast backend.</td>
-          <td className="px-4 py-3 text-slate-300">High performance.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">MongoDB Protocol</td>
+          <td className="px-4 py-3 text-slate-300">Full wire protocol, mongosh, PyMongo, Node.js driver</td>
+          <td className="px-4 py-3 text-slate-300">P50 < 5ms, P99 < 50ms</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Storage</td>
-          <td className="px-4 py-3 text-slate-300">Battle-tested, reliable storage.</td>
-          <td className="px-4 py-3 text-slate-300">Durability and reliability.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">MySQL Protocol</td>
+          <td className="px-4 py-3 text-slate-300">Standard MySQL protocol, mysql client, Tableau, PowerBI</td>
+          <td className="px-4 py-3 text-slate-300">msql-srv library</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">ACID Transactions</td>
-          <td className="px-4 py-3 text-slate-300">Multi-document ACID compliance.</td>
-          <td className="px-4 py-3 text-slate-300">Data integrity.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">SQL Translator</td>
+          <td className="px-4 py-3 text-slate-300">MySQL → PostgreSQL query translation (700+ lines)</td>
+          <td className="px-4 py-3 text-slate-300">20+ translation patterns</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Geospatial</td>
-          <td className="px-4 py-3 text-slate-300">Advanced geospatial queries.</td>
-          <td className="px-4 py-3 text-slate-300">Location-based features.</td>
+          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Backend</td>
+          <td className="px-4 py-3 text-slate-300">Native JSONB storage, ACID transactions, zero dependencies</td>
+          <td className="px-4 py-3 text-slate-300">PostgreSQL 17+</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">Monitoring</td>
+          <td className="px-4 py-3 text-slate-300">Prometheus metrics, Grafana dashboards, health checks</td>
+          <td className="px-4 py-3 text-slate-300">Per-protocol tracking</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
         </tr>
       </tbody>
     </table>
@@ -102,16 +118,37 @@ const fauxdbConfig = {
           <th className="px-4 py-3 font-semibold text-white">FauxDB</th>
           <th className="px-4 py-3 font-semibold text-white">FerretDB</th>
           <th className="px-4 py-3 font-semibold text-white">MongoDB</th>
-          <th className="px-4 py-3 font-semibold text-white">PostgreSQL JSON</th>
+          <th className="px-4 py-3 font-semibold text-white">MySQL</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">MongoDB Wire Protocol</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-green-400">✔️ Port 27018</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-green-400">✔️</td>
           <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">MySQL Wire Protocol</td>
+          <td className="px-4 py-3 text-green-400">✔️ Port 3306</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Dual-Protocol (Both)</td>
+          <td className="px-4 py-3 text-green-400">✔️ Unique!</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Backend</td>
+          <td className="px-4 py-3 text-green-400">✔️ JSONB</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
+          <td className="px-4 py-3 text-red-300">✗</td>
+          <td className="px-4 py-3 text-green-400">✔️</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-cyan-300">ACID Transactions</td>
