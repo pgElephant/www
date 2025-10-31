@@ -21,11 +21,51 @@ import {
   Network,
   Activity,
   BookOpen,
-  Search
+  Search,
+  Brain
 } from 'lucide-react'
 
 const FeaturesList = () => {
   const projects = [
+    {
+      name: 'NeurondB',
+      description: 'Advanced AI Database Extension for PostgreSQL',
+      icon: <Brain className="w-8 h-8" />,
+      color: 'primary',
+      link: '/neurondb',
+      features: [
+        {
+          title: 'Vector Search & HNSW Indexing',
+          description: 'Production-grade vector search with HNSW indexing and multiple distance metrics',
+          icon: <Search className="w-5 h-5" />
+        },
+        {
+          title: 'ML Inference & Embeddings',
+          description: 'Machine learning inference with embedding generation and ONNX runtime',
+          icon: <Cpu className="w-5 h-5" />
+        },
+        {
+          title: 'Hybrid Search',
+          description: 'Combining semantic vectors with full-text search for optimal results',
+          icon: <Database className="w-5 h-5" />
+        },
+        {
+          title: 'RAG Pipeline',
+          description: 'Complete RAG pipeline with reranking and background workers',
+          icon: <Network className="w-5 h-5" />
+        },
+        {
+          title: '100+ SQL Functions',
+          description: 'PostgreSQL 16-18 compatible with comprehensive SQL API',
+          icon: <Code className="w-5 h-5" />
+        },
+        {
+          title: 'Background Workers',
+          description: 'Queue processing, auto-tuning, and index maintenance workers',
+          icon: <Activity className="w-5 h-5" />
+        }
+      ]
+    },
     {
       name: 'pgbalancer',
       description: 'PostgreSQL Connection Pooler & Load Balancer',
@@ -365,6 +405,12 @@ Enterprise Solutions
                         </td>
                         <td className="p-3">
                           <div className="space-y-1">
+                            {project.name === 'NeurondB' && (
+                              <>
+                                <span className="block px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs font-light rounded-full text-center">AI Database</span>
+                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Vector Search</span>
+                              </>
+                            )}
                             {project.name === 'pgbalancer' && (
                               <>
                                 <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Pooling</span>
@@ -409,6 +455,14 @@ Enterprise Solutions
                         </td>
                         <td className="px-3 py-4">
                           <div className="space-y-1">
+                            {project.name === 'NeurondB' && (
+                              <>
+                                <div className="text-xs text-white/90">• Sub-ms vector search</div>
+                                <div className="text-xs text-white/90">• 100+ SQL functions</div>
+                                <div className="text-xs text-white/90">• HNSW indexing</div>
+                                <div className="text-xs text-white/90">• Native PG integration</div>
+                              </>
+                            )}
                             {project.name === 'pgbalancer' && (
                               <>
                                 <div className="text-xs text-white/90">• 10K+ connections/sec</div>
@@ -453,6 +507,14 @@ Enterprise Solutions
                         </td>
                         <td className="px-3 py-4">
                           <div className="space-y-1">
+                            {project.name === 'NeurondB' && (
+                              <>
+                                <div className="text-xs text-white/90">• PostgreSQL C extension</div>
+                                <div className="text-xs text-white/90">• PG 16-18 compatible</div>
+                                <div className="text-xs text-white/90">• Background workers</div>
+                                <div className="text-xs text-white/90">• Production-ready</div>
+                              </>
+                            )}
                             {project.name === 'pgbalancer' && (
                               <>
                                 <div className="text-xs text-white/90">• C-based high performance</div>
@@ -497,6 +559,14 @@ Enterprise Solutions
                         </td>
                         <td className="px-3 py-4">
                           <div className="space-y-1">
+                            {project.name === 'NeurondB' && (
+                              <>
+                                <div className="text-xs text-white/90">• Semantic search apps</div>
+                                <div className="text-xs text-white/90">• RAG applications</div>
+                                <div className="text-xs text-white/90">• AI-powered features</div>
+                                <div className="text-xs text-white/90">• Embedding storage</div>
+                              </>
+                            )}
                             {project.name === 'pgbalancer' && (
                               <>
                                 <div className="text-xs text-white/90">• High-traffic apps</div>

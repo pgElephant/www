@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
+import NeurondBDemoTerminal from '@/components/NeurondBDemoTerminal';
 import { Brain, Database, Zap, Search, Cpu, Shield, BarChart3, Layers } from 'lucide-react';
 import { Metadata } from 'next';
 
@@ -53,40 +54,7 @@ const neurondbConfig = {
     'Hybrid Search',
     'RAG Pipeline',
   ],
-  demo: (
-    <div className="bg-slate-900 rounded-lg p-6 font-mono text-sm text-green-400 overflow-x-auto">
-      <div className="mb-4">
-        <span className="text-slate-400">$</span> psql -d mydb
-      </div>
-      <div className="mb-4">
-        <span className="text-blue-400">mydb=#</span> CREATE EXTENSION neurondb;
-      </div>
-      <div className="text-green-300 mb-4">CREATE EXTENSION</div>
-      <div className="mb-4">
-        <span className="text-blue-400">mydb=#</span> CREATE TABLE docs (
-      </div>
-      <div className="ml-4 mb-4">
-        id SERIAL, content TEXT, embedding vector(384)
-      </div>
-      <div className="mb-4">);</div>
-      <div className="mb-4">
-        <span className="text-blue-400">mydb=#</span> INSERT INTO docs VALUES
-      </div>
-      <div className="ml-4 mb-4">
-        (1, 'AI overview', embed_text('AI overview'));
-      </div>
-      <div className="text-green-300 mb-4">INSERT 0 1</div>
-      <div className="mb-4">
-        <span className="text-blue-400">mydb=#</span> SELECT * FROM hybrid_search(
-      </div>
-      <div className="ml-4 mb-2">
-        'docs', embed_text('machine learning'), 'ML', '{}', 0.7, 10
-      </div>
-      <div className="mb-4">);</div>
-      <div className="text-green-300">id | content | score</div>
-      <div className="text-green-300">1 | AI overview | 0.92</div>
-    </div>
-  ),
+  demo: <NeurondBDemoTerminal />,
   featurePillars: {
     kicker: 'Key Features',
     items: [
@@ -147,6 +115,112 @@ const neurondbConfig = {
           <td className="px-4 py-3 text-slate-300">Complete in-database RAG with document processing</td>
           <td className="px-4 py-3 text-slate-300">End-to-end optimization</td>
           <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+      </tbody>
+    </table>
+  ),
+  featureComparison: (
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+      <thead className="bg-slate-800/60">
+        <tr className="text-left">
+          <th className="px-4 py-3 font-semibold text-white">Feature</th>
+          <th className="px-4 py-3 font-semibold text-white">NeurondB</th>
+          <th className="px-4 py-3 font-semibold text-white">pgvector</th>
+          <th className="px-4 py-3 font-semibold text-white">pgvectorscale</th>
+          <th className="px-4 py-3 font-semibold text-white">pgai</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Vector Indexing</td>
+          <td className="px-4 py-3 text-green-400">HNSW + IVF</td>
+          <td className="px-4 py-3 text-green-400">HNSW + IVF</td>
+          <td className="px-4 py-3 text-green-400">StreamingDiskANN</td>
+          <td className="px-4 py-3 text-red-300">No (uses pgvector)</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">ML Inference</td>
+          <td className="px-4 py-3 text-green-400">ONNX Runtime</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-green-400">OpenAI/Ollama API</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Embedding Generation</td>
+          <td className="px-4 py-3 text-green-400">In-database</td>
+          <td className="px-4 py-3 text-red-300">External</td>
+          <td className="px-4 py-3 text-red-300">External</td>
+          <td className="px-4 py-3 text-yellow-300">External API</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">Hybrid Search</td>
+          <td className="px-4 py-3 text-green-400">Native (Vector+FTS)</td>
+          <td className="px-4 py-3 text-yellow-300">Manual</td>
+          <td className="px-4 py-3 text-yellow-300">Manual</td>
+          <td className="px-4 py-3 text-yellow-300">Manual</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Reranking</td>
+          <td className="px-4 py-3 text-green-400">Cross-encoder, LLM, ColBERT</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">Background Workers</td>
+          <td className="px-4 py-3 text-green-400">Queue, Tuner, Defrag</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">RAG Pipeline</td>
+          <td className="px-4 py-3 text-green-400">Complete In-DB</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-yellow-300">Partial (API calls)</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">Quantization</td>
+          <td className="px-4 py-3 text-green-400">2x-32x (FP16, INT8, Binary)</td>
+          <td className="px-4 py-3 text-yellow-300">Binary only</td>
+          <td className="px-4 py-3 text-yellow-300">Binary only</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Analytics</td>
+          <td className="px-4 py-3 text-green-400">Clustering, PCA, UMAP, Outliers</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">Multi-Tenancy</td>
+          <td className="px-4 py-3 text-green-400">Tenant isolation + quotas</td>
+          <td className="px-4 py-3 text-red-300">Manual</td>
+          <td className="px-4 py-3 text-red-300">Manual</td>
+          <td className="px-4 py-3 text-red-300">Manual</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">Auto-Tuning</td>
+          <td className="px-4 py-3 text-green-400">Background worker</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-4 py-3 text-red-300">None</td>
+        </tr>
+        <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Versions</td>
+          <td className="px-4 py-3 text-green-400">16, 17, 18</td>
+          <td className="px-4 py-3 text-green-400">12-18</td>
+          <td className="px-4 py-3 text-yellow-300">15-18</td>
+          <td className="px-4 py-3 text-yellow-300">16-18</td>
+        </tr>
+        <tr>
+          <td className="px-4 py-3 font-medium text-cyan-300">License</td>
+          <td className="px-4 py-3 text-green-400">Apache 2.0</td>
+          <td className="px-4 py-3 text-green-400">PostgreSQL</td>
+          <td className="px-4 py-3 text-yellow-300">Timescale License</td>
+          <td className="px-4 py-3 text-green-400">PostgreSQL</td>
         </tr>
       </tbody>
     </table>
