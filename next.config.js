@@ -16,8 +16,6 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
-  // Enable SWC minification
-  swcMinify: true,
   images: {
     remotePatterns: [
       {

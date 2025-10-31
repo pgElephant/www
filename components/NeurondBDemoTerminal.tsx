@@ -586,11 +586,8 @@ const NeurondBDemoTerminal = () => {
                 </>
               ) : (
                 <>
-                  <span className="text-emerald-400 font-bold">user@neurondb</span>
-                  <span className="text-gray-600">:</span>
-                  <span className="text-blue-400">~/neurondb</span>
-                  <span className="text-gray-600">$</span>
-                  <span className="text-gray-200">{cmd.command}</span>
+                  <span className="text-emerald-400 font-bold">$</span>
+                  <span className="text-gray-200 ml-2">{cmd.command}</span>
                 </>
               )}
             </div>
@@ -648,10 +645,7 @@ const NeurondBDemoTerminal = () => {
         {/* Current Command Being Typed */}
         {isTyping && (
           <div className="flex items-center gap-2">
-            <span className="text-emerald-400 font-bold">user@neurondb</span>
-            <span className="text-gray-600">:</span>
-            <span className="text-blue-400">~/neurondb</span>
-            <span className="text-gray-600">$</span>
+            <span className="text-emerald-400 font-bold">$</span>
             <span className="text-gray-200">{currentCommand}</span>
             <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
           </div>
@@ -667,10 +661,7 @@ const NeurondBDemoTerminal = () => {
               </>
             ) : (
               <>
-                <span className="text-emerald-400 font-bold">user@neurondb</span>
-                <span className="text-gray-600">:</span>
-                <span className="text-blue-400">~/neurondb</span>
-                <span className="text-gray-600">$</span>
+                <span className="text-emerald-400 font-bold">$</span>
                 <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
               </>
             )}
