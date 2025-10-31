@@ -395,18 +395,18 @@ const RaleDemoTerminal = () => {
       
       const cmd = commands[commandIndex]
       
-      // Add command to history
-      setCommandHistory(prev => [
-        ...prev,
-        {
-          command: cmd.command,
-          output: [],
-          timestamp: new Date().toLocaleTimeString()
-        }
-      ])
-      
-      // Type the command
+      // Type the command first (no history entry yet for cleaner UX)
       typeCommand(cmd.command, () => {
+        // After typing completes, add to history
+        setCommandHistory(prev => [
+          ...prev,
+          {
+            command: cmd.command,
+            output: [],
+            timestamp: new Date().toLocaleTimeString()
+          }
+        ])
+        
         // Show output only (do not echo command again)
         setTimeout(() => {
           showOutput(cmd.output, () => {

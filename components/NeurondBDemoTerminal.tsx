@@ -7,6 +7,8 @@ interface TerminalCommand {
   command: string
   output: string[]
   timestamp: string
+  isPsqlCommand?: boolean
+  isShellCommand?: boolean
 }
 
 const NeurondBDemoTerminal = () => {
@@ -147,9 +149,9 @@ const NeurondBDemoTerminal = () => {
       output: [
         'psql (16.3)',
         'Type "help" for help.',
-        '',
-        'vectordb=#'
-      ]
+        ''
+      ],
+      isShellCommand: true
     },
     {
       command: 'CREATE TABLE documents (id SERIAL PRIMARY KEY, title TEXT, content TEXT, embedding vector(384));',
@@ -157,7 +159,8 @@ const NeurondBDemoTerminal = () => {
         'CREATE TABLE',
         '',
         '\x1b[36m-- Table created with vector column (384 dimensions)\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'INSERT INTO documents (title, content, embedding) VALUES (\'PostgreSQL Guide\', \'Learn PostgreSQL fundamentals\', embed_text(\'Learn PostgreSQL fundamentals\'));',
@@ -166,7 +169,8 @@ const NeurondBDemoTerminal = () => {
         '',
         '\x1b[36m-- Automatic embedding generation using embed_text() function\x1b[0m',
         '\x1b[36m-- Model: all-MiniLM-L6-v2 (384-dimensional embeddings)\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'INSERT INTO documents (title, content, embedding) SELECT \'Doc \' || i, \'Content about topic \' || i, embed_text(\'Content about topic \' || i) FROM generate_series(1, 1000) i;',
@@ -175,7 +179,8 @@ const NeurondBDemoTerminal = () => {
         '',
         '\x1b[32m✓ 1000 documents inserted with embeddings\x1b[0m',
         '\x1b[36m-- Batch embedding generation completed\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'CREATE INDEX docs_embedding_idx ON documents USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 200);',
@@ -186,59 +191,63 @@ const NeurondBDemoTerminal = () => {
         '\x1b[36m   m = 16                (max connections per node)\x1b[0m',
         '\x1b[36m   ef_construction = 200 (build-time accuracy)\x1b[0m',
         '\x1b[36m-- Index will be built by neurandefrag background worker\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'SELECT title, content, embedding <-> embed_text(\'PostgreSQL database\') AS distance FROM documents ORDER BY embedding <-> embed_text(\'PostgreSQL database\') LIMIT 5;',
       output: [
-        '       title       |           content           | distance ',
-        '-------------------+-----------------------------+----------',
-        ' PostgreSQL Guide  | Learn PostgreSQL fundamentals| 0.125',
-        ' Doc 42           | Content about topic 42      | 0.789',
-        ' Doc 156          | Content about topic 156     | 0.823',
-        ' Doc 891          | Content about topic 891     | 0.867',
-        ' Doc 234          | Content about topic 234     | 0.901',
+        '       title       |           content            | distance ',
+        '-------------------+------------------------------+----------',
+        ' PostgreSQL Guide  | Learn PostgreSQL fundamentals|  0.125',
+        ' Doc 42            | Content about topic 42       |  0.789',
+        ' Doc 156           | Content about topic 156      |  0.823',
+        ' Doc 891           | Content about topic 891      |  0.867',
+        ' Doc 234           | Content about topic 234      |  0.901',
         '(5 rows)',
         '',
         '\x1b[36m-- Vector similarity search using L2 distance (<-> operator)\x1b[0m',
         '\x1b[32m-- Query executed in 2.3ms using HNSW index\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'SELECT * FROM hybrid_search(\'documents\', \'content\', \'embedding\', \'PostgreSQL AI database\', 5, 0.7, 0.3);',
       output: [
-        ' id |      title       |           content           | vector_score | text_score | hybrid_score',
-        '----+------------------+-----------------------------+--------------+------------+-------------',
-        '  1 | PostgreSQL Guide | Learn PostgreSQL fundamentals|    0.95      |    0.85    |    0.92',
-        ' 42 | Doc 42          | Content about topic 42      |    0.76      |    0.12    |    0.57',
-        '156 | Doc 156         | Content about topic 156     |    0.71      |    0.08    |    0.52',
+        ' id |      title       |            content            | vector_score | text_score | hybrid_score',
+        '----+------------------+-------------------------------+--------------+------------+-------------',
+        '  1 | PostgreSQL Guide | Learn PostgreSQL fundamentals |     0.95     |    0.85    |     0.92',
+        ' 42 | Doc 42           | Content about topic 42        |     0.76     |    0.12    |     0.57',
+        '156 | Doc 156          | Content about topic 156       |     0.71     |    0.08    |     0.52',
         '(3 rows)',
         '',
         '\x1b[36m-- Hybrid search: 70% vector + 30% full-text (BM25)\x1b[0m',
         '\x1b[36m-- Combines semantic similarity with keyword matching\x1b[0m',
         '\x1b[32m-- Query executed in 5.8ms\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'SELECT model_name, input_dim, output_dim, status FROM neurondb_models();',
       output: [
-        '     model_name      | input_dim | output_dim | status ',
-        '---------------------+-----------+------------+--------',
-        ' all-MiniLM-L6-v2    |    -      |    384     | loaded',
-        ' bert-base-uncased   |    -      |    768     | loaded',
-        ' cross-encoder/ms-marco |  -     |      1     | loaded',
+        '       model_name        | input_dim | output_dim | status ',
+        '-------------------------+-----------+------------+--------',
+        ' all-MiniLM-L6-v2        |     -     |    384     | loaded',
+        ' bert-base-uncased       |     -     |    768     | loaded',
+        ' cross-encoder/ms-marco  |     -     |      1     | loaded',
         '(3 rows)',
         '',
         '\x1b[36m-- ML models loaded for inference\x1b[0m',
         '\x1b[36m-- Models cached in shared memory for fast inference\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'SELECT * FROM neurondb_index_stats WHERE index_name = \'docs_embedding_idx\';',
       output: [
         '    index_name      | vectors | levels | ef_construction | m  | recall@10 | build_time',
         '--------------------+---------+--------+-----------------+----+-----------+-----------',
-        ' docs_embedding_idx |  1001   |   3    |      200        | 16 |   0.995   |  1.234s',
+        ' docs_embedding_idx |   1001  |   3    |       200       | 16 |   0.995   |   1.234s',
         '(1 row)',
         '',
         '\x1b[36m-- Index Statistics:\x1b[0m',
@@ -246,16 +255,17 @@ const NeurondBDemoTerminal = () => {
         '\x1b[36m   • 3-level HNSW graph structure\x1b[0m',
         '\x1b[36m   • 99.5% recall@10 (excellent accuracy)\x1b[0m',
         '\x1b[32m-- Index quality: Excellent ✓\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'SELECT worker_name, status, last_run, jobs_processed, avg_runtime_ms FROM neurondb_worker_status();',
       output: [
-        '  worker_name   | status  |      last_run       | jobs_processed | avg_runtime_ms',
-        '----------------+---------+---------------------+----------------+---------------',
-        ' neuranq        | running | 2025-10-31 12:30:15 |      427       |     12.3',
-        ' neuranmon      | running | 2025-10-31 12:30:10 |       89       |     45.7',
-        ' neurandefrag   | running | 2025-10-31 12:28:00 |       23       |    234.8',
+        '  worker_name  | status  |      last_run       | jobs_processed | avg_runtime_ms',
+        '---------------+---------+---------------------+----------------+---------------',
+        ' neuranq       | running | 2025-10-31 12:30:15 |      427       |      12.3',
+        ' neuranmon     | running | 2025-10-31 12:30:10 |       89       |      45.7',
+        ' neurandefrag  | running | 2025-10-31 12:28:00 |       23       |     234.8',
         '(3 rows)',
         '',
         '\x1b[36m-- Background Workers:\x1b[0m',
@@ -263,7 +273,8 @@ const NeurondBDemoTerminal = () => {
         '\x1b[36m   • neuranmon:     Auto-tuning index parameters\x1b[0m',
         '\x1b[36m   • neurandefrag:  Index maintenance and optimization\x1b[0m',
         '\x1b[32m-- All workers healthy ✓\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'EXPLAIN ANALYZE SELECT * FROM documents ORDER BY embedding <-> embed_text(\'machine learning\') LIMIT 10;',
@@ -281,16 +292,17 @@ const NeurondBDemoTerminal = () => {
         '',
         '\x1b[36m-- HNSW index scan used (excellent performance)\x1b[0m',
         '\x1b[32m-- Total time: 1.712ms for similarity search over 1000 vectors\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     },
     {
       command: 'SELECT * FROM neurondb_cache_stats();',
       output: [
         '  cache_type   | size_mb | hit_rate | evictions | avg_inference_ms',
         '---------------+---------+----------+-----------+-----------------',
-        ' embeddings    |   45.2  |  0.956   |    123    |      8.2',
-        ' models        |  128.5  |  0.998   |      0    |      -',
-        ' index_pages   |   67.8  |  0.923   |    456    |      -',
+        ' embeddings    |   45.2  |  0.956   |    123    |       8.2',
+        ' models        |  128.5  |  0.998   |      0    |        -',
+        ' index_pages   |   67.8  |  0.923   |    456    |        -',
         '(3 rows)',
         '',
         '\x1b[36m-- Cache Performance:\x1b[0m',
@@ -298,7 +310,8 @@ const NeurondBDemoTerminal = () => {
         '\x1b[36m   • Model cache: 99.8% hit rate (models stay in memory)\x1b[0m',
         '\x1b[36m   • Index page cache: 92.3% hit rate\x1b[0m',
         '\x1b[32m-- Overall cache efficiency: Excellent ✓\x1b[0m'
-      ]
+      ],
+      isPsqlCommand: true
     }
   ]
 
@@ -405,19 +418,21 @@ const NeurondBDemoTerminal = () => {
       
       const cmd = commands[commandIndex]
       
-      // Add command to history with command prompt
-      setCommandHistory(prev => [
-        ...prev,
-        {
-          command: cmd.command,
-          output: [],
-          timestamp: new Date().toLocaleTimeString()
-        }
-      ])
-      
-      // Type the command with proper cleanup tracking
+      // Type the command first (no history entry yet)
       typeCommand(cmd.command, () => {
-        // Show output after command is typed
+        // After typing completes, add to history with output
+        setCommandHistory(prev => [
+          ...prev,
+          {
+            command: cmd.command,
+            output: [],
+            timestamp: new Date().toLocaleTimeString(),
+            isPsqlCommand: (cmd as any).isPsqlCommand,
+            isShellCommand: (cmd as any).isShellCommand
+          }
+        ])
+        
+        // Show output after command is added to history
         const timeout1 = setTimeout(() => {
           showOutput(cmd.output, () => {
             // Move to next command after output is shown
@@ -564,11 +579,20 @@ const NeurondBDemoTerminal = () => {
           <div key={index} className="mb-3">
             {/* Command prompt with timestamp */}
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-emerald-400 font-bold">user@neurondb</span>
-              <span className="text-gray-600">:</span>
-              <span className="text-blue-400">~/neurondb</span>
-              <span className="text-gray-600">$</span>
-              <span className="text-gray-200">{cmd.command}</span>
+              {cmd.isPsqlCommand ? (
+                <>
+                  <span className="text-emerald-400 font-bold">vectordb=#</span>
+                  <span className="text-gray-200">{cmd.command}</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-emerald-400 font-bold">user@neurondb</span>
+                  <span className="text-gray-600">:</span>
+                  <span className="text-blue-400">~/neurondb</span>
+                  <span className="text-gray-600">$</span>
+                  <span className="text-gray-200">{cmd.command}</span>
+                </>
+              )}
             </div>
             
             {/* Output with ANSI color support */}
@@ -636,11 +660,20 @@ const NeurondBDemoTerminal = () => {
         {/* Idle Prompt */}
         {!isRunning && !isTyping && commandHistory.length > 0 && (
           <div className="flex items-center gap-2 mt-2">
-            <span className="text-emerald-400 font-bold">user@neurondb</span>
-            <span className="text-gray-600">:</span>
-            <span className="text-blue-400">~/neurondb</span>
-            <span className="text-gray-600">$</span>
-            <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+            {activeTab === 'usage' && commandHistory.some(cmd => cmd.isPsqlCommand) ? (
+              <>
+                <span className="text-emerald-400 font-bold">vectordb=#</span>
+                <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+              </>
+            ) : (
+              <>
+                <span className="text-emerald-400 font-bold">user@neurondb</span>
+                <span className="text-gray-600">:</span>
+                <span className="text-blue-400">~/neurondb</span>
+                <span className="text-gray-600">$</span>
+                <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
+              </>
+            )}
           </div>
         )}
       </div>

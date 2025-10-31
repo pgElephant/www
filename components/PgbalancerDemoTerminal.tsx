@@ -622,16 +622,18 @@ const PgbalancerDemoTerminal = () => {
       
       const cmd = commands[commandIndex]
       
-      setCommandHistory(prev => [
-        ...prev,
-        {
-          command: cmd.command,
-          output: [],
-          timestamp: new Date().toLocaleTimeString()
-        }
-      ])
-      
+      // Type the command first (no history entry yet for cleaner UX)
       typeCommand(cmd.command, () => {
+        // After typing completes, add to history
+        setCommandHistory(prev => [
+          ...prev,
+          {
+            command: cmd.command,
+            output: [],
+            timestamp: new Date().toLocaleTimeString()
+          }
+        ])
+        
         const timeout1 = setTimeout(() => {
           showOutput(cmd.output, () => {
             const timeout2 = setTimeout(() => {
