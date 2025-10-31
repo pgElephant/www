@@ -25,6 +25,45 @@ export const metadata: Metadata = {
 const DocsIndexPage = () => {
   const products = [
     {
+      name: 'NeurondB',
+      description: 'Advanced AI Database Extension for PostgreSQL',
+      icon: <Database className="w-8 h-8" />,
+      color: 'indigo',
+      features: [
+        'Vector search with HNSW indexing',
+        'Machine learning inference',
+        'Hybrid semantic + text search',
+        'Complete RAG pipeline',
+        'Background workers for async ops'
+      ],
+      documentation: [
+        {
+          title: 'Getting Started',
+          description: 'Quick setup guide to get NeurondB running in minutes',
+          href: '/docs/neurondb/getting-started',
+          icon: <Zap className="w-5 h-5" />
+        },
+        {
+          title: 'Installation',
+          description: 'Complete installation guide for all platforms',
+          href: '/docs/neurondb/installation',
+          icon: <Settings className="w-5 h-5" />
+        },
+        {
+          title: 'Vector Types',
+          description: 'Understanding vector types and when to use each',
+          href: '/docs/neurondb/features/vector-types',
+          icon: <Database className="w-5 h-5" />
+        },
+        {
+          title: 'Embeddings Guide',
+          description: 'Deep dive into embedding generation and usage',
+          href: '/docs/neurondb/ml/embeddings',
+          icon: <Code className="w-5 h-5" />
+        }
+      ]
+    },
+    {
       name: 'pgSentinel',
       description: 'Professional pgbalancer Management & Monitoring Platform',
       icon: <Activity className="w-8 h-8" />,
@@ -141,6 +180,13 @@ const DocsIndexPage = () => {
   ];
 
   const quickStartGuides = [
+    {
+      title: 'NeurondB Quick Start',
+      description: 'Get NeurondB running in 5 minutes',
+      href: '/docs/neurondb/getting-started',
+      icon: <Database className="w-6 h-6" />,
+      steps: ['Install extension', 'Create vector table', 'Generate embeddings', 'Semantic search']
+    },
     {
       title: 'pgSentinel Quick Start',
       description: 'Get pgSentinel running in 5 minutes',

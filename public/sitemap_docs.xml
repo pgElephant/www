@@ -2,31 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.pgelephant.com/docs</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.pgelephant.com/docs/ram/getting-started</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
+    <loc>https://www.pgelephant.com/docs/neurondb</loc>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/getting-started</loc>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/installation</loc>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/features/vector-types</loc>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/ml/embeddings</loc>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/docs/pgraft/getting-started</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.pgelephant.com/docs/rale/getting-started</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/docs/fauxdb/getting-started</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
+    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

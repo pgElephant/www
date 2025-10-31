@@ -8,42 +8,29 @@ const Download = () => {
 
   const components = [
     {
-      title: 'RALE Consensus',
-      description: 'Distributed store for leader election and cluster coordination',
+      title: 'NeurondB',
+      description: 'Advanced AI Database Extension for PostgreSQL with vector search and ML',
       icon: Database,
       packages: {
-        debian: 'pgelephant-rale',
-        rpm: 'pgelephant-rale'
+        debian: 'neurondb-postgresql-17',
+        rpm: 'neurondb-postgresql-17'
       },
       downloadLinks: {
-        deb: 'https://packages.pgelephant.com/debian/pgelephant-rale_1.0.0_amd64.deb',
-        rpm: 'https://packages.pgelephant.com/rpm/pgelephant-rale-1.0.0-1.x86_64.rpm'
-      }
-    },
-    {
-      title: 'RAM Resilient Adaptive Manager',
-      description: 'Intelligent cluster management with automatic failover',
-      icon: Cpu,
-      packages: {
-        debian: 'pgelephant-ram',
-        rpm: 'pgelephant-ram'
-      },
-      downloadLinks: {
-        deb: 'https://packages.pgelephant.com/debian/pgelephant-ram_1.0.0_amd64.deb',
-        rpm: 'https://packages.pgelephant.com/rpm/pgelephant-ram-1.0.0-1.x86_64.rpm'
+        deb: 'https://github.com/pgElephant/NeurondB/releases/latest',
+        rpm: 'https://github.com/pgElephant/NeurondB/releases/latest'
       }
     },
     {
       title: 'FauxDB',
-      description: 'MongoDB-compatible document database for PostgreSQL.',
+      description: 'Dual-protocol database with MongoDB AND MySQL wire protocol support on PostgreSQL',
       icon: Database,
       packages: {
-        debian: 'pgelephant-fauxdb',
-        rpm: 'pgelephant-fauxdb'
+        debian: 'fauxdb',
+        rpm: 'fauxdb'
       },
       downloadLinks: {
-        deb: 'https://packages.pgelephant.com/debian/pgelephant-fauxdb_1.0.0_amd64.deb',
-        rpm: 'https://packages.pgelephant.com/rpm/pgelephant-fauxdb-1.0.0-1.x86_64.rpm'
+        deb: 'https://github.com/fauxdb/fauxdb/releases/latest',
+        rpm: 'https://github.com/fauxdb/fauxdb/releases/latest'
       }
     },
     {
@@ -286,6 +273,465 @@ const Download = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Project Downloads Section */}
+        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 mb-16 border border-slate-400/30 shadow-lg">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Project Downloads
+            </h3>
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+              Download pre-built packages for pgbalancer, pg_stat_insights, and pgraft across multiple platforms and PostgreSQL versions.
+            </p>
+          </div>
+
+          {/* pgbalancer Downloads */}
+          <div className="mb-12">
+            <h4 className="text-xl font-bold text-white mb-4 flex items-center">
+              <Database className="w-6 h-6 mr-2 text-teal-400" />
+              pgbalancer - AI-Based PostgreSQL Load Balancer
+            </h4>
+            <p className="text-sm text-white/80 mb-4">
+              Modern PostgreSQL connection pooler with REST API, AI load balancing, and MQTT support.
+            </p>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-white/90">
+                <thead className="bg-slate-100/20 border border-slate-400/30">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-semibold">PostgreSQL Version</th>
+                    <th className="px-4 py-3 text-center font-semibold">RPM (Rocky/RHEL)</th>
+                    <th className="px-4 py-3 text-center font-semibold">DEB (Ubuntu/Debian)</th>
+                    <th className="px-4 py-3 text-center font-semibold">macOS</th>
+                    <th className="px-4 py-3 text-center font-semibold">Source (tar.gz)</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-slate-100/10">
+                  <tr className="border-b border-slate-400/20">
+                    <td className="px-4 py-3 font-medium">PostgreSQL 16</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center" rowSpan={3}>
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <Package className="w-4 h-4" />
+                        tar.gz
+                      </a>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-slate-400/20">
+                    <td className="px-4 py-3 font-medium">PostgreSQL 17</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 font-medium">PostgreSQL 18</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgBalancer/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-white/60 mt-3">
+              📦 <strong>Download:</strong> All packages are available on <a href="https://github.com/pgElephant/pgBalancer/releases/latest" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300">GitHub Releases</a>. Look for packages matching your PostgreSQL version and platform.
+            </p>
+          </div>
+
+          {/* pg_stat_insights Downloads */}
+          <div className="mb-12">
+            <h4 className="text-xl font-bold text-white mb-4 flex items-center">
+              <Zap className="w-6 h-6 mr-2 text-teal-400" />
+              pg_stat_insights - Advanced Query Performance Analytics
+            </h4>
+            <p className="text-sm text-white/80 mb-4">
+              PostgreSQL extension for comprehensive query monitoring with response time categories and time-series tracking.
+            </p>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-white/90">
+                <thead className="bg-slate-100/20 border border-slate-400/30">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-semibold">PostgreSQL Version</th>
+                    <th className="px-4 py-3 text-center font-semibold">RPM (Rocky/RHEL)</th>
+                    <th className="px-4 py-3 text-center font-semibold">DEB (Ubuntu/Debian)</th>
+                    <th className="px-4 py-3 text-center font-semibold">macOS</th>
+                    <th className="px-4 py-3 text-center font-semibold">Source (tar.gz)</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-slate-100/10">
+                  <tr className="border-b border-slate-400/20">
+                    <td className="px-4 py-3 font-medium">PostgreSQL 16</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center" rowSpan={3}>
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <Package className="w-4 h-4" />
+                        tar.gz
+                      </a>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-slate-400/20">
+                    <td className="px-4 py-3 font-medium">PostgreSQL 17</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 font-medium">PostgreSQL 18</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pg_stat_insights/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-white/60 mt-3">
+              📦 <strong>Download:</strong> All packages are available on <a href="https://github.com/pgElephant/pg_stat_insights/releases/latest" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300">GitHub Releases</a>. Look for packages matching your PostgreSQL version and platform.
+            </p>
+          </div>
+
+          {/* pgraft Downloads */}
+          <div>
+            <h4 className="text-xl font-bold text-white mb-4 flex items-center">
+              <Shield className="w-6 h-6 mr-2 text-teal-400" />
+              pgraft - PostgreSQL Raft Consensus Extension
+            </h4>
+            <p className="text-sm text-white/80 mb-4">
+              Distributed consensus and replication for PostgreSQL using the Raft algorithm.
+            </p>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-white/90">
+                <thead className="bg-slate-100/20 border border-slate-400/30">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-semibold">PostgreSQL Version</th>
+                    <th className="px-4 py-3 text-center font-semibold">RPM (Rocky/RHEL)</th>
+                    <th className="px-4 py-3 text-center font-semibold">DEB (Ubuntu/Debian)</th>
+                    <th className="px-4 py-3 text-center font-semibold">macOS</th>
+                    <th className="px-4 py-3 text-center font-semibold">Source (tar.gz)</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-slate-100/10">
+                  <tr className="border-b border-slate-400/20">
+                    <td className="px-4 py-3 font-medium">PostgreSQL 16</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center" rowSpan={3}>
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <Package className="w-4 h-4" />
+                        tar.gz
+                      </a>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-slate-400/20">
+                    <td className="px-4 py-3 font-medium">PostgreSQL 17</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3 font-medium">PostgreSQL 18</td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        RPM
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        DEB
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <a
+                        href="https://github.com/pgElephant/pgraft/releases/latest"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors"
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        Build
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-white/60 mt-3">
+              📦 <strong>Download:</strong> All packages are available on <a href="https://github.com/pgElephant/pgraft/releases/latest" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:text-teal-300">GitHub Releases</a>. Look for packages matching your PostgreSQL version and platform.
+            </p>
           </div>
         </div>
 

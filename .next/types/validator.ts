@@ -155,6 +155,51 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/neurondb/features/vector-types/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/features/vector-types">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/features/vector-types/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/getting-started/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/getting-started">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/getting-started/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/installation/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/installation">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/installation/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/embeddings/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/embeddings">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/embeddings/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs">> = Specific
@@ -519,6 +564,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/fauxdb">> = Specific
   const handler = {} as typeof import("../../app/fauxdb/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/neurondb/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/neurondb">> = Specific
+  const handler = {} as typeof import("../../app/neurondb/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

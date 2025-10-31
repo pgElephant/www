@@ -34,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Main product pages
   const productPages: SitemapEntry[] = [
     {
-      url: `${baseUrl}/ram`,
+      url: `${baseUrl}/neurondb`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.mainProducts,
@@ -47,12 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/fauxdb`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.mainProducts,
-    },
-    {
-      url: `${baseUrl}/rale`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.mainProducts,
@@ -84,6 +78,68 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.docs,
+    },
+    // NeurondB documentation
+    {
+      url: `${baseUrl}/docs/neurondb`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.docs,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/getting-started`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/installation`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/features/vector-types`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/ml/embeddings`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    // NeurondB documentation
+    {
+      url: `${baseUrl}/docs/neurondb`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.docs,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/getting-started`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/installation`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/features/vector-types`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/ml/embeddings`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
     },
     // pgbalancer documentation
     {

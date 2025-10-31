@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ArrowRight, Database, Loader2, Zap, Crown, Network, Shield, FileText, Cpu, Server, Users, Activity, Layers, Monitor, BarChart3, Eye, Bell } from 'lucide-react'
+import { ArrowRight, Database, Loader2, Zap, Crown, Network, Shield, FileText, Cpu, Server, Users, Activity, Layers, Monitor, BarChart3, Eye, Bell, Brain, Search } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -70,26 +70,6 @@ const FauxDbIcon = ({ size = 24 }: { size?: number }) => (
   </div>
 )
 
-// Custom RALE icon component
-const RaleIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Users className="text-indigo-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Activity className="text-cyan-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
-// Custom RAM icon component
-const RamIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Server className="text-cyan-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Cpu className="text-green-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Activity className="text-orange-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
 // Custom pgSentinel icon component
 const PgSentinelIcon = ({ size = 24 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
@@ -110,19 +90,42 @@ const PgStatInsightsIcon = ({ size = 24 }: { size?: number }) => (
   </div>
 )
 
+// Custom NeurondB icon component
+const NeurondBIcon = ({ size = 24 }: { size?: number }) => (
+  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+    <Brain className="text-indigo-400" style={{ width: size * 0.7, height: size * 0.7 }} />
+    <Database className="text-teal-400 absolute -bottom-1 -right-1" style={{ width: size * 0.35, height: size * 0.35 }} />
+    <Zap className="text-yellow-400 absolute -top-1 -left-1" style={{ width: size * 0.3, height: size * 0.3 }} />
+    <Search className="text-purple-400 absolute -top-1 -right-1" style={{ width: size * 0.25, height: size * 0.25 }} />
+  </div>
+)
+
 const Hero = () => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
   const products: Product[] = [
     {
+      id: 'neurondb',
+      name: 'NeurondB',
+      title: 'Advanced AI Database Extension',
+      description: '• Production-grade vector search with HNSW indexing and multiple distance metrics',
+      description2: '• Machine learning inference with embedding generation and ONNX runtime',
+      description3: '• Hybrid search combining semantic vectors with full-text search',
+      description4: '• Complete RAG pipeline with reranking and background workers',
+      description5: '• PostgreSQL 16-18 compatible with 100+ SQL functions',
+      icon: 'neurondb-custom',
+      color: `from-[${palette.primary}] to-[${palette.secondary}]`,
+      bg: { from: palette.primaryDark, via: palette.primary, to: palette.secondary }
+    },
+    {
       id: 'fauxdb',
       name: 'FauxDB',
-      title: 'MongoDB-Compatible Document Database',
-      description: '• Full MongoDB wire protocol compatibility for seamless migration',
-      description2: '• Rust-powered high-performance engine with PostgreSQL storage',
-      description3: '• ACID transactions with multi-document consistency guarantees',
-      description4: '• Advanced geospatial queries and MongoDB aggregation pipeline',
-      description5: '• Native JSON indexing with enterprise-grade reliability',
+      title: 'Dual-Protocol Database: MongoDB + MySQL on PostgreSQL',
+      description: '• Dual-protocol support: MongoDB AND MySQL wire protocols simultaneously',
+      description2: '• Connect with MongoDB clients (mongosh, PyMongo) OR MySQL clients (mysql, Tableau)',
+      description3: '• Access the SAME data through both protocols with PostgreSQL ACID guarantees',
+      description4: '• Advanced SQL translator converts MySQL queries to PostgreSQL automatically',
+      description5: '• Rust-powered high-performance with geospatial, aggregation, and monitoring',
       icon: 'fauxdb-custom',
       color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
       bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
@@ -218,16 +221,14 @@ const Hero = () => {
                 <div className="mb-6">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-20 h-20 flex items-center justify-center">
-                      {current.icon === 'pgbalancer-custom' ? (
+                      {current.icon === 'neurondb-custom' ? (
+                        <NeurondBIcon size={80} />
+                      ) : current.icon === 'pgbalancer-custom' ? (
                         <PgbalancerIcon size={80} />
                       ) : current.icon === 'pgraft-custom' ? (
                         <PgraftIcon size={80} />
                       ) : current.icon === 'fauxdb-custom' ? (
                         <FauxDbIcon size={80} />
-                      ) : current.icon === 'rale-custom' ? (
-                        <RaleIcon size={80} />
-                      ) : current.icon === 'ram-custom' ? (
-                        <RamIcon size={80} />
                       ) : current.icon === 'pgsentinel-custom' ? (
                         <PgSentinelIcon size={80} />
                       ) : current.icon === 'pg-stat-insights-custom' ? (
@@ -296,16 +297,14 @@ const Hero = () => {
                          boxShadow: active ? '0 8px 32px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)' : '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
                        }}
                      >
-                       {product.icon === 'pgbalancer-custom' ? (
+                       {product.icon === 'neurondb-custom' ? (
+                         <NeurondBIcon size={20} />
+                       ) : product.icon === 'pgbalancer-custom' ? (
                          <PgbalancerIcon size={20} />
                        ) : product.icon === 'pgraft-custom' ? (
                          <PgraftIcon size={20} />
                        ) : product.icon === 'fauxdb-custom' ? (
                          <FauxDbIcon size={20} />
-                       ) : product.icon === 'rale-custom' ? (
-                         <RaleIcon size={20} />
-                       ) : product.icon === 'ram-custom' ? (
-                         <RamIcon size={20} />
                        ) : product.icon === 'pgsentinel-custom' ? (
                          <PgSentinelIcon size={20} />
                        ) : product.icon === 'pg-stat-insights-custom' ? (
