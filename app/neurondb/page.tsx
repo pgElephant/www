@@ -161,6 +161,6 @@ const neurondbConfig = {
 };
 
 export default function NeurondBPage() {
-  return <ProjectTemplate config={neurondbConfig} />;
+  return <ProjectTemplate {...neurondbConfig} />;
 }
 
