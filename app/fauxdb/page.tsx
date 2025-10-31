@@ -80,7 +80,7 @@ const fauxdbConfig = {
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">MongoDB Protocol</td>
           <td className="px-4 py-3 text-slate-300">Full wire protocol, mongosh, PyMongo, Node.js driver</td>
-          <td className="px-4 py-3 text-slate-300">P50 < 5ms, P99 < 50ms</td>
+          <td className="px-4 py-3 text-slate-300">P50 &lt; 5ms, P99 &lt; 50ms</td>
           <td className="px-4 py-3 text-green-400">✓</td>
         </tr>
         <tr>
