@@ -150,26 +150,6 @@ const DownloadPage = () => {
 
   const products = [
     {
-      id: 'ram',
-      name: 'RAM',
-      title: 'Resilient Adaptive Manager',
-      icon: 'ram-custom',
-      features: [
-        'Automatic Failover: Zero-downtime failover with sub-second detection',
-        'Leader Election: Raft-based consensus for reliable leader selection',
-        'Distributed Consensus: Multi-node coordination with split-brain prevention',
-        'Real-time Monitoring: Prometheus metrics and Grafana dashboards',
-        'Enterprise Security: Token-based auth, SSL/TLS, rate limiting',
-        'Cloud-Native: Docker, Kubernetes, and Helm chart support',
-      ],
-      details: '/ram',
-      downloads: [
-        { title: 'Linux Binary', href: '/download/ram', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/ram', type: 'Source' },
-        { title: 'Docker Image', href: '/download/ram', type: 'Docker' }
-      ]
-    },
-    {
       id: 'pgraft',
       name: 'pgraft',
       title: 'PostgreSQL Raft Consensus Extension',
@@ -228,23 +208,6 @@ const DownloadPage = () => {
         { title: 'Linux Binary', href: '/download/pgbalancer', type: 'Binary' },
         { title: 'Source Code', href: 'https://github.com/pgelephant/pgbalancer', type: 'Source' },
         { title: 'Docker Image', href: '/download/pgbalancer', type: 'Docker' }
-      ]
-    },
-    {
-      id: 'rale',
-      name: 'RALE',
-      title: 'Resilient Adaptive Leader Election',
-      icon: 'rale-custom',
-      features: [
-        'Distributed Leader Election: Reliable, adaptive leader selection',
-        'Split-Brain Prevention: Ensures cluster consistency',
-        'Production Proven: Used in mission-critical deployments',
-      ],
-      details: '/rale',
-      downloads: [
-        { title: 'Linux Binary', href: '/download/rale', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/rale', type: 'Source' },
-        { title: 'Docker Image', href: '/download/rale', type: 'Docker' }
       ]
     },
   ]

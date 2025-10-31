@@ -178,49 +178,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
-    // RAM documentation
-    {
-      url: `${baseUrl}/docs/ram/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/ram/installation`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/ram/configuration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/ram/docker`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/ram/kubernetes`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/ram/cluster-setup`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/ram/troubleshooting`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
     // FauxDB documentation
     {
       url: `${baseUrl}/docs/fauxdb/getting-started`,
@@ -260,37 +217,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/docs/fauxdb/migration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    // RALE documentation
-    {
-      url: `${baseUrl}/docs/rale/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/rale/installation`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/rale/docker`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/rale/cluster-setup`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/rale/consensus-algorithm`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
@@ -352,18 +278,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Blog category pages
   const blogPages: SitemapEntry[] = [
-    {
-      url: `${baseUrl}/blog/ram`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.blog,
-    },
-    {
-      url: `${baseUrl}/blog/rale`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.blog,
-    },
     {
       url: `${baseUrl}/blog/pgraft`,
       lastModified: currentDate,

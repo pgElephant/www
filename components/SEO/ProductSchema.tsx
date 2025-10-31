@@ -3,30 +3,6 @@ import React from 'react'
 const ProductSchema = () => {
   const products = [
     {
-      name: "RAM",
-      description: "Resilient Adaptive Manager for PostgreSQL clustering with automatic failover and Raft consensus",
-      category: "Database Management Software",
-      url: "https://www.pgelephant.com/ram/",
-      image: "https://www.pgelephant.com/ico/RAM_HD.ico",
-      offers: {
-        price: "0",
-        priceCurrency: "USD",
-        availability: "InStock"
-      }
-    },
-    {
-      name: "RALE",
-      description: "Resilient Adaptive Leader Election for distributed consensus and high availability",
-      category: "Database Management Software", 
-      url: "https://www.pgelephant.com/rale/",
-      image: "https://www.pgelephant.com/ico/RALE_HD.ico",
-      offers: {
-        price: "0",
-        priceCurrency: "USD",
-        availability: "InStock"
-      }
-    },
-    {
       name: "pgraft",
       description: "Raft-based PostgreSQL extension for leader election and distributed consensus",
       category: "Database Extension",
