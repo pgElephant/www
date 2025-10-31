@@ -705,43 +705,6 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
 
   const products = [
     {
-      id: 'rale',
-      name: 'RALE',
-      title: 'Resilient Adaptive Leader Election',
-      icon: '/ico/RALE_HD.ico',
-      bg: { from: palette.navy, via: palette.slate, to: palette.navy },
-      description: 'Distributed consensus and key-value store system for high availability',
-      docs: [
-        { title: 'Getting Started', href: '/docs/rale/getting-started', type: 'Guide', description: 'Install and configure RALE components' },
-        { title: 'librale Documentation', href: '/docs/rale/librale', type: 'Reference', description: 'Core C library API reference' },
-        { title: 'raled Documentation', href: '/docs/rale/raled', type: 'Reference', description: 'Daemon process configuration and management' },
-        { title: 'ralectrl Documentation', href: '/docs/rale/ralectrl', type: 'Reference', description: 'Command-line interface reference' },
-        { title: 'Architecture Guide', href: '/docs/rale/architecture', type: 'Guide', description: 'Understanding RALE architecture and design' },
-        { title: 'API Reference', href: '/docs/rale/api', type: 'Reference', description: 'Complete API documentation' },
-        { title: 'Examples', href: '/docs/rale/examples', type: 'Tutorial', description: 'Code examples and use cases' },
-        { title: 'Troubleshooting', href: '/docs/rale/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
-      ]
-    },
-    {
-      id: 'ram',
-      name: 'RAM',
-      title: 'Resilient Adaptive Manager',
-      icon: '/ico/RAM_HD.ico',
-      bg: { from: palette.slate, via: palette.navy, to: palette.slate },
-      description: 'PostgreSQL clustering solution with automatic failover and Raft consensus',
-      docs: [
-        { title: 'Getting Started', href: '/docs/ram/getting-started', type: 'Guide', description: 'Install and configure RAM components' },
-        { title: 'ramd Documentation', href: '/docs/ram/ramd', type: 'Reference', description: 'Cluster management daemon' },
-        { title: 'ramctrl Documentation', href: '/docs/ram/ramctrl', type: 'Reference', description: 'Command-line control utility' },
-        { title: 'Docker Setup', href: '/docs/ram/docker', type: 'Tutorial', description: 'Containerized deployment guide' },
-        { title: 'Kubernetes', href: '/docs/ram/kubernetes', type: 'Tutorial', description: 'Kubernetes deployment with Helm' },
-        { title: 'Configuration', href: '/docs/ram/configuration', type: 'Guide', description: 'Advanced configuration options' },
-        { title: 'Monitoring', href: '/docs/ram/monitoring', type: 'Guide', description: 'Prometheus metrics and monitoring' },
-        { title: 'API Reference', href: '/docs/ram/api', type: 'Reference', description: 'REST API documentation' },
-        { title: 'Troubleshooting', href: '/docs/ram/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
-      ]
-    },
-    {
       id: 'pgraft',
       name: 'pgraft',
       title: 'PostgreSQL Raft Extension',

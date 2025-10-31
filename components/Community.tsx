@@ -16,7 +16,7 @@ const Community = () => {
     {
       name: 'GitHub',
       description: 'Open source development and discussions',
-      url: 'https://github.com/pgElephant/rale',
+      url: 'https://github.com/pgElephant',
       icon: Github,
       color: 'bg-gradient-to-br from-neutral-50 to-neutral-100 border-neutral-200',
       stats: '2.4k stars, 150+ contributors'
@@ -64,21 +64,21 @@ const Community = () => {
     {
       title: 'Code Contributions',
       description: 'Help improve the core functionality and add new features',
-      link: 'https://github.com/pgElephant/rale',
+      link: 'https://github.com/pgElephant',
       icon: Github,
       color: 'text-green-600'
     },
     {
       title: 'Documentation',
       description: 'Write tutorials, improve guides, and help with API docs',
-      link: 'https://github.com/pgElephant/rale',
+      link: 'https://github.com/pgElephant',
       icon: Globe,
       color: 'text-blue-600'
     },
     {
       title: 'Bug Reports',
       description: 'Report issues and help improve stability',
-      link: 'https://github.com/pgElephant/rale',
+      link: 'https://github.com/pgElephant',
       icon: Zap,
       color: 'text-orange-600'
     },
@@ -234,7 +234,7 @@ const Community = () => {
                   Help improve pgelephant by contributing code, documentation, or bug reports.
                 </p>
                 <a
-                  href="https://github.com/pgElephant/rale"
+                  href="https://github.com/pgElephant"
                   className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm"
                   target="_blank"
                   rel="noopener noreferrer"

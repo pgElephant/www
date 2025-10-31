@@ -182,17 +182,17 @@ const nextConfig = {
       // Product-specific redirects
       {
         source: '/postgresql-ha',
-        destination: '/ram',
+        destination: '/pgraft',
         permanent: true,
       },
       {
         source: '/postgresql-clustering',
-        destination: '/ram',
+        destination: '/pgraft',
         permanent: true,
       },
       {
         source: '/high-availability',
-        destination: '/ram',
+        destination: '/pgraft',
         permanent: true,
       },
       {
@@ -227,17 +227,17 @@ const nextConfig = {
       },
       {
         source: '/consensus',
-        destination: '/rale',
+        destination: '/pgraft',
         permanent: true,
       },
       {
         source: '/distributed-consensus',
-        destination: '/rale',
+        destination: '/pgraft',
         permanent: true,
       },
       {
         source: '/leader-election',
-        destination: '/rale',
+        destination: '/pgraft',
         permanent: true,
       },
       // Common misspellings and variations

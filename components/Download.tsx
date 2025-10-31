@@ -64,7 +64,7 @@ const Download = () => {
     {
       title: 'GitHub Release',
       description: 'Download from GitHub',
-      command: 'wget https://github.com/pgElephant/rale/releases/latest/download/pgelephant-linux-amd64',
+      command: 'wget https://github.com/pgElephant/pgElephant/releases/latest/download/pgelephant-linux-amd64',
       icon: Github
     }
   ]
@@ -977,7 +977,7 @@ const Download = () => {
             </a>
             
             <a
-              href="https://github.com/pgElephant/rale"
+              href="https://github.com/pgElephant"
               className="group bg-white/10 backdrop-blur-sm border border-slate-400/30 rounded-xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 text-center"
             >
               <Github className="w-8 h-8 text-teal-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
