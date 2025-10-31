@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Terminal, Play, Square, RotateCcw, Copy, Check, Code, Database, Cpu, Server, Settings, Loader2, Zap } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Terminal, Play, Square, RotateCcw, Copy, Code, Database, Cpu, Server, Settings, Loader2, Zap } from 'lucide-react'
 
 interface TerminalCommand {
   command: string
@@ -17,10 +17,7 @@ const PgbalancerDemoTerminal = () => {
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
   const [activeTab, setActiveTab] = useState<'build' | 'usage' | 'ai'>('build')
-  const [copied, setCopied] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const timeoutRefs = useRef<NodeJS.Timeout[]>([])
 
   // Base timing values (in ms)
   const baseTimings = {
@@ -522,16 +519,6 @@ const PgbalancerDemoTerminal = () => {
     }
   ]
 
-  // Cleanup all intervals and timeouts
-  const cleanup = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-    timeoutRefs.current.forEach(timeout => clearTimeout(timeout))
-    timeoutRefs.current = []
-  }, [])
-
   // Cursor blinking effect
   useEffect(() => {
     const interval = setInterval(() => {
@@ -545,66 +532,46 @@ const PgbalancerDemoTerminal = () => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight
     }
-  }, [commandHistory, currentCommand])
+  }, [commandHistory])
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => cleanup()
-  }, [cleanup])
-
-  // Type command effect with cleanup
-  const typeCommand = useCallback((command: string, onComplete: () => void) => {
+  // Type command effect
+  const typeCommand = (command: string, onComplete: () => void) => {
     setIsTyping(true)
-    setCurrentCommand('')
     let index = 0
-    
     const interval = setInterval(() => {
-      index++
       setCurrentCommand(command.slice(0, index))
-      
+      index++
       if (index > command.length) {
         clearInterval(interval)
         setIsTyping(false)
         onComplete()
       }
     }, baseTimings.typeSpeed / speedMultiplier)
-    
-    intervalRef.current = interval
-  }, [speedMultiplier, baseTimings.typeSpeed])
+  }
 
-  // Show output with delay and cleanup
-  const showOutput = useCallback((output: string[], onComplete: () => void) => {
+  // Show output with delay
+  const showOutput = (output: string[], onComplete: () => void) => {
     let outputIndex = 0
-    
     const interval = setInterval(() => {
+      const currentOutput = output.slice(0, outputIndex + 1)
+      setCommandHistory(prev => [
+        ...prev.slice(0, -1),
+        {
+          ...prev[prev.length - 1],
+          output: currentOutput
+        }
+      ])
       outputIndex++
-      const currentOutput = output.slice(0, outputIndex)
-      
-      setCommandHistory(prev => {
-        if (prev.length === 0) return prev
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...prev[prev.length - 1],
-            output: currentOutput
-          }
-        ]
-      })
-      
       if (outputIndex >= output.length) {
         clearInterval(interval)
         onComplete()
       }
     }, baseTimings.outputDelay / speedMultiplier)
-    
-    intervalRef.current = interval
-  }, [speedMultiplier, baseTimings.outputDelay])
+  }
 
-  // Run demo sequence with proper cleanup
-  const runDemo = useCallback(() => {
+  // Run demo sequence
+  const runDemo = () => {
     if (isRunning) return
-    
-    cleanup()
     
     setIsRunning(true)
     setCommandHistory([])
@@ -616,12 +583,12 @@ const PgbalancerDemoTerminal = () => {
     const runNextCommand = () => {
       if (commandIndex >= commands.length) {
         setIsRunning(false)
-        cleanup()
         return
       }
       
       const cmd = commands[commandIndex]
       
+      // Add command to history
       setCommandHistory(prev => [
         ...prev,
         {
@@ -631,46 +598,39 @@ const PgbalancerDemoTerminal = () => {
         }
       ])
       
+      // Type the command
       typeCommand(cmd.command, () => {
-        const timeout1 = setTimeout(() => {
+        // Show output only (do not echo command again)
+        setTimeout(() => {
           showOutput(cmd.output, () => {
-            const timeout2 = setTimeout(() => {
-              commandIndex++
-              runNextCommand()
-            }, baseTimings.betweenCommands / speedMultiplier)
-            timeoutRefs.current.push(timeout2)
+            commandIndex++
+            setTimeout(runNextCommand, baseTimings.betweenCommands / speedMultiplier)
           })
         }, baseTimings.commandDelay / speedMultiplier)
-        timeoutRefs.current.push(timeout1)
       })
     }
     
     runNextCommand()
-  }, [isRunning, activeTab, buildCommands, usageCommands, aiCommands, typeCommand, showOutput, cleanup, speedMultiplier, baseTimings])
+  }
 
-  const stopDemo = useCallback(() => {
-    cleanup()
+  const stopDemo = () => {
     setIsRunning(false)
     setCurrentCommand('')
-    setIsTyping(false)
-  }, [cleanup])
+  }
 
-  const resetDemo = useCallback(() => {
-    cleanup()
+  const resetDemo = () => {
     setIsRunning(false)
     setCommandHistory([])
     setCurrentCommand('')
-    setIsTyping(false)
-  }, [cleanup])
+    setActiveTab('build')
+  }
 
-  const copyToClipboard = useCallback(() => {
+  const copyToClipboard = () => {
     const text = commandHistory
       .map(cmd => `$ ${cmd.command}\n${cmd.output.join('\n')}`)
       .join('\n\n')
     navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }, [commandHistory])
+  }
 
   return (
     <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">

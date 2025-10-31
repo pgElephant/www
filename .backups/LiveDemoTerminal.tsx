@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Terminal, Play, Square, RotateCcw, Copy, Check, Download } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Terminal, Play, Square, RotateCcw, Copy, Download } from 'lucide-react'
 
 interface TerminalCommand {
   command: string
@@ -15,10 +15,7 @@ const LiveDemoTerminal = () => {
   const [commandHistory, setCommandHistory] = useState<TerminalCommand[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
-  const [copied, setCopied] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const timeoutRefs = useRef<NodeJS.Timeout[]>([])
 
   // Demo commands and their outputs
   const demoCommands = [
@@ -102,16 +99,6 @@ const LiveDemoTerminal = () => {
     }
   ]
 
-  // Cleanup all intervals and timeouts
-  const cleanup = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-    timeoutRefs.current.forEach(timeout => clearTimeout(timeout))
-    timeoutRefs.current = []
-  }, [])
-
   // Cursor blinking effect
   useEffect(() => {
     const interval = setInterval(() => {
@@ -125,66 +112,46 @@ const LiveDemoTerminal = () => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight
     }
-  }, [commandHistory, currentCommand])
+  }, [commandHistory])
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => cleanup()
-  }, [cleanup])
-
-  // Type command effect with cleanup
-  const typeCommand = useCallback((command: string, onComplete: () => void) => {
+  // Type command effect
+  const typeCommand = (command: string, onComplete: () => void) => {
     setIsTyping(true)
-    setCurrentCommand('')
     let index = 0
-    
     const interval = setInterval(() => {
-      index++
       setCurrentCommand(command.slice(0, index))
-      
+      index++
       if (index > command.length) {
         clearInterval(interval)
         setIsTyping(false)
         onComplete()
       }
     }, 50)
-    
-    intervalRef.current = interval
-  }, [])
+  }
 
-  // Show output with delay and cleanup
-  const showOutput = useCallback((output: string[], onComplete: () => void) => {
+  // Show output with delay
+  const showOutput = (output: string[], onComplete: () => void) => {
     let outputIndex = 0
-    
     const interval = setInterval(() => {
+      const currentOutput = output.slice(0, outputIndex + 1)
+      setCommandHistory(prev => [
+        ...prev.slice(0, -1),
+        {
+          ...prev[prev.length - 1],
+          output: currentOutput
+        }
+      ])
       outputIndex++
-      const currentOutput = output.slice(0, outputIndex)
-      
-      setCommandHistory(prev => {
-        if (prev.length === 0) return prev
-        return [
-          ...prev.slice(0, -1),
-          {
-            ...prev[prev.length - 1],
-            output: currentOutput
-          }
-        ]
-      })
-      
       if (outputIndex >= output.length) {
         clearInterval(interval)
         onComplete()
       }
     }, 200)
-    
-    intervalRef.current = interval
-  }, [])
+  }
 
-  // Run demo sequence with proper cleanup
-  const runDemo = useCallback(() => {
+  // Run demo sequence
+  const runDemo = () => {
     if (isRunning) return
-    
-    cleanup()
     
     setIsRunning(true)
     setCommandHistory([])
@@ -195,12 +162,12 @@ const LiveDemoTerminal = () => {
     const runNextCommand = () => {
       if (commandIndex >= demoCommands.length) {
         setIsRunning(false)
-        cleanup()
         return
       }
       
       const cmd = demoCommands[commandIndex]
       
+      // Add command to history
       setCommandHistory(prev => [
         ...prev,
         {
@@ -210,46 +177,47 @@ const LiveDemoTerminal = () => {
         }
       ])
       
+      // Type the command
       typeCommand(cmd.command, () => {
-        const timeout1 = setTimeout(() => {
+        // Execute command (show prompt)
+        setCommandHistory(prev => [
+          ...prev.slice(0, -1),
+          {
+            ...prev[prev.length - 1],
+            output: ['$ ' + cmd.command, '']
+          }
+        ])
+        
+        // Show output
+        setTimeout(() => {
           showOutput(cmd.output, () => {
-            const timeout2 = setTimeout(() => {
-              commandIndex++
-              runNextCommand()
-            }, 1000)
-            timeoutRefs.current.push(timeout2)
+            commandIndex++
+            setTimeout(runNextCommand, 1000) // Pause between commands
           })
         }, 500)
-        timeoutRefs.current.push(timeout1)
       })
     }
     
     runNextCommand()
-  }, [isRunning, demoCommands, typeCommand, showOutput, cleanup])
+  }
 
-  const stopDemo = useCallback(() => {
-    cleanup()
+  const stopDemo = () => {
     setIsRunning(false)
     setCurrentCommand('')
-    setIsTyping(false)
-  }, [cleanup])
+  }
 
-  const resetDemo = useCallback(() => {
-    cleanup()
+  const resetDemo = () => {
     setIsRunning(false)
     setCommandHistory([])
     setCurrentCommand('')
-    setIsTyping(false)
-  }, [cleanup])
+  }
 
-  const copyToClipboard = useCallback(() => {
+  const copyToClipboard = () => {
     const text = commandHistory
       .map(cmd => `$ ${cmd.command}\n${cmd.output.join('\n')}`)
       .join('\n\n')
     navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }, [commandHistory])
+  }
 
   return (
     <section className="section-padding bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 relative overflow-hidden">
