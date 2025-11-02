@@ -7,18 +7,52 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'pgraft - PostgreSQL Raft Consensus Extension | Automatic Leader Election & Zero Split-Brain',
   description: 'Production-ready Raft consensus for distributed PostgreSQL clusters. Built on etcd-io/raft with automatic leader election, crash-safe replication, 100% split-brain prevention, zero-downtime failover, and comprehensive SQL API. Native background worker architecture with no external dependencies.',
-  keywords: 'PostgreSQL, Raft consensus, leader election, high availability, distributed systems, database clustering, etcd-io/raft, split-brain prevention, automatic failover, crash-safe replication, background worker, distributed consensus, PostgreSQL extension, key-value store, cluster management',
+  keywords: [
+    // Primary keywords
+    'postgresql raft', 'raft consensus postgresql', 'postgresql consensus', 'pgraft',
+    'postgresql leader election', 'automatic leader election', 'distributed postgresql',
+    // High availability
+    'postgresql high availability', 'postgresql ha', 'postgresql clustering', 'postgresql failover',
+    'zero downtime postgresql', 'split-brain prevention', 'automatic failover postgresql',
+    // Distributed systems
+    'distributed database', 'distributed consensus', 'consensus algorithm', 'raft algorithm',
+    'etcd raft', 'etcd-io raft', 'raft protocol', 'paxos alternative',
+    // PostgreSQL clustering
+    'postgresql cluster', 'database clustering', 'postgres cluster manager',
+    'postgresql replication', 'multi-master postgresql', 'cluster management postgresql',
+    // Technical features
+    'crash-safe replication', 'log replication', 'state machine replication',
+    'quorum-based consensus', 'majority voting', 'term-based leader election',
+    // Use cases
+    'postgresql production clustering', 'enterprise postgresql ha', 'postgresql disaster recovery',
+    'postgres fault tolerance', 'distributed key-value store', 'postgresql synchronization',
+    // Alternatives and comparisons
+    'patroni alternative', 'stolon alternative', 'repmgr alternative', 'pacemaker postgresql',
+    'postgresql ha solutions', 'best postgresql clustering', 'postgresql high availability tools',
+    // Extensions and integration
+    'postgresql extension', 'postgres background worker', 'postgresql native clustering',
+    'sql api clustering', 'postgresql extension ha', 'no external dependencies postgresql'
+  ].join(', '),
   openGraph: {
-    title: 'pgraft - PostgreSQL Raft Consensus Extension',
+    title: 'pgraft - PostgreSQL Raft Consensus Extension | Leader Election & HA',
     description: 'Production-ready Raft consensus for PostgreSQL with automatic leader election, crash-safe replication, and 100% split-brain prevention. Built on proven etcd-io/raft library.',
     type: 'website',
     url: 'https://www.pgelephant.com/pgraft',
     siteName: 'pgElephant',
+    images: [
+      {
+        url: 'https://www.pgelephant.com/og-pgraft.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'pgraft - PostgreSQL Raft Consensus Extension',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'pgraft - PostgreSQL Raft Consensus Extension',
+    title: 'pgraft - PostgreSQL Raft Consensus | Leader Election & HA',
     description: 'Production-ready Raft consensus for PostgreSQL clusters with automatic leader election, crash-safe replication, and 100% split-brain prevention.',
+    images: ['https://www.pgelephant.com/og-pgraft.jpg'],
   },
   alternates: {
     canonical: 'https://www.pgelephant.com/pgraft',
@@ -26,6 +60,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

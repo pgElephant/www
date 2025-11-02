@@ -5,18 +5,72 @@ import { Database, FileText, Layers, Activity } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL | pgElephant',
+  title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL | Wire Protocol Compatibility',
   description: 'FauxDB is the ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Built in Rust with pure PostgreSQL backend. Connect with mongosh OR mysql client—access the same data through both protocols with ACID guarantees, SQL translator, and zero external dependencies.',
-  keywords: 'FauxDB, dual-protocol database, MongoDB compatible, MySQL compatible, MongoDB wire protocol, MySQL wire protocol, Rust database, PostgreSQL backend, ACID transactions, SQL translator, document database, mongosh, mysql client, NoSQL alternative, wire protocol compatibility',
+  keywords: [
+    // Primary keywords
+    'fauxdb', 'dual-protocol database', 'mongodb mysql postgresql', 'multi-protocol database',
+    // MongoDB compatibility
+    'mongodb compatible postgresql', 'mongodb wire protocol', 'mongosh postgresql', 'mongodb alternative',
+    'mongodb to postgresql', 'mongodb postgresql proxy', 'mongodb replica postgresql',
+    // MySQL compatibility
+    'mysql compatible postgresql', 'mysql wire protocol', 'mysql postgresql proxy', 'mysql protocol postgresql',
+    'mysql to postgresql', 'mysql connector postgresql', 'mysql translation postgresql',
+    // Wire protocol
+    'wire protocol compatibility', 'database protocol translation', 'protocol proxy database',
+    'dual wire protocol', 'multi-protocol database server',
+    // Migration and compatibility
+    'migrate mongodb to postgresql', 'migrate mysql to postgresql', 'mongodb postgresql migration',
+    'mysql postgresql migration', 'database migration tool', 'zero downtime migration',
+    // Document database
+    'document database postgresql', 'jsonb mongodb', 'postgresql document store',
+    'nosql postgresql', 'document oriented database', 'schema-less postgresql',
+    // Technical features
+    'rust database', 'postgresql backend', 'acid transactions nosql', 'sql translator',
+    'query translation engine', 'bson postgresql', 'mongodb queries postgresql',
+    // Use cases
+    'mongodb postgresql compatibility', 'mysql postgresql compatibility', 'legacy application migration',
+    'multi-client database', 'hybrid database access', 'protocol abstraction layer',
+    // Competitive
+    'ferretdb alternative', 'mongosql alternative', 'best mongodb postgresql',
+    'production mongodb compatibility', 'enterprise database migration',
+    // Open source
+    'open source mongodb alternative', 'rust mongodb', 'rust mysql proxy', 'postgresql proxy'
+  ].join(', '),
   openGraph: {
     title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL',
-    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously, backed by pure PostgreSQL.',
+    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Built in Rust with pure PostgreSQL backend. Connect with mongosh OR mysql client—access the same data through both protocols.',
     type: 'website',
+    url: 'https://www.pgelephant.com/fauxdb',
+    siteName: 'pgElephant',
+    images: [
+      {
+        url: 'https://www.pgelephant.com/og-fauxdb.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'FauxDB - Dual-Protocol Database Server',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL',
-    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Connect with mongosh OR mysql client—access the same data.',
+    title: 'FauxDB - Dual-Protocol Database | MongoDB + MySQL on PostgreSQL',
+    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Connect with mongosh OR mysql client—access the same data through both protocols.',
+    images: ['https://www.pgelephant.com/og-fauxdb.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/fauxdb',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

@@ -6,20 +6,51 @@ import { Brain, Database, Zap, Search, Cpu, Shield, BarChart3, Layers } from 'lu
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'NeurondB - Advanced AI Database Extension for PostgreSQL | Vector Search & ML Inference',
-  description: 'Production-grade PostgreSQL extension for vector search, machine learning inference, hybrid retrieval, and complete RAG pipelines. Built with PostgreSQL C standards, featuring HNSW indexing, embedding generation, cross-encoder reranking, and background workers.',
-  keywords: 'NeurondB, PostgreSQL, vector database, AI database, machine learning, embeddings, HNSW, hybrid search, RAG, semantic search, vector search, ML inference, PostgreSQL extension',
+  title: 'NeurondB - AI Database PostgreSQL Extension | Vector Database, RAG Pipeline & ML Inference',
+  description: 'Production-grade AI database extension for PostgreSQL with vector search, RAG pipeline, machine learning inference, and hybrid retrieval. HNSW indexing, ONNX runtime, GPU acceleration (CUDA/ROCm), embeddings generation, cross-encoder reranking. Complete in-database RAG with semantic search, full-text search, and LLM integration. PostgreSQL 16-18 compatible AI extension.',
+  keywords: [
+    'ai database', 'ai database postgresql', 'postgres ai', 'postgresql ai extension', 'postgres ai extension',
+    'vector database', 'vector database postgresql', 'postgres vector database', 'vector search postgresql',
+    'rag pipeline', 'rag database', 'rag postgresql', 'retrieval augmented generation postgresql',
+    'semantic search postgresql', 'semantic database', 'similarity search postgresql',
+    'machine learning postgresql', 'ml inference postgresql', 'postgres ml', 'postgresql machine learning',
+    'embeddings database', 'embedding generation postgresql', 'text embeddings postgresql',
+    'hnsw index', 'hnsw postgresql', 'vector index postgresql', 'ann search postgresql',
+    'hybrid search', 'hybrid search postgresql', 'vector full text search',
+    'onnx postgresql', 'onnx runtime postgresql', 'ml models postgresql',
+    'gpu accelerated database', 'cuda postgresql', 'rocm postgresql',
+    'ai powered database', 'llm database', 'gpt database', 'chatgpt database',
+    'langchain postgresql', 'llamaindex postgresql', 'rag framework postgresql',
+    'pgvector alternative', 'postgres ai comparison', 'postgresql ai tools',
+    'neurondb', 'neurondB', 'pg ai', 'pgai', 'postgres vector',
+    'document retrieval postgresql', 'knowledge base postgresql', 'ai search postgresql',
+    'reranking postgresql', 'cross encoder postgresql', 'mmr postgresql',
+    'batch inference postgresql', 'model serving postgresql', 'inference engine postgresql',
+    'postgres analytics', 'k-means postgresql', 'clustering postgresql',
+    'dimensionality reduction postgresql', 'pca postgresql', 'dbscan postgresql',
+    'production ai database', 'enterprise ai database', 'scalable vector database',
+    'open source vector database', 'free vector database', 'vector database open source'
+  ].join(', '),
   openGraph: {
-    title: 'NeurondB - Advanced AI Database Extension for PostgreSQL',
-    description: 'Production-grade vector search, machine learning, and hybrid search—directly in PostgreSQL.',
+    title: 'NeurondB - AI Database PostgreSQL Extension | Vector Database, RAG & ML',
+    description: 'Production-grade AI database extension for PostgreSQL. Vector search with HNSW indexing, complete RAG pipeline, ML inference with ONNX, GPU acceleration, hybrid search, and embeddings generation. Open source PostgreSQL AI extension.',
     type: 'website',
     url: 'https://www.pgelephant.com/neurondb',
     siteName: 'pgElephant',
+    images: [
+      {
+        url: 'https://www.pgelephant.com/og-neurondb.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'NeurondB - AI Database Extension for PostgreSQL with Vector Search and RAG',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NeurondB - Advanced AI Database Extension for PostgreSQL',
-    description: 'Production-grade vector search, machine learning, and hybrid search—directly in PostgreSQL.',
+    title: 'NeurondB - AI Database PostgreSQL Extension | Vector Database & RAG',
+    description: 'Production-grade AI database for PostgreSQL. Vector search, RAG pipeline, ML inference, GPU acceleration, hybrid search. Open source PostgreSQL AI extension.',
+    images: ['https://www.pgelephant.com/og-neurondb.jpg'],
   },
   alternates: {
     canonical: 'https://www.pgelephant.com/neurondb',
@@ -27,6 +58,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
