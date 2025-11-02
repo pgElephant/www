@@ -23,7 +23,10 @@ const palette = {
   gray300: '#CBD5E1',
   white: '#FFFFFF',
   orange: '#F97316',
-  orangeDark: '#EA580C'
+  orangeDark: '#EA580C',
+  primary: '#4f46e5',
+  purple: '#7C3AED',
+  blue: '#3B82F6'
 }
 
 const DocsPage = () => {
@@ -33,7 +36,7 @@ const DocsPage = () => {
 
   // Set default documentation on mount
   React.useEffect(() => {
-    setActiveProduct('pgraft')
+    setActiveProduct('neurondb')
     setActiveSection('Getting Started')
   }, [])
 
@@ -705,21 +708,24 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
 
   const products = [
     {
-      id: 'pgraft',
-      name: 'pgraft',
-      title: 'PostgreSQL Raft Extension',
-      icon: '/ico/pgsql_raft_leader_HD.ico',
-      bg: { from: palette.tealDeep, via: palette.teal, to: palette.cyan },
-      description: 'PostgreSQL extension implementing Raft consensus protocol for distributed database systems',
+      id: 'neurondb',
+      name: 'NeurondB',
+      title: 'AI Database Extension',
+      icon: '/ico/pgElephant_HD.ico',
+      bg: { from: palette.primary, via: palette.teal, to: palette.cyan },
+      description: 'Production-grade AI database extension for PostgreSQL with vector search, ML inference, hybrid retrieval, and complete RAG pipeline',
       docs: [
-        { title: 'Getting Started', href: '/docs/pgraft/getting-started', type: 'Guide', description: 'Install and configure pgraft extension' },
-        { title: 'Installation', href: '/docs/pgraft/installation', type: 'Guide', description: 'Build and install from source' },
-        { title: 'Configuration', href: '/docs/pgraft/configuration', type: 'Guide', description: 'PostgreSQL configuration settings' },
-        { title: 'SQL Functions', href: '/docs/pgraft/sql-functions', type: 'Reference', description: 'PostgreSQL SQL function reference' },
-        { title: 'Raft Protocol', href: '/docs/pgraft/raft-protocol', type: 'Guide', description: 'Understanding Raft consensus implementation' },
-        { title: 'Cluster Management', href: '/docs/pgraft/cluster-management', type: 'Guide', description: 'Managing PostgreSQL clusters with Raft' },
-        { title: 'Performance Tuning', href: '/docs/pgraft/performance', type: 'Guide', description: 'Optimization and performance considerations' },
-        { title: 'Troubleshooting', href: '/docs/pgraft/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+        { title: 'Getting Started', href: '/docs/neurondb/getting-started', type: 'Guide', description: 'Quick start guide for NeurondB' },
+        { title: 'Installation', href: '/docs/neurondb/installation', type: 'Guide', description: 'Build and install from source' },
+        { title: 'Vector Types', href: '/docs/neurondb/features/vector-types', type: 'Reference', description: 'Vector data types and operators' },
+        { title: 'ML & Embeddings', href: '/docs/neurondb/ml/embeddings', type: 'Guide', description: 'Machine learning and embedding generation' },
+        { title: 'GPU Acceleration', href: '/docs/neurondb/gpu', type: 'Guide', description: 'CUDA/ROCm GPU support' },
+        { title: 'Hybrid Search', href: '/docs/neurondb/hybrid', type: 'Guide', description: 'Semantic + full-text search' },
+        { title: 'RAG Pipeline', href: '/docs/neurondb/rag', type: 'Guide', description: 'Complete RAG implementation' },
+        { title: 'Background Workers', href: '/docs/neurondb/background-workers', type: 'Guide', description: 'neuranq, neuranmon, neurandefrag' },
+        { title: 'ML Analytics', href: '/docs/neurondb/analytics', type: 'Guide', description: 'K-means, DBSCAN, PCA, drift detection' },
+        { title: 'Configuration', href: '/docs/neurondb/configuration', type: 'Reference', description: 'Extension configuration options' },
+        { title: 'Performance', href: '/docs/neurondb/performance', type: 'Guide', description: 'Optimization and tuning' }
       ]
     },
     {
@@ -728,34 +734,71 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
       title: 'Connection Pooling & Load Balancing',
       icon: '/ico/pgbalancer_HD.ico',
       bg: { from: palette.orangeDark, via: palette.orange, to: palette.cyan },
-      description: 'High-performance connection pooling and load balancing for PostgreSQL with YAML configuration',
+      description: 'Modern PostgreSQL connection pooler and load balancer. pgpool-II alternative with AI-powered load balancing, HAProxy mode, automatic failover, and REST API',
       docs: [
         { title: 'Getting Started', href: '/docs/pgbalancer/getting-started', type: 'Guide', description: 'Install and configure pgbalancer' },
-        { title: 'Configuration', href: '/docs/pgbalancer/configuration', type: 'Guide', description: 'YAML configuration options and settings' },
+        { title: 'Configuration', href: '/docs/pgbalancer/configuration', type: 'Guide', description: 'Configuration options and settings' },
         { title: 'Metrics & Observability', href: '/docs/pgbalancer/metrics', type: 'Guide', description: 'Prometheus metrics and monitoring' },
-        { title: 'Architecture & Internals', href: '/docs/pgbalancer/internals', type: 'Guide', description: 'Learn about pgbalancer internals and architecture' },
-        { title: 'bctl Reference', href: '/docs/pgbalancer/bctl', type: 'Reference', description: 'Command-line control utility reference' },
-        { title: 'REST API', href: '/docs/pgbalancer/api', type: 'Reference', description: 'REST API documentation' },
-        { title: 'Performance Tuning', href: '/docs/pgbalancer/performance', type: 'Guide', description: 'Optimization and performance tuning' },
-        { title: 'Troubleshooting', href: '/docs/pgbalancer/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+        { title: 'Architecture & Internals', href: '/docs/pgbalancer/internals', type: 'Guide', description: 'Learn about pgbalancer internals and architecture' }
+      ]
+    },
+    {
+      id: 'pgraft',
+      name: 'pgraft',
+      title: 'PostgreSQL Raft Extension',
+      icon: '/ico/pgsql_raft_leader_HD.ico',
+      bg: { from: palette.tealDeep, via: palette.teal, to: palette.cyan },
+      description: 'PostgreSQL extension implementing Raft consensus protocol for distributed database systems with automatic leader election and split-brain prevention',
+      docs: [
+        { title: 'Getting Started', href: '/docs/pgraft/getting-started', type: 'Guide', description: 'Install and configure pgraft extension' },
+        { title: 'Installation', href: '/docs/pgraft/installation', type: 'Guide', description: 'Build and install from source' },
+        { title: 'Configuration', href: '/docs/pgraft/configuration', type: 'Guide', description: 'PostgreSQL configuration settings' },
+        { title: 'SQL Functions', href: '/docs/pgraft/sql-functions', type: 'Reference', description: 'PostgreSQL SQL function reference' },
+        { title: 'Raft Protocol', href: '/docs/pgraft/raft-protocol', type: 'Guide', description: 'Understanding Raft consensus implementation' },
+        { title: 'Cluster Management', href: '/docs/pgraft/cluster-management', type: 'Guide', description: 'Managing PostgreSQL clusters with Raft' },
+        { title: 'Performance', href: '/docs/pgraft/performance', type: 'Guide', description: 'Optimization and performance considerations' },
+        { title: 'Troubleshooting', href: '/docs/pgraft/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
       ]
     },
     {
       id: 'fauxdb',
       name: 'FauxDB',
-      title: 'MongoDB Compatible Document Database',
+      title: 'Dual-Protocol Database Server',
       icon: '/ico/FauxDB_HD.ico',
       bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
-      description: 'MongoDB-compatible document database built in Rust with PostgreSQL backend',
+      description: 'Dual-protocol database with MongoDB AND MySQL wire protocol support. Built in Rust with pure PostgreSQL backend',
       docs: [
         { title: 'Getting Started', href: '/docs/fauxdb/getting-started', type: 'Guide', description: 'Install and configure FauxDB' },
         { title: 'Docker Setup', href: '/docs/fauxdb/docker', type: 'Tutorial', description: 'Containerized deployment guide' },
-        { title: 'Configuration', href: '/docs/fauxdb/configuration', type: 'Guide', description: 'Configuration file reference' },
-        { title: 'MongoDB Compatibility', href: '/docs/fauxdb/mongodb-compatibility', type: 'Guide', description: 'MongoDB wire protocol support' },
-        { title: 'API Reference', href: '/docs/fauxdb/api', type: 'Reference', description: 'Complete API documentation' },
-        { title: 'Performance Tuning', href: '/docs/fauxdb/performance', type: 'Guide', description: 'Optimization and tuning guide' },
-        { title: 'Security', href: '/docs/fauxdb/security', type: 'Guide', description: 'Authentication and authorization' },
-        { title: 'Troubleshooting', href: '/docs/fauxdb/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+        { title: 'API Reference', href: '/docs/fauxdb/api', type: 'Reference', description: 'Complete API documentation' }
+      ]
+    },
+    {
+      id: 'pgsentinel',
+      name: 'pgSentinel',
+      title: 'Monitoring & Management Platform',
+      icon: '/ico/pgElephant_HD.ico',
+      bg: { from: palette.purple, via: palette.blue, to: palette.cyan },
+      description: 'Professional web-based monitoring and management platform for pgbalancer with real-time metrics, Grafana dashboards, and Prometheus integration',
+      docs: [
+        { title: 'Getting Started', href: '/docs/pgsentinel/getting-started', type: 'Guide', description: 'Quick start guide for pgSentinel' },
+        { title: 'Configuration', href: '/docs/pgsentinel/configuration', type: 'Guide', description: 'Configuration options and settings' },
+        { title: 'REST API', href: '/docs/pgsentinel/api', type: 'Reference', description: 'Complete API documentation' },
+        { title: 'Troubleshooting', href: '/docs/pgsentinel/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+      ]
+    },
+    {
+      id: 'pg_stat_insights',
+      name: 'pg_stat_insights',
+      title: 'Performance Analytics Extension',
+      icon: '/ico/pgElephant_HD.ico',
+      bg: { from: palette.purple, via: palette.teal, to: palette.cyan },
+      description: 'Deep PostgreSQL performance analytics extension with 52 metrics across 11 views. Track slow queries, cache efficiency, and optimize database performance',
+      docs: [
+        { title: 'Getting Started', href: '/docs/pg-stat-insights/getting-started', type: 'Guide', description: 'Quick start guide for pg_stat_insights' },
+        { title: 'API Reference', href: '/docs/pg-stat-insights/api', type: 'Reference', description: 'Complete view and function reference' },
+        { title: 'Query Analytics', href: '/docs/pg-stat-insights/query-analytics', type: 'Guide', description: 'Query performance analysis' },
+        { title: 'Best Practices', href: '/docs/pg-stat-insights/best-practices', type: 'Guide', description: 'Optimization best practices' }
       ]
     }
   ]
@@ -1014,11 +1057,11 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
             {/* Documentation Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
               <div className="text-center">
-                <div className="text-3xl font-semibold text-white drop-shadow-2xl shadow-2xl mb-2">3</div>
+                <div className="text-3xl font-semibold text-white drop-shadow-2xl shadow-2xl mb-2">6</div>
                 <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Products</div>
           </div>
               <div className="text-center">
-                <div className="text-3xl font-semibold text-white drop-shadow-2xl shadow-2xl mb-2">26</div>
+                <div className="text-3xl font-semibold text-white drop-shadow-2xl shadow-2xl mb-2">34</div>
                 <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Documentation Pages</div>
               </div>
               <div className="text-center">
