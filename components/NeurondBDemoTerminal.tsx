@@ -18,7 +18,7 @@ const NeurondBDemoTerminal = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
-  const [activeTab, setActiveTab] = useState<'build' | 'usage'>('build')
+  const [activeTab, setActiveTab] = useState<'build' | 'usage' | 'vectors' | 'ml' | 'embeddings' | 'gpu' | 'hybrid'>('build')
   const [copied, setCopied] = useState(false)
   const [inPsqlMode, setInPsqlMode] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
@@ -141,6 +141,431 @@ const NeurondBDemoTerminal = () => {
         '\x1b[32m✓ NeurondB extension installed successfully\x1b[0m',
         '\x1b[36mAvailable: 100+ SQL functions, 20+ operators, 5 data types\x1b[0m'
       ]
+    }
+  ]
+
+  // Vector Operations Tab Commands
+  const vectorCommands = [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT \'[1,2,3]\'::vector + \'[4,5,6]\'::vector AS addition;',
+      output: [
+        '  addition  ',
+        '------------',
+        ' [5,7,9]',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Vector addition: element-wise sum\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_l2_distance(\'[1,0,0]\'::vector, \'[0,1,0]\'::vector) AS euclidean;',
+      output: [
+        '  euclidean  ',
+        '-------------',
+        ' 1.41421356',
+        '(1 row)',
+        '',
+        '\x1b[36m-- L2 (Euclidean) distance between vectors\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_cosine_distance(\'[1,0,0]\'::vector, \'[1,0,0]\'::vector) AS cosine;',
+      output: [
+        '  cosine  ',
+        '----------',
+        ' 0.000000',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Cosine distance: 0 means identical direction\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT quantize_vector_i8(\'[0.5, 0.3, -0.2, 0.8]\'::vector) AS int8_quantized;',
+      output: [
+        '      int8_quantized      ',
+        '-------------------------',
+        ' \\x7f4ccc19ff',
+        '(1 row)',
+        '',
+        '\x1b[36m-- 8x compression: float32 → int8\x1b[0m',
+        '\x1b[32m-- Memory saved: 75% reduction\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TABLE products (id INT, name TEXT, features vector(128));',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Product feature vectors for similarity search\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO products VALUES (1, \'Laptop\', array_fill(random()::float, ARRAY[128])::float[]::vector), (2, \'Phone\', array_fill(random()::float, ARRAY[128])::float[]::vector);',
+      output: [
+        'INSERT 0 2',
+        '',
+        '\x1b[32m-- 2 products with 128-dim feature vectors\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT name, features <-> (SELECT features FROM products WHERE id = 1) AS similarity FROM products ORDER BY similarity;',
+      output: [
+        '  name   | similarity',
+        '---------+------------',
+        ' Laptop  |  0.000000',
+        ' Phone   |  1.234567',
+        '(2 rows)',
+        '',
+        '\x1b[36m-- Finding similar products using vector distance\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ]
+
+  // ML Algorithms Tab Commands
+  const mlCommands = [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TABLE customer_data (id INT, features vector(10));',
+      output: ['CREATE TABLE', '', '\x1b[36m-- Table for ML algorithms demo\x1b[0m'],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO customer_data SELECT i, array_fill(random()::float, ARRAY[10])::float[]::vector FROM generate_series(1, 500) i;',
+      output: [
+        'INSERT 0 500',
+        '',
+        '\x1b[32m-- 500 customer feature vectors generated\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT cluster_kmeans(\'customer_data\', \'features\', 5, 100) AS kmeans_result;',
+      output: [
+        '                kmeans_result                ',
+        '---------------------------------------------',
+        ' {"clusters": 5, "iterations": 23,',
+        '  "inertia": 45.67, "converged": true}',
+        '(1 row)',
+        '',
+        '\x1b[36m-- K-Means clustering: 5 customer segments identified\x1b[0m',
+        '\x1b[36m-- Converged in 23 iterations\x1b[0m',
+        '\x1b[32m-- Algorithm: Lloyd\'s K-Means with k-means++ initialization\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT id, cluster_id, centroid_distance FROM neurondb_cluster_assignments(\'customer_data\', \'features\', 5) LIMIT 5;',
+      output: [
+        ' id | cluster_id | centroid_distance',
+        '----+------------+------------------',
+        '  1 |      3     |       0.234',
+        '  2 |      1     |       0.456',
+        '  3 |      3     |       0.189',
+        '  4 |      5     |       0.678',
+        '  5 |      2     |       0.345',
+        '(5 rows)',
+        '',
+        '\x1b[36m-- Each customer assigned to nearest cluster\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT detect_outliers(\'customer_data\', \'features\', 0.95) AS outlier_count;',
+      output: [
+        ' outlier_count',
+        '---------------',
+        '      12',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Outlier Detection: 12 anomalous customers (2.4%)\x1b[0m',
+        '\x1b[36m-- Algorithm: Isolation Forest with 95% confidence\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT reduce_dimensionality_pca(\'customer_data\', \'features\', 3) AS pca_result;',
+      output: [
+        '                     pca_result                     ',
+        '-------------------------------------------------------',
+        ' {"components": 3, "explained_variance": [0.45, 0.23, 0.12],',
+        '  "total_variance_explained": 0.80}',
+        '(1 row)',
+        '',
+        '\x1b[36m-- PCA: Reduced 10 → 3 dimensions\x1b[0m',
+        '\x1b[36m-- Retained 80% of variance\x1b[0m',
+        '\x1b[32m-- Algorithm: Singular Value Decomposition (SVD)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ]
+
+  // Embeddings Tab Commands
+  const embeddingCommands = [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT embed_text(\'artificial intelligence\') AS embedding;',
+      output: [
+        '                         embedding                          ',
+        '------------------------------------------------------------',
+        ' [0.234,-0.891,0.456,0.123,-0.678,...] (384 dimensions)',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Text → Vector embedding using all-MiniLM-L6-v2\x1b[0m',
+        '\x1b[36m-- Model: 384 dimensions, optimized for semantic search\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT embed_text(\'machine learning\', \'all-mpnet-base-v2\') AS embedding;',
+      output: [
+        '                         embedding                          ',
+        '------------------------------------------------------------',
+        ' [0.145,-0.723,0.891,0.234,...] (768 dimensions)',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Higher quality model: 768 dimensions\x1b[0m',
+        '\x1b[32m-- Better accuracy for complex queries\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT unnest(embed_text_batch(ARRAY[\'AI\', \'ML\', \'DL\'])) AS batch_embeddings;',
+      output: [
+        '              batch_embeddings               ',
+        '-----------------------------------------------',
+        ' [0.456,0.234,...]  (384 dimensions)',
+        ' [0.567,0.123,...]  (384 dimensions)',
+        ' [0.678,0.345,...]  (384 dimensions)',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Batch embedding: 3 texts → 3 vectors\x1b[0m',
+        '\x1b[32m-- 5x faster than individual calls\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TABLE articles (id INT, title TEXT, content TEXT, embedding vector(384));',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Articles table with embedding column\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO articles VALUES (1, \'AI Basics\', \'Introduction to artificial intelligence\', embed_cached(\'Introduction to artificial intelligence\'));',
+      output: [
+        'INSERT 0 1',
+        '',
+        '\x1b[36m-- Embedding generated and cached for reuse\x1b[0m',
+        '\x1b[32m-- Cache hit on next identical text: <1ms vs 50ms\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT title, embedding <-> embed_text(\'AI tutorial\') AS similarity FROM articles ORDER BY similarity LIMIT 3;',
+      output: [
+        '   title    | similarity',
+        '------------+------------',
+        ' AI Basics  |   0.234',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Semantic similarity search\x1b[0m',
+        '\x1b[36m-- Lower distance = more similar\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT cache_key, model_name, access_count, hit_rate FROM neurondb_embedding_cache ORDER BY access_count DESC LIMIT 3;',
+      output: [
+        '           cache_key            |    model_name     | access_count | hit_rate',
+        '------------------------------------+-------------------+--------------+---------',
+        ' Introduction to artificial... | all-MiniLM-L6-v2  |     47       |  0.96',
+        ' machine learning algorithms  | all-MiniLM-L6-v2  |     23       |  0.91',
+        ' deep neural networks         | all-MiniLM-L6-v2  |     15       |  0.87',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Embedding cache statistics\x1b[0m',
+        '\x1b[32m-- 96% hit rate: significant performance boost\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ]
+
+  // GPU Acceleration Tab Commands
+  const gpuCommands = [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT neurondb_gpu_info();',
+      output: [
+        '                     neurondb_gpu_info                      ',
+        '------------------------------------------------------------',
+        ' {"device": "NVIDIA RTX 4090", "memory": "24GB",',
+        '  "compute_capability": "8.9", "cuda_version": "12.6",',
+        '  "status": "available"}',
+        '(1 row)',
+        '',
+        '\x1b[36m-- GPU detected and available for acceleration\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neurondb_gpu_enable(true);',
+      output: [
+        ' neurondb_gpu_enable',
+        '---------------------',
+        ' GPU enabled',
+        '(1 row)',
+        '',
+        '\x1b[32m-- GPU acceleration activated for current session\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT cluster_kmeans_gpu(\'customer_data\', \'features\', 10, 100);',
+      output: [
+        '                 cluster_kmeans_gpu                 ',
+        '-------------------------------------------------------',
+        ' {"clusters": 10, "iterations": 18, "inertia": 234.5,',
+        '  "device": "GPU", "speedup": "23.4x"}',
+        '(1 row)',
+        '',
+        '\x1b[36m-- GPU K-Means: 500 vectors, 10 clusters\x1b[0m',
+        '\x1b[32m-- 23.4x speedup vs CPU (18ms vs 421ms)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_l2_distance_gpu(features, \'[0.5,0.3,...]\'::vector) FROM products ORDER BY 1 LIMIT 3;',
+      output: [
+        ' vector_l2_distance_gpu',
+        '------------------------',
+        '        0.234',
+        '        0.567',
+        '        0.891',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Batch GPU distance calculation\x1b[0m',
+        '\x1b[32m-- 100x faster for large batches\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT * FROM pg_stat_neurondb_gpu;',
+      output: [
+        ' backend_pid | queries | batches | avg_batch_size | avg_latency_ms | fallback_count',
+        '-------------+---------+---------+----------------+----------------+----------------',
+        '   12345     |   1847  |    92   |      8192      |      2.3       |       0',
+        '(1 row)',
+        '',
+        '\x1b[36m-- GPU Statistics:\x1b[0m',
+        '\x1b[36m   • 1847 GPU queries executed\x1b[0m',
+        '\x1b[36m   • Avg batch: 8192 vectors\x1b[0m',
+        '\x1b[36m   • Avg latency: 2.3ms\x1b[0m',
+        '\x1b[32m   • Zero fallbacks to CPU ✓\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ]
+
+  // Hybrid Search Tab Commands  
+  const hybridCommands = [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TABLE knowledge_base (id SERIAL PRIMARY KEY, title TEXT, content TEXT, embedding vector(384), ts_vector tsvector);',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Table with both vector and full-text search columns\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO knowledge_base (title, content, embedding, ts_vector) VALUES (\'PostgreSQL Performance\', \'Optimize queries with indexes and EXPLAIN\', embed_text(\'Optimize queries with indexes and EXPLAIN\'), to_tsvector(\'Optimize queries with indexes and EXPLAIN\'));',
+      output: [
+        'INSERT 0 1',
+        '',
+        '\x1b[36m-- Document with vector embedding + text index\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT * FROM hybrid_search(\'knowledge_base\', \'content\', \'embedding\', \'database optimization\', 10, 0.7, 0.3);',
+      output: [
+        ' id |        title         |              content              | vector_score | text_score | hybrid_score',
+        '----+----------------------+-----------------------------------+--------------+------------+-------------',
+        '  1 | PostgreSQL Performance| Optimize queries with indexes...  |     0.92     |    0.85    |     0.90',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Hybrid Search: 70% vector + 30% BM25 text search\x1b[0m',
+        '\x1b[36m-- Combines semantic similarity with keyword matching\x1b[0m',
+        '\x1b[32m-- Best of both: meaning + exact terms ✓\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT rerank_cross_encoder(\'What is PostgreSQL?\', ARRAY[\'PostgreSQL is a database\', \'MySQL is also a database\', \'Redis is a cache\'], \'ms-marco-MiniLM\', 3);',
+      output: [
+        ' idx | score ',
+        '-----+-------',
+        '  0  | 0.945',
+        '  1  | 0.678',
+        '  2  | 0.123',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Cross-encoder reranking for higher precision\x1b[0m',
+        '\x1b[32m-- Improved relevance: 94.5% vs 67.8% vs 12.3%\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT * FROM mmr_rerank(\'knowledge_base\', \'embedding\', embed_text(\'database\'), 20, 5, 0.7);',
+      output: [
+        ' id |  title   |   score   | diversity',
+        '----+----------+-----------+-----------',
+        '  1 | Doc A    |   0.923   |   1.000',
+        '  5 | Doc E    |   0.856   |   0.834',
+        ' 12 | Doc L    |   0.789   |   0.756',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- MMR (Maximal Marginal Relevance) reranking\x1b[0m',
+        '\x1b[36m-- Balances relevance (70%) with diversity (30%)\x1b[0m',
+        '\x1b[32m-- Avoids redundant results ✓\x1b[0m'
+      ],
+      isPsqlCommand: true
     }
   ]
 
@@ -317,6 +742,20 @@ const NeurondBDemoTerminal = () => {
     }
   ]
 
+  // Get commands based on active tab
+  const getCommands = () => {
+    switch (activeTab) {
+      case 'build': return buildCommands
+      case 'vectors': return vectorCommands
+      case 'ml': return mlCommands
+      case 'embeddings': return embeddingCommands
+      case 'gpu': return gpuCommands
+      case 'hybrid': return hybridCommands
+      case 'usage':
+      default: return usageCommands
+    }
+  }
+
   // Cleanup all intervals and timeouts
   const cleanup = useCallback(() => {
     if (intervalRef.current) {
@@ -409,7 +848,7 @@ const NeurondBDemoTerminal = () => {
     setCurrentCommand('')
     
     let commandIndex = 0
-    const commands = activeTab === 'build' ? buildCommands : usageCommands
+    const commands = getCommands()
     
     const runNextCommand = () => {
       if (commandIndex >= commands.length) {
@@ -523,21 +962,20 @@ const NeurondBDemoTerminal = () => {
         </div>
         
         {/* Tabs */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <button
             onClick={() => {
               setActiveTab('build')
               resetDemo()
             }}
             disabled={isRunning}
-            className={`px-5 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
               activeTab === 'build'
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
                 : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-            <Terminal className="w-4 h-4 inline mr-2" />
-            Build & Install
+            Build
           </button>
           <button
             onClick={() => {
@@ -545,14 +983,83 @@ const NeurondBDemoTerminal = () => {
               resetDemo()
             }}
             disabled={isRunning}
-            className={`px-5 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
               activeTab === 'usage'
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
                 : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-            <Terminal className="w-4 h-4 inline mr-2" />
-            Usage & Examples
+            Usage
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('vectors')
+              resetDemo()
+            }}
+            disabled={isRunning}
+            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
+              activeTab === 'vectors'
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            Vectors
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('ml')
+              resetDemo()
+            }}
+            disabled={isRunning}
+            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
+              activeTab === 'ml'
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            ML Algos
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('embeddings')
+              resetDemo()
+            }}
+            disabled={isRunning}
+            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
+              activeTab === 'embeddings'
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            Embeddings
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('gpu')
+              resetDemo()
+            }}
+            disabled={isRunning}
+            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
+              activeTab === 'gpu'
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            GPU
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('hybrid')
+              resetDemo()
+            }}
+            disabled={isRunning}
+            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
+              activeTab === 'hybrid'
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
+            Hybrid
           </button>
         </div>
       </div>
