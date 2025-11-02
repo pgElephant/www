@@ -6,36 +6,72 @@ import { Database, Network, Zap, BarChart3, Brain, Cpu } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'pgbalancer - AI-Powered PostgreSQL Connection Pooler | Machine Learning Load Balancing',
-  description: 'AI-powered PostgreSQL connection pooler with machine learning load balancing, REST API, MQTT clustering, and JWT authentication. Adaptive learning (10% rate), predictive query routing, health scoring, and intelligent backend selection. Production-ready with <10ms response time.',
+  title: 'pgbalancer - PostgreSQL Connection Pooler & Load Balancer | pgpool-II Alternative with HAProxy Mode',
+  description: 'Modern PostgreSQL connection pooler and load balancer with pgpool-II compatibility and HAProxy-like connection balancing. AI-powered machine learning load balancing, automatic failover, REST API, MQTT clustering, and watchdog support. Production-ready alternative to pgpool-II, PgBouncer, and HAProxy for PostgreSQL. Built-in health monitoring and intelligent query routing.',
   keywords: [
+    // Primary pgpool-II keywords
+    'pgpool-ii', 'pgpool-ii alternative', 'pgpool ii', 'pgpool', 'pgpool alternative',
+    'pgpool-ii fork', 'modern pgpool-ii', 'pgpool-ii replacement', 'better than pgpool-ii',
+    'pgpool-ii vs pgbalancer', 'migrate from pgpool-ii', 'pgpool-ii modern alternative',
+    
+    // HAProxy keywords
+    'haproxy postgresql', 'haproxy database', 'haproxy alternative', 'haproxy load balancer',
+    'haproxy connection pooling', 'haproxy postgres', 'load balancer like haproxy',
+    'haproxy mode', 'connection balancer haproxy', 'haproxy for postgresql',
+    
+    // Failover keywords
+    'postgresql failover', 'automatic failover postgresql', 'database failover',
+    'failover postgresql', 'postgres failover solution', 'automatic database failover',
+    'zero downtime failover', 'failover and recovery', 'postgresql high availability failover',
+    'instant failover postgresql', 'failover detection', 'watchdog failover',
+    
+    // Connection pooler keywords
+    'postgresql connection pooler', 'connection pooler', 'database connection pooler',
+    'postgres connection pooler', 'connection pool postgresql', 'pooler postgresql',
+    'pgbouncer alternative', 'pgcat alternative', 'odyssey alternative',
+    'best postgresql connection pooler', 'connection pooling middleware',
+    
+    // Load balancer keywords
+    'postgresql load balancer', 'database load balancer', 'postgres load balancer',
+    'load balancing postgresql', 'query load balancing', 'connection load balancing',
+    'intelligent load balancing', 'read write load balancing', 'statement level load balancing',
+    
     // AI and ML keywords
-    'AI PostgreSQL pooling', 'machine learning load balancing', 'AI-powered connection pooler',
-    'predictive query routing', 'adaptive learning database', 'intelligent load balancing',
-    'AI health scoring', 'ML-based backend selection', 'PostgreSQL AI optimization',
+    'ai postgresql pooling', 'machine learning load balancing', 'ai-powered connection pooler',
+    'predictive query routing', 'adaptive learning database', 'intelligent backend selection',
     
     // Core product keywords
-    'pgbalancer', 'PostgreSQL connection pooler', 'PostgreSQL load balancer', 'database connection pooling',
-    'PostgreSQL performance optimization', 'database load balancing', 'connection pool management',
-    'PostgreSQL clustering', 'database high availability', 'PostgreSQL failover',
+    'pgbalancer', 'pg balancer', 'postgres balancer', 'postgresql pooling',
+    'database connection pooling', 'connection pool management', 'postgresql clustering',
     
-    // Modern Features
-    'REST API database management', 'PostgreSQL REST API', 'JWT authentication database',
-    'MQTT clustering', 'event-driven database', 'bctl CLI tool', 'HTTP JSON API pooler',
+    // High availability keywords
+    'postgresql ha', 'database high availability', 'postgres high availability',
+    'ha postgresql', 'high availability solution', 'zero downtime postgresql',
+    'high availability load balancer', 'ha connection pooler',
     
-    // Competitive keywords
-    'pgpool-II fork', 'pgpool-II alternative', 'PgBouncer alternative', 'Pgcat alternative', 
-    'PostgreSQL pooling software', 'best PostgreSQL connection pooler', 'enterprise PostgreSQL pooling',
+    // Modern features
+    'rest api postgresql', 'rest api connection pooler', 'http api pooler',
+    'mqtt clustering', 'yaml configuration', 'cli connection pooler', 'bctl cli',
+    'jwt authentication pooler', 'modern connection pooler',
     
-    // Technical keywords
-    'PostgreSQL health monitoring', 'automatic database failover', 'query cache optimization',
-    'database performance monitoring', 'PostgreSQL metrics', 'watchdog support',
-    'exploration vs exploitation', 'weighted selection algorithm', 'health score prediction',
+    // Technical features
+    'watchdog support', 'health monitoring postgresql', 'backend health check',
+    'query cache', 'connection cache', 'session pooling', 'transaction pooling',
+    'statement level load balance', 'query based load balancing',
     
-    // Long-tail keywords
-    'how to optimize PostgreSQL connections', 'PostgreSQL connection pooling best practices',
-    'enterprise database connection management', 'AI-powered database pooling',
-    'machine learning database optimization', 'predictive database performance'
+    // Comparison and migration
+    'pgpool-ii vs pgbouncer', 'pgpool-ii vs haproxy', 'connection pooler comparison',
+    'migrate from pgpool', 'pgpool to pgbalancer', 'haproxy to pgbalancer',
+    'best postgresql pooling solution', 'enterprise connection pooler',
+    
+    // Use cases
+    'postgresql replication pooling', 'read replica load balancing', 'master slave pooling',
+    'multi master postgresql', 'streaming replication pooling', 'logical replication pooling',
+    
+    // Problem solving keywords
+    'too many postgresql connections', 'connection limit postgresql', 'optimize postgresql connections',
+    'postgresql connection pooling best practices', 'reduce connection overhead',
+    'connection pooling strategy', 'database connection management'
   ].join(', '),
   authors: [
     { name: 'pgElephant Team', url: 'https://www.pgelephant.com' }

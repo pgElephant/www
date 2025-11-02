@@ -110,46 +110,57 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
-    // NeurondB documentation
     {
-      url: `${baseUrl}/docs/neurondb`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/getting-started`,
+      url: `${baseUrl}/docs/neurondb/gpu`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
     {
-      url: `${baseUrl}/docs/neurondb/installation`,
+      url: `${baseUrl}/docs/neurondb/hybrid`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
     {
-      url: `${baseUrl}/docs/neurondb/features/vector-types`,
+      url: `${baseUrl}/docs/neurondb/analytics`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
     {
-      url: `${baseUrl}/docs/neurondb/ml/embeddings`,
+      url: `${baseUrl}/docs/neurondb/rag`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/background-workers`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/configuration`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/neurondb/performance`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
     // pgbalancer documentation
     {
-      url: `${baseUrl}/docs/pgbalancer/getting-started`,
+      url: `${baseUrl}/docs/pgbalancer`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: priorities.subPages,
+      priority: priorities.docs,
     },
     {
-      url: `${baseUrl}/docs/pgbalancer/installation`,
+      url: `${baseUrl}/docs/pgbalancer/getting-started`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
@@ -161,24 +172,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: priorities.subPages,
     },
     {
-      url: `${baseUrl}/docs/pgbalancer/ai-configuration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
       url: `${baseUrl}/docs/pgbalancer/metrics`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
     {
-      url: `${baseUrl}/docs/pgbalancer/performance-tuning`,
+      url: `${baseUrl}/docs/pgbalancer/internals`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
     // FauxDB documentation
+    {
+      url: `${baseUrl}/docs/fauxdb`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.docs,
+    },
     {
       url: `${baseUrl}/docs/fauxdb/getting-started`,
       lastModified: currentDate,
@@ -186,13 +197,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: priorities.subPages,
     },
     {
-      url: `${baseUrl}/docs/fauxdb/installation`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/fauxdb/configuration`,
+      url: `${baseUrl}/docs/fauxdb/api`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
@@ -203,25 +208,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: priorities.subPages,
     },
-    {
-      url: `${baseUrl}/docs/fauxdb/kubernetes`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/fauxdb/api-reference`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/fauxdb/migration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
     // pgraft documentation
+    {
+      url: `${baseUrl}/docs/pgraft`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.docs,
+    },
     {
       url: `${baseUrl}/docs/pgraft/getting-started`,
       lastModified: currentDate,
@@ -241,7 +234,93 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: priorities.subPages,
     },
     {
+      url: `${baseUrl}/docs/pgraft/cluster-management`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
       url: `${baseUrl}/docs/pgraft/raft-protocol`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgraft/sql-functions`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgraft/performance`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgraft/troubleshooting`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    // pgSentinel documentation
+    {
+      url: `${baseUrl}/docs/pgsentinel`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.docs,
+    },
+    {
+      url: `${baseUrl}/docs/pgsentinel/getting-started`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgsentinel/configuration`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgsentinel/api`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pgsentinel/troubleshooting`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    // pg_stat_insights documentation
+    {
+      url: `${baseUrl}/docs/pg-stat-insights`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.docs,
+    },
+    {
+      url: `${baseUrl}/docs/pg-stat-insights/getting-started`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pg-stat-insights/api`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pg-stat-insights/query-analytics`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.subPages,
+    },
+    {
+      url: `${baseUrl}/docs/pg-stat-insights/best-practices`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
@@ -301,3 +380,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPages
   ]
 }
+

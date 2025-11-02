@@ -7,8 +7,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: [
           '/',
-          '/ram',
-          '/rale', 
+          '/neurondb',
           '/pgraft',
           '/pgbalancer',
           '/fauxdb',
@@ -23,8 +22,6 @@ export default function robots(): MetadataRoute.Robots {
           '/contact',
           '/privacy',
           '/terms',
-          '/cpanel',
-          '/cpanel/',
           '/*.css',
           '/*.js',
           '/*.png',
