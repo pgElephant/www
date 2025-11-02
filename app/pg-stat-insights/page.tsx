@@ -702,6 +702,13 @@ asyncio.run(analyze_database())`,
       'Query via API at http://localhost:8000/api/v1/insights/*',
     ],
   },
+  ctaSection: {
+    kicker: 'Get Started',
+    title: 'Monitor PostgreSQL Performance',
+    description: 'Install pg_stat_insights and track 52 comprehensive metrics across 11 pre-built views to identify slow queries, optimize cache performance, and monitor database health.',
+    primaryCTA: { href: '/docs/pg-stat-insights/getting-started', label: 'View Documentation' },
+    secondaryCTA: { href: 'https://github.com/pgElephant/pg_stat_insights', label: 'View on GitHub', external: true },
+  },
 };
 
 export default function PgStatInsightsPage() {

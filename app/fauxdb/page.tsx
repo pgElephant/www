@@ -267,6 +267,13 @@ const fauxdbConfig = {
     { href: '/docs/fauxdb/getting-started', title: 'Getting Started', desc: 'Quick start guide for FauxDB.' },
     { href: '/docs/fauxdb/api', title: 'API Reference', desc: 'Explore the FauxDB API.' },
   ],
+  ctaSection: {
+    kicker: 'Get Started',
+    title: 'Deploy Dual-Protocol Database',
+    description: 'Install FauxDB and access your PostgreSQL data through both MongoDB and MySQL protocols simultaneously with zero downtime migration.',
+    primaryCTA: { href: '/docs/fauxdb/getting-started', label: 'View Documentation' },
+    secondaryCTA: { href: 'https://github.com/pgElephant/fauxdb', label: 'View on GitHub', external: true },
+  },
 };
 
 export default function FauxDbPage() {

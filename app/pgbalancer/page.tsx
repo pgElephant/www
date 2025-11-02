@@ -775,6 +775,13 @@ client.subscribe_to_events(handle_event)`,
       href: '/docs/pgbalancer/metrics',
     },
   ],
+  ctaSection: {
+    kicker: 'Get Started',
+    title: 'Deploy pgbalancer for Production',
+    description: 'Install pgbalancer and start scaling your PostgreSQL connections with AI-powered load balancing, automatic failover, and comprehensive monitoring.',
+    primaryCTA: { href: '/docs/pgbalancer/getting-started', label: 'View Documentation' },
+    secondaryCTA: { href: 'https://github.com/pgElephant/pgBalancer', label: 'View on GitHub', external: true },
+  },
 };
 
 export default function PgbalancerPage() {

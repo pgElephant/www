@@ -230,6 +230,13 @@ const pgraftConfig = {
     { href: '/docs/pgraft/sql-functions', title: 'SQL Functions', desc: 'Complete reference of SQL functions.' },
     { href: '/docs/pgraft/troubleshooting', title: 'Troubleshooting', desc: 'Common issues and solutions.' },
   ],
+  ctaSection: {
+    kicker: 'Get Started',
+    title: 'Deploy Raft Consensus for PostgreSQL',
+    description: 'Install pgraft and enable automatic leader election, crash-safe replication, and 100% split-brain prevention for your PostgreSQL clusters.',
+    primaryCTA: { href: '/docs/pgraft/getting-started', label: 'View Documentation' },
+    secondaryCTA: { href: 'https://github.com/pgElephant/pgraft', label: 'View on GitHub', external: true },
+  },
 };
 
 export default function PgraftPage() {

@@ -845,6 +845,13 @@ pgbalancer_backend_health{backend="primary"}`,
       'Explore API at http://localhost:8000/docs',
     ],
   },
+  ctaSection: {
+    kicker: 'Get Started',
+    title: 'Monitor Your pgbalancer Clusters',
+    description: 'Deploy pgSentinel and gain real-time visibility into your PostgreSQL connection pooling infrastructure with professional dashboards and comprehensive analytics.',
+    primaryCTA: { href: '/docs/pgsentinel/getting-started', label: 'View Documentation' },
+    secondaryCTA: { href: 'https://github.com/pgElephant/pgSentinel', label: 'View on GitHub', external: true },
+  },
 };
 
 export default function PgSentinelPage() {
