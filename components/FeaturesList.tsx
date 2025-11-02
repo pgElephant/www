@@ -22,47 +22,58 @@ import {
   Activity,
   BookOpen,
   Search,
-  Brain
+  Brain,
+  BarChart3
 } from 'lucide-react'
 
 const FeaturesList = () => {
   const projects = [
     {
       name: 'NeurondB',
-      description: 'Advanced AI Database Extension for PostgreSQL',
+      description: 'Enterprise AI Database Extension for PostgreSQL',
       icon: <Brain className="w-8 h-8" />,
       color: 'primary',
       link: '/neurondb',
       features: [
         {
-          title: 'Vector Search & HNSW Indexing',
-          description: 'Production-grade vector search with HNSW indexing and multiple distance metrics',
+          title: 'Vector Search & Indexing',
+          description: 'HNSW + IVF indexing, 10+ distance metrics, quantization (FP16/INT8/Binary), up to 32x compression',
           icon: <Search className="w-5 h-5" />
         },
         {
           title: 'ML Inference & Embeddings',
-          description: 'Machine learning inference with embedding generation and ONNX runtime',
+          description: 'ONNX runtime integration, text/image/multimodal embeddings, batch processing, model caching',
           icon: <Cpu className="w-5 h-5" />
         },
         {
-          title: 'Hybrid Search',
-          description: 'Combining semantic vectors with full-text search for optimal results',
+          title: 'Hybrid Search & RAG',
+          description: 'Semantic + full-text search, cross-encoder reranking, complete in-database RAG pipeline',
           icon: <Database className="w-5 h-5" />
         },
         {
-          title: 'RAG Pipeline',
-          description: 'Complete RAG pipeline with reranking and background workers',
-          icon: <Network className="w-5 h-5" />
+          title: 'GPU Acceleration',
+          description: 'CUDA/ROCm support, 100x speedup for batch operations, automatic CPU fallback',
+          icon: <Zap className="w-5 h-5" />
         },
         {
-          title: '100+ SQL Functions',
-          description: 'PostgreSQL 16-18 compatible with comprehensive SQL API',
-          icon: <Code className="w-5 h-5" />
+          title: 'ML Analytics Suite',
+          description: 'K-means, DBSCAN clustering, PCA, isolation forest, drift detection, quality metrics',
+          icon: <BarChart3 className="w-5 h-5" />
         },
         {
           title: 'Background Workers',
-          description: 'Queue processing, auto-tuning, and index maintenance workers',
+          description: 'Async job queue (neuranq), auto-tuner (neuranmon), index maintenance (neurandefrag)',
           icon: <Activity className="w-5 h-5" />
+        },
+        {
+          title: '100+ SQL Functions',
+          description: 'PostgreSQL 16-18 compatible, comprehensive SQL API, operator support, views & procedures',
+          icon: <Code className="w-5 h-5" />
+        },
+        {
+          title: 'Enterprise Security',
+          description: 'Vector encryption (AES-GCM), differential privacy, RLS integration, audit logging',
+          icon: <Shield className="w-5 h-5" />
         }
       ]
     },

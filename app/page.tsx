@@ -1,5 +1,6 @@
 import React from 'react'
 import Hero from '@/components/Hero'
+import NeuronDBShowcase from '@/components/NeuronDBShowcase'
 import WhyPgElephant from '@/components/WhyPgElephant'
 import ClusterArchitecture from '@/components/ClusterArchitecture'
 import FeaturesList from '@/components/FeaturesList'
@@ -64,6 +65,7 @@ export default function Home() {
       <ProductSchema />
       <main className="min-h-screen">
         <Hero />
+        <NeuronDBShowcase />
         <WhyPgElephant />
         <ClusterArchitecture />
         <FeaturesList />

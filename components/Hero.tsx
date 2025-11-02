@@ -107,12 +107,12 @@ const Hero = () => {
     {
       id: 'neurondb',
       name: 'NeurondB',
-      title: 'Advanced AI Database Extension',
-      description: '• Production-grade vector search with HNSW indexing and multiple distance metrics',
-      description2: '• Machine learning inference with embedding generation and ONNX runtime',
-      description3: '• Hybrid search combining semantic vectors with full-text search',
-      description4: '• Complete RAG pipeline with reranking and background workers',
-      description5: '• PostgreSQL 16-18 compatible with 100+ SQL functions',
+      title: 'Enterprise AI Database Extension for PostgreSQL',
+      description: '• Production-grade vector search: HNSW + IVF indexing, 10+ distance metrics, up to 32x compression',
+      description2: '• ML inference & embeddings: ONNX runtime, text/image/multimodal models, batch processing',
+      description3: '• Hybrid search & RAG: Semantic + FTS, cross-encoder reranking, complete in-database RAG pipeline',
+      description4: '• GPU acceleration: CUDA/ROCm support, 100x speedup for matrix ops, auto CPU fallback',
+      description5: '• Enterprise ready: 100+ SQL functions, background workers, monitoring, PG 16-18 compatible',
       icon: 'neurondb-custom',
       color: `from-[${palette.primary}] to-[${palette.secondary}]`,
       bg: { from: palette.primaryDark, via: palette.primary, to: palette.secondary }

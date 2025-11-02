@@ -45,6 +45,7 @@ type ProjectTemplateProps = {
   };
   badges?: string[];
   demo?: React.ReactNode;
+  architecture?: React.ReactNode;
   featurePillars?: {
     kicker?: string;
     items: { title: string; desc: string }[];
@@ -59,6 +60,7 @@ export default function ProjectTemplate({
   hero,
   badges,
   demo,
+  architecture,
   featurePillars,
   features,
   featureMatrix,
@@ -120,6 +122,15 @@ export default function ProjectTemplate({
           </div>
         </div>
       </section>
+
+      {/* Architecture Diagram */}
+      {architecture && (
+        <section className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+          <div className="container-wide">
+            {architecture}
+          </div>
+        </section>
+      )}
 
       {/* High-Level Feature Pillars */}
       {featurePillars && (

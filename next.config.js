@@ -185,6 +185,82 @@ const nextConfig = {
         destination: '/pgraft',
         permanent: true,
       },
+      // 404 Pages - Documentation redirects
+      {
+        source: '/docs/pgbalancer/ai-configuration',
+        destination: '/docs/pgbalancer/configuration',
+        permanent: true,
+      },
+      {
+        source: '/docs/pgbalancer/performance-tuning',
+        destination: '/docs/pgbalancer/internals',
+        permanent: true,
+      },
+      {
+        source: '/docs/pgbalancer/installation',
+        destination: '/docs/pgbalancer/getting-started',
+        permanent: true,
+      },
+      {
+        source: '/docs/ram/:path*',
+        destination: '/pgraft',
+        permanent: true,
+      },
+      {
+        source: '/docs/fauxdb/api-reference',
+        destination: '/docs/fauxdb/api',
+        permanent: true,
+      },
+      {
+        source: '/docs/fauxdb/migration',
+        destination: '/docs/fauxdb/getting-started',
+        permanent: true,
+      },
+      {
+        source: '/docs/fauxdb/installation',
+        destination: '/docs/fauxdb/getting-started',
+        permanent: true,
+      },
+      {
+        source: '/docs/fauxdb/configuration',
+        destination: '/docs/fauxdb/getting-started',
+        permanent: true,
+      },
+      {
+        source: '/docs/fauxdb/kubernetes',
+        destination: '/docs/fauxdb/docker',
+        permanent: true,
+      },
+      {
+        source: '/download/rale',
+        destination: '/pgraft',
+        permanent: true,
+      },
+      {
+        source: '/download/ram',
+        destination: '/pgraft',
+        permanent: true,
+      },
+      {
+        source: '/blog/high-availability',
+        destination: '/blog/pgraft',
+        permanent: true,
+      },
+      {
+        source: '/blog/docker-deployment',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/getting-started',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/clustering',
+        destination: '/blog/pgraft',
+        permanent: true,
+      },
       {
         source: '/postgresql-clustering',
         destination: '/pgraft',

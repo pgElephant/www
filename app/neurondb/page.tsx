@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectTemplate from '../_components/ProjectTemplate';
 import NeurondBDemoTerminal from '@/components/NeurondBDemoTerminal';
+import NeuronDBArchitectureDiagram from '@/components/NeuronDBArchitectureDiagram';
 import { Brain, Database, Zap, Search, Cpu, Shield, BarChart3, Layers } from 'lucide-react';
 import { Metadata } from 'next';
 
@@ -55,6 +56,7 @@ const neurondbConfig = {
     'RAG Pipeline',
   ],
   demo: <NeurondBDemoTerminal />,
+  architecture: <NeuronDBArchitectureDiagram />,
   featurePillars: {
     kicker: 'Comprehensive AI Database Features',
     items: [
@@ -162,104 +164,133 @@ const neurondbConfig = {
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
-          <th className="px-4 py-3 font-semibold text-white">Feature</th>
-          <th className="px-4 py-3 font-semibold text-white">NeurondB</th>
-          <th className="px-4 py-3 font-semibold text-white">pgvector</th>
-          <th className="px-4 py-3 font-semibold text-white">pgvectorscale</th>
-          <th className="px-4 py-3 font-semibold text-white">pgai</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">Feature</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">NeurondB</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">pgvector</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">pgvectorscale</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">pgai</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">PostgresML</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Vector Indexing</td>
-          <td className="px-4 py-3 text-green-400">HNSW + IVF</td>
-          <td className="px-4 py-3 text-green-400">HNSW + IVF</td>
-          <td className="px-4 py-3 text-green-400">StreamingDiskANN</td>
-          <td className="px-4 py-3 text-red-300">No (uses pgvector)</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Vector Indexing</td>
+          <td className="px-3 py-3 text-green-400 text-xs">HNSW + IVF</td>
+          <td className="px-3 py-3 text-green-400 text-xs">HNSW + IVF</td>
+          <td className="px-3 py-3 text-green-400 text-xs">StreamingDiskANN</td>
+          <td className="px-3 py-3 text-red-300 text-xs">Uses pgvector</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">pgvector-based</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">ML Inference</td>
-          <td className="px-4 py-3 text-green-400">ONNX Runtime</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-green-400">OpenAI/Ollama API</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">ML Inference</td>
+          <td className="px-3 py-3 text-green-400 text-xs">ONNX (C++)</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-green-400 text-xs">API calls</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Python ML libs</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Embedding Generation</td>
-          <td className="px-4 py-3 text-green-400">In-database</td>
-          <td className="px-4 py-3 text-red-300">External</td>
-          <td className="px-4 py-3 text-red-300">External</td>
-          <td className="px-4 py-3 text-yellow-300">External API</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Embedding Generation</td>
+          <td className="px-3 py-3 text-green-400 text-xs">In-database (ONNX)</td>
+          <td className="px-3 py-3 text-red-300 text-xs">External</td>
+          <td className="px-3 py-3 text-red-300 text-xs">External</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">External API</td>
+          <td className="px-3 py-3 text-green-400 text-xs">In-database (Transformers)</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Hybrid Search</td>
-          <td className="px-4 py-3 text-green-400">Native (Vector+FTS)</td>
-          <td className="px-4 py-3 text-yellow-300">Manual</td>
-          <td className="px-4 py-3 text-yellow-300">Manual</td>
-          <td className="px-4 py-3 text-yellow-300">Manual</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Hybrid Search</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Native (Vector+FTS)</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Manual</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Manual</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Manual</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Manual</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Reranking</td>
-          <td className="px-4 py-3 text-green-400">Cross-encoder, LLM, ColBERT</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Reranking</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Cross-encoder, LLM, ColBERT, MMR</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Background Workers</td>
-          <td className="px-4 py-3 text-green-400">Queue, Tuner, Defrag</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">ML Algorithms</td>
+          <td className="px-3 py-3 text-green-400 text-xs">K-means, DBSCAN, PCA, GMM, Isolation Forest, Hierarchical</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-green-400 text-xs">XGBoost, LightGBM, sklearn suite, Linear/Logistic</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">RAG Pipeline</td>
-          <td className="px-4 py-3 text-green-400">Complete In-DB</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-yellow-300">Partial (API calls)</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Background Workers</td>
+          <td className="px-3 py-3 text-green-400 text-xs">neuranq, neuranmon, neurandefrag</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+        </tr>
+        <tr>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">RAG Pipeline</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Complete In-DB</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Partial (API)</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Partial (Python)</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Quantization</td>
-          <td className="px-4 py-3 text-green-400">2x-32x (FP16, INT8, Binary)</td>
-          <td className="px-4 py-3 text-yellow-300">Binary only</td>
-          <td className="px-4 py-3 text-yellow-300">Binary only</td>
-          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Quantization</td>
+          <td className="px-3 py-3 text-green-400 text-xs">FP16, INT8, Binary (2x-32x)</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Binary only</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Binary only</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Analytics</td>
-          <td className="px-4 py-3 text-green-400">Clustering, PCA, UMAP, Outliers</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Implementation</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Pure C</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Pure C</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Pure C</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Rust + SQL</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Python + C</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Multi-Tenancy</td>
-          <td className="px-4 py-3 text-green-400">Tenant isolation + quotas</td>
-          <td className="px-4 py-3 text-red-300">Manual</td>
-          <td className="px-4 py-3 text-red-300">Manual</td>
-          <td className="px-4 py-3 text-red-300">Manual</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Training Models</td>
+          <td className="px-3 py-3 text-yellow-300 text-xs">Fine-tuning (roadmap)</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Full training (sklearn, XGBoost, etc.)</td>
         </tr>
         <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Auto-Tuning</td>
-          <td className="px-4 py-3 text-green-400">Background worker</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-          <td className="px-4 py-3 text-red-300">None</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Auto-Tuning</td>
+          <td className="px-3 py-3 text-green-400 text-xs">neuranmon worker</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Versions</td>
-          <td className="px-4 py-3 text-green-400">16, 17, 18</td>
-          <td className="px-4 py-3 text-green-400">12-18</td>
-          <td className="px-4 py-3 text-yellow-300">15-18</td>
-          <td className="px-4 py-3 text-yellow-300">16-18</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">GPU Support</td>
+          <td className="px-3 py-3 text-green-400 text-xs">CUDA + ROCm (native)</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-red-300 text-xs">None</td>
+          <td className="px-3 py-3 text-green-400 text-xs">CUDA (via Python)</td>
         </tr>
         <tr>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">PostgreSQL Versions</td>
+          <td className="px-3 py-3 text-white/70 text-xs">16, 17, 18</td>
+          <td className="px-3 py-3 text-white/70 text-xs">12-18</td>
+          <td className="px-3 py-3 text-white/70 text-xs">15-18</td>
+          <td className="px-3 py-3 text-white/70 text-xs">16-18</td>
+          <td className="px-3 py-3 text-white/70 text-xs">14-16</td>
+        </tr>
+        <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-cyan-300">License</td>
-          <td className="px-4 py-3 text-green-400">Apache 2.0</td>
-          <td className="px-4 py-3 text-green-400">PostgreSQL</td>
-          <td className="px-4 py-3 text-yellow-300">Timescale License</td>
-          <td className="px-4 py-3 text-green-400">PostgreSQL</td>
+          <td className="px-4 py-3 text-white/70">PostgreSQL</td>
+          <td className="px-4 py-3 text-white/70">PostgreSQL</td>
+          <td className="px-4 py-3 text-white/70">Timescale License</td>
+          <td className="px-4 py-3 text-white/70">PostgreSQL</td>
         </tr>
       </tbody>
     </table>
