@@ -65,8 +65,8 @@ export default function Home() {
       <ProductSchema />
       <main className="min-h-screen">
         <Hero />
-        <NeuronDBShowcase />
         <WhyPgElephant />
+        <NeuronDBShowcase />
         <ClusterArchitecture />
         <FeaturesList />
       </main>
