@@ -142,14 +142,14 @@ export const metadata: Metadata = {
     description: 'Enterprise-grade PostgreSQL solutions: pgbalancer connection pooling, pgraft Raft extension, FauxDB MongoDB-compatible document database, and NeuronDB AI vector database.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.jpg?v=2',
         width: 1200,
         height: 630,
         alt: 'pgElephant - Enterprise PostgreSQL Platform',
         type: 'image/jpeg',
       },
       {
-        url: '/og-image-square.jpg',
+        url: '/og-image-square.jpg?v=2',
         width: 1200,
         height: 1200,
         alt: 'pgElephant Logo',
@@ -163,7 +163,7 @@ export const metadata: Metadata = {
     creator: '@pgElephant',
     title: 'pgElephant - Enterprise PostgreSQL Platform',
     description: 'Enterprise-grade PostgreSQL solutions: pgbalancer connection pooling, pgraft Raft extension, FauxDB MongoDB-compatible document database, and NeuronDB AI vector database.',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.jpg?v=2'],
   },
   robots: {
     index: true,
@@ -314,7 +314,7 @@ export default function RootLayout({
               "datePublished": "2024-01-01",
               "dateModified": new Date().toISOString().split('T')[0],
               "downloadUrl": "https://www.pgelephant.com/download",
-              "screenshot": "https://www.pgelephant.com/og-image.jpg",
+              "screenshot": "https://www.pgelephant.com/og-image.jpg?v=2",
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "5.0",

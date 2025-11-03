@@ -33,7 +33,7 @@ export const metadata = {
     description: 'Enterprise-grade PostgreSQL solutions: NeurondB AI database extension with vector search, RAG pipeline, ML inference, and GPU acceleration. Plus pgbalancer connection pooling, pgraft Raft extension, FauxDB dual-protocol database (MongoDB + MySQL), pgSentinel monitoring, and pg_stat_insights analytics. Production-ready AI database for PostgreSQL.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.jpg?v=2',
         width: 1200,
         height: 630,
         alt: 'pgElephant Enterprise PostgreSQL Platform with AI Database',
@@ -47,7 +47,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'pgElephant - Enterprise PostgreSQL Platform | AI Database & Vector Search',
     description: 'Enterprise PostgreSQL solutions: NeurondB AI database with vector search, RAG pipeline, ML inference, GPU acceleration. Plus pgbalancer, pgraft, FauxDB, pgSentinel, and pg_stat_insights. Production-ready AI database.',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.jpg?v=2'],
     creator: '@pgElephant',
     site: '@pgElephant',
   },
