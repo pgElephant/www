@@ -18,7 +18,7 @@ export const metadata = {
   },
 };
 
-const markdown = `![pg_stat_insights blog header](/blog/pg-stat-insights/header.svg)
+const markdown = `![pg_stat_insights blog header](/blog/pg-stat-insights/header.svg?v=2)
 
 # pg_stat_insights: PostgreSQL Performance Monitoring Extension
 
