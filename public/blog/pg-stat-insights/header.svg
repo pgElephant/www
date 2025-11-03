@@ -61,13 +61,13 @@
     </g>
   </g>
   
-  <!-- Title -->
+  <!-- Title - Matching pgraft style exactly -->
   <text x="350" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
         fill="url(#textGradient)">
     pg_stat_insights
   </text>
   
-  <!-- Subtitle -->
+  <!-- Subtitle - Matching pgraft style exactly -->
   <text x="350" y="200" font-family="Arial, sans-serif" font-size="28" 
         fill="#e0e7ff" opacity="0.9">
     PostgreSQL Performance Monitoring

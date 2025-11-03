@@ -94,7 +94,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               />
             ) : post.slug === 'pg-stat-insights' ? (
               <Image
-                src="/blog/pg-stat-insights/header.svg?v=3"
+                src="/blog/pg-stat-insights/header.svg?v=4"
                 alt="pg_stat_insights blog header"
                 fill
                 className="object-cover"
