@@ -146,13 +146,13 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <div className="flex justify-center md:justify-start mb-4">
-              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
+              <div className="w-10 h-10 bg-transparent rounded-xl flex items-center justify-center">
                 <Image 
                   src="/favicons/favicon-128.png" 
                   alt="pgElephant" 
-                  width={64}
-                  height={64}
-                  className="w-16 h-16 object-contain"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 object-contain"
                   unoptimized
                 />
               </div>
