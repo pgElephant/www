@@ -1,22 +1,32 @@
 <svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Gradient Background -->
   <defs>
+    <!-- Website theme gradient - matches pgElephant theme -->
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#070d1a;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#111827;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1f2937;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#374151;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4b5563;stop-opacity:1" />
     </linearGradient>
+    <!-- Overlay gradient - matches hero section -->
+    <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.15" />
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.15" />
+    </linearGradient>
+    <!-- Text gradient - matches website theme -->
     <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#a78bfa;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#34d399;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
     </linearGradient>
   </defs>
   
-  <!-- Background -->
+  <!-- Background - matches website theme -->
   <rect width="1200" height="400" fill="url(#bgGradient)"/>
+  <rect width="1200" height="400" fill="url(#overlayGradient)"/>
   
-  <!-- Pattern Overlay -->
+  <!-- Subtle pattern overlay - matches hero -->
   <g opacity="0.1">
     <circle cx="100" cy="100" r="3" fill="#fff"/>
     <circle cx="150" cy="150" r="2" fill="#fff"/>
@@ -26,69 +36,82 @@
     <circle cx="900" cy="250" r="2.5" fill="#fff"/>
   </g>
   
-  <!-- Main Icon - Database with Charts -->
+  <!-- Database Icon -->
   <g transform="translate(100, 120)">
-    <!-- Database -->
-    <ellipse cx="60" cy="40" rx="50" ry="15" fill="#3b82f6" opacity="0.3"/>
-    <rect x="10" y="40" width="100" height="80" fill="#3b82f6" opacity="0.3"/>
-    <ellipse cx="60" cy="120" rx="50" ry="15" fill="#3b82f6" opacity="0.4"/>
-    <ellipse cx="60" cy="40" rx="50" ry="15" fill="none" stroke="#60a5fa" stroke-width="3"/>
-    <ellipse cx="60" cy="60" rx="50" ry="15" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.6"/>
-    <ellipse cx="60" cy="80" rx="50" ry="15" fill="none" stroke="#60a5fa" stroke-width="2" opacity="0.6"/>
-    <ellipse cx="60" cy="120" rx="50" ry="15" fill="none" stroke="#60a5fa" stroke-width="3"/>
+    <ellipse cx="60" cy="40" rx="50" ry="15" fill="#4f46e5" opacity="0.3"/>
+    <rect x="10" y="40" width="100" height="80" fill="#4f46e5" opacity="0.3"/>
+    <ellipse cx="60" cy="120" rx="50" ry="15" fill="#4f46e5" opacity="0.4"/>
+    <ellipse cx="60" cy="40" rx="50" ry="15" fill="none" stroke="#4f46e5" stroke-width="3"/>
+    <ellipse cx="60" cy="60" rx="50" ry="15" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.6"/>
+    <ellipse cx="60" cy="80" rx="50" ry="15" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.6"/>
+    <ellipse cx="60" cy="120" rx="50" ry="15" fill="none" stroke="#10b981" stroke-width="3"/>
   </g>
   
   <!-- Bar Chart Icon -->
   <g transform="translate(220, 150)">
-    <rect x="0" y="40" width="15" height="50" fill="#a78bfa" rx="2"/>
-    <rect x="25" y="20" width="15" height="70" fill="#60a5fa" rx="2"/>
-    <rect x="50" y="30" width="15" height="60" fill="#34d399" rx="2"/>
-    <rect x="75" y="10" width="15" height="80" fill="#fbbf24" rx="2"/>
+    <rect x="0" y="40" width="15" height="50" fill="#4f46e5" rx="2" opacity="0.9"/>
+    <rect x="25" y="20" width="15" height="70" fill="#06b6d4" rx="2" opacity="0.9"/>
+    <rect x="50" y="30" width="15" height="60" fill="#10b981" rx="2" opacity="0.9"/>
+    <rect x="75" y="10" width="15" height="80" fill="#fbbf24" rx="2" opacity="0.9"/>
   </g>
   
   <!-- Trend Line -->
   <g transform="translate(320, 160)">
     <path d="M 0 60 L 20 50 L 40 55 L 60 30 L 80 35 L 100 10" 
-          fill="none" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="0" cy="60" r="5" fill="#34d399"/>
-    <circle cx="20" cy="50" r="5" fill="#60a5fa"/>
-    <circle cx="40" cy="55" r="5" fill="#a78bfa"/>
+          fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="0" cy="60" r="5" fill="#10b981"/>
+    <circle cx="20" cy="50" r="5" fill="#06b6d4"/>
+    <circle cx="40" cy="55" r="5" fill="#4f46e5"/>
     <circle cx="60" cy="30" r="5" fill="#fbbf24"/>
-    <circle cx="80" cy="35" r="5" fill="#34d399"/>
-    <circle cx="100" cy="10" r="5" fill="#60a5fa"/>
+    <circle cx="80" cy="35" r="5" fill="#10b981"/>
+    <circle cx="100" cy="10" r="5" fill="#06b6d4"/>
   </g>
   
   <!-- Title -->
-  <text x="600" y="180" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
+  <text x="600" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
         fill="url(#textGradient)" text-anchor="middle">
     pg_stat_insights
   </text>
   
   <!-- Subtitle -->
-  <text x="600" y="230" font-family="Arial, sans-serif" font-size="28" 
+  <text x="600" y="200" font-family="Arial, sans-serif" font-size="28" 
         fill="#e0e7ff" text-anchor="middle" opacity="0.9">
-    PostgreSQL Performance Monitoring Extension
+    PostgreSQL Performance Monitoring
   </text>
   
-  <!-- Metrics Badge -->
-  <g transform="translate(450, 260)">
-    <rect x="0" y="0" width="140" height="40" rx="20" fill="#3b82f6" opacity="0.3"/>
-    <rect x="0" y="0" width="140" height="40" rx="20" fill="none" stroke="#60a5fa" stroke-width="2"/>
-    <text x="70" y="26" font-family="Arial, sans-serif" font-size="18" font-weight="bold" 
+  <!-- Feature badges - matching theme colors -->
+  <g transform="translate(410, 230)">
+    <rect x="0" y="0" width="130" height="36" rx="18" fill="#4f46e5" opacity="0.2"/>
+    <rect x="0" y="0" width="130" height="36" rx="18" fill="none" stroke="#4f46e5" stroke-width="2"/>
+    <text x="65" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">52 Metrics</text>
   </g>
   
-  <!-- Views Badge -->
-  <g transform="translate(610, 260)">
-    <rect x="0" y="0" width="140" height="40" rx="20" fill="#7c3aed" opacity="0.3"/>
-    <rect x="0" y="0" width="140" height="40" rx="20" fill="none" stroke="#a78bfa" stroke-width="2"/>
-    <text x="70" y="26" font-family="Arial, sans-serif" font-size="18" font-weight="bold" 
+  <g transform="translate(560, 230)">
+    <rect x="0" y="0" width="130" height="36" rx="18" fill="#06b6d4" opacity="0.2"/>
+    <rect x="0" y="0" width="130" height="36" rx="18" fill="none" stroke="#06b6d4" stroke-width="2"/>
+    <text x="65" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">11 Views</text>
   </g>
   
-  <!-- Decorative Elements -->
-  <circle cx="950" cy="150" r="40" fill="#60a5fa" opacity="0.2"/>
-  <circle cx="1050" cy="220" r="30" fill="#a78bfa" opacity="0.2"/>
-  <circle cx="980" cy="280" r="25" fill="#34d399" opacity="0.2"/>
+  <g transform="translate(710, 230)">
+    <rect x="0" y="0" width="180" height="36" rx="18" fill="#10b981" opacity="0.2"/>
+    <rect x="0" y="0" width="180" height="36" rx="18" fill="none" stroke="#10b981" stroke-width="2"/>
+    <text x="90" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+          fill="#fff" text-anchor="middle">Deep Insights</text>
+  </g>
+  
+  <g transform="translate(485, 280)">
+    <rect x="0" y="0" width="230" height="36" rx="18" fill="#fbbf24" opacity="0.2"/>
+    <rect x="0" y="0" width="230" height="36" rx="18" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text x="115" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+          fill="#fff" text-anchor="middle">✓ Drop-in Replacement</text>
+  </g>
+  
+  <!-- Decorative elements - matching theme -->
+  <circle cx="950" cy="150" r="40" fill="#4f46e5" opacity="0.15"/>
+  <circle cx="1050" cy="220" r="30" fill="#06b6d4" opacity="0.15"/>
+  <circle cx="980" cy="280" r="25" fill="#10b981" opacity="0.15"/>
+  <circle cx="1100" cy="150" r="20" fill="#fbbf24" opacity="0.15"/>
 </svg>
 

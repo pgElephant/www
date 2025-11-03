@@ -1,14 +1,28 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
-import CommentSystem from '../../../components/CommentSystem';
+import GiscusComments from '../../../components/GiscusComments';
+import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 
 export const metadata = {
   title: 'pgraft: Raft-Based PostgreSQL Extension',
-  description: 'How pgraft brings automatic leader election, split-brain prevention, and high availability to PostgreSQL clusters with mathematical guarantees.'
+  description: 'How pgraft brings automatic leader election, split-brain prevention, and high availability to PostgreSQL clusters with mathematical guarantees.',
+  openGraph: {
+    title: 'pgraft: Raft-Based PostgreSQL Extension',
+    description: 'Raft Consensus for PostgreSQL - Auto Leader Election, Zero Split-Brain, Crash-Safe Replication',
+    images: ['/blog/pgraft/og-image.svg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'pgraft: Raft-Based PostgreSQL Extension',
+    description: 'Raft Consensus for PostgreSQL - Auto Leader Election, Zero Split-Brain, Crash-Safe Replication',
+    images: ['/blog/pgraft/og-image.svg'],
+  },
 };
 
 const markdown = `![pgraft blog header](/blog/pgraft/header.svg)
 
 # pgraft: Raft-Based PostgreSQL Extension
+
+📦 **[View on GitHub](https://github.com/pgElephant/pgraft)** | 📥 **[Download Latest Release](https://github.com/pgElephant/pgraft/releases)** | 📖 **[Documentation](https://pgelephant.com/docs/pgraft)**
 
 ## Executive Summary
 
@@ -953,6 +967,32 @@ export default function PgraftBlogPost() {
       {/* Blog Content - Using gradient's right bottom color */}
       <div style={{ backgroundColor: '#4b5563' }}>
         <BlogMarkdown>{markdown}</BlogMarkdown>
+        
+        {/* Share Section */}
+        <div className="max-w-4xl mx-auto px-6 pb-12">
+          <div className="border-t border-white/10 pt-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Share This Article</h3>
+            <ShareOnLinkedIn
+              url="https://pgelephant.com/blog/pgraft"
+              title="🚀 Introducing pgraft: Raft Consensus Protocol for PostgreSQL"
+              summary="Achieve true high availability with automatic leader election, zero split-brain scenarios, and crash-safe replication. Built on the same etcd-io/raft engine that powers Kubernetes. Production-ready for PostgreSQL 16, 17, and 18."
+              hashtags={[
+                'PostgreSQL',
+                'HighAvailability',
+                'RaftConsensus',
+                'DatabaseClustering',
+                'DistributedSystems',
+                'pgElephant',
+                'DevOps',
+                'SRE',
+                'DatabaseEngineering',
+                'OpenSource',
+                'CloudNative',
+                'Kubernetes'
+              ]}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Comments Section with gradient background */}
@@ -1007,8 +1047,16 @@ export default function PgraftBlogPost() {
               Comments
             </h2>
             
-            {/* Comment System */}
-            <CommentSystem postSlug="pgraft" />
+            {/* Giscus Comments - Persistent GitHub Discussions */}
+            <GiscusComments
+              repo="pgElephant/www"
+              repoId="R_kgDONWqK3A"
+              category="Blog Comments"
+              categoryId="DIC_kwDONWqK3M4ClOuv"
+              mapping="pathname"
+              reactionsEnabled={true}
+              theme="dark"
+            />
           </div>
         </div>
       </div>

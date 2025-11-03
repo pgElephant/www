@@ -1,0 +1,122 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Website theme gradient - matches pgElephant theme -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070d1a;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#111827;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1f2937;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#374151;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4b5563;stop-opacity:1" />
+    </linearGradient>
+    <!-- Overlay gradient - matches hero section -->
+    <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.15" />
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.15" />
+    </linearGradient>
+    <!-- Text gradient - matches website theme -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background - matches website theme -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#overlayGradient)"/>
+  
+  <!-- Subtle pattern overlay - matches hero -->
+  <g opacity="0.1">
+    <circle cx="100" cy="100" r="4" fill="#fff"/>
+    <circle cx="150" cy="180" r="3" fill="#fff"/>
+    <circle cx="200" cy="120" r="3.5" fill="#fff"/>
+    <circle cx="1000" cy="450" r="4" fill="#fff"/>
+    <circle cx="1100" cy="300" r="3" fill="#fff"/>
+    <circle cx="900" cy="380" r="3.5" fill="#fff"/>
+  </g>
+  
+  <!-- Database Icon -->
+  <g transform="translate(130, 200)">
+    <ellipse cx="80" cy="50" rx="70" ry="22" fill="#4f46e5" opacity="0.3"/>
+    <rect x="10" y="50" width="140" height="110" fill="#4f46e5" opacity="0.3"/>
+    <ellipse cx="80" cy="160" rx="70" ry="22" fill="#4f46e5" opacity="0.4"/>
+    <ellipse cx="80" cy="50" rx="70" ry="22" fill="none" stroke="#4f46e5" stroke-width="4"/>
+    <ellipse cx="80" cy="80" rx="70" ry="22" fill="none" stroke="#06b6d4" stroke-width="3" opacity="0.6"/>
+    <ellipse cx="80" cy="110" rx="70" ry="22" fill="none" stroke="#06b6d4" stroke-width="3" opacity="0.6"/>
+    <ellipse cx="80" cy="160" rx="70" ry="22" fill="none" stroke="#10b981" stroke-width="4"/>
+  </g>
+  
+  <!-- Bar Chart Icon -->
+  <g transform="translate(300, 240)">
+    <rect x="0" y="60" width="22" height="70" fill="#4f46e5" rx="3" opacity="0.9"/>
+    <rect x="35" y="30" width="22" height="100" fill="#06b6d4" rx="3" opacity="0.9"/>
+    <rect x="70" y="45" width="22" height="85" fill="#10b981" rx="3" opacity="0.9"/>
+    <rect x="105" y="15" width="22" height="115" fill="#fbbf24" rx="3" opacity="0.9"/>
+  </g>
+  
+  <!-- Trend Line -->
+  <g transform="translate(450, 260)">
+    <path d="M 0 80 L 30 65 L 60 72 L 90 40 L 120 46 L 150 12" 
+          fill="none" stroke="#10b981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="0" cy="80" r="7" fill="#10b981"/>
+    <circle cx="30" cy="65" r="7" fill="#06b6d4"/>
+    <circle cx="60" cy="72" r="7" fill="#4f46e5"/>
+    <circle cx="90" cy="40" r="7" fill="#fbbf24"/>
+    <circle cx="120" cy="46" r="7" fill="#10b981"/>
+    <circle cx="150" cy="12" r="7" fill="#06b6d4"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="600" y="230" font-family="Arial, sans-serif" font-size="84" font-weight="bold" 
+        fill="url(#textGradient)" text-anchor="middle">
+    pg_stat_insights
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="300" font-family="Arial, sans-serif" font-size="36" 
+        fill="#e0e7ff" text-anchor="middle" opacity="0.9">
+    PostgreSQL Performance Monitoring
+  </text>
+  
+  <!-- Feature badges - matching theme colors -->
+  <g transform="translate(380, 350)">
+    <rect x="0" y="0" width="160" height="48" rx="24" fill="#4f46e5" opacity="0.2"/>
+    <rect x="0" y="0" width="160" height="48" rx="24" fill="none" stroke="#4f46e5" stroke-width="2"/>
+    <text x="80" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="600" 
+          fill="#fff" text-anchor="middle">52 Metrics</text>
+  </g>
+  
+  <g transform="translate(560, 350)">
+    <rect x="0" y="0" width="160" height="48" rx="24" fill="#06b6d4" opacity="0.2"/>
+    <rect x="0" y="0" width="160" height="48" rx="24" fill="none" stroke="#06b6d4" stroke-width="2"/>
+    <text x="80" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="600" 
+          fill="#fff" text-anchor="middle">11 Views</text>
+  </g>
+  
+  <g transform="translate(740, 350)">
+    <rect x="0" y="0" width="220" height="48" rx="24" fill="#10b981" opacity="0.2"/>
+    <rect x="0" y="0" width="220" height="48" rx="24" fill="none" stroke="#10b981" stroke-width="2"/>
+    <text x="110" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="600" 
+          fill="#fff" text-anchor="middle">Deep Insights</text>
+  </g>
+  
+  <g transform="translate(470, 420)">
+    <rect x="0" y="0" width="280" height="48" rx="24" fill="#fbbf24" opacity="0.2"/>
+    <rect x="0" y="0" width="280" height="48" rx="24" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text x="140" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="600" 
+          fill="#fff" text-anchor="middle">✓ Drop-in Replacement</text>
+  </g>
+  
+  <!-- pgElephant branding -->
+  <text x="600" y="570" font-family="Arial, sans-serif" font-size="24" font-weight="600" 
+        fill="#fff" text-anchor="middle" opacity="0.6">
+    pgElephant
+  </text>
+  
+  <!-- Decorative elements - matching theme -->
+  <circle cx="1000" cy="200" r="60" fill="#4f46e5" opacity="0.15"/>
+  <circle cx="1100" cy="320" r="45" fill="#06b6d4" opacity="0.15"/>
+  <circle cx="1020" cy="420" r="35" fill="#10b981" opacity="0.15"/>
+  <circle cx="1120" cy="220" r="28" fill="#fbbf24" opacity="0.15"/>
+</svg>

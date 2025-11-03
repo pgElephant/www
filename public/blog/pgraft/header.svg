@@ -1,82 +1,121 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#1a1f3a"/>
-      <stop offset="0.5" stop-color="#0a0e27"/>
-      <stop offset="1" stop-color="#2d1b3d"/>
+    <!-- Website theme gradient - matches pgElephant theme -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070d1a;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#111827;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1f2937;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#374151;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4b5563;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="elephantBody" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#336791"/>
-      <stop offset="1" stop-color="#4a9eff"/>
+    <!-- Overlay gradient - matches hero section -->
+    <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.15" />
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.15" />
     </linearGradient>
-    <linearGradient id="trunk" x1="0" y1="0" x2="0" y2="1">
-      <stop stop-color="#336791"/>
-      <stop offset="1" stop-color="#4a9eff"/>
+    <!-- Text gradient - matches website theme -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
     </linearGradient>
+    <!-- Node gradients -->
     <linearGradient id="node1" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#4a9eff"/>
-      <stop offset="1" stop-color="#6b5ce7"/>
+      <stop stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#4f46e5"/>
     </linearGradient>
     <linearGradient id="node2" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#ffd700"/>
-      <stop offset="1" stop-color="#ffaa00"/>
+      <stop stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f59e0b"/>
     </linearGradient>
     <linearGradient id="node3" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#4a9eff"/>
-      <stop offset="1" stop-color="#6b5ce7"/>
-    </linearGradient>
-    <linearGradient id="text" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#4a9eff"/>
-      <stop offset="0.5" stop-color="#ffd700"/>
-      <stop offset="1" stop-color="#6b5ce7"/>
+      <stop stop-color="#10b981"/>
+      <stop offset="1" stop-color="#06b6d4"/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="630" rx="12" fill="url(#bg)"/>
-  <!-- Grid lines -->
-  <g opacity="0.15">
-    <rect x="0" y="126" width="1200" height="2" fill="#4a9eff"/>
-    <rect x="0" y="252" width="1200" height="2" fill="#4a9eff"/>
-    <rect x="0" y="378" width="1200" height="2" fill="#4a9eff"/>
-    <rect x="0" y="504" width="1200" height="2" fill="#4a9eff"/>
-    <rect x="240" y="0" width="2" height="630" fill="#4a9eff"/>
-    <rect x="480" y="0" width="2" height="630" fill="#4a9eff"/>
-    <rect x="720" y="0" width="2" height="630" fill="#4a9eff"/>
-    <rect x="960" y="0" width="2" height="630" fill="#4a9eff"/>
+  
+  <!-- Background - matches website theme -->
+  <rect width="1200" height="400" fill="url(#bgGradient)"/>
+  <rect width="1200" height="400" fill="url(#overlayGradient)"/>
+  
+  <!-- Subtle pattern overlay - matches hero -->
+  <g opacity="0.1">
+    <circle cx="100" cy="100" r="3" fill="#fff"/>
+    <circle cx="150" cy="150" r="2" fill="#fff"/>
+    <circle cx="200" cy="80" r="2.5" fill="#fff"/>
+    <circle cx="1000" cy="300" r="3" fill="#fff"/>
+    <circle cx="1100" cy="200" r="2" fill="#fff"/>
+    <circle cx="900" cy="250" r="2.5" fill="#fff"/>
   </g>
-  <!-- Elephant -->
-  <g opacity="0.25">
-    <ellipse cx="990" cy="315" rx="90" ry="100" fill="url(#elephantBody)"/>
-    <rect x="930" y="340" width="40" height="120" rx="20" fill="url(#trunk)" transform="rotate(-20 930 340)"/>
-  </g>
-  <!-- Raft nodes -->
-  <g>
-    <rect x="200" y="195" width="80" height="80" rx="16" fill="url(#node1)"/>
-    <rect x="200" y="275" width="80" height="80" rx="16" fill="url(#node2)"/>
-    <rect x="200" y="355" width="80" height="80" rx="16" fill="url(#node3)"/>
-    <circle cx="240" cy="235" r="15" fill="#fff" opacity="0.9"/>
-    <circle cx="240" cy="315" r="15" fill="#fff" opacity="0.9"/>
-    <circle cx="240" cy="395" r="15" fill="#fff" opacity="0.9"/>
-    <!-- Leader label -->
-    <text x="240" y="375" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffd700">LEADER</text>
+  
+  <!-- Raft nodes illustration -->
+  <g transform="translate(80, 120)">
+    <!-- Node 1 - Follower -->
+    <rect x="0" y="0" width="70" height="70" rx="12" fill="url(#node1)" opacity="0.9"/>
+    <circle cx="35" cy="35" r="12" fill="#fff" opacity="0.9"/>
+    <text x="35" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#06b6d4" text-anchor="middle">Follower</text>
+    
+    <!-- Node 2 - Leader -->
+    <rect x="0" y="120" width="70" height="70" rx="12" fill="url(#node2)" opacity="0.9"/>
+    <circle cx="35" cy="155" r="12" fill="#fff" opacity="0.9"/>
+    <text x="35" y="215" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#fbbf24" text-anchor="middle">LEADER</text>
+    
+    <!-- Node 3 - Follower -->
+    <rect x="120" y="60" width="70" height="70" rx="12" fill="url(#node3)" opacity="0.9"/>
+    <circle cx="155" cy="95" r="12" fill="#fff" opacity="0.9"/>
+    <text x="155" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#10b981" text-anchor="middle">Follower</text>
+    
     <!-- Connections -->
-    <rect x="280" y="235" width="120" height="3" fill="#4a9eff" opacity="0.6"/>
-    <rect x="280" y="395" width="120" height="3" fill="#4a9eff" opacity="0.6"/>
+    <line x1="70" y1="35" x2="120" y2="95" stroke="#06b6d4" stroke-width="3" opacity="0.5"/>
+    <line x1="35" y1="70" x2="35" y2="120" stroke="#fbbf24" stroke-width="3" opacity="0.6"/>
+    <line x1="70" y1="155" x2="120" y2="95" stroke="#10b981" stroke-width="3" opacity="0.5"/>
   </g>
-  <!-- Title and tagline -->
-  <g>
-    <text x="400" y="200" font-size="72" font-weight="900" fill="url(#text)" letter-spacing="-2">pgraft</text>
-    <text x="400" y="260" font-size="32" fill="#a0b4d4">Raft Consensus Protocol</text>
-    <text x="400" y="300" font-size="32" fill="#a0b4d4">Embedded in PostgreSQL</text>
-    <!-- Feature badges -->
-    <rect x="400" y="340" width="260" height="38" rx="19" fill="#4a9eff" opacity="0.15"/>
-    <text x="430" y="366" font-size="18" fill="#4a9eff" font-weight="600">✓ Auto Leader Election</text>
-    <rect x="670" y="340" width="210" height="38" rx="19" fill="#4a9eff" opacity="0.15"/>
-    <text x="690" y="366" font-size="18" fill="#4a9eff" font-weight="600">✓ Zero Split-Brain</text>
-    <rect x="400" y="390" width="260" height="38" rx="19" fill="#4a9eff" opacity="0.15"/>
-    <text x="430" y="416" font-size="18" fill="#4a9eff" font-weight="600">✓ Crash-Safe Replication</text>
-    <rect x="670" y="390" width="210" height="38" rx="19" fill="#4a9eff" opacity="0.15"/>
-    <text x="690" y="416" font-size="18" fill="#4a9eff" font-weight="600">✓ Production Ready</text>
-    <!-- Version -->
-    <text x="420" y="590" font-size="18" fill="#fff" opacity="0.4">PostgreSQL 16+ | v1.0.0</text>
+  
+  <!-- Title -->
+  <text x="350" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
+        fill="url(#textGradient)">
+    pgraft
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="350" y="200" font-family="Arial, sans-serif" font-size="28" 
+        fill="#e0e7ff" opacity="0.9">
+    Raft Consensus for PostgreSQL
+  </text>
+  
+  <!-- Feature badges - matching theme colors -->
+  <g transform="translate(350, 230)">
+    <rect x="0" y="0" width="220" height="36" rx="18" fill="#4f46e5" opacity="0.2"/>
+    <rect x="0" y="0" width="220" height="36" rx="18" fill="none" stroke="#4f46e5" stroke-width="2"/>
+    <text x="110" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+          fill="#fff" text-anchor="middle">✓ Auto Leader Election</text>
   </g>
+  
+  <g transform="translate(590, 230)">
+    <rect x="0" y="0" width="190" height="36" rx="18" fill="#06b6d4" opacity="0.2"/>
+    <rect x="0" y="0" width="190" height="36" rx="18" fill="none" stroke="#06b6d4" stroke-width="2"/>
+    <text x="95" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+          fill="#fff" text-anchor="middle">✓ Zero Split-Brain</text>
+  </g>
+  
+  <g transform="translate(350, 280)">
+    <rect x="0" y="0" width="220" height="36" rx="18" fill="#10b981" opacity="0.2"/>
+    <rect x="0" y="0" width="220" height="36" rx="18" fill="none" stroke="#10b981" stroke-width="2"/>
+    <text x="110" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+          fill="#fff" text-anchor="middle">✓ Crash-Safe Replication</text>
+  </g>
+  
+  <g transform="translate(590, 280)">
+    <rect x="0" y="0" width="190" height="36" rx="18" fill="#fbbf24" opacity="0.2"/>
+    <rect x="0" y="0" width="190" height="36" rx="18" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text x="95" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+          fill="#fff" text-anchor="middle">✓ Production Ready</text>
+  </g>
+  
+  <!-- Decorative elements - matching theme -->
+  <circle cx="950" cy="150" r="40" fill="#4f46e5" opacity="0.15"/>
+  <circle cx="1050" cy="220" r="30" fill="#06b6d4" opacity="0.15"/>
+  <circle cx="980" cy="280" r="25" fill="#10b981" opacity="0.15"/>
+  <circle cx="1100" cy="150" r="20" fill="#fbbf24" opacity="0.15"/>
 </svg>

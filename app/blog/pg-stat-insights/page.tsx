@@ -1,14 +1,28 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
-import CommentSystem from '../../../components/CommentSystem';
+import GiscusComments from '../../../components/GiscusComments';
+import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 
 export const metadata = {
   title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
-  description: 'Track 52 metrics across 11 views for complete PostgreSQL query performance monitoring, cache analysis, and WAL tracking. Drop-in replacement for pg_stat_statements with enhanced analytics.'
+  description: 'Track 52 metrics across 11 views for complete PostgreSQL query performance monitoring, cache analysis, and WAL tracking. Drop-in replacement for pg_stat_statements with enhanced analytics.',
+  openGraph: {
+    title: 'pg_stat_insights: PostgreSQL Performance Monitoring',
+    description: '52 Metrics, 11 Views, Deep Insights - Drop-in Replacement for pg_stat_statements',
+    images: ['/blog/pg-stat-insights/og-image.svg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'pg_stat_insights: PostgreSQL Performance Monitoring',
+    description: '52 Metrics, 11 Views, Deep Insights - Drop-in Replacement for pg_stat_statements',
+    images: ['/blog/pg-stat-insights/og-image.svg'],
+  },
 };
 
 const markdown = `![pg_stat_insights blog header](/blog/pg-stat-insights/header.svg)
 
 # pg_stat_insights: PostgreSQL Performance Monitoring Extension
+
+📦 **[View on GitHub](https://github.com/pgElephant/pg_stat_insights)** | 📥 **[Download Latest Release](https://github.com/pgElephant/pg_stat_insights/releases)** | 📖 **[Documentation](https://pgelephant.com/docs/pg-stat-insights)**
 
 ## Executive Summary
 
@@ -325,7 +339,6 @@ Output:
 | Cache Analysis | Basic | **Enhanced with ratios** | Better optimization |
 | TAP Test Coverage | Standard | **150 tests, 100%** | Higher quality |
 | Documentation | Basic | **30+ pages** | Comprehensive guides |
-| Prometheus Integration | Manual | **Pre-built queries** | Easier setup |
 
 ### vs pg_stat_monitor
 
@@ -336,7 +349,6 @@ Output:
 | Response Time Histograms | ✗ No | ✓ **Yes** | Better performance tracking |
 | Time-Series | Basic | **Advanced buckets** | Better trend analysis |
 | TAP Tests | Limited | **150 tests** | Production quality |
-| Grafana Dashboards | Manual | **Pre-built (8 panels)** | Ready to use |
 
 ## Installation Guide
 
@@ -394,86 +406,6 @@ Output:
 |------------
 |          11
 |(1 row)
-\`\`\`
-
-## Prometheus & Grafana Integration
-
-### Pre-Built Prometheus Queries
-
-pg_stat_insights includes 5 production-ready Prometheus queries:
-
-**1. Query Rate (QPS)**
-
-\`\`\`promql
-rate(pg_stat_insights_calls_total[5m])
-\`\`\`
-
-**2. Cache Hit Ratio**
-
-\`\`\`promql
-100 * (
-  rate(pg_stat_insights_shared_blks_hit_total[5m]) /
-  (rate(pg_stat_insights_shared_blks_hit_total[5m]) + 
-   rate(pg_stat_insights_shared_blks_read_total[5m]))
-)
-\`\`\`
-
-**3. P95 Query Latency**
-
-\`\`\`promql
-histogram_quantile(0.95, pg_stat_insights_exec_time_bucket)
-\`\`\`
-
-**4. WAL Generation Rate**
-
-\`\`\`promql
-rate(pg_stat_insights_wal_bytes_total[5m])
-\`\`\`
-
-**5. Slow Query Count**
-
-\`\`\`promql
-count(pg_stat_insights_mean_exec_time > 0.1)
-\`\`\`
-
-### Grafana Dashboards
-
-**Pre-built dashboard with 8 panels:**
-
-1. **Query Performance Overview** - QPS, latency, errors
-2. **Cache Hit Ratio** - Buffer cache efficiency over time
-3. **Top Slow Queries** - Current slowest queries
-4. **Response Time Distribution** - Histogram visualization
-5. **WAL Generation** - Write activity tracking
-6. **Buffer I/O** - Shared/local/temp block activity
-7. **JIT Statistics** - Compilation metrics
-8. **Replication Lag** - Standby lag monitoring
-
-### Alert Rules
-
-**11 pre-configured alert rules:**
-
-\`\`\`yaml
-# High slow query rate
-- alert: HighSlowQueryRate
-  expr: count(pg_stat_insights_mean_exec_time > 0.1) > 10
-  for: 5m
-  labels:
-    severity: warning
-
-# Low cache hit ratio
-- alert: LowCacheHitRatio
-  expr: pg_stat_insights_cache_hit_ratio < 80
-  for: 10m
-  labels:
-    severity: warning
-
-# High WAL generation
-- alert: HighWALGeneration
-  expr: rate(pg_stat_insights_wal_bytes_total[5m]) > 100000000
-  for: 5m
-  labels:
-    severity: info
 \`\`\`
 
 ## Advanced Usage Scenarios
@@ -678,8 +610,8 @@ No need to write complex queries—the views do the work for you.
 
 ### Easy Integration
 - **Drop-in replacement** for pg_stat_statements
-- **Pre-built Prometheus queries** and Grafana dashboards
-- **11 production-ready alert rules**
+- **Simple SQL queries** for all analytics
+- **Comprehensive API** for custom integrations
 - **30+ pages of documentation**
 
 ## Getting Started Today
@@ -688,7 +620,7 @@ Ready to gain deep insights into your PostgreSQL performance? Here's your quicks
 
 \`\`\`bash
 # 1. Clone and install
-git clone https://github.com/pgelephant/pg_stat_insights.git
+git clone https://github.com/pgElephant/pg_stat_insights.git
 cd pg_stat_insights && make && sudo make install
 
 # 2. Configure postgresql.conf
@@ -704,9 +636,10 @@ psql -d your_database -c "SELECT * FROM pg_stat_insights_top_by_time LIMIT 10;"
 
 ## Resources and Community
 
-- **Documentation**: https://pgelephant.github.io/pg_stat_insights/
-- **GitHub Repository**: https://github.com/pgelephant/pg_stat_insights
-- **Issue Tracker**: https://github.com/pgelephant/pg_stat_insights/issues
+- **GitHub Repository**: https://github.com/pgElephant/pg_stat_insights
+- **Documentation**: https://pgelephant.com/docs/pg-stat-insights
+- **Issue Tracker**: https://github.com/pgElephant/pg_stat_insights/issues
+- **Download Releases**: https://github.com/pgElephant/pg_stat_insights/releases
 - **Website**: https://pgelephant.com/pg-stat-insights
 - **License**: MIT (Open Source)
 
@@ -720,7 +653,7 @@ pg_stat_insights represents a significant advancement in PostgreSQL performance 
 2. **Ready-to-Use**: 11 pre-built views for instant performance insights
 3. **Drop-in Replacement**: Compatible with pg_stat_statements queries
 4. **Production Tested**: 150 TAP tests with 100% code coverage
-5. **Easy Integration**: Pre-built Prometheus queries and Grafana dashboards
+5. **Easy Integration**: Simple SQL interface for all monitoring needs
 6. **Well-Documented**: 30+ pages of comprehensive documentation
 
 Whether you're optimizing query performance, troubleshooting slow queries, or monitoring production databases, pg_stat_insights provides the visibility you need to keep PostgreSQL running at peak performance.
@@ -735,6 +668,32 @@ export default function PgStatInsightsBlogPost() {
       {/* Blog Content */}
       <div style={{ backgroundColor: '#4b5563' }}>
         <BlogMarkdown>{markdown}</BlogMarkdown>
+        
+        {/* Share Section */}
+        <div className="max-w-4xl mx-auto px-6 pb-12">
+          <div className="border-t border-white/10 pt-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Share This Article</h3>
+            <ShareOnLinkedIn
+              url="https://pgelephant.com/blog/pg-stat-insights"
+              title="📊 pg_stat_insights: Next-Level PostgreSQL Performance Monitoring"
+              summary="Track 52 metrics across 11 pre-built views for complete query performance visibility. Drop-in replacement for pg_stat_statements with response time categorization, advanced cache analysis, WAL tracking, and JIT statistics. Compatible with PostgreSQL 16, 17, and 18."
+              hashtags={[
+                'PostgreSQL',
+                'PerformanceMonitoring',
+                'DatabaseOptimization',
+                'QueryAnalysis',
+                'pgElephant',
+                'DevOps',
+                'SRE',
+                'Observability',
+                'DatabaseEngineering',
+                'OpenSource',
+                'DataAnalytics',
+                'TechTools'
+              ]}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Comments Section */}
@@ -784,8 +743,16 @@ export default function PgStatInsightsBlogPost() {
               Comments
             </h2>
             
-            {/* Comment System */}
-            <CommentSystem postSlug="pg-stat-insights" />
+            {/* Giscus Comments - Persistent GitHub Discussions */}
+            <GiscusComments
+              repo="pgElephant/www"
+              repoId="R_kgDONWqK3A"
+              category="Blog Comments"
+              categoryId="DIC_kwDONWqK3M4ClOuv"
+              mapping="pathname"
+              reactionsEnabled={true}
+              theme="dark"
+            />
           </div>
         </div>
       </div>
