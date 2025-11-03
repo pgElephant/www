@@ -50,13 +50,13 @@ const svgTemplate = `<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns
 {{ICON_SVG}}
   
   <!-- Title -->
-  <text x="350" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
+  <text x="350" y="150" font-family="Arial, sans-serif" font-size="50" font-weight="bold" 
         fill="url(#textGradient)">
     {{TITLE}}
   </text>
   
   <!-- Subtitle -->
-  <text x="350" y="200" font-family="Arial, sans-serif" font-size="28" 
+  <text x="350" y="200" font-family="Arial, sans-serif" font-size="20" 
         fill="#e0e7ff" opacity="0.9">
     {{SUBTITLE}}
   </text>
@@ -164,7 +164,7 @@ function generateBadges(badges) {
     return `  <g transform="translate(${x}, ${y})">
     <rect x="0" y="0" width="${width}" height="36" rx="18" fill="${color}" opacity="0.2"/>
     <rect x="0" y="0" width="${width}" height="36" rx="18" fill="none" stroke="${color}" stroke-width="2"/>
-    <text x="${width / 2}" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="${width / 2}" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">${badge.text}</text>
   </g>`;
   }).join('\n');

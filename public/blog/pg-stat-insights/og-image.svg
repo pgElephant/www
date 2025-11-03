@@ -22,8 +22,8 @@
   </defs>
   
   <!-- Background -->
-  <rect width="1200" height="400" fill="url(#bgGradient)"/>
-  <rect width="1200" height="400" fill="url(#overlayGradient)"/>
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#overlayGradient)"/>
   
   <!-- Subtle pattern overlay -->
   <g opacity="0.1">
@@ -54,13 +54,13 @@
   </g>
   
   <!-- Title -->
-  <text x="350" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
+  <text x="350" y="150" font-family="Arial, sans-serif" font-size="50" font-weight="bold" 
         fill="url(#textGradient)">
     pg_stat_insights
   </text>
   
   <!-- Subtitle -->
-  <text x="350" y="200" font-family="Arial, sans-serif" font-size="28" 
+  <text x="350" y="200" font-family="Arial, sans-serif" font-size="20" 
         fill="#e0e7ff" opacity="0.9">
     PostgreSQL Performance Monitoring
   </text>
@@ -68,25 +68,25 @@
   <g transform="translate(350, 230)">
     <rect x="0" y="0" width="130" height="36" rx="18" fill="#4f46e5" opacity="0.2"/>
     <rect x="0" y="0" width="130" height="36" rx="18" fill="none" stroke="#4f46e5" stroke-width="2"/>
-    <text x="65" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="65" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">52 Metrics</text>
   </g>
   <g transform="translate(600, 230)">
     <rect x="0" y="0" width="130" height="36" rx="18" fill="#06b6d4" opacity="0.2"/>
     <rect x="0" y="0" width="130" height="36" rx="18" fill="none" stroke="#06b6d4" stroke-width="2"/>
-    <text x="65" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="65" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">11 Views</text>
   </g>
   <g transform="translate(350, 280)">
     <rect x="0" y="0" width="180" height="36" rx="18" fill="#10b981" opacity="0.2"/>
     <rect x="0" y="0" width="180" height="36" rx="18" fill="none" stroke="#10b981" stroke-width="2"/>
-    <text x="90" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="90" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">Deep Insights</text>
   </g>
   <g transform="translate(600, 280)">
     <rect x="0" y="0" width="230" height="36" rx="18" fill="#fbbf24" opacity="0.2"/>
     <rect x="0" y="0" width="230" height="36" rx="18" fill="none" stroke="#fbbf24" stroke-width="2"/>
-    <text x="115" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="115" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Drop-in Replacement</text>
   </g>
   

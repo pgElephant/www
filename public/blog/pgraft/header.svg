@@ -66,13 +66,13 @@
   </g>
   
   <!-- Title -->
-  <text x="350" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
+  <text x="350" y="150" font-family="Arial, sans-serif" font-size="50" font-weight="bold" 
         fill="url(#textGradient)">
     pgraft
   </text>
   
   <!-- Subtitle -->
-  <text x="350" y="200" font-family="Arial, sans-serif" font-size="28" 
+  <text x="350" y="200" font-family="Arial, sans-serif" font-size="20" 
         fill="#e0e7ff" opacity="0.9">
     Raft Consensus Protocol Embedded in PostgreSQL
   </text>
@@ -80,25 +80,25 @@
   <g transform="translate(350, 230)">
     <rect x="0" y="0" width="220" height="36" rx="18" fill="#4f46e5" opacity="0.2"/>
     <rect x="0" y="0" width="220" height="36" rx="18" fill="none" stroke="#4f46e5" stroke-width="2"/>
-    <text x="110" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="110" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Auto Leader Election</text>
   </g>
   <g transform="translate(600, 230)">
     <rect x="0" y="0" width="190" height="36" rx="18" fill="#06b6d4" opacity="0.2"/>
     <rect x="0" y="0" width="190" height="36" rx="18" fill="none" stroke="#06b6d4" stroke-width="2"/>
-    <text x="95" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="95" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Zero Split-Brain</text>
   </g>
   <g transform="translate(350, 280)">
     <rect x="0" y="0" width="220" height="36" rx="18" fill="#10b981" opacity="0.2"/>
     <rect x="0" y="0" width="220" height="36" rx="18" fill="none" stroke="#10b981" stroke-width="2"/>
-    <text x="110" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="110" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Crash-Safe Replication</text>
   </g>
   <g transform="translate(600, 280)">
     <rect x="0" y="0" width="190" height="36" rx="18" fill="#fbbf24" opacity="0.2"/>
     <rect x="0" y="0" width="190" height="36" rx="18" fill="none" stroke="#fbbf24" stroke-width="2"/>
-    <text x="95" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
+    <text x="95" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Production Ready</text>
   </g>
   
