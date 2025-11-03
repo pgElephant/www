@@ -31,7 +31,7 @@ const Header = () => {
           <Link href="/" className="flex items-center group">
             <div className="text-white group-hover:text-white transition-colors">
               <Image 
-                src="/ico/pgElephant_no_com_HD.ico" 
+                src="/favicons/NewFav.png" 
                 alt="pgElephant" 
                 width={64}
                 height={64}
