@@ -22,13 +22,8 @@ module.exports = {
     const result = []
     
     // Add dynamic blog posts and documentation pages
-    const blogCategories = ['ram', 'pgbalancer', 'fauxdb', 'rale', 'pgraft', 'postgresql', 'high-availability', 'tutorials']
+    const blogCategories = ['pgbalancer', 'fauxdb', 'pgraft', 'postgresql', 'high-availability', 'tutorials']
     const docSections = [
-      'ram/getting-started',
-      'ram/installation', 
-      'ram/configuration',
-      'ram/docker',
-      'ram/kubernetes',
       'pgbalancer/getting-started',
       'pgbalancer/installation',
       'pgbalancer/configuration',
@@ -38,9 +33,6 @@ module.exports = {
       'fauxdb/getting-started',
       'fauxdb/installation',
       'fauxdb/api-reference',
-      'rale/getting-started',
-      'rale/installation',
-      'rale/consensus-algorithm',
       'pgraft/getting-started',
       'pgraft/installation',
       'pgraft/raft-protocol'
@@ -79,7 +71,7 @@ module.exports = {
       changefreq = 'weekly'
     } 
     // Main product pages - very high priority
-    else if (path.match(/^\/(ram|pgbalancer|fauxdb|rale|pgraft)$/)) {
+    else if (path.match(/^\/(pgbalancer|fauxdb|pgraft)$/)) {
       priority = 0.9
       changefreq = 'weekly'
     } 
@@ -153,11 +145,11 @@ function getImagesForPath(path) {
       title: 'pgbalancer AI Dashboard',
       caption: 'AI-powered PostgreSQL connection pooling interface'
     })
-  } else if (path === '/ram') {
+  } else if (path === '/pgbalancer') {
     images.push({
-      loc: `${baseUrl}/screenshots/ram-cluster.jpg`,
-      title: 'RAM Cluster Management',
-      caption: 'PostgreSQL cluster management with automatic failover'
+      loc: `${baseUrl}/screenshots/pgbalancer-dashboard.jpg`,
+      title: 'pgbalancer Dashboard',
+      caption: 'AI-powered PostgreSQL connection pooling and load balancing'
     })
   }
   
