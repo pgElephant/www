@@ -9,7 +9,7 @@ const OrganizationSchema = () => {
     "url": "https://www.pgelephant.com",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+      "url": "https://www.pgelephant.com/favicons/favicon-512.png",
       "width": 512,
       "height": 512
     },

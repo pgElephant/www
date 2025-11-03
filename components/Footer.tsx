@@ -148,7 +148,7 @@ const Footer = () => {
             <div className="flex justify-center md:justify-start mb-4">
               <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
                 <Image 
-                  src="/ico/pgElephant_no_com_HD.ico" 
+                  src="/favicons/favicon-128.png" 
                   alt="pgElephant" 
                   width={64}
                   height={64}

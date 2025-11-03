@@ -9,7 +9,7 @@ const sharp = require('sharp');
 const { execFileSync } = require('child_process');
 
 async function renderFavicons() {
-  const sizes = [16, 32, 48, 96, 128, 192, 256, 512];
+  const sizes = [16, 32, 48, 64, 96, 128, 180, 192, 256, 512, 1024, 2048];
   const root = path.join(__dirname, '..');
   const svgPath = path.join(root, 'public', 'favicon.svg');
   const outDir = path.join(root, 'public', 'favicons');
@@ -32,8 +32,8 @@ async function renderFavicons() {
 
   const background = 'transparent'; // render with transparency
   for (const size of sizes) {
-    // Use higher render scale for small sizes to preserve detail
-  const renderScale = size <= 16 ? 8 : size <= 48 ? 6 : 4;
+    // Use ultra-high render scale for premium quality
+    const renderScale = size <= 16 ? 16 : size <= 32 ? 12 : size <= 64 ? 8 : size <= 256 ? 6 : 4;
     const sizedSvg = ensureSvgSize(stripBackground(originalSvg), size, size);
     await page.setViewport({ width: size, height: size, deviceScaleFactor: renderScale });
 
@@ -42,7 +42,7 @@ async function renderFavicons() {
         <head>
           <meta charset="utf-8" />
           <style>
-            html, body { margin:0; padding:0; background: ${background}; }
+            html, body { margin:0; padding:0; background: transparent; }
             #wrap { width:${size}px; height:${size}px; display:flex; align-items:center; justify-content:center; }
             svg { display:block; }
           </style>
@@ -59,14 +59,24 @@ async function renderFavicons() {
       omitBackground: true
     });
     const outPath = path.join(outDir, `favicon-${size}.png`);
-    await sharp(buffer)
+    let pipeline = sharp(buffer)
+      .png({ compressionLevel: 9, adaptiveFiltering: true, palette: false })
       .resize(size, size, {
         fit: 'contain',
         kernel: sharp.kernel.lanczos3,
         background: { r: 0, g: 0, b: 0, alpha: 0 }
-      })
-      .png({ compressionLevel: 9, adaptiveFiltering: true, palette: false })
-      .toFile(outPath);
+      });
+    // Aggressive sharpening for ultra-crisp output at all sizes
+    if (size <= 48) {
+      pipeline = pipeline.sharpen(1.2);
+    } else if (size <= 128) {
+      pipeline = pipeline.sharpen(0.8);
+    } else if (size <= 512) {
+      pipeline = pipeline.sharpen(0.4);
+    } else {
+      pipeline = pipeline.sharpen(0.2);
+    }
+    await pipeline.toFile(outPath);
     // Ensure PNG32 (TrueColor + Alpha) encoding to avoid palette/banding at tiny sizes
     try {
       const magick = fs.existsSync('/opt/homebrew/bin/magick') ? '/opt/homebrew/bin/magick' : 'magick';
@@ -93,14 +103,9 @@ function ensureSvgSize(svg, width, height) {
 }
 
 function stripBackground(svg) {
-  let s = svg;
-  // Remove the background circle group with dropShadow
-  s = s.replace(/<g[^>]*filter="url\(#dropShadow\)"[^>]*>[\s\S]*?<\/g>/i, '');
-  // Remove the wide gloss overlay path near the top
-  s = s.replace(/<path[^>]*d="M10,20[^"]*"[^>]*>/i, '');
-  // Remove the strong glossy ellipse across the top-right
-  s = s.replace(/<ellipse[^>]*cx="62"[^>]*>/i, '');
-  return s;
+  // Don't strip anything - render the full SVG with all gradients, gloss, and effects
+  // We only want transparent background, not to remove visual elements
+  return svg;
 }
 
 renderFavicons().catch((err) => {
