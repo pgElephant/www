@@ -8,13 +8,13 @@ export const metadata = {
   openGraph: {
     title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
     description: 'AI Load Balancing, REST API, MQTT Clustering - Modern PostgreSQL Connection Pooling',
-    images: ['/blog/pgbalancer/og-image.jpg?v=7'],
+    images: ['/blog/pgbalancer/og-image.jpg?v=8'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
     description: 'AI Load Balancing, REST API, MQTT Clustering - Modern PostgreSQL Connection Pooling',
-    images: ['/blog/pgbalancer/og-image.jpg?v=7'],
+    images: ['/blog/pgbalancer/og-image.jpg?v=8'],
   },
 };
 
