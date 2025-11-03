@@ -2,10 +2,10 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square70x70logo src="/ico/pgElephant_HD.ico"/>
-            <square150x150logo src="/ico/pgElephant_HD.ico"/>
-            <square310x310logo src="/ico/pgElephant_HD.ico"/>
-            <wide310x150logo src="/ico/pgElephant_HD.ico"/>
+            <square70x70logo src="/favicons/favicon-128.png"/>
+            <square150x150logo src="/favicons/favicon-192.png"/>
+            <square310x310logo src="/favicons/favicon-256.png"/>
+            <wide310x150logo src="/favicons/favicon-256.png"/>
             <TileColor>#070d1a</TileColor>
         </tile>
     </msapplication>

@@ -13,27 +13,27 @@
   "categories": ["productivity", "developer", "business"],
   "icons": [
     {
-      "src": "/ico/pgElephant_HD.ico",
+      "src": "/favicons/favicon-192.png",
       "sizes": "192x192",
-      "type": "image/x-icon",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/ico/pgElephant_HD.ico",
+      "src": "/favicons/favicon-512.png",
       "sizes": "512x512",
-      "type": "image/x-icon",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/ico/pgElephant_HD.ico",
-      "sizes": "384x384",
-      "type": "image/x-icon",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/ico/pgElephant_HD.ico",
+      "src": "/favicons/favicon-256.png",
       "sizes": "256x256",
-      "type": "image/x-icon",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicons/favicon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
@@ -45,8 +45,9 @@
       "url": "/download",
       "icons": [
         {
-          "src": "/ico/pgElephant_HD.ico",
-          "sizes": "96x96"
+          "src": "/favicons/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
@@ -57,8 +58,9 @@
       "url": "/docs",
       "icons": [
         {
-          "src": "/ico/pgElephant_HD.ico",
-          "sizes": "96x96"
+          "src": "/favicons/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
@@ -69,8 +71,9 @@
       "url": "/pgraft",
       "icons": [
         {
-          "src": "/ico/pgElephant_HD.ico",
-          "sizes": "96x96"
+          "src": "/favicons/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
@@ -81,8 +84,9 @@
       "url": "/fauxdb",
       "icons": [
         {
-          "src": "/ico/pgElephant_HD.ico",
-          "sizes": "96x96"
+          "src": "/favicons/favicon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     }

@@ -20,7 +20,8 @@
     "validate:schemas": "./scripts/validate-schemas.sh",
     "clean": "rm -rf node_modules .next out",
     "test": "npm run type-check && npm run lint:check && npm run validate:schemas && npm run build",
-    "precommit": "npm run type-check && npm run lint:check && npm run validate:schemas"
+    "precommit": "npm run type-check && npm run lint:check && npm run validate:schemas",
+    "render:favicons": "node scripts/render-svg-favicons.js"
   },
   "dependencies": {
     "@vercel/analytics": "^1.3.7",
@@ -56,6 +57,8 @@
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
+    "puppeteer": "^22.15.0",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.2.2",
     "webpack-bundle-analyzer": "^4.10.2"

@@ -205,23 +205,30 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://twitter.com" />
-        <link rel="manifest" href="/manifest.json" />
+  <link rel="manifest" href="/manifest.json" />
         
-  {/* Primary favicon - SVG for best visibility across all sizes */}
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-  {/* Fallback ICO for older browsers */}
-  <link rel="icon" type="image/x-icon" href="/ico/pgElephant_HD.ico" sizes="any" />
+  {/* Primary favicon - SVG for best visibility (modern browsers) */}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+  {/* PNG fallbacks for broad compatibility */}
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16.png?v=1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32.png?v=1" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48.png?v=1" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96.png?v=1" />
+  <link rel="icon" type="image/png" sizes="128x128" href="/favicons/favicon-128.png?v=1" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicons/favicon-192.png?v=1" />
+  <link rel="icon" type="image/png" sizes="256x256" href="/favicons/favicon-256.png?v=1" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicons/favicon-512.png?v=1" />
 
-  {/* Apple Touch Icon - use existing square OG image */}
-  <link rel="apple-touch-icon" href="/og-image-square.jpg" />
+  {/* Apple Touch Icon */}
+  <link rel="apple-touch-icon" href="/favicons/favicon-192.png?v=1" />
         
         {/* Windows/Microsoft icons */}
-        <meta name="msapplication-TileColor" content="#070d1a" />
-        <meta name="msapplication-TileImage" content="/ico/pgElephant_HD.ico" />
-        <meta name="msapplication-square70x70logo" content="/ico/pgElephant_HD.ico" />
-        <meta name="msapplication-square150x150logo" content="/ico/pgElephant_HD.ico" />
-        <meta name="msapplication-square310x310logo" content="/ico/pgElephant_HD.ico" />
-        <meta name="msapplication-wide310x150logo" content="/ico/pgElephant_HD.ico" />
+  <meta name="msapplication-TileColor" content="#070d1a" />
+  <meta name="msapplication-TileImage" content="/favicons/favicon-192.png?v=1" />
+  <meta name="msapplication-square70x70logo" content="/favicons/favicon-128.png?v=1" />
+  <meta name="msapplication-square150x150logo" content="/favicons/favicon-192.png?v=1" />
+  <meta name="msapplication-square310x310logo" content="/favicons/favicon-256.png?v=1" />
+  <meta name="msapplication-wide310x150logo" content="/favicons/favicon-256.png?v=1" />
         
         {/* Theme colors for better visibility */}
         <meta name="theme-color" content="#070d1a" />
@@ -235,11 +242,11 @@ export default function RootLayout({
         <meta name="msapplication-tooltip" content="pgElephant - Enterprise PostgreSQL Platform" />
         <meta name="msapplication-starturl" content="/" />
         
-  {/* Safari pinned tab icon - use an SVG */}
+  {/* Safari pinned tab icon */}
   <link rel="mask-icon" href="/hero-bg.svg" color="#070d1a" />
         
         {/* Additional browser-specific favicons */}
-        <link rel="fluid-icon" href="/ico/pgElephant_HD.ico" title="pgElephant" />
+  <link rel="fluid-icon" href="/favicons/favicon-512.png?v=1" title="pgElephant" />
         
         {/* Organization Schema for Google Search */}
         <script
@@ -253,7 +260,7 @@ export default function RootLayout({
               "url": "https://www.pgelephant.com",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+                "url": "https://www.pgelephant.com/favicons/favicon-512.png",
                 "width": 512,
                 "height": 512
               },
@@ -295,10 +302,10 @@ export default function RootLayout({
                 "@type": "Organization",
                 "name": "pgElephant Team",
                 "url": "https://www.pgelephant.com",
-                "logo": "https://www.pgelephant.com/ico/pgElephant_HD.ico"
+                "logo": "https://www.pgelephant.com/favicons/favicon-512.png"
               },
-              "image": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
-              "logo": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+              "image": "https://www.pgelephant.com/favicons/favicon-512.png",
+              "logo": "https://www.pgelephant.com/favicons/favicon-512.png",
               "featureList": [
                 "PostgreSQL High Availability",
                 "Automatic Failover",
@@ -336,7 +343,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "pgElephant",
               "url": "https://www.pgelephant.com",
-              "logo": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
+              "logo": "https://www.pgelephant.com/favicons/favicon-512.png",
               "description": "Enterprise PostgreSQL solutions provider specializing in high availability, clustering, and MongoDB-compatible databases",
               "foundingDate": "2024",
               "contactPoint": {
