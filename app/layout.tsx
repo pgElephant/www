@@ -207,9 +207,10 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://twitter.com" />
         <link rel="manifest" href="/manifest.json" />
         
-  {/* Primary favicon */}
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/x-icon" href="/ico/pgElephant_HD.ico" />
+  {/* Primary favicon - SVG for best visibility across all sizes */}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+  {/* Fallback ICO for older browsers */}
+  <link rel="icon" type="image/x-icon" href="/ico/pgElephant_HD.ico" sizes="any" />
 
   {/* Apple Touch Icon - use existing square OG image */}
   <link rel="apple-touch-icon" href="/og-image-square.jpg" />
