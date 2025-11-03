@@ -637,10 +637,10 @@ psql -d your_database -c "SELECT * FROM pg_stat_insights_top_by_time LIMIT 10;"
 ## Resources and Community
 
 - **GitHub Repository**: https://github.com/pgElephant/pg_stat_insights
-- **Documentation**: https://pgelephant.com/docs/pg-stat-insights
+- **Documentation**: https://www.pgelephant.com/docs/pg-stat-insights
 - **Issue Tracker**: https://github.com/pgElephant/pg_stat_insights/issues
 - **Download Releases**: https://github.com/pgElephant/pg_stat_insights/releases
-- **Website**: https://pgelephant.com/pg-stat-insights
+- **Website**: https://www.pgelephant.com/pg-stat-insights
 - **License**: MIT (Open Source)
 
 ## Conclusion
