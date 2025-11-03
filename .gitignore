@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+# turbo repo cache
+.turbo/
+
 # production
 /build
 
@@ -49,6 +52,9 @@ Thumbs.db
 # Logs
 logs
 *.log
+
+# Dev server pid file
+.dev_server_pid
 
 # Runtime data
 pids

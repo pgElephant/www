@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { Terminal, Play, Square, RotateCcw, Copy, Check, Code, Database, Cpu, Server, Settings, Loader2, Zap } from 'lucide-react'
 
 interface TerminalCommand {
@@ -23,15 +23,15 @@ const PgbalancerDemoTerminal = () => {
   const timeoutRefs = useRef<NodeJS.Timeout[]>([])
 
   // Base timing values (in ms)
-  const baseTimings = {
+  const baseTimings = useMemo(() => ({
     typeSpeed: 100,
     commandDelay: 2000,
     outputDelay: 400,
     betweenCommands: 2000
-  }
+  }), [])
 
   // pgbalancer-specific demo commands and their outputs
-  const buildCommands = [
+  const buildCommands = useMemo(() => [
     {
       command: 'git clone https://github.com/pgelephant/pgbalancer.git && cd pgbalancer',
       output: [
@@ -136,9 +136,9 @@ const PgbalancerDemoTerminal = () => {
         '[INFO] Load balancer ready'
       ]
     }
-  ]
+  ], [])
 
-  const usageCommands = [
+  const usageCommands = useMemo(() => [
     {
       command: '/usr/local/pgbalancer/bin/pgbalancer -c /usr/local/pgbalancer/etc/pgbalancer.yaml -d',
       output: [
@@ -334,9 +334,9 @@ const PgbalancerDemoTerminal = () => {
         '  - Pool utilization: 4%'
       ]
     }
-  ]
+  ], [])
 
-  const aiCommands = [
+  const aiCommands = useMemo(() => [
     {
       command: '/usr/local/pgbalancer/bin/pgbalancer -c /usr/local/pgbalancer/etc/pgbalancer.yaml -d --enable-ai',
       output: [
@@ -520,7 +520,13 @@ const PgbalancerDemoTerminal = () => {
         '[AI] Continuous learning active. Next model update in 2.3 hours.'
       ]
     }
-  ]
+  ], [])
+
+  const getCommands = useCallback(() => {
+    if (activeTab === 'build') return buildCommands
+    if (activeTab === 'usage') return usageCommands
+    return aiCommands
+  }, [activeTab, buildCommands, usageCommands, aiCommands])
 
   // Cleanup all intervals and timeouts
   const cleanup = useCallback(() => {
@@ -570,7 +576,7 @@ const PgbalancerDemoTerminal = () => {
     }, baseTimings.typeSpeed / speedMultiplier)
     
     intervalRef.current = interval
-  }, [speedMultiplier, baseTimings.typeSpeed])
+  }, [speedMultiplier, baseTimings])
 
   // Show output with delay and cleanup
   const showOutput = useCallback((output: string[], onComplete: () => void) => {
@@ -598,7 +604,7 @@ const PgbalancerDemoTerminal = () => {
     }, baseTimings.outputDelay / speedMultiplier)
     
     intervalRef.current = interval
-  }, [speedMultiplier, baseTimings.outputDelay])
+  }, [speedMultiplier, baseTimings])
 
   // Run demo sequence with proper cleanup
   const runDemo = useCallback(() => {
@@ -611,7 +617,7 @@ const PgbalancerDemoTerminal = () => {
     setCurrentCommand('')
     
     let commandIndex = 0
-    const commands = activeTab === 'build' ? buildCommands : activeTab === 'usage' ? usageCommands : aiCommands
+  const commands = getCommands()
     
     const runNextCommand = () => {
       if (commandIndex >= commands.length) {
@@ -648,7 +654,7 @@ const PgbalancerDemoTerminal = () => {
     }
     
     runNextCommand()
-  }, [isRunning, activeTab, buildCommands, usageCommands, aiCommands, typeCommand, showOutput, cleanup, speedMultiplier, baseTimings])
+  }, [isRunning, getCommands, typeCommand, showOutput, cleanup, speedMultiplier, baseTimings])
 
   const stopDemo = useCallback(() => {
     cleanup()

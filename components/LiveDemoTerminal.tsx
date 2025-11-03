@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { Terminal, Play, Square, RotateCcw, Copy, Check, Download } from 'lucide-react'
 
 interface TerminalCommand {
@@ -21,7 +21,7 @@ const LiveDemoTerminal = () => {
   const timeoutRefs = useRef<NodeJS.Timeout[]>([])
 
   // Demo commands and their outputs
-  const demoCommands = [
+  const demoCommands = useMemo(() => [
     {
       command: './run.sh init',
       output: [
@@ -100,7 +100,7 @@ const LiveDemoTerminal = () => {
         'Cluster fully operational with 3 nodes'
       ]
     }
-  ]
+  ], [])
 
   // Cleanup all intervals and timeouts
   const cleanup = useCallback(() => {

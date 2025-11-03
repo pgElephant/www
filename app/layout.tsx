@@ -163,7 +163,7 @@ export const metadata: Metadata = {
     creator: '@pgElephant',
     title: 'pgElephant - Enterprise PostgreSQL Platform',
     description: 'Enterprise-grade PostgreSQL solutions: pgbalancer connection pooling, pgraft Raft extension, FauxDB MongoDB-compatible document database, and NeuronDB AI vector database.',
-    images: ['/twitter-image.jpg'],
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -207,38 +207,12 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://twitter.com" />
         <link rel="manifest" href="/manifest.json" />
         
-        {/* Primary favicon - using the largest, most detailed icon */}
-        <link rel="icon" type="image/x-icon" href="/ico/pgElephant_HD.ico" />
-        <link rel="shortcut icon" href="/ico/pgElephant_HD.ico" />
-        
-        {/* Multiple PNG sizes for better browser support */}
-        <link rel="icon" type="image/png" sizes="192x192" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="160x160" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="64x64" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="48x48" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="24x24" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/ico/pgElephant_HD.ico" />
-        
-        {/* Apple Touch Icons - all sizes for maximum visibility */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="167x167" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="120x120" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="114x114" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="87x87" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="80x80" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="76x76" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="60x60" href="/ico/pgElephant_HD.ico" />
-        <link rel="apple-touch-icon" sizes="57x57" href="/ico/pgElephant_HD.ico" />
-        
-        {/* Android/Chrome icons */}
-        <link rel="icon" type="image/png" sizes="512x512" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="384x384" href="/ico/pgElephant_HD.ico" />
-        <link rel="icon" type="image/png" sizes="256x256" href="/ico/pgElephant_HD.ico" />
+  {/* Primary favicon */}
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/x-icon" href="/ico/pgElephant_HD.ico" />
+
+  {/* Apple Touch Icon - use existing square OG image */}
+  <link rel="apple-touch-icon" href="/og-image-square.jpg" />
         
         {/* Windows/Microsoft icons */}
         <meta name="msapplication-TileColor" content="#070d1a" />
@@ -260,8 +234,8 @@ export default function RootLayout({
         <meta name="msapplication-tooltip" content="pgElephant - Enterprise PostgreSQL Platform" />
         <meta name="msapplication-starturl" content="/" />
         
-        {/* Safari pinned tab icon */}
-        <link rel="mask-icon" href="/ico/pgElephant_HD.ico" color="#070d1a" />
+  {/* Safari pinned tab icon - use an SVG */}
+  <link rel="mask-icon" href="/hero-bg.svg" color="#070d1a" />
         
         {/* Additional browser-specific favicons */}
         <link rel="fluid-icon" href="/ico/pgElephant_HD.ico" title="pgElephant" />

@@ -80,6 +80,7 @@ const PgraftDocsPage = () => {
               width={64}
               height={64}
               className="w-16 h-16 mr-6 object-contain"
+              unoptimized
             />
             <div>
               <h1 className="text-4xl font-bold text-slate-900 mb-2">

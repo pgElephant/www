@@ -153,6 +153,7 @@ const Footer = () => {
                   width={64}
                   height={64}
                   className="w-16 h-16 object-contain"
+                  unoptimized
                 />
               </div>
             </div>
@@ -205,6 +206,7 @@ const Footer = () => {
                             width={16} 
                             height={16} 
                             className="w-4 h-4 object-contain"
+                            unoptimized
                           />
                         ) : (
                           <span className="text-sm">{item.icon}</span>

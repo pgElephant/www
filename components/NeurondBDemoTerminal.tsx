@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { Terminal, Play, Square, RotateCcw, Copy, Check } from 'lucide-react'
 
 interface TerminalCommand {
@@ -26,15 +26,15 @@ const NeurondBDemoTerminal = () => {
   const timeoutRefs = useRef<NodeJS.Timeout[]>([])
 
   // Base timing values (in ms)
-  const baseTimings = {
+  const baseTimings = useMemo(() => ({
     typeSpeed: 50,      // Faster typing for better UX
     commandDelay: 1000,  // Shorter delays
     outputDelay: 200,   // Faster output display
     betweenCommands: 1500 // Less wait between commands
-  }
+  }), [])
 
   // NeurondB-specific demo commands and their outputs
-  const buildCommands = [
+  const buildCommands = useMemo(() => [
     {
       command: 'git clone https://github.com/pgelephant/neurondb.git && cd neurondb',
       output: [
@@ -142,10 +142,10 @@ const NeurondBDemoTerminal = () => {
         '\x1b[36mAvailable: 100+ SQL functions, 20+ operators, 5 data types\x1b[0m'
       ]
     }
-  ]
+  ], [])
 
   // Vector Operations Tab Commands
-  const vectorCommands = [
+  const vectorCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
@@ -232,10 +232,10 @@ const NeurondBDemoTerminal = () => {
       ],
       isPsqlCommand: true
     }
-  ]
+  ], [])
 
   // ML Algorithms Tab Commands
-  const mlCommands = [
+  const mlCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
@@ -315,10 +315,10 @@ const NeurondBDemoTerminal = () => {
       ],
       isPsqlCommand: true
     }
-  ]
+  ], [])
 
   // Embeddings Tab Commands
-  const embeddingCommands = [
+  const embeddingCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
@@ -413,10 +413,10 @@ const NeurondBDemoTerminal = () => {
       ],
       isPsqlCommand: true
     }
-  ]
+  ], [])
 
   // GPU Acceleration Tab Commands
-  const gpuCommands = [
+  const gpuCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
@@ -494,10 +494,10 @@ const NeurondBDemoTerminal = () => {
       ],
       isPsqlCommand: true
     }
-  ]
+  ], [])
 
   // Hybrid Search Tab Commands  
-  const hybridCommands = [
+  const hybridCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
@@ -567,9 +567,9 @@ const NeurondBDemoTerminal = () => {
       ],
       isPsqlCommand: true
     }
-  ]
+  ], [])
 
-  const usageCommands = [
+  const usageCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
       output: [
@@ -740,10 +740,10 @@ const NeurondBDemoTerminal = () => {
       ],
       isPsqlCommand: true
     }
-  ]
+  ], [])
 
   // Get commands based on active tab
-  const getCommands = () => {
+  const getCommands = useCallback(() => {
     switch (activeTab) {
       case 'build': return buildCommands
       case 'vectors': return vectorCommands
@@ -754,7 +754,7 @@ const NeurondBDemoTerminal = () => {
       case 'usage':
       default: return usageCommands
     }
-  }
+  }, [activeTab, buildCommands, vectorCommands, mlCommands, embeddingCommands, gpuCommands, hybridCommands, usageCommands])
 
   // Cleanup all intervals and timeouts
   const cleanup = useCallback(() => {
@@ -806,7 +806,7 @@ const NeurondBDemoTerminal = () => {
     }, baseTimings.typeSpeed / speedMultiplier)
     
     intervalRef.current = interval
-  }, [speedMultiplier, baseTimings.typeSpeed])
+  }, [speedMultiplier, baseTimings])
 
   // Show output with delay and cleanup
   const showOutput = useCallback((output: string[], onComplete: () => void) => {
@@ -834,7 +834,7 @@ const NeurondBDemoTerminal = () => {
     }, baseTimings.outputDelay / speedMultiplier)
     
     intervalRef.current = interval
-  }, [speedMultiplier, baseTimings.outputDelay])
+  }, [speedMultiplier, baseTimings])
 
   // Run demo sequence with proper cleanup
   const runDemo = useCallback(() => {
@@ -848,7 +848,7 @@ const NeurondBDemoTerminal = () => {
     setCurrentCommand('')
     
     let commandIndex = 0
-    const commands = getCommands()
+  const commands = getCommands()
     
     const runNextCommand = () => {
       if (commandIndex >= commands.length) {
@@ -894,7 +894,7 @@ const NeurondBDemoTerminal = () => {
     }
     
     runNextCommand()
-  }, [isRunning, activeTab, buildCommands, usageCommands, typeCommand, showOutput, cleanup, speedMultiplier, baseTimings])
+  }, [isRunning, getCommands, typeCommand, showOutput, cleanup, speedMultiplier, baseTimings])
 
   const stopDemo = useCallback(() => {
     cleanup()

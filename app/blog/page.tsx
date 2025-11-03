@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Calendar, Clock, User, Tag, Eye, ThumbsUp, MessageCircle, TrendingUp, BookOpen, Code, Database, Server, Zap, Award, Globe, Users } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -83,16 +84,22 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
           {/* Large Stock Image */}
           <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20 overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center">
             {post.slug === 'pgraft' ? (
-              <img 
-                src="/blog/pgraft/header.svg" 
-                alt="pgraft blog header" 
-                className="w-full h-full object-cover"
+              <Image
+                src="/blog/pgraft/header.svg"
+                alt="pgraft blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
               />
             ) : post.slug === 'pg-stat-insights' ? (
-              <img 
-                src="/blog/pg-stat-insights/header.svg" 
-                alt="pg_stat_insights blog header" 
-                className="w-full h-full object-cover"
+              <Image
+                src="/blog/pg-stat-insights/header.svg"
+                alt="pg_stat_insights blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
               />
             ) : (
               <div className="text-center p-6">

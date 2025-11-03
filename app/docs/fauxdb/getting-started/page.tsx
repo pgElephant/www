@@ -215,6 +215,7 @@ db.sales.aggregate([
                   width={64}
                   height={64}
                   className="w-16 h-16 object-contain"
+                  unoptimized
                   priority
                 />
               </div>

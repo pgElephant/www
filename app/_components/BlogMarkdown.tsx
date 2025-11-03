@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image'
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Highlight, themes } from 'prism-react-renderer';
@@ -161,9 +162,23 @@ export function BlogMarkdown({ children }: { children: string }) {
             return <td className="px-6 py-4 text-sm text-white/90" {...props} />;
           },
           
-          // Images with proper styling
-          img({node, ...props}) {
-            return <img style={{ borderRadius: 12, marginBottom: 40, maxWidth: 900, width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }} {...props} />;
+          // Images with proper styling (use Next/Image to avoid lint warnings)
+          img({ node, ...props }) {
+            const src = (props as any).src as string | undefined
+            const alt = ((props as any).alt as string | undefined) || 'Blog image'
+            if (!src) return null
+            return (
+              <div style={{ borderRadius: 12, marginBottom: 40, maxWidth: 900, width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', overflow: 'hidden' }}>
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={900}
+                  height={600}
+                  style={{ width: '100%', height: 'auto' }}
+                  unoptimized
+                />
+              </div>
+            )
           },
           
           // Blockquotes with styling

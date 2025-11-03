@@ -36,6 +36,7 @@ export default function GiscusComments({
   useEffect(() => {
     if (!commentsRef.current || !repoId || !categoryId) return;
 
+    const container = commentsRef.current;
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
     script.setAttribute('data-repo', repo);
@@ -54,11 +55,11 @@ export default function GiscusComments({
     script.crossOrigin = 'anonymous';
     script.async = true;
 
-    commentsRef.current.appendChild(script);
+    container.appendChild(script);
 
     return () => {
-      if (commentsRef.current) {
-        commentsRef.current.innerHTML = '';
+      if (container) {
+        container.innerHTML = '';
       }
     };
   }, [repo, repoId, category, categoryId, mapping, term, reactionsEnabled, emitMetadata, inputPosition, theme, lang, loading]);

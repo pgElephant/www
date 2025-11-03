@@ -1,0 +1,5 @@
+# Ignore backup snapshots and generated artifacts
+.backups/
+.next/
+node_modules/
+out/

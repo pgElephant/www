@@ -8,6 +8,8 @@ const compat = new FlatCompat({
 });
 
 module.exports = [
+  // Global ignores (ensure backup snapshots are excluded from lint)
+  { ignores: ['.backups/**'] },
   ...compat.extends('next/core-web-vitals'),
   {
     rules: {

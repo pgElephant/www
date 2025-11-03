@@ -832,6 +832,7 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
                     width={48}
                     height={48}
                     className="w-12 h-12 mr-4 object-contain"
+                    unoptimized
                   />
                   <div>
                     <h3 className="text-2xl font-semibold text-white mb-1">
@@ -971,6 +972,7 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
               width={32}
               height={32}
               className="w-8 h-8 mr-3 object-contain"
+              unoptimized
             />
             <h1 className="text-3xl font-semibold text-white">
               {doc.title}
@@ -1143,6 +1145,7 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
                               width={24}
                               height={24}
                               className="w-6 h-6 mr-2 object-contain"
+                                unoptimized
                             />
                             <h4 className="text-sm font-semibold text-white">
                               {product.name}
