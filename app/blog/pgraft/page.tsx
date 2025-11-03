@@ -22,7 +22,7 @@ const markdown = `![pgraft blog header](/blog/pgraft/header.svg)
 
 # pgraft: Raft-Based PostgreSQL Extension
 
-📦 **[View on GitHub](https://github.com/pgElephant/pgraft)** | 📥 **[Download Latest Release](https://github.com/pgElephant/pgraft/releases)** | 📖 **[Documentation](https://pgelephant.com/docs/pgraft)**
+📦 **[View on GitHub](https://github.com/pgElephant/pgraft)** | 📥 **[Download Latest Release](https://github.com/pgElephant/pgraft/releases)** | 📖 **[Documentation](https://www.pgelephant.com/docs/pgraft)**
 
 ## Executive Summary
 

@@ -22,7 +22,7 @@ const markdown = `![pg_stat_insights blog header](/blog/pg-stat-insights/header.
 
 # pg_stat_insights: PostgreSQL Performance Monitoring Extension
 
-📦 **[View on GitHub](https://github.com/pgElephant/pg_stat_insights)** | 📥 **[Download Latest Release](https://github.com/pgElephant/pg_stat_insights/releases)** | 📖 **[Documentation](https://pgelephant.com/docs/pg-stat-insights)**
+📦 **[View on GitHub](https://github.com/pgElephant/pg_stat_insights)** | 📥 **[Download Latest Release](https://github.com/pgElephant/pg_stat_insights/releases)** | 📖 **[Documentation](https://www.pgelephant.com/docs/pg-stat-insights)**
 
 ## Executive Summary
 
