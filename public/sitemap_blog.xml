@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
     <loc>https://www.pgelephant.com/blog</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.pgelephant.com/blog/ram</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/blog/pgraft</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
+    <lastmod>2025-01-15T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
+    <news:news>
+      <news:publication>
+        <news:name>pgElephant Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-01-15T00:00:00.000Z</news:publication_date>
+      <news:title>pgraft: Raft-Based PostgreSQL Extension</news:title>
+    </news:news>
   </url>
   <url>
-    <loc>https://www.pgelephant.com/blog/rale</loc>
-    <lastmod>2025-10-02T00:00:00.000Z</lastmod>
+    <loc>https://www.pgelephant.com/blog/pg-stat-insights</loc>
+    <lastmod>2025-01-29T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
+    <news:news>
+      <news:publication>
+        <news:name>pgElephant Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-01-29T00:00:00.000Z</news:publication_date>
+      <news:title>pg_stat_insights: PostgreSQL Performance Monitoring Extension</news:title>
+    </news:news>
   </url>
 </urlset>
-

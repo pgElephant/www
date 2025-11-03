@@ -2,51 +2,254 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.pgelephant.com/docs</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- NeurondB Documentation -->
   <url>
     <loc>https://www.pgelephant.com/docs/neurondb</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/docs/neurondb/getting-started</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/docs/neurondb/installation</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/docs/neurondb/features/vector-types</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/docs/neurondb/ml/embeddings</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/gpu</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/hybrid</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/analytics</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/rag</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/background-workers</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/configuration</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/neurondb/performance</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- pgraft Documentation -->
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgraft</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.pgelephant.com/docs/pgraft/getting-started</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgraft/installation</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgraft/configuration</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.pgelephant.com/docs/pgraft/cluster-management</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgraft/raft-protocol</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgraft/sql-functions</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgraft/performance</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgraft/troubleshooting</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- FauxDB Documentation -->
+  <url>
+    <loc>https://www.pgelephant.com/docs/fauxdb</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.pgelephant.com/docs/fauxdb/getting-started</loc>
-    <lastmod>2025-10-31T00:00:00.000Z</lastmod>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/fauxdb/api</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/fauxdb/docker</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- pgbalancer Documentation -->
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgbalancer</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgbalancer/getting-started</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgbalancer/configuration</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgbalancer/metrics</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgbalancer/internals</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- pgSentinel Documentation -->
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgsentinel</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgsentinel/getting-started</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgsentinel/configuration</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgsentinel/api</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pgsentinel/troubleshooting</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- pg_stat_insights Documentation -->
+  <url>
+    <loc>https://www.pgelephant.com/docs/pg-stat-insights</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pg-stat-insights/getting-started</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pg-stat-insights/api</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pg-stat-insights/query-analytics</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/docs/pg-stat-insights/best-practices</loc>
+    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 </urlset>
-

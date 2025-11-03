@@ -143,13 +143,19 @@ function getImagesForPath(path) {
     images.push({
       loc: `${baseUrl}/screenshots/pgbalancer-dashboard.jpg`,
       title: 'pgbalancer AI Dashboard',
-      caption: 'AI-powered PostgreSQL connection pooling interface'
-    })
-  } else if (path === '/pgbalancer') {
-    images.push({
-      loc: `${baseUrl}/screenshots/pgbalancer-dashboard.jpg`,
-      title: 'pgbalancer Dashboard',
       caption: 'AI-powered PostgreSQL connection pooling and load balancing'
+    })
+  } else if (path === '/pgraft') {
+    images.push({
+      loc: `${baseUrl}/screenshots/pgraft-cluster.jpg`,
+      title: 'pgraft Raft Consensus',
+      caption: 'Raft-based high availability for PostgreSQL'
+    })
+  } else if (path === '/neurondb') {
+    images.push({
+      loc: `${baseUrl}/screenshots/neurondb-vectors.jpg`,
+      title: 'NeurondB Vector Database',
+      caption: 'AI-native PostgreSQL with vector search and ML'
     })
   }
   
