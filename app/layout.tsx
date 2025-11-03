@@ -212,15 +212,18 @@ export default function RootLayout({
   {/* PNG fallbacks for broad compatibility */}
   <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16.png?v=1" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32.png?v=1" />
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48.png?v=1" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48.png?v=2" />
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicons/favicon-64.png?v=2" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96.png?v=1" />
   <link rel="icon" type="image/png" sizes="128x128" href="/favicons/favicon-128.png?v=1" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicons/favicon-192.png?v=1" />
+  <link rel="icon" type="image/png" sizes="180x180" href="/favicons/favicon-180.png?v=2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicons/favicon-192.png?v=2" />
   <link rel="icon" type="image/png" sizes="256x256" href="/favicons/favicon-256.png?v=1" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/favicons/favicon-512.png?v=1" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicons/favicon-512.png?v=2" />
+  <link rel="icon" type="image/png" sizes="1024x1024" href="/favicons/favicon-1024.png?v=2" />
 
   {/* Apple Touch Icon */}
-  <link rel="apple-touch-icon" href="/favicons/favicon-192.png?v=1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180.png?v=2" />
         
         {/* Windows/Microsoft icons */}
   <meta name="msapplication-TileColor" content="#070d1a" />

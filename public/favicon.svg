@@ -48,31 +48,31 @@
   <path d="M10,20 C30,5 70,5 90,20 L90,44 C70,30 30,30 10,44 Z" fill="url(#gloss)" opacity="0.13"/>
 
   <!-- Stylized elephant group, centered and scaled for favicon clarity -->
-  <g transform="translate(50,52) scale(0.62)">
+  <g transform="translate(50,52) scale(0.72)">
     <!-- Elephant body with bold gradient and subtle stroke for contrast -->
-    <ellipse cx="0" cy="2" rx="28" ry="22" fill="url(#elephantGradient)" stroke="#06121a" stroke-opacity="0.06" stroke-width="0.8"/>
+    <ellipse cx="0" cy="2" rx="28" ry="22" fill="url(#elephantGradient)" stroke="#06121a" stroke-opacity="0.12" stroke-width="1"/>
 
     <!-- Head -->
-    <circle cx="-15" cy="-6" r="18" fill="url(#elephantGradient)"/>
+    <circle cx="-15" cy="-6" r="18" fill="url(#elephantGradient)" stroke="#06121a" stroke-opacity="0.12" stroke-width="1"/>
 
-    <!-- Ear (slightly lighter) -->
-    <ellipse cx="-24" cy="-8" rx="10" ry="15" fill="rgba(255,255,255,0.06)"/>
+    <!-- Ear (slightly lighter) - avoid rgba for renderer compatibility -->
+    <ellipse cx="-24" cy="-8" rx="10" ry="15" fill="#ffffff" fill-opacity="0.08"/>
 
     <!-- Trunk (solid for visibility) -->
-    <path d="M -25,-5 Q -36,6 -30,16 Q -28,20 -25,18" fill="none" stroke="#06202a" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M -25,-5 Q -36,6 -30,16 Q -28,20 -25,18" fill="none" stroke="#06202a" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
 
     <!-- Legs (clear silhouettes) -->
     <rect x="-8" y="20" width="6" height="12" rx="2" fill="#06202a" opacity="0.18"/>
     <rect x="4" y="20" width="6" height="12" rx="2" fill="#06202a" opacity="0.18"/>
 
     <!-- Eye - bright for contrast -->
-    <circle cx="-10" cy="-8" r="3" fill="#ffffff"/>
-    <circle cx="-10" cy="-8" r="1.2" fill="#071025"/>
+    <circle cx="-10" cy="-8" r="3.6" fill="#ffffff"/>
+    <circle cx="-10" cy="-8" r="1.6" fill="#071025"/>
 
-    <!-- Pg badge: bold white text on small dark rounded rectangle for recognition -->
-    <g transform="translate(22,6)">
-      <rect x="-8" y="-10" width="28" height="18" rx="4" fill="#071025" opacity="0.92"/>
-      <text x="6" y="4" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Pg</text>
+    <!-- AI badge: bold white text on small dark rounded rectangle for recognition -->
+    <g transform="translate(24,6)">
+      <rect x="-10" y="-11" width="32" height="20" rx="5" fill="#071025" opacity="0.96"/>
+      <text x="6" y="4" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#ffffff">AI</text>
     </g>
 
     <!-- Subtle inner shadow for depth on the elephant group -->
@@ -80,6 +80,6 @@
   </g>
 
   <!-- Strong glossy highlight across the top-right for shiny effect -->
-  <ellipse cx="62" cy="28" rx="18" ry="8" fill="url(#gloss)" opacity="0.28" transform="rotate(-18 62 28)"/>
+  <ellipse cx="62" cy="28" rx="18" ry="8" fill="url(#gloss)" opacity="0.32" transform="rotate(-18 62 28)"/>
 
 </svg>
