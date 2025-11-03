@@ -29,13 +29,13 @@ const Header = () => {
         <div className="flex items-center h-20 w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="text-white  group-hover:text-white transition-colors ">
+            <div className="text-white group-hover:text-white transition-colors">
               <Image 
                 src="/favicons/favicon-128.png" 
                 alt="pgElephant" 
-                width={128}
-                height={128}
-                className="w-32 h-32 object-contain"
+                width={64}
+                height={64}
+                className="w-16 h-16 object-contain"
                 unoptimized
                 priority
               />

@@ -169,9 +169,9 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={name}
-                  className="w-11 h-11 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-110"
+                  className="w-8 h-8 bg-transparent rounded-lg flex items-center justify-center text-white hover:text-white/80 transition-all duration-300 hover:scale-110"
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
@@ -188,28 +188,28 @@ const Footer = () => {
                       href={item.href} 
                       className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-300 text-sm"
                     >
-                      <div className="w-5 h-5 group-hover:scale-110 transition-transform duration-300 bg-white/20 backdrop-blur-sm rounded border border-white/30 flex items-center justify-center">
+                      <div className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 bg-transparent rounded flex items-center justify-center">
                         {item.icon === 'pgbalancer-custom' ? (
-                          <PgbalancerIcon size={16} />
+                          <PgbalancerIcon size={12} />
                         ) : item.icon === 'pgraft-custom' ? (
-                          <PgraftIcon size={16} />
+                          <PgraftIcon size={12} />
                         ) : item.icon === 'fauxdb-custom' ? (
-                          <FauxDbIcon size={16} />
+                          <FauxDbIcon size={12} />
                         ) : item.icon === 'rale-custom' ? (
-                          <RaleIcon size={16} />
+                          <RaleIcon size={12} />
                         ) : item.icon === 'ram-custom' ? (
-                          <RamIcon size={16} />
+                          <RamIcon size={12} />
                         ) : item.icon.startsWith('/') || item.icon.startsWith('http') ? (
                           <Image 
                             src={item.icon} 
                             alt={`${item.name} icon`} 
-                            width={16} 
-                            height={16} 
-                            className="w-4 h-4 object-contain"
+                            width={12} 
+                            height={12} 
+                            className="w-3 h-3 object-contain"
                             unoptimized
                           />
                         ) : (
-                          <span className="text-sm">{item.icon}</span>
+                          <span className="text-xs">{item.icon}</span>
                         )}
                       </div>
                       <div>
