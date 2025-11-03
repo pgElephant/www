@@ -1,6 +1,6 @@
 <svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Website theme gradient - matches pgElephant theme -->
+    <!-- Website theme gradient -->
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#070d1a;stop-opacity:1" />
       <stop offset="25%" style="stop-color:#111827;stop-opacity:1" />
@@ -8,38 +8,24 @@
       <stop offset="75%" style="stop-color:#374151;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#4b5563;stop-opacity:1" />
     </linearGradient>
-    <!-- Overlay gradient - matches hero section -->
     <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.15" />
       <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.15" />
       <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.15" />
     </linearGradient>
-    <!-- Text gradient - matches website theme -->
     <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
       <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
     </linearGradient>
-    <!-- Node gradients -->
-    <linearGradient id="node1" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#06b6d4"/>
-      <stop offset="1" stop-color="#4f46e5"/>
-    </linearGradient>
-    <linearGradient id="node2" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#fbbf24"/>
-      <stop offset="1" stop-color="#f59e0b"/>
-    </linearGradient>
-    <linearGradient id="node3" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#10b981"/>
-      <stop offset="1" stop-color="#06b6d4"/>
-    </linearGradient>
+
   </defs>
   
-  <!-- Background - matches website theme -->
+  <!-- Background -->
   <rect width="1200" height="400" fill="url(#bgGradient)"/>
   <rect width="1200" height="400" fill="url(#overlayGradient)"/>
   
-  <!-- Subtle pattern overlay - matches hero -->
+  <!-- Subtle pattern overlay -->
   <g opacity="0.1">
     <circle cx="100" cy="100" r="3" fill="#fff"/>
     <circle cx="150" cy="150" r="2" fill="#fff"/>
@@ -51,22 +37,29 @@
   
   <!-- Raft nodes illustration -->
   <g transform="translate(80, 120)">
-    <!-- Node 1 - Follower -->
+    <defs>
+      <linearGradient id="node1" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#06b6d4"/>
+        <stop offset="1" stop-color="#4f46e5"/>
+      </linearGradient>
+      <linearGradient id="node2" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#fbbf24"/>
+        <stop offset="1" stop-color="#f59e0b"/>
+      </linearGradient>
+      <linearGradient id="node3" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#10b981"/>
+        <stop offset="1" stop-color="#06b6d4"/>
+      </linearGradient>
+    </defs>
     <rect x="0" y="0" width="70" height="70" rx="12" fill="url(#node1)" opacity="0.9"/>
     <circle cx="35" cy="35" r="12" fill="#fff" opacity="0.9"/>
     <text x="35" y="95" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#06b6d4" text-anchor="middle">Follower</text>
-    
-    <!-- Node 2 - Leader -->
     <rect x="0" y="120" width="70" height="70" rx="12" fill="url(#node2)" opacity="0.9"/>
     <circle cx="35" cy="155" r="12" fill="#fff" opacity="0.9"/>
     <text x="35" y="215" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#fbbf24" text-anchor="middle">LEADER</text>
-    
-    <!-- Node 3 - Follower -->
     <rect x="120" y="60" width="70" height="70" rx="12" fill="url(#node3)" opacity="0.9"/>
     <circle cx="155" cy="95" r="12" fill="#fff" opacity="0.9"/>
     <text x="155" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#10b981" text-anchor="middle">Follower</text>
-    
-    <!-- Connections -->
     <line x1="70" y1="35" x2="120" y2="95" stroke="#06b6d4" stroke-width="3" opacity="0.5"/>
     <line x1="35" y1="70" x2="35" y2="120" stroke="#fbbf24" stroke-width="3" opacity="0.6"/>
     <line x1="70" y1="155" x2="120" y2="95" stroke="#10b981" stroke-width="3" opacity="0.5"/>
@@ -81,39 +74,35 @@
   <!-- Subtitle -->
   <text x="350" y="200" font-family="Arial, sans-serif" font-size="28" 
         fill="#e0e7ff" opacity="0.9">
-    Raft Consensus for PostgreSQL
+    Raft Consensus Protocol Embedded in PostgreSQL
   </text>
   
-  <!-- Feature badges - matching theme colors -->
   <g transform="translate(350, 230)">
     <rect x="0" y="0" width="220" height="36" rx="18" fill="#4f46e5" opacity="0.2"/>
     <rect x="0" y="0" width="220" height="36" rx="18" fill="none" stroke="#4f46e5" stroke-width="2"/>
     <text x="110" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Auto Leader Election</text>
   </g>
-  
-  <g transform="translate(590, 230)">
+  <g transform="translate(600, 230)">
     <rect x="0" y="0" width="190" height="36" rx="18" fill="#06b6d4" opacity="0.2"/>
     <rect x="0" y="0" width="190" height="36" rx="18" fill="none" stroke="#06b6d4" stroke-width="2"/>
     <text x="95" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Zero Split-Brain</text>
   </g>
-  
   <g transform="translate(350, 280)">
     <rect x="0" y="0" width="220" height="36" rx="18" fill="#10b981" opacity="0.2"/>
     <rect x="0" y="0" width="220" height="36" rx="18" fill="none" stroke="#10b981" stroke-width="2"/>
     <text x="110" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Crash-Safe Replication</text>
   </g>
-  
-  <g transform="translate(590, 280)">
+  <g transform="translate(600, 280)">
     <rect x="0" y="0" width="190" height="36" rx="18" fill="#fbbf24" opacity="0.2"/>
     <rect x="0" y="0" width="190" height="36" rx="18" fill="none" stroke="#fbbf24" stroke-width="2"/>
     <text x="95" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Production Ready</text>
   </g>
   
-  <!-- Decorative elements - matching theme -->
+  <!-- Decorative elements -->
   <circle cx="950" cy="150" r="40" fill="#4f46e5" opacity="0.15"/>
   <circle cx="1050" cy="220" r="30" fill="#06b6d4" opacity="0.15"/>
   <circle cx="980" cy="280" r="25" fill="#10b981" opacity="0.15"/>

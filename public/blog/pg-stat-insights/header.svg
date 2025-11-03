@@ -1,7 +1,6 @@
 <svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Updated: 2025-11-03 - Dark theme matching pgraft -->
   <defs>
-    <!-- Website theme gradient - matches pgElephant theme -->
+    <!-- Website theme gradient -->
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#070d1a;stop-opacity:1" />
       <stop offset="25%" style="stop-color:#111827;stop-opacity:1" />
@@ -9,25 +8,24 @@
       <stop offset="75%" style="stop-color:#374151;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#4b5563;stop-opacity:1" />
     </linearGradient>
-    <!-- Overlay gradient - matches hero section -->
     <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.15" />
       <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.15" />
       <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.15" />
     </linearGradient>
-    <!-- Text gradient - matches website theme -->
     <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
       <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
     </linearGradient>
+
   </defs>
   
-  <!-- Background - matches website theme -->
+  <!-- Background -->
   <rect width="1200" height="400" fill="url(#bgGradient)"/>
   <rect width="1200" height="400" fill="url(#overlayGradient)"/>
   
-  <!-- Subtle pattern overlay - matches hero -->
+  <!-- Subtle pattern overlay -->
   <g opacity="0.1">
     <circle cx="100" cy="100" r="3" fill="#fff"/>
     <circle cx="150" cy="150" r="2" fill="#fff"/>
@@ -37,22 +35,16 @@
     <circle cx="900" cy="250" r="2.5" fill="#fff"/>
   </g>
   
-  <!-- Performance monitoring illustration - left side -->
+  <!-- Performance monitoring illustration -->
   <g transform="translate(80, 100)">
-    <!-- Database layers -->
     <g opacity="0.9">
       <ellipse cx="90" cy="50" rx="70" ry="20" fill="none" stroke="#4f46e5" stroke-width="3"/>
       <ellipse cx="90" cy="80" rx="70" ry="20" fill="none" stroke="#06b6d4" stroke-width="3"/>
       <ellipse cx="90" cy="110" rx="70" ry="20" fill="none" stroke="#10b981" stroke-width="3"/>
-      
-      <!-- Connecting lines -->
       <line x1="20" y1="50" x2="20" y2="110" stroke="#4f46e5" stroke-width="2" opacity="0.5"/>
       <line x1="160" y1="50" x2="160" y2="110" stroke="#10b981" stroke-width="2" opacity="0.5"/>
     </g>
-    
-    <!-- Metrics visualization -->
     <g transform="translate(0, 140)">
-      <!-- Bar chart -->
       <rect x="20" y="40" width="18" height="50" fill="#4f46e5" rx="2" opacity="0.9"/>
       <rect x="48" y="25" width="18" height="65" fill="#06b6d4" rx="2" opacity="0.9"/>
       <rect x="76" y="32" width="18" height="58" fill="#10b981" rx="2" opacity="0.9"/>
@@ -61,51 +53,46 @@
     </g>
   </g>
   
-  <!-- Title - Matching pgraft style exactly -->
+  <!-- Title -->
   <text x="350" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="bold" 
         fill="url(#textGradient)">
     pg_stat_insights
   </text>
   
-  <!-- Subtitle - Matching pgraft style exactly -->
+  <!-- Subtitle -->
   <text x="350" y="200" font-family="Arial, sans-serif" font-size="28" 
         fill="#e0e7ff" opacity="0.9">
     PostgreSQL Performance Monitoring
   </text>
   
-  <!-- Feature badges - matching theme colors -->
   <g transform="translate(350, 230)">
     <rect x="0" y="0" width="130" height="36" rx="18" fill="#4f46e5" opacity="0.2"/>
     <rect x="0" y="0" width="130" height="36" rx="18" fill="none" stroke="#4f46e5" stroke-width="2"/>
     <text x="65" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">52 Metrics</text>
   </g>
-  
-  <g transform="translate(500, 230)">
+  <g transform="translate(600, 230)">
     <rect x="0" y="0" width="130" height="36" rx="18" fill="#06b6d4" opacity="0.2"/>
     <rect x="0" y="0" width="130" height="36" rx="18" fill="none" stroke="#06b6d4" stroke-width="2"/>
     <text x="65" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">11 Views</text>
   </g>
-  
-  <g transform="translate(650, 230)">
+  <g transform="translate(350, 280)">
     <rect x="0" y="0" width="180" height="36" rx="18" fill="#10b981" opacity="0.2"/>
     <rect x="0" y="0" width="180" height="36" rx="18" fill="none" stroke="#10b981" stroke-width="2"/>
     <text x="90" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">Deep Insights</text>
   </g>
-  
-  <g transform="translate(350, 280)">
+  <g transform="translate(600, 280)">
     <rect x="0" y="0" width="230" height="36" rx="18" fill="#fbbf24" opacity="0.2"/>
     <rect x="0" y="0" width="230" height="36" rx="18" fill="none" stroke="#fbbf24" stroke-width="2"/>
     <text x="115" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="600" 
           fill="#fff" text-anchor="middle">✓ Drop-in Replacement</text>
   </g>
   
-  <!-- Decorative elements - matching theme -->
+  <!-- Decorative elements -->
   <circle cx="950" cy="150" r="40" fill="#4f46e5" opacity="0.15"/>
   <circle cx="1050" cy="220" r="30" fill="#06b6d4" opacity="0.15"/>
   <circle cx="980" cy="280" r="25" fill="#10b981" opacity="0.15"/>
   <circle cx="1100" cy="150" r="20" fill="#fbbf24" opacity="0.15"/>
 </svg>
-

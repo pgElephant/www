@@ -85,7 +85,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
           <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20 overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center">
             {post.slug === 'pgraft' ? (
               <Image
-                src="/blog/pgraft/header.svg"
+                src="/blog/pgraft/header.svg?v=5"
                 alt="pgraft blog header"
                 fill
                 className="object-cover"
@@ -94,7 +94,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               />
             ) : post.slug === 'pg-stat-insights' ? (
               <Image
-                src="/blog/pg-stat-insights/header.svg?v=4"
+                src="/blog/pg-stat-insights/header.svg?v=5"
                 alt="pg_stat_insights blog header"
                 fill
                 className="object-cover"
