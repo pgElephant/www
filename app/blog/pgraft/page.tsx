@@ -8,13 +8,13 @@ export const metadata = {
   openGraph: {
     title: 'pgraft: Raft-Based PostgreSQL Extension',
     description: 'Raft Consensus for PostgreSQL - Auto Leader Election, Zero Split-Brain, Crash-Safe Replication',
-    images: ['/blog/pgraft/og-image.svg?v=6'],
+    images: ['/blog/pgraft/og-image.jpg?v=7'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'pgraft: Raft-Based PostgreSQL Extension',
     description: 'Raft Consensus for PostgreSQL - Auto Leader Election, Zero Split-Brain, Crash-Safe Replication',
-    images: ['/blog/pgraft/og-image.svg?v=6'],
+    images: ['/blog/pgraft/og-image.jpg?v=7'],
   },
 };
 

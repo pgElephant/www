@@ -22,8 +22,8 @@
   </defs>
   
   <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bgGradient)"/>
-  <rect width="1200" height="630" fill="url(#overlayGradient)"/>
+  <rect width="1200" height="400" fill="url(#bgGradient)"/>
+  <rect width="1200" height="400" fill="url(#overlayGradient)"/>
   
   <!-- Subtle pattern overlay -->
   <g opacity="0.1">

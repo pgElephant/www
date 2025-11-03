@@ -8,13 +8,13 @@ export const metadata = {
   openGraph: {
     title: 'pg_stat_insights: PostgreSQL Performance Monitoring',
     description: '52 Metrics, 11 Views, Deep Insights - Drop-in Replacement for pg_stat_statements',
-    images: ['/blog/pg-stat-insights/og-image.svg?v=6'],
+    images: ['/blog/pg-stat-insights/og-image.jpg?v=7'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'pg_stat_insights: PostgreSQL Performance Monitoring',
     description: '52 Metrics, 11 Views, Deep Insights - Drop-in Replacement for pg_stat_statements',
-    images: ['/blog/pg-stat-insights/og-image.svg?v=6'],
+    images: ['/blog/pg-stat-insights/og-image.jpg?v=7'],
   },
 };
 

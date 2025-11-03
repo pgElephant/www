@@ -194,6 +194,17 @@ const blogs = {
       { text: '✓ Drop-in Replacement', color: 'yellow', width: 230 },
     ],
   },
+  'pgbalancer': {
+    title: 'pgbalancer',
+    subtitle: 'AI-Powered PostgreSQL Connection Pooler',
+    icon: 'balance',
+    badges: [
+      { text: 'AI Load Balancing', color: 'indigo', width: 180 },
+      { text: 'REST API', color: 'cyan', width: 130 },
+      { text: 'MQTT Clustering', color: 'emerald', width: 180 },
+      { text: '✓ Production Ready', color: 'yellow', width: 190 },
+    ],
+  },
 };
 
 // Generate SVGs

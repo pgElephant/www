@@ -31,14 +31,31 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '2', icon: BookOpen, color: 'text-white' },
-  { label: 'Monthly Readers', value: '3.8k', icon: Eye, color: 'text-white' },
+  { label: 'Total Articles', value: '3', icon: BookOpen, color: 'text-white' },
+  { label: 'Monthly Readers', value: '4.2k', icon: Eye, color: 'text-white' },
   { label: 'Categories', value: '1', icon: Tag, color: 'text-white' },
   { label: 'Authors', value: '1', icon: Users, color: 'text-white' }
 ]
 
 
 const blogPosts = [
+  {
+    slug: 'pgbalancer',
+    title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
+    excerpt: 'Modern connection pooling meets artificial intelligence. pgbalancer brings intelligent load balancing, automatic failover, and ML-powered optimization to PostgreSQL connection management.',
+    content: 'pgbalancer is a next-generation PostgreSQL connection pooler that combines traditional pooling capabilities with AI-driven load balancing, REST API management, and MQTT clustering for modern cloud-native applications.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-15',
+    readTime: '18 min read',
+    category: 'Technical',
+    featured: true,
+    icon: 'pgbalancer',
+    views: 856,
+    likes: 67,
+    comments: 19,
+    tags: ['Connection Pooling', 'AI', 'Load Balancing', 'REST API', 'PostgreSQL']
+  },
   {
     slug: 'pg-stat-insights',
     title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
@@ -85,7 +102,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
           <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20 overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center">
             {post.slug === 'pgraft' ? (
               <Image
-                src="/blog/pgraft/header.svg?v=6"
+                src="/blog/pgraft/header.svg?v=7"
                 alt="pgraft blog header"
                 fill
                 className="object-cover"
@@ -94,8 +111,17 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               />
             ) : post.slug === 'pg-stat-insights' ? (
               <Image
-                src="/blog/pg-stat-insights/header.svg?v=6"
+                src="/blog/pg-stat-insights/header.svg?v=7"
                 alt="pg_stat_insights blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'pgbalancer' ? (
+              <Image
+                src="/blog/pgbalancer/header.svg?v=7"
+                alt="pgbalancer blog header"
                 fill
                 className="object-cover"
                 unoptimized
