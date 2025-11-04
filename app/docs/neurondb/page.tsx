@@ -20,12 +20,12 @@ import {
 } from 'lucide-react'
 
 export const metadata = {
-  title: 'NeurondB - Advanced AI Database Extension Documentation',
-  description: 'Complete documentation for NeurondB, the PostgreSQL extension for vector search, machine learning inference, hybrid retrieval, and RAG pipelines.',
-  keywords: 'NeurondB, postgresql, vector database, AI database, machine learning, embeddings, HNSW, hybrid search, RAG, semantic search, documentation'
+  title: 'NeuronDB Documentation',
+  description:
+    'Comprehensive documentation for NeuronDB, the AI/Vector database extension for PostgreSQL. Learn vector types, ANN search, ML analytics, hybrid search, RAG, GPU acceleration, background workers, configuration, and performance tuning.',
 }
 
-const NeurondBDocsPage = () => {
+export default function Page() {
   const features = [
     {
       icon: Database,
@@ -287,6 +287,4 @@ const NeurondBDocsPage = () => {
     </div>
   )
 }
-
-export default NeurondBDocsPage
 

@@ -209,6 +209,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/neurondb/indexing/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/indexing">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/indexing/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/neurondb/installation/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/installation">> = Specific
@@ -249,6 +258,33 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/rag">> = Specific
   const handler = {} as typeof import("../../app/docs/neurondb/rag/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/security/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/security">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/security/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/sql-api/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/sql-api">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/sql-api/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/troubleshooting/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/troubleshooting">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/troubleshooting/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -362,6 +398,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgraft/config-reference/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/config-reference">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/config-reference/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgraft/configuration/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/configuration">> = Specific
@@ -420,6 +465,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/sql-functions">> = Specific
   const handler = {} as typeof import("../../app/docs/pgraft/sql-functions/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgraft/sql-reference/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/sql-reference">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/sql-reference/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

@@ -1,10 +1,13 @@
-'use client'
+export const metadata = {
+  title: 'NeuronDB · GPU Acceleration',
+  description: 'Enable CUDA/ROCm acceleration, inspect GPU status, and monitor performance with NeuronDB.',
+}
 
 import React from 'react'
 import Link from 'next/link'
 import { Cpu, Zap, BarChart3, CheckCircle, ArrowRight, Terminal, Brain } from 'lucide-react'
 
-export default function NeuronDBGPUPage() {
+export default function Page() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
       {/* Hero Section */}
@@ -151,14 +154,10 @@ neurondb.gpu_timeout_ms = 30000         # Kernel timeout`}
                   <h3 className="text-lg font-bold text-white mb-3">Enable GPU Acceleration</h3>
                   <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
                     <code className="text-green-300">
-                      {`-- Check GPU availability
-SELECT neurondb_gpu_info();
-
--- Enable GPU for current session
-SELECT neurondb_gpu_enable(true);
-
--- Check GPU statistics
-SELECT * FROM pg_stat_neurondb_gpu;`}
+                      {`-- Enable GPU via GUCs (requires shared_preload_libraries='neurondb')
+SET neurondb.gpu_enabled = on;
+SET neurondb.gpu_device = 0;        -- select device
+SET neurondb.gpu_batch_size = 8192;  -- tune for throughput`}
                     </code>
                   </div>
                 </div>
@@ -184,24 +183,12 @@ ORDER BY 1 LIMIT 10;`}
                   </div>
                 </div>
 
-                {/* GPU K-Means */}
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-6">
-                  <h3 className="text-lg font-bold text-white mb-3">GPU K-Means Clustering</h3>
-                  <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- GPU-accelerated clustering (23x faster)
-SELECT cluster_kmeans_gpu(
-  'customer_data',
-  'features',
-  10,        -- number of clusters
-  100        -- max iterations
-);
-
--- Result: {"clusters": 10, "iterations": 18, 
---          "inertia": 234.5, "device": "GPU", 
---          "speedup": "23.4x"}`}
-                    </code>
-                  </div>
+                {/* GPU K-Means (not yet available) */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-amber-500/30 p-6">
+                  <h3 className="text-lg font-bold text-white mb-3">GPU K-Means</h3>
+                  <p className="text-white/70 text-sm">
+                    Note: GPU-accelerated clustering is planned and not available in this build. Use CPU <code className="text-emerald-300">cluster_kmeans</code> or <code className="text-emerald-300">cluster_minibatch_kmeans</code> for now.
+                  </p>
                 </div>
               </div>
             </div>
@@ -317,31 +304,13 @@ sudo amdgpu-install -y --usecase=rocm
               </div>
             </div>
 
-            {/* GPU Statistics */}
+            {/* GPU Statistics (coming soon) */}
             <div>
               <h2 className="text-3xl font-bold text-white mb-8">Monitoring GPU Usage</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm mb-6">
-                  <code className="text-green-300">
-                    {`-- View GPU statistics per backend
-SELECT * FROM pg_stat_neurondb_gpu;
-
--- Columns:
---   backend_pid: PostgreSQL backend process ID
---   queries: Total GPU queries executed
---   batches: Number of batches processed
---   avg_batch_size: Average vectors per batch
---   avg_latency_ms: Average GPU kernel latency
---   fallback_count: Times fell back to CPU
---   oom_count: Out-of-memory errors
---   last_error: Last GPU error (if any)`}
-                  </code>
-                </div>
-                <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-4">
-                  <p className="text-white/80 text-sm">
-                    <strong className="text-indigo-400">Pro Tip:</strong> Monitor fallback_count and oom_count to detect GPU memory pressure. If these increase, consider reducing batch_size or increasing memory_pool_mb.
-                  </p>
-                </div>
+                <p className="text-white/80">
+                  A system view for GPU statistics will be documented here when available. In the meantime, use PostgreSQL logs and tune GUCs like neurondb.gpu_batch_size and neurondb.gpu_fail_open.
+                </p>
               </div>
             </div>
 

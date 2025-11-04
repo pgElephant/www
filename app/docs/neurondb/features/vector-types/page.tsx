@@ -1,10 +1,13 @@
-'use client'
+export const metadata = {
+  title: 'NeuronDB · Vector Types',
+  description: 'Dense vectors, packed vectors, sparse maps, vector graphs, and retrieval text types in NeuronDB.',
+}
 
 import React from 'react'
 import Link from 'next/link'
 import { Database, Zap, BarChart3, Layers, CheckCircle, ArrowRight, Info } from 'lucide-react'
 
-export default function VectorTypesDoc() {
+export default function Page() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
       <section className="relative py-20 overflow-hidden">

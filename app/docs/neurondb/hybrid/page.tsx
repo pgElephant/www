@@ -1,10 +1,13 @@
-'use client'
+export const metadata = {
+  title: 'NeuronDB · Hybrid Search',
+  description: 'Combine semantic vector search with lexical (BM25) and apply learning-to-rank for better relevance.',
+}
 
 import React from 'react'
 import Link from 'next/link'
 import { Search, Zap, BarChart3, ArrowRight, CheckCircle } from 'lucide-react'
 
-export default function NeuronDBHybridPage() {
+export default function Page() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
       {/* Hero */}

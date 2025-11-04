@@ -1,10 +1,13 @@
-'use client'
+export const metadata = {
+  title: 'NeuronDB · Embeddings',
+  description: 'Configure providers, generate text embeddings, cache results, and query embeddings with NeuronDB.',
+}
 
 import React from 'react'
 import Link from 'next/link'
 import { Brain, Sparkles, Image as ImageIcon, FileText, Zap, CheckCircle, ArrowRight, Code } from 'lucide-react'
 
-export default function EmbeddingsDoc() {
+export default function Page() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
       <section className="relative py-20 overflow-hidden">

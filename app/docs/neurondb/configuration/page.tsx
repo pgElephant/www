@@ -1,9 +1,12 @@
-'use client'
+export const metadata = {
+  title: 'NeuronDB · Configuration',
+  description: 'All configuration parameters (GUCs) and operational settings for NeuronDB.',
+}
 
 import React from 'react'
 import { Settings, Database, Zap, CheckCircle } from 'lucide-react'
 
-export default function NeuronDBConfigurationPage() {
+export default function Page() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
       <section className="relative py-20 overflow-hidden">

@@ -1,10 +1,14 @@
-'use client'
+export const metadata = {
+  title: 'NeuronDB · Getting Started',
+  description: 'Create the extension, define a table with vectors, run first ANN queries, and understand the basic vector types.',
+}
+
 
 import React from 'react'
 import Link from 'next/link'
 import { Terminal, Download, BookOpen, Play, CheckCircle, AlertCircle, Code, Database, Zap } from 'lucide-react'
 
-export default function NeurondBGettingStarted() {
+export default function Page() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
       {/* Hero Section */}

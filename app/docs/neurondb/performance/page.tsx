@@ -1,9 +1,12 @@
-'use client'
+export const metadata = {
+  title: 'NeuronDB · Performance & Tuning',
+  description: 'Recall/latency tuning, ANN parameters, storage, and system settings for NeuronDB.',
+}
 
 import React from 'react'
 import { Zap, BarChart3, Cpu, CheckCircle } from 'lucide-react'
 
-export default function NeuronDBPerformancePage() {
+export default function Page() {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
       <section className="relative py-20 overflow-hidden">

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { BarChart3, Brain, Zap, ArrowRight, CheckCircle } from 'lucide-react'
+import { BarChart3, Brain, ArrowRight, CheckCircle } from 'lucide-react'
 
 export default function NeuronDBAnalyticsPage() {
   return (
@@ -43,27 +43,31 @@ export default function NeuronDBAnalyticsPage() {
                 <h3 className="text-2xl font-bold text-emerald-300 mb-4">K-Means Clustering</h3>
                 <p className="text-white/80 mb-6">
                   Lloyd's K-Means with k-means++ initialization for finding customer segments, topic clusters, and data grouping.
+                  The examples below mirror the fraud demo in NeuronDB/demo/ML and use a table with a vector column named features.
                 </p>
                 <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm mb-4">
                   <code className="text-green-300">
-                    {`-- CPU K-Means
+                    {`-- K-Means clustering
 SELECT cluster_kmeans(
-  'customer_data',  -- table
-  'features',       -- vector column
-  5,                -- number of clusters
-  100               -- max iterations
+  'train_data',   -- table with vectors
+  'features',     -- vector column
+  7,              -- K clusters
+  50              -- max iterations
 );
 
--- GPU K-Means (23x faster)
-SELECT cluster_kmeans_gpu(
-  'customer_data', 'features', 5, 100
-);
+-- Project-based training and versioning
+SELECT neurondb_train_kmeans_project(
+  'fraud_kmeans',   -- project name
+  'train_data',
+  'features',
+  7,
+  50
+) AS model_id;
 
--- Get cluster assignments
-SELECT id, cluster_id, centroid_distance
-FROM neurondb_cluster_assignments('customer_data', 'features', 5)
-ORDER BY cluster_id, centroid_distance
-LIMIT 100;`}
+-- List models for a project
+SELECT version, algorithm, parameters, is_deployed
+FROM neurondb_list_project_models('fraud_kmeans')
+ORDER BY version;`}
                   </code>
                 </div>
                 <div className="grid md:grid-cols-3 gap-4">
@@ -71,69 +75,74 @@ LIMIT 100;`}
                     <div className="text-lg font-bold text-emerald-400 mb-1">O(n·k·i·d)</div>
                     <div className="text-xs text-white/60">Time Complexity</div>
                   </div>
-                  <div className="bg-teal-500/10 rounded-lg p-4 border border-teal-500/30">
-                    <div className="text-lg font-bold text-teal-400 mb-1">23x GPU</div>
-                    <div className="text-xs text-white/60">Speedup on GPU</div>
-                  </div>
                   <div className="bg-cyan-500/10 rounded-lg p-4 border border-cyan-500/30">
                     <div className="text-lg font-bold text-cyan-400 mb-1">k-means++</div>
                     <div className="text-xs text-white/60">Initialization</div>
                   </div>
+                  <div className="bg-teal-500/10 rounded-lg p-4 border border-teal-500/30">
+                    <div className="text-lg font-bold text-teal-400 mb-1">Versioned</div>
+                    <div className="text-xs text-white/60">Project + deployment
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* DBSCAN */}
+              {/* Mini-batch K-Means */}
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <h3 className="text-2xl font-bold text-emerald-300 mb-4">DBSCAN (Density-Based)</h3>
+                <h3 className="text-2xl font-bold text-emerald-300 mb-4">Mini-batch K-Means</h3>
                 <p className="text-white/80 mb-6">
-                  Density-based clustering that automatically discovers the number of clusters and identifies outliers.
+                  Fast stochastic K-Means optimized for large datasets. Matches the demo at NeuronDB/demo/ML/004_minibatch_kmeans.sql.
                 </p>
                 <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
                   <code className="text-green-300">
-                    {`-- DBSCAN clustering (auto-discovers cluster count)
-SELECT cluster_dbscan(
-  'customer_data',
+                    {`-- Mini-batch K-Means (fast)
+SELECT cluster_minibatch_kmeans(
+  'train_data',
   'features',
-  0.5,      -- epsilon (neighborhood radius)
-  5         -- min_points (minimum cluster size)
-);
-
--- Get clusters and outliers
-SELECT cluster_id, COUNT(*) as size
-FROM neurondb_dbscan_assignments('customer_data', 'features', 0.5, 5)
-GROUP BY cluster_id
-ORDER BY cluster_id;
-
--- cluster_id = -1 means outlier`}
+  7,      -- K clusters
+  50,     -- max iterations
+  100     -- batch size
+) AS clusters;`}
                   </code>
+                </div>
+              </div>
+
+              {/* GMM */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
+                <h3 className="text-2xl font-bold text-emerald-300 mb-4">Gaussian Mixture Models (GMM)</h3>
+                <p className="text-white/80 mb-6">
+                  Probabilistic clustering that returns a probability matrix. Convert to hard cluster IDs using a helper function from the demo.
+                </p>
+                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm mb-4">
+                  <code className="text-green-300">
+                    {`-- Helper: convert probability matrix to cluster IDs
+CREATE OR REPLACE FUNCTION gmm_to_clusters(probs float8[][])
+RETURNS integer[] LANGUAGE plpgsql IMMUTABLE AS $$
+DECLARE r integer[] := ARRAY[]::integer[]; i int; j int; k int; m float8; b int; BEGIN
+  k := array_length(probs,2); FOR i IN 1..array_length(probs,1) LOOP m := -1; b := 1;
+    FOR j IN 1..k LOOP IF probs[i][j] > m THEN m := probs[i][j]; b := j; END IF; END LOOP;
+    r := array_append(r, b); END LOOP; RETURN r; END; $$;
+
+-- Train GMM and convert to clusters
+WITH p AS (
+  SELECT cluster_gmm('train_data','features',7,30) AS probs
+)
+SELECT gmm_to_clusters(probs) FROM p;`}
+                  </code>
+                </div>
+                <div className="text-white/60 text-sm">
+                  Tip: See NeuronDB/demo/ML/003_gmm_clustering.sql for a complete workflow including evaluation on test data.
                 </div>
               </div>
             </div>
 
-            {/* Dimensionality Reduction */}
+            {/* Dimensionality Reduction (coming soon) */}
             <div>
               <h2 className="text-3xl font-bold text-white mb-8">Dimensionality Reduction</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <h3 className="text-2xl font-bold text-cyan-300 mb-4">PCA (Principal Component Analysis)</h3>
-                <p className="text-white/80 mb-6">
-                  Reduce high-dimensional vectors to lower dimensions while preserving variance.
+                <p className="text-white/80">
+                  PCA and related techniques will be documented here. For now, focus on clustering and outlier detection from the ML demo.
                 </p>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-green-300">
-                    {`-- Reduce dimensions: 768 → 128
-SELECT reduce_dimensionality_pca(
-  'embeddings_table',
-  'vector_column',
-  128  -- target dimensions
-);
-
--- Returns: {"components": 128, 
---           "explained_variance": [0.45, 0.23, 0.12, ...],
---           "total_variance_explained": 0.80}
-
--- 80% of information retained with 83% size reduction`}
-                  </code>
-                </div>
               </div>
             </div>
 
@@ -141,24 +150,32 @@ SELECT reduce_dimensionality_pca(
             <div>
               <h2 className="text-3xl font-bold text-white mb-8">Outlier Detection</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <h3 className="text-2xl font-bold text-yellow-300 mb-4">Isolation Forest</h3>
+                <h3 className="text-2xl font-bold text-yellow-300 mb-4">Z-score Outlier Detection</h3>
                 <p className="text-white/80 mb-6">
-                  Detect anomalies and unusual patterns in your vector data using Isolation Forest algorithm.
+                  Statistical anomaly detection using Z-scores. Matches the workflow in NeuronDB/demo/ML/005_outlier_detection.sql.
                 </p>
                 <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
                   <code className="text-green-300">
-                    {`-- Detect outliers with 95% confidence
-SELECT detect_outliers(
-  'customer_data',
+                    {`-- Flag outliers using Z-score
+SELECT detect_outliers_zscore(
+  'train_data',
   'features',
-  0.95  -- confidence level
-) AS outlier_count;
+  3.0,      -- threshold (higher = fewer outliers)
+  'zscore'  -- method
+) AS outliers;
 
--- Get outlier details
-SELECT id, anomaly_score
-FROM neurondb_outlier_scores('customer_data', 'features', 0.95)
-WHERE is_outlier = true
-ORDER BY anomaly_score DESC;`}
+-- Aggregate fraud detection rate among outliers (demo schema)
+WITH flags AS (
+  SELECT detect_outliers_zscore('train_data','features',3.0,'zscore') AS f
+), labeled AS (
+  SELECT t.is_fraud, o.is_outlier
+  FROM (SELECT is_fraud, ROW_NUMBER() OVER (ORDER BY transaction_id) rn FROM train_data) t,
+       flags,
+       LATERAL unnest(f) WITH ORDINALITY AS o(is_outlier, rn)
+  WHERE t.rn = o.rn
+)
+SELECT ROUND(100.0*SUM(CASE WHEN is_outlier AND is_fraud THEN 1 ELSE 0 END)/NULLIF(SUM(CASE WHEN is_fraud THEN 1 ELSE 0 END),0),2) AS fraud_detection_rate
+FROM labeled;`}
                   </code>
                 </div>
               </div>
@@ -169,10 +186,10 @@ ORDER BY anomaly_score DESC;`}
               <h3 className="text-2xl font-bold text-white mb-6">Related Documentation</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <Link href="/docs/neurondb/gpu" className="flex items-center gap-3 bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-all group">
-                  <Zap className="w-6 h-6 text-emerald-400" />
+                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/40" />
                   <div>
                     <div className="font-semibold text-white">GPU Acceleration</div>
-                    <div className="text-sm text-white/60">23x faster clustering</div>
+                    <div className="text-sm text-white/60">Vector distance + quantization</div>
                   </div>
                   <ArrowRight className="w-5 h-5 text-white/40 ml-auto" />
                 </Link>
