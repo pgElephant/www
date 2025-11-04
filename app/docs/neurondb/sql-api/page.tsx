@@ -34,7 +34,7 @@ INSERT INTO embeddings (embedding) VALUES ('[1, 2, 3]');
 INSERT INTO embeddings (embedding) VALUES (ARRAY[1.0, 2.0, 3.0]::vector);
 
 -- Cast from array
-SELECT ARRAY[1.0, 2.0, 3.0]::vector(3);`}</code></pre></pre>
+SELECT ARRAY[1.0, 2.0, 3.0]::vector(3);`}</code></pre>
             </pre>
           </div>
         </div>
@@ -99,7 +99,7 @@ SELECT neurondb_embed('Hello world', 'text-embedding-ada-002');
 -- Batch embeddings
 INSERT INTO documents (content, embedding)
 SELECT content, neurondb_embed(content, 'text-embedding-ada-002')
-FROM source_documents;`}</code></pre></pre>
+FROM source_documents;`}</code></pre>
             </pre>
           </div>
 
@@ -128,7 +128,7 @@ FROM (
   WHERE embedding IS NULL
   GROUP BY id
 ) batch
-WHERE documents.id = batch.id;`}</code></pre></pre>
+WHERE documents.id = batch.id;`}</code></pre>
             </pre>
           </div>
         </div>
@@ -153,7 +153,7 @@ WHERE documents.id = batch.id;`}</code></pre></pre>
 SET neurondb.gpu_enabled = true;
 
 SELECT vector_l2_distance_gpu(embedding, '[1,2,3]'::vector)
-FROM documents;`}</code></pre></pre>
+FROM documents;`}</code></pre>
             </pre>
           </div>
 
@@ -168,7 +168,7 @@ FROM documents;`}</code></pre></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT vector_cosine_distance_gpu(embedding, '[1,2,3]'::vector)
-FROM documents;`}</code></pre></pre>
+FROM documents;`}</code></pre>
             </pre>
           </div>
 
@@ -183,7 +183,7 @@ FROM documents;`}</code></pre></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT vector_inner_product_gpu(embedding, '[1,2,3]'::vector)
-FROM documents;`}</code></pre></pre>
+FROM documents;`}</code></pre>
             </pre>
           </div>
 
@@ -197,7 +197,7 @@ FROM documents;`}</code></pre></pre>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT vector_to_int8_gpu(embedding) FROM documents;`}</code></pre></pre>
+SELECT vector_to_int8_gpu(embedding) FROM documents;`}</code></pre>
             </pre>
           </div>
 
@@ -211,7 +211,7 @@ SELECT vector_to_int8_gpu(embedding) FROM documents;`}</code></pre></pre>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT vector_to_fp16_gpu(embedding) FROM documents;`}</code></pre></pre>
+SELECT vector_to_fp16_gpu(embedding) FROM documents;`}</code></pre>
             </pre>
           </div>
 
@@ -225,7 +225,7 @@ SELECT vector_to_fp16_gpu(embedding) FROM documents;`}</code></pre></pre>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT vector_to_binary_gpu(embedding) FROM documents;`}</code></pre></pre>
+SELECT vector_to_binary_gpu(embedding) FROM documents;`}</code></pre>
             </pre>
           </div>
         </div>
@@ -249,7 +249,7 @@ SELECT * FROM cluster_kmeans(
   5,  -- 5 clusters
   100,  -- max iterations
   0.0001  -- tolerance
-);`}</code></pre></pre>
+);`}</code></pre>
             </pre>
           </div>
 
@@ -268,7 +268,7 @@ SELECT * FROM cluster_minibatch_kmeans(
   10,  -- 10 clusters
   1000,  -- batch size
   50  -- max iterations
-);`}</code></pre></pre>
+);`}</code></pre>
             </pre>
           </div>
 
@@ -297,7 +297,7 @@ SELECT gmm_to_clusters(
   ARRAY(SELECT covariance FROM cluster_gmm(...)),
   ARRAY(SELECT weight FROM cluster_gmm(...))
 ) AS cluster_id
-FROM documents;`}</code></pre></pre>
+FROM documents;`}</code></pre>
             </pre>
           </div>
 
@@ -322,7 +322,7 @@ FROM (
     detect_outliers_zscore(embedding, 3.0) AS stats
   FROM documents
 ) sub
-WHERE (stats).is_outlier;`}</code></pre></pre>
+WHERE (stats).is_outlier;`}</code></pre>
             </pre>
           </div>
         </div>
@@ -344,7 +344,7 @@ WHERE (stats).is_outlier;`}</code></pre></pre>
 SELECT neurondb_create_ml_project(
   'customer_segments',
   'K-means clustering of customer embeddings'
-);`}</code></pre></pre>
+);`}</code></pre>
             </pre>
           </div>
 
@@ -363,7 +363,7 @@ SELECT neurondb_train_kmeans_project(
   ARRAY(SELECT embedding FROM train_data),
   5,  -- k clusters
   100  -- max iterations
-);`}</code></pre></pre>
+);`}</code></pre>
             </pre>
           </div>
 
@@ -377,7 +377,7 @@ SELECT neurondb_train_kmeans_project(
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT * FROM neurondb_list_project_models(1);`}</code></pre></pre>
+SELECT * FROM neurondb_list_project_models(1);`}</code></pre>
             </pre>
           </div>
 
@@ -391,7 +391,7 @@ SELECT * FROM neurondb_list_project_models(1);`}</code></pre></pre>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT neurondb_deploy_model(42, 'production_clusters');`}</code></pre></pre>
+SELECT neurondb_deploy_model(42, 'production_clusters');`}</code></pre>
             </pre>
           </div>
 
@@ -405,7 +405,7 @@ SELECT neurondb_deploy_model(42, 'production_clusters');`}</code></pre></pre>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT neurondb_get_deployed_model('production_clusters');`}</code></pre></pre>
+SELECT neurondb_get_deployed_model('production_clusters');`}</code></pre>
             </pre>
           </div>
 
@@ -419,7 +419,7 @@ SELECT neurondb_get_deployed_model('production_clusters');`}</code></pre></pre>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT neurondb_get_project_info(1);`}</code></pre></pre>
+SELECT neurondb_get_project_info(1);`}</code></pre>
             </pre>
           </div>
         </div>
@@ -453,7 +453,7 @@ SELECT
 FROM vector_results v
 FULL OUTER JOIN fts_results f ON v.id = f.id
 ORDER BY hybrid_score DESC
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
 
@@ -477,7 +477,7 @@ SELECT * FROM neurondb_rerank(
   'cross-encoder/ms-marco-MiniLM-L-12-v2'
 )
 ORDER BY rerank_score DESC
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
         </div>
@@ -506,7 +506,7 @@ SELECT neurondb_schedule_embedding_update(
   'content',
   'embedding',
   'text-embedding-ada-002'
-);`}</code></pre></pre>
+);`}</code></pre>
             </pre>
           </div>
 
@@ -518,7 +518,7 @@ SELECT neurondb_schedule_embedding_update(
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
-SELECT * FROM neurondb_worker_status();`}</code></pre></pre>
+SELECT * FROM neurondb_worker_status();`}</code></pre>
             </pre>
           </div>
         </div>

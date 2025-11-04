@@ -368,6 +368,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.blog,
+    },
+    {
+      url: `${baseUrl}/blog/neurondb`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.blog,
     }
   ]
 

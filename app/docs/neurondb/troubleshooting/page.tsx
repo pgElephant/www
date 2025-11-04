@@ -38,7 +38,7 @@ export default function TroubleshootingPage() {
 SET neurondb.gpu_fail_open = true;
 
 -- Verify GPU status in logs
-SET neurondb.log_level = 'debug';`}</code></pre></pre>
+SET neurondb.log_level = 'debug';`}</code></pre>
               </pre>
             </div>
           </div>
@@ -61,7 +61,7 @@ SET neurondb.log_level = 'debug';`}</code></pre></pre>
 -- Optimize for large batches
 SET neurondb.gpu_batch_size = 5000;
 SET neurondb.gpu_streams = 8;
-SET neurondb.gpu_memory_pool_mb = 2048;`}</code></pre></pre>
+SET neurondb.gpu_memory_pool_mb = 2048;`}</code></pre>
               </pre>
             </div>
           </div>
@@ -86,7 +86,7 @@ SET neurondb.gpu_batch_size = 500;
 SET neurondb.gpu_memory_pool_mb = 256;
 
 -- Use quantization to reduce memory
-SELECT vector_to_int8_gpu(embedding) FROM documents;`}</code></pre></pre>
+SELECT vector_to_int8_gpu(embedding) FROM documents;`}</code></pre>
               </pre>
             </div>
           </div>
@@ -118,7 +118,7 @@ SELECT * FROM cluster_kmeans(
   5,
   500,  -- increased max_iter
   0.001  -- relaxed tolerance
-);`}</code></pre></pre>
+);`}</code></pre>
               </pre>
             </div>
           </div>
@@ -146,7 +146,7 @@ WITH normalized AS (
 SELECT * FROM cluster_kmeans(
   (SELECT norm_emb FROM normalized),
   5, 100, 0.0001
-);`}</code></pre></pre>
+);`}</code></pre>
               </pre>
             </div>
           </div>
@@ -169,7 +169,7 @@ SELECT * FROM cluster_kmeans(
 SELECT * FROM detect_outliers_zscore(
   (SELECT embedding FROM documents),
   2.5  -- lower threshold (default 3.0)
-);`}</code></pre></pre>
+);`}</code></pre>
               </pre>
             </div>
           </div>
@@ -204,7 +204,7 @@ LIMIT 10;
 -- Expected: Index Scan using hnsw_idx on documents
 
 -- Force index usage (if needed)
-SET enable_seqscan = off;`}</code></pre></pre>
+SET enable_seqscan = off;`}</code></pre>
               </pre>
             </div>
           </div>
@@ -233,7 +233,7 @@ WITH (m = 12, ef_construction = 32);
 
 -- Or switch to IVF
 CREATE INDEX ON documents USING ivfflat (embedding vector_l2_ops)
-WITH (lists = 100);`}</code></pre></pre>
+WITH (lists = 100);`}</code></pre>
               </pre>
             </div>
           </div>
@@ -261,7 +261,7 @@ SET ivfflat.probes = 20;
 
 -- Exact search (no index)
 DROP INDEX documents_embedding_idx;
-SELECT * FROM documents ORDER BY embedding <-> query LIMIT 10;`}</code></pre></pre>
+SELECT * FROM documents ORDER BY embedding <-> query LIMIT 10;`}</code></pre>
               </pre>
             </div>
           </div>
@@ -291,7 +291,7 @@ SELECT * FROM documents ORDER BY embedding <-> query LIMIT 10;`}</code></pre></p
 SET neurondb.llm_api_key = 'sk-...';
 
 -- Persistent configuration (postgresql.conf or ALTER DATABASE)
-ALTER DATABASE mydb SET neurondb.llm_api_key = 'sk-...';`}</code></pre></pre>
+ALTER DATABASE mydb SET neurondb.llm_api_key = 'sk-...';`}</code></pre>
               </pre>
             </div>
           </div>
@@ -319,7 +319,7 @@ SET neurondb.llm_max_retries = 5;
 SELECT neurondb_embed_batch(
   ARRAY(SELECT content FROM documents LIMIT 100),  -- batch 100 at a time
   'text-embedding-ada-002'
-);`}</code></pre></pre>
+);`}</code></pre>
               </pre>
             </div>
           </div>
@@ -344,7 +344,7 @@ FROM pg_attribute
 WHERE attrelid = 'documents'::regclass AND attname = 'embedding';
 
 -- Update column dimension
-ALTER TABLE documents ALTER COLUMN embedding TYPE vector(3072);`}</code></pre></pre>
+ALTER TABLE documents ALTER COLUMN embedding TYPE vector(3072);`}</code></pre>
               </pre>
             </div>
           </div>
@@ -389,7 +389,7 @@ ALTER TABLE documents ALTER COLUMN embedding TYPE vector(3072);`}</code></pre></
 -- Use quantization to save memory
 ALTER TABLE documents ADD COLUMN embedding_int8 vector;
 UPDATE documents SET embedding_int8 = vector_to_int8_gpu(embedding);
-CREATE INDEX ON documents USING hnsw (embedding_int8 vector_l2_ops);`}</code></pre></pre>
+CREATE INDEX ON documents USING hnsw (embedding_int8 vector_l2_ops);`}</code></pre>
               </pre>
             </div>
           </div>
@@ -414,7 +414,7 @@ SELECT
   schemaname, tablename, indexname, 
   pg_size_pretty(pg_relation_size(indexrelid)) AS index_size
 FROM pg_stat_user_indexes
-WHERE tablename = 'documents';`}</code></pre></pre>
+WHERE tablename = 'documents';`}</code></pre>
             </pre>
           </div>
 
@@ -430,7 +430,7 @@ ORDER BY name;
 
 -- Check GPU status in logs
 SHOW neurondb.log_level;
-SET neurondb.log_level = 'debug';`}</code></pre></pre>
+SET neurondb.log_level = 'debug';`}</code></pre>
             </pre>
           </div>
 
@@ -447,7 +447,7 @@ SELECT
 FROM pg_stat_statements
 WHERE query LIKE '%embedding%'
 ORDER BY mean_exec_time DESC
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
         </div>

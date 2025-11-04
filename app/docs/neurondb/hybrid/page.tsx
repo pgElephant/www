@@ -1,6 +1,29 @@
 export const metadata = {
-  title: 'NeuronDB · Hybrid Search',
-  description: 'Combine semantic vector search with lexical (BM25) and apply learning-to-rank for better relevance.',
+  title: 'Hybrid Search PostgreSQL | Vector + Full-Text BM25 - NeuronDB',
+  description: 'Combine semantic vector search with BM25 full-text search in PostgreSQL. Reciprocal Rank Fusion (RRF), learning-to-rank, and weighted scoring for best-in-class search relevance. Better than Elasticsearch for AI apps.',
+  keywords: [
+    'hybrid search',
+    'hybrid search PostgreSQL',
+    'vector full-text search',
+    'BM25 PostgreSQL',
+    'semantic search combination',
+    'RRF PostgreSQL',
+    'reciprocal rank fusion',
+    'learning to rank',
+    'vector keyword search',
+    'combined search PostgreSQL',
+    'Elasticsearch alternative',
+    'full-text vector search',
+    'search relevance PostgreSQL'
+  ],
+  openGraph: {
+    title: 'Hybrid Search - Vector + Full-Text in PostgreSQL',
+    description: 'Best-in-class search combining semantic vectors with BM25 keyword search. RRF and learning-to-rank in one database.',
+    url: 'https://www.pgelephant.com/docs/neurondb/hybrid',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/hybrid',
+  },
 }
 
 import React from 'react'

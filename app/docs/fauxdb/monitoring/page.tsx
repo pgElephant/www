@@ -32,7 +32,7 @@ const FauxDBMonitoringPage = () => {
             <div className="bg-slate-900/50 rounded-lg p-4 mb-4"><pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[monitoring]
 prometheus_enabled = true
 prometheus_port = 9090
-metrics_path = "/metrics"`}</code></pre></pre></div>
+metrics_path = "/metrics"`}</code></pre></div>
             <p className="text-slate-300 text-sm">Access metrics at: <code className="text-emerald-400">http://localhost:9090/metrics</code></p>
           </div>
         </section>
@@ -71,7 +71,7 @@ metrics_path = "/metrics"`}</code></pre></pre></div>
 # Or manually configure:
 1. Add Prometheus data source
 2. Import dashboard JSON from /monitoring/grafana-dashboard.json
-3. Configure variables for your environment`}</code></pre></pre></div>
+3. Configure variables for your environment`}</code></pre></div>
           </div>
         </section>
 

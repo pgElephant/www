@@ -1,6 +1,28 @@
 export const metadata = {
-  title: 'NeuronDB · Getting Started',
-  description: 'Create the extension, define a table with vectors, run first ANN queries, and understand the basic vector types.',
+  title: 'NeuronDB Quick Start - Build AI Apps with PostgreSQL in 5 Minutes',
+  description: 'Get started with NeuronDB PostgreSQL vector database. Learn to create embeddings, perform semantic search, build RAG applications, and run similarity queries. Includes code examples for OpenAI, Python, Node.js, and LangChain integration.',
+  keywords: [
+    'NeuronDB tutorial',
+    'PostgreSQL vector search',
+    'semantic search tutorial',
+    'RAG tutorial PostgreSQL',
+    'vector embeddings tutorial',
+    'pgvector getting started',
+    'similarity search PostgreSQL',
+    'OpenAI PostgreSQL integration',
+    'LangChain PostgreSQL',
+    'vector database tutorial',
+    'AI database quickstart',
+    'embedding search PostgreSQL'
+  ],
+  openGraph: {
+    title: 'NeuronDB Getting Started - PostgreSQL Vector Database Tutorial',
+    description: 'Quick start guide for building AI applications with NeuronDB. Code examples for semantic search, RAG, and vector similarity.',
+    url: 'https://www.pgelephant.com/docs/neurondb/getting-started',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/getting-started',
+  },
 }
 
 
@@ -9,8 +31,61 @@ import Link from 'next/link'
 import { Terminal, Download, BookOpen, Play, CheckCircle, AlertCircle, Code, Database, Zap } from 'lucide-react'
 
 export default function Page() {
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is NeuronDB?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'NeuronDB is a production-ready PostgreSQL extension that transforms your database into an AI platform with vector search, ML inference, and hybrid retrieval capabilities. It supports semantic search, RAG applications, and similarity queries.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I install NeuronDB?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Install NeuronDB by downloading the extension from the official repository, building from source with make && make install, and then enabling it in PostgreSQL with CREATE EXTENSION neurondb;'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Is NeuronDB compatible with pgvector?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, NeuronDB is fully compatible with pgvector and can be used as a drop-in replacement with additional features like GPU acceleration, HNSW indexing, and ML inference capabilities.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'What can I build with NeuronDB?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'You can build semantic search engines, RAG (Retrieval Augmented Generation) applications, recommendation systems, chatbots, image search, document similarity matching, and any AI application requiring vector embeddings and similarity search.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Does NeuronDB support GPU acceleration?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, NeuronDB supports GPU acceleration using CUDA for 10-100x faster vector search compared to CPU-only implementations. GPU support is optional and works with NVIDIA GPUs.'
+        }
+      }
+    ]
+  }
+  
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+      {/* JSON-LD FAQ Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
+      
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />

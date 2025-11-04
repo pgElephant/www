@@ -1,6 +1,29 @@
 export const metadata = {
-  title: 'NeuronDB · GPU Acceleration',
-  description: 'Enable CUDA/ROCm acceleration, inspect GPU status, and monitor performance with NeuronDB.',
+  title: 'GPU-Accelerated Vector Search | NeuronDB PostgreSQL Performance',
+  description: 'Enable GPU acceleration for NeuronDB with NVIDIA CUDA and AMD ROCm. Achieve 10-100x faster vector similarity search, HNSW indexing, and embedding generation. Supports RTX, A100, MI250 GPUs. Production-ready GPU database configuration.',
+  keywords: [
+    'GPU vector database',
+    'CUDA PostgreSQL',
+    'GPU accelerated search',
+    'NVIDIA vector search',
+    'AMD ROCm database',
+    'GPU similarity search',
+    'fast vector search',
+    'GPU HNSW',
+    'accelerated embeddings',
+    'GPU PostgreSQL extension',
+    'RTX vector database',
+    'A100 database',
+    'GPU machine learning'
+  ],
+  openGraph: {
+    title: 'GPU Acceleration for NeuronDB - 100x Faster Vector Search',
+    description: 'Enable CUDA/ROCm GPU acceleration for lightning-fast vector similarity search in PostgreSQL.',
+    url: 'https://www.pgelephant.com/docs/neurondb/gpu',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/gpu',
+  },
 }
 
 import React from 'react'

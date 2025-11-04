@@ -1,6 +1,28 @@
 export const metadata = {
-  title: 'NeuronDB · Performance & Tuning',
-  description: 'Recall/latency tuning, ANN parameters, storage, and system settings for NeuronDB.',
+  title: 'Vector Database Performance Tuning | Optimize NeuronDB PostgreSQL',
+  description: 'Complete performance optimization guide for NeuronDB PostgreSQL vector database. HNSW tuning, recall optimization, latency reduction, memory management, and production scaling. Handle 100M+ vectors with sub-10ms queries.',
+  keywords: [
+    'vector database performance',
+    'PostgreSQL performance tuning',
+    'HNSW optimization',
+    'vector search performance',
+    'database tuning',
+    'recall optimization',
+    'latency optimization',
+    'PostgreSQL scaling',
+    'vector index tuning',
+    'database performance',
+    'fast vector search',
+    'production vector database'
+  ],
+  openGraph: {
+    title: 'Performance Tuning Guide - NeuronDB Vector Database',
+    description: 'Optimize NeuronDB for production. HNSW tuning, recall/latency optimization, and scaling to 100M+ vectors.',
+    url: 'https://www.pgelephant.com/docs/neurondb/performance',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/performance',
+  },
 }
 
 import React from 'react'

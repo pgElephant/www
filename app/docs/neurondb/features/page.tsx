@@ -318,7 +318,7 @@ LIMIT 5;
 -- Vector operations
 SELECT embedding + '[0.1, 0.1, ...]'::vector FROM embeddings LIMIT 1;
 SELECT embedding * 2.0 FROM embeddings LIMIT 1;
-SELECT embedding || '[0.5]'::vector FROM embeddings LIMIT 1;`}</code></pre></pre>
+SELECT embedding || '[0.5]'::vector FROM embeddings LIMIT 1;`}</code></pre>
             </pre>
           </div>
         </section>

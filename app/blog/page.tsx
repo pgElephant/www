@@ -31,7 +31,7 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '3', icon: BookOpen, color: 'text-white' },
+  { label: 'Total Articles', value: '4', icon: BookOpen, color: 'text-white' },
   { label: 'Monthly Readers', value: '4.2k', icon: Eye, color: 'text-white' },
   { label: 'Categories', value: '1', icon: Tag, color: 'text-white' },
   { label: 'Authors', value: '1', icon: Users, color: 'text-white' }
@@ -39,6 +39,23 @@ const blogStats = [
 
 
 const blogPosts = [
+    {
+      slug: 'neurondb',
+      title: 'NeuronDB: PostgreSQL AI Vector Database Extension',
+      excerpt: 'Transform PostgreSQL into an AI platform with vector search, ML inference, and RAG capabilities. HNSW indexing, GPU acceleration, 10+ distance metrics, and full pgvector compatibility.',
+      content: 'NeuronDB is a production-ready PostgreSQL extension that provides vector search, machine learning inference, GPU acceleration, and hybrid retrieval capabilities for building semantic search, RAG applications, and recommendation systems.',
+      author: 'pgElephant Team',
+      authorRole: 'Core Developers',
+      date: '2025-02-20',
+      readTime: '22 min read',
+      category: 'Technical',
+      featured: true,
+      icon: 'neurondb',
+      views: 0,
+      likes: 0,
+      comments: 0,
+      tags: ['AI', 'Vector Database', 'Machine Learning', 'Semantic Search', 'RAG', 'PostgreSQL']
+    },
   {
     slug: 'pgbalancer',
     title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',

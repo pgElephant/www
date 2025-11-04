@@ -1,6 +1,25 @@
 export const metadata = {
-  title: 'NeuronDB · Configuration',
-  description: 'All configuration parameters (GUCs) and operational settings for NeuronDB.',
+  title: 'NeuronDB Configuration Guide | PostgreSQL Vector Database Settings',
+  description: 'Complete configuration reference for NeuronDB PostgreSQL extension. HNSW parameters, GPU settings, background workers, security, performance tuning, and production deployment settings. All GUC parameters explained.',
+  keywords: [
+    'NeuronDB configuration',
+    'PostgreSQL vector config',
+    'HNSW parameters',
+    'vector database config',
+    'PostgreSQL extension settings',
+    'GPU database configuration',
+    'vector index configuration',
+    'production database settings',
+    'PostgreSQL tuning'
+  ],
+  openGraph: {
+    title: 'NeuronDB Configuration Reference - PostgreSQL Vector Database',
+    description: 'Complete configuration guide for NeuronDB. HNSW, GPU, workers, security, and performance settings.',
+    url: 'https://www.pgelephant.com/docs/neurondb/configuration',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/configuration',
+  },
 }
 
 import React from 'react'

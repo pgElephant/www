@@ -374,7 +374,7 @@ neurondb.huggingface_token = 'hf_...'     # HuggingFace token
 neurondb.batch_size = 100                  # Embedding batch size
 neurondb.request_timeout = 30              # API timeout (seconds)
 neurondb.max_retries = 3                   # Retry failed requests
-neurondb.cache_ttl = 86400                 # Cache TTL (seconds)`}</code></pre></pre>
+neurondb.cache_ttl = 86400                 # Cache TTL (seconds)`}</code></pre>
             </pre>
           </div>
         </section>

@@ -1,8 +1,32 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Indexing and Distance Metrics | NeuronDB',
-  description: 'Learn about NeuronDB vector indexing strategies, distance metrics, operators, and approximate nearest neighbor (ANN) search.'
+  title: 'Vector Indexing & ANN Search | HNSW, IVFFlat for PostgreSQL - NeuronDB',
+  description: 'Complete guide to vector indexing in NeuronDB PostgreSQL. Learn HNSW, IVFFlat, LSH algorithms, distance metrics (cosine, L2, dot product), and optimize ANN (Approximate Nearest Neighbor) search performance. 10M+ vectors, millisecond queries.',
+  keywords: [
+    'HNSW PostgreSQL',
+    'IVFFlat index',
+    'vector index',
+    'ANN search',
+    'approximate nearest neighbor',
+    'cosine similarity index',
+    'L2 distance PostgreSQL',
+    'dot product search',
+    'vector indexing',
+    'similarity search index',
+    'fast vector search',
+    'pgvector index',
+    'vector database performance',
+    'embedding index'
+  ],
+  openGraph: {
+    title: 'Vector Indexing with HNSW & IVFFlat - NeuronDB PostgreSQL',
+    description: 'Production-grade vector indexing for PostgreSQL. HNSW, IVFFlat, LSH with 10+ distance metrics.',
+    url: 'https://www.pgelephant.com/docs/neurondb/indexing',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/indexing',
+  },
 };
 
 export default function IndexingPage() {
@@ -41,7 +65,7 @@ LIMIT 10;
 SELECT id, vector_l2_distance_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS distance
 FROM documents
 ORDER BY distance
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
 
@@ -63,7 +87,7 @@ LIMIT 10;
 SELECT id, vector_cosine_distance_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS distance
 FROM documents
 ORDER BY distance
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
 
@@ -85,7 +109,7 @@ LIMIT 10;
 SELECT id, vector_inner_product_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS score
 FROM documents
 ORDER BY score DESC
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
         </div>
@@ -160,7 +184,7 @@ SET hnsw.ef_search = 100;
 
 SELECT * FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
 
@@ -185,7 +209,7 @@ SET ivfflat.probes = 10;
 
 SELECT * FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
             </pre>
           </div>
         </div>
@@ -294,7 +318,7 @@ CREATE INDEX ON documents USING hnsw (embedding vector_l2_ops)
 WITH (m = 32, ef_construction = 128);
 
 -- Runtime tuning for higher recall
-SET hnsw.ef_search = 200;`}</code></pre></pre>
+SET hnsw.ef_search = 200;`}</code></pre>
             </pre>
           </div>
 
@@ -317,7 +341,7 @@ CREATE INDEX ON documents USING ivfflat (embedding vector_l2_ops)
 WITH (lists = 3000);
 
 -- Runtime tuning for better recall
-SET ivfflat.probes = 20;`}</code></pre></pre>
+SET ivfflat.probes = 20;`}</code></pre>
             </pre>
           </div>
         </div>
@@ -344,7 +368,7 @@ SELECT id,
        vector_inner_product_gpu(embedding, query_vec) AS ip_score
 FROM documents, (SELECT '[0.1, 0.2, 0.3]'::vector AS query_vec) q
 ORDER BY l2_dist
-LIMIT 100;`}</code></pre></pre>
+LIMIT 100;`}</code></pre>
         </pre>
       </section>
 
@@ -425,7 +449,7 @@ LIMIT 10;
 EXPLAIN ANALYZE
 SELECT id FROM documents
 ORDER BY embedding <=> '[0.1, 0.2, ...]'::vector
-LIMIT 10;`}</code></pre></pre>
+LIMIT 10;`}</code></pre>
         </pre>
       </section>
 

@@ -91,7 +91,7 @@ const FauxDBTroubleshootingPage = () => {
 level = "debug"
 format = "json"
 output = "file"
-file_path = "/var/log/fauxdb/debug.log"`}</code></pre></pre></div>
+file_path = "/var/log/fauxdb/debug.log"`}</code></pre></div>
             <p className="text-slate-300 text-sm">View logs: <code className="text-emerald-400">tail -f /var/log/fauxdb/debug.log</code></p>
           </div>
         </section>

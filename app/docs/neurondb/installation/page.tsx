@@ -1,6 +1,27 @@
 export const metadata = {
-  title: 'NeuronDB · Installation',
-  description: 'Supported PostgreSQL versions, prerequisites, build & install steps, and GPU enablement for NeuronDB.',
+  title: 'Install NeuronDB PostgreSQL Vector Database | Step-by-Step Guide',
+  description: 'Complete installation guide for NeuronDB - PostgreSQL AI vector database extension. Supports PostgreSQL 12-17, Ubuntu, Debian, RHEL, macOS. Includes GPU setup (CUDA/ROCm), dependencies, and configuration. Get started in 5 minutes.',
+  keywords: [
+    'install NeuronDB',
+    'NeuronDB installation',
+    'PostgreSQL vector database setup',
+    'pgvector alternative',
+    'vector database installation',
+    'PostgreSQL AI extension',
+    'NeuronDB Ubuntu',
+    'NeuronDB Docker',
+    'GPU database setup',
+    'CUDA PostgreSQL',
+    'install pgvector alternative'
+  ],
+  openGraph: {
+    title: 'Install NeuronDB - PostgreSQL Vector Database Extension',
+    description: 'Step-by-step guide to install NeuronDB on PostgreSQL 12-17. Supports Ubuntu, Debian, RHEL, macOS with optional GPU acceleration.',
+    url: 'https://www.pgelephant.com/docs/neurondb/installation',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/installation',
+  },
 }
 
 import React from 'react'

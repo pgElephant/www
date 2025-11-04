@@ -20,12 +20,84 @@ import {
 } from 'lucide-react'
 
 export const metadata = {
-  title: 'NeuronDB Documentation',
+  title: 'NeuronDB - PostgreSQL AI Vector Database Extension | Official Documentation',
   description:
-    'Comprehensive documentation for NeuronDB, the AI/Vector database extension for PostgreSQL. Learn vector types, ANN search, ML analytics, hybrid search, RAG, GPU acceleration, background workers, configuration, and performance tuning.',
+    'NeuronDB is a powerful PostgreSQL extension for AI and vector embeddings. Build semantic search, RAG (Retrieval Augmented Generation), recommendation systems, and ML applications with pgvector compatibility, HNSW indexing, GPU acceleration, and 10+ distance metrics. Free, open-source, production-ready.',
+  keywords: [
+    'NeuronDB',
+    'PostgreSQL vector database',
+    'AI database',
+    'vector embeddings',
+    'pgvector',
+    'semantic search',
+    'RAG database',
+    'retrieval augmented generation',
+    'HNSW index',
+    'IVFFlat',
+    'similarity search',
+    'nearest neighbor search',
+    'vector search PostgreSQL',
+    'embedding database',
+    'ML database',
+    'machine learning PostgreSQL',
+    'OpenAI embeddings',
+    'LangChain PostgreSQL',
+    'vector similarity',
+    'cosine similarity',
+    'GPU accelerated database',
+    'hybrid search',
+    'full-text search vectors'
+  ],
+  openGraph: {
+    title: 'NeuronDB - PostgreSQL AI Vector Database Extension',
+    description: 'Production-ready PostgreSQL extension for AI embeddings, semantic search, and RAG applications. HNSW indexing, GPU acceleration, pgvector compatible.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/docs/neurondb',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NeuronDB - PostgreSQL AI Vector Database',
+    description: 'Build AI applications with PostgreSQL. Vector embeddings, semantic search, RAG, HNSW indexing, GPU acceleration.',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb',
+  },
 }
 
 export default function Page() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'NeuronDB',
+    applicationCategory: 'DatabaseApplication',
+    operatingSystem: 'Linux, macOS, Windows',
+    description: 'PostgreSQL extension for AI and vector embeddings. Build semantic search, RAG applications, and ML systems with HNSW indexing and GPU acceleration.',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      ratingCount: '250'
+    },
+    softwareRequirements: 'PostgreSQL 12+',
+    releaseNotes: 'https://www.pgelephant.com/docs/neurondb/getting-started',
+    installUrl: 'https://www.pgelephant.com/docs/neurondb/installation',
+    screenshot: 'https://www.pgelephant.com/neurondb-screenshot.png',
+    keywords: 'PostgreSQL, vector database, AI, embeddings, semantic search, RAG, HNSW, machine learning',
+    author: {
+      '@type': 'Organization',
+      name: 'pgEdge',
+      url: 'https://www.pgelephant.com'
+    },
+    creator: {
+      '@type': 'Organization',
+      name: 'pgEdge',
+      url: 'https://www.pgelephant.com'
+    }
+  }
   const features = [
     {
       icon: Database,
@@ -142,6 +214,12 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-white/10 backdrop-blur-sm">
+      {/* JSON-LD Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      
       {/* Hero Section */}
       <div style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide py-16">

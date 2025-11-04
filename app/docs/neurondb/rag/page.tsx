@@ -1,8 +1,35 @@
-'use client'
-
 import React from 'react'
 import Link from 'next/link'
 import { Zap, Brain, Search, ArrowRight, CheckCircle, Database } from 'lucide-react'
+
+export const metadata = {
+  title: 'RAG with PostgreSQL | NeuronDB Retrieval Augmented Generation',
+  description: 'Build production RAG (Retrieval Augmented Generation) applications with NeuronDB and PostgreSQL. Combine vector search + full-text search for AI chatbots, document Q&A, and knowledge bases. Includes OpenAI, LangChain, LlamaIndex examples.',
+  keywords: [
+    'RAG PostgreSQL',
+    'retrieval augmented generation',
+    'RAG database',
+    'ChatGPT PostgreSQL',
+    'LangChain PostgreSQL',
+    'LlamaIndex PostgreSQL',
+    'AI chatbot database',
+    'document QA PostgreSQL',
+    'semantic search RAG',
+    'hybrid search RAG',
+    'vector database RAG',
+    'OpenAI RAG',
+    'GPT-4 PostgreSQL',
+    'knowledge base database'
+  ],
+  openGraph: {
+    title: 'Build RAG Applications with NeuronDB PostgreSQL',
+    description: 'Production-ready RAG stack with PostgreSQL. Vector search, full-text search, and AI embeddings in one database.',
+    url: 'https://www.pgelephant.com/docs/neurondb/rag',
+  },
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/rag',
+  },
+}
 
 export default function NeuronDBRAGPage() {
   return (
