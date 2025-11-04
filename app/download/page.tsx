@@ -235,9 +235,12 @@ const DownloadPage = () => {
 
         <div className="container-extra-wide mx-auto relative z-10 pt-20 pb-16">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">Download Center</h1>
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <Image src="/ico/pgElephant_HD.ico" alt="pgElephant" width={80} height={80} className="drop-shadow-2xl" />
+            </div>
+            <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">pgElephant Download Center</h1>
             <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow-lg">
-              Official, production-grade releases. Secure, fast, and trusted by global enterprises.
+              Official pgElephant releases. Open source PostgreSQL extensions and tools for modern distributed systems.
             </p>
             {/* Trust Bar */}
             <div className="flex flex-wrap justify-center gap-6 mb-10">
@@ -262,102 +265,150 @@ const DownloadPage = () => {
         </div>
       </section>
 
-      {/* Professional Download Table/List */}
+      {/* pgElephant Products - Card-Based Layout */}
       <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide mx-auto">
-          <div className="max-w-5xl mx-auto">
-            <table className="w-full text-left border-separate border-spacing-y-0">
-              <thead>
-                <tr className="text-white text-sm uppercase tracking-wider font-semibold">
-                  <th className="py-2">Product</th>
-                  <th className="py-2">Description</th>
-                  <th className="py-2">Downloads</th>
-                  <th className="py-2">Release Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product, idx) => (
-                  <tr
-                    key={product.id}
-                    className={
-                      `transition ` +
-                      (idx % 2 === 0 ? 'bg-white/10 backdrop-blur-sm' : 'bg-white/5 backdrop-blur-sm') +
-                      (product.featured ? ' ring-2 ring-cyan-400/40' : '') +
-                      ' hover:bg-white/20'
-                    }
-                  >
-                    <td className="py-3 px-2 align-top whitespace-nowrap">
-                      <div className="flex items-center gap-3">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-white mb-4">pgElephant Products</h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Production-ready PostgreSQL extensions and tools. Built by developers, for developers.
+            </p>
+          </div>
+
+          <div className="max-w-7xl mx-auto space-y-8">
+            {products.map((product, idx) => (
+              <div
+                key={product.id}
+                className={`bg-gradient-to-r from-slate-800/60 to-slate-900/60 backdrop-blur-sm rounded-2xl p-8 border transition-all hover:shadow-2xl hover:scale-[1.02] ${
+                  product.featured 
+                    ? 'border-cyan-400/50 shadow-lg shadow-cyan-500/20' 
+                    : 'border-white/10'
+                }`}
+              >
+                <div className="flex flex-col lg:flex-row gap-8">
+                  {/* Left: Product Info */}
+                  <div className="flex-1">
+                    <div className="flex items-start gap-6 mb-6">
+                      {/* Product Icon */}
+                      <div className="flex-shrink-0">
                         {product.icon === 'pgbalancer-custom' ? (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-cyan-400/30 bg-gradient-to-br from-cyan-500/20 to-blue-500/20">
                             <PgbalancerIcon />
                           </div>
                         ) : product.icon === 'pgraft-custom' ? (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-blue-400/30 bg-gradient-to-br from-blue-500/20 to-purple-500/20">
                             <PgraftIcon />
                           </div>
                         ) : product.icon === 'fauxdb-custom' ? (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
+                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-emerald-400/30 bg-gradient-to-br from-emerald-500/20 to-green-500/20">
                             <FauxDbIcon />
                           </div>
-                        ) : product.icon === 'rale-custom' ? (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
-                            <RaleIcon />
-                          </div>
-                        ) : product.icon === 'ram-custom' ? (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/20 bg-white/5">
-                            <RamIcon />
-                          </div>
                         ) : (
-                          <Image src={product.icon} alt={`${product.name} icon`} width={48} height={48} className="w-12 h-12 object-contain rounded-lg border border-white/20" />
+                          <Image src={product.icon} alt={`${product.name} icon`} width={80} height={80} className="w-20 h-20 object-contain rounded-xl border-2 border-white/20" />
                         )}
-                        <div>
-                          <div className="font-bold text-lg text-white flex items-center gap-2">
-                            {product.name}
-                            {product.featured && (
-                              <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-thin px-2 py-0.5 rounded animate-pulse border border-white/30">New</span>
-                            )}
-                            <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-thin px-2 py-0.5 rounded border border-white/30">Stable</span>
-                          </div>
-                        </div>
                       </div>
-                    </td>
-                    <td className="py-3 px-2 align-top text-sm text-white max-w-xs">
-                      <div className="flex flex-col h-full min-h-[180px]">
-                        <div className="flex-1">
-                          <div className="font-semibold text-base text-white mb-1">{product.title}</div>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 list-disc list-inside mb-4">
-                            {product.features && product.features.map((feature, i) => (
-                              <li key={i} className="text-white text-xs leading-snug font-medium">{feature}</li>
-                            ))}
-                          </ul>
+
+                      {/* Product Name & Badges */}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="text-3xl font-bold text-white">{product.name}</h3>
+                          {product.featured && (
+                            <span className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse">
+                              FEATURED
+                            </span>
+                          )}
+                          <span className="bg-green-500/20 border border-green-500/30 text-green-300 text-xs font-bold px-3 py-1 rounded-full">
+                            STABLE
+                          </span>
                         </div>
-                        <div className="flex items-end mt-auto">
-                          <Link href={product.details} className="inline-block mt-2 text-xs font-semibold text-blue-400 hover:underline hover:text-blue-300 transition">View Enterprise Details</Link>
+                        <p className="text-xl text-cyan-300 font-semibold mb-4">{product.title}</p>
+
+                        {/* Features Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {product.features && product.features.map((feature, i) => {
+                            const [title, ...desc] = feature.split(':');
+                            return (
+                              <div key={i} className="flex items-start gap-2">
+                                <CheckCircle className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                                <div className="flex-1">
+                                  <span className="text-white font-semibold">{title}</span>
+                                  {desc.length > 0 && (
+                                    <span className="text-slate-300 text-sm">: {desc.join(':')}</span>
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
+
+                        {/* Product Details Link */}
+                        <Link 
+                          href={product.details} 
+                          className="inline-flex items-center gap-2 mt-6 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors group"
+                        >
+                          <FileText className="w-5 h-5" />
+                          View Full Documentation
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
                       </div>
-                    </td>
-                    <td className="py-3 px-2 align-top">
-                      <div className="flex flex-col gap-2">
-                        {product.downloads.map((download, index) => (
-                          <Link key={index} href={download.href} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/20 hover:border-blue-400 hover:bg-white/10 transition-colors text-sm font-bold">
-                            {(() => {
-                              const IconComponent = getDownloadIcon(download.type)
-                              return <IconComponent className="w-4 h-4 text-blue-400" />
-                            })()}
-                            {download.title}
-                            <span className="ml-2 text-xs text-blue-400 font-bold">{download.type}</span>
-                          </Link>
-                        ))}
+                    </div>
+                  </div>
+
+                  {/* Right: Download Options */}
+                  <div className="lg:w-80 flex-shrink-0">
+                    <div className="bg-slate-900/80 rounded-xl p-6 border border-white/10">
+                      <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <Download className="w-5 h-5 text-cyan-400" />
+                        Download Options
+                      </h4>
+                      
+                      <div className="space-y-3">
+                        {product.downloads.map((download, index) => {
+                          const IconComponent = getDownloadIcon(download.type);
+                          return (
+                            <Link 
+                              key={index} 
+                              href={download.href}
+                              className="flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white transition-all hover:shadow-lg hover:scale-105 group"
+                            >
+                              <div className="flex items-center gap-3">
+                                <IconComponent className="w-5 h-5" />
+                                <div>
+                                  <div className="font-bold text-sm">{download.title}</div>
+                                  <div className="text-xs opacity-90">{download.type}</div>
+                                </div>
+                              </div>
+                              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                          );
+                        })}
                       </div>
-                    </td>
-                    <td className="py-3 px-2 align-top">
-                      <a href={`https://github.com/pgElephant/${product.id}/releases`} target="_blank" rel="noopener" className="text-xs text-blue-400 hover:underline font-semibold">View</a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+
+                      {/* Release Notes */}
+                      <div className="mt-6 pt-6 border-t border-white/10">
+                        <a 
+                          href={`https://github.com/pgElephant/${product.id}/releases`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2 text-slate-300 hover:text-white transition-colors"
+                        >
+                          <Github className="w-4 h-4" />
+                          <span className="text-sm font-semibold">View Release Notes</span>
+                        </a>
+                      </div>
+
+                      {/* Version Badge */}
+                      <div className="mt-4 text-center">
+                        <span className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-slate-300 text-xs px-3 py-1 rounded-full">
+                          <Star className="w-3 h-3 text-yellow-400" />
+                          Latest: v1.0.0
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -399,8 +450,11 @@ const DownloadPage = () => {
       <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide mx-auto">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-thin text-white mb-4">Why Download from pgElephant?</h2>
-            <p className="text-lg text-white mb-8">All downloads are cryptographically signed, verified, and scanned for security. We provide open source, enterprise-grade software trusted by leading organizations worldwide.</p>
+            <h2 className="text-2xl md:text-3xl font-thin text-white mb-4">Why Choose pgElephant?</h2>
+            <p className="text-lg text-white mb-8">
+              pgElephant is an independent open source project providing enterprise-grade PostgreSQL extensions and tools. 
+              All releases are cryptographically signed, verified, and built from source on GitHub Actions.
+            </p>
             <div className="flex flex-wrap justify-center gap-6">
               {trustBar.map((item, i) => (
                 <div key={i} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-base font-semibold text-white">
