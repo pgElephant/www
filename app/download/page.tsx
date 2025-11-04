@@ -173,6 +173,7 @@ const DownloadPage = () => {
       title: 'AI Database Extension for PostgreSQL',
       icon: 'neurondb-custom',
       featured: true,
+      isExtension: true,
       features: [
         'Vector Search: High-performance vector similarity search with multiple index types',
         'ML Inference: Built-in machine learning models and embedding generation',
@@ -183,9 +184,11 @@ const DownloadPage = () => {
       ],
       details: '/docs/neurondb',
       downloads: [
-        { title: 'Linux Binary', href: '/download/neurondb', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/neurondb', type: 'Source' },
-        { title: 'Docker Image', href: '/download/neurondb', type: 'Docker' }
+        { title: 'Source Code', href: 'https://github.com/pgelephant/neurondb', type: 'Source', available: true },
+        { title: 'Installation Guide', href: '/docs/neurondb/installation', type: 'Docs', available: true },
+        { title: 'RPM Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
+        { title: 'DEB Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
+        { title: 'Docker Image', href: '#', type: 'Docker', available: false, note: 'PostgreSQL Extension' }
       ]
     },
     {
@@ -194,6 +197,7 @@ const DownloadPage = () => {
       title: 'Performance Analytics Extension',
       icon: 'pg_stat_insights-custom',
       featured: false,
+      isExtension: true,
       features: [
         '52 Performance Metrics: Track planning, execution, I/O, WAL, JIT, and parallel execution',
         'Enhanced Analytics: 11 specialized views for comprehensive query analysis',
@@ -204,9 +208,11 @@ const DownloadPage = () => {
       ],
       details: '/docs/pg-stat-insights',
       downloads: [
-        { title: 'Linux Binary', href: '/download/pg_stat_insights', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/pg_stat_insights', type: 'Source' },
-        { title: 'Docker Image', href: '/download/pg_stat_insights', type: 'Docker' }
+        { title: 'Source Code', href: 'https://github.com/pgelephant/pg_stat_insights', type: 'Source', available: true },
+        { title: 'Installation Guide', href: '/docs/pg-stat-insights/getting-started', type: 'Docs', available: true },
+        { title: 'RPM Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
+        { title: 'DEB Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
+        { title: 'Docker Image', href: '#', type: 'Docker', available: false, note: 'PostgreSQL Extension' }
       ]
     },
     {
@@ -215,6 +221,7 @@ const DownloadPage = () => {
       title: 'PostgreSQL Raft Consensus Extension',
       icon: 'pgraft-custom',
       featured: false,
+      isExtension: true,
       features: [
         'Raft Consensus Protocol: Implements the Raft algorithm for distributed consensus',
         'Automatic Leader Election: Seamless leader election and failover',
@@ -225,9 +232,11 @@ const DownloadPage = () => {
       ],
       details: '/pgraft',
       downloads: [
-        { title: 'Linux Binary', href: '/download/pgraft', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/pgraft', type: 'Source' },
-        { title: 'Docker Image', href: '/download/pgraft', type: 'Docker' }
+        { title: 'Source Code', href: 'https://github.com/pgelephant/pgraft', type: 'Source', available: true },
+        { title: 'Installation Guide', href: '/docs/pgraft/installation', type: 'Docs', available: true },
+        { title: 'RPM Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
+        { title: 'DEB Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
+        { title: 'Docker Image', href: '#', type: 'Docker', available: false, note: 'PostgreSQL Extension' }
       ]
     },
     {
@@ -235,6 +244,7 @@ const DownloadPage = () => {
       name: 'FauxDB',
       title: 'MongoDB Compatible Document Database',
       icon: 'fauxdb-custom',
+      isExtension: false,
       features: [
         '100% MongoDB Compatibility: Full wire protocol support with mongosh compatibility',
         'High Performance: Built in Rust for superior speed and memory efficiency',
@@ -245,9 +255,9 @@ const DownloadPage = () => {
       ],
       details: '/fauxdb',
       downloads: [
-        { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/fauxdb', type: 'Source' },
-        { title: 'Docker Image', href: '/download/fauxdb', type: 'Docker' }
+        { title: 'Source Code', href: 'https://github.com/pgelephant/fauxdb', type: 'Source', available: true },
+        { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary', available: true },
+        { title: 'Docker Image', href: '/download/fauxdb', type: 'Docker', available: true }
       ]
     },
     {
@@ -255,6 +265,7 @@ const DownloadPage = () => {
       name: 'pgbalancer',
       title: 'Connection Pooling & Load Balancing for PostgreSQL',
       icon: 'pgbalancer-custom',
+      isExtension: false,
       features: [
         'High Performance: Enterprise-grade connection pooling with minimal latency',
         'Load Balancing: Intelligent query distribution across multiple PostgreSQL nodes',
@@ -265,9 +276,9 @@ const DownloadPage = () => {
       ],
       details: '/pgbalancer',
       downloads: [
-        { title: 'Linux Binary', href: '/download/pgbalancer', type: 'Binary' },
-        { title: 'Source Code', href: 'https://github.com/pgelephant/pgbalancer', type: 'Source' },
-        { title: 'Docker Image', href: '/download/pgbalancer', type: 'Docker' }
+        { title: 'Source Code', href: 'https://github.com/pgelephant/pgbalancer', type: 'Source', available: true },
+        { title: 'Linux Binary', href: '/download/pgbalancer', type: 'Binary', available: true },
+        { title: 'Docker Image', href: '/download/pgbalancer', type: 'Docker', available: true }
       ]
     },
   ]
@@ -430,9 +441,43 @@ const DownloadPage = () => {
                         Download Options
                       </h4>
                       
+                      {/* Extension Notice */}
+                      {product.isExtension && (
+                        <div className="mb-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                          <div className="flex items-start gap-2">
+                            <FileText className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                            <p className="text-xs text-blue-300 leading-relaxed">
+                              PostgreSQL Extension - Install via source code or follow the installation guide for your PostgreSQL setup.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      
                       <div className="space-y-3">
                         {product.downloads.map((download, index) => {
                           const IconComponent = getDownloadIcon(download.type);
+                          const isAvailable = download.available !== false; // Default to true if not specified
+                          
+                          if (!isAvailable) {
+                            // Disabled/Greyed out option for extensions
+                            return (
+                              <div
+                                key={index}
+                                className="flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-slate-800/40 text-slate-500 border border-slate-700/50 cursor-not-allowed opacity-50"
+                                title={'note' in download ? download.note : 'Not available for PostgreSQL extensions'}
+                              >
+                                <div className="flex items-center gap-3">
+                                  <IconComponent className="w-5 h-5" />
+                                  <div>
+                                    <div className="font-bold text-sm">{download.title}</div>
+                                    <div className="text-xs opacity-75">{'note' in download ? download.note : 'Extension only'}</div>
+                                  </div>
+                                </div>
+                                <Lock className="w-4 h-4" />
+                              </div>
+                            );
+                          }
+                          
                           return (
                             <Link 
                               key={index} 
