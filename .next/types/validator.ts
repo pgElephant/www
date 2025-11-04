@@ -344,6 +344,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pg_stat_insights/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pg_stat_insights/views/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/views">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/views/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgbalancer/configuration/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/configuration">> = Specific
@@ -434,6 +452,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgraft/monitoring/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/monitoring">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/monitoring/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgraft/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft">> = Specific
@@ -474,6 +501,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/sql-reference">> = Specific
   const handler = {} as typeof import("../../app/docs/pgraft/sql-reference/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgraft/troubleshooting-guide/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgraft/troubleshooting-guide">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgraft/troubleshooting-guide/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
