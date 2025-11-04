@@ -1,724 +1,21 @@
-'use client'
-
-import React, { useState } from 'react'
-import { BookOpen, ArrowRight, Code, Download, ExternalLink, Play, Container, FileText } from 'lucide-react'
+import React from 'react'
+import { BookOpen, ArrowRight, Code, Download, ExternalLink, FileText, Container } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-// Colors from pgElephant icon (darker variants)
-const palette = {
-  iconTeal: '#025A6B',
-  iconTealLight: '#036B7D',
-  iconTealMedium: '#045E70',
-  iconTealDark: '#054A56',
-  // Supporting colors
-  navy: '#1E293B',
-  navyDeep: '#0F172A',
-  slate: '#334155',
-  cyan: '#0EA5E9',
-  cyanDeep: '#0284C7',
-  teal: '#14B8A6',
-  tealDeep: '#0D9488',
-  gray100: '#F8FAFC',
-  gray300: '#CBD5E1',
-  white: '#FFFFFF',
-  orange: '#F97316',
-  orangeDark: '#EA580C',
-  primary: '#4f46e5',
-  purple: '#7C3AED',
-  blue: '#3B82F6'
-}
-
 const DocsPage = () => {
-  // State for active documentation section
-  const [activeSection, setActiveSection] = useState<string | null>('Getting Started')
-  const [activeProduct, setActiveProduct] = useState<string | null>('pgraft')
-
-  // Set default documentation on mount
-  React.useEffect(() => {
-    setActiveProduct('neurondb')
-    setActiveSection('Getting Started')
-  }, [])
-
-  // Function to get appropriate icon for documentation type
-  const getDocIcon = (type: string) => {
-    switch (type) {
-      case 'Guide':
-        return BookOpen
-      case 'Tutorial':
-        return Container
-      case 'Reference':
-        return FileText
-      default:
-        return BookOpen
-    }
-  }
-
-  // Function to handle sidebar link clicks
-  const handleSidebarClick = (productId: string, docTitle: string) => {
-    setActiveProduct(productId)
-    setActiveSection(docTitle)
-    
-    // Scroll to top of content area
-    setTimeout(() => {
-      const contentElement = document.getElementById('docs-content')
-      if (contentElement) {
-        contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    }, 100)
-  }
-
-  // Function to render actual documentation content
-  const renderDocumentationContent = (productId: string, docTitle: string) => {
-    return (
-      <div className="space-y-8">
-        {/* Full documentation content based on the section */}
-        {getFullDocumentationContent(productId, docTitle)}
-      </div>
-    )
-  }
-
-  // Function to render formatted content with proper syntax highlighting
-  const renderFormattedContent = (content: string) => {
-    const parts = content.split(/(```[\w]*\n[\s\S]*?```)/g);
-    
-    return parts.map((part, index) => {
-      // Check if this is a code block
-      const codeBlockMatch = part.match(/```(\w+)?\n([\s\S]*?)```/);
-      if (codeBlockMatch) {
-        const language = codeBlockMatch[1] || 'text';
-        const code = codeBlockMatch[2].trim();
-        
-        return (
-          <pre key={index} className="bg-white/10 backdrop-blur-sm text-white p-4 rounded-lg overflow-x-auto text-sm border border-white/20 font-mono mb-4">
-            <code className={`language-${language}`}>
-              {renderHighlightedCode(code, language)}
-            </code>
-          </pre>
-        );
-      }
-      
-      // Regular text content - split into paragraphs
-      const paragraphs = part.split(/\n\s*\n/);
-      return paragraphs.map((paragraph, pIndex) => {
-        if (!paragraph.trim()) return null;
-        
-        // Check if this is a section header (standalone **Text:** pattern)
-        const sectionHeaderMatch = paragraph.match(/^\*\*([^*]+?):\*\*\s*$/);
-        if (sectionHeaderMatch) {
-          return (
-            <h4 key={`${index}-${pIndex}`} className="text-lg font-semibold text-white mt-6 mb-3">
-              {sectionHeaderMatch[1]}:
-            </h4>
-          );
-        }
-        
-        // Check if this is a list item
-        const listItemMatch = paragraph.match(/^(\d+\.|[-•*])\s*(.+)/);
-        if (listItemMatch) {
-          const marker = listItemMatch[1];
-          const content = listItemMatch[2];
-          const formattedText = content
-            .replace(/`([^`]+)`/g, '<code class="bg-white/10 backdrop-blur-sm px-2 py-1 rounded text-sm font-mono border border-white/20 text-white">$1</code>')
-            .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-white">$1</strong>')
-            .replace(/\*([^*]+)\*/g, '<em class="italic text-white/90">$1</em>');
-          
-          return (
-            <div key={`${index}-${pIndex}`} className="mb-2 text-white/90 leading-relaxed flex">
-              <span className="text-white/80 mr-3 font-mono min-w-[1.5rem]">{marker}</span>
-              <div dangerouslySetInnerHTML={{ __html: formattedText }} />
-            </div>
-          );
-        }
-        
-        // Regular paragraph
-        const formattedText = paragraph
-          .replace(/`([^`]+)`/g, '<code class="bg-white/10 backdrop-blur-sm px-2 py-1 rounded text-sm font-mono border border-white/20 text-white">$1</code>')
-          .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-semibold text-white">$1</strong>')
-          .replace(/\*([^*]+)\*/g, '<em class="italic text-white/90">$1</em>')
-          .replace(/\n/g, '<br/>');
-        
-        return (
-          <div key={`${index}-${pIndex}`} className="mb-4 text-white/90 leading-relaxed" dangerouslySetInnerHTML={{ __html: formattedText }} />
-        );
-      }).filter(Boolean);
-    });
-  }
-
-  // Function to render highlighted code as React elements
-  const renderHighlightedCode = (code: string, language: string) => {
-    if (language === 'bash' || language === 'sh') {
-      return code.split('\n').map((line, lineIndex) => {
-        const parts = line.split(/(#.*$|\$\s|git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn|--\w+|".*?")/);
-        return (
-          <div key={lineIndex}>
-            {parts.map((part, partIndex) => {
-              if (part.match(/^#.*$/)) {
-                return <span key={partIndex} className="text-green-600">{part}</span>;
-              } else if (part.match(/^\$\s/)) {
-                return <span key={partIndex} className="text-blue-600">{part}</span>;
-              } else if (part.match(/^(git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn)$/)) {
-                return <span key={partIndex} className="text-purple-600 font-thin">{part}</span>;
-              } else if (part.match(/^--\w+/)) {
-                return <span key={partIndex} className="text-orange-600">{part}</span>;
-              } else if (part.match(/^".*"$/)) {
-                return <span key={partIndex} className="text-red-600">{part}</span>;
-              }
-              return <span key={partIndex}>{part}</span>;
-            })}
-          </div>
-        );
-      });
-    } else if (language === 'sql') {
-      return code.split('\n').map((line, lineIndex) => {
-        const parts = line.split(/(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END|--.*$|\/\*[\s\S]*?\*\/|".*?"|'.*?'|\d+)/gi);
-        return (
-          <div key={lineIndex}>
-            {parts.map((part, partIndex) => {
-              if (part.match(/^(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END)$/i)) {
-                return <span key={partIndex} className="text-blue-600 font-thin">{part}</span>;
-              } else if (part.match(/^--.*$/)) {
-                return <span key={partIndex} className="text-green-600">{part}</span>;
-              } else if (part.match(/^\/\*[\s\S]*?\*\/$/)) {
-                return <span key={partIndex} className="text-green-600">{part}</span>;
-              } else if (part.match(/^".*"$|^'.*'$/)) {
-                return <span key={partIndex} className="text-red-600">{part}</span>;
-              } else if (part.match(/^\d+$/)) {
-                return <span key={partIndex} className="text-orange-600">{part}</span>;
-              }
-              return <span key={partIndex}>{part}</span>;
-            })}
-          </div>
-        );
-      });
-    }
-    
-    // Default: return plain text
-    return code.split('\n').map((line, index) => (
-      <div key={index}>{line}</div>
-    ));
-  }
-
-  // Function to apply basic syntax highlighting
-  const applySyntaxHighlighting = (code: string, language: string) => {
-    if (language === 'bash' || language === 'sh') {
-      return code
-        .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
-        .replace(/(\$\s)/g, '<span class="text-blue-600">$1</span>') // Command prompt
-        .replace(/(git|make|sudo|cd|ls|cat|echo|export|curl|wget|npm|yarn)\b/g, '<span class="text-purple-600 font-thin">$1</span>') // Commands
-        .replace(/(--\w+)/g, '<span class="text-orange-600">$1</span>') // Options
-        .replace(/(".*?")/g, '<span class="text-red-600">$1</span>'); // Strings
-    } else if (language === 'sql') {
-      return code
-        .replace(/(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|DATABASE|INDEX|VIEW|PROCEDURE|FUNCTION|TRIGGER|GRANT|REVOKE|COMMIT|ROLLBACK|BEGIN|END)\b/gi, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
-        .replace(/(--.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
-        .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
-        .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
-        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
-    } else if (language === 'c' || language === 'cpp') {
-      return code
-        .replace(/(#include|#define|#ifdef|#ifndef|#endif|#if|#else|#elif)\b/g, '<span class="text-purple-600">$1</span>') // Preprocessor
-        .replace(/(int|char|float|double|void|struct|typedef|enum|const|static|extern|volatile|register|auto|signed|unsigned|long|short)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Types
-        .replace(/(if|else|while|for|do|switch|case|default|break|continue|return|goto)\b/g, '<span class="text-orange-600 font-thin">$1</span>') // Keywords
-        .replace(/(\/\/.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
-        .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
-        .replace(/(".*?")/g, '<span class="text-red-600">$1</span>'); // Strings
-    } else if (language === 'javascript' || language === 'js') {
-      return code
-        .replace(/(function|const|let|var|if|else|while|for|do|switch|case|default|break|continue|return|try|catch|finally|throw|new|this|class|extends|import|export|from|async|await)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
-        .replace(/(\/\/.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
-        .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="text-green-600">$1</span>') // Block comments
-        .replace(/(".*?"|'.*?'|`.*?`)/g, '<span class="text-red-600">$1</span>') // Strings
-        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
-    } else if (language === 'yaml' || language === 'yml') {
-      return code
-        .replace(/(version|services|ports|environment|volumes|networks|depends_on|build|image|command|restart|healthcheck)\b/g, '<span class="text-blue-600 font-thin">$1</span>') // Keywords
-        .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
-        .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
-        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
-    } else if (language === 'toml') {
-      return code
-        .replace(/(\[.*?\])/g, '<span class="text-blue-600 font-thin">$1</span>') // Sections
-        .replace(/(#.*$)/gm, '<span class="text-green-600">$1</span>') // Comments
-        .replace(/(".*?"|'.*?')/g, '<span class="text-red-600">$1</span>') // Strings
-        .replace(/(\d+)/g, '<span class="text-orange-600">$1</span>'); // Numbers
-    }
-    return code;
-  }
-
-  // Function to get full documentation content
-  const getFullDocumentationContent = (productId: string, docTitle: string) => {
-    const content: { [key: string]: { [key: string]: any } } = {
-      pgraft: {
-        'Getting Started': {
-          sections: [
-            {
-              title: 'Installation',
-              content: `pgraft is a PostgreSQL extension that implements Raft consensus for automatic leader election and failover.
-
-1. **Prerequisites**:
-   - PostgreSQL 16-18 with development headers
-   - Go 1.21+
-   - Build tools (GCC/Clang, Make, pkg-config)
-
-2. **Clone and build**:
-   \`\`\`bash
-   git clone https://github.com/pgElephant/pgraft.git
-   cd pgraft
-   make && sudo make install
-   \`\`\`
-
-3. **Configure PostgreSQL**:
-   \`\`\`conf
-   # Add to postgresql.conf
-   shared_preload_libraries = 'pgraft'
-   \`\`\`
-
-4. **Create extension**:
-   \`\`\`sql
-   CREATE EXTENSION pgraft;
-   \`\`\``
-            },
-            {
-              title: 'Quick Start',
-              content: `**Initialize cluster:**
-\`\`\`sql
-SELECT pgraft_init_cluster('my-cluster');
-\`\`\`
-
-**Add nodes:**
-\`\`\`sql
-SELECT pgraft_add_member('my-cluster', 'node1', 'host=192.168.1.10 port=5432');
-SELECT pgraft_add_member('my-cluster', 'node2', 'host=192.168.1.11 port=5432');
-SELECT pgraft_add_member('my-cluster', 'node3', 'host=192.168.1.12 port=5432');
-\`\`\`
-
-**Check status:**
-\`\`\`sql
-SELECT * FROM pgraft_cluster_status('my-cluster');
-SELECT * FROM pgraft_leader('my-cluster');
-\`\`\``
-            }
-          ]
-        },
-        'Installation': {
-          sections: [
-            {
-              title: 'Detailed Installation Guide',
-              content: `Complete installation guide for pgraft PostgreSQL Raft extension. Build from source, configure PostgreSQL, and enable the extension.
-
-**Prerequisites:**
-- PostgreSQL 16-18 with development headers
-- Go 1.21+ for Raft implementation
-- Build tools: GCC/Clang, Make, pkg-config
-
-**Installation Steps:**
-1. Clone repository and build
-2. Install extension files
-3. Configure PostgreSQL
-4. Create and verify extension
-
-Visit the full Installation page for detailed instructions.`
-            }
-          ]
-        },
-        'Configuration': {
-          sections: [
-            {
-              title: 'Configuration Guide',
-              content: `Configure pgraft extension and PostgreSQL for optimal Raft consensus performance.
-
-**PostgreSQL Configuration:**
-- shared_preload_libraries = 'pgraft'
-- Memory and connection settings
-- WAL configuration for replication
-
-**pgraft Parameters:**
-- heartbeat_interval: Leader heartbeat frequency
-- election_timeout: Timeout for leader election
-- snapshot_threshold: Log entries before snapshot
-
-Visit the full Configuration page for complete settings.`
-            }
-          ]
-        },
-        'SQL Functions': {
-          sections: [
-            {
-              title: 'SQL Function Reference',
-              content: `Complete reference for all pgraft SQL functions and procedures.
-
-**Cluster Management:**
-- pgraft_init_cluster(): Initialize new cluster
-- pgraft_add_member(): Add node to cluster
-- pgraft_remove_member(): Remove node from cluster
-
-**Leadership Functions:**
-- pgraft_leader(): Get current leader
-- pgraft_is_leader(): Check if node is leader
-- pgraft_force_election(): Trigger election
-
-Visit the full SQL Functions page for complete reference.`
-            }
-          ]
-        },
-        'Raft Protocol': {
-          sections: [
-            {
-              title: 'Raft Consensus Protocol',
-              content: `Understanding Raft consensus protocol implementation in pgraft PostgreSQL extension.
-
-**Raft Overview:**
-- Distributed consensus algorithm
-- Leader election and log replication
-- Safety properties and guarantees
-
-**Node States:**
-- Leader: Handles requests and replicates logs
-- Follower: Receives logs from leader
-- Candidate: Requests votes during election
-
-Visit the full Raft Protocol page for detailed explanation.`
-            }
-          ]
-        },
-        'Cluster Management': {
-          sections: [
-            {
-              title: 'Cluster Management Guide',
-              content: `Managing PostgreSQL clusters with pgraft Raft consensus for high availability and automatic failover.
-
-**Cluster Lifecycle:**
-1. Cluster creation and initialization
-2. Node addition and removal
-3. Health monitoring and maintenance
-
-**Failover Management:**
-- Automatic failover process
-- Manual failover procedures
-- Recovery and troubleshooting
-
-Visit the full Cluster Management page for operational procedures.`
-            }
-          ]
-        },
-        'Performance Tuning': {
-          sections: [
-            {
-              title: 'Performance Optimization',
-              content: `Optimize pgraft PostgreSQL Raft extension for maximum performance and throughput.
-
-**Configuration Strategies:**
-- High throughput configuration
-- Low latency configuration
-- Balanced performance settings
-
-**Monitoring and Tuning:**
-- Key performance metrics
-- Network optimization
-- PostgreSQL tuning
-
-Visit the full Performance Tuning page for optimization strategies.`
-            }
-          ]
-        },
-        'Troubleshooting': {
-          sections: [
-            {
-              title: 'Troubleshooting Guide',
-              content: `Resolve common issues and errors with pgraft PostgreSQL Raft extension.
-
-**Common Issues:**
-- Extension won't load
-- Cluster split-brain scenarios
-- High replication latency
-- Network connectivity problems
-
-**Diagnostic Commands:**
-- Health check procedures
-- Configuration validation
-- Performance analysis
-
-Visit the full Troubleshooting page for solutions and recovery procedures.`
-            }
-          ]
-        }
-      },
-      fauxdb: {
-        'Getting Started': {
-          sections: [
-            {
-              title: 'Installation',
-              content: `FauxDB is a MongoDB-compatible document database built in Rust with PostgreSQL backend.
-
-1. **Install Rust** (latest stable version)
-2. **Install PostgreSQL** (version 12+)
-3. **Clone and build FauxDB**:
-   \`\`\`bash
-   git clone https://github.com/pgElephant/fauxdb.git
-   cd fauxdb
-   cargo build --release
-   \`\`\``
-            },
-            {
-              title: 'Quick Start',
-              content: `**Start FauxDB server:**
-\`\`\`bash
-./target/release/fauxdb --config fauxdb.toml
-\`\`\`
-
-**Connect with MongoDB client:**
-\`\`\`javascript
-const { MongoClient } = require('mongodb');
-const client = new MongoClient('mongodb://localhost:27017');
-await client.connect();
-\`\`\``
-            }
-          ]
-        },
-        'Docker Setup': {
-          sections: [
-            {
-              title: 'Docker Compose',
-              content: `**docker-compose.yml:**
-\`\`\`yaml
-version: '3.8'
-services:
-  postgres:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: fauxdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  fauxdb:
-    build: .
-    ports:
-      - "27017:27017"
-    depends_on:
-      - postgres
-    environment:
-      DATABASE_URL: postgres://postgres:password@postgres:5432/fauxdb
-
-volumes:
-  postgres_data:
-\`\`\``
-            },
-            {
-              title: 'Running with Docker',
-              content: `**Start the stack:**
-\`\`\`bash
-docker-compose up -d
-\`\`\`
-
-**Connect to FauxDB:**
-\`\`\`bash
-docker exec -it fauxdb_fauxdb_1 mongosh
-\`\`\``
-            }
-          ]
-        },
-        'Configuration': {
-          sections: [
-            {
-              title: 'Configuration Guide',
-              content: `Configure FauxDB server using TOML configuration files for database connections, authentication, and performance tuning.
-
-**Key Settings:**
-- Database connection configuration
-- MongoDB wire protocol settings
-- Performance and caching options
-- Security and authentication
-
-Visit the full Configuration page for complete configuration reference.`
-            }
-          ]
-        },
-        'MongoDB Compatibility': {
-          sections: [
-            {
-              title: 'MongoDB Wire Protocol',
-              content: `FauxDB implements MongoDB wire protocol for seamless compatibility with existing MongoDB drivers and applications.
-
-**Supported Features:**
-- MongoDB wire protocol compatibility
-- Driver compatibility (Node.js, Python, Java)
-- Query translation to PostgreSQL SQL
-- Aggregation pipeline support
-
-**Limitations:**
-- Some advanced MongoDB features
-- Performance considerations
-- Migration considerations
-
-Visit the full MongoDB Compatibility page for detailed compatibility information.`
-            }
-          ]
-        },
-        'API Reference': {
-          sections: [
-            {
-              title: 'Complete API Documentation',
-              content: `Complete API documentation for FauxDB including MongoDB-compatible operations, custom extensions, and administrative functions.
-
-**MongoDB Operations:**
-- CRUD operations (insert, find, update, delete)
-- Aggregation pipeline
-- Index management
-- Transaction support
-
-**Administrative Functions:**
-- Server management
-- Configuration updates
-- Monitoring and metrics
-
-Visit the full API Reference page for complete API documentation.`
-            }
-          ]
-        },
-        'Performance Tuning': {
-          sections: [
-            {
-              title: 'Performance Optimization',
-              content: `Optimize FauxDB performance including connection pooling, query optimization, and PostgreSQL backend tuning.
-
-**Performance Areas:**
-- Connection pooling configuration
-- Query optimization strategies
-- PostgreSQL backend tuning
-- Caching and indexing
-
-**Monitoring:**
-- Performance metrics
-- Query analysis
-- Resource utilization
-
-Visit the full Performance Tuning page for optimization strategies.`
-            }
-          ]
-        },
-        'Security': {
-          sections: [
-            {
-              title: 'Security Configuration',
-              content: `Configure authentication, authorization, and encryption for FauxDB deployments including SSL/TLS setup and user management.
-
-**Security Features:**
-- Authentication mechanisms
-- Authorization and access control
-- SSL/TLS encryption
-- User and role management
-
-**Best Practices:**
-- Security configuration
-- Network security
-- Data encryption
-
-Visit the full Security page for complete security setup.`
-            }
-          ]
-        },
-        'Troubleshooting': {
-          sections: [
-            {
-              title: 'Troubleshooting Guide',
-              content: `Common issues and solutions for FauxDB deployment including connection problems, performance issues, and compatibility problems.
-
-**Common Issues:**
-- Connection problems
-- Query translation errors
-- Performance issues
-- Compatibility problems
-
-**Diagnostic Tools:**
-- Log analysis
-- Performance monitoring
-- Configuration validation
-
-Visit the full Troubleshooting page for solutions and recovery procedures.`
-            }
-          ]
-        }
-      }
-    }
-
-    const docContent = content[productId]?.[docTitle]
-    if (!docContent) {
-      return (
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-8">
-          <p className="text-white/90">
-            Documentation content for "{docTitle}" is being prepared. 
-            Please check back soon or visit the full documentation page.
-          </p>
-        </div>
-      )
-    }
-
-    return (
-      <div className="space-y-8">
-        {docContent.sections.map((section: any, index: number) => (
-          <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              {section.title}
-            </h3>
-            <div className="max-w-none text-white/90 leading-relaxed">
-              {renderFormattedContent(section.content)}
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  // Function to get quick overview content
-  const getQuickOverview = (productId: string, docTitle: string) => {
-    const overviews: { [key: string]: { [key: string]: string } } = {
-      rale: {
-        'Getting Started': 'RALE (Resilient Adaptive Leader Election) is a distributed consensus system. Start by installing the core components: librale (C library), raled (daemon), and ralectrl (CLI tool).',
-        'librale Documentation': 'The librale C library provides the core consensus algorithms and distributed key-value store functionality. It implements Raft consensus with optimizations for high availability.',
-        'raled Documentation': 'raled is the cluster management daemon that runs on each node. It handles network communication, state management, and coordinates with other nodes in the cluster.',
-        'ralectrl Documentation': 'ralectrl is the command-line interface for managing RALE clusters. Use it to create clusters, add/remove nodes, and monitor cluster health.',
-        'Architecture Guide': 'RALE uses a distributed architecture with leader election, log replication, and membership management. The system is designed for high availability and fault tolerance.',
-        'API Reference': 'Complete API documentation for all RALE components including C library functions, daemon configuration, and CLI commands.',
-        'Examples': 'Code examples and use cases showing how to integrate RALE into your applications, from simple key-value operations to complex distributed systems.',
-        'Troubleshooting': 'Common issues and solutions for RALE deployment, including network problems, node failures, and configuration errors.'
-      },
-      fauxdb: {
-        'Getting Started': 'FauxDB is a MongoDB-compatible document database built in Rust with PostgreSQL backend. Install Rust, PostgreSQL, and configure FauxDB server.',
-        'Docker Setup': 'Deploy FauxDB using Docker containers. Includes docker-compose configurations for development and production environments.',
-        'Configuration': 'Configure FauxDB server using TOML configuration files. Set up database connections, authentication, and performance tuning.',
-        'MongoDB Compatibility': 'FauxDB implements MongoDB wire protocol for seamless compatibility with existing MongoDB drivers and applications.',
-        'API Reference': 'Complete API documentation for FauxDB including MongoDB-compatible operations, custom extensions, and administrative functions.',
-        'Performance Tuning': 'Optimize FauxDB performance including connection pooling, query optimization, and PostgreSQL backend tuning.',
-        'Security': 'Configure authentication, authorization, and encryption for FauxDB deployments. Includes SSL/TLS setup and user management.',
-        'Troubleshooting': 'Common issues and solutions for FauxDB deployment including connection problems, performance issues, and compatibility problems.'
-      }
-    }
-
-  return (
-      <p className="text-white/90 leading-relaxed">
-        {overviews[productId]?.[docTitle] || `This section covers ${docTitle} for ${productId.toUpperCase()}. Click "View Full Documentation" to see the complete guide.`}
-      </p>
-    )
-  }
-
   const products = [
     {
       id: 'neurondb',
       name: 'NeurondB',
       title: 'AI Database Extension',
       icon: '/ico/pgElephant_HD.ico',
-      bg: { from: palette.primary, via: palette.teal, to: palette.cyan },
       description: 'Production-grade AI database extension for PostgreSQL with vector search, ML inference, hybrid retrieval, and complete RAG pipeline',
       docs: [
         { title: 'Getting Started', href: '/docs/neurondb/getting-started', type: 'Guide', description: 'Quick start guide for NeurondB' },
         { title: 'Installation', href: '/docs/neurondb/installation', type: 'Guide', description: 'Build and install from source' },
-        { title: 'Vector Types', href: '/docs/neurondb/features/vector-types', type: 'Reference', description: 'Vector data types and operators' },
-        { title: 'ML & Embeddings', href: '/docs/neurondb/ml/embeddings', type: 'Guide', description: 'Machine learning and embedding generation' },
+        { title: 'Vector Types', href: '/docs/neurondb/features', type: 'Reference', description: 'Vector data types and operators' },
+        { title: 'ML & Embeddings', href: '/docs/neurondb/ml', type: 'Guide', description: 'Machine learning and embedding generation' },
         { title: 'GPU Acceleration', href: '/docs/neurondb/gpu', type: 'Guide', description: 'CUDA/ROCm GPU support' },
         { title: 'Hybrid Search', href: '/docs/neurondb/hybrid', type: 'Guide', description: 'Semantic + full-text search' },
         { title: 'RAG Pipeline', href: '/docs/neurondb/rag', type: 'Guide', description: 'Complete RAG implementation' },
@@ -733,7 +30,6 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
       name: 'pgbalancer',
       title: 'Connection Pooling & Load Balancing',
       icon: '/ico/pgbalancer_HD.ico',
-      bg: { from: palette.orangeDark, via: palette.orange, to: palette.cyan },
       description: 'Modern PostgreSQL connection pooler and load balancer. pgpool-II alternative with AI-powered load balancing, HAProxy mode, automatic failover, and REST API',
       docs: [
         { title: 'Getting Started', href: '/docs/pgbalancer/getting-started', type: 'Guide', description: 'Install and configure pgbalancer' },
@@ -747,17 +43,16 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
       name: 'pgraft',
       title: 'PostgreSQL Raft Extension',
       icon: '/ico/pgsql_raft_leader_HD.ico',
-      bg: { from: palette.tealDeep, via: palette.teal, to: palette.cyan },
       description: 'PostgreSQL extension implementing Raft consensus protocol for distributed database systems with automatic leader election and split-brain prevention',
       docs: [
         { title: 'Getting Started', href: '/docs/pgraft/getting-started', type: 'Guide', description: 'Install and configure pgraft extension' },
         { title: 'Installation', href: '/docs/pgraft/installation', type: 'Guide', description: 'Build and install from source' },
         { title: 'Configuration', href: '/docs/pgraft/configuration', type: 'Guide', description: 'PostgreSQL configuration settings' },
-        { title: 'SQL Functions', href: '/docs/pgraft/sql-functions', type: 'Reference', description: 'PostgreSQL SQL function reference' },
+        { title: 'SQL Functions', href: '/docs/pgraft/sql-reference', type: 'Reference', description: 'PostgreSQL SQL function reference' },
         { title: 'Raft Protocol', href: '/docs/pgraft/raft-protocol', type: 'Guide', description: 'Understanding Raft consensus implementation' },
         { title: 'Cluster Management', href: '/docs/pgraft/cluster-management', type: 'Guide', description: 'Managing PostgreSQL clusters with Raft' },
         { title: 'Performance', href: '/docs/pgraft/performance', type: 'Guide', description: 'Optimization and performance considerations' },
-        { title: 'Troubleshooting', href: '/docs/pgraft/troubleshooting', type: 'Guide', description: 'Common issues and solutions' }
+        { title: 'Troubleshooting', href: '/docs/pgraft/troubleshooting-guide', type: 'Guide', description: 'Common issues and solutions' }
       ]
     },
     {
@@ -765,7 +60,6 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
       name: 'FauxDB',
       title: 'Dual-Protocol Database Server',
       icon: '/ico/FauxDB_HD.ico',
-      bg: { from: palette.navyDeep, via: palette.navy, to: palette.slate },
       description: 'Dual-protocol database with MongoDB AND MySQL wire protocol support. Built in Rust with pure PostgreSQL backend',
       docs: [
         { title: 'Getting Started', href: '/docs/fauxdb/getting-started', type: 'Guide', description: 'Install and configure FauxDB' },
@@ -778,7 +72,6 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
       name: 'pgSentinel',
       title: 'Monitoring & Management Platform',
       icon: '/ico/pgElephant_HD.ico',
-      bg: { from: palette.purple, via: palette.blue, to: palette.cyan },
       description: 'Professional web-based monitoring and management platform for pgbalancer with real-time metrics, Grafana dashboards, and Prometheus integration',
       docs: [
         { title: 'Getting Started', href: '/docs/pgsentinel/getting-started', type: 'Guide', description: 'Quick start guide for pgSentinel' },
@@ -792,7 +85,6 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
       name: 'pg_stat_insights',
       title: 'Performance Analytics Extension',
       icon: '/ico/pgElephant_HD.ico',
-      bg: { from: palette.purple, via: palette.teal, to: palette.cyan },
       description: 'Deep PostgreSQL performance analytics extension with 52 metrics across 11 views. Track slow queries, cache efficiency, and optimize database performance',
       docs: [
         { title: 'Getting Started', href: '/docs/pg-stat-insights/getting-started', type: 'Guide', description: 'Quick start guide for pg_stat_insights' },
@@ -803,32 +95,124 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
     }
   ]
 
-  // Function to render content based on active section
-  const renderContent = () => {
-    if (!activeProduct || !activeSection) {
-      return (
-        <div>
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-semibold text-white mb-4">
-              Product Documentation
-            </h2>
-            <p className="text-lg text-white/90 max-w-3xl mx-auto">
-              Comprehensive documentation for all pgElephant products. Each product includes guides, API references, and tutorials to help you get started and master advanced features.
+  return (
+    <div className="pt-16">
+      {/* Hero Section */}
+      <div 
+        className="relative overflow-hidden"
+        style={{ 
+          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)',
+        }}
+      >
+        {/* Elegant overlay gradient */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
+          }}
+        />
+        
+        {/* Elegant floating elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-indigo-500/25 to-cyan-500/25 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-teal-500/15 to-indigo-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+              backgroundSize: '32px 32px'
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-6 py-28 relative z-10 max-w-6xl">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-semibold text-white mb-6">
+              Documentation
+            </h1>
+            <p className="text-xl mb-8 leading-relaxed text-white/90 max-w-3xl mx-auto">
+              Complete guides and references for pgElephant products. Professional documentation following enterprise standards.
             </p>
-            <div className="mt-4 inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-medium border border-white/30">
-              👈 Click on any documentation link in the sidebar to get started
+            
+            {/* Documentation Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-3xl mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-semibold text-white drop-shadow-2xl mb-2">6</div>
+                <div className="text-sm text-white/90">Products</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-semibold text-white drop-shadow-2xl mb-2">34</div>
+                <div className="text-sm text-white/90">Documentation Pages</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-semibold text-white drop-shadow-2xl mb-2">100%</div>
+                <div className="text-sm text-white/90">Open Source</div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* All Documentation Links - Simple List Layout */}
+      {/* Documentation Categories */}
+      <div
+        className="py-16"
+        style={{ 
+          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
+        }}
+      >
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-semibold text-white mb-4">
+              Documentation Structure
+            </h2>
+            <p className="text-lg text-white/90 max-w-3xl mx-auto">
+              Our documentation follows enterprise standards with comprehensive guides, API references, and tutorials for each product.
+            </p>
+          </div>
+          
+          {/* Documentation Types */}
+          <div className="flex flex-wrap justify-center gap-8 mb-16">
+            <div className="flex items-center gap-3">
+              <BookOpen className="w-6 h-6 text-cyan-400" />
+              <div>
+                <h3 className="font-semibold text-white">Guides</h3>
+                <p className="text-white/80 text-sm">Step-by-step installation and configuration</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <FileText className="w-6 h-6 text-teal-400" />
+              <div>
+                <h3 className="font-semibold text-white">Reference</h3>
+                <p className="text-white/80 text-sm">Complete API documentation and functions</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <Container className="w-6 h-6 text-orange-400" />
+              <div>
+                <h3 className="font-semibold text-white">Tutorials</h3>
+                <p className="text-white/80 text-sm">Docker, Kubernetes, and deployment guides</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Products Documentation */}
+      <div className="py-20" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <div className="container mx-auto px-6 max-w-6xl">
           <div className="space-y-16">
             {products.map((product) => (
-              <div key={product.id} className="border-b border-gray-200 pb-16 last:border-b-0">
+              <div key={product.id} className="border-b border-white/10 pb-16 last:border-b-0">
                 {/* Product Header */}
                 <div className="flex items-center mb-6">
                   <Image 
                     src={product.icon} 
-                    alt={`${product.name} icon`}
+                    alt={product.name + ' icon'}
                     width={48}
                     height={48}
                     className="w-12 h-12 mr-4 object-contain"
@@ -838,7 +222,7 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
                     <h3 className="text-2xl font-semibold text-white mb-1">
                       {product.name}
                     </h3>
-                    <p className="text-lg text-white/90">
+                    <p className="text-lg text-white/80">
                       {product.title}
                     </p>
                   </div>
@@ -849,502 +233,178 @@ Visit the full Troubleshooting page for solutions and recovery procedures.`
                   {product.description}
                 </p>
 
-                {/* Documentation Links - Simple Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                {/* Documentation Links */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {product.docs.map((doc, index) => (
-                    <button
+                    <Link
                       key={index}
-                      onClick={() => handleSidebarClick(product.id, doc.title)}
-                      className="flex items-start gap-4 p-4 text-left bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-lg transition-colors group border border-white/20 hover:border-blue-300"
+                      href={doc.href}
+                      className="flex items-start gap-4 p-4 text-left bg-white/5 backdrop-blur-sm hover:bg-white/10 rounded-lg transition-all group border border-white/10 hover:border-cyan-400/50"
                     >
                       <div className="flex-shrink-0">
-                        <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium"
-                              style={{
-                                backgroundColor: doc.type === 'Guide' ? '#E0F2FE' : 
-                                               doc.type === 'Reference' ? '#F0FDF4' : '#FEF3C7',
-                                color: doc.type === 'Guide' ? '#0369A1' : 
-                                      doc.type === 'Reference' ? '#166534' : '#92400E'
-                              }}>
+                        <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-white/10 text-white border border-white/20">
                           {doc.type}
                         </span>
                       </div>
                       <div className="flex-1">
-                        <div className="font-medium text-white group-hover:text-blue-300 mb-1">
+                        <div className="font-medium text-white group-hover:text-cyan-300 mb-1 transition-colors">
                           {doc.title}
                         </div>
-                        <p className="text-sm text-white/90">
+                        <p className="text-sm text-white/70 group-hover:text-white/90 transition-colors">
                           {doc.description}
                         </p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-blue-300 transition-colors flex-shrink-0 mt-1" />
-                    </button>
+                      <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-cyan-400 transition-colors flex-shrink-0 mt-1" />
+                    </Link>
                   ))}
-                </div>
-
-                {/* Quick Actions */}
-                <div className="flex gap-4">
-                  <Link
-                    href={`/${product.id}`}
-                    className="inline-flex items-center px-4 py-2 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors font-medium"
-                  >
-                    Learn More
-                  </Link>
-                  <Link
-                    href="/download"
-                    className="inline-flex items-center px-4 py-2 rounded-lg text-white drop-shadow-2xl shadow-2xl transition-colors font-medium"
-                    style={{ backgroundColor: palette.cyan }}
-                  >
-                    Download
-                  </Link>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      )
-    }
-
-    // Find the active product and documentation
-    const product = products.find(p => p.id === activeProduct)
-    const doc = product?.docs.find(d => d.title === activeSection)
-
-    if (!product || !doc) return null
-
-  return (
-      <div>
-        {/* Breadcrumb */}
-        <nav className="flex mb-8" aria-label="Breadcrumb">
-          <ol className="inline-flex items-center space-x-1 md:space-x-3">
-            <li className="inline-flex items-center">
-              <button
-                onClick={() => { 
-                  setActiveProduct(null); 
-                  setActiveSection(null);
-                  setTimeout(() => {
-                    const contentElement = document.getElementById('docs-content')
-                    if (contentElement) {
-                      contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }
-                  }, 100)
-                }}
-                className="inline-flex items-center text-sm font-medium text-white/90 hover:text-blue-300"
-              >
-                <BookOpen className="w-4 h-4 mr-2" />
-                Documentation
-              </button>
-            </li>
-            <li>
-              <div className="flex items-center">
-                <ArrowRight className="w-4 h-4 text-white/60 mx-1" />
-                <button
-                  onClick={() => {
-                    setActiveSection(null);
-                    setTimeout(() => {
-                      const contentElement = document.getElementById('docs-content')
-                      if (contentElement) {
-                        contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                      }
-                    }, 100)
-                  }}
-                  className="ml-1 text-sm font-medium text-white/90 hover:text-blue-300 md:ml-2"
-                >
-                  {product.name}
-                </button>
-              </div>
-            </li>
-            <li aria-current="page">
-              <div className="flex items-center">
-                <ArrowRight className="w-4 h-4 text-white/60 mx-1" />
-                <span className="ml-1 text-sm font-medium text-white/70 md:ml-2">
-                  {doc.title}
-                </span>
-              </div>
-            </li>
-          </ol>
-        </nav>
-
-        {/* Content Header */}
-        <div className="mb-8">
-          <div className="flex items-center mb-4">
-            <Image 
-              src={product.icon} 
-              alt={`${product.name} icon`}
-              width={32}
-              height={32}
-              className="w-8 h-8 mr-3 object-contain"
-              unoptimized
-            />
-            <h1 className="text-3xl font-semibold text-white">
-              {doc.title}
-            </h1>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm text-white border border-white/30">
-              {doc.type}
-            </span>
-            <span className="text-sm text-white/60">•</span>
-            <span className="text-sm text-white/90">{product.name}</span>
-          </div>
-        </div>
-
-        {/* Content Body */}
-        <div className="max-w-none text-white/90 leading-relaxed">
-          <p className="text-lg text-white/90 mb-6">
-            {doc.description}
-          </p>
-          
-          {/* Dynamic content based on documentation type */}
-          {renderDocumentationContent(product.id, doc.title)}
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div className="pt-16">
-      {/* Hero Section with elegant gradient background - same as main page */}
-      <div 
-        className="relative overflow-hidden"
-        style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
-          position: 'relative'
-        }}
-      >
-        {/* Elegant overlay gradient - same as Hero */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
-        {/* Elegant floating elements - same as Hero */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating orbs */}
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          
-          {/* Subtle pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
-              backgroundSize: '32px 32px'
-            }}
-          />
-        </div>
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
-              backgroundSize: '48px 48px'
-            }}
-          />
-        </div>
-
-        <div className="container-wide py-28 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-semibold text-white mb-6">
-              Documentation
-            </h1>
-            <p className="text-xl mb-8 leading-relaxed text-white">
-              Complete guides and references for pgElephant products. Professional documentation following enterprise standards.
-            </p>
-            
-            {/* Documentation Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="text-center">
-                <div className="text-3xl font-semibold text-white drop-shadow-2xl shadow-2xl mb-2">6</div>
-                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Products</div>
-          </div>
-              <div className="text-center">
-                <div className="text-3xl font-semibold text-white drop-shadow-2xl shadow-2xl mb-2">34</div>
-                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Documentation Pages</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-semibold text-white drop-shadow-2xl shadow-2xl mb-2">100%</div>
-                <div className="text-sm text-white drop-shadow-2xl shadow-2xl">Open Source</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Overview */}
-      <div
-        className="py-16"
-        style={{ 
-          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
-        }}
-      >
-        <div className="container-wide">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-semibold text-white mb-8 text-center">
-              Documentation Structure
-            </h2>
-            <p className="text-lg text-white/90 text-center mb-12 max-w-3xl mx-auto">
-              Our documentation follows enterprise standards with comprehensive guides, API references, and tutorials for each product.
-            </p>
-            
-            {/* Documentation Categories - Simple List */}
-            <div className="flex flex-wrap justify-center gap-8 mb-16">
-              <div className="flex items-center gap-3">
-                <BookOpen className="w-6 h-6" style={{ color: palette.cyan }} />
-                <div>
-                  <h3 className="font-semibold text-white">Guides</h3>
-                  <p className="text-white/90 text-sm">Step-by-step installation and configuration</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3">
-                <FileText className="w-6 h-6" style={{ color: palette.teal }} />
-                <div>
-                  <h3 className="font-semibold text-white">Reference</h3>
-                  <p className="text-white/90 text-sm">Complete API documentation and functions</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3">
-                <Container className="w-6 h-6" style={{ color: palette.orange }} />
-                <div>
-                  <h3 className="font-semibold text-white">Tutorials</h3>
-                  <p className="text-white/90 text-sm">Docker, Kubernetes, and deployment guides</p>
-                </div>
-              </div>
-            </div>
-          </div>
-                    </div>
-                  </div>
-
-      {/* Two-Column Documentation Layout */}
-      <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-        <div className="container-wide">
-          <div className="max-w-7xl mx-auto">
-                  <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
-              
-              {/* Left Sidebar - Navigation */}
-              <div className="lg:col-span-2">
-            <div className="sticky top-24">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-                    <h3 className="text-lg font-semibold text-white mb-4">Documentation</h3>
-                    
-                    {/* Navigation Menu */}
-                    <nav className="space-y-2">
-                      {products.map((product) => (
-                        <div key={product.id} className="mb-6">
-                          {/* Product Header */}
-                          <div className="flex items-center mb-3">
-                            <Image 
-                              src={product.icon} 
-                              alt={`${product.name} icon`}
-                              width={24}
-                              height={24}
-                              className="w-6 h-6 mr-2 object-contain"
-                                unoptimized
-                            />
-                            <h4 className="text-sm font-semibold text-white">
-                              {product.name}
-                            </h4>
-          </div>
-
-                                {/* Product Documentation Links */}
-                                <div className="ml-8 space-y-1">
-                                  {product.docs.map((doc, index) => (
-                                    <button
-                                      key={index}
-                                      onClick={() => handleSidebarClick(product.id, doc.title)}
-                                      className={`block w-full py-2 px-3 text-sm text-left rounded-md transition-colors group ${
-                                        activeProduct === product.id && activeSection === doc.title
-                                          ? 'bg-blue-50 text-blue-700 border-l-2 border-blue-500'
-                                          : 'text-white hover:text-white hover:bg-white/10 backdrop-blur-sm'
-                                      }`}
-                  >
-                    <div className="flex items-center justify-between">
-                                        <span className="flex-1">{doc.title}</span>
-                                        <span className={`text-xs px-2 py-0.5 rounded-full ${
-                                          activeProduct === product.id && activeSection === doc.title
-                                            ? 'bg-white/20 backdrop-blur-sm text-white border border-white/30'
-                                            : 'bg-white/10 backdrop-blur-sm text-white/80 group-hover:bg-white/20 border border-white/20'
-                                        }`}>
-                                          {doc.type}
-                      </span>
-                    </div>
-                                    </button>
-                ))}
-                                </div>
-                        </div>
-                    ))}
-                    </nav>
-              </div>
-            </div>
-          </div>
-
-              {/* Right Content - Dynamic Documentation */}
-              <div className="lg:col-span-4">
-                <div id="docs-content" className="max-w-6xl">
-                  {renderContent()}
-              </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
       {/* Quick Start Section */}
       <div 
-        className="py-20"
+        className="py-20 border-t border-white/10"
         style={{ 
           background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
         }}
       >
-        <div className="container-wide">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-semibold text-white mb-6">
-              Quick Start
-            </h2>
-            <p className="text-xl text-white/90 mb-12 leading-relaxed">
-              Get up and running with pgElephant in minutes.
-            </p>
+        <div className="container mx-auto px-6 max-w-4xl text-center">
+          <h2 className="text-3xl font-semibold text-white mb-6">
+            Quick Start
+          </h2>
+          <p className="text-xl text-white/90 mb-12 leading-relaxed">
+            Get up and running with pgElephant in minutes.
+          </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <Download className="w-8 h-8" style={{ color: palette.cyan }} />
-                    </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  Download
-                </h3>
-                <p className="text-white/90">
-                  Get the latest version of pgElephant products.
-                </p>
-                    </div>
-
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <Code className="w-8 h-8" style={{ color: palette.teal }} />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  Install
-                </h3>
-                <p className="text-white/90">
-                  Follow our installation guides for your platform.
-                </p>
-                  </div>
-
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <ExternalLink className="w-8 h-8" style={{ color: palette.orange }} />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  Deploy
-                </h3>
-                <p className="text-white/90">
-                  Deploy to production with confidence.
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <Download className="w-8 h-8 text-cyan-400" />
               </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Download
+              </h3>
+              <p className="text-white/80">
+                Get the latest version of pgElephant products.
+              </p>
             </div>
 
-            <div className="mt-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <Code className="w-8 h-8 text-teal-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Install
+              </h3>
+              <p className="text-white/80">
+                Follow our installation guides for your platform.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <ExternalLink className="w-8 h-8 text-orange-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Deploy
+              </h3>
+              <p className="text-white/80">
+                Deploy to production with confidence.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <Link
+              href="/download"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-medium text-white bg-orange-500 hover:bg-orange-600 transition-colors shadow-lg"
+            >
+              Get Started
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Additional Resources */}
+      <div className="py-20 border-t border-white/10" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <div className="container mx-auto px-6 max-w-6xl">
+          <h2 className="text-3xl font-semibold text-white mb-12 text-center">
+            Additional Resources
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <ExternalLink className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">GitHub</h3>
+              <p className="text-white/80 text-sm mb-4">
+                Source code, issues, and contributions
+              </p>
               <Link
-                href="/download"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-thin text-white drop-shadow-2xl shadow-2xl transition-all duration-200 shadow-lg"
-                style={{ backgroundColor: palette.orange }}
+                href="https://github.com/pgElephant"
+                className="text-sm font-medium text-cyan-400 hover:text-cyan-300"
               >
-                Get Started
-                <ArrowRight className="w-4 h-4" />
+                View on GitHub →
               </Link>
-                        </div>
-                  </div>
-                </div>
             </div>
-
-            {/* Additional Resources */}
-      <div className="py-20 relative overflow-hidden border-t border-white/20" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-        <div className="container-wide">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-semibold text-white mb-12 text-center">
-              Additional Resources
-            </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <ExternalLink className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">GitHub</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Source code, issues, and contributions
-                </p>
-                <Link
-                  href="https://github.com/pgElephant"
-                  className="text-sm font-thin"
-                  style={{ color: palette.cyan }}
-                >
-                  View on GitHub →
-                </Link>
-                  </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <Play className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Community</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Join our community for support
-                </p>
-                <Link
-                  href="/community"
-                  className="text-sm font-thin"
-                  style={{ color: palette.cyan }}
-                >
-                  Join Community →
-                </Link>
-                  </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <FileText className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Blog</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Latest updates and tutorials
-                </p>
-                <Link
-                  href="/blog"
-                  className="text-sm font-thin"
-                  style={{ color: palette.cyan }}
-                >
-                  Read Blog →
-                </Link>
-                  </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                  <Code className="w-8 h-8 text-white" />
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <Code className="w-8 h-8 text-white" />
               </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Support</h3>
-                <p className="text-white/90 text-sm mb-4">
-                  Get help and technical support
-                </p>
-                <Link
-                  href="/contact"
-                  className="text-sm font-thin"
-                  style={{ color: palette.cyan }}
-                >
-                  Contact Support →
-                </Link>
+              <h3 className="text-lg font-semibold text-white mb-2">Community</h3>
+              <p className="text-white/80 text-sm mb-4">
+                Join our community for support
+              </p>
+              <Link
+                href="/community"
+                className="text-sm font-medium text-cyan-400 hover:text-cyan-300"
+              >
+                Join Community →
+              </Link>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <FileText className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Blog</h3>
+              <p className="text-white/80 text-sm mb-4">
+                Latest updates and tutorials
+              </p>
+              <Link
+                href="/blog"
+                className="text-sm font-medium text-cyan-400 hover:text-cyan-300"
+              >
+                Read Blog →
+              </Link>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <BookOpen className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Support</h3>
+              <p className="text-white/80 text-sm mb-4">
+                Get help and technical support
+              </p>
+              <Link
+                href="/contact"
+                className="text-sm font-medium text-cyan-400 hover:text-cyan-300"
+              >
+                Contact Support →
+              </Link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
   )
 }
 
-export default DocsPage 
+export default DocsPage

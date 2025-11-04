@@ -87,6 +87,24 @@ const RamIcon = () => (
   </div>
 )
 
+const NeuronDBIcon = () => (
+  <div className="relative w-12 h-12 flex items-center justify-center">
+    <Database className="w-7 h-7 text-purple-400" />
+    <Cpu className="w-4 h-4 text-pink-400 absolute -top-1 -right-1" />
+    <Zap className="w-3 h-3 text-yellow-400 absolute -bottom-1 -left-1" />
+    <Network className="w-3 h-3 text-cyan-400 absolute -bottom-1 -right-1" />
+  </div>
+)
+
+const PgStatInsightsIcon = () => (
+  <div className="relative w-12 h-12 flex items-center justify-center">
+    <Activity className="w-7 h-7 text-teal-400" />
+    <Star className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
+    <Database className="w-3 h-3 text-cyan-400 absolute -bottom-1 -left-1" />
+    <Zap className="w-3 h-3 text-orange-400 absolute -bottom-1 -right-1" />
+  </div>
+)
+
 const DownloadPage = () => {
   // Function to get appropriate icon for download type
   const getDownloadIcon = (type: string) => {
@@ -114,7 +132,7 @@ const DownloadPage = () => {
   const downloadStats = [
     { label: 'Total Downloads', value: '200', icon: Download, color: 'text-blue-600' },
     { label: 'Active Users', value: '10', icon: Users, color: 'text-green-600' },
-    { label: 'Supported Platforms', value: '5', icon: Globe, color: 'text-purple-600' },
+    { label: 'Products Available', value: '5', icon: Package, color: 'text-purple-600' },
     { label: 'Latest Version', value: 'v1.0.0', icon: Star, color: 'text-yellow-500' }
   ]
 
@@ -150,11 +168,53 @@ const DownloadPage = () => {
 
   const products = [
     {
+      id: 'neurondb',
+      name: 'NeuronDB',
+      title: 'AI Database Extension for PostgreSQL',
+      icon: 'neurondb-custom',
+      featured: true,
+      features: [
+        'Vector Search: High-performance vector similarity search with multiple index types',
+        'ML Inference: Built-in machine learning models and embedding generation',
+        'GPU Acceleration: CUDA and ROCm support for accelerated operations',
+        'Hybrid Search: Combines semantic vector search with full-text search',
+        'RAG Pipeline: Complete Retrieval-Augmented Generation implementation',
+        'Background Workers: Automated indexing, monitoring, and defragmentation',
+      ],
+      details: '/docs/neurondb',
+      downloads: [
+        { title: 'Linux Binary', href: '/download/neurondb', type: 'Binary' },
+        { title: 'Source Code', href: 'https://github.com/pgelephant/neurondb', type: 'Source' },
+        { title: 'Docker Image', href: '/download/neurondb', type: 'Docker' }
+      ]
+    },
+    {
+      id: 'pg_stat_insights',
+      name: 'pg_stat_insights',
+      title: 'Performance Analytics Extension',
+      icon: 'pg_stat_insights-custom',
+      featured: false,
+      features: [
+        '52 Performance Metrics: Track planning, execution, I/O, WAL, JIT, and parallel execution',
+        'Enhanced Analytics: 11 specialized views for comprehensive query analysis',
+        'Cache Efficiency: Detailed buffer hit ratios and I/O timing analysis',
+        'JIT Analysis: Complete JIT compilation metrics and cost-benefit tracking',
+        'Query Patterns: Identify slow queries, cache misses, and optimization opportunities',
+        'Zero Overhead Mode: Minimal performance impact with configurable tracking levels',
+      ],
+      details: '/docs/pg-stat-insights',
+      downloads: [
+        { title: 'Linux Binary', href: '/download/pg_stat_insights', type: 'Binary' },
+        { title: 'Source Code', href: 'https://github.com/pgelephant/pg_stat_insights', type: 'Source' },
+        { title: 'Docker Image', href: '/download/pg_stat_insights', type: 'Docker' }
+      ]
+    },
+    {
       id: 'pgraft',
       name: 'pgraft',
       title: 'PostgreSQL Raft Consensus Extension',
       icon: 'pgraft-custom',
-      featured: true,
+      featured: false,
       features: [
         'Raft Consensus Protocol: Implements the Raft algorithm for distributed consensus',
         'Automatic Leader Election: Seamless leader election and failover',
@@ -291,7 +351,15 @@ const DownloadPage = () => {
                     <div className="flex items-start gap-6 mb-6">
                       {/* Product Icon */}
                       <div className="flex-shrink-0">
-                        {product.icon === 'pgbalancer-custom' ? (
+                        {product.icon === 'neurondb-custom' ? (
+                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-purple-400/30 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                            <NeuronDBIcon />
+                          </div>
+                        ) : product.icon === 'pg_stat_insights-custom' ? (
+                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-teal-400/30 bg-gradient-to-br from-teal-500/20 to-cyan-500/20">
+                            <PgStatInsightsIcon />
+                          </div>
+                        ) : product.icon === 'pgbalancer-custom' ? (
                           <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-cyan-400/30 bg-gradient-to-br from-cyan-500/20 to-blue-500/20">
                             <PgbalancerIcon />
                           </div>
