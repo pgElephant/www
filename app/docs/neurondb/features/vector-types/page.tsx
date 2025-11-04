@@ -381,7 +381,7 @@ FROM docs ORDER BY score DESC LIMIT 10;`}
                   <ArrowRight className="w-5 h-5 text-indigo-400" />
                 </Link>
                 <Link 
-                  href="/docs/neurondb/features/indexing"
+                  href="/docs/neurondb/indexing"
                   className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors"
                 >
                   <div>
