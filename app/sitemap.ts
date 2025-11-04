@@ -370,7 +370,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: priorities.blog,
     },
     {
+      url: `${baseUrl}/blog/pg-stat-insights-1-0-0`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.blog,
+    },
+    {
       url: `${baseUrl}/blog/neurondb`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: priorities.blog,
+    },
+    {
+      url: `${baseUrl}/blog/pgbalancer`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.blog,
