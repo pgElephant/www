@@ -184,7 +184,8 @@ const DownloadPage = () => {
       ],
       details: '/docs/neurondb',
       downloads: [
-        { title: 'Source Code', href: 'https://github.com/pgelephant/neurondb', type: 'Source', available: true },
+        { title: 'Source Code (tar.gz)', href: 'https://github.com/pgElephant/neurondb/archive/refs/tags/v1.0.0.tar.gz', type: 'Source', available: true },
+        { title: 'Source Code (zip)', href: 'https://github.com/pgElephant/neurondb/archive/refs/tags/v1.0.0.zip', type: 'Source', available: true },
         { title: 'Installation Guide', href: '/docs/neurondb/installation', type: 'Docs', available: true },
         { title: 'RPM Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
         { title: 'DEB Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
@@ -208,7 +209,8 @@ const DownloadPage = () => {
       ],
       details: '/docs/pg-stat-insights',
       downloads: [
-        { title: 'Source Code', href: 'https://github.com/pgelephant/pg_stat_insights', type: 'Source', available: true },
+        { title: 'Source Code (tar.gz)', href: 'https://github.com/pgElephant/pg_stat_insights/archive/refs/tags/v1.0.0.tar.gz', type: 'Source', available: true },
+        { title: 'Source Code (zip)', href: 'https://github.com/pgElephant/pg_stat_insights/archive/refs/tags/v1.0.0.zip', type: 'Source', available: true },
         { title: 'Installation Guide', href: '/docs/pg-stat-insights/getting-started', type: 'Docs', available: true },
         { title: 'RPM Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
         { title: 'DEB Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
@@ -232,7 +234,8 @@ const DownloadPage = () => {
       ],
       details: '/pgraft',
       downloads: [
-        { title: 'Source Code', href: 'https://github.com/pgelephant/pgraft', type: 'Source', available: true },
+        { title: 'Source Code (tar.gz)', href: 'https://github.com/pgElephant/pgraft/archive/refs/tags/v1.0.0.tar.gz', type: 'Source', available: true },
+        { title: 'Source Code (zip)', href: 'https://github.com/pgElephant/pgraft/archive/refs/tags/v1.0.0.zip', type: 'Source', available: true },
         { title: 'Installation Guide', href: '/docs/pgraft/installation', type: 'Docs', available: true },
         { title: 'RPM Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
         { title: 'DEB Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
@@ -255,7 +258,8 @@ const DownloadPage = () => {
       ],
       details: '/fauxdb',
       downloads: [
-        { title: 'Source Code', href: 'https://github.com/pgelephant/fauxdb', type: 'Source', available: true },
+        { title: 'Source Code (tar.gz)', href: 'https://github.com/pgElephant/fauxdb/archive/refs/tags/v1.0.0.tar.gz', type: 'Source', available: true },
+        { title: 'Source Code (zip)', href: 'https://github.com/pgElephant/fauxdb/archive/refs/tags/v1.0.0.zip', type: 'Source', available: true },
         { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary', available: true },
         { title: 'Docker Image', href: '/download/fauxdb', type: 'Docker', available: true }
       ]
@@ -276,7 +280,8 @@ const DownloadPage = () => {
       ],
       details: '/pgbalancer',
       downloads: [
-        { title: 'Source Code', href: 'https://github.com/pgelephant/pgbalancer', type: 'Source', available: true },
+        { title: 'Source Code (tar.gz)', href: 'https://github.com/pgElephant/pgbalancer/archive/refs/tags/v1.0.0.tar.gz', type: 'Source', available: true },
+        { title: 'Source Code (zip)', href: 'https://github.com/pgElephant/pgbalancer/archive/refs/tags/v1.0.0.zip', type: 'Source', available: true },
         { title: 'Linux Binary', href: '/download/pgbalancer', type: 'Binary', available: true },
         { title: 'Docker Image', href: '/download/pgbalancer', type: 'Docker', available: true }
       ]
