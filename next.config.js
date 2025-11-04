@@ -261,6 +261,17 @@ const nextConfig = {
         destination: '/blog/pgraft',
         permanent: true,
       },
+      // Blog slug compatibility (underscore to dash)
+      {
+        source: '/blog/pg_stat_insights',
+        destination: '/blog/pg-stat-insights',
+        permanent: true,
+      },
+      {
+        source: '/blog/pg_stat_insights/:path*',
+        destination: '/blog/pg-stat-insights/:path*',
+        permanent: true,
+      },
       {
         source: '/postgresql-clustering',
         destination: '/pgraft',

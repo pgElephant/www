@@ -31,7 +31,7 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '4', icon: BookOpen, color: 'text-white' },
+  { label: 'Total Articles', value: '5', icon: BookOpen, color: 'text-white' },
   { label: 'Monthly Readers', value: '4.2k', icon: Eye, color: 'text-white' },
   { label: 'Categories', value: '1', icon: Tag, color: 'text-white' },
   { label: 'Authors', value: '1', icon: Users, color: 'text-white' }
@@ -39,6 +39,23 @@ const blogStats = [
 
 
 const blogPosts = [
+  {
+    slug: 'pg-stat-insights-1-0-0',
+    title: 'pg_stat_insights 1.0.0 — Release Announcement',
+    excerpt: 'We’re excited to announce pg_stat_insights 1.0.0 — advanced PostgreSQL performance monitoring with 52 metrics across 11 views. Production-ready, easy to install.',
+    content: 'pg_stat_insights 1.0.0 delivers comprehensive query performance insights with 52 metrics, 11 pre-built views, response-time categories, and PostgreSQL 16–17 compatibility.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-21',
+    readTime: '6 min read',
+    category: 'Announcement',
+    featured: true,
+    icon: 'pg_stat_insights',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['PostgreSQL', 'Performance Monitoring', 'Release', 'pg_stat_insights']
+  },
     {
       slug: 'neurondb',
       title: 'NeuronDB: PostgreSQL AI Vector Database Extension',
@@ -139,6 +156,15 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               <Image
                 src="/blog/pgbalancer/header.svg?v=7"
                 alt="pgbalancer blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'pg-stat-insights-1-0-0' ? (
+              <Image
+                src="/blog/pg-stat-insights/header.svg?v=7"
+                alt="pg_stat_insights release blog header"
                 fill
                 className="object-cover"
                 unoptimized
