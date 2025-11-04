@@ -30,7 +30,8 @@ export default function IndexingPage() {
               Commonly used for embeddings that represent spatial relationships.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- L2 distance operator
+              <code>{`
+-- L2 distance operator
 SELECT embedding <-> '[0.1, 0.2, 0.3]'::vector
 FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
@@ -40,7 +41,7 @@ LIMIT 10;
 SELECT id, vector_l2_distance_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS distance
 FROM documents
 ORDER BY distance
-LIMIT 10;`}</code>
+LIMIT 10;`}</code></pre></pre>
             </pre>
           </div>
 
@@ -51,7 +52,8 @@ LIMIT 10;`}</code>
               Ideal for text embeddings and normalized vectors where magnitude is less important than direction.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Cosine distance operator
+              <code>{`
+-- Cosine distance operator
 SELECT embedding <=> '[0.1, 0.2, 0.3]'::vector
 FROM documents
 ORDER BY embedding <=> '[0.1, 0.2, 0.3]'::vector
@@ -61,7 +63,7 @@ LIMIT 10;
 SELECT id, vector_cosine_distance_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS distance
 FROM documents
 ORDER BY distance
-LIMIT 10;`}</code>
+LIMIT 10;`}</code></pre></pre>
             </pre>
           </div>
 
@@ -72,7 +74,8 @@ LIMIT 10;`}</code>
               Use with normalized vectors for maximum inner product search (MIPS).
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Inner product operator (negative for ordering, higher is more similar)
+              <code>{`
+-- Inner product operator (negative for ordering, higher is more similar)
 SELECT embedding <#> '[0.1, 0.2, 0.3]'::vector
 FROM documents
 ORDER BY embedding <#> '[0.1, 0.2, 0.3]'::vector
@@ -82,7 +85,7 @@ LIMIT 10;
 SELECT id, vector_inner_product_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS score
 FROM documents
 ORDER BY score DESC
-LIMIT 10;`}</code>
+LIMIT 10;`}</code></pre></pre>
             </pre>
           </div>
         </div>
@@ -102,19 +105,19 @@ LIMIT 10;`}</code>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;-&gt;</code></td>
+                <td className="p-3"><code>&lt;-&gt;</code></pre></td>
                 <td className="p-3">L2 (Euclidean)</td>
                 <td className="p-3">ASC (lower = more similar)</td>
                 <td className="p-3">Spatial data, general embeddings</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;=&gt;</code></td>
+                <td className="p-3"><code>&lt;=&gt;</code></pre></td>
                 <td className="p-3">Cosine</td>
                 <td className="p-3">ASC (lower = more similar)</td>
                 <td className="p-3">Text embeddings, normalized vectors</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;#&gt;</code></td>
+                <td className="p-3"><code>&lt;#&gt;</code></pre></td>
                 <td className="p-3">Inner Product</td>
                 <td className="p-3">ASC (higher raw value = more similar)</td>
                 <td className="p-3">MIPS, normalized embeddings</td>
@@ -138,7 +141,8 @@ LIMIT 10;`}</code>
               for efficient navigation to nearest neighbors. Recommended for most use cases.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Create HNSW index with L2 distance
+              <code>{`
+-- Create HNSW index with L2 distance
 CREATE INDEX ON documents USING hnsw (embedding vector_l2_ops);
 
 -- Create HNSW index with cosine distance
@@ -156,7 +160,7 @@ SET hnsw.ef_search = 100;
 
 SELECT * FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
-LIMIT 10;`}</code>
+LIMIT 10;`}</code></pre></pre>
             </pre>
           </div>
 
@@ -167,7 +171,8 @@ LIMIT 10;`}</code>
               Best for very large datasets where index build time and memory are critical.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Create IVF index with 100 lists (adjust based on dataset size)
+              <code>{`
+-- Create IVF index with 100 lists (adjust based on dataset size)
 CREATE INDEX ON documents USING ivfflat (embedding vector_l2_ops)
 WITH (lists = 100);
 
@@ -180,7 +185,7 @@ SET ivfflat.probes = 10;
 
 SELECT * FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
-LIMIT 10;`}</code>
+LIMIT 10;`}</code></pre></pre>
             </pre>
           </div>
         </div>
@@ -236,17 +241,17 @@ LIMIT 10;`}</code>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="p-3"><code>vector_l2_ops</code></td>
+                <td className="p-3"><code>vector_l2_ops</code></pre></td>
                 <td className="p-3">L2 (Euclidean)</td>
                 <td className="p-3">HNSW, IVF</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>vector_cosine_ops</code></td>
+                <td className="p-3"><code>vector_cosine_ops</code></pre></td>
                 <td className="p-3">Cosine</td>
                 <td className="p-3">HNSW, IVF</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>vector_ip_ops</code></td>
+                <td className="p-3"><code>vector_ip_ops</code></pre></td>
                 <td className="p-3">Inner Product</td>
                 <td className="p-3">HNSW, IVF</td>
               </tr>
@@ -256,8 +261,8 @@ LIMIT 10;`}</code>
         <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
           <p className="text-sm">
             <strong>Important:</strong> The operator class in your index must match the distance operator in your query.
-            For example, an index with <code>vector_l2_ops</code> will be used for queries with <code>&lt;-&gt;</code>,
-            but not for <code>&lt;=&gt;</code> (cosine) queries.
+            For example, an index with <code>vector_l2_ops</code></pre> will be used for queries with <code>&lt;-&gt;</code></pre>,
+            but not for <code>&lt;=&gt;</code></pre> (cosine) queries.
           </p>
         </div>
       </section>
@@ -283,12 +288,13 @@ LIMIT 10;`}</code>
               </li>
             </ul>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto mt-4">
-              <code>{`-- Build-time tuning
+              <code>{`
+-- Build-time tuning
 CREATE INDEX ON documents USING hnsw (embedding vector_l2_ops)
 WITH (m = 32, ef_construction = 128);
 
 -- Runtime tuning for higher recall
-SET hnsw.ef_search = 200;`}</code>
+SET hnsw.ef_search = 200;`}</code></pre></pre>
             </pre>
           </div>
 
@@ -296,7 +302,7 @@ SET hnsw.ef_search = 200;`}</code>
             <h3 className="text-xl font-semibold mb-2">IVF Parameters</h3>
             <ul className="space-y-2 list-disc list-inside">
               <li>
-                <strong>lists</strong> (build-time): Number of clusters. Rule of thumb: <code>sqrt(num_rows)</code> for datasets &gt; 1M.
+                <strong>lists</strong> (build-time): Number of clusters. Rule of thumb: <code>sqrt(num_rows)</code></pre> for datasets &gt; 1M.
                 Typical range: 100–10,000.
               </li>
               <li>
@@ -305,12 +311,13 @@ SET hnsw.ef_search = 200;`}</code>
               </li>
             </ul>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto mt-4">
-              <code>{`-- Build-time tuning (for 10M rows, sqrt(10M) ~ 3162)
+              <code>{`
+-- Build-time tuning (for 10M rows, sqrt(10M) ~ 3162)
 CREATE INDEX ON documents USING ivfflat (embedding vector_l2_ops)
 WITH (lists = 3000);
 
 -- Runtime tuning for better recall
-SET ivfflat.probes = 20;`}</code>
+SET ivfflat.probes = 20;`}</code></pre></pre>
             </pre>
           </div>
         </div>
@@ -324,7 +331,8 @@ SET ivfflat.probes = 20;`}</code>
           for configuration details.
         </p>
         <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-          <code>{`-- Enable GPU acceleration (session-level)
+          <code>{`
+-- Enable GPU acceleration (session-level)
 SET neurondb.gpu_enabled = true;
 SET neurondb.gpu_device = 0;
 SET neurondb.gpu_batch_size = 1000;
@@ -336,7 +344,7 @@ SELECT id,
        vector_inner_product_gpu(embedding, query_vec) AS ip_score
 FROM documents, (SELECT '[0.1, 0.2, 0.3]'::vector AS query_vec) q
 ORDER BY l2_dist
-LIMIT 100;`}</code>
+LIMIT 100;`}</code></pre></pre>
         </pre>
       </section>
 
@@ -370,15 +378,15 @@ LIMIT 100;`}</code>
             <h4 className="font-semibold mb-2">4. Index Maintenance</h4>
             <p className="text-muted-foreground">
               Indexes are automatically updated on INSERT/UPDATE/DELETE, but frequent updates can degrade quality.
-              For bulk loads, consider building the index after data ingestion with <code>CREATE INDEX</code>.
+              For bulk loads, consider building the index after data ingestion with <code>CREATE INDEX</code></pre>.
             </p>
           </div>
 
           <div className="p-4 border rounded-lg">
             <h4 className="font-semibold mb-2">5. Query Tuning</h4>
             <p className="text-muted-foreground">
-              Adjust runtime GUCs (<code>hnsw.ef_search</code>, <code>ivfflat.probes</code>) to balance recall and latency.
-              Monitor query performance and index scan statistics with <code>EXPLAIN ANALYZE</code>.
+              Adjust runtime GUCs (<code>hnsw.ef_search</code></pre>, <code>ivfflat.probes</code></pre>) to balance recall and latency.
+              Monitor query performance and index scan statistics with <code>EXPLAIN ANALYZE</code></pre>.
             </p>
           </div>
         </div>
@@ -387,7 +395,8 @@ LIMIT 100;`}</code>
       <section>
         <h2 className="text-2xl font-semibold mb-4">Example: Complete Indexing Workflow</h2>
         <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-          <code>{`-- 1. Create table with vector column
+          <code>{`
+-- 1. Create table with vector column
 CREATE TABLE documents (
   id SERIAL PRIMARY KEY,
   content TEXT,
@@ -416,7 +425,7 @@ LIMIT 10;
 EXPLAIN ANALYZE
 SELECT id FROM documents
 ORDER BY embedding <=> '[0.1, 0.2, ...]'::vector
-LIMIT 10;`}</code>
+LIMIT 10;`}</code></pre></pre>
         </pre>
       </section>
 

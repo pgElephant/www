@@ -250,9 +250,9 @@ LIMIT 10;`
                       {category.models.map((model, i) => (
                         <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                           <td className="py-3 px-4">
-                            <code className="text-sm text-purple-300 bg-slate-900/50 px-2 py-1 rounded">
+                            <pre className="text-sm overflow-x-auto"><code className="text-sm text-purple-300 bg-slate-900/50 px-2 py-1 rounded">
                               {model.name}
-                            </code>
+                            </code></pre>
                           </td>
                           <td className="py-3 px-4 text-sm text-slate-300">{model.provider}</td>
                           <td className="py-3 px-4 text-sm text-cyan-400 font-semibold">{model.dimensions}</td>
@@ -286,12 +286,12 @@ LIMIT 10;`
                 <p className="text-slate-300 mb-3">{func.description}</p>
                 
                 <div className="bg-slate-900/50 rounded-lg p-4 mb-3">
-                  <code className="text-sm text-cyan-400">{func.signature}</code>
+                  <pre className="text-sm overflow-x-auto"><code className="text-sm text-cyan-400">{func.signature}</code></pre>
                 </div>
                 
                 <div className="bg-slate-900/50 rounded-lg p-4">
                   <p className="text-xs text-slate-400 mb-2">Example:</p>
-                  <code className="text-sm text-green-400">{func.example}</code>
+                  <pre className="text-sm overflow-x-auto"><code className="text-sm text-green-400">{func.example}</code></pre>
                 </div>
               </div>
             ))}
@@ -320,7 +320,7 @@ LIMIT 10;`
                 
                 <div className="bg-slate-900/50 rounded-lg p-4 overflow-x-auto">
                   <pre className="text-sm">
-                    <code className="text-green-400">{step.code}</code>
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-400">{step.code}</code></pre>
                   </pre>
                 </div>
               </div>
@@ -358,7 +358,8 @@ LIMIT 10;`
           
           <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-400/30">
             <pre className="text-sm overflow-x-auto">
-              <code className="text-green-400">{`-- PostgreSQL configuration (postgresql.conf)
+              <pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`
+-- PostgreSQL configuration (postgresql.conf)
 neurondb.ml_workers = 4                    # Number of ML worker processes
 neurondb.embedding_cache_size = '1GB'      # Cache for embeddings
 neurondb.model_memory_limit = '4GB'        # Max memory per model
@@ -373,7 +374,7 @@ neurondb.huggingface_token = 'hf_...'     # HuggingFace token
 neurondb.batch_size = 100                  # Embedding batch size
 neurondb.request_timeout = 30              # API timeout (seconds)
 neurondb.max_retries = 3                   # Retry failed requests
-neurondb.cache_ttl = 86400                 # Cache TTL (seconds)`}</code>
+neurondb.cache_ttl = 86400                 # Cache TTL (seconds)`}</code></pre></pre>
             </pre>
           </div>
         </section>

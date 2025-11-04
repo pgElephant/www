@@ -44,7 +44,8 @@ export default function Page() {
               <div className="bg-slate-900/80 rounded-lg p-6 mb-6">
                 <p className="text-white/70 mb-2">Example Vector:</p>
                 <pre className="text-green-400 font-mono text-sm">
-{`[0.234, -0.891, 0.456, 0.123, -0.678]`}
+{`
+[0.234, -0.891, 0.456, 0.123, -0.678]`}
                 </pre>
                 <p className="text-white/60 text-sm mt-2">
                   This is a 5-dimensional vector where each number represents a feature
@@ -108,7 +109,8 @@ export default function Page() {
               <div className="mt-6 bg-slate-900/80 rounded-lg p-6">
                 <p className="text-white/70 mb-3 font-semibold">How Vector Similarity Works:</p>
                 <pre className="text-sm text-white/80 leading-relaxed">
-{`Query: "laptop computers"
+{`
+Query: "laptop computers"
    ↓
 Convert to vector: [0.8, 0.2, 0.1, ...]
    ↓
@@ -136,7 +138,8 @@ Find similar vectors in database:
 
                 <div className="bg-slate-900/80 rounded-lg p-4 mb-4">
                   <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Create table with vector column
+{`
+-- Create table with vector column
 CREATE TABLE embeddings (
     id SERIAL PRIMARY KEY,
     data vector(384)  -- 384-dimensional vector
@@ -315,8 +318,8 @@ VALUES ('[0.1, 0.2, 0.3, ...]'::vector);`}
 
               <div className="mt-6 bg-blue-500/20 rounded-lg p-4">
                 <p className="text-white/80 text-sm">
-                  <strong>💡 Recommendation:</strong> Start with <code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">vector (float32)</code> for development. 
-                  Switch to <code className="bg-slate-900 px-2 py-1 rounded text-purple-300">float16</code> or <code className="bg-slate-900 px-2 py-1 rounded text-cyan-300">int8</code> in production when you understand your accuracy requirements.
+                  <strong>💡 Recommendation:</strong> Start with <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">vector (float32)</code></pre> for development. 
+                  Switch to <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-purple-300">float16</code></pre> or <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-cyan-300">int8</code></pre> in production when you understand your accuracy requirements.
                 </p>
               </div>
             </div>
@@ -330,7 +333,8 @@ VALUES ('[0.1, 0.2, 0.3, ...]'::vector);`}
                   <h3 className="text-xl font-semibold text-white mb-3">Creating Vector Columns</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Standard precision
+{`
+-- Standard precision
 CREATE TABLE docs (id SERIAL, embedding vector(384));
 
 -- Half precision (2x storage savings)
@@ -349,7 +353,8 @@ CREATE TABLE docs_binary (id SERIAL, embedding binary(384));`}
                   <h3 className="text-xl font-semibold text-white mb-3">Similarity Search</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- L2 distance (Euclidean)
+{`
+-- L2 distance (Euclidean)
 SELECT id, embedding <-> '[0.1, 0.2, ...]'::vector AS distance
 FROM docs ORDER BY distance LIMIT 10;
 

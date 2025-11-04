@@ -54,7 +54,8 @@ export default function Page() {
               <div className="bg-slate-900/80 rounded-lg p-6">
                 <p className="text-white/70 mb-3 font-semibold">How Embeddings Capture Similarity:</p>
                 <pre className="text-sm text-white/80 leading-relaxed">
-{`Text "cat"    → [0.8, 0.2, 0.1, ...]     ┐
+{`
+Text "cat"    → [0.8, 0.2, 0.1, ...]     ┐
 Text "kitten" → [0.75, 0.25, 0.12, ...]   ├─ Close together (similar meaning)
 Text "dog"    → [0.7, 0.3, 0.15, ...]     ┘
 
@@ -112,7 +113,8 @@ Text "car"    → [-0.3, 0.9, -0.5, ...]    ← Far apart (different concept)`}
                   <h3 className="text-xl font-semibold text-white mb-3">Basic Usage</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Generate embedding from text
+{`
+-- Generate embedding from text
 SELECT embed_text('artificial intelligence');
 
 -- Result: vector(384) containing the embedding
@@ -125,7 +127,8 @@ SELECT embed_text('artificial intelligence');
                   <h3 className="text-xl font-semibold text-white mb-3">Choose a Model</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Fast, efficient model (384 dimensions)
+{`
+-- Fast, efficient model (384 dimensions)
 SELECT embed_text('machine learning', 'all-MiniLM-L6-v2');
 
 -- Higher quality (768 dimensions)
@@ -141,7 +144,8 @@ SELECT embed_text('machine learning', 'all-mpnet-base-v2');`}
                   </p>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Embed multiple texts at once
+{`
+-- Embed multiple texts at once
 SELECT embed_text_batch(
     ARRAY[
         'artificial intelligence',
@@ -169,7 +173,8 @@ SELECT embed_text_batch(
 
               <div className="bg-slate-900/80 rounded-lg p-4 mb-6">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Embed image from binary data
+{`
+-- Embed image from binary data
 SELECT embed_image(
     pg_read_binary_file('/path/to/image.jpg'),
     'clip'  -- CLIP model (text + image)
@@ -203,7 +208,8 @@ LIMIT 10;`}
                   </h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`CREATE TABLE documents (
+{`
+CREATE TABLE documents (
     id SERIAL PRIMARY KEY,
     title TEXT,
     content TEXT,
@@ -220,7 +226,8 @@ LIMIT 10;`}
                   </h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`INSERT INTO documents (title, content, embedding) VALUES
+{`
+INSERT INTO documents (title, content, embedding) VALUES
     ('Machine Learning', 'Introduction to ML...', 
      embed_text('Introduction to ML...')),
     ('Deep Learning', 'Neural networks...', 
@@ -236,7 +243,8 @@ LIMIT 10;`}
                   </h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`SELECT title, content,
+{`
+SELECT title, content,
        embedding <-> embed_text('AI algorithms') AS distance
 FROM documents
 ORDER BY distance
@@ -254,8 +262,8 @@ LIMIT 5;`}
                 Performance Tips
               </h2>
               <ul className="space-y-3 text-white/80">
-                <li>• <strong>Batch processing:</strong> Use <code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">embed_text_batch()</code> for 3-5x speedup</li>
-                <li>• <strong>Caching:</strong> Use <code className="bg-slate-900 px-2 py-1 rounded text-purple-300">embed_cached()</code> to avoid regenerating embeddings</li>
+                <li>• <strong>Batch processing:</strong> Use <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">embed_text_batch()</code></pre> for 3-5x speedup</li>
+                <li>• <strong>Caching:</strong> Use <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-purple-300">embed_cached()</code></pre> to avoid regenerating embeddings</li>
                 <li>• <strong>Indexing:</strong> Create HNSW indexes on embedding columns for fast search</li>
                 <li>• <strong>Model selection:</strong> Smaller models (384-dim) are faster, larger models (768-dim) are more accurate</li>
                 <li>• <strong>Quantization:</strong> Use int8 or binary types for 4-32x storage savings</li>

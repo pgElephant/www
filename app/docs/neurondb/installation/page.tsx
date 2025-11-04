@@ -69,7 +69,8 @@ export default function Page() {
                   <h3 className="text-xl font-semibold text-white mb-3">Step 1: Install PostgreSQL</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`sudo apt-get update
+{`
+sudo apt-get update
 sudo apt-get install -y postgresql-17 \\
     postgresql-server-dev-17 \\
     postgresql-contrib-17`}
@@ -81,7 +82,8 @@ sudo apt-get install -y postgresql-17 \\
                   <h3 className="text-xl font-semibold text-white mb-3">Step 2: Install Build Dependencies</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`sudo apt-get install -y \\
+{`
+sudo apt-get install -y \\
     build-essential \\
     libcurl4-openssl-dev \\
     libssl-dev \\
@@ -95,7 +97,8 @@ sudo apt-get install -y postgresql-17 \\
                   <h3 className="text-xl font-semibold text-white mb-3">Step 3: Build and Install</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`git clone https://github.com/pgElephant/NeurondB.git
+{`
+git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
 make PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config
 sudo make install PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config`}
@@ -107,7 +110,8 @@ sudo make install PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config`}
                   <h3 className="text-xl font-semibold text-white mb-3">Step 4: Verify Installation</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`ls -lh /usr/lib/postgresql/17/lib/neurondb.so
+{`
+ls -lh /usr/lib/postgresql/17/lib/neurondb.so
 ls -lh /usr/share/postgresql/17/extension/neurondb*`}
                     </pre>
                   </div>
@@ -127,7 +131,8 @@ ls -lh /usr/share/postgresql/17/extension/neurondb*`}
                   <h3 className="text-xl font-semibold text-white mb-3">Step 1: Install PostgreSQL via Homebrew</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`brew install postgresql@17
+{`
+brew install postgresql@17
 brew services start postgresql@17`}
                     </pre>
                   </div>
@@ -137,7 +142,8 @@ brew services start postgresql@17`}
                   <h3 className="text-xl font-semibold text-white mb-3">Step 2: Build and Install</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`git clone https://github.com/pgElephant/NeurondB.git
+{`
+git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
 make PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config
 sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
@@ -159,7 +165,8 @@ sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
                   <h3 className="text-xl font-semibold text-white mb-3">Step 1: Install PostgreSQL</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`sudo dnf install -y \\
+{`
+sudo dnf install -y \\
     postgresql17-server \\
     postgresql17-devel \\
     postgresql17-contrib`}
@@ -171,7 +178,8 @@ sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
                   <h3 className="text-xl font-semibold text-white mb-3">Step 2: Install Build Dependencies</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`sudo dnf install -y \\
+{`
+sudo dnf install -y \\
     gcc \\
     make \\
     curl-devel \\
@@ -185,7 +193,8 @@ sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
                   <h3 className="text-xl font-semibold text-white mb-3">Step 3: Build and Install</h3>
                   <div className="bg-slate-900/80 rounded-lg p-4">
                     <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`git clone https://github.com/pgElephant/NeurondB.git
+{`
+git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
 make PG_CONFIG=/usr/pgsql-17/bin/pg_config
 sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
@@ -201,7 +210,8 @@ sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
               
               <div className="bg-slate-900/80 rounded-lg p-4 mb-6">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Connect to your database
+{`
+-- Connect to your database
 psql -d mydb
 
 -- Create extension

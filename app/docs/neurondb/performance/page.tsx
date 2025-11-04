@@ -200,8 +200,9 @@ export default function Page() {
                   <div>
                     <h3 className="text-lg font-bold text-cyan-300 mb-3">2. Use Batch Operations</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-green-300">
-                        {`-- Good: Batch embedding generation (5x faster)
+                      <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                        {`
+-- Good: Batch embedding generation (5x faster)
 UPDATE docs SET embedding = batch.emb
 FROM (
   SELECT id, unnest(embed_text_batch(array_agg(content))) AS emb
@@ -210,21 +211,22 @@ FROM (
 
 -- Bad: Individual calls
 UPDATE docs SET embedding = embed_text(content);  -- Slow!`}
-                      </code>
+                      </code></pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-bold text-cyan-300 mb-3">3. Monitor Cache Hit Rates</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-green-300">
-                        {`SELECT * FROM neurondb_cache_stats();
+                      <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                        {`
+SELECT * FROM neurondb_cache_stats();
 
 -- Target hit rates:
 --   Embeddings: > 50%
 --   Models: > 95%
 --   Index pages: > 90%`}
-                      </code>
+                      </code></pre>
                     </div>
                   </div>
                 </div>

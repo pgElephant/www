@@ -87,11 +87,11 @@ const FauxDBTroubleshootingPage = () => {
           <h2 className="text-3xl font-bold mb-8">Debugging</h2>
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30">
             <h3 className="text-xl font-bold text-cyan-300 mb-4">Enable Debug Logging</h3>
-            <div className="bg-slate-900/50 rounded-lg p-4 mb-4"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[logging]
+            <div className="bg-slate-900/50 rounded-lg p-4 mb-4"><pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[logging]
 level = "debug"
 format = "json"
 output = "file"
-file_path = "/var/log/fauxdb/debug.log"`}</code></pre></div>
+file_path = "/var/log/fauxdb/debug.log"`}</code></pre></pre></div>
             <p className="text-slate-300 text-sm">View logs: <code className="text-emerald-400">tail -f /var/log/fauxdb/debug.log</code></p>
           </div>
         </section>

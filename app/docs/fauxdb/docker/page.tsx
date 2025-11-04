@@ -52,7 +52,7 @@ export default function FauxDBDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">1. Clone and Setup</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># Clone the repository</div>
                 <div className="text-slate-300 mb-2">git clone https://github.com/fauxdb/fauxdb.git</div>
                 <div className="text-slate-300 mb-2">cd fauxdb</div>
@@ -69,7 +69,7 @@ export default function FauxDBDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">2. Start FauxDB</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># Quick setup and start</div>
                 <div className="text-slate-300 mb-2">make setup</div>
                 <div className="text-slate-300 mb-2">docker-compose up -d</div>
@@ -86,7 +86,7 @@ export default function FauxDBDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">3. Test MongoDB Connection</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># Connect with mongosh</div>
                 <div className="text-slate-300 mb-2">mongosh mongodb://localhost:27018</div>
                 <div className="text-slate-300 mb-4"></div>
@@ -111,7 +111,7 @@ export default function FauxDBDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Basic docker-compose.yml</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm overflow-x-auto">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 overflow-x-auto">
                 <div className="text-slate-300 mb-2">version: '3.8'</div>
                 <div className="text-slate-300 mb-2">services:</div>
                 <div className="text-slate-300 mb-2">  postgres:</div>
@@ -155,7 +155,7 @@ export default function FauxDBDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Environment Variables (.env)</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># PostgreSQL Configuration</div>
                 <div className="text-slate-300 mb-2">POSTGRES_USER=postgres</div>
                 <div className="text-slate-300 mb-2">POSTGRES_PASSWORD=your_secure_password</div>
@@ -190,7 +190,7 @@ export default function FauxDBDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Hot Reload Development</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># Start development environment</div>
                 <div className="text-slate-300 mb-2">make dev</div>
                 <div className="text-slate-300 mb-4"></div>
@@ -210,7 +210,7 @@ export default function FauxDBDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Production Environment</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># Start production environment</div>
                 <div className="text-slate-300 mb-2">make prod</div>
                 <div className="text-slate-300 mb-4"></div>
@@ -236,7 +236,7 @@ export default function FauxDBDockerSetup() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Run Test Suite</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># Run tests with Docker</div>
                 <div className="text-slate-300 mb-2">make test</div>
                 <div className="text-slate-300 mb-4"></div>
@@ -252,7 +252,7 @@ export default function FauxDBDockerSetup() {
             
             <div>
               <h3 className="text-xl font-semibold text-white mb-3">Database Operations</h3>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 font-mono text-sm">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 <div className="text-blue-400 mb-4"># Open PostgreSQL shell</div>
                 <div className="text-slate-300 mb-2">make db-shell</div>
                 <div className="text-slate-300 mb-4"></div>

@@ -45,9 +45,10 @@ export default function NeuronDBAnalyticsPage() {
                   Lloyd's K-Means with k-means++ initialization for finding customer segments, topic clusters, and data grouping.
                   The examples below mirror the fraud demo in NeuronDB/demo/ML and use a table with a vector column named features.
                 </p>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm mb-4">
-                  <code className="text-green-300">
-                    {`-- K-Means clustering
+                <div className="bg-slate-900/50 rounded-lg p-6 mb-4">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                    {`
+-- K-Means clustering
 SELECT cluster_kmeans(
   'train_data',   -- table with vectors
   'features',     -- vector column
@@ -68,7 +69,7 @@ SELECT neurondb_train_kmeans_project(
 SELECT version, algorithm, parameters, is_deployed
 FROM neurondb_list_project_models('fraud_kmeans')
 ORDER BY version;`}
-                  </code>
+                  </code></pre>
                 </div>
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="bg-emerald-500/10 rounded-lg p-4 border border-emerald-500/30">
@@ -93,9 +94,10 @@ ORDER BY version;`}
                 <p className="text-white/80 mb-6">
                   Fast stochastic K-Means optimized for large datasets. Matches the demo at NeuronDB/demo/ML/004_minibatch_kmeans.sql.
                 </p>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-green-300">
-                    {`-- Mini-batch K-Means (fast)
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                    {`
+-- Mini-batch K-Means (fast)
 SELECT cluster_minibatch_kmeans(
   'train_data',
   'features',
@@ -103,7 +105,7 @@ SELECT cluster_minibatch_kmeans(
   50,     -- max iterations
   100     -- batch size
 ) AS clusters;`}
-                  </code>
+                  </code></pre>
                 </div>
               </div>
 
@@ -113,9 +115,10 @@ SELECT cluster_minibatch_kmeans(
                 <p className="text-white/80 mb-6">
                   Probabilistic clustering that returns a probability matrix. Convert to hard cluster IDs using a helper function from the demo.
                 </p>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm mb-4">
-                  <code className="text-green-300">
-                    {`-- Helper: convert probability matrix to cluster IDs
+                <div className="bg-slate-900/50 rounded-lg p-6 mb-4">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                    {`
+-- Helper: convert probability matrix to cluster IDs
 CREATE OR REPLACE FUNCTION gmm_to_clusters(probs float8[][])
 RETURNS integer[] LANGUAGE plpgsql IMMUTABLE AS $$
 DECLARE r integer[] := ARRAY[]::integer[]; i int; j int; k int; m float8; b int; BEGIN
@@ -128,7 +131,7 @@ WITH p AS (
   SELECT cluster_gmm('train_data','features',7,30) AS probs
 )
 SELECT gmm_to_clusters(probs) FROM p;`}
-                  </code>
+                  </code></pre>
                 </div>
                 <div className="text-white/60 text-sm">
                   Tip: See NeuronDB/demo/ML/003_gmm_clustering.sql for a complete workflow including evaluation on test data.
@@ -154,9 +157,10 @@ SELECT gmm_to_clusters(probs) FROM p;`}
                 <p className="text-white/80 mb-6">
                   Statistical anomaly detection using Z-scores. Matches the workflow in NeuronDB/demo/ML/005_outlier_detection.sql.
                 </p>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-green-300">
-                    {`-- Flag outliers using Z-score
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                    {`
+-- Flag outliers using Z-score
 SELECT detect_outliers_zscore(
   'train_data',
   'features',
@@ -176,7 +180,7 @@ WITH flags AS (
 )
 SELECT ROUND(100.0*SUM(CASE WHEN is_outlier AND is_fraud THEN 1 ELSE 0 END)/NULLIF(SUM(CASE WHEN is_fraud THEN 1 ELSE 0 END),0),2) AS fraud_detection_rate
 FROM labeled;`}
-                  </code>
+                  </code></pre>
                 </div>
               </div>
             </div>

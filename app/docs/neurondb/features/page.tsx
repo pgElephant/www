@@ -206,9 +206,9 @@ const VectorTypesPage = () => {
                       key={i}
                       className="flex items-start gap-4 p-4 rounded-lg bg-white/5 border border-white/10 hover:border-cyan-400/30 transition-all"
                     >
-                      <code className="text-lg font-mono text-pink-400 bg-slate-900/50 px-3 py-1 rounded min-w-[60px] text-center">
+                      <pre className="text-sm overflow-x-auto"><code className="text-lg font-mono text-pink-400 bg-slate-900/50 px-3 py-1 rounded min-w-[60px] text-center">
                         {item.operator}
-                      </code>
+                      </code></pre>
                       <div className="flex-1">
                         <h4 className="font-semibold text-white mb-1">{item.name}</h4>
                         <p className="text-sm text-slate-400">{item.description}</p>
@@ -293,7 +293,8 @@ const VectorTypesPage = () => {
           
           <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-400/30">
             <pre className="text-sm overflow-x-auto">
-              <code className="text-green-400">{`-- Create table with vector column
+              <pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`
+-- Create table with vector column
 CREATE TABLE embeddings (
   id SERIAL PRIMARY KEY,
   content TEXT,
@@ -317,7 +318,7 @@ LIMIT 5;
 -- Vector operations
 SELECT embedding + '[0.1, 0.1, ...]'::vector FROM embeddings LIMIT 1;
 SELECT embedding * 2.0 FROM embeddings LIMIT 1;
-SELECT embedding || '[0.5]'::vector FROM embeddings LIMIT 1;`}</code>
+SELECT embedding || '[0.5]'::vector FROM embeddings LIMIT 1;`}</code></pre></pre>
             </pre>
           </div>
         </section>

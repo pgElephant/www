@@ -66,14 +66,15 @@ export default function Page() {
                 </div>
 
                 <h3 className="text-xl font-bold text-blue-300 mb-4">Configuration</h3>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-cyan-300">
-                    {`# postgresql.conf
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">
+                    {`
+# postgresql.conf
 neurondb.neuranq_enabled = on
 neurondb.neuranq_naptime = 1000        # Check queue every 1 second
 neurondb.neuranq_batch_size = 100      # Process 100 jobs per cycle
 neurondb.neuranq_max_retries = 3       # Retry failed jobs 3 times`}
-                  </code>
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -106,14 +107,15 @@ neurondb.neuranq_max_retries = 3       # Retry failed jobs 3 times`}
                   </li>
                 </ul>
 
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-cyan-300">
-                    {`# postgresql.conf
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">
+                    {`
+# postgresql.conf
 neurondb.neuranmon_enabled = on
 neurondb.neuranmon_naptime = 60000     # Check every 60 seconds
 neurondb.neuranmon_target_latency_ms = 10  # Target latency SLO
 neurondb.neuranmon_min_recall = 0.95   # Minimum 95% recall`}
-                  </code>
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -146,13 +148,14 @@ neurondb.neuranmon_min_recall = 0.95   # Minimum 95% recall`}
                   </div>
                 </div>
 
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-cyan-300">
-                    {`# postgresql.conf
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">
+                    {`
+# postgresql.conf
 neurondb.neurandefrag_enabled = on
 neurondb.neurandefrag_naptime = 300000     # Check every 5 minutes
 neurondb.neurandefrag_fragmentation_threshold = 0.30  # Rebuild at 30%`}
-                  </code>
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -161,9 +164,10 @@ neurondb.neurandefrag_fragmentation_threshold = 0.30  # Rebuild at 30%`}
             <div>
               <h2 className="text-3xl font-bold text-white mb-8">Monitor Workers</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-green-300">
-                    {`-- View all worker status
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                    {`
+-- View all worker status
 SELECT * FROM neurondb_worker_status();
 
 -- Returns:
@@ -172,7 +176,7 @@ SELECT * FROM neurondb_worker_status();
 --  neuranq      | running | 2025-11-03 12:30:15 |      427       |      12.3
 --  neuranmon    | running | 2025-11-03 12:30:10 |       89       |      45.7
 --  neurandefrag | running | 2025-11-03 12:28:00 |       23       |     234.8`}
-                  </code>
+                  </code></pre>
                 </div>
               </div>
             </div>

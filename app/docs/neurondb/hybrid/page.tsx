@@ -95,9 +95,10 @@ export default function Page() {
               <h2 className="text-3xl font-bold text-white mb-8">Basic Hybrid Search</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                 <h3 className="text-xl font-bold text-white mb-4">Setup Table</h3>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm mb-6">
-                  <code className="text-green-300">
-                    {`-- Create table with vector and text columns
+                <div className="bg-slate-900/50 rounded-lg p-6 mb-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                    {`
+-- Create table with vector and text columns
 CREATE TABLE knowledge_base (
   id SERIAL PRIMARY KEY,
   title TEXT,
@@ -118,13 +119,14 @@ VALUES (
   embed_text('Optimize queries with indexes and EXPLAIN'),
   to_tsvector('Optimize queries with indexes and EXPLAIN')
 );`}
-                  </code>
+                  </code></pre>
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-4">Perform Hybrid Search</h3>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-green-300">
-                    {`-- Hybrid search: 70% vector + 30% text
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                    {`
+-- Hybrid search: 70% vector + 30% text
 SELECT * FROM hybrid_search(
   'knowledge_base',      -- table name
   'content',             -- text column
@@ -136,7 +138,7 @@ SELECT * FROM hybrid_search(
 );
 
 -- Returns: id, title, content, vector_score, text_score, hybrid_score`}
-                  </code>
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -152,9 +154,10 @@ SELECT * FROM hybrid_search(
                   <p className="text-white/70 mb-4">
                     Cross-encoders jointly encode the query and each candidate for higher precision scoring.
                   </p>
-                  <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- Rerank search results with cross-encoder
+                  <div className="bg-slate-900/50 rounded-lg p-6">
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                      {`
+-- Rerank search results with cross-encoder
 SELECT rerank_cross_encoder(
   'What is PostgreSQL?',                    -- query
   ARRAY[                                    -- candidate documents
@@ -172,7 +175,7 @@ SELECT rerank_cross_encoder(
 --   0  | 0.945  (most relevant)
 --   1  | 0.678
 --   2  | 0.123  (least relevant)`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
 
@@ -182,9 +185,10 @@ SELECT rerank_cross_encoder(
                   <p className="text-white/70 mb-4">
                     MMR balances relevance with diversity to avoid redundant results.
                   </p>
-                  <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- MMR reranking for diverse results
+                  <div className="bg-slate-900/50 rounded-lg p-6">
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                      {`
+-- MMR reranking for diverse results
 SELECT * FROM mmr_rerank(
   'knowledge_base',           -- table
   'embedding',                -- vector column
@@ -195,7 +199,7 @@ SELECT * FROM mmr_rerank(
 );
 
 -- Returns: id, title, score, diversity`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
               </div>
@@ -212,21 +216,22 @@ SELECT * FROM mmr_rerank(
                       Adjust the balance based on your use case:
                     </p>
                     <ul className="space-y-2 text-white/70 text-sm ml-4">
-                      <li><code className="text-cyan-300">0.9/0.1</code> - Heavily semantic (concepts matter more than exact terms)</li>
-                      <li><code className="text-cyan-300">0.7/0.3</code> - Balanced (default, works for most cases)</li>
-                      <li><code className="text-cyan-300">0.5/0.5</code> - Equal weight (both semantic and keywords important)</li>
-                      <li><code className="text-cyan-300">0.3/0.7</code> - Keyword-focused (exact terms critical)</li>
+                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.9/0.1</code></pre> - Heavily semantic (concepts matter more than exact terms)</li>
+                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.7/0.3</code></pre> - Balanced (default, works for most cases)</li>
+                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.5/0.5</code></pre> - Equal weight (both semantic and keywords important)</li>
+                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.3/0.7</code></pre> - Keyword-focused (exact terms critical)</li>
                     </ul>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-bold text-cyan-300 mb-3">2. Index Both Columns</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-green-300">
-                        {`-- Always index both for performance
+                      <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                        {`
+-- Always index both for performance
 CREATE INDEX ON docs USING hnsw (embedding vector_l2_ops);
 CREATE INDEX ON docs USING gin (ts_vector);`}
-                      </code>
+                      </code></pre>
                     </div>
                   </div>
 

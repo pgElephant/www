@@ -40,9 +40,9 @@ export default function Page() {
             <div>
               <h2 className="text-3xl font-bold text-white mb-8">Core Configuration</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-cyan-300">
-                    {`# Add to postgresql.conf
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+# Add to postgresql.conf
 
 # Load Extension
 shared_preload_libraries = 'neurondb'
@@ -72,8 +72,7 @@ neurondb.cache_size_mb = 256               # Embedding cache size
 
 # Security
 neurondb.enable_encryption = off           # Vector encryption
-neurondb.enable_differential_privacy = off # DP noise addition`}
-                  </code>
+neurondb.enable_differential_privacy = off # DP noise addition`}</code></pre>
                 </div>
               </div>
             </div>
@@ -82,9 +81,9 @@ neurondb.enable_differential_privacy = off # DP noise addition`}
             <div>
               <h2 className="text-3xl font-bold text-white mb-8">GPU Configuration (Optional)</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-cyan-300">
-                    {`# GPU Settings (optional)
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+# GPU Settings (optional)
 neurondb.gpu_enabled = off                 # Default: off
 neurondb.gpu_device = 0                    # GPU device ID
 neurondb.gpu_batch_size = 8192             # Batch size
@@ -92,8 +91,7 @@ neurondb.gpu_streams = 2                   # CUDA/HIP streams
 neurondb.gpu_memory_pool_mb = 512          # Memory pool
 neurondb.gpu_fail_open = on                # Fallback to CPU
 neurondb.gpu_kernels = 'l2,cosine,ip'      # Enabled kernels
-neurondb.gpu_timeout_ms = 30000            # Kernel timeout`}
-                  </code>
+neurondb.gpu_timeout_ms = 30000            # Kernel timeout`}</code></pre>
                 </div>
               </div>
             </div>
@@ -105,9 +103,9 @@ neurondb.gpu_timeout_ms = 30000            # Kernel timeout`}
                 <p className="text-white/80 mb-6">
                   These can be changed per-session without restarting PostgreSQL:
                 </p>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-green-300">
-                    {`-- Adjust search accuracy
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">{`
+-- Adjust search accuracy
 SET neurondb.ef_search = 100;  -- Higher = more accurate but slower
 
 -- Enable GPU for this session
@@ -118,8 +116,7 @@ SET neurondb.cache_size_mb = 512;
 
 -- View current settings
 SHOW neurondb.ef_search;
-SELECT * FROM neurondb_config();`}
-                  </code>
+SELECT * FROM neurondb_config();`}</code></pre>
                 </div>
               </div>
             </div>
@@ -132,34 +129,31 @@ SELECT * FROM neurondb_config();`}
                   <div>
                     <h3 className="text-xl font-bold text-orange-300 mb-3">For Low Latency</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-cyan-300">
-                        {`neurondb.ef_search = 20          # Lower for speed
+                      <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+neurondb.ef_search = 20          # Lower for speed
 neurondb.enable_prefetch = on    # Predictive loading
 neurondb.enable_simd = on        # SIMD acceleration  
-neurondb.gpu_enabled = on        # GPU if available`}
-                      </code>
+neurondb.gpu_enabled = on        # GPU if available`}</code></pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-xl font-bold text-amber-300 mb-3">For High Accuracy</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-cyan-300">
-                        {`neurondb.ef_search = 200         # Higher for accuracy
+                      <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+neurondb.ef_search = 200         # Higher for accuracy
 neurondb.ef_construction = 500   # Better index quality
-neurondb.m = 32                  # More connections`}
-                      </code>
+neurondb.m = 32                  # More connections`}</code></pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-xl font-bold text-yellow-300 mb-3">For Large Scale</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-cyan-300">
-                        {`neurondb.cache_size_mb = 1024    # Larger cache
+                      <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+neurondb.cache_size_mb = 1024    # Larger cache
 neurondb.inference_threads = 8   # More parallelism
-neurondb.neuranq_batch_size = 200 # Larger batches`}
-                      </code>
+neurondb.neuranq_batch_size = 200 # Larger batches`}</code></pre>
                     </div>
                   </div>
                 </div>

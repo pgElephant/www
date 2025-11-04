@@ -123,7 +123,8 @@ export default function Page() {
               
               <div className="bg-slate-900/80 rounded-lg p-6 mb-6">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`# Install PostgreSQL development packages
+{`
+# Install PostgreSQL development packages
 sudo apt-get update
 sudo apt-get install -y postgresql-17 \\
     postgresql-server-dev-17 \\
@@ -150,7 +151,8 @@ sudo make install PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config`}
               
               <div className="bg-slate-900/80 rounded-lg p-6 mb-6">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`# Install PostgreSQL via Homebrew
+{`
+# Install PostgreSQL via Homebrew
 brew install postgresql@17
 
 # Clone and build NeurondB
@@ -171,7 +173,8 @@ sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
               
               <div className="bg-slate-900/80 rounded-lg p-6 mb-6">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`# Install PostgreSQL development packages
+{`
+# Install PostgreSQL development packages
 sudo dnf install -y postgresql17-server \\
     postgresql17-devel \\
     gcc \\
@@ -209,7 +212,8 @@ sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
               
               <div className="bg-slate-900/80 rounded-lg p-6 mb-4">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`CREATE EXTENSION neurondb;`}
+{`
+CREATE EXTENSION neurondb;`}
                 </pre>
               </div>
             </div>
@@ -222,7 +226,8 @@ sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
               
               <div className="bg-slate-900/80 rounded-lg p-6 mb-4">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`CREATE TABLE documents (
+{`
+CREATE TABLE documents (
     id SERIAL PRIMARY KEY,
     title TEXT,
     content TEXT,
@@ -240,7 +245,8 @@ sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
               
               <div className="bg-slate-900/80 rounded-lg p-6 mb-4">
                 <pre className="text-green-400 font-mono text-sm overflow-x-auto">
-{`-- Insert document with embedding
+{`
+-- Insert document with embedding
 INSERT INTO documents (title, content, embedding) VALUES
     ('Machine Learning', 'Introduction to ML', 
      embed_text('Introduction to Machine Learning'));

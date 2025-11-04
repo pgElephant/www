@@ -34,7 +34,8 @@ export default function SecurityPage() {
               Configure API keys at the database or role level, not in individual sessions or application code.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Database-level configuration (persists across sessions)
+              <code>{`
+-- Database-level configuration (persists across sessions)
 ALTER DATABASE mydb SET neurondb.llm_api_key = 'sk-...';
 ALTER DATABASE mydb SET neurondb.llm_provider = 'openai';
 
@@ -44,7 +45,7 @@ ALTER ROLE app_user SET neurondb.llm_api_key = 'sk-...';
 -- Verify settings without exposing the key
 SELECT name, setting 
 FROM pg_settings 
-WHERE name = 'neurondb.llm_provider';`}</code>
+WHERE name = 'neurondb.llm_provider';`}</code></pre></pre>
             </pre>
           </div>
 
@@ -54,13 +55,14 @@ WHERE name = 'neurondb.llm_provider';`}</code>
               For production deployments, use environment variables or secrets managers (AWS Secrets Manager, HashiCorp Vault, etc.).
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- In postgresql.conf or postgresql.auto.conf
+              <code>{`
+-- In postgresql.conf or postgresql.auto.conf
 neurondb.llm_api_key = '$OPENAI_API_KEY'
 neurondb.llm_provider = 'openai'
 
 -- Or use ALTER SYSTEM (requires superuser)
 ALTER SYSTEM SET neurondb.llm_api_key = 'sk-...';
-SELECT pg_reload_conf();`}</code>
+SELECT pg_reload_conf();`}</code></pre></pre>
             </pre>
           </div>
 
@@ -86,7 +88,8 @@ SELECT pg_reload_conf();`}</code>
               Grant users only the permissions they need. Separate read-only and write roles for embedding functions and ML operations.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Read-only role for querying embeddings
+              <code>{`
+-- Read-only role for querying embeddings
 CREATE ROLE reader_role;
 GRANT SELECT ON documents TO reader_role;
 GRANT EXECUTE ON FUNCTION neurondb_embed(text, text) TO reader_role;
@@ -107,7 +110,7 @@ GRANT EXECUTE ON FUNCTION detect_outliers_zscore TO ml_analyst_role;
 -- Assign roles to users
 GRANT reader_role TO app_readonly_user;
 GRANT writer_role TO app_service_user;
-GRANT ml_analyst_role TO data_scientist;`}</code>
+GRANT ml_analyst_role TO data_scientist;`}</code></pre></pre>
             </pre>
           </div>
 
@@ -117,7 +120,8 @@ GRANT ml_analyst_role TO data_scientist;`}</code>
               Use PostgreSQL row-level security to enforce fine-grained access control on embedding data.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Enable RLS on embeddings table
+              <code>{`
+-- Enable RLS on embeddings table
 ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
 
 -- Policy: users can only see their own documents
@@ -133,7 +137,7 @@ CREATE POLICY service_all_documents ON documents
 
 -- Test RLS
 SET ROLE app_user;
-SELECT * FROM documents;  -- Only sees own rows`}</code>
+SELECT * FROM documents;  -- Only sees own rows`}</code></pre></pre>
             </pre>
           </div>
 
@@ -143,7 +147,8 @@ SELECT * FROM documents;  -- Only sees own rows`}</code>
               Restrict GPU acceleration to authorized roles to prevent resource exhaustion.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Only allow specific roles to enable GPU
+              <code>{`
+-- Only allow specific roles to enable GPU
 ALTER ROLE ml_power_user SET neurondb.gpu_enabled = true;
 
 -- Prevent other users from enabling GPU
@@ -151,7 +156,7 @@ ALTER DATABASE mydb SET neurondb.gpu_enabled = false;
 
 -- Grant GPU function execution to specific roles
 REVOKE EXECUTE ON FUNCTION vector_l2_distance_gpu FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION vector_l2_distance_gpu TO gpu_user_role;`}</code>
+GRANT EXECUTE ON FUNCTION vector_l2_distance_gpu TO gpu_user_role;`}</code></pre></pre>
             </pre>
           </div>
         </div>
@@ -170,7 +175,8 @@ GRANT EXECUTE ON FUNCTION vector_l2_distance_gpu TO gpu_user_role;`}</code>
               <li>Encrypt backups containing embedding data</li>
             </ul>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto mt-3">
-              <code>{`-- Enforce SSL connections (postgresql.conf)
+              <code>{`
+-- Enforce SSL connections (postgresql.conf)
 ssl = on
 ssl_cert_file = '/path/to/server.crt'
 ssl_key_file = '/path/to/server.key'
@@ -179,7 +185,7 @@ ssl_key_file = '/path/to/server.key'
 ALTER ROLE app_user SET ssl = on;
 
 -- Verify SSL connection
-SELECT * FROM pg_stat_ssl WHERE pid = pg_backend_pid();`}</code>
+SELECT * FROM pg_stat_ssl WHERE pid = pg_backend_pid();`}</code></pre></pre>
             </pre>
           </div>
 
@@ -195,7 +201,8 @@ SELECT * FROM pg_stat_ssl WHERE pid = pg_backend_pid();`}</code>
               <li>Audit access to sensitive embedding columns</li>
             </ul>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto mt-3">
-              <code>{`-- Redact PII before embedding
+              <code>{`
+-- Redact PII before embedding
 CREATE FUNCTION redact_pii(text) RETURNS text AS $$
   -- Replace emails, phone numbers, SSNs, etc.
   SELECT regexp_replace(
@@ -213,7 +220,7 @@ FROM source_data;
 
 -- Automated data retention
 DELETE FROM documents 
-WHERE created_at < NOW() - INTERVAL '365 days';`}</code>
+WHERE created_at < NOW() - INTERVAL '365 days';`}</code></pre></pre>
             </pre>
           </div>
 
@@ -223,7 +230,8 @@ WHERE created_at < NOW() - INTERVAL '365 days';`}</code>
               Enable PostgreSQL audit logging to track access to embedding data and API key usage.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Enable pgaudit extension
+              <code>{`
+-- Enable pgaudit extension
 CREATE EXTENSION pgaudit;
 
 -- Audit all DDL and DML on embeddings table
@@ -235,7 +243,7 @@ ALTER DATABASE mydb SET pgaudit.log_function_calls = on;
 
 -- Review audit logs
 SELECT * FROM pg_catalog.pg_stat_activity
-WHERE query LIKE '%neurondb_embed%';`}</code>
+WHERE query LIKE '%neurondb_embed%';`}</code></pre></pre>
             </pre>
           </div>
         </div>
@@ -258,7 +266,8 @@ WHERE query LIKE '%neurondb_embed%';`}</code>
           <div>
             <h3 className="text-xl font-semibold mb-2">PostgreSQL Connection Security</h3>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- pg_hba.conf: restrict connections by IP and authentication method
+              <code>{`
+-- pg_hba.conf: restrict connections by IP and authentication method
 # Allow SSL connections from app subnet only
 hostssl all all 10.0.1.0/24 scram-sha-256
 
@@ -267,7 +276,7 @@ host all all 0.0.0.0/0 reject
 
 -- Use strong authentication
 # postgresql.conf
-password_encryption = scram-sha-256`}</code>
+password_encryption = scram-sha-256`}</code></pre></pre>
             </pre>
           </div>
 
@@ -277,7 +286,8 @@ password_encryption = scram-sha-256`}</code>
               Verify and pin LLM API endpoints to prevent MITM attacks.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Use official endpoints only
+              <code>{`
+-- Use official endpoints only
 SET neurondb.llm_endpoint = 'https://api.openai.com/v1';
 
 -- Avoid unencrypted HTTP
@@ -285,7 +295,7 @@ SET neurondb.llm_endpoint = 'https://api.openai.com/v1';
 
 -- Monitor outbound connections
 SELECT * FROM pg_stat_activity
-WHERE query LIKE '%neurondb_embed%';`}</code>
+WHERE query LIKE '%neurondb_embed%';`}</code></pre></pre>
             </pre>
           </div>
         </div>
@@ -301,7 +311,8 @@ WHERE query LIKE '%neurondb_embed%';`}</code>
               Prevent resource exhaustion from excessive embedding requests or GPU operations.
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-              <code>{`-- Limit concurrent connections per role
+              <code>{`
+-- Limit concurrent connections per role
 ALTER ROLE app_user CONNECTION LIMIT 10;
 
 -- Statement timeout to prevent runaway queries
@@ -312,7 +323,7 @@ ALTER ROLE gpu_user SET neurondb.gpu_batch_size = 1000;
 ALTER ROLE gpu_user SET neurondb.gpu_memory_pool_mb = 512;
 
 -- Limit LLM API call timeout
-ALTER DATABASE mydb SET neurondb.llm_timeout_ms = 15000;`}</code>
+ALTER DATABASE mydb SET neurondb.llm_timeout_ms = 15000;`}</code></pre></pre>
             </pre>
           </div>
 
@@ -344,7 +355,8 @@ ALTER DATABASE mydb SET neurondb.llm_timeout_ms = 15000;`}</code>
               <li>Review embedding function call frequency and patterns</li>
             </ul>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto mt-3">
-              <code>{`-- Monitor failed logins
+              <code>{`
+-- Monitor failed logins
 SELECT * FROM pg_stat_database_conflicts;
 
 -- Track function call statistics
@@ -358,7 +370,7 @@ ORDER BY calls DESC;
 SET neurondb.log_level = 'info';
 SET log_connections = on;
 SET log_disconnections = on;
-SET log_statement = 'ddl';`}</code>
+SET log_statement = 'ddl';`}</code></pre></pre>
             </pre>
           </div>
 
@@ -373,7 +385,8 @@ SET log_statement = 'ddl';`}</code>
               </ol>
             </div>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto mt-3">
-              <code>{`-- Emergency: Revoke API key immediately
+              <code>{`
+-- Emergency: Revoke API key immediately
 ALTER DATABASE mydb RESET neurondb.llm_api_key;
 SELECT pg_reload_conf();
 
@@ -383,7 +396,7 @@ FROM pg_stat_activity
 WHERE usename = 'compromised_user';
 
 -- Reset user password
-ALTER ROLE compromised_user PASSWORD 'new_strong_password';`}</code>
+ALTER ROLE compromised_user PASSWORD 'new_strong_password';`}</code></pre></pre>
             </pre>
           </div>
         </div>

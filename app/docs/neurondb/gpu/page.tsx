@@ -125,9 +125,9 @@ export default function Page() {
               <h2 className="text-3xl font-bold text-white mb-8">Configuration</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                 <h3 className="text-xl font-bold text-white mb-4">PostgreSQL Configuration</h3>
-                <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                  <code className="text-cyan-300">
-                    {`# Add to postgresql.conf
+                <div className="bg-slate-900/50 rounded-lg p-6">
+                  <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+# Add to postgresql.conf
 shared_preload_libraries = 'neurondb'
 
 # GPU Configuration (all optional)
@@ -138,8 +138,7 @@ neurondb.gpu_streams = 2                # CUDA/HIP streams
 neurondb.gpu_memory_pool_mb = 512       # Memory pool size
 neurondb.gpu_fail_open = on             # Fallback to CPU on error
 neurondb.gpu_kernels = 'l2,cosine,ip'   # Enabled kernels
-neurondb.gpu_timeout_ms = 30000         # Kernel timeout`}
-                  </code>
+neurondb.gpu_timeout_ms = 30000         # Kernel timeout`}</code></pre>
                 </div>
               </div>
             </div>
@@ -153,12 +152,11 @@ neurondb.gpu_timeout_ms = 30000         # Kernel timeout`}
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-6">
                   <h3 className="text-lg font-bold text-white mb-3">Enable GPU Acceleration</h3>
                   <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- Enable GPU via GUCs (requires shared_preload_libraries='neurondb')
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">{`
+-- Enable GPU via GUCs (requires shared_preload_libraries='neurondb')
 SET neurondb.gpu_enabled = on;
 SET neurondb.gpu_device = 0;        -- select device
-SET neurondb.gpu_batch_size = 8192;  -- tune for throughput`}
-                    </code>
+SET neurondb.gpu_batch_size = 8192;  -- tune for throughput`}</code></pre>
                   </div>
                 </div>
 
@@ -166,8 +164,8 @@ SET neurondb.gpu_batch_size = 8192;  -- tune for throughput`}
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-6">
                   <h3 className="text-lg font-bold text-white mb-3">GPU-Accelerated Distance</h3>
                   <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- Batch GPU distance calculation (100x faster)
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">{`
+-- Batch GPU distance calculation (100x faster)
 SELECT vector_l2_distance_gpu(
   embedding, 
   '[0.1, 0.2, ...]'::vector
@@ -178,8 +176,7 @@ SELECT vector_cosine_distance_gpu(
   features, 
   query_vector
 ) FROM products
-ORDER BY 1 LIMIT 10;`}
-                    </code>
+ORDER BY 1 LIMIT 10;`}</code></pre>
                   </div>
                 </div>
 
@@ -201,24 +198,23 @@ ORDER BY 1 LIMIT 10;`}
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">Using build.sh (Recommended)</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-cyan-300">
-                        {`# CPU-only build (default)
+                      <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+# CPU-only build (default)
 ./build.sh
 
 # With GPU support (auto-detects CUDA/ROCm)
 ./build.sh --with-gpu
 
 # With custom paths
-./build.sh --with-gpu --cuda-path /opt/cuda --onnx-path /usr/local`}
-                      </code>
+./build.sh --with-gpu --cuda-path /opt/cuda --onnx-path /usr/local`}</code></pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">NVIDIA GPU (CUDA)</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-cyan-300">
-                        {`# Install CUDA Toolkit 12.6
+                      <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+# Install CUDA Toolkit 12.6
 # Ubuntu/Debian
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
 sudo dpkg -i cuda-keyring_1.1-1_all.deb
@@ -226,24 +222,22 @@ sudo apt-get update
 sudo apt-get install -y cuda-toolkit-12-6
 
 # Build NeuronDB with CUDA
-./build.sh --with-gpu`}
-                      </code>
+./build.sh --with-gpu`}</code></pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-xl font-bold text-white mb-3">AMD GPU (ROCm)</h3>
                     <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <code className="text-cyan-300">
-                        {`# Install ROCm
+                      <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+# Install ROCm
 # Ubuntu
 wget https://repo.radeon.com/amdgpu-install/latest/ubuntu/jammy/amdgpu-install_6.0.60000-1_all.deb
 sudo dpkg -i amdgpu-install_6.0.60000-1_all.deb
 sudo amdgpu-install -y --usecase=rocm
 
 # Build NeuronDB with ROCm
-./build.sh --with-gpu --rocm-path /opt/rocm`}
-                      </code>
+./build.sh --with-gpu --rocm-path /opt/rocm`}</code></pre>
                     </div>
                   </div>
                 </div>
@@ -358,13 +352,12 @@ sudo amdgpu-install -y --usecase=rocm
                   </div>
                 </div>
                 <div className="mt-6 bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                  <code className="text-cyan-300">
-                    {`-- Set fail-open (default, recommended)
+                  <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">{`
+-- Set fail-open (default, recommended)
 SET neurondb.gpu_fail_open = on;
 
 -- Set fail-closed (strict GPU requirement)
-SET neurondb.gpu_fail_open = off;`}
-                  </code>
+SET neurondb.gpu_fail_open = off;`}</code></pre>
                 </div>
               </div>
             </div>

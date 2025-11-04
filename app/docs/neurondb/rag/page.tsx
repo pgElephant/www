@@ -86,9 +86,10 @@ export default function NeuronDBRAGPage() {
                 {/* Step 1: Setup */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                   <h3 className="text-xl font-bold text-violet-300 mb-4">Step 1: Setup Knowledge Base</h3>
-                  <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- Create knowledge base table
+                  <div className="bg-slate-900/50 rounded-lg p-6">
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                      {`
+-- Create knowledge base table
 CREATE TABLE knowledge_docs (
   id SERIAL PRIMARY KEY,
   title TEXT,
@@ -103,16 +104,17 @@ CREATE TABLE knowledge_docs (
 CREATE INDEX ON knowledge_docs USING hnsw (embedding vector_l2_ops);
 CREATE INDEX ON knowledge_docs USING gin (ts_vector);
 CREATE INDEX ON knowledge_docs USING gin (metadata);`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
 
                 {/* Step 2: Ingest */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                   <h3 className="text-xl font-bold text-fuchsia-300 mb-4">Step 2: Ingest Documents</h3>
-                  <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- Insert documents with automatic embedding generation
+                  <div className="bg-slate-900/50 rounded-lg p-6">
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                      {`
+-- Insert documents with automatic embedding generation
 INSERT INTO knowledge_docs (title, content, embedding, ts_vector, metadata)
 VALUES (
   'PostgreSQL Replication Guide',
@@ -130,16 +132,17 @@ SELECT
   embed_cached(content),  -- Uses cache for duplicate content
   to_tsvector(content)
 FROM imported_documents;`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
 
                 {/* Step 3: Retrieve */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                   <h3 className="text-xl font-bold text-pink-300 mb-4">Step 3: Retrieve Relevant Documents</h3>
-                  <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- Hybrid search: 70% vector + 30% text
+                  <div className="bg-slate-900/50 rounded-lg p-6">
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                      {`
+-- Hybrid search: 70% vector + 30% text
 WITH candidates AS (
   SELECT * FROM hybrid_search(
     'knowledge_docs',
@@ -158,16 +161,17 @@ SELECT * FROM rerank_cross_encoder(
   'ms-marco-MiniLM-L-6-v2',
   5  -- return top 5
 );`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
 
                 {/* Step 4: Generate */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                   <h3 className="text-xl font-bold text-purple-300 mb-4">Step 4: Generate Answer</h3>
-                  <div className="bg-slate-900/50 rounded-lg p-6 font-mono text-sm">
-                    <code className="text-green-300">
-                      {`-- Complete RAG query
+                  <div className="bg-slate-900/50 rounded-lg p-6">
+                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
+                      {`
+-- Complete RAG query
 SELECT neurondb_rag_answer(
   'What is PostgreSQL replication?',    -- question
   'knowledge_docs',                      -- table
@@ -189,7 +193,7 @@ SELECT neurondb_rag_answer(
 --   "tokens_used": 342,
 --   "latency_ms": 1234
 -- }`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
               </div>
@@ -205,13 +209,14 @@ SELECT neurondb_rag_answer(
                     Generate multiple query variations to improve recall.
                   </p>
                   <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-xs">
-                    <code className="text-cyan-300">
-                      {`SELECT neurondb_multiquery_rag(
+                    <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">
+                      {`
+SELECT neurondb_multiquery_rag(
   'complex question',
   'docs', 'content', 'embedding',
   3  -- generate 3 variations
 );`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
 
@@ -221,13 +226,14 @@ SELECT neurondb_rag_answer(
                     Extract only relevant sections from retrieved documents.
                   </p>
                   <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-xs">
-                    <code className="text-cyan-300">
-                      {`SELECT compress_context(
+                    <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">
+                      {`
+SELECT compress_context(
   'question',
   documents_array,
   model := 'gpt-4'
 );`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
 
@@ -237,15 +243,16 @@ SELECT neurondb_rag_answer(
                     Content safety checks and policy enforcement.
                   </p>
                   <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-xs">
-                    <code className="text-cyan-300">
-                      {`SELECT check_guardrails(
+                    <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">
+                      {`
+SELECT check_guardrails(
   answer_text,
   '{
     "toxicity": 0.1,
     "pii_detection": true
   }'::jsonb
 );`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
 
@@ -255,12 +262,13 @@ SELECT neurondb_rag_answer(
                     Monitor LLM token usage and costs per query.
                   </p>
                   <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-xs">
-                    <code className="text-cyan-300">
-                      {`SELECT * 
+                    <pre className="text-sm overflow-x-auto"><code className="text-cyan-300">
+                      {`
+SELECT * 
 FROM neurondb_llm_costs
 ORDER BY timestamp DESC
 LIMIT 10;`}
-                    </code>
+                    </code></pre>
                   </div>
                 </div>
               </div>

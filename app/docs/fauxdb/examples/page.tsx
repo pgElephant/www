@@ -40,11 +40,11 @@ const FauxDBExamplesPage = () => {
               <h3 className="text-xl font-bold text-emerald-300 mb-4">Connect with mongosh</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`# Connect to FauxDB
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# Connect to FauxDB
 mongosh mongodb://localhost:27017/mydb
 
 # With authentication
-mongosh "mongodb://username:password@localhost:27017/mydb?authSource=admin"`}</code>
+mongosh "mongodb://username:password@localhost:27017/mydb?authSource=admin"`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -53,7 +53,7 @@ mongosh "mongodb://username:password@localhost:27017/mydb?authSource=admin"`}</c
               <h3 className="text-xl font-bold text-emerald-300 mb-4">CRUD Operations</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`// Insert documents
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`// Insert documents
 db.users.insertOne({ 
   name: "John Doe", 
   email: "john@example.com",
@@ -83,7 +83,7 @@ db.users.updateMany(
 
 // Delete documents
 db.users.deleteOne({ email: "john@example.com" })
-db.users.deleteMany({ age: { $gte: 40 } })`}</code>
+db.users.deleteMany({ age: { $gte: 40 } })`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -92,7 +92,7 @@ db.users.deleteMany({ age: { $gte: 40 } })`}</code>
               <h3 className="text-xl font-bold text-emerald-300 mb-4">Aggregation Pipeline</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`// Group by age and count
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`// Group by age and count
 db.users.aggregate([
   { $group: { _id: "$age", count: { $sum: 1 } } },
   { $sort: { count: -1 } }
@@ -110,7 +110,7 @@ db.orders.aggregate([
   },
   { $sort: { total: -1 } },
   { $limit: 10 }
-])`}</code>
+])`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -119,7 +119,7 @@ db.orders.aggregate([
               <h3 className="text-xl font-bold text-emerald-300 mb-4">Indexes</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`// Create indexes
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`// Create indexes
 db.users.createIndex({ email: 1 }, { unique: true })
 db.users.createIndex({ name: 1, age: -1 })
 db.users.createIndex({ location: "2dsphere" })
@@ -128,7 +128,7 @@ db.users.createIndex({ location: "2dsphere" })
 db.users.getIndexes()
 
 // Drop index
-db.users.dropIndex("email_1")`}</code>
+db.users.dropIndex("email_1")`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -147,11 +147,11 @@ db.users.dropIndex("email_1")`}</code>
               <h3 className="text-xl font-bold text-blue-300 mb-4">Connect with MySQL Client</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`# Connect to FauxDB
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# Connect to FauxDB
 mysql -h localhost -P 3306 -u username -p mydb
 
 # Connection string
-mysql://username:password@localhost:3306/mydb`}</code>
+mysql://username:password@localhost:3306/mydb`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -160,7 +160,7 @@ mysql://username:password@localhost:3306/mydb`}</code>
               <h3 className="text-xl font-bold text-blue-300 mb-4">SQL Operations</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`-- Create table
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`-- Create table
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255),
@@ -185,7 +185,7 @@ SELECT name, email FROM users ORDER BY age DESC;
 UPDATE users SET age = 31 WHERE email = 'john@example.com';
 
 -- Delete data
-DELETE FROM users WHERE age > 40;`}</code>
+DELETE FROM users WHERE age > 40;`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -194,7 +194,7 @@ DELETE FROM users WHERE age > 40;`}</code>
               <h3 className="text-xl font-bold text-blue-300 mb-4">Joins & Subqueries</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`-- Join tables
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`-- Join tables
 SELECT u.name, o.order_id, o.amount
 FROM users u
 JOIN orders o ON u.id = o.user_id
@@ -216,7 +216,7 @@ SELECT
 FROM users u
 LEFT JOIN orders o ON u.id = o.user_id
 GROUP BY u.id, u.name
-HAVING total_spent > 1000;`}</code>
+HAVING total_spent > 1000;`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -232,7 +232,7 @@ HAVING total_spent > 1000;`}</code>
               <h3 className="text-lg font-bold text-purple-300 mb-4">Python - MongoDB Driver</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`from pymongo import MongoClient
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`from pymongo import MongoClient
 
 # Connect to FauxDB
 client = MongoClient('mongodb://localhost:27017/')
@@ -248,7 +248,7 @@ collection.insert_one({
 # Query
 users = collection.find({'age': {'$gte': 25}})
 for user in users:
-    print(user)`}</code>
+    print(user)`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -257,7 +257,7 @@ for user in users:
               <h3 className="text-lg font-bold text-purple-300 mb-4">Python - MySQL Driver</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`import mysql.connector
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`import mysql.connector
 
 # Connect to FauxDB
 conn = mysql.connector.connect(
@@ -279,7 +279,7 @@ cursor.execute(
 for row in cursor.fetchall():
     print(row)
 
-conn.close()`}</code>
+conn.close()`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -288,7 +288,7 @@ conn.close()`}</code>
               <h3 className="text-lg font-bold text-purple-300 mb-4">Node.js - MongoDB Driver</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`const { MongoClient } = require('mongodb');
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`const { MongoClient } = require('mongodb');
 
 const client = new MongoClient(
   'mongodb://localhost:27017'
@@ -307,7 +307,7 @@ await collection.insertOne({
 // Query
 const users = await collection
   .find({ age: { $gte: 25 } })
-  .toArray();`}</code>
+  .toArray();`}</code></pre>
                 </pre>
               </div>
             </div>
@@ -316,7 +316,7 @@ const users = await collection
               <h3 className="text-lg font-bold text-purple-300 mb-4">Node.js - MySQL Driver</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
                 <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400">{`const mysql = require('mysql2/promise');
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`const mysql = require('mysql2/promise');
 
 const connection = await mysql.createConnection({
   host: 'localhost',
@@ -332,7 +332,7 @@ const [rows] = await connection.execute(
   [25]
 );
 
-console.log(rows);`}</code>
+console.log(rows);`}</code></pre>
                 </pre>
               </div>
             </div>
