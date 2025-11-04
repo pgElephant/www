@@ -344,6 +344,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pg_stat_insights/configuration/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/configuration">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/configuration/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pg_stat_insights/metrics/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/metrics">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/metrics/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pg_stat_insights/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights">> = Specific
