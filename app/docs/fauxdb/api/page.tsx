@@ -154,9 +154,11 @@ const FauxDbApiPage = () => {
                     </div>
                   </div>
                   <div className="bg-slate-900 text-slate-100 p-4 rounded-lg">
-                    <code className="text-sm">
-                      {endpoint.example}
-                    </code>
+                    <pre className="text-sm overflow-x-auto">
+                      <code className="text-sm">
+                        {endpoint.example}
+                      </code>
+                    </pre>
                   </div>
                 </div>
               ))}

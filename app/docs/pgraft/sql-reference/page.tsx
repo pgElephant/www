@@ -30,8 +30,7 @@ export default function PgraftSqlFunctionsPage() {
 SELECT pgraft_init();
 
 -- Returns: true if successful, false otherwise`}</code>
-            </pre>
-            <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
+            </pre><div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>Note:</strong> Typically called automatically when <code>CREATE EXTENSION pgraft</code> runs. 
               Reads configuration from <code>pgraft.*</code> GUC variables.
             </div>
@@ -59,8 +58,7 @@ BEGIN
     END IF;
     PERFORM pgraft_add_node(4, '10.0.1.14', 7004);
 END $$;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_remove_node(node_id)</code></h3>
@@ -78,8 +76,7 @@ SELECT pgraft_remove_node(4);
 
 -- Verify removal
 SELECT * FROM pgraft_get_nodes();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_get_cluster_status()</code></h3>
@@ -102,8 +99,7 @@ SELECT
     state,
     CASE WHEN leader_id = node_id THEN 'LEADER' ELSE 'FOLLOWER' END AS role
 FROM pgraft_get_cluster_status();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_get_nodes()</code></h3>
@@ -125,8 +121,7 @@ FROM pgraft_get_cluster_status();`}</code>
 SELECT node_id, address, port 
 FROM pgraft_get_nodes() 
 WHERE is_leader;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_get_nodes_from_raft()</code></h3>
@@ -144,8 +139,7 @@ SELECT
     (node->>'address')::text AS address,
     (node->>'active')::boolean AS is_active
 FROM json_array_elements(pgraft_get_nodes_from_raft()::json) AS node;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_is_leader()</code></h3>
@@ -166,8 +160,7 @@ BEGIN
         RAISE NOTICE 'This node is a follower';
     END IF;
 END $$;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_get_leader()</code></h3>
@@ -182,8 +175,7 @@ END $$;`}</code>
 SELECT n.* 
 FROM pgraft_get_nodes() n
 WHERE n.node_id = pgraft_get_leader();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_get_term()</code></h3>
@@ -200,8 +192,7 @@ SELECT
     pgraft_get_term() AS current_term,
     pgraft_get_leader() AS leader_id,
     NOW() AS timestamp;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_get_worker_state()</code></h3>
@@ -213,8 +204,7 @@ SELECT
               <code>{`SELECT pgraft_get_worker_state();
 
 -- Returns: 'RUNNING', 'STOPPED', 'INITIALIZING', etc.`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_get_version()</code></h3>
@@ -224,8 +214,7 @@ SELECT
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`SELECT pgraft_get_version();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_set_debug(enabled)</code></h3>
@@ -241,8 +230,7 @@ SELECT pgraft_set_debug(true);
 
 -- Disable debug logging
 SELECT pgraft_set_debug(false);`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_test()</code></h3>
@@ -252,8 +240,7 @@ SELECT pgraft_set_debug(false);`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`SELECT pgraft_test();`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -275,8 +262,7 @@ SELECT
     last_index - last_applied AS replication_lag,
     last_index - commit_index AS commit_lag
 FROM pgraft_log_get_stats();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_log_get_replication_status()</code></h3>
@@ -286,8 +272,7 @@ FROM pgraft_log_get_stats();`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`SELECT * FROM pgraft_log_get_replication_status();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_log_sync_with_leader()</code></h3>
@@ -298,8 +283,7 @@ FROM pgraft_log_get_stats();`}</code>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`-- Force sync with leader
 SELECT pgraft_log_sync_with_leader();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_log_get_entry(index)</code></h3>
@@ -312,8 +296,7 @@ SELECT pgraft_log_sync_with_leader();`}</code>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`-- Get log entry at index 42
 SELECT pgraft_log_get_entry(42);`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_replicate_entry(entry_data)</code></h3>
@@ -328,8 +311,7 @@ SELECT pgraft_log_get_entry(42);`}</code>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`-- Replicate custom entry
 SELECT pgraft_replicate_entry('{"type":"custom","data":"value"}');`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -364,8 +346,7 @@ BEGIN
     PERFORM pgraft_kv_put('db/port', '5432');
     PERFORM pgraft_kv_put('db/name', 'myapp');
 END $$;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_get(key)</code></h3>
@@ -384,8 +365,7 @@ SELECT (pgraft_kv_get('app/config')::jsonb)->>'timeout' AS timeout;
 
 -- Check for NULL (key not found)
 SELECT COALESCE(pgraft_kv_get('missing/key'), 'default_value');`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_delete(key)</code></h3>
@@ -408,8 +388,7 @@ BEGIN
         PERFORM pgraft_kv_delete('temp/data');
     END IF;
 END $$;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_exists(key)</code></h3>
@@ -428,8 +407,7 @@ IF pgraft_kv_exists('feature/enabled') AND
    pgraft_kv_get('feature/enabled') = 'true' THEN
     -- Feature is enabled
 END IF;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_list_keys()</code></h3>
@@ -448,8 +426,7 @@ SELECT jsonb_array_elements_text(pgraft_kv_list_keys()::jsonb) AS key;
 SELECT key 
 FROM jsonb_array_elements_text(pgraft_kv_list_keys()::jsonb) AS key
 WHERE key LIKE 'app/%';`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_get_stats()</code></h3>
@@ -468,8 +445,7 @@ SELECT
     gets,
     deletes
 FROM pgraft_kv_get_stats();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_compact()</code></h3>
@@ -494,8 +470,7 @@ BEGIN
         PERFORM pgraft_kv_compact();
     END IF;
 END $$;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_reset()</code></h3>
@@ -510,8 +485,7 @@ END $$;`}</code>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`-- DANGER: Clear all KV data
 SELECT pgraft_kv_reset();`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -534,32 +508,28 @@ SELECT pgraft_kv_reset();`}</code>
 --        1 | 10.0.1.11:7001  | 10.0.1.11:7001  | leader
 --        2 | 10.0.1.12:7002  | 10.0.1.12:7002  | follower
 --        3 | 10.0.1.13:7003  | 10.0.1.13:7003  | follower`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.endpoint_health</code></h3>
             <p className="mb-2">View matching <code>etcdctl endpoint health</code> output.</p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`SELECT * FROM pgraft.endpoint_health;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.cluster_health</code></h3>
             <p className="mb-2">View matching <code>etcdctl cluster-health</code> output.</p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`SELECT * FROM pgraft.cluster_health;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.cluster_info</code></h3>
             <p className="mb-2">View providing etcd-style cluster information.</p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`SELECT * FROM pgraft.cluster_info;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_cluster_state</code></h3>
@@ -576,8 +546,7 @@ SELECT
     messages_processed,
     heartbeats_sent
 FROM pgraft_cluster_state;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_worker_status</code></h3>
@@ -587,8 +556,7 @@ FROM pgraft_cluster_state;`}</code>
 
 -- Check if worker is running
 SELECT is_running FROM pgraft_worker_status;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft_kv_status</code></h3>
@@ -599,8 +567,7 @@ SELECT is_running FROM pgraft_worker_status;`}</code>
 -- Check if compaction is needed
 SELECT status FROM pgraft_kv_status;
 -- Returns: 'HEALTHY', 'NEEDS_COMPACTION', or 'EMPTY'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -640,8 +607,7 @@ BEGIN
             status.last_index, status.commit_index, status.last_applied;
     END LOOP;
 END $$;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Application Configuration with KV Store</h3>
@@ -683,8 +649,7 @@ SELECT get_app_config();
 
 -- Update specific setting
 SELECT pgraft_kv_put('app/features/beta', 'disabled');`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Monitoring Dashboard Query</h3>
@@ -723,8 +688,7 @@ FROM pgraft_get_cluster_status() cs
 CROSS JOIN pgraft_worker_status ws
 CROSS JOIN pgraft_log_get_stats() ls
 CROSS JOIN pgraft_kv_status kvs;`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 

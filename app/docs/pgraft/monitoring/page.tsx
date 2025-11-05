@@ -54,7 +54,6 @@ SELECT * FROM pgraft_get_cluster_status();
 -- heartbeats_sent      : Heartbeats sent (leader only)
 -- elections_triggered  : Number of elections this node participated in`}</code>
             </pre>
-            
             <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>Health Indicators:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
@@ -108,8 +107,7 @@ SELECT
 --  leader_id | am_i_leader | current_term 
 -- -----------+-------------+--------------
 --          1 | f           |           15`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Worker State</h3>
@@ -123,8 +121,7 @@ SELECT * FROM pgraft_worker_status;
 --  state   | last_tick           | uptime_seconds 
 -- ---------+---------------------+----------------
 --  running | 2024-11-04 10:15:32 |          18445`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Version Information</h3>
@@ -137,8 +134,7 @@ SELECT pgraft_get_version();
 SELECT * FROM pg_extension WHERE extname = 'pgraft';
 --  oid  | extname | extowner | extnamespace | ... 
 -- ------+---------+----------+--------------+-----`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -168,9 +164,7 @@ SELECT * FROM pgraft_log_get_replication_status();
 -- commit_index : Latest committed index (same for all nodes)
 -- lag_entries  : Replication lag in log entries
 -- state        : Replication health (ok, slow, stalled, error)`}</code>
-            </pre>
-            
-            <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
+            </pre><div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
               <strong>Alert Thresholds:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
                 <li><code>lag_entries &gt; 100</code>: Warning (follower falling behind)</li>
@@ -205,8 +199,7 @@ SELECT
     disk_usage_mb,
     (disk_usage_mb::float / total_entries) * 1024 AS avg_entry_kb
 FROM pgraft_log_get_stats();`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Manual Log Synchronization</h3>
@@ -219,8 +212,7 @@ SELECT pgraft_log_sync_with_leader();
 -- - Follower fell far behind and needs catch-up
 -- - After network partition recovery
 -- - During controlled maintenance windows`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -254,8 +246,7 @@ SELECT
 FROM pgraft.kv
 ORDER BY pg_column_size(value) DESC
 LIMIT 10;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">KV Store Health Checks</h3>
@@ -282,8 +273,7 @@ BEGIN
     -- Cleanup
     PERFORM pgraft_kv_delete(test_key);
 END $$;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">KV Store Capacity Planning</h3>
@@ -306,8 +296,7 @@ SELECT
     SUM(bytes_added) OVER (ORDER BY day) / 1024 / 1024 AS cumulative_mb
 FROM daily_growth
 ORDER BY day DESC;`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -358,8 +347,7 @@ SELECT
     (c.heartbeats_sent - p.heartbeats_sent) /
         EXTRACT(EPOCH FROM (c.recorded_at - p.recorded_at)) AS heartbeats_per_second
 FROM current c JOIN previous p ON c.node_id = p.node_id;`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Election Frequency</h3>
@@ -375,9 +363,7 @@ FROM pgraft_get_cluster_status();
 
 -- Healthy cluster: elections_triggered ≈ current_term (one election per term)
 -- Unhealthy: elections_triggered >> current_term (many failed elections)`}</code>
-            </pre>
-            
-            <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded text-sm">
+            </pre><div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded text-sm">
               <strong>Alert if:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
                 <li><code>elections_per_term &gt; 2.0</code>: Frequent election failures</li>
@@ -406,8 +392,7 @@ FROM pgraft_get_cluster_status();
 
 -- Verify snapshot count setting
 SHOW pgraft.snapshot_count;`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -446,8 +431,7 @@ SELECT * FROM pgraft.cluster_info;
 --  cluster_id | member_id | revision | raft_term | raft_index 
 -- ------------+-----------+----------+-----------+------------
 --  prod-01    |         1 |     1250 |        15 |       1250`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Cluster State View</h3>
@@ -471,8 +455,7 @@ SELECT
 FROM pgraft_cluster_state;
 
 SELECT * FROM pgraft_health_summary;`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -592,8 +575,7 @@ SELECT * FROM pgraft_health_check();
 --  quorum              | OK       | 3 nodes in cluster              | info
 --  election_stability  | OK       | 2 elections across 15 terms     | info
 --  replication_lag     | OK       | All followers up to date        | info`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Prometheus Metrics Exporter (Shell Script)</h3>
@@ -638,8 +620,7 @@ EOF
 
 # Run via cron or monitoring agent:
 # */1 * * * * /usr/local/bin/pgraft-prometheus-exporter.sh > /var/lib/node_exporter/pgraft.prom`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Email Alerting Script</h3>
@@ -682,8 +663,7 @@ fi
 
 # Run every 5 minutes via cron:
 # */5 * * * * /usr/local/bin/pgraft-alerts.sh`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -735,8 +715,7 @@ SELECT
     total_size_bytes / 1024 / 1024 AS "Size (MB)",
     avg_value_size / 1024 AS "Avg Value (KB)"
 FROM pgraft_kv_get_stats();`}</code>
-          </pre>
-        </div>
+            </pre></div>
       </section>
 
       <section>
@@ -759,9 +738,7 @@ sudo grep -i "pgraft.*leader" /var/log/postgresql/postgresql-17-main.log | tail 
 
 # Monitor node additions/removals
 sudo grep -E "pgraft.*(add_node|remove_node)" /var/log/postgresql/postgresql-17-main.log`}</code>
-          </pre>
-          
-          <h3 className="text-xl font-semibold mt-4 mb-2">Debug Logging</h3>
+            </pre><h3 className="text-xl font-semibold mt-4 mb-2">Debug Logging</h3>
           <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
             <code>{`-- Enable debug logging temporarily
 SELECT pgraft_set_debug(true);
@@ -774,8 +751,7 @@ SELECT pgraft_set_debug(false);
 
 -- Review debug logs
 sudo tail -100 /var/log/postgresql/postgresql-17-main.log | grep "DEBUG.*pgraft"`}</code>
-          </pre>
-        </div>
+            </pre></div>
       </section>
 
       <section>

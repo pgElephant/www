@@ -118,7 +118,7 @@ Find similar vectors in database:
    • "notebook PCs"     distance: 0.15 ✅ Very similar
    • "tablets"          distance: 0.45 ✅ Somewhat similar  
    • "bicycles"         distance: 2.30 ❌ Not similar`}
-                </pre>
+           </pre>
               </div>
             </div>
 
@@ -318,8 +318,8 @@ VALUES ('[0.1, 0.2, 0.3, ...]'::vector);`}
 
               <div className="mt-6 bg-blue-500/20 rounded-lg p-4">
                 <p className="text-white/80 text-sm">
-                  <strong>💡 Recommendation:</strong> Start with <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">vector (float32)</code></pre> for development. 
-                  Switch to <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-purple-300">float16</code></pre> or <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-cyan-300">int8</code></pre> in production when you understand your accuracy requirements.
+                  <strong>💡 Recommendation:</strong> Start with <code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">vector (float32)</code> for development. 
+                  Switch to <code className="bg-slate-900 px-2 py-1 rounded text-purple-300">float16</code> or <code className="bg-slate-900 px-2 py-1 rounded text-cyan-300">int8</code> in production when you understand your accuracy requirements.
                 </p>
               </div>
             </div>

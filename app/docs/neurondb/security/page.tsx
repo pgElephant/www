@@ -46,7 +46,6 @@ ALTER ROLE app_user SET neurondb.llm_api_key = 'sk-...';
 SELECT name, setting 
 FROM pg_settings 
 WHERE name = 'neurondb.llm_provider';`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -63,7 +62,6 @@ neurondb.llm_provider = 'openai'
 -- Or use ALTER SYSTEM (requires superuser)
 ALTER SYSTEM SET neurondb.llm_api_key = 'sk-...';
 SELECT pg_reload_conf();`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -111,7 +109,6 @@ GRANT EXECUTE ON FUNCTION detect_outliers_zscore TO ml_analyst_role;
 GRANT reader_role TO app_readonly_user;
 GRANT writer_role TO app_service_user;
 GRANT ml_analyst_role TO data_scientist;`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -138,7 +135,6 @@ CREATE POLICY service_all_documents ON documents
 -- Test RLS
 SET ROLE app_user;
 SELECT * FROM documents;  -- Only sees own rows`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -157,7 +153,6 @@ ALTER DATABASE mydb SET neurondb.gpu_enabled = false;
 -- Grant GPU function execution to specific roles
 REVOKE EXECUTE ON FUNCTION vector_l2_distance_gpu FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION vector_l2_distance_gpu TO gpu_user_role;`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -186,7 +181,6 @@ ALTER ROLE app_user SET ssl = on;
 
 -- Verify SSL connection
 SELECT * FROM pg_stat_ssl WHERE pid = pg_backend_pid();`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -221,7 +215,6 @@ FROM source_data;
 -- Automated data retention
 DELETE FROM documents 
 WHERE created_at < NOW() - INTERVAL '365 days';`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -244,7 +237,6 @@ ALTER DATABASE mydb SET pgaudit.log_function_calls = on;
 -- Review audit logs
 SELECT * FROM pg_catalog.pg_stat_activity
 WHERE query LIKE '%neurondb_embed%';`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -277,7 +269,6 @@ host all all 0.0.0.0/0 reject
 -- Use strong authentication
 # postgresql.conf
 password_encryption = scram-sha-256`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -296,7 +287,6 @@ SET neurondb.llm_endpoint = 'https://api.openai.com/v1';
 -- Monitor outbound connections
 SELECT * FROM pg_stat_activity
 WHERE query LIKE '%neurondb_embed%';`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -324,7 +314,6 @@ ALTER ROLE gpu_user SET neurondb.gpu_memory_pool_mb = 512;
 
 -- Limit LLM API call timeout
 ALTER DATABASE mydb SET neurondb.llm_timeout_ms = 15000;`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -371,7 +360,6 @@ SET neurondb.log_level = 'info';
 SET log_connections = on;
 SET log_disconnections = on;
 SET log_statement = 'ddl';`}</code></pre>
-            </pre>
           </div>
 
           <div>
@@ -397,7 +385,6 @@ WHERE usename = 'compromised_user';
 
 -- Reset user password
 ALTER ROLE compromised_user PASSWORD 'new_strong_password';`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>

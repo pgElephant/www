@@ -287,12 +287,12 @@ db.sales.aggregate([
                 </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
-                <pre className="text-white/90100 text-sm overflow-x-auto">
+                <pre className="text-white/90 text-sm overflow-x-auto">
                   <code>{codeBlocks.install}</code>
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.install, 'install')}
-                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
                 >
                   {copiedCode === 'install' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -310,12 +310,12 @@ db.sales.aggregate([
                 </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
-                <pre className="text-white/90100 text-sm overflow-x-auto">
+                <pre className="text-white/90 text-sm overflow-x-auto">
                   <code>{codeBlocks.config}</code>
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.config, 'config')}
-                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
                 >
                   {copiedCode === 'config' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
@@ -333,12 +333,12 @@ db.sales.aggregate([
                 </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 relative">
-                <pre className="text-white/90100 text-sm overflow-x-auto">
+                <pre className="text-white/90 text-sm overflow-x-auto">
                   <code>{codeBlocks.start}</code>
                 </pre>
                 <button
                   onClick={() => copyToClipboard(codeBlocks.start, 'start')}
-                  className="absolute top-4 right-4 p-2 text-white/90400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
                 >
                   {copiedCode === 'start' ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>

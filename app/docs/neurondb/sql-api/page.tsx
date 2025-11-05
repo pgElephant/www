@@ -19,7 +19,7 @@ export default function SqlApiPage() {
         <h2 className="text-2xl font-semibold mb-4">Vector Types</h2>
         <div className="space-y-4">
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>vector(n)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>vector(n)</code></h3>
             <p className="mb-2">A fixed-dimension vector of floating-point numbers.</p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
@@ -35,7 +35,6 @@ INSERT INTO embeddings (embedding) VALUES (ARRAY[1.0, 2.0, 3.0]::vector);
 
 -- Cast from array
 SELECT ARRAY[1.0, 2.0, 3.0]::vector(3);`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -54,22 +53,22 @@ SELECT ARRAY[1.0, 2.0, 3.0]::vector(3);`}</code></pre>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;-&gt;</code></pre></td>
+                <td className="p-3"><code>&lt;-&gt;</code></td>
                 <td className="p-3">L2 (Euclidean) distance</td>
-                <td className="p-3"><code>float</code></pre></td>
-                <td className="p-3"><code>embedding &lt;-&gt; '[1,2,3]'</code></pre></td>
+                <td className="p-3"><code>float</code></td>
+                <td className="p-3"><code>embedding &lt;-&gt; '[1,2,3]'</code></td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;=&gt;</code></pre></td>
+                <td className="p-3"><code>&lt;=&gt;</code></td>
                 <td className="p-3">Cosine distance</td>
-                <td className="p-3"><code>float</code></pre></td>
-                <td className="p-3"><code>embedding &lt;=&gt; '[1,2,3]'</code></pre></td>
+                <td className="p-3"><code>float</code></td>
+                <td className="p-3"><code>embedding &lt;=&gt; '[1,2,3]'</code></td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;#&gt;</code></pre></td>
+                <td className="p-3"><code>&lt;#&gt;</code></td>
                 <td className="p-3">Inner product (negative dot product)</td>
-                <td className="p-3"><code>float</code></pre></td>
-                <td className="p-3"><code>embedding &lt;#&gt; '[1,2,3]'</code></pre></td>
+                <td className="p-3"><code>float</code></td>
+                <td className="p-3"><code>embedding &lt;#&gt; '[1,2,3]'</code></td>
               </tr>
             </tbody>
           </table>
@@ -80,7 +79,7 @@ SELECT ARRAY[1.0, 2.0, 3.0]::vector(3);`}</code></pre>
         <h2 className="text-2xl font-semibold mb-4">Embedding Functions</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_embed(text, model)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_embed(text, model)</code></h3>
             <p className="mb-2">Generate embeddings using configured LLM providers.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> text (TEXT), model (TEXT)
@@ -100,11 +99,10 @@ SELECT neurondb_embed('Hello world', 'text-embedding-ada-002');
 INSERT INTO documents (content, embedding)
 SELECT content, neurondb_embed(content, 'text-embedding-ada-002')
 FROM source_documents;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_embed_batch(texts, model)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_embed_batch(texts, model)</code></h3>
             <p className="mb-2">Generate embeddings for multiple texts in a single API call (more efficient).</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> texts (TEXT[]), model (TEXT)
@@ -129,7 +127,6 @@ FROM (
   GROUP BY id
 ) batch
 WHERE documents.id = batch.id;`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -137,11 +134,11 @@ WHERE documents.id = batch.id;`}</code></pre>
       <section>
         <h2 className="text-2xl font-semibold mb-4">GPU Distance Functions</h2>
         <p className="mb-4 text-muted-foreground">
-          GPU-accelerated distance computation functions. Require <code>neurondb.gpu_enabled = true</code></pre>.
+          GPU-accelerated distance computation functions. Require <code>neurondb.gpu_enabled = true</code>.
         </p>
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>vector_l2_distance_gpu(a, b)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>vector_l2_distance_gpu(a, b)</code></h3>
             <p className="mb-2">Compute L2 distance on GPU.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> a (vector), b (vector)
@@ -154,11 +151,10 @@ SET neurondb.gpu_enabled = true;
 
 SELECT vector_l2_distance_gpu(embedding, '[1,2,3]'::vector)
 FROM documents;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>vector_cosine_distance_gpu(a, b)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>vector_cosine_distance_gpu(a, b)</code></h3>
             <p className="mb-2">Compute cosine distance on GPU.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> a (vector), b (vector)
@@ -169,11 +165,10 @@ FROM documents;`}</code></pre>
               <code>{`
 SELECT vector_cosine_distance_gpu(embedding, '[1,2,3]'::vector)
 FROM documents;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>vector_inner_product_gpu(a, b)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>vector_inner_product_gpu(a, b)</code></h3>
             <p className="mb-2">Compute inner product on GPU.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> a (vector), b (vector)
@@ -184,11 +179,10 @@ FROM documents;`}</code></pre>
               <code>{`
 SELECT vector_inner_product_gpu(embedding, '[1,2,3]'::vector)
 FROM documents;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>vector_to_int8_gpu(v)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>vector_to_int8_gpu(v)</code></h3>
             <p className="mb-2">Quantize vector to int8 on GPU.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> v (vector)
@@ -198,11 +192,10 @@ FROM documents;`}</code></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT vector_to_int8_gpu(embedding) FROM documents;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>vector_to_fp16_gpu(v)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>vector_to_fp16_gpu(v)</code></h3>
             <p className="mb-2">Quantize vector to fp16 on GPU.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> v (vector)
@@ -212,11 +205,10 @@ SELECT vector_to_int8_gpu(embedding) FROM documents;`}</code></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT vector_to_fp16_gpu(embedding) FROM documents;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>vector_to_binary_gpu(v)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>vector_to_binary_gpu(v)</code></h3>
             <p className="mb-2">Quantize vector to binary on GPU.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> v (vector)
@@ -226,7 +218,6 @@ SELECT vector_to_fp16_gpu(embedding) FROM documents;`}</code></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT vector_to_binary_gpu(embedding) FROM documents;`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -235,7 +226,7 @@ SELECT vector_to_binary_gpu(embedding) FROM documents;`}</code></pre>
         <h2 className="text-2xl font-semibold mb-4">ML Analytics Functions</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>cluster_kmeans(data, k, max_iter, tol)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>cluster_kmeans(data, k, max_iter, tol)</code></h3>
             <p className="mb-2">K-Means clustering aggregate function.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> data (vector), k (int), max_iter (int, default 100), tol (float8, default 0.0001)
@@ -250,11 +241,10 @@ SELECT * FROM cluster_kmeans(
   100,  -- max iterations
   0.0001  -- tolerance
 );`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>cluster_minibatch_kmeans(data, k, batch_size, max_iter)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>cluster_minibatch_kmeans(data, k, batch_size, max_iter)</code></h3>
             <p className="mb-2">Mini-batch K-Means for large datasets.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> data (vector), k (int), batch_size (int, default 100), max_iter (int, default 100)
@@ -269,11 +259,10 @@ SELECT * FROM cluster_minibatch_kmeans(
   1000,  -- batch size
   50  -- max iterations
 );`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>cluster_gmm(data, k, max_iter, tol)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>cluster_gmm(data, k, max_iter, tol)</code></h3>
             <p className="mb-2">Gaussian Mixture Model clustering with soft assignments.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> data (vector), k (int), max_iter (int, default 100), tol (float8, default 0.0001)
@@ -298,11 +287,10 @@ SELECT gmm_to_clusters(
   ARRAY(SELECT weight FROM cluster_gmm(...))
 ) AS cluster_id
 FROM documents;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>detect_outliers_zscore(data, threshold)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>detect_outliers_zscore(data, threshold)</code></h3>
             <p className="mb-2">Detect outliers using Z-score method.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> data (vector), threshold (float8, default 3.0)
@@ -323,7 +311,6 @@ FROM (
   FROM documents
 ) sub
 WHERE (stats).is_outlier;`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -332,7 +319,7 @@ WHERE (stats).is_outlier;`}</code></pre>
         <h2 className="text-2xl font-semibold mb-4">ML Project Management</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_create_ml_project(name, description)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_create_ml_project(name, description)</code></h3>
             <p className="mb-2">Create a new ML project for model management.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> name (TEXT), description (TEXT)
@@ -345,11 +332,10 @@ SELECT neurondb_create_ml_project(
   'customer_segments',
   'K-means clustering of customer embeddings'
 );`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_train_kmeans_project(project_id, data, k, max_iter)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_train_kmeans_project(project_id, data, k, max_iter)</code></h3>
             <p className="mb-2">Train a K-Means model within a project.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> project_id (int), data (vector[]), k (int), max_iter (int)
@@ -364,11 +350,10 @@ SELECT neurondb_train_kmeans_project(
   5,  -- k clusters
   100  -- max iterations
 );`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_list_project_models(project_id)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_list_project_models(project_id)</code></h3>
             <p className="mb-2">List all models in a project.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> project_id (int)
@@ -378,11 +363,10 @@ SELECT neurondb_train_kmeans_project(
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT * FROM neurondb_list_project_models(1);`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_deploy_model(model_id, deployment_name)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_deploy_model(model_id, deployment_name)</code></h3>
             <p className="mb-2">Deploy a model for inference.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> model_id (int), deployment_name (TEXT)
@@ -392,11 +376,10 @@ SELECT * FROM neurondb_list_project_models(1);`}</code></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT neurondb_deploy_model(42, 'production_clusters');`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_get_deployed_model(deployment_name)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_get_deployed_model(deployment_name)</code></h3>
             <p className="mb-2">Retrieve deployed model metadata.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> deployment_name (TEXT)
@@ -406,11 +389,10 @@ SELECT neurondb_deploy_model(42, 'production_clusters');`}</code></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT neurondb_get_deployed_model('production_clusters');`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_get_project_info(project_id)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_get_project_info(project_id)</code></h3>
             <p className="mb-2">Get project information and statistics.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> project_id (int)
@@ -420,7 +402,6 @@ SELECT neurondb_get_deployed_model('production_clusters');`}</code></pre>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT neurondb_get_project_info(1);`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -429,7 +410,7 @@ SELECT neurondb_get_project_info(1);`}</code></pre>
         <h2 className="text-2xl font-semibold mb-4">Hybrid Search Functions</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_hybrid_search(query, vector_weight, fts_weight)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_hybrid_search(query, vector_weight, fts_weight)</code></h3>
             <p className="mb-2">Combine vector similarity and full-text search scores.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> query (TEXT), vector_weight (float8), fts_weight (float8)
@@ -454,11 +435,10 @@ FROM vector_results v
 FULL OUTER JOIN fts_results f ON v.id = f.id
 ORDER BY hybrid_score DESC
 LIMIT 10;`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_rerank(results, query, model)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_rerank(results, query, model)</code></h3>
             <p className="mb-2">Rerank search results using a cross-encoder model.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> results (TABLE), query (TEXT), model (TEXT)
@@ -478,7 +458,6 @@ SELECT * FROM neurondb_rerank(
 )
 ORDER BY rerank_score DESC
 LIMIT 10;`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -487,7 +466,7 @@ LIMIT 10;`}</code></pre>
         <h2 className="text-2xl font-semibold mb-4">Background Worker Functions</h2>
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_schedule_embedding_update(table_name, content_col, embedding_col, model)</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_schedule_embedding_update(table_name, content_col, embedding_col, model)</code></h3>
             <p className="mb-2">Schedule automatic embedding updates via background worker.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Parameters:</strong> table_name (TEXT), content_col (TEXT), embedding_col (TEXT), model (TEXT)
@@ -507,11 +486,10 @@ SELECT neurondb_schedule_embedding_update(
   'embedding',
   'text-embedding-ada-002'
 );`}</code></pre>
-            </pre>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-2"><code>neurondb_worker_status()</code></pre></h3>
+            <h3 className="text-xl font-semibold mb-2"><code>neurondb_worker_status()</code></h3>
             <p className="mb-2">Check background worker status and metrics.</p>
             <p className="text-sm text-muted-foreground mb-2">
               <strong>Returns:</strong> TABLE(worker_id int, status text, tasks_processed bigint, last_run timestamp)
@@ -519,7 +497,6 @@ SELECT neurondb_schedule_embedding_update(
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`
 SELECT * FROM neurondb_worker_status();`}</code></pre>
-            </pre>
           </div>
         </div>
       </section>
@@ -542,31 +519,31 @@ SELECT * FROM neurondb_worker_status();`}</code></pre>
                 </thead>
                 <tbody>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.llm_provider</code></pre></td>
+                    <td className="p-3"><code>neurondb.llm_provider</code></td>
                     <td className="p-3">string</td>
                     <td className="p-3">'openai'</td>
                     <td className="p-3">LLM provider (openai, cohere, huggingface)</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.llm_api_key</code></pre></td>
+                    <td className="p-3"><code>neurondb.llm_api_key</code></td>
                     <td className="p-3">string</td>
                     <td className="p-3">NULL</td>
                     <td className="p-3">API key for LLM provider</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.llm_endpoint</code></pre></td>
+                    <td className="p-3"><code>neurondb.llm_endpoint</code></td>
                     <td className="p-3">string</td>
                     <td className="p-3">NULL</td>
                     <td className="p-3">Custom API endpoint URL</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.llm_timeout_ms</code></pre></td>
+                    <td className="p-3"><code>neurondb.llm_timeout_ms</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">30000</td>
                     <td className="p-3">API call timeout (milliseconds)</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.llm_max_retries</code></pre></td>
+                    <td className="p-3"><code>neurondb.llm_max_retries</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">3</td>
                     <td className="p-3">Max retry attempts for failed API calls</td>
@@ -590,55 +567,55 @@ SELECT * FROM neurondb_worker_status();`}</code></pre>
                 </thead>
                 <tbody>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_enabled</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_enabled</code></td>
                     <td className="p-3">bool</td>
                     <td className="p-3">false</td>
                     <td className="p-3">Enable GPU acceleration</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_device</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_device</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">0</td>
                     <td className="p-3">GPU device ID to use</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_batch_size</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_batch_size</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">1000</td>
                     <td className="p-3">Batch size for GPU operations</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_streams</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_streams</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">4</td>
                     <td className="p-3">Number of CUDA streams</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_memory_pool_mb</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_memory_pool_mb</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">512</td>
                     <td className="p-3">GPU memory pool size (MB)</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_fail_open</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_fail_open</code></td>
                     <td className="p-3">bool</td>
                     <td className="p-3">true</td>
                     <td className="p-3">Fallback to CPU on GPU error</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_kernels</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_kernels</code></td>
                     <td className="p-3">string</td>
                     <td className="p-3">'auto'</td>
                     <td className="p-3">GPU kernel selection (auto, cuda, rocm)</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_backend</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_backend</code></td>
                     <td className="p-3">string</td>
                     <td className="p-3">'cuda'</td>
                     <td className="p-3">GPU backend (cuda, rocm)</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.gpu_timeout_ms</code></pre></td>
+                    <td className="p-3"><code>neurondb.gpu_timeout_ms</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">5000</td>
                     <td className="p-3">GPU operation timeout (ms)</td>
@@ -662,25 +639,25 @@ SELECT * FROM neurondb_worker_status();`}</code></pre>
                 </thead>
                 <tbody>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.enable_background_workers</code></pre></td>
+                    <td className="p-3"><code>neurondb.enable_background_workers</code></td>
                     <td className="p-3">bool</td>
                     <td className="p-3">false</td>
                     <td className="p-3">Enable background embedding workers</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.worker_batch_size</code></pre></td>
+                    <td className="p-3"><code>neurondb.worker_batch_size</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">100</td>
                     <td className="p-3">Batch size for worker tasks</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.worker_interval_sec</code></pre></td>
+                    <td className="p-3"><code>neurondb.worker_interval_sec</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">60</td>
                     <td className="p-3">Worker polling interval (seconds)</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.worker_max_concurrent</code></pre></td>
+                    <td className="p-3"><code>neurondb.worker_max_concurrent</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">4</td>
                     <td className="p-3">Max concurrent worker tasks</td>
@@ -704,19 +681,19 @@ SELECT * FROM neurondb_worker_status();`}</code></pre>
                 </thead>
                 <tbody>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.enable_metrics</code></pre></td>
+                    <td className="p-3"><code>neurondb.enable_metrics</code></td>
                     <td className="p-3">bool</td>
                     <td className="p-3">true</td>
                     <td className="p-3">Enable performance metrics collection</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.metrics_retention_days</code></pre></td>
+                    <td className="p-3"><code>neurondb.metrics_retention_days</code></td>
                     <td className="p-3">int</td>
                     <td className="p-3">7</td>
                     <td className="p-3">Metric retention period</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="p-3"><code>neurondb.log_level</code></pre></td>
+                    <td className="p-3"><code>neurondb.log_level</code></td>
                     <td className="p-3">string</td>
                     <td className="p-3">'info'</td>
                     <td className="p-3">Logging level (debug, info, warning, error)</td>
@@ -733,15 +710,15 @@ SELECT * FROM neurondb_worker_status();`}</code></pre>
         <div className="space-y-4">
           <h3 className="text-xl font-semibold">Index Types</h3>
           <ul className="list-disc list-inside space-y-2">
-            <li><code>hnsw</code></pre> - Hierarchical Navigable Small World graph index</li>
-            <li><code>ivfflat</code></pre> - Inverted File with Flat quantization</li>
+            <li><code>hnsw</code> - Hierarchical Navigable Small World graph index</li>
+            <li><code>ivfflat</code> - Inverted File with Flat quantization</li>
           </ul>
 
           <h3 className="text-xl font-semibold mt-6">Operator Classes</h3>
           <ul className="list-disc list-inside space-y-2">
-            <li><code>vector_l2_ops</code></pre> - L2 (Euclidean) distance operations</li>
-            <li><code>vector_cosine_ops</code></pre> - Cosine distance operations</li>
-            <li><code>vector_ip_ops</code></pre> - Inner product operations</li>
+            <li><code>vector_l2_ops</code> - L2 (Euclidean) distance operations</li>
+            <li><code>vector_cosine_ops</code> - Cosine distance operations</li>
+            <li><code>vector_ip_ops</code> - Inner product operations</li>
           </ul>
         </div>
       </section>

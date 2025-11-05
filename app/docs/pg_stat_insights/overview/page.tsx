@@ -118,7 +118,9 @@ const PgStatInsightsOverviewPage = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">{item.icon}</span>
                   <div className="flex-1">
-                    <code className="text-teal-300 font-mono text-sm">{item.view}</code>
+                    <pre className="text-sm overflow-x-auto">
+                      <code className="text-teal-300 font-mono text-sm">{item.view}</code>
+                    </pre>
                     <p className="text-slate-400 text-sm mt-1">{item.desc}</p>
                   </div>
                 </div>
@@ -150,7 +152,8 @@ ORDER BY shared_blks_read DESC;
 SELECT query, jit_functions, jit_generation_time, jit_optimization_time
 FROM pg_stat_insights_jit
 WHERE jit_functions > 0
-ORDER BY jit_generation_time DESC;`}</code></pre>
+ORDER BY jit_generation_time DESC;`}</code>
+                </pre>
             </div>
           </div>
         </section>

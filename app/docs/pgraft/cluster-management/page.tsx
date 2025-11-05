@@ -60,18 +60,21 @@ export default function PgraftClusterManagementPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">1. Cluster Creation</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Create a new cluster<br/>
                         SELECT pgraft_init_cluster('production-cluster');<br/><br/>
                         # Verify cluster creation<br/>
                         SELECT * FROM pgraft_cluster_status('production-cluster');
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">2. Add Nodes</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Add primary node<br/>
                         SELECT pgraft_add_member('production-cluster', 'node1', 'host=192.168.1.10 port=5432');<br/><br/>
@@ -79,12 +82,14 @@ export default function PgraftClusterManagementPage() {
                         SELECT pgraft_add_member('production-cluster', 'node2', 'host=192.168.1.11 port=5432');<br/>
                         SELECT pgraft_add_member('production-cluster', 'node3', 'host=192.168.1.12 port=5432');
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">3. Monitor Cluster Health</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Check cluster status<br/>
                         SELECT * FROM pgraft_cluster_status('production-cluster');<br/><br/>
@@ -93,6 +98,7 @@ export default function PgraftClusterManagementPage() {
                         # Get metrics<br/>
                         SELECT * FROM pgraft_metrics('production-cluster');
                       </code>
+              </pre>
                     </div>
                   </div>
                 </div>
@@ -141,12 +147,14 @@ export default function PgraftClusterManagementPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Removing Nodes</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Remove node from cluster<br/>
                         SELECT pgraft_remove_member('production-cluster', 'node3');<br/><br/>
                         # Verify removal<br/>
                         SELECT * FROM pgraft_cluster_status('production-cluster');
                       </code>
+              </pre>
                     </div>
                     <p className="text-white/90 text-sm mt-2">Ensure cluster has majority (odd number of nodes) after removal.</p>
                   </div>
@@ -154,6 +162,7 @@ export default function PgraftClusterManagementPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Node Maintenance</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Check node health<br/>
                         SELECT * FROM pgraft_node_info('production-cluster');<br/><br/>
@@ -162,6 +171,7 @@ export default function PgraftClusterManagementPage() {
                         # Force election if needed<br/>
                         SELECT pgraft_force_election('production-cluster');
                       </code>
+              </pre>
                     </div>
                   </div>
                 </div>
@@ -223,12 +233,14 @@ export default function PgraftClusterManagementPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Manual Failover</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Trigger manual failover<br/>
                         SELECT pgraft_force_election('production-cluster');<br/><br/>
                         # Check new leader<br/>
                         SELECT * FROM pgraft_leader('production-cluster');
                       </code>
+              </pre>
                     </div>
                   </div>
                 </div>
@@ -242,6 +254,7 @@ export default function PgraftClusterManagementPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Health Monitoring</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Comprehensive cluster status<br/>
                         SELECT * FROM pgraft_cluster_status('production-cluster');<br/><br/>
@@ -250,12 +263,14 @@ export default function PgraftClusterManagementPage() {
                         # Performance metrics<br/>
                         SELECT * FROM pgraft_metrics('production-cluster');
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Configuration Management</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # View current configuration<br/>
                         SELECT * FROM pgraft_get_config('production-cluster');<br/><br/>
@@ -263,6 +278,7 @@ export default function PgraftClusterManagementPage() {
                         SELECT pgraft_set_config('production-cluster', 'heartbeat_interval', '50ms');<br/>
                         SELECT pgraft_set_config('production-cluster', 'election_timeout', '500ms');
                       </code>
+              </pre>
                     </div>
                   </div>
 
@@ -272,18 +288,21 @@ export default function PgraftClusterManagementPage() {
                       <div>
                         <h4 className="text-lg font-thin text-white mb-2">Regular Backups</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # PostgreSQL backup<br/>
                             pg_dump -h leader-node -U postgres database_name &gt; backup.sql<br/><br/>
                             # Raft log backup<br/>
                             SELECT pgraft_backup_logs('production-cluster');
                           </code>
+              </pre>
                         </div>
                       </div>
                       
                       <div>
                         <h4 className="text-lg font-thin text-white mb-2">Disaster Recovery</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Restore from backup<br/>
                             psql -h new-node -U postgres database_name &lt; backup.sql<br/><br/>
@@ -291,6 +310,7 @@ export default function PgraftClusterManagementPage() {
                             SELECT pgraft_init_cluster('production-cluster');<br/>
                             SELECT pgraft_add_member('production-cluster', 'node1', 'host=new-node port=5432');
                           </code>
+              </pre>
                         </div>
                       </div>
                     </div>

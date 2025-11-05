@@ -191,8 +191,8 @@ sudo dnf install -y \\
     postgresql17-server \\
     postgresql17-devel \\
     postgresql17-contrib`}
-                    </pre>
-                  </div>
+                        </pre>
+                      </div>
                 </div>
 
                 <div>

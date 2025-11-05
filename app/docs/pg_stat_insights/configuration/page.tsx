@@ -29,7 +29,7 @@ pg_stat_insights.save = true                    # Persist stats across restarts
 
 # Restart PostgreSQL for changes to take effect
 # or use ALTER SYSTEM + pg_reload_conf() for SIGHUP-level parameters`}</code>
-              </pre>
+        </pre>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4 mt-6">
@@ -105,7 +105,7 @@ SELECT COUNT(*) as tracked_queries,
        current_setting('pg_stat_insights.max')::int as max_queries,
        (COUNT(*)::float / current_setting('pg_stat_insights.max')::int * 100) as usage_pct
 FROM pg_stat_insights;`}</code>
-                </pre>
+                    </pre>
               </div>
 
               <div>
@@ -119,8 +119,8 @@ FROM pg_stat_insights;`}</code>
 pg_stat_insights.max = 10000  →  ~20-30 MB
 pg_stat_insights.max = 50000  →  ~100-150 MB
 pg_stat_insights.max = 100000 →  ~200-300 MB`}
-                  </pre>
-                  <p className="text-slate-300 mt-3 text-sm">
+                    </pre>
+                    <p className="text-slate-300 mt-3 text-sm">
                     <strong className="text-yellow-400">Note:</strong> This memory is allocated from shared_buffers at PostgreSQL startup and cannot be reclaimed without a restart.
                   </p>
                 </div>
@@ -191,7 +191,7 @@ FROM pg_stat_insights;
 
 -- If usage_pct consistently > 80%, double pg_stat_insights.max
 -- If queries are being evicted frequently, you'll see new queries with recent stats_since timestamps`}</code>
-                </pre>
+                    </pre>
               </div>
             </div>
           </section>
@@ -357,7 +357,7 @@ SELECT
   AVG(mean_exec_time) as avg_time
 FROM pg_stat_insights
 GROUP BY toplevel;`}</code>
-                </pre>
+                    </pre>
               </div>
 
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-6">
@@ -512,7 +512,7 @@ WHERE query LIKE 'CREATE %'
    OR query LIKE 'VACUUM %'
    OR query LIKE 'ANALYZE %'
 ORDER BY total_exec_time DESC;`}</code>
-                </pre>
+                    </pre>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
@@ -603,7 +603,7 @@ SELECT query, calls, rows / NULLIF(calls, 0) as avg_rows_per_copy,
 FROM pg_stat_insights
 WHERE query LIKE 'COPY %'
 ORDER BY total_exec_time DESC;`}</code>
-                </pre>
+                    </pre>
               </div>
             </div>
           </section>
@@ -693,7 +693,7 @@ SELECT pg_reload_conf();
 
 -- Check current setting
 SHOW pg_stat_insights.track_planning;`}</code>
-                </pre>
+                    </pre>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
@@ -789,7 +789,7 @@ FROM pg_stat_insights
 WHERE plans > 100 AND stddev_plan_time > 0
 ORDER BY plan_cv DESC
 LIMIT 20;`}</code>
-                </pre>
+                    </pre>
               </div>
 
               <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-6">
@@ -929,7 +929,7 @@ FROM pg_stat_insights;
 
 -- Manually save statistics to disk (requires superuser)
 SELECT pg_stat_insights_reset();  -- This triggers a save if save=true`}</code>
-                </pre>
+                    </pre>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
@@ -1197,7 +1197,7 @@ psql -d your_database -c "
          current_setting('pg_stat_insights.max')::int as max_queries
   FROM pg_stat_insights;
 "`}</code>
-              </pre>
+                    </pre>
             </div>
           </section>
         </div>

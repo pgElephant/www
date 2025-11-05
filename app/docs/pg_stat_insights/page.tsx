@@ -54,8 +54,8 @@ SELECT
     rows
 FROM pg_stat_insights_top_by_time 
 LIMIT 10;`}</code>
-          </pre>
-        </div>
+    </pre>
+  </div>
       </section>
 
       <section>
@@ -195,7 +195,9 @@ LIMIT 10;`}</code>
             { name: 'pg_stat_insights_replication', desc: 'Replication lag and status monitoring' },
           ].map((view) => (
             <div key={view.name} className="p-3 border border-gray-300 dark:border-gray-700 rounded">
-              <code className="text-sm font-semibold text-blue-600 dark:text-blue-400">{view.name}</code>
+              <pre className="text-sm overflow-x-auto">
+                <code className="text-sm font-semibold text-blue-600 dark:text-blue-400">{view.name}</code>
+              </pre>
               <p className="text-sm text-muted-foreground mt-1">{view.desc}</p>
             </div>
           ))}

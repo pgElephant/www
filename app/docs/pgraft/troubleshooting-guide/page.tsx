@@ -53,9 +53,7 @@ sudo tail -50 /var/log/postgresql/postgresql-17-main.log | grep -i error
 # 4. Verify Go library is accessible
 ls -l /usr/lib/postgresql/17/lib/libpgraft_core.so
 # Or check path specified in pgraft.go_library_path`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
             <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
               <li>
                 <strong>Missing shared library:</strong>
@@ -64,8 +62,7 @@ ls -l /usr/lib/postgresql/17/lib/libpgraft_core.so
 sudo apt-get install --reinstall pgraft
 # or
 sudo yum reinstall pgraft`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>shared_preload_libraries not set:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -77,8 +74,7 @@ shared_preload_libraries = 'pgraft'
 
 # Restart PostgreSQL (required!)
 sudo systemctl restart postgresql`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Wrong PostgreSQL version:</strong> Ensure pgraft version matches PostgreSQL version (e.g., pgraft-17 for PostgreSQL 17)
               </li>
@@ -86,8 +82,7 @@ sudo systemctl restart postgresql`}</code>
                 <strong>Library permissions:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
                   <code>sudo chmod 755 /usr/lib/postgresql/17/lib/pgraft.so</code>
-                </pre>
-              </li>
+            </pre></li>
             </ul>
           </div>
 
@@ -115,8 +110,7 @@ sudo apt-get install --reinstall pgraft
 # 4. Verify database ownership
 psql -U postgres -c "\\l"
 # Ensure you have CREATE permission on database`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -144,9 +138,7 @@ telnet 10.0.1.12 7002
 
 # Check PostgreSQL logs for Raft messages
 sudo grep -i "pgraft.*raft" /var/log/postgresql/*.log | tail -50`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Common Causes and Solutions:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Common Causes and Solutions:</h4>
             <ul className="list-disc list-inside space-y-3 text-sm text-muted-foreground">
               <li>
                 <strong>Mismatched initial_cluster configuration:</strong>
@@ -161,8 +153,7 @@ ssh node2 "grep initial_cluster /etc/postgresql/17/main/postgresql.conf"
 ssh node3 "grep initial_cluster /etc/postgresql/17/main/postgresql.conf"
 
 # If different, fix and restart PostgreSQL on all nodes`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Node name doesn't match initial_cluster:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -172,8 +163,7 @@ ssh node3 "grep initial_cluster /etc/postgresql/17/main/postgresql.conf"
 
 # Verify:
 SHOW pgraft.name;  -- Run on each node`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Network connectivity issues:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -191,8 +181,7 @@ sudo iptables -L -n | grep 700[123]
 sudo ufw allow 7001/tcp
 sudo ufw allow 7002/tcp
 sudo ufw allow 7003/tcp`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Data directory issues:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -208,8 +197,7 @@ sudo chmod 700 /var/lib/postgresql/pgraft
 sudo systemctl stop postgresql
 sudo rm -rf /var/lib/postgresql/pgraft/*
 sudo systemctl start postgresql`}</code>
-                </pre>
-              </li>
+            </pre></li>
             </ul>
           </div>
 
@@ -240,8 +228,7 @@ nc -zv <leader-ip> <raft-port>
 
 # 5. Review logs on new node for connection errors
 ssh new-node "sudo tail -100 /var/log/postgresql/*.log | grep pgraft"`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -275,9 +262,7 @@ top
 
 # Review election events in logs
 sudo grep -i "election" /var/log/postgresql/*.log | tail -20`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
             <ul className="list-disc list-inside space-y-3 text-sm text-muted-foreground">
               <li>
                 <strong>High network latency:</strong> Increase timeouts
@@ -288,8 +273,7 @@ pgraft.heartbeat_interval = 300  # 300ms (was 100)
 
 # Restart PostgreSQL on all nodes
 sudo systemctl restart postgresql`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>System overload:</strong> Check CPU and I/O
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -300,8 +284,7 @@ uptime
 iostat -x 1 5
 
 # If high load, reduce PostgreSQL workload or add resources`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Clock skew:</strong> Ensure time synchronization
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -313,8 +296,7 @@ sudo timedatectl set-ntp true
 
 # Verify time matches across nodes
 date`}</code>
-                </pre>
-              </li>
+            </pre></li>
             </ul>
           </div>
 
@@ -338,9 +320,7 @@ psql -h 10.0.1.13 -U postgres -c "SELECT pgraft_is_leader(), pgraft_get_leader()
 
 # All should agree on leader_id and term
 # If multiple nodes report is_leader=true, you may have network partition`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Recovery:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Recovery:</h4>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
               <code>{`# 1. Fix network connectivity first
 # Ensure all nodes can communicate
@@ -353,8 +333,7 @@ sudo systemctl restart postgresql  # on followers
 
 # 4. Verify cluster converged to single leader
 psql -U postgres -c "SELECT * FROM pgraft_get_cluster_status();"`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -384,9 +363,7 @@ SELECT * FROM pgraft_log_get_stats();
 # On follower node:
 SELECT * FROM pg_stat_bgwriter;
 SELECT * FROM pg_stat_database WHERE datname = current_database();`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
             <ul className="list-disc list-inside space-y-3 text-sm text-muted-foreground">
               <li>
                 <strong>Network congestion:</strong> Check bandwidth between leader and follower
@@ -394,8 +371,7 @@ SELECT * FROM pg_stat_database WHERE datname = current_database();`}</code>
                   <code>{`# Test network throughput
 iperf3 -s  # on follower
 iperf3 -c <follower-ip> -t 30  # on leader`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Follower disk I/O bottleneck:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -405,16 +381,14 @@ iostat -x 1 10
 # If high await/svctm, consider:
 # - Faster storage (SSD instead of HDD)
 # - Reduce other I/O load on follower`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Force synchronization:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
                   <code>{`# On lagging follower, force sync
 SELECT pgraft_log_sync_with_leader();
 -- Returns number of entries synchronized`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Increase batch size (trade-off: higher latency):</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -424,8 +398,7 @@ pgraft.max_batch_delay = 50  # ms
 
 # Restart PostgreSQL
 sudo systemctl restart postgresql`}</code>
-                </pre>
-              </li>
+            </pre></li>
             </ul>
           </div>
 
@@ -450,8 +423,7 @@ sudo rm -rf /var/lib/postgresql/pgraft/*
 sudo systemctl start postgresql
 
 # Extension will auto-sync from leader snapshot`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -477,9 +449,7 @@ SELECT pgraft_kv_get('test_key');
 # Check log stats
 SELECT disk_usage_mb, total_entries FROM pgraft_log_get_stats();
 # High disk usage may slow writes`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
             <ul className="list-disc list-inside space-y-3 text-sm text-muted-foreground">
               <li>
                 <strong>Trigger snapshot to compact log:</strong>
@@ -490,15 +460,13 @@ pgraft.snapshot_count = 5000  # from 10000
 
 # Or manually compact KV store
 SELECT pgraft_kv_compact();`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Optimize batch settings for lower latency:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
                   <code>{`pgraft.batch_size = 10  # Reduce batch size
 pgraft.max_batch_delay = 1  # 1ms max delay`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>Use faster storage for pgraft.data_dir:</strong> Move to SSD/NVMe
               </li>
@@ -522,9 +490,7 @@ du -sh /var/lib/postgresql/pgraft/wal/
 
 # Count snapshots
 ls -1 /var/lib/postgresql/pgraft/snapshots/ | wc -l`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Solutions:</h4>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
               <code>{`# Reduce snapshot retention
 # postgresql.conf:
@@ -536,8 +502,7 @@ SELECT pgraft_kv_compact();
 
 # Manually clean old snapshots (if safe to do so)
 sudo ls -t /var/lib/postgresql/pgraft/snapshots/ | tail -n +3 | xargs -I {} sudo rm -f /var/lib/postgresql/pgraft/snapshots/{}`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -560,9 +525,7 @@ SELECT num_nodes FROM pgraft_get_cluster_status();
 # Identify which nodes are down
 SELECT * FROM pgraft_get_nodes();
 -- Try connecting to each node`}</code>
-            </pre>
-
-            <h4 className="font-semibold mt-4 mb-2">Recovery Options:</h4>
+            </pre><h4 className="font-semibold mt-4 mb-2">Recovery Options:</h4>
             <ul className="list-decimal list-inside space-y-3 text-sm text-muted-foreground">
               <li>
                 <strong>Restore failed nodes (preferred):</strong>
@@ -573,8 +536,7 @@ ssh failed-node2 "sudo systemctl start postgresql"
 
 # Verify quorum restored
 SELECT * FROM pgraft_get_cluster_status();`}</code>
-                </pre>
-              </li>
+            </pre></li>
               <li>
                 <strong>If nodes permanently lost, rebuild cluster:</strong>
                 <pre className="bg-muted p-2 rounded mt-1 overflow-x-auto">
@@ -597,8 +559,7 @@ sudo systemctl start postgresql
 psql -U postgres -c "CREATE EXTENSION pgraft;"
 
 # 5. Add new nodes to rebuild quorum`}</code>
-                </pre>
-              </li>
+            </pre></li>
             </ul>
           </div>
         </div>
@@ -625,16 +586,12 @@ sudo tail -200 /var/log/postgresql/*.log | grep pgraft | grep DEBUG
 
 -- Disable debug mode
 SELECT pgraft_set_debug(false);`}</code>
-          </pre>
-
-          <h3 className="text-xl font-semibold mt-6 mb-2">Test Mode</h3>
+            </pre><h3 className="text-xl font-semibold mt-6 mb-2">Test Mode</h3>
           <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
             <code>{`-- Run internal test function
 SELECT pgraft_test();
 -- Returns diagnostic information about cluster state`}</code>
-          </pre>
-
-          <h3 className="text-xl font-semibold mt-6 mb-2">Log Entry Inspection</h3>
+            </pre><h3 className="text-xl font-semibold mt-6 mb-2">Log Entry Inspection</h3>
           <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
             <code>{`-- Get specific log entry details
 SELECT * FROM pgraft_log_get_entry(1250);
@@ -642,9 +599,7 @@ SELECT * FROM pgraft_log_get_entry(1250);
 
 -- Manually replicate single entry (advanced)
 SELECT pgraft_replicate_entry(1250);`}</code>
-          </pre>
-
-          <h3 className="text-xl font-semibold mt-6 mb-2">Network Diagnostics</h3>
+            </pre><h3 className="text-xl font-semibold mt-6 mb-2">Network Diagnostics</h3>
           <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
             <code>{`# Test connectivity matrix
 for node in 10.0.1.11:7001 10.0.1.12:7002 10.0.1.13:7003; do
@@ -660,8 +615,7 @@ done
 
 # Check packet loss
 mtr -r -c 100 10.0.1.12`}</code>
-          </pre>
-        </div>
+            </pre></div>
       </section>
 
       <section>
@@ -697,8 +651,7 @@ psql -U postgres -c "SELECT * FROM pgraft_get_cluster_status();"
 
 # 8. Restore data if needed
 psql -U postgres database_name < emergency_backup.sql`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Data Corruption Recovery</h3>
@@ -713,8 +666,7 @@ sudo systemctl stop postgresql
 sudo rm -rf /var/lib/postgresql/pgraft/*
 sudo systemctl start postgresql
 # Node will re-sync from cluster`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -752,9 +704,7 @@ SELECT * FROM pgraft_log_get_replication_status();
 # 8. System information
 uname -a
 cat /etc/os-release`}</code>
-          </pre>
-
-          <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            </pre><div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
             <h4 className="font-semibold mb-2">Support Channels</h4>
             <ul className="list-disc list-inside space-y-1 text-sm">
               <li>GitHub Issues: <a href="https://github.com/pgedge/pgraft/issues" className="text-blue-600 hover:underline">github.com/pgedge/pgraft/issues</a></li>

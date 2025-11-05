@@ -29,7 +29,7 @@ const FauxDBMonitoringPage = () => {
           </h2>
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30">
             <h3 className="text-xl font-bold text-cyan-300 mb-4">Enable Metrics</h3>
-            <div className="bg-slate-900/50 rounded-lg p-4 mb-4"><pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[monitoring]
+            <div className="bg-slate-900/50 rounded-lg p-4 mb-4"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[monitoring]
 prometheus_enabled = true
 prometheus_port = 9090
 metrics_path = "/metrics"`}</code></pre></div>
@@ -65,7 +65,7 @@ metrics_path = "/metrics"`}</code></pre></div>
           </h2>
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-purple-400/30">
             <p className="text-slate-300 mb-4">Import the official FauxDB Grafana dashboard:</p>
-            <div className="bg-slate-900/50 rounded-lg p-4"><pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# Dashboard ID: fauxdb-overview
+            <div className="bg-slate-900/50 rounded-lg p-4"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# Dashboard ID: fauxdb-overview
 # Download from: https://grafana.com/dashboards/fauxdb
 
 # Or manually configure:

@@ -58,7 +58,6 @@ FROM pg_stat_insights
 ORDER BY total_exec_time DESC
 LIMIT 20;`}</code>
             </pre>
-
             <h4 className="font-semibold mt-4 mb-2">Key Columns:</h4>
             <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground ml-4">
               <li><code>userid</code>, <code>dbid</code>, <code>queryid</code> - Query identification</li>
@@ -101,7 +100,6 @@ LIMIT 10;
 --  SELECT * FROM large_table WHERE id = $1  | 50000 |       125000.50 |           2.50 |          45.20
 --  UPDATE users SET last_seen = NOW()...    | 10000 |        85000.30 |           8.50 |          30.75`}</code>
             </pre>
-
             <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>Use case:</strong> Identify queries that have accumulated the most execution time. 
               A query with low mean time but high call count may still dominate total time.
@@ -140,7 +138,6 @@ FROM pg_stat_insights_top_by_calls
 WHERE mean_exec_time < 5  -- Fast queries (< 5ms)
 LIMIT 15;`}</code>
             </pre>
-
             <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>Use case:</strong> Optimize frequently-called queries for maximum impact. 
               Even small improvements (e.g., 1ms → 0.5ms) can save significant total time.
@@ -176,7 +173,6 @@ FROM pg_stat_insights_slow_queries
 WHERE stddev_exec_time > mean_exec_time * 0.5  -- High variance
 ORDER BY coefficient_of_variation DESC;`}</code>
             </pre>
-
             <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
               <strong>Optimization tip:</strong> High standard deviation indicates inconsistent query performance. 
               Investigate parameter sniffing, plan stability, or resource contention issues.
@@ -224,7 +220,6 @@ FROM pg_stat_insights_top_by_io
 WHERE shared_blks_read + local_blks_read + temp_blks_read > 1000
 LIMIT 20;`}</code>
             </pre>
-
             <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>Performance impact:</strong> Each block read is 8KB. High I/O queries may benefit from:
               <ul className="list-disc list-inside mt-1 ml-4">
@@ -271,7 +266,6 @@ FROM pg_stat_insights_top_cache_misses
 GROUP BY 1
 ORDER BY 1;`}</code>
             </pre>
-
             <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
               <strong>Target cache hit ratio:</strong> &gt;95% is good, &gt;99% is excellent. 
               Low ratios indicate insufficient <code>shared_buffers</code>, missing indexes, or sequential scans on large tables.
@@ -319,7 +313,6 @@ ORDER BY
 --  100ms-1s               |          15 |        800  |        350.00 |              0.7500
 --  1-10s                  |           5 |         50  |       4500.00 |              0.6000`}</code>
             </pre>
-
             <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>SLA monitoring:</strong> Use this view to track percentage of queries meeting response time SLAs.
               Example: 99% of queries should be &lt;100ms.
@@ -399,7 +392,7 @@ FROM pg_stat_insights_replication;
 -- Example output:
 --  application_name | client_addr  | repl_state | sync_state | write_lag_bytes | flush_lag_bytes | replay_lag_bytes | write_lag_seconds | flush_lag_seconds | replay_lag_seconds
 -- ------------------+--------------+------------+------------+-----------------+-----------------+------------------+-------------------+-------------------+--------------------
---  replica1         | 10.0.1.12    | streaming  | async      |            1024 |            2048 |             4096 |              0.15 |              0.25 |               0.50
+--  replica1         | 10.0.12    | streaming  | async      |            1024 |            2048 |             4096 |              0.15 |              0.25 |               0.50
 --  replica2         | 10.0.1.13    | streaming  | sync       |               0 |               0 |                0 |              0.00 |              0.00 |               0.00
 
 -- Alert on high replication lag
@@ -481,7 +474,6 @@ SELECT
 FROM pg_stat_insights_slow_queries
 LIMIT 10;`}</code>
           </pre>
-
           <h3 className="text-lg font-semibold mt-6">Query Optimization Candidates</h3>
           <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
             <code>{`-- Find queries that would benefit most from optimization

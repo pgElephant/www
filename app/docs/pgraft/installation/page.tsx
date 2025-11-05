@@ -94,20 +94,24 @@ export default function PgraftInstallationPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">1. Clone the Repository</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         git clone https://github.com/pgElephant/pgraft.git<br/>
                         cd pgraft
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">2. Build the Extension</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         make<br/>
                         sudo make install
                       </code>
+              </pre>
                     </div>
                     <p className="text-white/90 text-sm mt-2">This builds both the PostgreSQL extension and the Go Raft library.</p>
                   </div>
@@ -115,22 +119,26 @@ export default function PgraftInstallationPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">3. Configure PostgreSQL</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Add to postgresql.conf<br/>
                         shared_preload_libraries = 'pgraft'<br/><br/>
                         # Restart PostgreSQL<br/>
                         sudo systemctl restart postgresql
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">4. Create the Extension</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         psql -d postgres<br/>
                         CREATE EXTENSION pgraft;
                       </code>
+                      </pre>
                     </div>
                   </div>
                 </div>
@@ -140,12 +148,14 @@ export default function PgraftInstallationPage() {
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
                 <h2 className="text-2xl font-thin text-white mb-6">Verification</h2>
                 <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                   <code className="text-green-400 text-sm">
                     # Check if extension is loaded<br/>
                     SELECT * FROM pg_extension WHERE extname = 'pgraft';<br/><br/>
                     # Check available functions<br/>
                     \df pgraft_*
                   </code>
+                  </pre>
                 </div>
               </div>
 

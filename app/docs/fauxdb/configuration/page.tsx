@@ -42,8 +42,7 @@ const FauxDBConfigurationPage = () => {
             </p>
             
             <div className="bg-slate-900/50 rounded-lg p-6 overflow-x-auto">
-              <pre className="text-sm">
-                <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# FauxDB Configuration File
+              <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# FauxDB Configuration File
 # /etc/fauxdb/config.toml
 
 [server]
@@ -155,7 +154,6 @@ metrics_path = "/metrics"
 
 # Health check endpoint
 health_check_path = "/health"`}</code></pre>
-              </pre>
             </div>
           </div>
         </section>
@@ -171,7 +169,7 @@ health_check_path = "/health"`}</code></pre>
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30">
               <h3 className="text-xl font-bold text-cyan-300 mb-4">Required PostgreSQL Extensions</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
-                <pre className="text-sm">
+                
                   <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`-- Install required extensions
 CREATE EXTENSION IF NOT EXISTS hstore;
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
@@ -180,14 +178,13 @@ CREATE EXTENSION IF NOT EXISTS btree_gist;
 
 -- FauxDB uses JSONB for document storage
 -- No additional setup required for JSONB`}</code></pre>
-                </pre>
               </div>
             </div>
 
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30">
               <h3 className="text-xl font-bold text-cyan-300 mb-4">Database Schema Setup</h3>
               <div className="bg-slate-900/50 rounded-lg p-4">
-                <pre className="text-sm">
+                
                   <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`-- Create FauxDB database
 CREATE DATABASE fauxdb;
 
@@ -218,7 +215,6 @@ CREATE TABLE IF NOT EXISTS _fauxdb_indexes (
   created_at TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(collection_name, index_name)
 );`}</code></pre>
-                </pre>
               </div>
             </div>
           </div>
@@ -286,7 +282,7 @@ CREATE TABLE IF NOT EXISTS _fauxdb_indexes (
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-blue-400/30">
             <h3 className="text-xl font-bold text-blue-300 mb-4">Character Sets & Collations</h3>
             <div className="bg-slate-900/50 rounded-lg p-4 mb-4">
-              <pre className="text-sm">
+              
                 <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[mysql]
 # Default character set
 charset = "utf8mb4"
@@ -296,7 +292,6 @@ collation = "utf8mb4_unicode_ci"
 
 # Supported character sets
 supported_charsets = ["utf8mb4", "utf8", "latin1", "ascii"]`}</code></pre>
-              </pre>
             </div>
             <p className="text-slate-300 text-sm">
               FauxDB automatically handles character set conversions between MySQL protocol and PostgreSQL backend.
@@ -315,7 +310,7 @@ supported_charsets = ["utf8mb4", "utf8", "latin1", "ascii"]`}</code></pre>
                 Optimize PostgreSQL connection pool for your workload:
               </p>
               <div className="bg-slate-900/50 rounded-lg p-4">
-                <pre className="text-sm">
+                
                   <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# For OLTP workloads (many short queries)
 pool_min_size = 20
 pool_max_size = 200
@@ -325,7 +320,6 @@ pool_timeout = 10
 pool_min_size = 5
 pool_max_size = 50
 pool_timeout = 60`}</code></pre>
-                </pre>
               </div>
             </div>
 
@@ -335,7 +329,7 @@ pool_timeout = 60`}</code></pre>
                 Enable query caching and optimization:
               </p>
               <div className="bg-slate-900/50 rounded-lg p-4">
-                <pre className="text-sm">
+                
                   <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[performance]
 # Query cache (increases memory usage but improves performance)
 query_cache_size = 512  # MB
@@ -346,7 +340,6 @@ statement_cache_size = 2000
 # Query optimization
 query_optimization = true
 max_query_complexity = 5000`}</code></pre>
-                </pre>
               </div>
             </div>
           </div>
@@ -361,7 +354,7 @@ max_query_complexity = 5000`}</code></pre>
               Configuration can be overridden using environment variables:
             </p>
             <div className="bg-slate-900/50 rounded-lg p-4">
-              <pre className="text-sm">
+              
                 <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# Server configuration
 FAUXDB_BIND_ADDRESS="0.0.0.0"
 FAUXDB_MONGODB_PORT=27017
@@ -383,7 +376,6 @@ FAUXDB_TLS_KEY="/path/to/key.pem"
 # Monitoring
 FAUXDB_PROMETHEUS_ENABLED=true
 FAUXDB_PROMETHEUS_PORT=9090`}</code></pre>
-              </pre>
             </div>
           </div>
         </section>

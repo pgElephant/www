@@ -72,6 +72,7 @@ export default function PgraftTroubleshootingPage() {
                       <div>
                         <h4 className="text-md font-thin text-white mb-1">Solutions:</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Check extension installation<br/>
                             ls -la /usr/lib/postgresql/16/lib/pgraft.so<br/><br/>
@@ -80,7 +81,7 @@ export default function PgraftTroubleshootingPage() {
                             # Check PostgreSQL configuration<br/>
                             grep shared_preload_libraries postgresql.conf
                           </code>
-                        </div>
+            </pre></div>
                       </div>
                     </div>
                   </div>
@@ -100,6 +101,7 @@ export default function PgraftTroubleshootingPage() {
                       <div>
                         <h4 className="text-md font-thin text-white mb-1">Solutions:</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Check cluster status<br/>
                             SELECT * FROM pgraft_cluster_status('my-cluster');<br/><br/>
@@ -108,7 +110,7 @@ export default function PgraftTroubleshootingPage() {
                             # Check network connectivity<br/>
                             ping -c 3 node1 node2 node3
                           </code>
-                        </div>
+            </pre></div>
                       </div>
                     </div>
                   </div>
@@ -128,6 +130,7 @@ export default function PgraftTroubleshootingPage() {
                       <div>
                         <h4 className="text-md font-thin text-white mb-1">Solutions:</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Reduce heartbeat interval<br/>
                             SELECT pgraft_set_config('my-cluster', 'heartbeat_interval', '50ms');<br/><br/>
@@ -136,7 +139,7 @@ export default function PgraftTroubleshootingPage() {
                             # Monitor replication metrics<br/>
                             SELECT * FROM pgraft_metrics('my-cluster');
                           </code>
-                        </div>
+            </pre></div>
                       </div>
                     </div>
                   </div>
@@ -200,6 +203,7 @@ export default function PgraftTroubleshootingPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Cluster Health Checks</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Comprehensive cluster status<br/>
                         SELECT * FROM pgraft_cluster_status('my-cluster');<br/><br/>
@@ -210,12 +214,13 @@ export default function PgraftTroubleshootingPage() {
                         # Performance metrics<br/>
                         SELECT * FROM pgraft_metrics('my-cluster');
                       </code>
-                    </div>
+            </pre></div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Configuration Validation</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # View current configuration<br/>
                         SELECT * FROM pgraft_get_config('my-cluster');<br/><br/>
@@ -225,12 +230,13 @@ export default function PgraftTroubleshootingPage() {
                         # Verify extension is loaded<br/>
                         SELECT * FROM pg_extension WHERE extname = 'pgraft';
                       </code>
-                    </div>
+            </pre></div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Network Diagnostics</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Test connectivity to other nodes<br/>
                         telnet node1 5433<br/>
@@ -242,7 +248,7 @@ export default function PgraftTroubleshootingPage() {
                         # Test PostgreSQL connectivity<br/>
                         psql -h node1 -p 5432 -U postgres -c "SELECT 1"
                       </code>
-                    </div>
+            </pre></div>
                   </div>
                 </div>
               </div>
@@ -300,6 +306,7 @@ export default function PgraftTroubleshootingPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Cluster Recovery</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # If cluster is completely down<br/>
                         # 1. Start majority of nodes<br/>
@@ -312,7 +319,7 @@ export default function PgraftTroubleshootingPage() {
                         # 4. Verify cluster health<br/>
                         SELECT * FROM pgraft_cluster_status('my-cluster');
                       </code>
-                    </div>
+            </pre></div>
                   </div>
                 </div>
               </div>
@@ -328,12 +335,13 @@ export default function PgraftTroubleshootingPage() {
                       <div>
                         <h4 className="text-md font-thin text-white mb-1">Check Metrics:</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             SELECT * FROM pgraft_metrics('my-cluster');<br/>
                             SELECT * FROM pg_stat_activity;<br/>
                             SELECT * FROM pg_stat_database;
                           </code>
-                        </div>
+            </pre></div>
                       </div>
                       <div>
                         <h4 className="text-md font-thin text-white mb-1">Common Solutions:</h4>
@@ -361,6 +369,7 @@ export default function PgraftTroubleshootingPage() {
                       <div>
                         <h4 className="text-md font-thin text-white mb-1">Solutions:</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Reduce log entries<br/>
                             SELECT pgraft_set_config('my-cluster', 'max_log_entries', '5000');<br/><br/>
@@ -370,7 +379,7 @@ export default function PgraftTroubleshootingPage() {
                             SHOW shared_buffers;<br/>
                             SHOW work_mem;
                           </code>
-                        </div>
+            </pre></div>
                       </div>
                     </div>
                   </div>

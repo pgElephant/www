@@ -262,8 +262,8 @@ LIMIT 5;`}
                 Performance Tips
               </h2>
               <ul className="space-y-3 text-white/80">
-                <li>• <strong>Batch processing:</strong> Use <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">embed_text_batch()</code></pre> for 3-5x speedup</li>
-                <li>• <strong>Caching:</strong> Use <pre className="text-sm overflow-x-auto"><code className="bg-slate-900 px-2 py-1 rounded text-purple-300">embed_cached()</code></pre> to avoid regenerating embeddings</li>
+                <li>• <strong>Batch processing:</strong> Use <code className="bg-slate-900 px-2 py-1 rounded text-indigo-300">embed_text_batch()</code> for 3-5x speedup</li>
+                <li>• <strong>Caching:</strong> Use <code className="bg-slate-900 px-2 py-1 rounded text-purple-300">embed_cached()</code> to avoid regenerating embeddings</li>
                 <li>• <strong>Indexing:</strong> Create HNSW indexes on embedding columns for fast search</li>
                 <li>• <strong>Model selection:</strong> Smaller models (384-dim) are faster, larger models (768-dim) are more accurate</li>
                 <li>• <strong>Quantization:</strong> Use int8 or binary types for 4-32x storage savings</li>

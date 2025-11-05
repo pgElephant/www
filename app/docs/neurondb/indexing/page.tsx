@@ -65,7 +65,7 @@ LIMIT 10;
 SELECT id, vector_l2_distance_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS distance
 FROM documents
 ORDER BY distance
-LIMIT 10;`}</code></pre>
+LIMIT 10;`}</code>
             </pre>
           </div>
 
@@ -87,7 +87,7 @@ LIMIT 10;
 SELECT id, vector_cosine_distance_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS distance
 FROM documents
 ORDER BY distance
-LIMIT 10;`}</code></pre>
+LIMIT 10;`}</code>
             </pre>
           </div>
 
@@ -109,7 +109,7 @@ LIMIT 10;
 SELECT id, vector_inner_product_gpu(embedding, '[0.1, 0.2, 0.3]'::vector) AS score
 FROM documents
 ORDER BY score DESC
-LIMIT 10;`}</code></pre>
+LIMIT 10;`}</code>
             </pre>
           </div>
         </div>
@@ -129,19 +129,19 @@ LIMIT 10;`}</code></pre>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;-&gt;</code></pre></td>
+                <td className="p-3"><code>&lt;-&gt;</code></td>
                 <td className="p-3">L2 (Euclidean)</td>
                 <td className="p-3">ASC (lower = more similar)</td>
                 <td className="p-3">Spatial data, general embeddings</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;=&gt;</code></pre></td>
+                <td className="p-3"><code>&lt;=&gt;</code></td>
                 <td className="p-3">Cosine</td>
                 <td className="p-3">ASC (lower = more similar)</td>
                 <td className="p-3">Text embeddings, normalized vectors</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>&lt;#&gt;</code></pre></td>
+                <td className="p-3"><code>&lt;#&gt;</code></td>
                 <td className="p-3">Inner Product</td>
                 <td className="p-3">ASC (higher raw value = more similar)</td>
                 <td className="p-3">MIPS, normalized embeddings</td>
@@ -184,7 +184,7 @@ SET hnsw.ef_search = 100;
 
 SELECT * FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
-LIMIT 10;`}</code></pre>
+LIMIT 10;`}</code>
             </pre>
           </div>
 
@@ -209,7 +209,7 @@ SET ivfflat.probes = 10;
 
 SELECT * FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
-LIMIT 10;`}</code></pre>
+LIMIT 10;`}</code>
             </pre>
           </div>
         </div>
@@ -265,17 +265,17 @@ LIMIT 10;`}</code></pre>
             </thead>
             <tbody>
               <tr className="border-b">
-                <td className="p-3"><code>vector_l2_ops</code></pre></td>
+                <td className="p-3"><code>vector_l2_ops</code></td>
                 <td className="p-3">L2 (Euclidean)</td>
                 <td className="p-3">HNSW, IVF</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>vector_cosine_ops</code></pre></td>
+                <td className="p-3"><code>vector_cosine_ops</code></td>
                 <td className="p-3">Cosine</td>
                 <td className="p-3">HNSW, IVF</td>
               </tr>
               <tr className="border-b">
-                <td className="p-3"><code>vector_ip_ops</code></pre></td>
+                <td className="p-3"><code>vector_ip_ops</code></td>
                 <td className="p-3">Inner Product</td>
                 <td className="p-3">HNSW, IVF</td>
               </tr>
@@ -285,8 +285,8 @@ LIMIT 10;`}</code></pre>
         <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
           <p className="text-sm">
             <strong>Important:</strong> The operator class in your index must match the distance operator in your query.
-            For example, an index with <code>vector_l2_ops</code></pre> will be used for queries with <code>&lt;-&gt;</code></pre>,
-            but not for <code>&lt;=&gt;</code></pre> (cosine) queries.
+            For example, an index with <code>vector_l2_ops</code> will be used for queries with <code>&lt;-&gt;</code>,
+            but not for <code>&lt;=&gt;</code> (cosine) queries.
           </p>
         </div>
       </section>
@@ -318,7 +318,7 @@ CREATE INDEX ON documents USING hnsw (embedding vector_l2_ops)
 WITH (m = 32, ef_construction = 128);
 
 -- Runtime tuning for higher recall
-SET hnsw.ef_search = 200;`}</code></pre>
+SET hnsw.ef_search = 200;`}</code>
             </pre>
           </div>
 
@@ -326,7 +326,7 @@ SET hnsw.ef_search = 200;`}</code></pre>
             <h3 className="text-xl font-semibold mb-2">IVF Parameters</h3>
             <ul className="space-y-2 list-disc list-inside">
               <li>
-                <strong>lists</strong> (build-time): Number of clusters. Rule of thumb: <code>sqrt(num_rows)</code></pre> for datasets &gt; 1M.
+                <strong>lists</strong> (build-time): Number of clusters. Rule of thumb: <code>sqrt(num_rows)</code> for datasets &gt; 1M.
                 Typical range: 100–10,000.
               </li>
               <li>
@@ -341,7 +341,7 @@ CREATE INDEX ON documents USING ivfflat (embedding vector_l2_ops)
 WITH (lists = 3000);
 
 -- Runtime tuning for better recall
-SET ivfflat.probes = 20;`}</code></pre>
+SET ivfflat.probes = 20;`}</code>
             </pre>
           </div>
         </div>
@@ -368,8 +368,8 @@ SELECT id,
        vector_inner_product_gpu(embedding, query_vec) AS ip_score
 FROM documents, (SELECT '[0.1, 0.2, 0.3]'::vector AS query_vec) q
 ORDER BY l2_dist
-LIMIT 100;`}</code></pre>
-        </pre>
+LIMIT 100;`}</code>
+  </pre>
       </section>
 
       <section>
@@ -402,15 +402,15 @@ LIMIT 100;`}</code></pre>
             <h4 className="font-semibold mb-2">4. Index Maintenance</h4>
             <p className="text-muted-foreground">
               Indexes are automatically updated on INSERT/UPDATE/DELETE, but frequent updates can degrade quality.
-              For bulk loads, consider building the index after data ingestion with <code>CREATE INDEX</code></pre>.
+              For bulk loads, consider building the index after data ingestion with <code>CREATE INDEX</code>.
             </p>
           </div>
 
           <div className="p-4 border rounded-lg">
             <h4 className="font-semibold mb-2">5. Query Tuning</h4>
             <p className="text-muted-foreground">
-              Adjust runtime GUCs (<code>hnsw.ef_search</code></pre>, <code>ivfflat.probes</code></pre>) to balance recall and latency.
-              Monitor query performance and index scan statistics with <code>EXPLAIN ANALYZE</code></pre>.
+              Adjust runtime GUCs (<code>hnsw.ef_search</code>, <code>ivfflat.probes</code>) to balance recall and latency.
+              Monitor query performance and index scan statistics with <code>EXPLAIN ANALYZE</code>.
             </p>
           </div>
         </div>
@@ -449,8 +449,8 @@ LIMIT 10;
 EXPLAIN ANALYZE
 SELECT id FROM documents
 ORDER BY embedding <=> '[0.1, 0.2, ...]'::vector
-LIMIT 10;`}</code></pre>
-        </pre>
+LIMIT 10;`}</code>
+  </pre>
       </section>
 
       <section>

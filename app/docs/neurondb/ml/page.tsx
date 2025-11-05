@@ -319,9 +319,7 @@ LIMIT 10;`
                 </div>
                 
                 <div className="bg-slate-900/50 rounded-lg p-4 overflow-x-auto">
-                  <pre className="text-sm">
-                    <pre className="text-sm overflow-x-auto"><code className="text-green-400">{step.code}</code></pre>
-                  </pre>
+                  <pre className="text-sm overflow-x-auto"><code className="text-green-400">{step.code}</code></pre>
                 </div>
               </div>
             ))}
@@ -357,8 +355,7 @@ LIMIT 10;`
           <h2 className="text-3xl font-bold mb-8">Configuration</h2>
           
           <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-400/30">
-            <pre className="text-sm overflow-x-auto">
-              <pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`
+            <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`
 -- PostgreSQL configuration (postgresql.conf)
 neurondb.ml_workers = 4                    # Number of ML worker processes
 neurondb.embedding_cache_size = '1GB'      # Cache for embeddings
@@ -375,7 +372,6 @@ neurondb.batch_size = 100                  # Embedding batch size
 neurondb.request_timeout = 30              # API timeout (seconds)
 neurondb.max_retries = 3                   # Retry failed requests
 neurondb.cache_ttl = 86400                 # Cache TTL (seconds)`}</code></pre>
-            </pre>
           </div>
         </section>
 

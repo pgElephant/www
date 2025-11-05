@@ -88,7 +88,7 @@ pgraft.data_dir = '/opt/homebrew/var/postgresql@17/pgraft'`}</code>
                 <code>{`sudo mkdir -p /var/lib/postgresql/pgraft
 sudo chown postgres:postgres /var/lib/postgresql/pgraft
 sudo chmod 700 /var/lib/postgresql/pgraft`}</code>
-              </pre>
+            </pre>
             </div>
           </div>
 
@@ -189,8 +189,7 @@ pgraft.heartbeat_interval = 50
 
 # Reduce network traffic (5 heartbeats/sec)
 pgraft.heartbeat_interval = 200`}</code>
-            </pre>
-            <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
+            </pre><div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>Rule of thumb:</strong> <code>election_timeout = 10 × heartbeat_interval</code>
               <br />
               Example: heartbeat=100ms → election=1000ms
@@ -213,13 +212,11 @@ pgraft.snapshot_count = 5000
 
 # Less frequent snapshots (less I/O, slower recovery)
 pgraft.snapshot_count = 50000`}</code>
-            </pre>
-            <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
+            </pre><div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded text-sm">
               <strong>Monitoring:</strong> Check snapshot frequency with:
               <pre className="mt-1 bg-muted p-2 rounded text-xs overflow-x-auto">
                 <code>ls -lh /var/lib/postgresql/pgraft/snapshots/</code>
-              </pre>
-            </div>
+            </pre></div>
           </div>
         </div>
       </section>
@@ -241,8 +238,7 @@ pgraft.initial_cluster_state = 'new'
 
 # Adding node to existing cluster
 pgraft.initial_cluster_state = 'existing'`}</code>
-            </pre>
-            <div className="mt-2 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
+            </pre><div className="mt-2 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
               <strong>Important:</strong> After initial setup, this should remain 'new' on original nodes. 
               Only set to 'existing' on nodes being dynamically added.
             </div>
@@ -264,8 +260,7 @@ pgraft.initial_cluster_token = 'prod-cluster-01'
 
 # Development cluster
 pgraft.initial_cluster_token = 'dev-cluster-test'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -290,8 +285,7 @@ pgraft.initial_advertise_peer_urls = 'http://203.0.113.10:7001'
 
 # Multiple URLs (prefer internal, fallback to external)
 pgraft.initial_advertise_peer_urls = 'http://10.0.1.11:7001,http://203.0.113.10:7001'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.listen_peer_urls</code></h3>
@@ -305,8 +299,7 @@ pgraft.listen_peer_urls = 'http://0.0.0.0:7001'
 
 # Multiple interfaces
 pgraft.listen_peer_urls = 'http://10.0.1.11:7001,http://192.168.1.11:7001'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.listen_client_urls</code></h3>
@@ -317,8 +310,7 @@ pgraft.listen_peer_urls = 'http://10.0.1.11:7001,http://192.168.1.11:7001'`}</co
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`pgraft.listen_client_urls = 'http://0.0.0.0:2379'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.advertise_client_urls</code></h3>
@@ -328,8 +320,7 @@ pgraft.listen_peer_urls = 'http://10.0.1.11:7001,http://192.168.1.11:7001'`}</co
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`pgraft.advertise_client_urls = 'http://10.0.1.11:2379'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -353,8 +344,7 @@ pgraft.max_log_entries = 500000
 
 # Memory-constrained environments
 pgraft.max_log_entries = 50000`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.batch_size</code></h3>
@@ -372,8 +362,7 @@ pgraft.batch_size = 1000
 
 # Low latency (sacrifice throughput)
 pgraft.batch_size = 10`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>pgraft.max_batch_delay</code></h3>
@@ -390,8 +379,7 @@ pgraft.max_batch_delay = 1
 
 # Batch-oriented workloads (maximize throughput)
 pgraft.max_batch_delay = 100`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>quota_backend_bytes</code></h3>
@@ -401,8 +389,7 @@ pgraft.max_batch_delay = 100`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`quota_backend_bytes = 8589934592  # 8GB`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>max_request_bytes</code></h3>
@@ -412,8 +399,7 @@ pgraft.max_batch_delay = 100`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`max_request_bytes = 1572864  # 1.5MB`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -436,8 +422,7 @@ pgraft.log_level = 'debug'
 
 # Quiet (errors only)
 pgraft.log_level = 'error'`}</code>
-            </pre>
-            <div className="mt-2 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
+            </pre><div className="mt-2 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded text-sm">
               <strong>Warning:</strong> Debug level generates significant log volume. Use only for troubleshooting.
             </div>
           </div>
@@ -450,8 +435,7 @@ pgraft.log_level = 'error'`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`log_outputs = 'stderr'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>log_package_levels</code></h3>
@@ -461,8 +445,7 @@ pgraft.log_level = 'error'`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`log_package_levels = 'raft=info,pgraft=debug'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -485,8 +468,7 @@ max_snapshots = 2
 
 # Long recovery history
 max_snapshots = 10`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>max_wals</code></h3>
@@ -496,8 +478,7 @@ max_snapshots = 10`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`max_wals = 5`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>auto_compaction_retention</code></h3>
@@ -507,8 +488,7 @@ max_snapshots = 10`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`auto_compaction_retention = '1h'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>auto_compaction_mode</code></h3>
@@ -518,8 +498,7 @@ max_snapshots = 10`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`auto_compaction_mode = 'periodic'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>compaction_batch_limit</code></h3>
@@ -529,8 +508,7 @@ max_snapshots = 10`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`compaction_batch_limit = 1000`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -555,8 +533,7 @@ peer_cert_allowed_cn = 'pgraft-peer'
 
 # Hostname verification
 peer_cert_allowed_hostname = true`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Client TLS Configuration</h3>
@@ -568,8 +545,7 @@ cert_file = '/etc/pgraft/certs/server.crt'
 key_file = '/etc/pgraft/certs/server.key'
 client_cert_file = '/etc/pgraft/certs/client.crt'
 client_key_file = '/etc/pgraft/certs/client.key'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>cipher_suites</code></h3>
@@ -579,8 +555,7 @@ client_key_file = '/etc/pgraft/certs/client.key'`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`cipher_suites = 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -596,8 +571,7 @@ client_key_file = '/etc/pgraft/certs/client.key'`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`listen_metrics_urls = 'http://0.0.0.0:2379/metrics'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>metrics</code></h3>
@@ -607,8 +581,7 @@ client_key_file = '/etc/pgraft/certs/client.key'`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`metrics = 'extensive'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -625,8 +598,7 @@ client_key_file = '/etc/pgraft/certs/client.key'`}</code>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`# Usually auto-detected, manual override if needed
 pgraft.go_library_path = '/usr/lib/postgresql/17/lib/libpgraft_core.so'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>cors</code></h3>
@@ -636,8 +608,7 @@ pgraft.go_library_path = '/usr/lib/postgresql/17/lib/libpgraft_core.so'`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`cors = '*'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2"><code>host_whitelist</code></h3>
@@ -647,8 +618,7 @@ pgraft.go_library_path = '/usr/lib/postgresql/17/lib/libpgraft_core.so'`}</code>
             </p>
             <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
               <code>{`host_whitelist = 'localhost,*.example.com'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -673,8 +643,7 @@ pgraft.election_timeout = 1000
 pgraft.heartbeat_interval = 100
 pgraft.snapshot_count = 10000
 pgraft.log_level = 'info'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">High-Performance Configuration</h3>
@@ -702,8 +671,7 @@ max_snapshots = 3
 
 # Minimal logging
 pgraft.log_level = 'warning'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">WAN/High-Latency Configuration</h3>
@@ -726,8 +694,7 @@ pgraft.max_batch_delay = 100
 
 # Verbose logging for debugging
 pgraft.log_level = 'info'`}</code>
-            </pre>
-          </div>
+            </pre></div>
 
           <div>
             <h3 className="text-xl font-semibold mb-2">Development/Testing Configuration</h3>
@@ -747,8 +714,7 @@ pgraft.snapshot_count = 100
 
 # Verbose debugging
 pgraft.log_level = 'debug'`}</code>
-            </pre>
-          </div>
+            </pre></div>
         </div>
       </section>
 
@@ -778,8 +744,7 @@ psql -c "SELECT name, setting FROM pg_settings WHERE name LIKE 'pgraft.%' ORDER 
 
 # 6. Check logs for errors
 sudo tail -f /var/log/postgresql/postgresql-17-main.log | grep pgraft`}</code>
-          </pre>
-        </div>
+            </pre></div>
       </section>
 
       <section>

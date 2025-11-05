@@ -69,8 +69,7 @@ const FauxDBProductionPage = () => {
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-purple-400/30">
             <h3 className="text-xl font-bold text-purple-300 mb-4">Generate Certificates</h3>
             <div className="bg-slate-900/50 rounded-lg p-4 mb-6">
-              <pre className="text-sm overflow-x-auto">
-                <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# Generate CA key and certificate
+              <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`# Generate CA key and certificate
 openssl genrsa -out ca-key.pem 4096
 openssl req -new -x509 -days 3650 -key ca-key.pem -out ca-cert.pem
 
@@ -82,19 +81,16 @@ openssl x509 -req -days 3650 -in server-req.pem -CA ca-cert.pem -CAkey ca-key.pe
 # Set permissions
 chmod 600 server-key.pem
 chmod 644 server-cert.pem ca-cert.pem`}</code></pre>
-              </pre>
             </div>
             
             <h3 className="text-xl font-bold text-purple-300 mb-4">Configure FauxDB</h3>
             <div className="bg-slate-900/50 rounded-lg p-4">
-              <pre className="text-sm overflow-x-auto">
-                <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[security]
+              <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`[security]
 tls_enabled = true
 tls_cert = "/etc/fauxdb/certs/server-cert.pem"
 tls_key = "/etc/fauxdb/certs/server-key.pem"
 client_ca = "/etc/fauxdb/certs/ca-cert.pem"
 require_client_cert = false  # Set to true for mutual TLS`}</code></pre>
-              </pre>
             </div>
           </div>
         </section>
@@ -109,8 +105,7 @@ require_client_cert = false  # Set to true for mutual TLS`}</code></pre>
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30">
             <h3 className="text-xl font-bold text-cyan-300 mb-4">docker-compose.yml</h3>
             <div className="bg-slate-900/50 rounded-lg p-4">
-              <pre className="text-sm overflow-x-auto">
-                <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`version: '3.8'
+              <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`version: '3.8'
 
 services:
   postgres:
@@ -144,7 +139,6 @@ services:
 
 volumes:
   postgres_data:`}</code></pre>
-              </pre>
             </div>
           </div>
         </section>
@@ -156,8 +150,7 @@ volumes:
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-blue-400/30">
             <h3 className="text-xl font-bold text-blue-300 mb-4">deployment.yaml</h3>
             <div className="bg-slate-900/50 rounded-lg p-4">
-              <pre className="text-sm overflow-x-auto">
-                <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`apiVersion: apps/v1
+              <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fauxdb
@@ -222,7 +215,6 @@ spec:
   - name: mysql
     port: 3306
     targetPort: 3306`}</code></pre>
-              </pre>
             </div>
           </div>
         </section>

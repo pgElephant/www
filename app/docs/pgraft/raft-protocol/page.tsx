@@ -101,12 +101,13 @@ export default function PgraftRaftProtocolPage() {
                       to maintain leadership and replicates log entries to followers.
                     </p>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Check if node is leader<br/>
                         SELECT pgraft_is_leader('my-cluster');<br/>
                         -- Returns: true if leader, false otherwise
                       </code>
-                    </div>
+            </pre></div>
                   </div>
 
                   <div className="border-l-4 border-green-500 pl-4">
@@ -192,6 +193,7 @@ export default function PgraftRaftProtocolPage() {
                   </p>
                   
                   <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                     <code className="text-green-400 text-sm">
                       # Leader receives client request<br/>
                       # 1. Append entry to leader's log<br/>
@@ -200,7 +202,7 @@ export default function PgraftRaftProtocolPage() {
                       # 4. Apply entry to state machine<br/>
                       # 5. Respond to client
                     </code>
-                  </div>
+            </pre></div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div>
@@ -268,32 +270,36 @@ export default function PgraftRaftProtocolPage() {
                       <h3 className="text-lg font-thin text-white mb-2">heartbeat_interval</h3>
                       <p className="text-white/90 text-sm mb-2">How often the leader sends heartbeats (default: 100ms)</p>
                       <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                         <code className="text-green-400 text-sm">pgraft.heartbeat_interval = 50ms</code>
-                      </div>
+            </pre></div>
                     </div>
                     
                     <div>
                       <h3 className="text-lg font-thin text-white mb-2">election_timeout</h3>
                       <p className="text-white/90 text-sm mb-2">Timeout before follower becomes candidate (default: 1000ms)</p>
                       <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                         <code className="text-green-400 text-sm">pgraft.election_timeout = 500ms</code>
-                      </div>
+            </pre></div>
                     </div>
                     
                     <div>
                       <h3 className="text-lg font-thin text-white mb-2">snapshot_threshold</h3>
                       <p className="text-white/90 text-sm mb-2">Number of entries before taking snapshot (default: 1000)</p>
                       <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                         <code className="text-green-400 text-sm">pgraft.snapshot_threshold = 5000</code>
-                      </div>
+            </pre></div>
                     </div>
                     
                     <div>
                       <h3 className="text-lg font-thin text-white mb-2">max_log_entries</h3>
                       <p className="text-white/90 text-sm mb-2">Maximum log entries before compaction (default: 10000)</p>
                       <div className="bg-slate-900 rounded-lg p-3 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                         <code className="text-green-400 text-sm">pgraft.max_log_entries = 20000</code>
-                      </div>
+            </pre></div>
                     </div>
                   </div>
                 </div>

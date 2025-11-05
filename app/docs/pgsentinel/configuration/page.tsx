@@ -554,10 +554,11 @@ max_replication_slots = 3`,
                 {category.variables.map((variable, variableIndex) => (
                   <div key={variableIndex} className="border-l-4 border-slate-700 pl-6">
                     <div className="flex items-center mb-2">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-lg font-mono text-white mr-4">
                         {variable.name}
                       </code>
-                      <span className={`px-2 py-1 rounded text-xs font-semibold ${
+            </pre><span className={`px-2 py-1 rounded text-xs font-semibold ${
                         variable.required 
                           ? 'bg-red-500/20 text-red-300' 
                           : 'bg-slate-500/20 text-slate-300'

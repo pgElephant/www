@@ -417,8 +417,7 @@ FROM pg_stat_insights
 WHERE temp_blks_written > 0
 ORDER BY temp_blks_written DESC
 LIMIT 20;`}</code>
-              </pre>
-
+                </pre>
               <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mt-4">
                 <strong className="text-red-400">🚨 Critical Issue - Temp Blocks:</strong>
                 <ul className="list-disc list-inside text-slate-300 mt-2 space-y-1">
@@ -480,8 +479,7 @@ FROM pg_stat_insights
 WHERE total_exec_time > 0 AND (shared_blk_read_time + temp_blk_read_time) > 0
 ORDER BY io_pct DESC
 LIMIT 20;`}</code>
-              </pre>
-
+                </pre>
               <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
                 <strong className="text-blue-400">📊 Interpretation:</strong>
                 <ul className="list-disc list-inside text-slate-300 mt-2 space-y-1">
@@ -563,7 +561,7 @@ FROM pg_stat_insights
 WHERE calls > 10;
 
 -- If queries_with_wal_pressure > 0, increase wal_buffers`}</code>
-              </pre>
+                </pre>
             </div>
           </section>
 
@@ -634,8 +632,7 @@ FROM pg_stat_insights
 WHERE calls > 100
 ORDER BY total_jit_time DESC
 LIMIT 20;`}</code>
-              </pre>
-
+                </pre>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                   <strong className="text-green-400">✅ JIT is Beneficial When:</strong>
@@ -706,8 +703,7 @@ FROM pg_stat_insights
 WHERE calls > 10
 ORDER BY parallel_workers_to_launch DESC
 LIMIT 20;`}</code>
-              </pre>
-
+                </pre>
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                 <strong className="text-cyan-400">🎯 Parallel Query Tuning:</strong>
                 <ul className="list-disc list-inside text-slate-300 mt-2 space-y-1">
@@ -812,7 +808,7 @@ FROM pg_stat_insights
 WHERE calls > 10
 ORDER BY total_exec_time DESC
 LIMIT 50;`}</code>
-              </pre>
+                </pre>
             </div>
           </section>
         </div>

@@ -60,6 +60,7 @@ export default function PgraftPerformancePage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">High Throughput Configuration</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Optimize for high throughput<br/>
                         pgraft.heartbeat_interval = 50ms<br/>
@@ -68,6 +69,7 @@ export default function PgraftPerformancePage() {
                         pgraft.max_log_entries = 20000<br/>
                         pgraft.batch_size = 1000
                       </code>
+            </pre>
                     </div>
                     <p className="text-white/90 text-sm mt-2">Configuration optimized for maximum transaction throughput.</p>
                   </div>
@@ -75,6 +77,7 @@ export default function PgraftPerformancePage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Low Latency Configuration</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Optimize for low latency<br/>
                         pgraft.heartbeat_interval = 25ms<br/>
@@ -83,13 +86,14 @@ export default function PgraftPerformancePage() {
                         pgraft.max_log_entries = 5000<br/>
                         pgraft.batch_size = 100
                       </code>
-                    </div>
+            </pre></div>
                     <p className="text-white/90 text-sm mt-2">Configuration optimized for minimal response times.</p>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Balanced Configuration</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Balanced performance<br/>
                         pgraft.heartbeat_interval = 100ms<br/>
@@ -98,7 +102,7 @@ export default function PgraftPerformancePage() {
                         pgraft.max_log_entries = 10000<br/>
                         pgraft.batch_size = 500
                       </code>
-                    </div>
+            </pre></div>
                     <p className="text-white/90 text-sm mt-2">Balanced configuration for most use cases.</p>
                   </div>
                 </div>
@@ -112,6 +116,7 @@ export default function PgraftPerformancePage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Memory Configuration</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Memory settings<br/>
                         shared_buffers = 256MB<br/>
@@ -120,12 +125,13 @@ export default function PgraftPerformancePage() {
                         maintenance_work_mem = 64MB<br/>
                         max_connections = 200
                       </code>
-                    </div>
+            </pre></div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">WAL Configuration</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # WAL settings<br/>
                         wal_level = replica<br/>
@@ -134,12 +140,13 @@ export default function PgraftPerformancePage() {
                         checkpoint_completion_target = 0.9<br/>
                         wal_buffers = 16MB
                       </code>
-                    </div>
+            </pre></div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Connection Settings</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Connection optimization<br/>
                         tcp_keepalives_idle = 600<br/>
@@ -148,7 +155,7 @@ export default function PgraftPerformancePage() {
                         listen_addresses = '*'<br/>
                         port = 5432
                       </code>
-                    </div>
+            </pre></div>
                   </div>
                 </div>
               </div>
@@ -161,6 +168,7 @@ export default function PgraftPerformancePage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Network Settings</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Network optimization<br/>
                         pgraft.network_buffer_size = 1MB<br/>
@@ -169,7 +177,7 @@ export default function PgraftPerformancePage() {
                         pgraft.keepalive_interval = 60s<br/>
                         pgraft.keepalive_count = 3
                       </code>
-                    </div>
+            </pre></div>
                   </div>
 
                   <div>
@@ -221,6 +229,7 @@ export default function PgraftPerformancePage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Performance Queries</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Get performance metrics<br/>
                         SELECT * FROM pgraft_metrics('my-cluster');<br/><br/>
@@ -230,7 +239,7 @@ export default function PgraftPerformancePage() {
                         SELECT * FROM pg_stat_activity;<br/>
                         SELECT * FROM pg_stat_database;
                       </code>
-                    </div>
+            </pre></div>
                   </div>
                 </div>
               </div>
@@ -246,37 +255,40 @@ export default function PgraftPerformancePage() {
                       <div>
                         <h4 className="text-lg font-thin text-white mb-2">High Replication Latency</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Reduce heartbeat interval<br/>
                             SELECT pgraft_set_config('my-cluster', 'heartbeat_interval', '50ms');<br/><br/>
                             # Check network connectivity<br/>
                             SELECT * FROM pgraft_cluster_status('my-cluster');
                           </code>
-                        </div>
+            </pre></div>
                       </div>
 
                       <div>
                         <h4 className="text-lg font-thin text-white mb-2">Frequent Elections</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Increase election timeout<br/>
                             SELECT pgraft_set_config('my-cluster', 'election_timeout', '2000ms');<br/><br/>
                             # Check node health<br/>
                             SELECT * FROM pgraft_node_info('my-cluster');
                           </code>
-                        </div>
+            </pre></div>
                       </div>
 
                       <div>
                         <h4 className="text-lg font-thin text-white mb-2">High Memory Usage</h4>
                         <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                           <code className="text-green-400 text-sm">
                             # Reduce log entries<br/>
                             SELECT pgraft_set_config('my-cluster', 'max_log_entries', '5000');<br/><br/>
                             # Force snapshot<br/>
                             SELECT pgraft_snapshot('my-cluster');
                           </code>
-                        </div>
+            </pre></div>
                       </div>
                     </div>
                   </div>

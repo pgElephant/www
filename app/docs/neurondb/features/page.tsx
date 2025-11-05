@@ -292,8 +292,7 @@ const VectorTypesPage = () => {
           <h2 className="text-3xl font-bold mb-8">Example Usage</h2>
           
           <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-400/30">
-            <pre className="text-sm overflow-x-auto">
-              <pre className="text-sm overflow-x-auto"><pre className="text-sm overflow-x-auto"><code className="text-green-400">{`
+            <pre className="text-sm overflow-x-auto"><code className="text-green-400">{`
 -- Create table with vector column
 CREATE TABLE embeddings (
   id SERIAL PRIMARY KEY,
@@ -319,7 +318,6 @@ LIMIT 5;
 SELECT embedding + '[0.1, 0.1, ...]'::vector FROM embeddings LIMIT 1;
 SELECT embedding * 2.0 FROM embeddings LIMIT 1;
 SELECT embedding || '[0.5]'::vector FROM embeddings LIMIT 1;`}</code></pre>
-            </pre>
           </div>
         </section>
 

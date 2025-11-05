@@ -60,6 +60,7 @@ export default function PgraftConfigurationPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">postgresql.conf Settings</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Required settings<br/>
                         shared_preload_libraries = 'pgraft'<br/><br/>
@@ -70,18 +71,21 @@ export default function PgraftConfigurationPage() {
                         max_wal_senders = 10<br/>
                         hot_standby = on
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">pg_hba.conf Configuration</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Allow replication connections<br/>
                         local   replication     postgres                        peer<br/>
                         host    replication     postgres        127.0.0.1/32    md5<br/>
                         host    replication     postgres        ::1/128         md5
                       </code>
+              </pre>
                     </div>
                   </div>
                 </div>
@@ -95,6 +99,7 @@ export default function PgraftConfigurationPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Extension Parameters</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Set in postgresql.conf or via ALTER SYSTEM<br/>
                         pgraft.listen_address = '0.0.0.0:5433'<br/>
@@ -103,12 +108,14 @@ export default function PgraftConfigurationPage() {
                         pgraft.snapshot_threshold = 1000<br/>
                         pgraft.max_log_entries = 10000
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Runtime Configuration</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Check current configuration<br/>
                         SELECT * FROM pgraft_get_config();<br/><br/>
@@ -116,6 +123,7 @@ export default function PgraftConfigurationPage() {
                         SELECT pgraft_set_config('heartbeat_interval', '50ms');<br/>
                         SELECT pgraft_set_config('election_timeout', '500ms');
                       </code>
+              </pre>
                     </div>
                   </div>
                 </div>
@@ -129,6 +137,7 @@ export default function PgraftConfigurationPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Initialize Cluster</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Create cluster<br/>
                         SELECT pgraft_init_cluster('my-cluster');<br/><br/>
@@ -137,18 +146,21 @@ export default function PgraftConfigurationPage() {
                         SELECT pgraft_add_member('my-cluster', 'node2', 'host=192.168.1.11 port=5432');<br/>
                         SELECT pgraft_add_member('my-cluster', 'node3', 'host=192.168.1.12 port=5432');
                       </code>
+              </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-3">Verify Cluster</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         # Check cluster status<br/>
                         SELECT * FROM pgraft_cluster_status('my-cluster');<br/><br/>
                         # Check leader<br/>
                         SELECT * FROM pgraft_leader('my-cluster');
                       </code>
+                      </pre>
                     </div>
                   </div>
                 </div>
@@ -162,24 +174,28 @@ export default function PgraftConfigurationPage() {
                   <div>
                     <h3 className="text-lg font-thin text-white mb-2">High Throughput</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         pgraft.heartbeat_interval = 50ms<br/>
                         pgraft.election_timeout = 500ms<br/>
                         pgraft.snapshot_threshold = 5000<br/>
                         pgraft.max_log_entries = 20000
                       </code>
+                      </pre>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-thin text-white mb-2">Low Latency</h3>
                     <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <pre className="text-sm overflow-x-auto">
                       <code className="text-green-400 text-sm">
                         pgraft.heartbeat_interval = 25ms<br/>
                         pgraft.election_timeout = 250ms<br/>
                         pgraft.snapshot_threshold = 1000<br/>
                         pgraft.max_log_entries = 5000
                       </code>
+                      </pre>
                     </div>
                   </div>
                 </div>
