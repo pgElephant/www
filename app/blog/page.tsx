@@ -170,6 +170,15 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
                 unoptimized
                 priority
               />
+            ) : post.slug === 'neurondb' ? (
+              <Image
+                src="/blog/neurondb/header.svg?v=7"
+                alt="NeuronDB blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
             ) : (
               <div className="text-center p-6">
                 <div className="text-4xl mb-2">📄</div>

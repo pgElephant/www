@@ -4,16 +4,16 @@ import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 
 export const metadata = {
   title: 'pg_stat_insights 1.0.0 — Release Announcement',
-  description: 'We are excited to announce pg_stat_insights 1.0.0 — an advanced PostgreSQL performance monitoring extension with 52 metrics across 11 views. Production-ready, compatible with PostgreSQL 16 and 17.',
+  description: 'We are excited to announce pg_stat_insights 1.0.0 — an advanced PostgreSQL performance monitoring extension with 52 metrics across 11 views. Production-ready, compatible with PostgreSQL 16, 17, and 18.',
   openGraph: {
     title: 'pg_stat_insights 1.0.0 — Release Announcement',
-    description: 'Advanced PostgreSQL performance monitoring with 52 metrics and 11 views. Production-ready and easy to install.',
+    description: 'Advanced PostgreSQL performance monitoring with 52 metrics and 11 views. PostgreSQL 16/17/18 support.',
     images: ['/blog/pg-stat-insights/og-image-v9.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'pg_stat_insights 1.0.0 — Release Announcement',
-    description: 'Advanced PostgreSQL performance monitoring with 52 metrics and 11 views. Production-ready and easy to install.',
+    description: 'Advanced PostgreSQL performance monitoring with 52 metrics and 11 views. PostgreSQL 16/17/18 support.',
     images: ['/blog/pg-stat-insights/og-image-v9.jpg'],
   },
 };
@@ -28,7 +28,7 @@ const markdown = `![pg_stat_insights header](/blog/pg-stat-insights/header.svg?v
 
 Today we’re releasing **pg_stat_insights 1.0.0**, a production-ready PostgreSQL performance monitoring extension that delivers **52 comprehensive metrics** across **11 purpose-built views**. It’s a powerful, drop-in enhancement to standard PostgreSQL statistics, designed to help you identify slow queries, understand cache behavior, track WAL generation, and make data-driven tuning decisions.
 
-- ✅ PostgreSQL 16–17 compatibility
+- ✅ PostgreSQL 16, 17, and 18 compatibility
 - ✅ Build artifacts for Ubuntu, Rocky Linux, and macOS
 - ✅ Easy install with packages or build-from-source
 
@@ -41,7 +41,7 @@ Today we’re releasing **pg_stat_insights 1.0.0**, a production-ready PostgreSQ
 
 ## Build Artifacts
 
-- PostgreSQL versions: **16, 17**
+- PostgreSQL versions: **16, 17, 18**
 - Platforms: **Ubuntu (\`.so\`), Rocky Linux (\`.so\`), macOS (\`.dylib\`)**
 - Get them here: **[Release Assets](https://github.com/pgElephant/pg_stat_insights/releases/tag/v1.0.0)**
 
