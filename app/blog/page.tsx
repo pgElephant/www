@@ -128,12 +128,13 @@ const blogPosts = [
 
 
 const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number }) => {
+  const isAnnouncement = post.category === 'Announcement'
   return (
     <article className="group h-full">
       <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-white/30 h-full flex flex-col">
           {/* Large Stock Image */}
-          <div className="relative w-full aspect-[3/2] bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20 overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center">
+          <div className={`relative w-full aspect-[3/2] overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center ${isAnnouncement ? 'bg-gradient-to-br from-gray-900 via-slate-900 to-black' : 'bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20'}`}>
             {post.slug === 'pgraft' ? (
               <Image
                 src="/blog/pgraft/header.svg?v=7"
@@ -185,6 +186,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
                 <div className="text-white/80 text-sm font-thin">{post.category}</div>
               </div>
             )}
+            {isAnnouncement && <div className="absolute inset-0 bg-black/30" />}
             <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-sm/80 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg drop-shadow-lg">
               {post.category}
             </div>
@@ -297,16 +299,28 @@ export default function BlogPage() {
 
 
 
-      {/* Blog Articles - Clean Modern Grid */}
+      {/* Blog Articles - Split by Category */}
       <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-14">
-              <h2 className="text-4xl md:text-5xl font-thin text-white mb-4 tracking-tight">Articles</h2>
-              <p className="text-lg text-white/80 max-w-2xl mx-auto">Insights, tutorials, and updates from the pgElephant team. Explore all our technical content in one place.</p>
+            {/* Technical Blogs */}
+            <div className="text-center mb-10">
+              <h2 className="text-4xl md:text-5xl font-thin text-white mb-2 tracking-tight">Technical Blogs</h2>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">Deep dives, tutorials, and engineering notes.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-20">
+              {blogPosts.filter(p => p.category === 'Technical').map((post, i) => (
+                <BlogCard key={post.slug} post={post} index={i} />
+              ))}
+            </div>
+
+            {/* Announcements */}
+            <div className="text-center mb-10">
+              <h2 className="text-4xl md:text-5xl font-thin text-white mb-2 tracking-tight">Announcements</h2>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">Releases, product updates, and news.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-              {blogPosts.map((post, i) => (
+              {blogPosts.filter(p => p.category === 'Announcement').map((post, i) => (
                 <BlogCard key={post.slug} post={post} index={i} />
               ))}
             </div>
