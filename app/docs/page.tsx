@@ -82,21 +82,23 @@ const DocsPage = () => {
       ]
     },
     {
-      id: 'pg_stat_insights',
-      name: 'pg_stat_insights',
-      title: 'Performance Analytics Extension',
-      icon: 'pg_stat_insights-custom',
-      gradient: 'from-teal-500/20 to-cyan-500/20',
-      borderColor: 'border-teal-400/30',
-      glowColor: 'shadow-teal-500/20',
-      description: 'Deep PostgreSQL performance analytics extension with 52 metrics across 11 views. Track slow queries, cache efficiency, and optimize database performance',
+      id: 'pgraft',
+      name: 'pgraft',
+      title: 'PostgreSQL Raft Extension',
+      icon: 'pgraft-custom',
+      gradient: 'from-blue-500/20 to-purple-500/20',
+      borderColor: 'border-blue-400/30',
+      glowColor: 'shadow-blue-500/20',
+      description: 'PostgreSQL extension implementing Raft consensus protocol for distributed database systems with automatic leader election and split-brain prevention',
       docs: [
-        { title: 'Getting Started', href: '/docs/pg-stat-insights/getting-started', type: 'Guide', description: 'Quick start guide for pg_stat_insights' },
-        { title: 'Metrics Guide', href: '/docs/pg_stat_insights/metrics', type: 'Reference', description: 'All 52 metric columns explained' },
-        { title: 'Configuration', href: '/docs/pg_stat_insights/configuration', type: 'Reference', description: 'GUC parameters and tuning' },
-        { title: 'API Reference', href: '/docs/pg-stat-insights/api', type: 'Reference', description: 'Complete view and function reference' },
-        { title: 'Query Analytics', href: '/docs/pg-stat-insights/query-analytics', type: 'Guide', description: 'Query performance analysis' },
-        { title: 'Best Practices', href: '/docs/pg-stat-insights/best-practices', type: 'Guide', description: 'Optimization best practices' }
+        { title: 'Getting Started', href: '/docs/pgraft/getting-started', type: 'Guide', description: 'Install and configure pgraft extension' },
+        { title: 'Installation', href: '/docs/pgraft/installation', type: 'Guide', description: 'Build and install from source' },
+        { title: 'Configuration', href: '/docs/pgraft/configuration', type: 'Guide', description: 'PostgreSQL configuration settings' },
+        { title: 'SQL Functions', href: '/docs/pgraft/sql-reference', type: 'Reference', description: 'PostgreSQL SQL function reference' },
+        { title: 'Raft Protocol', href: '/docs/pgraft/raft-protocol', type: 'Guide', description: 'Understanding Raft consensus implementation' },
+        { title: 'Cluster Management', href: '/docs/pgraft/cluster-management', type: 'Guide', description: 'Managing PostgreSQL clusters with Raft' },
+        { title: 'Performance', href: '/docs/pgraft/performance', type: 'Guide', description: 'Optimization and performance considerations' },
+        { title: 'Troubleshooting', href: '/docs/pgraft/troubleshooting-guide', type: 'Guide', description: 'Common issues and solutions' }
       ]
     },
     {
@@ -116,23 +118,21 @@ const DocsPage = () => {
       ]
     },
     {
-      id: 'pgraft',
-      name: 'pgraft',
-      title: 'PostgreSQL Raft Extension',
-      icon: 'pgraft-custom',
-      gradient: 'from-blue-500/20 to-purple-500/20',
-      borderColor: 'border-blue-400/30',
-      glowColor: 'shadow-blue-500/20',
-      description: 'PostgreSQL extension implementing Raft consensus protocol for distributed database systems with automatic leader election and split-brain prevention',
+      id: 'pg_stat_insights',
+      name: 'pg_stat_insights',
+      title: 'Performance Analytics Extension',
+      icon: 'pg_stat_insights-custom',
+      gradient: 'from-teal-500/20 to-cyan-500/20',
+      borderColor: 'border-teal-400/30',
+      glowColor: 'shadow-teal-500/20',
+      description: 'Deep PostgreSQL performance analytics extension with 52 metrics across 11 views. Track slow queries, cache efficiency, and optimize database performance',
       docs: [
-        { title: 'Getting Started', href: '/docs/pgraft/getting-started', type: 'Guide', description: 'Install and configure pgraft extension' },
-        { title: 'Installation', href: '/docs/pgraft/installation', type: 'Guide', description: 'Build and install from source' },
-        { title: 'Configuration', href: '/docs/pgraft/configuration', type: 'Guide', description: 'PostgreSQL configuration settings' },
-        { title: 'SQL Functions', href: '/docs/pgraft/sql-reference', type: 'Reference', description: 'PostgreSQL SQL function reference' },
-        { title: 'Raft Protocol', href: '/docs/pgraft/raft-protocol', type: 'Guide', description: 'Understanding Raft consensus implementation' },
-        { title: 'Cluster Management', href: '/docs/pgraft/cluster-management', type: 'Guide', description: 'Managing PostgreSQL clusters with Raft' },
-        { title: 'Performance', href: '/docs/pgraft/performance', type: 'Guide', description: 'Optimization and performance considerations' },
-        { title: 'Troubleshooting', href: '/docs/pgraft/troubleshooting-guide', type: 'Guide', description: 'Common issues and solutions' }
+        { title: 'Getting Started', href: '/docs/pg-stat-insights/getting-started', type: 'Guide', description: 'Quick start guide for pg_stat_insights' },
+        { title: 'Metrics Guide', href: '/docs/pg_stat_insights/metrics', type: 'Reference', description: 'All 52 metric columns explained' },
+        { title: 'Configuration', href: '/docs/pg_stat_insights/configuration', type: 'Reference', description: 'GUC parameters and tuning' },
+        { title: 'API Reference', href: '/docs/pg-stat-insights/api', type: 'Reference', description: 'Complete view and function reference' },
+        { title: 'Query Analytics', href: '/docs/pg-stat-insights/query-analytics', type: 'Guide', description: 'Query performance analysis' },
+        { title: 'Best Practices', href: '/docs/pg-stat-insights/best-practices', type: 'Guide', description: 'Optimization best practices' }
       ]
     },
     {

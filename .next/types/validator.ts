@@ -299,6 +299,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/neurondb/ml/classification/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/classification">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/classification/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/clustering/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/clustering">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/clustering/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/neurondb/ml/embeddings/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/embeddings">> = Specific
@@ -308,10 +326,91 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/neurondb/ml/feature-store/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/feature-store">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/feature-store/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/gpu/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/gpu">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/gpu/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/hyperparameter-tuning/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/hyperparameter-tuning">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/hyperparameter-tuning/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/outlier-detection/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/outlier-detection">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/outlier-detection/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/neurondb/ml/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml">> = Specific
   const handler = {} as typeof import("../../app/docs/neurondb/ml/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/rag/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/rag">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/rag/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/regression/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/regression">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/regression/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/svm/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/svm">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/svm/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/text-ml/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/text-ml">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/text-ml/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml/unified-api/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml/unified-api">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml/unified-api/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -425,10 +524,37 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pg_stat_insights/cache-efficiency/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/cache-efficiency">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/cache-efficiency/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pg_stat_insights/configuration/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/configuration">> = Specific
   const handler = {} as typeof import("../../app/docs/pg_stat_insights/configuration/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pg_stat_insights/io-performance/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/io-performance">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/io-performance/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pg_stat_insights/jit-analysis/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/jit-analysis">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/jit-analysis/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -470,6 +596,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pg_stat_insights/parallel-queries/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/parallel-queries">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/parallel-queries/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pg_stat_insights/slow-queries/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/slow-queries">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/slow-queries/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pg_stat_insights/usage/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/usage">> = Specific
@@ -488,10 +632,37 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pg_stat_insights/wal-monitoring/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/wal-monitoring">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/wal-monitoring/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgbalancer/cli-management/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/cli-management">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgbalancer/cli-management/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgbalancer/configuration/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/configuration">> = Specific
   const handler = {} as typeof import("../../app/docs/pgbalancer/configuration/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgbalancer/connection-pooling/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/connection-pooling">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgbalancer/connection-pooling/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -506,10 +677,28 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgbalancer/high-availability/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/high-availability">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgbalancer/high-availability/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgbalancer/internals/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/internals">> = Specific
   const handler = {} as typeof import("../../app/docs/pgbalancer/internals/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgbalancer/load-balancing/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/load-balancing">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgbalancer/load-balancing/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -524,10 +713,28 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/pgbalancer/monitoring/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/monitoring">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgbalancer/monitoring/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/pgbalancer/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer">> = Specific
   const handler = {} as typeof import("../../app/docs/pgbalancer/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pgbalancer/rest-api/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pgbalancer/rest-api">> = Specific
+  const handler = {} as typeof import("../../app/docs/pgbalancer/rest-api/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

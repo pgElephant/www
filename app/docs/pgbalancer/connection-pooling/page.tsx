@@ -1,5 +1,6 @@
 import React from 'react';
 import { Database, Activity, TrendingUp, Settings, Users, Gauge } from 'lucide-react';
+import SqlCodeBlock from '@/components/SqlCodeBlock';
 
 export const metadata = {
   title: 'Connection Pooling Setup - pgBalancer',
@@ -32,10 +33,10 @@ export default function ConnectionPoolingPage() {
           pgBalancer supports three pooling modes with different connection behaviors:
         </p>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">pgbalancer.conf Configuration</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# Connection Pooling Configuration
+        <SqlCodeBlock
+          title="pgbalancer.conf Configuration"
+          language="bash"
+          code={`# Connection Pooling Configuration
 
 # Pool mode: session, transaction, or statement
 # - session: Connection held for entire client session (default)
@@ -64,8 +65,7 @@ child_max_connections = 0       # Max connections per child (0 = unlimited)
 
 # Connection cache
 connection_cache = on           # Enable connection caching`}
-          </pre>
-        </div>
+        />
 
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-4">
           <p className="text-sm text-blue-200 m-0">
@@ -84,26 +84,43 @@ connection_cache = on           # Enable connection caching`}
           <h2 className="text-2xl font-bold m-0">Step 2: Monitor Pool Utilization</h2>
         </div>
 
-        <p className="text-gray-300 mb-4">
+                <p className="text-gray-300 mb-4">
           Query pgBalancer to monitor connection pool usage and identify bottlenecks:
         </p>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Check Pool Status via SHOW POOL_PROCESSES</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`-- Connect to pgBalancer
+        <SqlCodeBlock
+          title="Check Pool Status via SHOW POOL_PROCESSES"
+          code={`-- Connect to pgBalancer
 psql -h localhost -p 9999 -U postgres
 
 -- View all pool processes and their connections
 SHOW POOL_PROCESSES;
 
 -- Output shows:
--- pool_pid | start_time | database | username | create_time | pool_counter
--- ---------+------------+----------+----------+-------------+-------------
--- 12345    | 2025-11-06 | testdb   | appuser  | 2025-11-06  | 150
--- 12346    | 2025-11-06 | testdb   | appuser  | 2025-11-06  | 89`}
-          </pre>
-        </div>
+-- pool_pid | start_time | database | username | create_time | pool_counter`}
+        />
+
+        <SqlCodeBlock
+          title="Pool Statistics Query"
+          code={`-- Get pool utilization metrics
+SELECT 
+    database,
+    username,
+    COUNT(*) as active_connections,
+    MAX(pool_counter) as max_reuse
+FROM pool_processes
+GROUP BY database, username;
+
+-- Check for pool exhaustion
+SELECT 
+    CASE 
+        WHEN COUNT(*) >= 32 THEN 'WARNING: Pool exhausted'
+        ELSE 'OK'
+    END as pool_status,
+    COUNT(*) as used_connections,
+    32 as max_connections
+FROM pool_processes;`}
+        />
 
         <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
           <h3 className="text-lg font-semibold text-cyan-400 mb-3">Pool Statistics via SHOW POOL_POOLS</h3>
