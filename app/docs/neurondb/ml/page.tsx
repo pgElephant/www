@@ -195,6 +195,49 @@ LIMIT 10;`
           </p>
         </div>
 
+        {/* Quick Links */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold mb-6">Machine Learning Topics</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link href="/docs/neurondb/ml/embeddings" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Embeddings</div>
+              <div className="text-white/70 text-sm">Text & image embeddings, batching, indexing and search</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/clustering" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Clustering</div>
+              <div className="text-white/70 text-sm">K-means, GMM, hierarchical, DBSCAN, outliers</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/classification" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Classification</div>
+              <div className="text-white/70 text-sm">Logistic regression, KNN, SVM, trees, random forest</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/regression" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Regression</div>
+              <div className="text-white/70 text-sm">Linear, Ridge, Lasso with evaluation metrics</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/rag" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">RAG Pipeline</div>
+              <div className="text-white/70 text-sm">Chunk → Embed → Rank → Transform</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/feature-store" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Feature Store</div>
+              <div className="text-white/70 text-sm">Register, transform, and serve features consistently</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/hyperparameter-tuning" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Hyperparameter Tuning</div>
+              <div className="text-white/70 text-sm">Grid, random, Bayesian strategies</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/unified-api" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Unified ML API</div>
+              <div className="text-white/70 text-sm">train(), predict(), deploy() in one interface</div>
+            </Link>
+            <Link href="/docs/neurondb/ml/text-ml" className="block bg-white/5 rounded-xl border border-white/10 p-5 hover:bg-white/10 transition">
+              <div className="text-xl font-semibold mb-2">Text ML</div>
+              <div className="text-white/70 text-sm">Classification, sentiment, NER, summarization</div>
+            </Link>
+          </div>
+        </section>
+
         {/* ML Capabilities */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8">ML Capabilities</h2>
@@ -375,41 +418,95 @@ neurondb.cache_ttl = 86400                 # Cache TTL (seconds)`}</code></pre>
           </div>
         </section>
 
-        {/* Related Documentation */}
+        {/* ML Guides - Modular Navigation */}
         <section>
-          <h2 className="text-3xl font-bold mb-8">Related Documentation</h2>
+          <h2 className="text-3xl font-bold mb-8">Machine Learning Guides</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <Link
               href="/docs/neurondb/ml/embeddings"
               className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-purple-400/50 transition-all group"
             >
-              <span className="font-semibold">Detailed Embeddings Guide</span>
+              <span className="font-semibold">Embeddings</span>
               <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
             </Link>
             
             <Link
-              href="/docs/neurondb/rag"
-              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-purple-400/50 transition-all group"
+              href="/docs/neurondb/ml/clustering"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-cyan-400/50 transition-all group"
             >
-              <span className="font-semibold">RAG Pipeline Guide</span>
-              <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
+              <span className="font-semibold">Clustering</span>
+              <ArrowRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
             </Link>
             
             <Link
-              href="/docs/neurondb/hybrid"
-              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-purple-400/50 transition-all group"
+              href="/docs/neurondb/ml/classification"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-rose-400/50 transition-all group"
             >
-              <span className="font-semibold">Hybrid Search</span>
-              <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
+              <span className="font-semibold">Classification</span>
+              <ArrowRight className="w-5 h-5 text-rose-400 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <Link
+              href="/docs/neurondb/ml/regression"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-emerald-400/50 transition-all group"
+            >
+              <span className="font-semibold">Regression</span>
+              <ArrowRight className="w-5 h-5 text-emerald-400 group-hover:translate-x-1 transition-transform" />
             </Link>
             
             <Link
-              href="/docs/neurondb/gpu"
-              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-purple-400/50 transition-all group"
+              href="/docs/neurondb/ml/rag"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-indigo-400/50 transition-all group"
+            >
+              <span className="font-semibold">RAG Pipeline</span>
+              <ArrowRight className="w-5 h-5 text-indigo-400 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            
+            <Link
+              href="/docs/neurondb/ml/text-ml"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-lime-400/50 transition-all group"
+            >
+              <span className="font-semibold">Text ML</span>
+              <ArrowRight className="w-5 h-5 text-lime-400 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link
+              href="/docs/neurondb/ml/gpu"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-yellow-400/50 transition-all group"
             >
               <span className="font-semibold">GPU Acceleration</span>
-              <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 text-yellow-400 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            
+            <Link
+              href="/docs/neurondb/ml/feature-store"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-amber-400/50 transition-all group"
+            >
+              <span className="font-semibold">Feature Store</span>
+              <ArrowRight className="w-5 h-5 text-amber-400 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            
+            <Link
+              href="/docs/neurondb/ml/hyperparameter-tuning"
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:border-fuchsia-400/50 transition-all group"
+            >
+              <span className="font-semibold">Hyperparameter Tuning</span>
+              <ArrowRight className="w-5 h-5 text-fuchsia-400 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="mt-6">
+            <Link
+              href="/docs/neurondb/ml/unified-api"
+              className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 rounded-lg border border-cyan-400/30 hover:border-cyan-400/60 transition-all group"
+            >
+              <span className="font-semibold text-cyan-300">Unified ML API (train, predict, deploy)</span>
+              <ArrowRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </section>
