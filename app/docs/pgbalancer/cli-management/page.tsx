@@ -1,5 +1,6 @@
 import React from 'react';
 import { Terminal, List, Info, Play, Settings, FileText } from 'lucide-react';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata = {
   title: 'CLI Management (bctl) - pgBalancer',

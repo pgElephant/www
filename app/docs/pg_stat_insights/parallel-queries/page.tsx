@@ -289,7 +289,9 @@ SET force_parallel_mode = on;  # Use for testing only!
             Related SQL Test Files
           </h2>
           <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-            <code className="text-green-400">/Users/pgedge/pge/pg_stat_insights/sql/parallel.sql</code>
+            <a href="https://github.com/pgelephant/pg_stat_insights/tree/main/sql/parallel.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">
+              📄 View complete test on GitHub: sql/parallel.sql
+            </a>
           </div>
         </section>
       </div>

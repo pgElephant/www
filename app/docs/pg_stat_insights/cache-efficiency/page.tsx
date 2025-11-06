@@ -456,8 +456,8 @@ temp_buffers = 32MB`}</code>
           </h2>
           <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
             <ul className="space-y-2 text-gray-300">
-              <li><code className="text-green-400">/Users/pgedge/pge/pg_stat_insights/sql/select.sql</code> - Cache hit tracking</li>
-              <li><code className="text-green-400">/Users/pgedge/pge/pg_stat_insights/sql/dml.sql</code> - Buffer writes analysis</li>
+              <li><a href="https://github.com/pgelephant/pg_stat_insights/tree/main/sql/select.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 sql/select.sql</a> - Cache hit tracking</li>
+              <li><a href="https://github.com/pgelephant/pg_stat_insights/tree/main/sql/dml.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 sql/dml.sql</a> - Buffer writes analysis</li>
             </ul>
           </div>
         </section>

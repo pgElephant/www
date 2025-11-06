@@ -282,11 +282,11 @@ SELECT train_naive_bayes_classifier(
           </h2>
           <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
             <ul className="space-y-2 text-gray-300">
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/009_logistic_regression.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/010_knn.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/011_decision_tree.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/016_random_forest.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/012_naive_bayes.sql</code></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/009_logistic_regression.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/009_logistic_regression.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/010_knn.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/010_knn.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/011_decision_tree.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/011_decision_tree.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/016_random_forest.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/016_random_forest.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/012_naive_bayes.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/012_naive_bayes.sql</a></li>
             </ul>
           </div>
         </section>

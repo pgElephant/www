@@ -1,5 +1,7 @@
 import React from 'react';
 import { Shield, Heart, Zap, RefreshCw, AlertCircle, CheckCircle } from 'lucide-react';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
+import SqlCodeBlock from '../../../../components/SqlCodeBlock';
 
 export const metadata = {
   title: 'High Availability & Failover - pgBalancer',

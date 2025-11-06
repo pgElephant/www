@@ -1,6 +1,7 @@
 import React from 'react';
 import { Database, Activity, TrendingUp, Settings, Users, Gauge } from 'lucide-react';
-import SqlCodeBlock from '@/components/SqlCodeBlock';
+import SqlCodeBlock from '../../../../components/SqlCodeBlock';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata = {
   title: 'Connection Pooling Setup - pgBalancer',

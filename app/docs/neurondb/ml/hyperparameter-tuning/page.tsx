@@ -236,7 +236,9 @@ LIMIT 1;
             Complete Demo SQL File
           </h2>
           <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-            <code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/021_hyperparameter_tuning.sql</code>
+            <a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/021_hyperparameter_tuning.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">
+              📄 View complete demo on GitHub: demo/ML/sql/021_hyperparameter_tuning.sql
+            </a>
           </div>
         </section>
       </div>

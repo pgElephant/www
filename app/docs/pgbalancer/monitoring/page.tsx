@@ -1,5 +1,7 @@
 import React from 'react';
 import { BarChart, AlertTriangle, TrendingUp, Activity, Eye, Bell } from 'lucide-react';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
+import SqlCodeBlock from '../../../../components/SqlCodeBlock';
 
 export const metadata = {
   title: 'Monitoring & Metrics - pgBalancer',

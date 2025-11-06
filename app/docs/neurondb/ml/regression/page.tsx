@@ -187,8 +187,8 @@ SELECT train_elastic_net(
           </h2>
           <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
             <ul className="space-y-2 text-gray-300">
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/008_linear_regression.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/014_ridge_lasso.sql</code></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/008_linear_regression.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/008_linear_regression.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/014_ridge_lasso.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/014_ridge_lasso.sql</a></li>
             </ul>
           </div>
         </section>

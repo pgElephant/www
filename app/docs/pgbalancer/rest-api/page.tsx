@@ -1,5 +1,6 @@
 import React from 'react';
 import { Globe, Lock, Code, Zap, Database, Server } from 'lucide-react';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata = {
   title: 'REST API Usage - pgBalancer',

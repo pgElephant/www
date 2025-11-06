@@ -293,7 +293,9 @@ full_page_writes = on  # Required for crash safety`}</code>
             Related SQL Test Files
           </h2>
           <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-            <code className="text-green-400">/Users/pgedge/pge/pg_stat_insights/sql/wal.sql</code>
+            <a href="https://github.com/pgelephant/pg_stat_insights/tree/main/sql/wal.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">
+              📄 View complete test on GitHub: sql/wal.sql
+            </a>
           </div>
         </section>
       </div>

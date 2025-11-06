@@ -1,4 +1,5 @@
 import React from 'react';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata = {
   title: 'pgbalancer Architecture & Internals',

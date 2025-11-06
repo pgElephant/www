@@ -497,15 +497,6 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
-// Validate ../../app/docs/pg-stat-insights/getting-started/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/pg-stat-insights/getting-started">> = Specific
-  const handler = {} as typeof import("../../app/docs/pg-stat-insights/getting-started/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
 // Validate ../../app/docs/pg-stat-insights/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pg-stat-insights">> = Specific
@@ -537,6 +528,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/configuration">> = Specific
   const handler = {} as typeof import("../../app/docs/pg_stat_insights/configuration/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/pg_stat_insights/getting-started/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/pg_stat_insights/getting-started">> = Specific
+  const handler = {} as typeof import("../../app/docs/pg_stat_insights/getting-started/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

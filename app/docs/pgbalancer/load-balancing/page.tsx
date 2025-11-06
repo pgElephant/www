@@ -1,5 +1,7 @@
 import React from 'react';
 import { BarChart3, Target, Zap, Brain, Scale, AlertTriangle } from 'lucide-react';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
+import SqlCodeBlock from '../../../../components/SqlCodeBlock';
 
 export const metadata = {
   title: 'Load Balancing - pgBalancer',

@@ -361,11 +361,11 @@ ORDER BY CASE WHEN cluster_id = -1 THEN 999999 ELSE cluster_id END;
           </h2>
           <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
             <ul className="space-y-2 text-gray-300">
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/002_kmeans_clustering.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/003_gmm_clustering.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/004_minibatch_kmeans.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/006_hierarchical_clustering.sql</code></li>
-              <li><code className="text-green-400">/Users/pgedge/pge/NeurondB/demo/ML/sql/017_dbscan.sql</code></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/002_kmeans_clustering.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/002_kmeans_clustering.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/003_gmm_clustering.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/003_gmm_clustering.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/004_minibatch_kmeans.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/004_minibatch_kmeans.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/006_hierarchical_clustering.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/006_hierarchical_clustering.sql</a></li>
+              <li><a href="https://github.com/pgElephant/NeurondB/tree/main/demo/ML/sql/017_dbscan.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">📄 demo/ML/sql/017_dbscan.sql</a></li>
             </ul>
           </div>
         </section>
