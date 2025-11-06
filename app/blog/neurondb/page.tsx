@@ -8,17 +8,19 @@ export const metadata = {
   openGraph: {
     title: 'NeuronDB: PostgreSQL AI Vector Database Extension',
     description: 'Vector Search, ML Inference, GPU Acceleration - Transform PostgreSQL into an AI Platform',
-    images: ['/blog/neurondb/og-image.jpg'],
+    images: ['/blog/neurondb/og-image.svg'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NeuronDB: PostgreSQL AI Vector Database Extension',
     description: 'Vector Search, ML Inference, GPU Acceleration - Transform PostgreSQL into an AI Platform',
-    images: ['/blog/neurondb/og-image.jpg'],
+    images: ['/blog/neurondb/og-image.svg'],
   },
 };
 
-const markdown = `# NeuronDB: PostgreSQL AI Vector Database Extension
+const markdown = `![NeuronDB header](/blog/neurondb/header.svg?v=7)
+
+# NeuronDB: PostgreSQL AI Vector Database Extension
 
 📦 **[View on GitHub](https://github.com/pgElephant/NeurondB)** | 📥 **[Download Latest Release](https://github.com/pgElephant/NeurondB/releases)** | 📖 **[Documentation](https://www.pgelephant.com/docs/neurondb)**
 
