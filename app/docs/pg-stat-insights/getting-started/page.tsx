@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import { Gauge } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
+import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'Getting Started with pg_stat_insights | PostgreSQL Performance Monitoring',
@@ -15,7 +15,7 @@ export default function GettingStartedPage() {
       product="pg_stat_insights"
       hero={{
         label: 'pg_stat_insights',
-        labelIcon: <Gauge className="h-4 w-4" />, 
+        labelIcon: <PgStatInsightsIcon size={20} />, 
         labelAccent: 'cyan',
         title: 'Getting Started with pg_stat_insights',
         description:

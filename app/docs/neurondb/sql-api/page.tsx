@@ -15,7 +15,7 @@ export default function SqlApiPage() {
         </p>
       </div>
 
-      <section>
+      <section id="vector-types">
         <h2 className="text-2xl font-semibold mb-4">Vector Types</h2>
         <div className="space-y-4">
           <div>
@@ -39,7 +39,7 @@ SELECT ARRAY[1.0, 2.0, 3.0]::vector(3);`}</code></pre>
         </div>
       </section>
 
-      <section>
+      <section id="distance-operators">
         <h2 className="text-2xl font-semibold mb-4">Distance Operators</h2>
         <div className="overflow-x-auto mb-4">
           <table className="w-full border-collapse">
@@ -75,7 +75,7 @@ SELECT ARRAY[1.0, 2.0, 3.0]::vector(3);`}</code></pre>
         </div>
       </section>
 
-      <section>
+      <section id="embedding-functions">
         <h2 className="text-2xl font-semibold mb-4">Embedding Functions</h2>
         <div className="space-y-6">
           <div>

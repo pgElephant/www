@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import { Database } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'Getting Started with pgraft | PostgreSQL Raft Consensus Extension',
@@ -15,7 +15,7 @@ export default function GettingStartedPage() {
       product="pgraft"
       hero={{
         label: 'pgraft',
-        labelIcon: <Database className="h-4 w-4" />, 
+        labelIcon: <PgraftIcon size={20} />, 
         labelAccent: 'blue',
         title: 'Getting Started with pgraft',
         description:

@@ -1,6 +1,7 @@
 import React from 'react'
-import { BookOpen, Code, ExternalLink, Play, Database, Activity, Cpu, Network } from 'lucide-react'
+import { BookOpen, Code, ExternalLink, Play, Activity, Cpu, Network } from 'lucide-react'
 import ProductDocsLanding from '../../../components/ProductDocsLanding'
+import { PgbalancerIcon } from '../../../components/ProductIcons'
 
 export const metadata = {
   title: 'pgBalancer - PostgreSQL AI Load Balancer & Connection Pooler | Official Documentation',
@@ -79,7 +80,7 @@ export default function Page() {
       <ProductDocsLanding
         hero={{
           badgeLabel: 'pgBalancer',
-          badgeIcon: <Database className="h-6 w-6" />,
+          badgeIcon: <PgbalancerIcon size={24} />,
           badgeGradient: 'from-blue-600 to-purple-600',
           title: 'PostgreSQL AI Load Balancer',
           description:
@@ -112,7 +113,7 @@ export default function Page() {
             description: '17 HTTP/JSON endpoints for cluster orchestration, health checks, and automation.'
           },
           {
-            icon: Database,
+            icon: () => <PgbalancerIcon size={24} />,
             title: 'Connection Pooling',
             description: 'Session, transaction, and statement pooling with configurable health checks.'
           },

@@ -28,7 +28,8 @@ export const metadata = {
 
 import React from 'react'
 import Link from 'next/link'
-import { Cpu, Zap, BarChart3, CheckCircle, ArrowRight, Terminal, Brain } from 'lucide-react'
+import { Cpu, Zap, BarChart3, CheckCircle, ArrowRight, Terminal } from 'lucide-react'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export default function Page() {
   return (
@@ -390,7 +391,7 @@ SET neurondb.gpu_fail_open = off;`}</code></pre>
               <h3 className="text-2xl font-bold text-white mb-6">Next Steps</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <Link href="/docs/neurondb/ml/embeddings" className="flex items-center gap-3 bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-all group">
-                  <Brain className="w-6 h-6 text-indigo-400" />
+                  <NeurondBIcon size={24} />
                   <div>
                     <div className="font-semibold text-white group-hover:text-indigo-300">ML & Embeddings</div>
                     <div className="text-sm text-white/60">Text and image embeddings</div>

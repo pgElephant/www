@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import { Brain } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'Install NeurondB PostgreSQL Vector Database | Step-by-Step Guide',
@@ -19,7 +19,7 @@ export default function NeurondBInstallationPage() {
       product="NeurondB"
       hero={{
         label: 'NeurondB',
-        labelIcon: <Brain className="h-4 w-4" />, 
+        labelIcon: <NeurondBIcon size={20} />, 
         labelAccent: 'indigo',
         title: 'Install NeurondB on PostgreSQL 16–18',
         description:

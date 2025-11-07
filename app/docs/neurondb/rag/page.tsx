@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { Zap, Brain, Search, ArrowRight, CheckCircle, Database } from 'lucide-react'
+import { Zap, Search, ArrowRight, CheckCircle, Database } from 'lucide-react'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export const metadata = {
   title: 'RAG with PostgreSQL | NeuronDB Retrieval Augmented Generation',
@@ -313,7 +314,7 @@ LIMIT 10;`}
                   <ArrowRight className="w-4 h-4 text-white/40" />
                 </Link>
                 <Link href="/docs/neurondb/ml/embeddings" className="flex items-center gap-3 bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-all group">
-                  <Brain className="w-6 h-6 text-fuchsia-400" />
+                  <NeurondBIcon size={24} />
                   <div className="flex-1">
                     <div className="font-semibold text-white text-sm">Embeddings</div>
                   </div>

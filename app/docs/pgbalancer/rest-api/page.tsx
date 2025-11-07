@@ -1,5 +1,6 @@
 import React from 'react';
-import { Globe, Lock, Code, Zap, Database, Server } from 'lucide-react';
+import { Globe, Lock, Code, Zap, Server } from 'lucide-react';
+import { PgbalancerIcon } from '../../../../components/ProductIcons';
 import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata = {
@@ -292,7 +293,7 @@ curl -X POST http://localhost:8080/api/v1/nodes/1/promote \
       <section className="mb-12">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 bg-cyan-500/20 rounded-lg">
-            <Database className="w-6 h-6 text-cyan-400" />
+            <PgbalancerIcon size={24} />
           </div>
           <h2 className="text-2xl font-bold m-0">Step 4: Connection Pool Management</h2>
         </div>

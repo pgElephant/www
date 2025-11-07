@@ -1,5 +1,6 @@
 import React from 'react'
-import { BookOpen, Download, ExternalLink, Brain, Database, Gauge, Shield, Cpu, Zap, FileText, Wrench, Network } from 'lucide-react'
+import { BookOpen, Download, ExternalLink, Shield, Cpu, Zap, Wrench, Network } from 'lucide-react'
+import { NeurondBIcon, PgraftIcon, PgbalancerIcon, PgStatInsightsIcon, FauxDbIcon, PgSentinelIcon } from '../../components/ProductIcons'
 import DocsHubLanding, { type HubProduct, type ResourceLink } from '../../components/DocsHubLanding'
 
 const hero = {
@@ -22,7 +23,7 @@ const hero = {
     headline: 'PostgreSQL AI Vector Extension',
     summary:
       'Production-grade AI database extension for PostgreSQL with vector search, ONNX inference, hybrid retrieval, and RAG pipelines.',
-    icon: <Brain className="h-10 w-10 text-indigo-300" />, 
+    icon: <NeurondBIcon size={40} />, 
     theme: {
       gradient: 'from-indigo-900/60 via-purple-900/50 to-cyan-900/40',
       border: 'border-indigo-500/40',
@@ -75,7 +76,7 @@ const hero = {
     headline: 'PostgreSQL Raft Consensus Extension',
     summary:
       'Bring deterministic leader election, replication, and high availability into PostgreSQL clusters with embedded Raft workers.',
-    icon: <Database className="h-10 w-10 text-blue-300" />, 
+    icon: <PgraftIcon size={40} />, 
     theme: {
       gradient: 'from-blue-900/60 via-indigo-900/50 to-purple-900/40',
       border: 'border-blue-500/40',
@@ -128,7 +129,7 @@ const hero = {
     headline: 'AI Load Balancer & Connection Pooler',
     summary:
       'Modern PostgreSQL proxy with machine learning routing, REST API controls, MQTT event streaming, and advanced pooling policies.',
-    icon: <Database className="h-10 w-10 text-cyan-300" />, 
+    icon: <PgbalancerIcon size={40} />, 
     theme: {
       gradient: 'from-cyan-900/60 via-blue-900/50 to-purple-900/40',
       border: 'border-cyan-500/40',
@@ -181,7 +182,7 @@ const hero = {
     headline: 'PostgreSQL Performance Analytics',
     summary:
       'Deep workload telemetry with 52 metrics across 11 curated views. Track slow queries, cache hit ratio, WAL pressure, and JIT behavior.',
-    icon: <Gauge className="h-10 w-10 text-teal-300" />, 
+    icon: <PgStatInsightsIcon size={40} />, 
     theme: {
       gradient: 'from-teal-900/60 via-cyan-900/50 to-blue-900/40',
       border: 'border-teal-500/40',
@@ -234,7 +235,7 @@ const hero = {
     headline: 'Dual-Protocol Database Server',
     summary:
       'Single PostgreSQL-backed endpoint that speaks MongoDB and MySQL wire protocols. Built in Rust for hybrid document workloads.',
-    icon: <FileText className="h-10 w-10 text-emerald-300" />, 
+    icon: <FauxDbIcon size={40} />, 
     theme: {
       gradient: 'from-emerald-900/60 via-green-900/50 to-teal-900/40',
       border: 'border-emerald-500/40',
@@ -287,7 +288,7 @@ const hero = {
     headline: 'Monitoring & Management Platform',
     summary:
       'Web-based monitoring for pgBalancer with Grafana dashboards, Prometheus metrics, and multi-cluster health automation.',
-    icon: <Shield className="h-10 w-10 text-purple-300" />, 
+    icon: <PgSentinelIcon size={40} />, 
     theme: {
       gradient: 'from-purple-900/60 via-indigo-900/50 to-blue-900/40',
       border: 'border-purple-500/40',

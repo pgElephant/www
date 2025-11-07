@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import { Brain } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'Getting Started with NeurondB | PostgreSQL AI Vector Extension',
@@ -15,7 +15,7 @@ export default function NeurondBGettingStarted() {
       product="NeurondB"
       hero={{
         label: 'NeurondB',
-        labelIcon: <Brain className="h-4 w-4" />, 
+        labelIcon: <NeurondBIcon size={20} />, 
         labelAccent: 'indigo',
         title: 'Getting Started with NeurondB',
         description:
@@ -44,6 +44,7 @@ export default function NeurondBGettingStarted() {
       }}
       sections={[
         {
+          id: 'installation',
           title: 'Install NeurondB',
           description:
             'Build from source on your platform of choice. Each snippet installs prerequisites, clones the repository, and compiles the extension.',
@@ -102,6 +103,62 @@ sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
           ],
         },
         {
+          id: 'quick-start',
+          title: 'Quick Start Checklist',
+          description: 'Validate your installation and run the core NeurondB commands in minutes.',
+          cards: [
+            {
+              id: 'quick-start',
+              title: 'Run smoke test',
+              accent: 'emerald',
+              content: (
+                <SqlCodeBlock
+                  title="Verify extension"
+                  code={`-- Ensure extension is available
+SELECT extname, extversion
+FROM   pg_extension
+WHERE  extname = 'neurondb';
+
+-- List helper functions
+SELECT proname
+FROM   pg_proc
+WHERE  proname LIKE 'neurondb_%'
+ORDER  BY proname
+LIMIT  10;`}
+                />
+              ),
+            },
+            {
+              id: 'load-sample-data',
+              title: 'Load sample dataset',
+              accent: 'cyan',
+              content: (
+                <BashCodeBlock
+                  title="Load demo dataset"
+                  code={`psql -d postgres -f https://raw.githubusercontent.com/pgElephant/NeurondB/main/demo/ML/sql/00_create_demo_schema.sql
+psql -d postgres -f https://raw.githubusercontent.com/pgElephant/NeurondB/main/demo/ML/sql/01_load_vectors.sql`}
+                />
+              ),
+            },
+            {
+              id: 'first-search',
+              title: 'Run first semantic search',
+              accent: 'purple',
+              content: (
+                <SqlCodeBlock
+                  title="Semantic query"
+                  code={`SELECT title,
+       embedding <-> embed_text('postgresql vector search overview') AS distance
+FROM   neurondb_demo.corpus
+ORDER  BY distance
+LIMIT  5;`}
+                />
+              ),
+            },
+          ],
+        },
+        {
+          id: 'configuration',
           title: 'Configure PostgreSQL',
           description: 'Load NeurondB at startup and adjust optional GPU settings in postgresql.conf.',
           content: [
@@ -123,6 +180,7 @@ ALTER SYSTEM SET shared_preload_libraries = 'neurondb';
           ],
         },
         {
+          id: 'initialize-and-query',
           title: 'Initialize and Query',
           description: 'Create the extension, define your vector schema, and run the first semantic search query.',
           cards: [

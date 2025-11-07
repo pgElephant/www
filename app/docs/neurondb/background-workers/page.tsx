@@ -5,7 +5,8 @@ export const metadata = {
 
 import React from 'react'
 import Link from 'next/link'
-import { Database, Zap, Settings, ArrowRight, CheckCircle } from 'lucide-react'
+import { Zap, Settings, ArrowRight, CheckCircle } from 'lucide-react'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export default function Page() {
   return (
@@ -16,7 +17,7 @@ export default function Page() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Database className="w-4 h-4" />
+              <NeurondBIcon size={18} />
               Background Workers
             </div>
             
@@ -39,7 +40,7 @@ export default function Page() {
             
             {/* neuranq */}
             <div>
-              <h2 className="text-3xl font-bold text-white mb-8">neuranq - Async Job Queue</h2>
+              <h2 id="neuranq" className="text-3xl font-bold text-white mb-8">neuranq - Async Job Queue</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                 <p className="text-white/80 mb-6">
                   Asynchronous job queue executor with SKIP LOCKED, rate limits, retries, and poison job handling. Perfect for batch embedding generation, model inference, and long-running operations.
@@ -81,7 +82,7 @@ neurondb.neuranq_max_retries = 3       # Retry failed jobs 3 times`}
 
             {/* neuranmon */}
             <div>
-              <h2 className="text-3xl font-bold text-white mb-8">neuranmon - Auto-Tuner</h2>
+              <h2 id="neuranmon" className="text-3xl font-bold text-white mb-8">neuranmon - Auto-Tuner</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                 <p className="text-white/80 mb-6">
                   Automatically tunes index parameters based on query performance and SLO targets. Adjusts ef_search, rotates caches, and tracks recall@k metrics.
@@ -122,7 +123,7 @@ neurondb.neuranmon_min_recall = 0.95   # Minimum 95% recall`}
 
             {/* neurandefrag */}
             <div>
-              <h2 className="text-3xl font-bold text-white mb-8">neurandefrag - Index Maintenance</h2>
+              <h2 id="neurandefrag" className="text-3xl font-bold text-white mb-8">neurandefrag - Index Maintenance</h2>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
                 <p className="text-white/80 mb-6">
                   Automatic index maintenance: compacts HNSW graphs, re-levels layers, prunes tombstones, and schedules rebuilds for optimal performance.

@@ -1,6 +1,7 @@
 import React from 'react'
-import { BookOpen, Download, ExternalLink, Brain, Database, Zap, Search } from 'lucide-react'
+import { BookOpen, Download, ExternalLink, Database, Zap, Search } from 'lucide-react'
 import ProductDocsLanding from '../../../components/ProductDocsLanding'
+import { NeurondBIcon } from '../../../components/ProductIcons'
 
 export const metadata = {
   title: 'NeurondB Documentation | PostgreSQL AI Vector Extension',
@@ -13,7 +14,7 @@ export default function Page() {
     <ProductDocsLanding
       hero={{
         badgeLabel: 'NeurondB',
-        badgeIcon: <Brain className="h-6 w-6" />,
+        badgeIcon: <NeurondBIcon size={24} />,
         badgeGradient: 'from-indigo-600 to-purple-600',
         title: 'PostgreSQL AI Vector Extension',
         description:
@@ -41,7 +42,7 @@ export default function Page() {
           description: 'HNSW, IVF, product quantization, and custom distance metrics for billion-scale similarity search.'
         },
         {
-          icon: Brain,
+          icon: () => <NeurondBIcon size={24} />,
           title: 'ML Inference',
           description: 'ONNX runtime integration, GPU offload, and batch execution for deep learning workloads in SQL.'
         },
@@ -91,17 +92,17 @@ export default function Page() {
           items: [
             { title: 'Hybrid Overview', href: '/docs/neurondb/hybrid/overview', description: 'Architectures for multi-signal retrieval.' },
             { title: 'Reranking', href: '/docs/neurondb/reranking/overview', description: 'Cross-encoder and LLM reranking playbooks.' },
-            { title: 'RAG Workflows', href: '/docs/neurondb/rag/page', description: 'Orchestrate retrieval augmented generation end to end.' }
+            { title: 'RAG Workflows', href: '/docs/neurondb/rag', description: 'Orchestrate retrieval augmented generation end to end.' }
           ]
         },
         {
           title: 'Background Workers',
           description: 'Operational guidance for queue execution, auto-tuning, and index maintenance workers.',
           items: [
-            { title: 'Worker Overview', href: '/docs/neurondb/workers/overview', description: 'Understand worker architecture and lifecycles.' },
-            { title: 'Queue Worker', href: '/docs/neurondb/workers/neuranq', description: 'Batch ingestion and asynchronous scoring.' },
-            { title: 'Auto-Tuner', href: '/docs/neurondb/workers/neuranmon', description: 'Automated index health and GPU utilization tuning.' },
-            { title: 'Index Maintenance', href: '/docs/neurondb/workers/neurandefrag', description: 'Defragment and rebalance vector indexes online.' }
+            { title: 'Worker Overview', href: '/docs/neurondb/background-workers', description: 'Understand worker architecture and lifecycles.' },
+            { title: 'Queue Worker (neuranq)', href: '/docs/neurondb/background-workers#neuranq', description: 'Batch ingestion and asynchronous scoring.' },
+            { title: 'Auto-Tuner (neuranmon)', href: '/docs/neurondb/background-workers#neuranmon', description: 'Automated index health and GPU utilization tuning.' },
+            { title: 'Index Maintenance (neurandefrag)', href: '/docs/neurondb/background-workers#neurandefrag', description: 'Defragment and rebalance vector indexes online.' }
           ]
         },
         {

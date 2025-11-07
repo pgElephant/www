@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { BarChart3, Brain, ArrowRight, CheckCircle } from 'lucide-react'
+import { BarChart3, ArrowRight, CheckCircle } from 'lucide-react'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export default function NeuronDBAnalyticsPage() {
   return (
@@ -198,7 +199,7 @@ FROM labeled;`}
                   <ArrowRight className="w-5 h-5 text-white/40 ml-auto" />
                 </Link>
                 <Link href="/docs/neurondb/ml/embeddings" className="flex items-center gap-3 bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-all group">
-                  <Brain className="w-6 h-6 text-cyan-400" />
+                  <NeurondBIcon size={24} />
                   <div>
                     <div className="font-semibold text-white">Embeddings</div>
                     <div className="text-sm text-white/60">Generate vectors</div>

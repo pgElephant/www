@@ -81,6 +81,7 @@ interface SectionCard {
 }
 
 interface SectionProps {
+  id?: string
   title: string
   description?: string
   cards?: SectionCard[]
@@ -184,7 +185,7 @@ export default function GettingStartedLayout({
         </div>
 
         {sections.map((section) => (
-          <section key={section.title} className="space-y-6">
+          <section key={section.title} id={section.id} className="space-y-6">
             <div>
               <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">{section.title}</h2>
               {section.description ? (
@@ -198,6 +199,7 @@ export default function GettingStartedLayout({
                   return (
                     <div
                       key={card.id}
+                      id={card.id}
                       className={`border-l-4 ${accent.border} bg-white/80 p-4 shadow-sm dark:bg-slate-900/50`}
                     >
                       <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{card.title}</h3>

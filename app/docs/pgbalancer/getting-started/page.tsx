@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
-import { Database } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
+import { PgbalancerIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'Getting Started with pgBalancer | AI-Powered PostgreSQL Load Balancer',
@@ -14,7 +14,7 @@ export default function PgBalancerGettingStarted() {
       product="pgBalancer"
       hero={{
         label: 'pgBalancer',
-        labelIcon: <Database className="h-4 w-4" />, 
+        labelIcon: <PgbalancerIcon size={20} />, 
         labelAccent: 'purple',
         title: 'Getting Started with pgBalancer',
         description:

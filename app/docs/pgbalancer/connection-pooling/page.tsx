@@ -1,5 +1,6 @@
 import React from 'react';
-import { Database, Activity, TrendingUp, Settings, Users, Gauge } from 'lucide-react';
+import { Activity, TrendingUp, Settings, Users, Gauge } from 'lucide-react';
+import { PgbalancerIcon } from '../../../../components/ProductIcons';
 import SqlCodeBlock from '../../../../components/SqlCodeBlock';
 import BashCodeBlock from '../../../../components/BashCodeBlock';
 
@@ -25,7 +26,7 @@ export default function ConnectionPoolingPage() {
       <section className="mb-12">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 bg-blue-500/20 rounded-lg">
-            <Database className="w-6 h-6 text-blue-400" />
+            <PgbalancerIcon size={24} />
           </div>
           <h2 className="text-2xl font-bold m-0">Step 1: Configure Connection Pools</h2>
         </div>

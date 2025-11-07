@@ -5,7 +5,8 @@ export const metadata = {
 
 import React from 'react'
 import Link from 'next/link'
-import { Brain, Sparkles, Image as ImageIcon, FileText, Zap, CheckCircle, ArrowRight, Code } from 'lucide-react'
+import { Sparkles, Image as ImageIcon, FileText, Zap, CheckCircle, ArrowRight, Code } from 'lucide-react'
+import { NeurondBIcon } from '../../../../../components/ProductIcons'
 
 export default function Page() {
   return (
@@ -18,7 +19,7 @@ export default function Page() {
             {/* Header */}
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Brain className="w-4 h-4" />
+                <NeurondBIcon size={18} />
                 Machine Learning
               </div>
               

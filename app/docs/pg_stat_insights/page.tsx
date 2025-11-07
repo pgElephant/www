@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
-import { BookOpen, Database, Gauge, Activity, BarChart3 } from 'lucide-react'
+import { BookOpen, Database, Activity } from 'lucide-react'
 import ProductDocsLanding from '../../../components/ProductDocsLanding'
+import { PgStatInsightsIcon } from '../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pg_stat_insights Documentation | PostgreSQL Performance Analytics',
@@ -14,7 +15,7 @@ export default function PgStatInsightsPage() {
       <ProductDocsLanding
         hero={{
           badgeLabel: 'pg_stat_insights',
-          badgeIcon: <Gauge className="h-6 w-6" />,
+          badgeIcon: <PgStatInsightsIcon size={24} />,
           badgeGradient: 'from-cyan-600 to-blue-600',
           title: 'PostgreSQL Performance Analytics Extension',
           description:
@@ -36,7 +37,7 @@ export default function PgStatInsightsPage() {
         }}
         features={[
           {
-            icon: Gauge,
+            icon: () => <PgStatInsightsIcon size={24} />,
             title: 'Comprehensive Metrics',
             description: 'Capture 52 timing, planning, I/O, WAL, and JIT statistics per query fingerprint with low overhead.'
           },
@@ -51,7 +52,7 @@ export default function PgStatInsightsPage() {
             description: 'Superset of pg_stat_statements APIs with additional histograms, attribution, and workload tagging.'
           },
           {
-            icon: BarChart3,
+            icon: () => <PgStatInsightsIcon size={24} />,
             title: 'Observability Ready',
             description: 'Prometheus exporters and Grafana dashboards for real-time SLO tracking and alerting.'
           }

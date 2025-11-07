@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import { Database } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgRaft Installation Guide | Build and Install the Raft Extension',
@@ -15,8 +15,8 @@ export default function PgraftInstallationPage() {
     <GettingStartedLayout
       product="pgRaft"
       hero={{
-        label: 'pgRaft',
-        labelIcon: <Database className="h-4 w-4" />, 
+        label: 'pgraft',
+        labelIcon: <PgraftIcon size={20} />, 
         labelAccent: 'blue',
         title: 'Install pgRaft on PostgreSQL 16–18',
         description:

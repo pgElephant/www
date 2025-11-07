@@ -1,6 +1,7 @@
 import React from 'react'
-import { BookOpen, Download, ExternalLink, Database, Shield, Zap, Code } from 'lucide-react'
+import { BookOpen, Download, ExternalLink, Shield, Zap, Code } from 'lucide-react'
 import ProductDocsLanding from '../../../components/ProductDocsLanding'
+import { PgraftIcon } from '../../../components/ProductIcons'
 
 export const metadata = {
   title: 'pgRaft Documentation | PostgreSQL Raft Consensus Extension',
@@ -13,7 +14,7 @@ export default function PgRaftDocsPage() {
     <ProductDocsLanding
       hero={{
         badgeLabel: 'pgRaft',
-        badgeIcon: <Database className="h-6 w-6" />,
+        badgeIcon: <PgraftIcon size={24} />,
         badgeGradient: 'from-blue-600 to-purple-600',
         title: 'PostgreSQL Raft Consensus Extension',
         description:
@@ -36,7 +37,7 @@ export default function PgRaftDocsPage() {
       }}
       features={[
         {
-          icon: Database,
+          icon: () => <PgraftIcon size={24} />,
           title: 'Raft Consensus',
           description: 'Deterministic leader election, log replication, and commit guarantees implemented inside PostgreSQL.'
         },

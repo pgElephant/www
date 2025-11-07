@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import { Brain } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'NeurondB Troubleshooting | Common Issues & Fixes',
@@ -14,9 +14,9 @@ export default function NeurondBTroubleshootingPage() {
     <GettingStartedLayout
       product="NeurondB"
       hero={{
-        label: 'Troubleshooting',
-        labelIcon: <Brain className="h-4 w-4" />, 
-        labelAccent: 'rose',
+        label: 'NeurondB',
+        labelIcon: <NeurondBIcon size={20} />, 
+        labelAccent: 'indigo',
         title: 'Resolve NeurondB Operational Issues',
         description:
           'Use the guided diagnostics below to fix GPU acceleration errors, ML clustering failures, index build problems, and API integration issues. Each card includes the exact SQL/Bash remediation steps.',

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Brain, Sparkles, Cpu, ArrowRight, CheckCircle2, Code, Zap, Database } from 'lucide-react'
+import { Sparkles, Cpu, ArrowRight, CheckCircle2, Code, Zap, Database } from 'lucide-react'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 import Link from 'next/link'
 
 export const metadata = {
@@ -10,7 +11,7 @@ export const metadata = {
 const MLPage = () => {
   const mlCapabilities = [
     {
-      icon: <Brain className="w-8 h-8 text-purple-400" />,
+      icon: <NeurondBIcon size={32} />,
       title: 'In-Database ML Inference',
       description: 'Run ML models directly inside PostgreSQL',
       features: [
@@ -169,7 +170,7 @@ LIMIT 10;`
     {
       title: 'Custom Models',
       description: 'Deploy your own ONNX, TensorFlow, or PyTorch models',
-      icon: <Brain className="w-6 h-6 text-purple-400" />
+      icon: <NeurondBIcon size={24} />
     }
   ]
 

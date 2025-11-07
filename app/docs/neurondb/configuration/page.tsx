@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
-import { Brain } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
+import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'NeurondB Configuration Guide | PostgreSQL Vector Database Settings',
@@ -18,9 +18,9 @@ export default function NeurondBConfigurationPage() {
     <GettingStartedLayout
       product="NeurondB"
       hero={{
-        label: 'Configuration',
-        labelIcon: <Brain className="h-4 w-4" />, 
-        labelAccent: 'amber',
+        label: 'NeurondB',
+        labelIcon: <NeurondBIcon size={20} />, 
+        labelAccent: 'indigo',
         title: 'Configure NeurondB for Production Workloads',
         description:
           'Reference every NeurondB GUC parameter with recommended values for search accuracy, GPU acceleration, background workers, and security.',
