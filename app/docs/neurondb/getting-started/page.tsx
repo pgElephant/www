@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Gauge } from 'lucide-react'
+import { Brain } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
@@ -15,7 +15,7 @@ export default function NeurondBGettingStarted() {
       product="NeurondB"
       hero={{
         label: 'NeurondB',
-        labelIcon: <Gauge className="h-4 w-4" />, 
+        labelIcon: <Brain className="h-4 w-4" />, 
         labelAccent: 'indigo',
         title: 'Getting Started with NeurondB',
         description:

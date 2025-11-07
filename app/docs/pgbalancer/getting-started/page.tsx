@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Gauge } from 'lucide-react'
+import { Database } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
@@ -14,7 +14,7 @@ export default function PgBalancerGettingStarted() {
       product="pgBalancer"
       hero={{
         label: 'pgBalancer',
-        labelIcon: <Gauge className="h-4 w-4" />, 
+        labelIcon: <Database className="h-4 w-4" />, 
         labelAccent: 'purple',
         title: 'Getting Started with pgBalancer',
         description:

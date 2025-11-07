@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Gauge } from 'lucide-react'
+import { Database } from 'lucide-react'
 import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
@@ -15,7 +15,7 @@ export default function GettingStartedPage() {
       product="pgraft"
       hero={{
         label: 'pgraft',
-        labelIcon: <Gauge className="h-4 w-4" />, 
+        labelIcon: <Database className="h-4 w-4" />, 
         labelAccent: 'blue',
         title: 'Getting Started with pgraft',
         description:
