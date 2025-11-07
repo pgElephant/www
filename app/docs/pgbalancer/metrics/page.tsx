@@ -458,18 +458,18 @@ curl -s http://localhost:8080/api/backends | \\
             <ul className="text-sm space-y-1">
               <li>• Backend node down (health_score = 0)</li>
               <li>• All backends unavailable</li>
-              <li>• Connection pool exhaustion (utilization > 90%)</li>
+              <li>• Connection pool exhaustion (utilization &gt; 90%)</li>
               <li>• Failover events</li>
-              <li>• Health check failures (> 3 consecutive)</li>
+              <li>• Health check failures (&gt; 3 consecutive)</li>
             </ul>
           </div>
 
           <div className="p-4 border rounded-lg">
             <h4 className="font-semibold mb-2">⚡ Warning Alerts</h4>
             <ul className="text-sm space-y-1">
-              <li>• Low health score (< 0.5)</li>
-              <li>• High response time (> 100ms avg)</li>
-              <li>• Connection pool usage (> 70%)</li>
+              <li>• Low health score (&lt; 0.5)</li>
+              <li>• High response time (&gt; 100ms avg)</li>
+              <li>• Connection pool usage (&gt; 70%)</li>
               <li>• Uneven query distribution</li>
               <li>• Increased error rate</li>
             </ul>

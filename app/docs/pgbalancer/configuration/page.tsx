@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata: Metadata = {
   title: 'Configuration Reference | pgBalancer PostgreSQL Load Balancer',
@@ -221,8 +222,8 @@ rest_api_log_requests = on`}
             <li><code>GET /api/processes</code> - Active processes</li>
             <li><code>GET /api/config</code> - Configuration info</li>
             <li><code>POST /api/login</code> - JWT authentication</li>
-            <li><code>POST /api/node/{id}/attach</code> - Attach backend node</li>
-            <li><code>POST /api/node/{id}/detach</code> - Detach backend node</li>
+            <li><code>POST /api/node/{'{'}id{'}'}/attach</code> - Attach backend node</li>
+            <li><code>POST /api/node/{'{'}id{'}'}/detach</code> - Detach backend node</li>
             <li>... and 9 more endpoints for cluster management</li>
           </ul>
         </div>
