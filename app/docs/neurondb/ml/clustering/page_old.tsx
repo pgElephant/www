@@ -6,6 +6,7 @@ export const metadata = {
 import React from 'react'
 import Link from 'next/link'
 import { GitBranch, Layers, Target, BarChart3, Rocket, ArrowRight } from 'lucide-react'
+import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export default function Page() {
   return (
@@ -29,10 +30,19 @@ export default function Page() {
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2"><Layers className="w-6 h-6 text-indigo-300"/> Prerequisite: Demo Dataset</h2>
               <p className="text-white/80 mb-4">Generate the sample fraud-detection dataset used in these examples (~1.5M rows):</p>
               <div className="bg-slate-900/80 rounded-lg p-4">
-                <pre className="text-green-400 font-mono text-sm overflow-x-auto">{
-`-- Run in psql
-\i /Users/pgedge/pge/NeurondB/demo/ML/sql/001_generate_dataset.sql`
-                }</pre>
+                <SqlCodeBlock
+                  title="Generate dataset"
+                  code={`-- Run in psql
+\\i './demo/ML/sql/001_generate_dataset.sql'`}
+                />
+                <a
+                  href="https://github.com/pgElephant/NeurondB/blob/main/demo/ML/sql/001_generate_dataset.sql"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200"
+                >
+                  📄 View 001_generate_dataset.sql on GitHub
+                </a>
               </div>
             </div>
 
@@ -40,10 +50,19 @@ export default function Page() {
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2"><Target className="w-6 h-6 text-cyan-300"/> K-means (K=7)</h2>
               <p className="text-white/80 mb-4">Train multiple K values, compare, and deploy the best version.</p>
               <div className="bg-slate-900/80 rounded-lg p-4 mb-4">
-                <pre className="text-green-400 font-mono text-sm overflow-x-auto">{
-`-- K-means training, comparison and deployment
-\i /Users/pgedge/pge/NeurondB/demo/ML/sql/002_kmeans_clustering.sql`
-                }</pre>
+                <SqlCodeBlock
+                  title="K-means training"
+                  code={`-- K-means training, comparison and deployment
+\\i './demo/ML/sql/002_kmeans_clustering.sql'`}
+                />
+                <a
+                  href="https://github.com/pgElephant/NeurondB/blob/main/demo/ML/sql/002_kmeans_clustering.sql"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200"
+                >
+                  📄 View 002_kmeans_clustering.sql on GitHub
+                </a>
               </div>
               <p className="text-white/70">Highlights: project tracking, multiple versions, evaluation on test split, and deployment with <code className="bg-slate-800 px-1 rounded">neurondb_deploy_model()</code>.</p>
             </div>
@@ -53,19 +72,37 @@ export default function Page() {
                 <h3 className="text-xl font-semibold text-white mb-3">GMM (Gaussian Mixture)</h3>
                 <p className="text-white/70 mb-3">Soft clustering with cluster membership probabilities.</p>
                 <div className="bg-slate-900/80 rounded-lg p-4">
-                  <pre className="text-green-400 font-mono text-sm overflow-x-auto">{
-`-- Try Gaussian Mixture Models
-\i /Users/pgedge/pge/NeurondB/demo/ML/sql/003_gmm_clustering.sql`
-                  }</pre>
+                  <SqlCodeBlock
+                    title="Gaussian Mixture Models"
+                    code={`-- Try Gaussian Mixture Models
+\\i './demo/ML/sql/003_gmm_clustering.sql'`}
+                  />
+                  <a
+                    href="https://github.com/pgElephant/NeurondB/blob/main/demo/ML/sql/003_gmm_clustering.sql"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200"
+                  >
+                    📄 View 003_gmm_clustering.sql on GitHub
+                  </a>
                 </div>
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-6">
                 <h3 className="text-xl font-semibold text-white mb-3">Mini-batch K-means</h3>
                 <p className="text-white/70 mb-3">Faster, streaming-friendly variant for large datasets.</p>
                 <div className="bg-slate-900/80 rounded-lg p-4">
-                  <pre className="text-green-400 font-mono text-sm overflow-x-auto">{
-`\i /Users/pgedge/pge/NeurondB/demo/ML/sql/004_minibatch_kmeans.sql`
-                  }</pre>
+                  <SqlCodeBlock
+                    title="Mini-batch K-means"
+                    code={`\\i './demo/ML/sql/004_minibatch_kmeans.sql'`}
+                  />
+                  <a
+                    href="https://github.com/pgElephant/NeurondB/blob/main/demo/ML/sql/004_minibatch_kmeans.sql"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200"
+                  >
+                    📄 View 004_minibatch_kmeans.sql on GitHub
+                  </a>
                 </div>
               </div>
             </div>
@@ -75,18 +112,36 @@ export default function Page() {
                 <h3 className="text-xl font-semibold text-white mb-3">Hierarchical Clustering</h3>
                 <p className="text-white/70 mb-3">Tree-based grouping for exploratory analysis.</p>
                 <div className="bg-slate-900/80 rounded-lg p-4">
-                  <pre className="text-green-400 font-mono text-sm overflow-x-auto">{
-`\i /Users/pgedge/pge/NeurondB/demo/ML/sql/006_hierarchical_clustering.sql`
-                  }</pre>
+                  <SqlCodeBlock
+                    title="Hierarchical clustering"
+                    code={`\\i './demo/ML/sql/006_hierarchical_clustering.sql'`}
+                  />
+                  <a
+                    href="https://github.com/pgElephant/NeurondB/blob/main/demo/ML/sql/006_hierarchical_clustering.sql"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200"
+                  >
+                    📄 View 006_hierarchical_clustering.sql on GitHub
+                  </a>
                 </div>
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-6">
                 <h3 className="text-xl font-semibold text-white mb-3">DBSCAN (Density-Based)</h3>
                 <p className="text-white/70 mb-3">Find clusters of varying shapes, detect outliers.</p>
                 <div className="bg-slate-900/80 rounded-lg p-4">
-                  <pre className="text-green-400 font-mono text-sm overflow-x-auto">{
-`\i /Users/pgedge/pge/NeurondB/demo/ML/sql/017_dbscan.sql`
-                  }</pre>
+                  <SqlCodeBlock
+                    title="DBSCAN clustering"
+                    code={`\\i './demo/ML/sql/017_dbscan.sql'`}
+                  />
+                  <a
+                    href="https://github.com/pgElephant/NeurondB/blob/main/demo/ML/sql/017_dbscan.sql"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200"
+                  >
+                    📄 View 017_dbscan.sql on GitHub
+                  </a>
                 </div>
               </div>
             </div>
@@ -95,9 +150,18 @@ export default function Page() {
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2"><BarChart3 className="w-6 h-6 text-emerald-300"/> Outlier Detection</h2>
               <p className="text-white/80 mb-4">Identify anomalous transactions in unsupervised fashion.</p>
               <div className="bg-slate-900/80 rounded-lg p-4">
-                <pre className="text-green-400 font-mono text-sm overflow-x-auto">{
-`\i /Users/pgedge/pge/NeurondB/demo/ML/sql/005_outlier_detection.sql`
-                }</pre>
+                <SqlCodeBlock
+                  title="Outlier detection"
+                  code={`\\i './demo/ML/sql/005_outlier_detection.sql'`}
+                />
+                <a
+                  href="https://github.com/pgElephant/NeurondB/blob/main/demo/ML/sql/005_outlier_detection.sql"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200"
+                >
+                  📄 View 005_outlier_detection.sql on GitHub
+                </a>
               </div>
             </div>
 
