@@ -1,182 +1,177 @@
 import { Metadata } from 'next'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
+import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'pgraft Installation Guide - Build from Source | pgElephant',
-  description: 'Complete installation guide for pgraft PostgreSQL Raft extension. Build from source, configure PostgreSQL, and enable the extension.',
+  title: 'pgraft Installation Guide | Build and Install the Raft Extension',
+  description: 'Step-by-step instructions to build pgraft from source, install dependencies, enable the extension, and verify the PostgreSQL Raft cluster setup.',
 }
 
 export default function PgraftInstallationPage() {
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <div 
-        className="relative overflow-hidden py-28"
-        style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
-        }}
-      >
-        {/* Elegant overlay gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
-        {/* Floating orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
+    <div className="space-y-12">
+      <div>
+        <h1 className="text-4xl font-bold mb-4">pgraft Installation Guide</h1>
+        <p className="text-lg text-muted-foreground">
+          Install pgraft from source on any PostgreSQL 16–18 server. This guide covers dependency setup,
+          compilation of the C and Go components, configuration changes, and verification commands.
+        </p>
+      </div>
 
-        <div className="container-wide mx-auto px-6 relative z-10">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
-              pgraft Installation
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Build and install pgraft PostgreSQL Raft extension from source.
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">1. Install System Dependencies</h2>
+        <p className="text-muted-foreground mb-4">
+          pgraft links against PostgreSQL server headers and embeds the etcd-io/raft Go library. Install the packages below before building.
+        </p>
+        <BashCodeBlock
+          title="Install prerequisites"
+          code={`# Ubuntu / Debian (adjust PostgreSQL version as needed)
+sudo apt-get update
+sudo apt-get install postgresql-18 postgresql-server-dev-18 golang-go build-essential pkg-config
+
+# RHEL / Rocky Linux / AlmaLinux
+sudo yum install postgresql18 postgresql18-devel golang gcc make pkgconfig
+
+# macOS (Homebrew)
+brew install postgresql@18 go pkg-config
+brew link --overwrite postgresql@18`}
+        />
+        <p className="text-sm text-muted-foreground mt-2">
+          Ensure <code>pg_config</code> resolves to the PostgreSQL instance where you plan to deploy pgraft.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">2. Clone Repository and Build</h2>
+        <p className="text-muted-foreground mb-4">
+          Compile pgraft using the provided <code>Makefile</code>. The build step compiles both the PostgreSQL extension and the Go Raft worker library.
+        </p>
+        <BashCodeBlock
+          title="Build pgraft"
+          code={`git clone https://github.com/pgElephant/pgraft.git
+cd pgraft
+make clean && make
+
+# Optional: build against a specific PostgreSQL install
+# make clean && make PG_CONFIG=/path/to/pg_config`}
+        />
+        <p className="text-sm text-muted-foreground mt-2">
+          On success, the build outputs <code>pgraft.so</code> (SQL extension) and <code>pgraft_go.so</code> (Raft worker library).
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">3. Install the Extension</h2>
+        <p className="text-muted-foreground mb-4">
+          Install pgraft into PostgreSQL&apos;s extension directory. Root privileges are typically required for system-wide installs.
+        </p>
+        <BashCodeBlock
+          title="Install binaries"
+          code={`sudo make install
+
+# Validate artifacts landed in the target libdir
+pg_config --libdir
+ls -lh $(pg_config --libdir)/pgraft*`}
+        />
+        <p className="text-sm text-muted-foreground mt-2">
+          If you deploy into a custom PostgreSQL build, use <code>make install PG_CONFIG=/path/to/pg_config</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">4. Update postgresql.conf</h2>
+        <p className="text-muted-foreground mb-4">
+          pgraft must be loaded at startup and provided with Raft identity information. Append the following settings to <code>postgresql.conf</code> and restart PostgreSQL.
+        </p>
+        <BashCodeBlock
+          title="postgresql.conf"
+          code={`shared_preload_libraries = 'pgraft'
+
+# Node identity (adjust for each server)
+pgraft.cluster_id = 'production-cluster'
+pgraft.node_id = 1
+pgraft.address = '10.0.0.11'
+pgraft.port = 7001
+pgraft.data_dir = '/var/lib/postgresql/pgraft'
+
+# Recommended durability settings
+synchronous_commit = on
+wal_level = logical
+max_wal_senders = 10`}
+        />
+        <p className="text-sm text-muted-foreground mt-2">
+          Restart PostgreSQL after saving configuration changes:
+        </p>
+        <BashCodeBlock
+          title="Restart PostgreSQL"
+          code={`# systemd
+sudo systemctl restart postgresql
+
+# Homebrew (macOS)
+brew services restart postgresql@18`}
+        />
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">5. Create the Extension & Verify</h2>
+        <p className="text-muted-foreground mb-4">
+          Connect with <code>psql</code>, create the extension in your database, and confirm that Raft services are running.
+        </p>
+        <SqlCodeBlock
+          title="Create pgraft extension"
+          code={`-- Connect to the target database first
+CREATE EXTENSION pgraft;
+
+-- Initialize the Raft metadata store on this node
+SELECT pgraft_init();
+
+-- Confirm extension installation
+SELECT extversion FROM pg_extension WHERE extname = 'pgraft';`}
+        />
+        <SqlCodeBlock
+          title="Health checks"
+          code={`-- Validate worker and leader state
+SELECT pgraft_is_leader() AS is_leader,
+       pgraft_get_term() AS current_term,
+       pgraft_get_worker_state() AS worker_state;
+
+-- List available management functions
+\df+ pgraft_*`}
+        />
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Troubleshooting</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="border rounded-lg p-4">
+            <h3 className="font-semibold mb-2">Build failures</h3>
+            <p className="text-sm text-muted-foreground">
+              Confirm <code>pg_config</code> matches your target PostgreSQL version and verify Go 1.21+ is on the <code>PATH</code>.
+              Re-run <code>make clean</code> before rebuilding after dependency changes.
+            </p>
+          </div>
+          <div className="border rounded-lg p-4">
+            <h3 className="font-semibold mb-2">Extension won&apos;t load</h3>
+            <p className="text-sm text-muted-foreground">
+              Check PostgreSQL logs for shared library errors. Ensure <code>shared_preload_libraries</code> contains pgraft and restart the server.
+              If SELinux/AppArmor is enabled, allow the pgraft shared libraries.
+            </p>
+          </div>
+          <div className="border rounded-lg p-4">
+            <h3 className="font-semibold mb-2">Worker not running</h3>
+            <p className="text-sm text-muted-foreground">
+              Run <code>SELECT pgraft_get_worker_state();</code>. If it returns <code>stopped</code>, confirm that the Go runtime library
+              (<code>pgraft_go.so</code>) deployed into PostgreSQL&apos;s library directory.
+            </p>
+          </div>
+          <div className="border rounded-lg p-4">
+            <h3 className="font-semibold mb-2">Network connectivity</h3>
+            <p className="text-sm text-muted-foreground">
+              Verify that the configured Raft ports are open between nodes. pgraft requires bi-directional TCP connectivity for log replication.
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Content */}
-      <div 
-        className="py-20"
-        style={{ 
-          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
-        }}
-      >
-        <div className="container-wide mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {/* Prerequisites */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Prerequisites</h2>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-blue-400 text-sm">1</span>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-thin text-white mb-2">PostgreSQL 16-18</h3>
-                      <p className="text-white/90">pgraft requires PostgreSQL version 16 or higher with development headers.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-blue-400 text-sm">2</span>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-thin text-white mb-2">Go 1.21+</h3>
-                      <p className="text-white/90">pgraft uses a Go-based Raft implementation that requires Go 1.21 or later.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-blue-400 text-sm">3</span>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-thin text-white mb-2">Build Tools</h3>
-                      <p className="text-white/90">GCC/Clang, Make, and pkg-config for building the extension.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Installation Steps */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Installation Steps</h2>
-                
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-3">1. Clone the Repository</h3>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        git clone https://github.com/pgElephant/pgraft.git<br/>
-                        cd pgraft
-                      </code>
-              </pre>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-3">2. Build the Extension</h3>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        make<br/>
-                        sudo make install
-                      </code>
-              </pre>
-                    </div>
-                    <p className="text-white/90 text-sm mt-2">This builds both the PostgreSQL extension and the Go Raft library.</p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-3">3. Configure PostgreSQL</h3>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        # Add to postgresql.conf<br/>
-                        shared_preload_libraries = 'pgraft'<br/><br/>
-                        # Restart PostgreSQL<br/>
-                        sudo systemctl restart postgresql
-                      </code>
-              </pre>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-3">4. Create the Extension</h3>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        psql -d postgres<br/>
-                        CREATE EXTENSION pgraft;
-                      </code>
-                      </pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Verification */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Verification</h2>
-                <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                  <code className="text-green-400 text-sm">
-                    # Check if extension is loaded<br/>
-                    SELECT * FROM pg_extension WHERE extname = 'pgraft';<br/><br/>
-                    # Check available functions<br/>
-                    \df pgraft_*
-                  </code>
-                  </pre>
-                </div>
-              </div>
-
-              {/* Troubleshooting */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Troubleshooting</h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-2">Build Errors</h3>
-                    <p className="text-white/90">Ensure all dependencies are installed and PostgreSQL development headers are available.</p>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-thin text-white mb-2">Extension Not Loading</h3>
-                    <p className="text-white/90">Check PostgreSQL logs for errors and ensure shared_preload_libraries is configured correctly.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   )
 }
