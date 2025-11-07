@@ -1,285 +1,200 @@
-import { Metadata } from 'next';
-import SqlCodeBlock from '../../../../components/SqlCodeBlock';
-import BashCodeBlock from '../../../../components/BashCodeBlock';
+import { Metadata } from 'next'
+import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
+import { BookOpen, Gauge } from 'lucide-react'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Getting Started with pg_stat_insights | PostgreSQL Performance Monitoring',
-  description: 'Quick start guide for pg_stat_insights - install and configure PostgreSQL performance monitoring in 3 steps.',
-};
+  description: 'Install and configure pg_stat_insights in minutes, then explore core analytics views and metrics.',
+}
 
 export default function GettingStartedPage() {
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold mb-4">Getting Started with pg_stat_insights</h1>
-        <p className="text-lg text-muted-foreground">
-          Monitor PostgreSQL query performance in under 5 minutes. pg_stat_insights is a standalone extension that provides comprehensive performance monitoring with 52 metrics across 11 pre-built views.
-        </p>
-      </div>
-
-      <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
-        <h3 className="text-lg font-semibold mb-2 text-green-800 dark:text-green-400">✅ Standalone Extension</h3>
-        <p className="text-sm text-green-700 dark:text-green-300">
-          pg_stat_insights requires <strong>no other extensions</strong> - just PostgreSQL 16, 17, or 18. It's a drop-in replacement for pg_stat_statements with enhanced analytics.
-        </p>
-      </div>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Installation in 3 Steps</h2>
-
-        <div className="space-y-6">
-          <div className="border-l-4 border-blue-500 pl-4">
-            <h3 className="text-lg font-semibold mb-2">Step 1: Enable Extension in PostgreSQL Configuration</h3>
-            <p className="text-sm text-muted-foreground mb-3">
-              Add pg_stat_insights to shared_preload_libraries and restart PostgreSQL.
-            </p>
-            <SqlCodeBlock
-              code={`-- Enable pg_stat_insights in PostgreSQL configuration
-ALTER SYSTEM SET shared_preload_libraries = 'pg_stat_insights';
-
--- Restart PostgreSQL server (required for shared_preload_libraries changes)
--- On systemd systems:
--- sudo systemctl restart postgresql
-
--- On macOS/Homebrew:
--- brew services restart postgresql@18`}
-              title="PostgreSQL Configuration"
-            />
-          </div>
-
-          <div className="border-l-4 border-green-500 pl-4">
-            <h3 className="text-lg font-semibold mb-2">Step 2: Create the Extension</h3>
-            <p className="text-sm text-muted-foreground mb-3">
-              Create the extension in your database. No additional dependencies required.
-            </p>
-            <SqlCodeBlock
-              code={`-- Connect to your database
-\\c your_database_name
-
--- Create the pg_stat_insights extension
-CREATE EXTENSION pg_stat_insights;`}
-              title="Create Extension"
-            />
-          </div>
-
-          <div className="border-l-4 border-purple-500 pl-4">
-            <h3 className="text-lg font-semibold mb-2">Step 3: View Your Performance Data</h3>
-            <p className="text-sm text-muted-foreground mb-3">
-              Instantly access comprehensive query performance metrics.
-            </p>
-            <SqlCodeBlock
-              code={`-- View your slowest queries
-SELECT
-    query,
-    calls,
-    total_exec_time,
-    mean_exec_time,
-    rows,
-    shared_blks_hit,
-    shared_blks_read,
-    temp_blks_written
-FROM pg_stat_insights_top_by_time
-LIMIT 10;
-
--- Check cache efficiency
-SELECT
-    query,
-    calls,
-    shared_blks_hit,
-    shared_blks_read,
-    round(100.0 * shared_blks_hit / (shared_blks_hit + shared_blks_read), 2) as cache_hit_ratio
-FROM pg_stat_insights_top_cache_misses
-WHERE shared_blks_hit + shared_blks_read > 0
-LIMIT 10;`}
-              title="Query Performance Analysis"
-            />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-slate-900 dark:via-slate-800 dark:to-cyan-900">
+      {/* Hero */}
+      <section className="relative overflow-hidden py-16 sm:py-24">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/20 to-blue-600/20 dark:from-cyan-500/10 dark:to-blue-500/10" />
+        <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
+          <div className="rounded-2xl bg-white/85 p-8 shadow-lg ring-1 ring-slate-200 dark:bg-slate-900/70 dark:ring-slate-700">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 px-4 py-2 text-sm font-semibold text-white">
+                  <Gauge className="h-4 w-4" />
+                  pg_stat_insights
+                </div>
+                <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                  Getting Started with pg_stat_insights
+                </h1>
+                <p className="mt-3 text-base text-slate-600 dark:text-slate-300">
+                  Enable 52 query performance metrics and 11 curated diagnostic views in under five minutes. Follow the three-step
+                  onboarding to install the extension, and then explore deeper tuning guides below.
+                </p>
+              </div>
+              <a
+                href="/docs/pg_stat_insights/views"
+                className="inline-flex items-center gap-2 self-start rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400 dark:border-slate-600 dark:text-slate-200"
+              >
+                <BookOpen className="h-4 w-4" />
+                View Documentation Library
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Complete Installation Guide</h2>
+      <section className="mx-auto max-w-4xl space-y-8 px-6 pb-24 lg:px-8">
+        <div className="rounded-2xl border border-emerald-200 bg-white/90 p-6 shadow-sm dark:border-emerald-900/50 dark:bg-slate-900/60">
+          <h3 className="text-lg font-semibold text-emerald-800 dark:text-emerald-300">✅ Standalone Extension</h3>
+          <p className="mt-2 text-sm text-emerald-700 dark:text-emerald-200">
+            pg_stat_insights ships as a single extension and requires only PostgreSQL 16, 17, or 18. No additional dependencies or collectors needed—simply load the extension and start analyzing workloads immediately.
+          </p>
+        </div>
 
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold">Build and Install from Source</h3>
+        <section>
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Installation in 3 Steps</h2>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            Follow these commands from your PostgreSQL superuser. Restart is only required after enabling shared_preload_libraries.
+          </p>
+
+          <div className="mt-6 space-y-6">
+            <div className="border-l-4 border-blue-500 bg-white/80 p-4 shadow-sm dark:bg-slate-900/50">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Step 1 · Update postgresql.conf</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300">
+                Enable the extension at startup and restart PostgreSQL.
+              </p>
+              <SqlCodeBlock
+                code={`-- Enable pg_stat_insights in PostgreSQL configuration
+ALTER SYSTEM SET shared_preload_libraries = 'pg_stat_insights';
+
+-- Restart PostgreSQL after changing shared_preload_libraries
+-- sudo systemctl restart postgresql
+-- brew services restart postgresql@18`}
+                title="PostgreSQL Configuration"
+              />
+            </div>
+
+            <div className="border-l-4 border-emerald-500 bg-white/80 p-4 shadow-sm dark:bg-slate-900/50">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Step 2 · Create the Extension</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300">
+                Connect to the target database and register pg_stat_insights.
+              </p>
+              <SqlCodeBlock
+                code={`-- Connect to your database
+\c your_database_name
+
+-- Create the extension
+CREATE EXTENSION pg_stat_insights;`}
+                title="Create Extension"
+              />
+            </div>
+
+            <div className="border-l-4 border-purple-500 bg-white/80 p-4 shadow-sm dark:bg-slate-900/50">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Step 3 · Run First Diagnostics</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-300">
+                Immediately inspect top slow queries, cache ratios, and disk usage.
+              </p>
+              <SqlCodeBlock
+                code={`-- Slowest queries by total runtime
+SELECT query, calls, total_exec_time, mean_exec_time
+FROM   pg_stat_insights_top_by_time
+LIMIT  10;
+
+-- Queries with the weakest cache hit ratios
+SELECT query, shared_blks_hit, shared_blks_read,
+       round(100.0 * shared_blks_hit / NULLIF(shared_blks_hit + shared_blks_read, 0), 2) AS cache_hit_ratio
+FROM   pg_stat_insights_top_cache_misses
+WHERE  shared_blks_hit + shared_blks_read > 0
+LIMIT  10;`}
+                title="Initial Analytics"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Complete Installation Reference</h2>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            Build from source, install via packages, or automate with CI—use the commands below as a template.
+          </p>
 
           <BashCodeBlock
-            code={`# Clone the repository
-git clone https://github.com/pgelephant/pg_stat_insights.git
-cd pg_stat_insights
+            code={`# Clone repository
+ git clone https://github.com/pgelephant/pg_stat_insights.git
+ cd pg_stat_insights
 
-# Build the extension
-make clean && make
+# Build extension shared library
+ make clean && make
 
-# Install system-wide
-sudo make install
+# Install binaries (may require sudo)
+ sudo make install
 
-# Or install to custom location
-make install PG_CONFIG=/path/to/pg_config`}
+# Override pg_config if using custom PostgreSQL
+ make install PG_CONFIG=/path/to/pg_config`}
             title="Build from Source"
           />
 
-          <h3 className="text-xl font-semibold">Package Installation (Ubuntu/Debian)</h3>
-
           <BashCodeBlock
-            code={`# Add PostgreSQL repository (if not already added)
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+            code={`# Ubuntu / Debian
+sudo apt-get install postgresql-18-pg-stat-insights
 
-# Update package list
-sudo apt-get update
+# RHEL / Rocky / AlmaLinux
+yum install pg-stat-insights_18
 
-# Install pg_stat_insights
-sudo apt-get install postgresql-18-pg-stat-insights`}
-            title="Package Installation"
+# Homebrew (macOS)
+brew install pg_stat_insights`}
+            title="Package Installs"
           />
+        </section>
 
-          <h3 className="text-xl font-semibold">Homebrew Installation (macOS)</h3>
-
-          <BashCodeBlock
-            code={`# Install pg_stat_insights via Homebrew
-brew install pg_stat_insights
-
-# Or if using custom PostgreSQL installation
-cd pg_stat_insights
-make && make install PG_CONFIG=/usr/local/pgsql/bin/pg_config`}
-            title="Homebrew Installation"
-          />
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Configuration Options</h2>
-
-        <p className="text-muted-foreground mb-4">
-          pg_stat_insights provides 5 GUC parameters to fine-tune performance monitoring:
-        </p>
-
-        <SqlCodeBlock
-          code={`-- Enable query timing tracking
+        <section>
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Configuration Checklist</h2>
+          <SqlCodeBlock
+            code={`-- Optional GUC tuning
 SET pg_stat_insights.track_timing = on;
-
--- Set maximum number of queries to track
 SET pg_stat_insights.max_entries = 10000;
-
--- Enable histogram collection for response time analysis
 SET pg_stat_insights.track_histogram = on;
-
--- Track queries by database user
 SET pg_stat_insights.track_user = on;
-
--- Track queries by application name
 SET pg_stat_insights.track_application = on;`}
-          title="Configuration Parameters"
-        />
+            title="Session-level Tuning"
+          />
+        </section>
 
-        <div className="grid md:grid-cols-2 gap-4 mt-6">
-          <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">Performance Tuning</h4>
-            <ul className="text-sm space-y-1">
-              <li>• <code>max_entries</code>: Controls memory usage</li>
-              <li>• <code>track_timing</code>: Enable for execution time metrics</li>
-              <li>• <code>track_histogram</code>: Enable for response time distribution</li>
-            </ul>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Next Steps</h2>
+          <div className="grid gap-3 md:grid-cols-2">
+            <Link
+              href="/docs/pg_stat_insights/views"
+              className="rounded-xl border border-slate-200 bg-white/90 p-4 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-400 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-200"
+            >
+              Views Reference
+              <p className="mt-1 text-xs font-normal text-slate-500 dark:text-slate-400">Understand all 11 curated analytics views.</p>
+            </Link>
+            <Link
+              href="/docs/pg_stat_insights/metrics"
+              className="rounded-xl border border-slate-200 bg-white/90 p-4 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-400 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-200"
+            >
+              Metrics Guide
+              <p className="mt-1 text-xs font-normal text-slate-500 dark:text-slate-400">Detailed definitions for all 52 collected metrics.</p>
+            </Link>
+            <Link
+              href="/docs/pg_stat_insights/usage"
+              className="rounded-xl border border-slate-200 bg-white/90 p-4 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-400 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-200"
+            >
+              Usage Playbooks
+              <p className="mt-1 text-xs font-normal text-slate-500 dark:text-slate-400">Troubleshoot latency, cache misses, locking, and WAL.</p>
+            </Link>
+            <Link
+              href="/docs/pg_stat_insights/monitoring"
+              className="rounded-xl border border-slate-200 bg-white/90 p-4 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-400 dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-200"
+            >
+              Monitoring Integration
+              <p className="mt-1 text-xs font-normal text-slate-500 dark:text-slate-400">Prometheus exporters, Grafana dashboards, and alerting tips.</p>
+            </Link>
           </div>
-          <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">Security & Filtering</h4>
-            <ul className="text-sm space-y-1">
-              <li>• <code>track_user</code>: Filter by database user</li>
-              <li>• <code>track_application</code>: Filter by application</li>
-              <li>• <code>track_utility</code>: Include utility commands</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Quick Performance Analysis</h2>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Top Slow Queries</h3>
-          <SqlCodeBlock
-            code={`SELECT
-    query,
-    calls,
-    round(total_exec_time::numeric, 2) as total_time_ms,
-    round(mean_exec_time::numeric, 2) as avg_time_ms,
-    rows,
-    round((shared_blks_hit * 100.0 / (shared_blks_hit + shared_blks_read))::numeric, 2) as cache_hit_pct
-FROM pg_stat_insights_top_by_time
-WHERE mean_exec_time > 100  -- Queries slower than 100ms
-ORDER BY total_exec_time DESC
-LIMIT 20;`}
-            title="Slow Query Analysis"
-          />
-
-          <h3 className="text-lg font-semibold">Cache Performance Issues</h3>
-          <SqlCodeBlock
-            code={`SELECT
-    query,
-    calls,
-    shared_blks_hit,
-    shared_blks_read,
-    shared_blks_hit + shared_blks_read as total_blocks,
-    round((shared_blks_hit * 100.0 / (shared_blks_hit + shared_blks_read))::numeric, 2) as cache_hit_ratio
-FROM pg_stat_insights_top_cache_misses
-WHERE shared_blks_hit + shared_blks_read > 1000  -- Significant I/O
-ORDER BY shared_blks_read DESC
-LIMIT 15;`}
-            title="Cache Efficiency Analysis"
-          />
-
-          <h3 className="text-lg font-semibold">Response Time Distribution</h3>
-          <SqlCodeBlock
-            code={`SELECT
-    response_time_category,
-    count,
-    round((count * 100.0 / sum(count) over ())::numeric, 2) as percentage,
-    round(avg_exec_time::numeric, 2) as avg_time_ms,
-    round(min_exec_time::numeric, 2) as min_time_ms,
-    round(max_exec_time::numeric, 2) as max_time_ms
-FROM pg_stat_insights_histogram_summary
-ORDER BY response_time_category;`}
-            title="Response Time Analysis"
-          />
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Next Steps</h2>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          <a href="/docs/pg-stat-insights/query-analytics" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">📊 Query Analytics</h3>
-            <p className="text-sm text-muted-foreground">Deep analysis of query performance and patterns</p>
-          </a>
-          <a href="/docs/pg-stat-insights/api" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">📈 API Reference</h3>
-            <p className="text-sm text-muted-foreground">Complete API documentation with examples</p>
-          </a>
-          <a href="/docs/pg-stat-insights/best-practices" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">⚙️ Best Practices</h3>
-            <p className="text-sm text-muted-foreground">Performance tuning recommendations</p>
-          </a>
-          <a href="/docs/pg-stat-insights" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">📚 Documentation</h3>
-            <p className="text-sm text-muted-foreground">Complete documentation index</p>
-          </a>
-        </div>
-      </section>
-
-      <section className="bg-muted p-6 rounded-lg">
-        <h2 className="text-xl font-semibold mb-2">Need Help?</h2>
-        <p className="text-muted-foreground mb-4">
-          Join our community for support and discussion:
-        </p>
-        <ul className="space-y-2">
-          <li>• <a href="https://github.com/pgelephant/pg_stat_insights/issues" className="text-blue-600 hover:underline">GitHub Issues</a> - Report bugs and request features</li>
-          <li>• <a href="https://github.com/pgelephant/pg_stat_insights/discussions" className="text-blue-600 hover:underline">GitHub Discussions</a> - Ask questions and share experiences</li>
-          <li>• <a href="https://www.pgelephant.com/blog" className="text-blue-600 hover:underline">Blog Articles</a> - Performance tuning guides and best practices</li>
-        </ul>
+        </section>
       </section>
     </div>
-  );
+  )
 }
 
