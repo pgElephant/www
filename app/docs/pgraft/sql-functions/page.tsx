@@ -1,316 +1,302 @@
 import { Metadata } from 'next'
+import DocsContentLayout from '../../../../components/DocsContentLayout'
+import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
+import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgraft SQL Functions - Complete Reference | pgElephant',
-  description: 'Complete SQL function reference for pgraft PostgreSQL Raft extension. Cluster management, leader election, and monitoring functions.',
+  description:
+    'Complete SQL function reference for pgraft PostgreSQL Raft extension covering cluster bootstrap, leadership, monitoring, and KV store operations.',
 }
 
 export default function PgraftSqlFunctionsPage() {
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <div 
-        className="relative overflow-hidden py-28"
-        style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
-        }}
-      >
-        {/* Elegant overlay gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
-        {/* Floating orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'pgRaft',
+        badgeIcon: <PgraftIcon size={20} />, 
+        badgeTone: 'blue',
+        title: 'pgraft SQL Functions',
+        description:
+          'Explore the complete pgraft SQL surface area for managing Raft clusters directly from psql or application code. Each function includes behavior notes, return values, and operational guidance.',
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-12">
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Cluster Bootstrap</h2>
+          <p className="text-muted-foreground">
+            Initialize pgraft metadata, set cluster identity, and register members. Execute these commands on the elected leader once PostgreSQL configuration matches across nodes.
+          </p>
+          <div className="grid lg:grid-cols-3 gap-4">
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_init()</h3>
+              <p className="text-sm text-muted-foreground">
+                Bootstraps the cluster catalog and Raft log. Automatically executed during <code>CREATE EXTENSION pgraft</code> but exposed for automation.
+              </p>
+              <SqlCodeBlock
+                title="Initialize cluster"
+                code={`-- Run after CREATE EXTENSION if manual bootstrap is required
+SELECT pgraft_init();`}
+              />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_add_node()</h3>
+              <p className="text-sm text-muted-foreground">
+                Adds a follower node to the membership roster. The follower must be online with matching <code>pgraft.cluster_id</code> and a unique <code>pgraft.node_id</code>.
+              </p>
+              <SqlCodeBlock
+                title="Register followers"
+                code={`SELECT pgraft_add_node(2, '10.0.0.12', 7002);
+SELECT pgraft_add_node(3, '10.0.0.13', 7003);
 
-        <div className="container-wide mx-auto px-6 relative z-10">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
-              pgraft SQL Functions
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Complete reference for all pgraft SQL functions. pgraft provides a comprehensive set of functions for cluster management, leader election, log operations, and monitoring.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div 
-        className="py-20"
-        style={{ 
-          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
-        }}
-      >
-        <div className="container-wide mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {/* Core Initialization Functions */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Core Initialization Functions</h2>
-                
-                <div className="space-y-6">
-                  <div className="border-l-4 border-blue-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_init() → boolean</h3>
-                    <p className="text-white/90 mb-3">Initialize the pgraft node using GUC configuration variables. Must be called after CREATE EXTENSION.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_init();<br/>
-                        -- Returns: true on success, false on failure<br/>
-                        -- Uses: pgraft.cluster_id, pgraft.node_id, pgraft.address, pgraft.port, etc.
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-blue-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_init_guc(cluster_id, node_id, address, port) → boolean</h3>
-                    <p className="text-white/90 mb-3">Initialize pgraft with explicit parameters instead of GUC variables.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_init_guc('prod-cluster', 1, '127.0.0.1', 7001);
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-blue-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_get_version() → text</h3>
-                    <p className="text-white/90 mb-3">Get the current pgraft version information.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_get_version();<br/>
-                        -- Returns: "pgraft 1.0.0"
-                      </code>
-            </pre></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Cluster Management Functions */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Cluster Management Functions</h2>
-                
-                <div className="space-y-6">
-                  <div className="border-l-4 border-green-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_add_node(node_id int, address text, port int) → boolean</h3>
-                    <p className="text-white/90 mb-3">Add a new node to the cluster. Must be called on the leader node.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_add_node(2, '127.0.0.1', 7002);<br/>
-                        SELECT pgraft_add_node(3, '127.0.0.1', 7003);
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-green-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_remove_node(node_id int) → boolean</h3>
-                    <p className="text-white/90 mb-3">Remove a node from the cluster. Must be called on the leader node.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_remove_node(3);
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-green-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_get_cluster_status() → TABLE(...)</h3>
-                    <p className="text-white/90 mb-3">Get comprehensive cluster status information including all nodes.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT * FROM pgraft_get_cluster_status();<br/>
-                        -- Returns: node_id, address, port, is_leader, term, state
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-green-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_get_nodes() → TABLE(node_id, address, port, is_leader)</h3>
-                    <p className="text-white/90 mb-3">Get information about all nodes in the cluster.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT * FROM pgraft_get_nodes();
-                      </code>
-            </pre></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Leadership Functions */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Leadership Functions</h2>
-                
-                <div className="space-y-6">
-                  <div className="border-l-4 border-purple-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_is_leader() → boolean</h3>
-                    <p className="text-white/90 mb-3">Check if the current node is the cluster leader.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_is_leader();<br/>
-                        -- Returns: true if current node is leader, false otherwise
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-purple-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_get_leader() → bigint</h3>
-                    <p className="text-white/90 mb-3">Get the ID of the current cluster leader.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_get_leader();<br/>
-                        -- Returns: leader node ID, or 0 if no leader
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-purple-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_get_term() → bigint</h3>
-                    <p className="text-white/90 mb-3">Get the current Raft term number.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_get_term();<br/>
-                        -- Returns: current term number
-                      </code>
-            </pre></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Log Operations */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Log Operations</h2>
-                
-                <div className="space-y-6">
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_log_append(data text) → boolean</h3>
-                    <p className="text-white/90 mb-3">Append a new entry to the Raft log. Only works on leader.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_log_append('"user_created"');<br/>
-                        -- Returns: true on success
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_log_commit(log_index int) → boolean</h3>
-                    <p className="text-white/90 mb-3">Commit a log entry at the specified index.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_log_commit(1);
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_log_apply(log_index int) → boolean</h3>
-                    <p className="text-white/90 mb-3">Apply a committed log entry to the state machine.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_log_apply(1);
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_log_get_stats() → TABLE(log_size, last_index, commit_index, last_applied)</h3>
-                    <p className="text-white/90 mb-3">Get statistics about the Raft log.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT * FROM pgraft_log_get_stats();
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-yellow-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_log_get_entry_sql(log_index int) → TABLE(index, term, data)</h3>
-                    <p className="text-white/90 mb-3">Retrieve a specific log entry by index.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT * FROM pgraft_log_get_entry_sql(1);
-                      </code>
-            </pre></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Monitoring and Debugging */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-                <h2 className="text-2xl font-thin text-white mb-6">Monitoring and Debugging</h2>
-                
-                <div className="space-y-6">
-                  <div className="border-l-4 border-red-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_get_worker_state() → text</h3>
-                    <p className="text-white/90 mb-3">Get the current state of the pgraft background worker.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_get_worker_state();<br/>
-                        -- Returns: "RUNNING", "STOPPED", "INITIALIZING", etc.
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-red-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_get_queue_status() → TABLE(command_type, status, count)</h3>
-                    <p className="text-white/90 mb-3">Get status of the command queue.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT * FROM pgraft_get_queue_status();
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-red-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_set_debug(enabled boolean) → boolean</h3>
-                    <p className="text-white/90 mb-3">Enable or disable debug logging.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_set_debug(true);<br/>
-                        -- Returns: true on success
-                      </code>
-            </pre></div>
-                  </div>
-
-                  <div className="border-l-4 border-red-500 pl-4">
-                    <h3 className="text-lg font-thin text-white mb-2">pgraft_test() → boolean</h3>
-                    <p className="text-white/90 mb-3">Run basic functionality tests.</p>
-                    <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-              <pre className="text-sm overflow-x-auto">
-                      <code className="text-green-400 text-sm">
-                        SELECT pgraft_test();<br/>
-                        -- Returns: true if all tests pass
-                      </code>
-            </pre></div>
-                  </div>
-                </div>
-              </div>
+SELECT node_id,
+       state,
+       match_index,
+       commit_index
+  FROM pgraft_get_nodes();`}
+              />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_remove_node()</h3>
+              <p className="text-sm text-muted-foreground">
+                Removes a node from voting membership. Use before decommissioning hardware or performing destructive maintenance.
+              </p>
+              <SqlCodeBlock
+                title="Drain a node"
+                code={`SELECT pgraft_remove_node(3);
+SELECT pgraft_quorum_met() AS quorum_ok;`}
+              />
             </div>
           </div>
-        </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Leadership Control</h2>
+          <p className="text-muted-foreground">
+            Determine leadership, orchestrate manual failovers, and coordinate rolling maintenance with declarative SQL calls.
+          </p>
+          <div className="grid lg:grid-cols-3 gap-4">
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_get_leader()</h3>
+              <p className="text-sm text-muted-foreground">Returns the node ID of the current leader according to the calling session.</p>
+              <SqlCodeBlock title="Who is leader?" code={`SELECT pgraft_get_leader();`} />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_is_leader()</h3>
+              <p className="text-sm text-muted-foreground">Boolean helper for routing logic and connection pools.</p>
+              <SqlCodeBlock title="Am I leader?" code={`SELECT pgraft_is_leader();`} />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_transfer_leadership()</h3>
+              <p className="text-sm text-muted-foreground">
+                Requests that the current leader hand off leadership to another node to support planned maintenance or topology changes.
+              </p>
+              <SqlCodeBlock
+                title="Promote another node"
+                code={`SELECT pgraft_transfer_leadership(2);
+SELECT pgraft_get_leader();`}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Operational Monitoring</h2>
+          <p className="text-muted-foreground">
+            These read-only views expose Raft health, replication status, and worker uptime. Use them to drive dashboards and alerting.
+          </p>
+          <div className="grid lg:grid-cols-2 gap-4">
+            <SqlCodeBlock
+              title="Cluster status"
+              code={`SELECT node_id,
+       leader_id,
+       current_term,
+       state,
+       num_nodes,
+       messages_processed,
+       elections_triggered
+  FROM pgraft_get_cluster_status();`}
+            />
+            <SqlCodeBlock
+              title="Replication lag"
+              code={`SELECT node_id,
+       match_index,
+       commit_index,
+       lag_entries,
+       state
+  FROM pgraft_log_get_replication_status()
+ ORDER BY lag_entries DESC;`}
+            />
+            <SqlCodeBlock
+              title="Node connectivity"
+              code={`SELECT node_id,
+       address,
+       port,
+       last_heartbeat_ms,
+       replication_lag_bytes
+  FROM pgraft_get_nodes();`}
+            />
+            <SqlCodeBlock
+              title="Log volume"
+              code={`SELECT first_index,
+       last_index,
+       total_entries,
+       disk_usage_mb
+  FROM pgraft_log_get_stats();`}
+            />
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Runtime Configuration</h2>
+          <p className="text-muted-foreground">
+            Update pgraft configuration dynamically and persist durable overrides without restarting PostgreSQL.
+          </p>
+          <div className="grid lg:grid-cols-3 gap-4">
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_set_config()</h3>
+              <p className="text-sm text-muted-foreground">Adjusts any pgraft GUC at runtime on all nodes.</p>
+              <SqlCodeBlock
+                title="Tune consensus timing"
+                code={`SELECT pgraft_set_config('heartbeat_interval', '75ms');
+SELECT pgraft_set_config('election_timeout', '900ms');`}
+              />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_save_config()</h3>
+              <p className="text-sm text-muted-foreground">Persists in-memory overrides to catalog tables so they survive a restart.</p>
+              <SqlCodeBlock title="Persist changes" code={`SELECT pgraft_save_config();`} />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_get_config()</h3>
+              <p className="text-sm text-muted-foreground">Shows active configuration values, including defaults and overrides.</p>
+              <SqlCodeBlock title="Inspect configuration" code={`SELECT * FROM pgraft_get_config();`} />
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Replicated KV Store</h2>
+          <p className="text-muted-foreground">
+            pgraft ships with a lightweight key-value store for coordination objects. Reads and writes follow the same consensus guarantees as SQL transactions.
+          </p>
+          <div className="grid lg:grid-cols-3 gap-4">
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_kv_put()</h3>
+              <SqlCodeBlock
+                title="Store metadata"
+                code={`SELECT pgraft_kv_put('configs/maintenance', jsonb_build_object('window', '02:00 UTC', 'duration', '30m'));`}
+              />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_kv_get()</h3>
+              <SqlCodeBlock title="Read value" code={`SELECT pgraft_kv_get('configs/maintenance');`} />
+            </div>
+            <div className="border rounded-lg p-4 space-y-3">
+              <h3 className="font-semibold">pgraft_kv_delete()</h3>
+              <SqlCodeBlock title="Delete key" code={`SELECT pgraft_kv_delete('configs/maintenance');`} />
+            </div>
+          </div>
+          <SqlCodeBlock
+            title="Health probe"
+            code={`DO $$
+DECLARE
+  k TEXT := 'health_' || extract(epoch FROM now());
+  v TEXT := md5(random()::text);
+  r TEXT;
+BEGIN
+  PERFORM pgraft_kv_put(k, to_jsonb(v));
+  SELECT pgraft_kv_get(k)::text INTO r;
+  IF r IS NULL OR r <> to_jsonb(v)::text THEN
+    RAISE EXCEPTION 'KV health check failed';
+  END IF;
+  PERFORM pgraft_kv_delete(k);
+END;
+$$;`}
+          />
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Troubleshooting Toolkit</h2>
+          <p className="text-muted-foreground">
+            Use these recipes to detect unhealthy patterns, salvage lagging followers, and debug Raft behavior in production.
+          </p>
+          <div className="grid lg:grid-cols-2 gap-4">
+            <SqlCodeBlock
+              title="Detect unhealthy elections"
+              code={`SELECT node_id,
+       elections_triggered,
+       current_term,
+       elections_triggered::float / GREATEST(current_term, 1) AS elections_per_term
+  FROM pgraft_get_cluster_status()
+ WHERE elections_triggered::float / GREATEST(current_term, 1) > 2.0;`}
+            />
+            <SqlCodeBlock
+              title="Find stalled followers"
+              code={`SELECT node_id,
+       lag_entries,
+       state
+  FROM pgraft_log_get_replication_status()
+ WHERE lag_entries > 1000
+    OR state = 'stalled';`}
+            />
+            <SqlCodeBlock
+              title="Reset follower"
+              code={`-- Execute on lagging follower after maintenance
+SELECT pgraft_log_sync_with_leader();`}
+            />
+            <SqlCodeBlock
+              title="Expose debug info"
+              code={`SELECT pgraft_set_debug(true);
+-- Reproduce issue
+SELECT pgraft_set_debug(false);`}
+            />
+          </div>
+          <BashCodeBlock
+            title="Collect diagnostics"
+            code={`#!/usr/bin/env bash
+psql -f - <<'SQL'
+\o /tmp/pgraft-diagnostics.txt
+SELECT now() AS collected_at;
+SELECT * FROM pgraft_get_cluster_status();
+SELECT * FROM pgraft_get_nodes();
+SELECT * FROM pgraft_log_get_replication_status();
+SELECT * FROM pgraft_log_get_stats();
+SQL
+
+sudo tail -200 /var/log/postgresql/postgresql-17-main.log | grep pgraft >> /tmp/pgraft-diagnostics.txt`}
+          />
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Automation Workflows</h2>
+          <p className="text-muted-foreground">
+            Combine pgraft SQL with shell automation to orchestrate incident response and rolling deployments.
+          </p>
+          <SqlCodeBlock
+            title="Rolling restart playbook"
+            code={`-- Assume node 1 is leader and node 2 requires maintenance
+BEGIN;
+  PERFORM pgraft_transfer_leadership(3);
+  PERFORM pgraft_set_config('failover_enabled', 'false');
+COMMIT;
+
+-- Perform OS updates on node 2, then rejoin cluster
+SELECT pgraft_set_config('failover_enabled', 'true');
+SELECT * FROM pgraft_get_cluster_status();`}
+          />
+          <BashCodeBlock
+            title="Automated health check"
+            code={`#!/usr/bin/env bash
+RESULT=$(psql -t -c "SELECT * FROM pgraft_health_check() WHERE severity IN ('warning', 'critical');")
+if [[ -n "$RESULT" ]]; then
+  echo "$(date --iso-8601=seconds) - ALERT: $RESULT" >> /var/log/pgraft-health.log
+fi`}
+          />
+        </section>
       </div>
-    </div>
+    </DocsContentLayout>
   )
 }

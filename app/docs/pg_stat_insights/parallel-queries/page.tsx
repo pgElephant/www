@@ -1,300 +1,126 @@
-export const metadata = {
+import { Metadata } from 'next'
+import DocsContentLayout from '../../../../components/DocsContentLayout'
+import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
+import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
+
+export const metadata: Metadata = {
   title: 'pg_stat_insights · Parallel Query Analysis',
-  description: 'Track parallel worker usage, measure parallelism benefits, and optimize parallel query execution.'
+  description: 'Track parallel worker usage, measure speedups, and tune PostgreSQL parallel query execution with pg_stat_insights.',
 }
 
-import React from 'react'
-import Link from 'next/link'
-import { GitBranch, ArrowRight, Database, Activity, TrendingUp, Code } from 'lucide-react'
+const parallelUsage = `SELECT queryid,
+       LEFT(query, 160) AS query_preview,
+       calls,
+       parallel_workers_launched,
+       parallel_workers_planned,
+       mean_exec_time,
+       (parallel_workers_launched::numeric / NULLIF(calls, 0)) AS avg_workers
+  FROM pg_stat_insights
+ WHERE parallel_workers_launched > 0
+ ORDER BY parallel_workers_launched DESC
+ LIMIT 20;`
 
-export default function Page() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
-      <div className="container mx-auto px-6 py-12">
-        <div className="mb-8">
-          <Link href="/docs/pg_stat_insights" className="inline-flex items-center gap-2 text-teal-300 hover:text-teal-200 transition-colors">
-            <ArrowRight className="w-4 h-4 rotate-180" /> Back to pg_stat_insights
-          </Link>
-        </div>
-
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 text-transparent bg-clip-text flex items-center gap-3">
-          <GitBranch className="w-10 h-10 text-purple-400" /> Parallel Query Analysis
-        </h1>
-        
-        <p className="text-lg text-gray-300 mb-8">
-          Track parallel worker usage, measure parallelism efficiency, and tune parallel execution configuration.
-        </p>
-
-        {/* STEP 1: IDENTIFY PARALLEL QUERIES */}
-        <div className="space-y-8 mb-12">
-          <section>
-            <h2 className="text-3xl font-semibold mb-6 text-purple-400">Step 1: Identify Queries Using Parallelism</h2>
-            
-            <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Database className="w-5 h-5 text-purple-400" />
-                Queries with Parallel Execution
-              </h3>
-              <pre className="bg-black/50 p-4 rounded overflow-x-auto">
-                <code className="text-sm text-gray-300">{`-- Find queries using parallel workers
-SELECT 
-    queryid,
-    LEFT(query, 100) as query_preview,
-    calls,
-    parallel_workers_launched,                  -- Total workers launched
-    ROUND((parallel_workers_launched::numeric / NULLIF(calls, 0))::numeric, 2) as avg_workers_per_call,
-    ROUND(mean_exec_time::numeric, 2) as avg_exec_ms,
-    ROUND(total_exec_time::numeric, 2) as total_exec_ms,
-    rows,
-    ROUND((rows::numeric / NULLIF(calls, 0))::numeric, 0) as avg_rows_per_call
-FROM pg_stat_insights
-WHERE parallel_workers_launched > 0             -- Only parallel queries
-ORDER BY parallel_workers_launched DESC
-LIMIT 20;
-
--- Parallel Query Indicators:
--- • parallel_workers_launched > 0: Query used parallel execution
--- • avg_workers_per_call: Typical parallelism level
--- • High workers + high exec time: Good candidate for parallelism`}</code>
-              </pre>
-            </div>
-          </section>
-        </div>
-
-        {/* STEP 2: MEASURE PARALLELISM BENEFIT */}
-        <div className="space-y-8 mb-12">
-          <section>
-            <h2 className="text-3xl font-semibold mb-6 text-pink-400">Step 2: Measure Parallelism Efficiency</h2>
-            
-            <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Activity className="w-5 h-5 text-pink-400" />
-                Parallel Efficiency Analysis
-              </h3>
-              <p className="text-gray-300 mb-4">
-                Estimate speedup from parallel execution (theoretical vs actual).
-              </p>
-              <pre className="bg-black/50 p-4 rounded overflow-x-auto">
-                <code className="text-sm text-gray-300">{`-- Analyze parallel query efficiency
-SELECT 
-    queryid,
-    LEFT(query, 80) as query_preview,
-    calls,
-    ROUND((parallel_workers_launched::numeric / NULLIF(calls, 0))::numeric, 2) as avg_workers,
-    ROUND(mean_exec_time::numeric, 2) as avg_exec_ms,
-    ROUND((rows::numeric / NULLIF(calls, 0))::numeric, 0) as avg_rows,
-    -- Theoretical speedup if perfectly parallel
-    ROUND((parallel_workers_launched::numeric / NULLIF(calls, 0) + 1)::numeric, 2) as theoretical_speedup,
-    -- Actual throughput benefit
-    ROUND(
-        (rows::numeric / NULLIF(total_exec_time, 0) * 1000)::numeric,
-        2
-    ) as rows_per_second,
-    CASE 
-        WHEN parallel_workers_launched::numeric / NULLIF(calls, 0) >= 4 
-            THEN '🟢 HIGH parallelism (4+ workers)'
-        WHEN parallel_workers_launched::numeric / NULLIF(calls, 0) >= 2 
-            THEN '✅ MODERATE parallelism (2-4 workers)'
-        WHEN parallel_workers_launched::numeric / NULLIF(calls, 0) >= 1 
-            THEN '🟡 LOW parallelism (1-2 workers)'
-        ELSE '⚪ MINIMAL parallelism'
-    END as parallel_level
-FROM pg_stat_insights
-WHERE parallel_workers_launched > 0
-ORDER BY parallel_workers_launched DESC
-LIMIT 20;
-
--- Ideal Parallelism:
--- • avg_workers ≥ 4: Excellent for large scans
--- • avg_workers 2-4: Good for medium queries
--- • avg_workers < 2: May not justify overhead`}</code>
-              </pre>
-            </div>
-          </section>
-        </div>
-
-        {/* STEP 3: PARALLEL VS NON-PARALLEL COMPARISON */}
-        <div className="space-y-8 mb-12">
-          <section>
-            <h2 className="text-3xl font-semibold mb-6 text-red-400">Step 3: Parallel vs Non-Parallel Queries</h2>
-            
-            <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-red-400" />
-                Compare Execution Patterns
-              </h3>
-              <pre className="bg-black/50 p-4 rounded overflow-x-auto">
-                <code className="text-sm text-gray-300">{`-- Compare parallel vs non-parallel query performance
-WITH query_stats AS (
-    SELECT 
-        CASE 
-            WHEN parallel_workers_launched > 0 THEN 'Parallel'
-            ELSE 'Non-Parallel'
-        END as execution_mode,
-        COUNT(*) as query_count,
-        SUM(calls) as total_calls,
-        ROUND(AVG(mean_exec_time)::numeric, 2) as avg_exec_time,
-        ROUND(AVG(rows::numeric / NULLIF(calls, 0))::numeric, 0) as avg_rows_per_query,
-        SUM(parallel_workers_launched) as total_workers_launched
+const speedupRatio = `WITH stats AS (
+  SELECT queryid,
+         total_exec_time,
+         total_plan_time,
+         parallel_workers_launched,
+         calls
     FROM pg_stat_insights
-    WHERE calls > 10
-    GROUP BY execution_mode
+   WHERE parallel_workers_launched > 0
 )
-SELECT 
-    execution_mode,
-    query_count,
-    total_calls,
-    avg_exec_time,
-    avg_rows_per_query,
-    total_workers_launched,
-    CASE execution_mode
-        WHEN 'Parallel' THEN ROUND((total_workers_launched::numeric / NULLIF(total_calls, 0))::numeric, 2)
-        ELSE 0
-    END as avg_workers_per_call
-FROM query_stats
-ORDER BY execution_mode;
+SELECT queryid,
+       total_exec_time / NULLIF(calls, 0) AS avg_exec_ms,
+       (total_exec_time - total_plan_time) / NULLIF(parallel_workers_launched, 0) AS exec_ms_per_worker
+  FROM stats
+ ORDER BY exec_ms_per_worker ASC
+ LIMIT 15;`
 
--- Insights:
--- • Parallel queries should show lower avg_exec_time for large datasets
--- • If parallel queries slower, may indicate:
---   - Overhead exceeds benefit
---   - Too many workers competing
---   - Insufficient parallelizable work`}</code>
-              </pre>
+const configuration = `max_parallel_workers_per_gather = 4
+max_parallel_workers = 16
+max_parallel_maintenance_workers = 4
+parallel_leader_participation = on`
+
+export default function PgStatInsightsParallelQueriesPage() {
+  return (
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'pg_stat_insights',
+        badgeIcon: <PgStatInsightsIcon size={20} />, 
+        badgeTone: 'emerald',
+        title: 'Parallel Query Analysis',
+        description:
+          'Measure parallel worker utilisation, quantify speedups, and uncover queries that should embrace or avoid parallel execution.',
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-12">
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">1. Inspect Parallel Adoption</h2>
+          <p className="text-muted-foreground">
+            Start by listing the busiest queries that launched parallel workers. Compare the number planned versus launched to identify executor fallbacks (e.g., due to insufficient workers).
+          </p>
+          <SqlCodeBlock title="Queries using parallel workers" code={parallelUsage} />
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">2. Evaluate Parallel Speedup</h2>
+          <p className="text-muted-foreground">
+            Gauge efficiency by normalising execution time per worker. Small or negative gains suggest the workload is not parallel-friendly.
+          </p>
+          <SqlCodeBlock title="Execution time per worker" code={speedupRatio} />
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">3. Highlight Sequential Fallbacks</h2>
+          <SqlCodeBlock
+            title="Queries planned for parallelism but executed serially"
+            code={`SELECT queryid,
+       parallel_workers_planned,
+       parallel_workers_launched,
+       mean_exec_time
+  FROM pg_stat_insights
+ WHERE parallel_workers_planned > 0
+   AND parallel_workers_launched = 0
+ ORDER BY mean_exec_time DESC
+ LIMIT 15;`}
+          />
+          <p className="text-sm text-muted-foreground">
+            Reasons include disabled <code>parallel_leader_participation</code>, insufficient workers, or functions marked <code>PARALLEL UNSAFE</code>.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">4. Tune Configuration</h2>
+          <BashCodeBlock title="Recommended starting values" code={configuration} />
+          <p className="text-sm text-muted-foreground">
+            Ensure <code>max_worker_processes</code> is set higher than <code>max_parallel_workers</code>, and monitor background worker contention (logical replication, autovacuum) when raising limits.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">5. Optimise Execution Plans</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="border rounded-lg p-4">
+              <h3 className="font-semibold">Encourage parallelism</h3>
+              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                <li>Use <code>parallel_setup_cost</code> and <code>parallel_tuple_cost</code> to adjust planner sensitivity.</li>
+                <li>Rewrite functions to be <code>PARALLEL SAFE</code> when possible.</li>
+                <li>Partition large tables to enable partition-wise joins and aggregates.</li>
+              </ul>
             </div>
-          </section>
-        </div>
-
-        {/* STEP 4: IDENTIFY PARALLELIZATION CANDIDATES */}
-        <div className="space-y-8 mb-12">
-          <section>
-            <h2 className="text-3xl font-semibold mb-6 text-green-400">Step 4: Find Queries That Should Be Parallel</h2>
-            
-            <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-              <pre className="bg-black/50 p-4 rounded overflow-x-auto">
-                <code className="text-sm text-gray-300">{`-- Queries that could benefit from parallelism but aren't using it
-SELECT 
-    queryid,
-    LEFT(query, 100) as query_preview,
-    calls,
-    ROUND(mean_exec_time::numeric, 2) as avg_exec_ms,
-    ROUND((rows::numeric / NULLIF(calls, 0))::numeric, 0) as avg_rows,
-    shared_blks_read,
-    parallel_workers_launched,                  -- Should be > 0 but isn't
-    CASE 
-        WHEN mean_exec_time > 1000 AND rows / NULLIF(calls, 0) > 10000 
-            THEN '🔴 EXCELLENT parallel candidate (slow + large dataset)'
-        WHEN mean_exec_time > 500 AND rows / NULLIF(calls, 0) > 5000 
-            THEN '🟡 GOOD parallel candidate'
-        WHEN shared_blks_read > 10000 
-            THEN '📊 CONSIDER parallelism (high I/O)'
-        ELSE 'May not benefit from parallelism'
-    END as parallelization_potential,
-    -- Recommendation
-    CASE 
-        WHEN mean_exec_time > 1000 AND rows / NULLIF(calls, 0) > 10000 
-            THEN 'Increase max_parallel_workers_per_gather or reduce parallel_setup_cost'
-        ELSE 'Review query plan - may have non-parallelizable operations'
-    END as recommendation
-FROM pg_stat_insights
-WHERE parallel_workers_launched = 0             -- NOT using parallelism
-  AND calls > 10
-  AND (mean_exec_time > 500 OR rows / NULLIF(calls, 0) > 5000)
-ORDER BY mean_exec_time DESC, rows DESC
-LIMIT 20;
-
--- Parallelization Candidates:
--- • Slow queries (>500ms) with large datasets (>5000 rows)
--- • Sequential scans on large tables
--- • Aggregations over many rows
--- • Hash joins on large datasets`}</code>
-              </pre>
+            <div className="border rounded-lg p-4">
+              <h3 className="font-semibold">Disable when harmful</h3>
+              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                <li>Set <code>ALTER ROLE user SET max_parallel_workers_per_gather = 0;</code> for latency-critical clients.</li>
+                <li>Use <code>{'/*+ Parallel(0) */'}</code> planner hints (via pg_hint_plan) for known hotspots.</li>
+                <li>Disable parallelism for queries with heavy locking or when CPU is saturated.</li>
+              </ul>
             </div>
-          </section>
-        </div>
-
-        {/* PARALLEL CONFIGURATION */}
-        <div className="space-y-8 mb-12">
-          <section>
-            <h2 className="text-3xl font-semibold mb-6 text-cyan-400">Parallel Query Configuration</h2>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-900/50 rounded-lg p-6 border border-cyan-700">
-                <h3 className="text-xl font-semibold mb-3 text-cyan-400">max_parallel_workers_per_gather</h3>
-                <pre className="bg-black/50 p-3 rounded text-sm">
-                  <code className="text-green-400">{`# Maximum workers per query
-max_parallel_workers_per_gather = 4  # Default: 2
-
-# Increase for queries on large datasets`}</code>
-                </pre>
-              </div>
-
-              <div className="bg-gray-900/50 rounded-lg p-6 border border-blue-700">
-                <h3 className="text-xl font-semibold mb-3 text-blue-400">max_parallel_workers</h3>
-                <pre className="bg-black/50 p-3 rounded text-sm">
-                  <code className="text-green-400">{`# Total parallel workers system-wide
-max_parallel_workers = 8  # Should be ≥ max_parallel_workers_per_gather`}</code>
-                </pre>
-              </div>
-
-              <div className="bg-gray-900/50 rounded-lg p-6 border border-purple-700">
-                <h3 className="text-xl font-semibold mb-3 text-purple-400">parallel_setup_cost</h3>
-                <pre className="bg-black/50 p-3 rounded text-sm">
-                  <code className="text-green-400">{`# Cost of launching parallel workers
-parallel_setup_cost = 1000  # Default
-
-# Decrease to encourage parallelism
-SET parallel_setup_cost = 100;`}</code>
-                </pre>
-              </div>
-
-              <div className="bg-gray-900/50 rounded-lg p-6 border border-pink-700">
-                <h3 className="text-xl font-semibold mb-3 text-pink-400">parallel_tuple_cost</h3>
-                <pre className="bg-black/50 p-3 rounded text-sm">
-                  <code className="text-green-400">{`# Cost per tuple transferred to leader
-parallel_tuple_cost = 0.1  # Default
-
-# Decrease for better parallel selectivity`}</code>
-                </pre>
-              </div>
-
-              <div className="bg-gray-900/50 rounded-lg p-6 border border-green-700">
-                <h3 className="text-xl font-semibold mb-3 text-green-400">min_parallel_table_scan_size</h3>
-                <pre className="bg-black/50 p-3 rounded text-sm">
-                  <code className="text-green-400">{`# Minimum table size for parallel scan
-min_parallel_table_scan_size = 8MB  # Default
-
-# Decrease for smaller tables
-SET min_parallel_table_scan_size = '1MB';`}</code>
-                </pre>
-              </div>
-
-              <div className="bg-gray-900/50 rounded-lg p-6 border border-yellow-700">
-                <h3 className="text-xl font-semibold mb-3 text-yellow-400">force_parallel_mode</h3>
-                <pre className="bg-black/50 p-3 rounded text-sm">
-                  <code className="text-green-400">{`# Force parallelism for testing
-SET force_parallel_mode = on;  # Use for testing only!
-
-# Options: off, on, regress`}</code>
-                </pre>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        {/* SQL FILES REFERENCE */}
-        <section>
-          <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-            <Code className="w-6 h-6 text-purple-400" />
-            Related SQL Test Files
-          </h2>
-          <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700">
-            <a href="https://github.com/pgelephant/pg_stat_insights/tree/main/sql/parallel.sql" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">
-              📄 View complete test on GitHub: sql/parallel.sql
-            </a>
           </div>
         </section>
       </div>
-    </div>
+    </DocsContentLayout>
   )
 }
