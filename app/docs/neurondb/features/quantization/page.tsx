@@ -1,14 +1,15 @@
+import Link from 'next/link'
+import { BadgeCheck, Cpu, Gauge, Layers } from 'lucide-react'
+import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
+import BashCodeBlock from '../../../../../components/BashCodeBlock'
+import DocsContentLayout from '../../../../../components/DocsContentLayout'
+import { NeurondBIcon } from '../../../../../components/ProductIcons'
+
 export const metadata = {
   title: 'NeurondB Quantization Strategies | Memory Efficient Vector Search',
   description:
     'Configure NeurondB product quantization, scalar quantization, and residual compression to lower memory usage while preserving recall. Includes SQL recipes and tuning guidance.',
 }
-
-import Link from 'next/link'
-import { BadgeCheck, Cpu, Gauge, Layers } from 'lucide-react'
-import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
-import BashCodeBlock from '../../../../../components/BashCodeBlock'
-import { NeurondBIcon } from '../../../../../components/ProductIcons'
 
 const quantizationModes = [
   {
@@ -70,19 +71,16 @@ USING neurondb_hamming (fingerprint);`,
 
 const QuantizationPage = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-900 via-slate-900 to-indigo-900 opacity-90" />
-        <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-6 px-6 pb-16 pt-16">
-          <div className="inline-flex items-center gap-3 rounded-full border border-fuchsia-400/40 bg-fuchsia-500/10 px-4 py-2 text-sm text-fuchsia-100">
-            <NeurondBIcon size={24} />
-            <span>NeurondB · Quantization Strategies</span>
-          </div>
-          <h1 className="text-4xl font-bold text-white md:text-5xl">Compress vectors without sacrificing recall</h1>
-          <p className="max-w-3xl text-base text-fuchsia-100 md:text-lg">
-            Quantization enables billion-scale search and GPU efficiency. Learn how to apply product, scalar, and binary quantization in NeurondB, monitor quality, and rebalance codebooks as your corpus grows.
-          </p>
-          <div className="flex flex-wrap gap-3">
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'NeurondB',
+        badgeIcon: <NeurondBIcon size={24} />, 
+        badgeTone: 'purple',
+        title: 'Quantization Strategies',
+        description:
+          'Quantization enables billion-scale search and GPU efficiency. Learn how to apply product, scalar, and binary quantization, monitor quality, and rebalance codebooks as your corpus grows.',
+        actions: (
+          <>
             <Link
               href="/docs/neurondb/performance"
               className="inline-flex items-center gap-2 rounded-xl bg-fuchsia-500/20 px-4 py-2 text-sm font-semibold text-fuchsia-100 transition hover:bg-fuchsia-500/30"
@@ -95,11 +93,12 @@ const QuantizationPage = () => {
             >
               Automation Workers
             </Link>
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-5xl space-y-16 px-6 pb-24 pt-12">
+          </>
+        ),
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-16">
         {quantizationModes.map((mode) => (
           <section key={mode.id} id={mode.id} className="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-8 shadow-xl">
             <div className="flex items-center gap-4">
@@ -218,8 +217,8 @@ ORDER  BY ratio;`}
             </Link>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </DocsContentLayout>
   )
 }
 

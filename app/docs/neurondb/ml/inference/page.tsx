@@ -1,30 +1,27 @@
+import Link from 'next/link'
+import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
+import BashCodeBlock from '../../../../../components/BashCodeBlock'
+import DocsContentLayout from '../../../../../components/DocsContentLayout'
+import { NeurondBIcon } from '../../../../../components/ProductIcons'
+
 export const metadata = {
   title: 'NeurondB Model Inference | ONNX & GPU Serving',
   description:
     'Deploy ONNX models inside PostgreSQL with NeurondB. Configure GPU batching, caching, runtime preferences, and integrate inference with SQL pipelines.',
 }
 
-import Link from 'next/link'
-import {  } from 'lucide-react'
-import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
-import BashCodeBlock from '../../../../../components/BashCodeBlock'
-import { NeurondBIcon } from '../../../../../components/ProductIcons'
-
 const InferencePage = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-slate-900 to-emerald-900 opacity-90" />
-        <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-6 px-6 pb-16 pt-16">
-          <div className="inline-flex items-center gap-3 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-100">
-            <NeurondBIcon size={24} />
-            <span>NeurondB · Model Inference</span>
-          </div>
-          <h1 className="text-4xl font-bold text-white md:text-5xl">Serve ONNX models directly from PostgreSQL</h1>
-          <p className="max-w-3xl text-base text-emerald-100 md:text-lg">
-            NeurondB embeds ONNX Runtime for CPU and GPU model execution. Load transformer encoders, rerankers, custom classifiers, and more—no external microservices required.
-          </p>
-          <div className="flex flex-wrap gap-3">
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'NeurondB',
+        badgeIcon: <NeurondBIcon size={24} />, 
+        badgeTone: 'emerald',
+        title: 'Serve ONNX models directly from PostgreSQL',
+        description:
+          'NeurondB embeds ONNX Runtime for CPU and GPU model execution. Load encoders, rerankers, and custom classifiers without managing external microservices.',
+        actions: (
+          <>
             <Link
               href="/docs/neurondb/ml/embeddings"
               className="inline-flex items-center gap-2 rounded-xl bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-500/30"
@@ -37,11 +34,12 @@ const InferencePage = () => {
             >
               Performance Tuning
             </Link>
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-5xl space-y-16 px-6 pb-24 pt-12">
+          </>
+        ),
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-16">
         <section id="load-models" className="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-8 shadow-xl">
           <h2 className="text-2xl font-semibold text-white">Load ONNX models</h2>
           <p className="mt-2 max-w-3xl text-sm text-slate-300">
@@ -61,7 +59,12 @@ const InferencePage = () => {
             />
             <SqlCodeBlock
               title="Inspect registry"
-              code={`SELECT name, version, device, created_at
+              code={`SELECT name,
+       version,
+       metadata ->> 'owner'     AS owner,
+       metadata ->> 'git_commit' AS git_commit,
+       created_at,
+       status
 FROM   neurondb_model_registry
 ORDER  BY created_at DESC;`}
             />
@@ -204,8 +207,8 @@ SELECT neurondb_prerun_model(
             </Link>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </DocsContentLayout>
   )
 }
 

@@ -3,33 +3,25 @@ export const metadata = {
   description: 'Configure providers, generate text embeddings, cache results, and query embeddings with NeuronDB.',
 }
 
-import React from 'react'
 import Link from 'next/link'
 import { Sparkles, Image as ImageIcon, FileText, Zap, CheckCircle, ArrowRight, Code } from 'lucide-react'
+import DocsContentLayout from '../../../../../components/DocsContentLayout'
 import { NeurondBIcon } from '../../../../../components/ProductIcons'
 
 export default function Page() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <NeurondBIcon size={18} />
-                Machine Learning
-              </div>
-              
-              <h1 className="text-5xl font-bold text-white mb-6">
-                Understanding Embeddings
-              </h1>
-              <p className="text-xl text-white/80 max-w-3xl mx-auto">
-                Learn what embeddings are, why they matter, and how to use them effectively in NeurondB
-              </p>
-            </div>
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'NeurondB',
+        badgeIcon: <NeurondBIcon size={20} />, 
+        badgeTone: 'purple',
+        title: 'Understanding Embeddings',
+        description:
+          'Learn what embeddings are, why they matter, and how to use them effectively in NeurondB.',
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-16">
 
             {/* What are Embeddings */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8 mb-8">
@@ -271,9 +263,7 @@ LIMIT 5;`}
               </ul>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </DocsContentLayout>
   )
 }
 

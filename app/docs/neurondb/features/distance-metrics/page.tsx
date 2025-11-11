@@ -4,11 +4,12 @@ export const metadata = {
     'Understand and tune NeurondB distance metrics including cosine, inner product, L2/L1, Hamming, and hybrid scoring. Includes SQL examples and tuning guidance.',
 }
 
-import { Activity, BarChart3, Calculator, Compass, Gauge, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import { Activity, BarChart3, Calculator, Compass, Gauge, Sparkles } from 'lucide-react'
+import DocsContentLayout from '../../../../../components/DocsContentLayout'
+import { NeurondBIcon } from '../../../../../components/ProductIcons'
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../../components/BashCodeBlock'
-import { NeurondBIcon } from '../../../../../components/ProductIcons'
 
 const metrics = [
   {
@@ -132,21 +133,16 @@ FROM   neurondb_distance_profile('kb_articles', 'embedding', metric => 'cosine')
 
 const DistanceMetricsPage = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-slate-900 to-purple-900 opacity-90" />
-        <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-start gap-6 px-6 pb-16 pt-16">
-          <div className="inline-flex items-center gap-3 rounded-full border border-indigo-400/40 bg-indigo-500/10 px-4 py-2 text-sm text-indigo-200">
-            <NeurondBIcon size={24} />
-            <span>NeurondB · Distance Metrics</span>
-          </div>
-          <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">
-            Choose the right distance metric for every vector workload
-          </h1>
-          <p className="max-w-3xl text-base text-indigo-100 md:text-lg">
-            NeurondB implements multiple distance operators optimized for CPU and GPU execution. This guide explains how each metric works, when to use it, and how to tune planner preferences for enterprise-grade vector search.
-          </p>
-          <div className="flex flex-wrap gap-3">
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'NeurondB',
+        badgeIcon: <NeurondBIcon size={24} />, 
+        badgeTone: 'indigo',
+        title: 'Distance Metrics Guide',
+        description:
+          'NeurondB implements multiple distance operators optimized for CPU and GPU execution. Learn when to use each metric and how to tune planner preferences for enterprise-grade search.',
+        actions: (
+          <>
             <Link
               href="/docs/neurondb/indexing"
               className="inline-flex items-center gap-2 rounded-xl bg-indigo-500/20 px-4 py-2 text-sm font-semibold text-indigo-100 transition hover:bg-indigo-500/30"
@@ -159,11 +155,12 @@ const DistanceMetricsPage = () => {
             >
               Embedding Quality
             </Link>
-          </div>
-        </div>
-      </div>
-
-      <main className="mx-auto max-w-5xl space-y-16 px-6 pb-24 pt-12">
+          </>
+        ),
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-16">
         {metrics.map((metric) => (
           <section key={metric.id} id={metric.id} className="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-8 shadow-xl">
             <div className="flex items-center gap-4">
@@ -280,8 +277,8 @@ LIMIT  25;`}
             </Link>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </DocsContentLayout>
   )
 }
 

@@ -26,66 +26,47 @@ export const metadata = {
   },
 }
 
-import React from 'react'
 import Link from 'next/link'
-import { Cpu, Zap, BarChart3, CheckCircle, ArrowRight, Terminal } from 'lucide-react'
+import { Zap, BarChart3, CheckCircle, ArrowRight, Terminal } from 'lucide-react'
+import DocsContentLayout from '../../../../components/DocsContentLayout'
 import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export default function Page() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-indigo-500/20 text-indigo-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Cpu className="w-4 h-4" />
-              GPU Acceleration
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                GPU Acceleration
-              </span>
-            </h1>
-            
-            <p className="text-xl text-white/80 mb-8">
-              Supercharge vector operations with CUDA and ROCm. Get 100x speedup for batch operations and 23x faster clustering on NVIDIA and AMD GPUs.
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'NeurondB',
+        badgeIcon: <NeurondBIcon size={24} />, 
+        badgeTone: 'indigo',
+        title: 'GPU Acceleration',
+        description: 'Supercharge vector operations with CUDA and ROCm. Get 100x speedup for batch operations and 23x faster clustering on NVIDIA and AMD GPUs.',
+      }}
+      contentWidth="default"
+    >
+      <div className="space-y-16">
+        {/* Overview */}
+        <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
+          <h2 className="text-3xl font-bold text-white mb-6">Overview</h2>
+          <div className="prose prose-invert max-w-none">
+            <p className="text-white/80 text-lg mb-4">
+              NeuronDB provides optional GPU acceleration for compute-intensive vector operations using <strong>NVIDIA CUDA</strong> or <strong>AMD ROCm</strong>. GPU support is completely optional and automatically falls back to CPU when unavailable.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto space-y-16">
-            
-            {/* Overview */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-              <h2 className="text-3xl font-bold text-white mb-6">Overview</h2>
-              <div className="prose prose-invert max-w-none">
-                <p className="text-white/80 text-lg mb-4">
-                  NeuronDB provides optional GPU acceleration for compute-intensive vector operations using <strong>NVIDIA CUDA</strong> or <strong>AMD ROCm</strong>. GPU support is completely optional and automatically falls back to CPU when unavailable.
-                </p>
-                <div className="grid md:grid-cols-3 gap-4 mt-6">
-                  <div className="bg-indigo-500/10 rounded-lg p-4 border border-indigo-500/30">
-                    <div className="text-2xl font-bold text-indigo-400 mb-2">100x</div>
-                    <div className="text-sm text-white/70">Batch Distance Speedup</div>
-                  </div>
-                  <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/30">
-                    <div className="text-2xl font-bold text-purple-400 mb-2">23x</div>
-                    <div className="text-sm text-white/70">K-Means Clustering</div>
-                  </div>
-                  <div className="bg-cyan-500/10 rounded-lg p-4 border border-cyan-500/30">
-                    <div className="text-2xl font-bold text-cyan-400 mb-2">2.3ms</div>
-                    <div className="text-sm text-white/70">Avg GPU Latency</div>
-                  </div>
-                </div>
+            <div className="grid md:grid-cols-3 gap-4 mt-6">
+              <div className="bg-indigo-500/10 rounded-lg p-4 border border-indigo-500/30">
+                <div className="text-2xl font-bold text-indigo-400 mb-2">100x</div>
+                <div className="text-sm text-white/70">Batch Distance Speedup</div>
+              </div>
+              <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/30">
+                <div className="text-2xl font-bold text-purple-400 mb-2">23x</div>
+                <div className="text-sm text-white/70">K-Means Clustering</div>
+              </div>
+              <div className="bg-cyan-500/10 rounded-lg p-4 border border-cyan-500/30">
+                <div className="text-2xl font-bold text-cyan-400 mb-2">2.3ms</div>
+                <div className="text-sm text-white/70">Avg GPU Latency</div>
               </div>
             </div>
+          </div>
+        </div>
 
             {/* GPU-Accelerated Operations */}
             <div>
@@ -410,9 +391,7 @@ SET neurondb.gpu_fail_open = off;`}</code></pre>
             </div>
 
           </div>
-        </div>
-      </section>
-    </div>
+        </DocsContentLayout>
   )
 }
 

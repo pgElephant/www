@@ -8,23 +8,21 @@ import Link from 'next/link'
 import { ClipboardCheck, GitBranch, Key, RefreshCcw, ShieldCheck } from 'lucide-react'
 import BashCodeBlock from '../../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
+import DocsContentLayout from '../../../../../components/DocsContentLayout'
 import { NeurondBIcon } from '../../../../../components/ProductIcons'
 
 const ModelManagementPage = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-slate-900 to-emerald-900 opacity-90" />
-        <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-6 px-6 pb-16 pt-16">
-          <div className="inline-flex items-center gap-3 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-4 py-2 text-sm text-emerald-100">
-            <NeurondBIcon size={24} />
-            <span>NeurondB · Model Management</span>
-          </div>
-          <h1 className="text-4xl font-bold text-white md:text-5xl">Govern the full model lifecycle inside PostgreSQL</h1>
-          <p className="max-w-3xl text-base text-emerald-100 md:text-lg">
-            Register ONNX models, promote versions through staged environments, and capture approval workflows without leaving the database. NeurondB integrates model registry, rollout controls, and performance monitoring in SQL.
-          </p>
-          <div className="flex flex-wrap gap-3">
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'NeurondB',
+        badgeIcon: <NeurondBIcon size={24} />, 
+        badgeTone: 'emerald',
+        title: 'Govern the full model lifecycle inside PostgreSQL',
+        description:
+          'Register ONNX models, promote versions through staged environments, and capture approval workflows without leaving the database. NeurondB integrates model registry, rollout controls, and performance monitoring in SQL.',
+        actions: (
+          <>
             <Link
               href="/docs/neurondb/ml/inference"
               className="inline-flex items-center gap-2 rounded-xl bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-500/30"
@@ -37,11 +35,12 @@ const ModelManagementPage = () => {
             >
               Monitoring & QA
             </Link>
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-5xl space-y-16 px-6 pb-24 pt-12">
+          </>
+        ),
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-16">
         <section id="registry" className="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-8 shadow-xl">
           <h2 className="text-2xl font-semibold text-white">Model registry & metadata</h2>
           <p className="mt-2 max-w-3xl text-sm text-slate-300">
@@ -209,8 +208,8 @@ ORDER  BY metric, version DESC;`}
             <li className="flex items-start gap-3"><Key className="h-5 w-5 text-emerald-400" />Rotate API keys and provider secrets with KMS-backed helpers.</li>
           </ul>
         </section>
-      </main>
-    </div>
+      </div>
+    </DocsContentLayout>
   )
 }
 
