@@ -1,127 +1,65 @@
-import React from 'react';
-import { Terminal, List, Info, Play, Settings, FileText } from 'lucide-react';
-import BashCodeBlock from '../../../../components/BashCodeBlock';
+import { Terminal, List, Info, Play, Settings, FileText } from 'lucide-react'
+import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { PgbalancerIcon } from '../../../../components/ProductIcons'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
 
 export const metadata = {
   title: 'CLI Management (bctl) - pgBalancer',
   description: 'Use bctl command-line tool for pgBalancer cluster management and monitoring.'
-};
+}
 
 export default function CLIManagementPage() {
   return (
-    <div className="prose dark:prose-invert max-w-4xl mx-auto py-12 px-6">
-      {/* Header */}
-      <div className="not-prose mb-12">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent mb-4">
-          CLI Management (bctl)
-        </h1>
-        <p className="text-xl text-gray-300">
-          Use the bctl command-line tool for pgBalancer cluster management and monitoring
-        </p>
-      </div>
-
-      {/* Step 1: Installation */}
-      <section className="mb-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-cyan-500/20 rounded-lg">
-            <Terminal className="w-6 h-6 text-cyan-400" />
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'pgBalancer',
+        badgeIcon: <PgbalancerIcon size={20} />, 
+        badgeTone: 'cyan',
+        title: 'CLI Management (bctl)',
+        description: 'Use the bctl command-line tool for pgBalancer cluster management and monitoring.'
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-12 text-slate-200">
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-cyan-500/20 rounded-lg">
+              <Terminal className="w-6 h-6 text-cyan-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-white">Step 1: Install and Configure bctl</h2>
           </div>
-          <h2 className="text-2xl font-bold m-0">Step 1: Install and Configure bctl</h2>
-        </div>
 
-        <p className="text-gray-300 mb-4">
-          bctl is the unified CLI tool that replaces multiple pcp_* commands:
-        </p>
+          <p>bctl is the unified CLI tool that replaces multiple pcp_* commands:</p>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Install bctl</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Install bctl</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# bctl is included with pgBalancer
 # After installing pgbalancer, bctl is in /usr/local/bin
 
 # Verify installation
 which bctl
-# /usr/local/bin/bctl
-
 bctl --version
-# bctl version 1.0.0 (pgBalancer 5.0.0)
 
-# View help
-bctl --help
-
-Usage: bctl [OPTIONS] COMMAND [ARGS]...
-
-  pgBalancer Control Tool - Unified CLI for cluster management
-
-Options:
-  --host HOST          pgBalancer API host (default: localhost)
-  --port PORT          pgBalancer API port (default: 8080)
-  --format FORMAT      Output format: default, table, json (default: default)
-  --verbose           Enable verbose output
-  --version           Show version and exit
-  --help              Show this message and exit
-
-Commands:
-  status              Show pgBalancer status
-  nodes               Node management commands
-  pool                Pool management commands
-  watchdog            Watchdog status and management
-  health              Check cluster health
-  config              Configuration management
-  logs                View pgBalancer logs`}
-          </pre>
-        </div>
-
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Configure bctl</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# Create configuration file
-mkdir -p ~/.config/bctl
-cat > ~/.config/bctl/config.yaml << EOF
-# bctl configuration
-host: localhost
-port: 8080
-format: table
-verbose: false
-
-# Authentication (optional)
-auth:
-  enabled: false
-  username: admin
-  password: your-password
-EOF
-
-# Environment variables (alternative)
-export BCTL_HOST=localhost
-export BCTL_PORT=8080
-export BCTL_FORMAT=table`}
-          </pre>
-        </div>
-
-        <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-4">
-          <p className="text-sm text-blue-200 m-0">
-            <strong>💡 Tip:</strong> bctl connects to pgBalancer's REST API. Ensure the API server is enabled 
-            (<code>enable_rest_api = on</code>) and accessible on port 8080.
-          </p>
-        </div>
-      </section>
-
-      {/* Step 2: Status Commands */}
-      <section className="mb-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-blue-500/20 rounded-lg">
-            <Info className="w-6 h-6 text-blue-400" />
+# Configuration file location
+~/.config/pgbalancer/bctl.conf`}
+            </pre>
           </div>
-          <h2 className="text-2xl font-bold m-0">Step 2: Check Cluster Status</h2>
-        </div>
+        </section>
 
-        <p className="text-gray-300 mb-4">
-          View overall cluster status and health:
-        </p>
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-500/20 rounded-lg">
+              <Info className="w-6 h-6 text-blue-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-white">Step 2: Check Cluster Status</h2>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Overall Status</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <p>View overall cluster status and health:</p>
+
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Overall Status</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# Show cluster status (table format - default)
 bctl status
 
@@ -167,12 +105,12 @@ bctl status --format json | jq
     "utilization": 35.16
   }
 }`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Health Check</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Health Check</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# Quick health check
 bctl health
 
@@ -191,26 +129,23 @@ else
     echo "Cluster has issues!"
     bctl health --verbose
 fi`}
-          </pre>
-        </div>
-      </section>
-
-      {/* Step 3: Node Management */}
-      <section className="mb-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-indigo-500/20 rounded-lg">
-            <List className="w-6 h-6 text-indigo-400" />
+            </pre>
           </div>
-          <h2 className="text-2xl font-bold m-0">Step 3: Node Management</h2>
-        </div>
+        </section>
 
-        <p className="text-gray-300 mb-4">
-          Manage backend nodes using bctl:
-        </p>
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-indigo-500/20 rounded-lg">
+              <List className="w-6 h-6 text-indigo-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-white">Step 3: Node Management</h2>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">List Nodes</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <p>Manage backend nodes using bctl:</p>
+
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">List Nodes</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# List all backend nodes (table format)
 bctl nodes list
 
@@ -228,12 +163,12 @@ bctl nodes list --format default
 Node 0: db-primary.internal:5432 [up] primary weight=1 select_cnt=1523 qps=15.2
 Node 1: db-replica1.internal:5432 [up] standby weight=2 select_cnt=4501 qps=45.8
 Node 2: db-replica2.internal:5432 [up] standby weight=2 select_cnt=4389 qps=44.1`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Get Node Information</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Get Node Information</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# Get detailed info about node 0
 bctl nodes info 0
 
@@ -274,12 +209,12 @@ bctl nodes info 0 --format json | jq '.stats'
   "avg_response_time_ms": 12.5,
   "error_rate": 0.001
 }`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Node Operations</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Node Operations</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# Detach node for maintenance
 bctl nodes detach 2
 
@@ -308,26 +243,23 @@ Updating cluster topology...
   New primary: node 1
   Old primary: node 0 (now standby)
   Duration: 2.3 seconds`}
-          </pre>
-        </div>
-      </section>
-
-      {/* Step 4: Pool Management */}
-      <section className="mb-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-purple-500/20 rounded-lg">
-            <Play className="w-6 h-6 text-purple-400" />
+            </pre>
           </div>
-          <h2 className="text-2xl font-bold m-0">Step 4: Pool Management</h2>
-        </div>
+        </section>
 
-        <p className="text-gray-300 mb-4">
-          Monitor and manage connection pools:
-        </p>
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-purple-500/20 rounded-lg">
+              <Play className="w-6 h-6 text-purple-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-white">Step 4: Pool Management</h2>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">View Pool Processes</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <p>Monitor and manage connection pools:</p>
+
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">View Pool Processes</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# List all pool processes
 bctl pool processes
 
@@ -343,12 +275,12 @@ bctl pool processes
 Total processes: 32
 Active: 28
 Idle: 4`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Pool Statistics</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Pool Statistics</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# Get pool statistics
 bctl pool stats
 
@@ -366,26 +298,23 @@ bctl pool stats
 │ Child Processes          │ 32      │
 │ Max Pool per Child       │ 4       │
 └──────────────────────────┴─────────┘`}
-          </pre>
-        </div>
-      </section>
-
-      {/* Step 5: Watchdog Management */}
-      <section className="mb-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-yellow-500/20 rounded-lg">
-            <Settings className="w-6 h-6 text-yellow-400" />
+            </pre>
           </div>
-          <h2 className="text-2xl font-bold m-0">Step 5: Watchdog Management</h2>
-        </div>
+        </section>
 
-        <p className="text-gray-300 mb-4">
-          Monitor watchdog status and coordination:
-        </p>
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-yellow-500/20 rounded-lg">
+              <Settings className="w-6 h-6 text-yellow-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-white">Step 5: Watchdog Management</h2>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Watchdog Status</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <p>Monitor watchdog status and coordination:</p>
+
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Watchdog Status</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# View watchdog status
 bctl watchdog status
 
@@ -401,26 +330,23 @@ Watchdog State: MASTER
 Quorum: Yes (3/3 nodes alive)
 Virtual IP: 192.168.1.100
 VIP Active: Yes`}
-          </pre>
-        </div>
-      </section>
-
-      {/* Step 6: Configuration Management */}
-      <section className="mb-12">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-green-500/20 rounded-lg">
-            <FileText className="w-6 h-6 text-green-400" />
+            </pre>
           </div>
-          <h2 className="text-2xl font-bold m-0">Step 6: Configuration and Logs</h2>
-        </div>
+        </section>
 
-        <p className="text-gray-300 mb-4">
-          View configuration and logs:
-        </p>
+        <section className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-green-500/20 rounded-lg">
+              <FileText className="w-6 h-6 text-green-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-white">Step 6: Configuration and Logs</h2>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">View Configuration</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <p>View configuration and logs:</p>
+
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">View Configuration</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# Show current configuration
 bctl config show
 
@@ -450,12 +376,12 @@ bctl config show --format json | jq '.pool'
   "max_pool": 4,
   "connection_life_time": 600
 }`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">View Logs</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">View Logs</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`# Tail pgBalancer logs
 bctl logs --follow
 
@@ -470,96 +396,94 @@ bctl logs --level error --tail 50
 
 # Search logs
 bctl logs --grep "failover" --tail 100`}
-          </pre>
-        </div>
-      </section>
+            </pre>
+          </div>
+        </section>
 
-      {/* Command Reference */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Command Reference</h2>
-        
-        <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg p-6 border border-gray-700">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-600">
-                <th className="text-left py-2 text-cyan-400">Command</th>
-                <th className="text-left py-2 text-cyan-400">Description</th>
-                <th className="text-left py-2 text-cyan-400">Example</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-300">
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">status</td>
-                <td className="py-2">Show cluster status</td>
-                <td className="py-2 font-mono text-xs">bctl status</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">health</td>
-                <td className="py-2">Quick health check</td>
-                <td className="py-2 font-mono text-xs">bctl health</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">nodes list</td>
-                <td className="py-2">List all nodes</td>
-                <td className="py-2 font-mono text-xs">bctl nodes list</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">nodes info</td>
-                <td className="py-2">Get node details</td>
-                <td className="py-2 font-mono text-xs">bctl nodes info 0</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">nodes detach</td>
-                <td className="py-2">Detach node</td>
-                <td className="py-2 font-mono text-xs">bctl nodes detach 2</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">nodes attach</td>
-                <td className="py-2">Attach node</td>
-                <td className="py-2 font-mono text-xs">bctl nodes attach 2</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">nodes promote</td>
-                <td className="py-2">Promote to primary</td>
-                <td className="py-2 font-mono text-xs">bctl nodes promote 1</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">pool processes</td>
-                <td className="py-2">List pool processes</td>
-                <td className="py-2 font-mono text-xs">bctl pool processes</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">pool stats</td>
-                <td className="py-2">Pool statistics</td>
-                <td className="py-2 font-mono text-xs">bctl pool stats</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">watchdog status</td>
-                <td className="py-2">Watchdog status</td>
-                <td className="py-2 font-mono text-xs">bctl watchdog status</td>
-              </tr>
-              <tr className="border-b border-gray-700">
-                <td className="py-2 font-mono text-green-400">config show</td>
-                <td className="py-2">Show configuration</td>
-                <td className="py-2 font-mono text-xs">bctl config show</td>
-              </tr>
-              <tr>
-                <td className="py-2 font-mono text-green-400">logs</td>
-                <td className="py-2">View logs</td>
-                <td className="py-2 font-mono text-xs">bctl logs --follow</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-white">Command Reference</h2>
+          
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-600">
+                  <th className="text-left py-2 text-cyan-400">Command</th>
+                  <th className="text-left py-2 text-cyan-400">Description</th>
+                  <th className="text-left py-2 text-cyan-400">Example</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-300">
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">status</td>
+                  <td className="py-2">Show cluster status</td>
+                  <td className="py-2 font-mono text-xs">bctl status</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">health</td>
+                  <td className="py-2">Quick health check</td>
+                  <td className="py-2 font-mono text-xs">bctl health</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">nodes list</td>
+                  <td className="py-2">List all nodes</td>
+                  <td className="py-2 font-mono text-xs">bctl nodes list</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">nodes info</td>
+                  <td className="py-2">Get node details</td>
+                  <td className="py-2 font-mono text-xs">bctl nodes info 0</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">nodes detach</td>
+                  <td className="py-2">Detach node</td>
+                  <td className="py-2 font-mono text-xs">bctl nodes detach 2</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">nodes attach</td>
+                  <td className="py-2">Attach node</td>
+                  <td className="py-2 font-mono text-xs">bctl nodes attach 2</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">nodes promote</td>
+                  <td className="py-2">Promote to primary</td>
+                  <td className="py-2 font-mono text-xs">bctl nodes promote 1</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">pool processes</td>
+                  <td className="py-2">List pool processes</td>
+                  <td className="py-2 font-mono text-xs">bctl pool processes</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">pool stats</td>
+                  <td className="py-2">Pool statistics</td>
+                  <td className="py-2 font-mono text-xs">bctl pool stats</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">watchdog status</td>
+                  <td className="py-2">Watchdog status</td>
+                  <td className="py-2 font-mono text-xs">bctl watchdog status</td>
+                </tr>
+                <tr className="border-b border-gray-700">
+                  <td className="py-2 font-mono text-green-400">config show</td>
+                  <td className="py-2">Show configuration</td>
+                  <td className="py-2 font-mono text-xs">bctl config show</td>
+                </tr>
+                <tr>
+                  <td className="py-2 font-mono text-green-400">logs</td>
+                  <td className="py-2">View logs</td>
+                  <td className="py-2 font-mono text-xs">bctl logs --follow</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-      {/* Scripting Examples */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Automation Scripts</h2>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-white">Automation Scripts</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Health Check Script</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Health Check Script</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`#!/bin/bash
 # Monitor cluster health
 
@@ -578,12 +502,12 @@ fi
 
 echo "✓ Cluster healthy"
 exit 0`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Pool Utilization Alert</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Pool Utilization Alert</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
 {`#!/bin/bash
 # Alert on high pool utilization
 
@@ -593,15 +517,13 @@ if (( \${UTILIZATION%.*} > 90 )); then
     echo "⚠️  High pool utilization: $UTILIZATION%"
     # Send alert
 fi`}
-          </pre>
-        </div>
-      </section>
+            </pre>
+          </div>
+        </section>
 
-      {/* Best Practices */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Best Practices</h2>
-        
-        <div className="space-y-4">
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-white">Best Practices</h2>
+          
           <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
             <h3 className="text-lg font-semibold text-green-400 mb-2">✓ DO</h3>
             <ul className="text-gray-300 space-y-2 mb-0">
@@ -622,37 +544,36 @@ fi`}
               <li>• Don't ignore error messages and exit codes</li>
             </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Resources */}
-      <section>
-        <h2 className="text-2xl font-bold mb-6">Additional Resources</h2>
-        <div className="bg-gray-800/50 rounded-lg p-6">
-          <ul className="space-y-2 text-gray-300 mb-0">
-            <li>
-              • <a href="https://github.com/pgElephant/pgbalancer/tree/main/bctl" className="text-cyan-400 hover:text-cyan-300">
-                bctl GitHub Repository
-              </a>
-            </li>
-            <li>
-              • <a href="/docs/pgbalancer/rest-api" className="text-cyan-400 hover:text-cyan-300">
-                REST API Documentation
-              </a>
-            </li>
-            <li>
-              • <a href="/docs/pgbalancer/high-availability" className="text-cyan-400 hover:text-cyan-300">
-                High Availability Guide
-              </a>
-            </li>
-            <li>
-              • <a href="https://github.com/pgElephant/pgbalancer/tree/main/cluster/examples/basic-usage.sh" className="text-cyan-400 hover:text-cyan-300">
-                Example Usage Scripts
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </div>
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-white">Additional Resources</h2>
+          <div className="bg-gray-800/50 rounded-lg p-6">
+            <ul className="space-y-2 text-gray-300 mb-0">
+              <li>
+                • <a href="https://github.com/pgElephant/pgbalancer/tree/main/bctl" className="text-cyan-400 hover:text-cyan-300">
+                  bctl GitHub Repository
+                </a>
+              </li>
+              <li>
+                • <a href="/docs/pgbalancer/rest-api" className="text-cyan-400 hover:text-cyan-300">
+                  REST API Documentation
+                </a>
+              </li>
+              <li>
+                • <a href="/docs/pgbalancer/high-availability" className="text-cyan-400 hover:text-cyan-300">
+                  High Availability Guide
+                </a>
+              </li>
+              <li>
+                • <a href="https://github.com/pgElephant/pgbalancer/tree/main/cluster/examples/basic-usage.sh" className="text-cyan-400 hover:text-cyan-300">
+                  Example Usage Scripts
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </DocsContentLayout>
   );
 }

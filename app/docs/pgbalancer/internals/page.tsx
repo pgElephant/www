@@ -1,5 +1,5 @@
-import React from 'react';
-import BashCodeBlock from '../../../../components/BashCodeBlock';
+import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { PgbalancerIcon } from '../../../../components/ProductIcons'
 
 export const metadata = {
   title: 'pgbalancer Architecture & Internals',
@@ -8,13 +8,17 @@ export const metadata = {
 
 export default function PgBalancerInternalsDocs() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-8">
-            <h1 className="text-4xl font-bold text-white mb-8">Architecture & Internals</h1>
-            
-            <div className="space-y-6 text-white/90">
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'pgBalancer',
+        badgeIcon: <PgbalancerIcon size={20} />, 
+        badgeTone: 'cyan',
+        title: 'Architecture & Internals',
+        description: 'Understand the core architecture, worker lifecycle, and performance model behind pgBalancer.'
+      }}
+      contentWidth="default"
+    >
+      <div className="bg-white/10 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-8 text-white/90 space-y-6">
               <p className="text-lg leading-relaxed">
                 pgbalancer is built for performance and reliability with a modern, scalable architecture:
               </p>
@@ -90,9 +94,6 @@ export default function PgBalancerInternalsDocs() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </DocsContentLayout>
   );
 }

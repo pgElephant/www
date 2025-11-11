@@ -1,126 +1,63 @@
-import { Metadata } from 'next';
-import BashCodeBlock from '../../../../components/BashCodeBlock';
-import SqlCodeBlock from '../../../../components/SqlCodeBlock';
+import { Metadata } from 'next'
+import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { PgbalancerIcon } from '../../../../components/ProductIcons'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
+import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
   title: 'Metrics & Monitoring | pgBalancer PostgreSQL Load Balancer',
-  description: 'Complete monitoring guide for pgBalancer - REST API metrics, bctl statistics, Prometheus integration, and Grafana dashboards for PostgreSQL cluster management.',
-};
+  description:
+    'Complete monitoring guide for pgBalancer - REST API metrics, bctl statistics, Prometheus integration, and Grafana dashboards for PostgreSQL cluster management.',
+}
 
 export default function PgBalancerMetricsDocs() {
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold mb-4">pgBalancer Metrics & Monitoring</h1>
-        <p className="text-lg text-muted-foreground">
-          Comprehensive monitoring guide for pgBalancer using REST API metrics, bctl CLI tools, and integration with Prometheus and Grafana for PostgreSQL cluster observability.
-        </p>
-      </div>
-
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-        <h3 className="text-lg font-semibold mb-2">📊 Monitoring Options</h3>
-        <ul className="space-y-1 text-sm">
-          <li>✅ <strong>REST API</strong> - Real-time metrics via HTTP/JSON endpoints</li>
-          <li>✅ <strong>bctl CLI</strong> - Command-line statistics and status</li>
-          <li>✅ <strong>Prometheus</strong> - Time-series metrics collection</li>
-          <li>✅ <strong>Grafana</strong> - Visual dashboards and alerting</li>
-        </ul>
-      </div>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">REST API Metrics</h2>
-
-        <p className="text-muted-foreground mb-4">
-          pgBalancer REST API provides real-time metrics on port 8080 (configurable):
-        </p>
-
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Backend Node Statistics</h3>
-            <BashCodeBlock
-              code={`# Get all backend nodes with health scores
-curl http://localhost:8080/api/backends | jq
-
-# Example response:
-# [
-#   {
-#     "id": 0,
-#     "hostname": "db-primary.local",
-#     "port": 5432,
-#     "status": "up",
-#     "health_score": 0.95,
-#     "query_count": 15234,
-#     "avg_response_time_ms": 12.5,
-#     "error_count": 0,
-#     "role": "primary"
-#   },
-#   {
-#     "id": 1,
-#     "hostname": "db-replica1.local",
-#     "port": 5432,
-#     "status": "up",
-#     "health_score": 0.88,
-#     "query_count": 8421,
-#     "avg_response_time_ms": 18.2,
-#     "error_count": 2,
-#     "role": "replica"
-#   }
-# ]`}
-              title="GET /api/backends - Backend Statistics"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Pool Statistics</h3>
-            <BashCodeBlock
-              code={`# Get connection pool statistics
-curl http://localhost:8080/api/stats | jq
-
-# Example response:
-# {
-#   "total_connections": 128,
-#   "active_connections": 45,
-#   "idle_connections": 83,
-#   "waiting_clients": 3,
-#   "total_queries": 1234567,
-#   "queries_per_second": 542.3,
-#   "avg_query_time_ms": 15.7,
-#   "cache_hit_ratio": 0.94,
-#   "pool_utilization": 0.35
-# }`}
-              title="GET /api/stats - Pool Statistics"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Process Information</h3>
-            <BashCodeBlock
-              code={`# Get active process information
-curl http://localhost:8080/api/processes | jq
-
-# Example response shows all child processes with:
-# - PID, database, user, client address
-# - Connection state, query being executed
-# - Start time, duration`}
-              title="GET /api/processes - Active Processes"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Health Check Status</h3>
-            <BashCodeBlock
-              code={`# Simple health check
-curl http://localhost:8080/api/health
-
-# Response: {"status": "ok", "uptime_seconds": 86400, "version": "4.5.0"}
-
-# Detailed health with backend info
-curl http://localhost:8080/api/backends | jq '.[] | {id, hostname, status, health_score}'`}
-              title="GET /api/health - Health Status"
-            />
-          </div>
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'pgBalancer',
+        badgeIcon: <PgbalancerIcon size={20} />, 
+        badgeTone: 'cyan',
+        title: 'Metrics & Monitoring',
+        description:
+          'Comprehensive monitoring guide for pgBalancer using REST API metrics, bctl CLI tools, and integration with Prometheus and Grafana for PostgreSQL cluster observability.',
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-8 text-slate-200">
+        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-blue-100 mb-2">📊 Monitoring options</h3>
+          <ul className="space-y-1 text-sm text-blue-100">
+            <li>✅ <strong>REST API</strong> - Real-time metrics via HTTP/JSON endpoints</li>
+            <li>✅ <strong>bctl CLI</strong> - Command-line statistics and status</li>
+            <li>✅ <strong>Prometheus</strong> - Time-series metrics collection</li>
+            <li>✅ <strong>Grafana</strong> - Visual dashboards and alerting</li>
+          </ul>
         </div>
-      </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-white">REST API Metrics</h2>
+
+          <p className="text-slate-300">
+            pgBalancer REST API provides real-time metrics on port 8080 (configurable):
+          </p>
+
+          <div className="grid gap-4">
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-2">Backend Node Statistics</h3>
+              <BashCodeBlock
+                title="List backend stats"
+                code={`curl -s http://localhost:8080/api/v1/backends | jq`}
+              />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-2">Connection Pool Status</h3>
+              <BashCodeBlock
+                title="Connection pools"
+                code={`curl -s http://localhost:8080/api/v1/pool/summary | jq`}
+              />
+            </div>
+          </div>
+        </section>
 
       <section>
         <h2 className="text-2xl font-semibold mb-4">bctl CLI Monitoring</h2>
@@ -638,6 +575,7 @@ curl -X POST http://admin:admin@localhost:3000/api/dashboards/db \\
           </a>
         </div>
       </section>
-    </div>
+      </div>
+    </DocsContentLayout>
   );
 }

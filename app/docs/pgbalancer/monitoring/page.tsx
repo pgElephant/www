@@ -1,7 +1,8 @@
-import React from 'react';
-import { BarChart, AlertTriangle, TrendingUp, Activity, Eye, Bell } from 'lucide-react';
-import BashCodeBlock from '../../../../components/BashCodeBlock';
-import SqlCodeBlock from '../../../../components/SqlCodeBlock';
+import { BarChart, AlertTriangle, TrendingUp, Activity, Eye, Bell } from 'lucide-react'
+import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { PgbalancerIcon } from '../../../../components/ProductIcons'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
+import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
 export const metadata = {
   title: 'Monitoring & Metrics - pgBalancer',
@@ -10,19 +11,19 @@ export const metadata = {
 
 export default function MonitoringMetricsPage() {
   return (
-    <div className="prose dark:prose-invert max-w-4xl mx-auto py-12 px-6">
-      {/* Header */}
-      <div className="not-prose mb-12">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent mb-4">
-          Monitoring & Metrics
-        </h1>
-        <p className="text-xl text-gray-300">
-          Configure Prometheus metrics, Grafana dashboards, and alerting for comprehensive pgBalancer monitoring
-        </p>
-      </div>
-
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'pgBalancer',
+        badgeIcon: <PgbalancerIcon size={20} />, 
+        badgeTone: 'amber',
+        title: 'Monitoring & Metrics',
+        description: 'Configure Prometheus metrics, Grafana dashboards, and alerting for comprehensive pgBalancer monitoring.',
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-12 text-slate-200">
       {/* Step 1: Prometheus Setup */}
-      <section className="mb-12">
+      <section className="space-y-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 bg-orange-500/20 rounded-lg">
             <BarChart className="w-6 h-6 text-orange-400" />
@@ -789,5 +790,6 @@ groups:
         </div>
       </section>
     </div>
+  </DocsContentLayout>
   );
 }

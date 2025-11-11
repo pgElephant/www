@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import DocsContentLayout from '../../../../components/DocsContentLayout';
+import { PgbalancerIcon } from '../../../../components/ProductIcons';
 import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata: Metadata = {
@@ -8,28 +10,32 @@ export const metadata: Metadata = {
 
 export default function PgBalancerConfigDocs() {
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold mb-4">pgBalancer Configuration Reference</h1>
-        <p className="text-lg text-muted-foreground">
-          Complete guide to configuring pgBalancer using <strong>.conf file format</strong>. Configure AI load balancing, REST API, MQTT event streaming, connection pooling, health checks, and failover behavior.
-        </p>
-      </div>
+    <DocsContentLayout
+      hero={{
+        badgeLabel: 'pgBalancer',
+        badgeIcon: <PgbalancerIcon size={20} />, 
+        badgeTone: 'cyan',
+        title: 'Configuration Reference',
+        description:
+          'Complete guide to configuring pgBalancer using .conf file format. Configure AI load balancing, REST API, MQTT event streaming, connection pooling, health checks, and failover behavior.',
+      }}
+      contentWidth="wide"
+    >
+      <div className="space-y-8">
+        <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-yellow-200 mb-2">⚙️ Configuration File Format</h3>
+          <p className="text-sm text-yellow-100">
+            pgBalancer uses <strong>.conf file format</strong> (same as pgpool-II and PostgreSQL). Configuration file location:
+            <code>/etc/pgbalancer/pgbalancer.conf</code>
+          </p>
+        </div>
 
-      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6">
-        <h3 className="text-lg font-semibold mb-2 text-yellow-800 dark:text-yellow-400">⚙️ Configuration File Format</h3>
-        <p className="text-sm text-yellow-700 dark:text-yellow-300">
-          pgBalancer uses <strong>.conf file format</strong> (same as pgpool-II and PostgreSQL), NOT YAML. 
-          Configuration file location: <code>/etc/pgbalancer/pgbalancer.conf</code>
-        </p>
-      </div>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4 text-white">Connection Settings</h2>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Connection Settings</h2>
-
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Basic Connection Configuration</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Basic Connection Configuration</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # CONNECTION SETTINGS
 #------------------------------------------------------------------------------
@@ -38,57 +44,32 @@ export default function PgBalancerConfigDocs() {
 listen_addresses = '*'
 # * = all interfaces, localhost = local only, or specific IP
 
-# Port for client connections (default: 5432)
-port = 5432
+# Listen port
+port = 9999
 
-# Unix socket directory
-socket_dir = '/var/run/pgbalancer'
+# Upstream Postgres primary/backup nodes
+backend_hostname0 = 'postgres-primary'
+backend_port0 = 5432
+backend_weight0 = 1
 
-# PCP (admin protocol) settings
-pcp_listen_addresses = '*'
-pcp_port = 9898
-pcp_socket_dir = '/var/run/pgbalancer'
+backend_hostname1 = 'postgres-standby'
+backend_port1 = 5432
+backend_weight1 = 1
+backend_status1 = 'standby'
 
-# Maximum connections from clients
-num_init_children = 32
-max_pool = 4
-
-# Connection timeout (seconds, 0 = disable)
-connection_cache = on
-connection_life_time = 0
-child_life_time = 300
-child_max_connections = 0
-client_idle_limit = 0`}
-          </pre>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">Key Parameters</h4>
-            <ul className="text-sm space-y-1">
-              <li>• <code>num_init_children</code>: Pre-forked child processes (32)</li>
-              <li>• <code>max_pool</code>: Max connections per child (4)</li>
-              <li>• <code>connection_life_time</code>: Connection reuse time (0=infinite)</li>
-              <li>• <code>child_life_time</code>: Child process lifetime (300s)</li>
-            </ul>
+# Authentication to PostgreSQL
+backend_user = 'pgbalancer'
+backend_password = 'StrongPassword123!'`}
+            </pre>
           </div>
-          <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">Recommended Values</h4>
-            <ul className="text-sm space-y-1">
-              <li>• <strong>Small (10-50 clients)</strong>: num_init_children=16, max_pool=2</li>
-              <li>• <strong>Medium (50-200)</strong>: num_init_children=32, max_pool=4</li>
-              <li>• <strong>Large (200+)</strong>: num_init_children=64, max_pool=8</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Backend Server Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Backend Server Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Defining PostgreSQL Backends</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Defining PostgreSQL Backends</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # BACKEND SERVERS (0-indexed)
 #------------------------------------------------------------------------------
@@ -118,28 +99,28 @@ backend_flag2 = 'ALLOW_TO_FAILOVER'
 backend_application_name2 = 'replica2_db'
 
 # Add more backends as needed (up to 128 backends supported)`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="space-y-2 text-sm">
-          <p><strong>Backend Parameters:</strong></p>
-          <ul className="list-disc ml-6 space-y-1">
-            <li><code>backend_hostname</code>: Server hostname or IP address</li>
-            <li><code>backend_port</code>: PostgreSQL port number</li>
-            <li><code>backend_weight</code>: Load balancing weight (higher = more queries)</li>
-            <li><code>backend_data_directory</code>: PostgreSQL data directory path</li>
-            <li><code>backend_flag</code>: ALLOW_TO_FAILOVER or ALWAYS_PRIMARY or DISALLOW_TO_FAILOVER</li>
-            <li><code>backend_application_name</code>: Identifier for monitoring</li>
-          </ul>
-        </div>
-      </section>
+          <div className="space-y-2 text-sm">
+            <p><strong>Backend Parameters:</strong></p>
+            <ul className="list-disc ml-6 space-y-1">
+              <li><code>backend_hostname</code>: Server hostname or IP address</li>
+              <li><code>backend_port</code>: PostgreSQL port number</li>
+              <li><code>backend_weight</code>: Load balancing weight (higher = more queries)</li>
+              <li><code>backend_data_directory</code>: PostgreSQL data directory path</li>
+              <li><code>backend_flag</code>: ALLOW_TO_FAILOVER or ALWAYS_PRIMARY or DISALLOW_TO_FAILOVER</li>
+              <li><code>backend_application_name</code>: Identifier for monitoring</li>
+            </ul>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">AI Load Balancing Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">AI Load Balancing Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Machine Learning Routing Settings</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Machine Learning Routing Settings</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # AI LOAD BALANCING (Machine Learning Routing)
 #------------------------------------------------------------------------------
@@ -165,26 +146,26 @@ ai_min_sample_size = 100
 # Performance metric to optimize
 # Options: response_time, throughput, error_rate
 ai_optimization_metric = 'response_time'`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="p-4 border border-blue-500 rounded-lg">
-          <h4 className="font-semibold mb-2">🎯 AI Tuning Guidelines</h4>
-          <ul className="text-sm space-y-1">
-            <li>• <strong>Conservative</strong>: learning_rate=0.005, exploration_rate=0.05 (stable production)</li>
-            <li>• <strong>Balanced</strong>: learning_rate=0.01, exploration_rate=0.1 (recommended)</li>
-            <li>• <strong>Aggressive</strong>: learning_rate=0.05, exploration_rate=0.2 (fast adaptation)</li>
-            <li>• <strong>Update interval</strong>: 60s for production, 10s for testing</li>
-          </ul>
-        </div>
-      </section>
+          <div className="p-4 border border-blue-500 rounded-lg">
+            <h4 className="font-semibold mb-2">🎯 AI Tuning Guidelines</h4>
+            <ul className="text-sm space-y-1">
+              <li>• <strong>Conservative</strong>: learning_rate=0.005, exploration_rate=0.05 (stable production)</li>
+              <li>• <strong>Balanced</strong>: learning_rate=0.01, exploration_rate=0.1 (recommended)</li>
+              <li>• <strong>Aggressive</strong>: learning_rate=0.05, exploration_rate=0.2 (fast adaptation)</li>
+              <li>• <strong>Update interval</strong>: 60s for production, 10s for testing</li>
+            </ul>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">REST API Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">REST API Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">HTTP/JSON API Settings</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">HTTP/JSON API Settings</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # REST API CONFIGURATION
 #------------------------------------------------------------------------------
@@ -210,31 +191,31 @@ rest_api_cors_origins = '*'
 
 # API request logging
 rest_api_log_requests = on`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="space-y-2 text-sm">
-          <p><strong>Available API Endpoints (17 total):</strong></p>
-          <ul className="list-disc ml-6 space-y-1">
-            <li><code>GET /api/health</code> - Health check</li>
-            <li><code>GET /api/backends</code> - Backend status with AI health scores</li>
-            <li><code>GET /api/stats</code> - Pool statistics</li>
-            <li><code>GET /api/processes</code> - Active processes</li>
-            <li><code>GET /api/config</code> - Configuration info</li>
-            <li><code>POST /api/login</code> - JWT authentication</li>
-            <li><code>POST /api/node/{'{'}id{'}'}/attach</code> - Attach backend node</li>
-            <li><code>POST /api/node/{'{'}id{'}'}/detach</code> - Detach backend node</li>
-            <li>... and 9 more endpoints for cluster management</li>
-          </ul>
-        </div>
-      </section>
+          <div className="space-y-2 text-sm">
+            <p><strong>Available API Endpoints (17 total):</strong></p>
+            <ul className="list-disc ml-6 space-y-1">
+              <li><code>GET /api/health</code> - Health check</li>
+              <li><code>GET /api/backends</code> - Backend status with AI health scores</li>
+              <li><code>GET /api/stats</code> - Pool statistics</li>
+              <li><code>GET /api/processes</code> - Active processes</li>
+              <li><code>GET /api/config</code> - Configuration info</li>
+              <li><code>POST /api/login</code> - JWT authentication</li>
+              <li><code>POST /api/node/{'{'}id{'}'}/attach</code> - Attach backend node</li>
+              <li><code>POST /api/node/{'{'}id{'}'}/detach</code> - Detach backend node</li>
+              <li>... and 9 more endpoints for cluster management</li>
+            </ul>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">MQTT Event Streaming Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">MQTT Event Streaming Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Real-Time Event Publishing</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Real-Time Event Publishing</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # MQTT EVENT STREAMING
 #------------------------------------------------------------------------------
@@ -265,26 +246,26 @@ mqtt_publish_connection = off      # Connection events (verbose)
 
 # Publish interval for status updates (seconds)
 mqtt_publish_interval = 30`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="p-4 border border-purple-500 rounded-lg">
-          <h4 className="font-semibold mb-2">📡 Event Topics</h4>
-          <ul className="text-sm space-y-1">
-            <li>• <code>pgbalancer/node/status</code> - Node status changes</li>
-            <li>• <code>pgbalancer/failover</code> - Failover events</li>
-            <li>• <code>pgbalancer/health</code> - Health check results</li>
-            <li>• <code>pgbalancer/stats</code> - Periodic statistics</li>
-          </ul>
-        </div>
-      </section>
+          <div className="p-4 border border-purple-500 rounded-lg">
+            <h4 className="font-semibold mb-2">📡 Event Topics</h4>
+            <ul className="text-sm space-y-1">
+              <li>• <code>pgbalancer/node/status</code> - Node status changes</li>
+              <li>• <code>pgbalancer/failover</code> - Failover events</li>
+              <li>• <code>pgbalancer/health</code> - Health check results</li>
+              <li>• <code>pgbalancer/stats</code> - Periodic statistics</li>
+            </ul>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Load Balancing Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Load Balancing Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Load Balancing Modes and Settings</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Load Balancing Modes and Settings</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # LOAD BALANCING
 #------------------------------------------------------------------------------
@@ -315,16 +296,16 @@ disable_load_balance_on_write = 'transaction'
 # Database redirect preferences
 database_redirect_preference_list = ''
 app_name_redirect_preference_list = ''`}
-          </pre>
-        </div>
-      </section>
+            </pre>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Health Check Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Health Check Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Backend Health Monitoring</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Backend Health Monitoring</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # HEALTH CHECK
 #------------------------------------------------------------------------------
@@ -353,36 +334,36 @@ connect_timeout = 10000
 
 # Log health check errors
 log_health_check = off`}
-          </pre>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">Health Check Best Practices</h4>
-            <ul className="text-sm space-y-1">
-              <li>• Set <code>health_check_period</code> between 5-30 seconds</li>
-              <li>• Use dedicated health check user with minimal permissions</li>
-              <li>• Set timeout shorter than period to avoid overlap</li>
-              <li>• Enable <code>log_health_check</code> for debugging only</li>
-            </ul>
+            </pre>
           </div>
-          <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">Recommended Settings</h4>
-            <ul className="text-sm space-y-1">
-              <li>• <strong>Production</strong>: period=10, timeout=5, retries=3</li>
-              <li>• <strong>Testing</strong>: period=5, timeout=2, retries=1</li>
-              <li>• <strong>High latency</strong>: period=30, timeout=10, retries=5</li>
-            </ul>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="p-4 border rounded-lg">
+              <h4 className="font-semibold mb-2">Health Check Best Practices</h4>
+              <ul className="text-sm space-y-1">
+                <li>• Set <code>health_check_period</code> between 5-30 seconds</li>
+                <li>• Use dedicated health check user with minimal permissions</li>
+                <li>• Set timeout shorter than period to avoid overlap</li>
+                <li>• Enable <code>log_health_check</code> for debugging only</li>
+              </ul>
+            </div>
+            <div className="p-4 border rounded-lg">
+              <h4 className="font-semibold mb-2">Recommended Settings</h4>
+              <ul className="text-sm space-y-1">
+                <li>• <strong>Production</strong>: period=10, timeout=5, retries=3</li>
+                <li>• <strong>Testing</strong>: period=5, timeout=2, retries=1</li>
+                <li>• <strong>High latency</strong>: period=30, timeout=10, retries=5</li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Failover and Watchdog Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Failover and Watchdog Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">High Availability Settings</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">High Availability Settings</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # FAILOVER
 #------------------------------------------------------------------------------
@@ -427,16 +408,16 @@ arping_cmd = '/usr/bin/arping -U $_IP_$ -w 1 -I eth0'
 wd_monitoring_interfaces_list = ''
 wd_interval = 10
 wd_priority = 1`}
-          </pre>
-        </div>
-      </section>
+            </pre>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Logging Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Logging Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Logging and Debug Settings</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Logging and Debug Settings</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # LOGGING
 #------------------------------------------------------------------------------
@@ -473,16 +454,16 @@ syslog_ident = 'pgbalancer'
 log_min_messages = warning
 client_min_messages = notice
 log_error_verbosity = default`}
-          </pre>
-        </div>
-      </section>
+            </pre>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Authentication Configuration</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Authentication Configuration</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Client and PCP Authentication</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Client and PCP Authentication</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # AUTHENTICATION
 #------------------------------------------------------------------------------
@@ -503,13 +484,13 @@ ssl_ca_cert_dir = ''
 
 # PCP authentication file
 pcp_socket_dir = '/var/run/pgbalancer'`}
-          </pre>
-        </div>
+            </pre>
+          </div>
 
-        <div className="space-y-2 text-sm">
-          <p><strong>Setting up pool_passwd file:</strong></p>
-          <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-            <pre className="bg-black text-green-400 p-3 rounded overflow-x-auto text-xs">
+          <div className="space-y-2 text-sm">
+            <p><strong>Setting up pool_passwd file:</strong></p>
+            <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
+              <pre className="bg-black text-green-400 p-3 rounded overflow-x-auto text-xs">
 {`# Format: username:md5password
 # Generate MD5 password hash
 pg_md5 your_password
@@ -517,19 +498,19 @@ pg_md5 your_password
 # Add to /etc/pgbalancer/pool_passwd
 postgres:md5d8578edf8458ce06fbc5bb76a58c5ca4
 appuser:md5a1b2c3d4e5f6789012345678901234`}
-            </pre>
+              </pre>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Advanced Features</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Advanced Features</h2>
 
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Query Cache</h3>
-            <div className="bg-gray-800/50 rounded-lg p-6">
-              <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Query Cache</h3>
+              <div className="bg-gray-800/50 rounded-lg p-6">
+                <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`# Memory query cache
 memory_cache_enabled = on
 memqcache_method = 'shmem'
@@ -538,14 +519,14 @@ memqcache_max_num_cache = 1000000
 memqcache_expire = 0
 memqcache_auto_cache_invalidation = on
 memqcache_maxcache = 400KB`}
-              </pre>
+                </pre>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Replication Mode</h3>
-            <div className="bg-gray-800/50 rounded-lg p-6">
-              <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Replication Mode</h3>
+              <div className="bg-gray-800/50 rounded-lg p-6">
+                <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`# Replication mode settings
 replication_mode = off
 replicate_select = off
@@ -556,14 +537,14 @@ lobj_lock_table = ''
 sr_check_period = 10
 sr_check_user = 'postgres'
 delay_threshold = 10000000`}
-              </pre>
+                </pre>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-3">In-Memory Query Cache</h3>
-            <div className="bg-gray-800/50 rounded-lg p-6">
-              <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+            <div>
+              <h3 className="text-xl font-semibold mb-3">In-Memory Query Cache</h3>
+              <div className="bg-gray-800/50 rounded-lg p-6">
+                <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`# Enable in-memory query result caching
 memory_cache_enabled = on
 
@@ -582,18 +563,18 @@ memqcache_expire = 0
 
 # Auto invalidation on table updates
 memqcache_auto_cache_invalidation = on`}
-              </pre>
+                </pre>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Complete Configuration Example</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Complete Configuration Example</h2>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Production-Ready Configuration</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Production-Ready Configuration</h3>
+            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#==============================================================================
 # pgBalancer Production Configuration
 # Modern AI-Powered PostgreSQL Connection Pooler
@@ -695,15 +676,15 @@ logdir = '/var/log/pgbalancer'
 log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
 log_connections = on
 log_min_messages = info`}
-          </pre>
-        </div>
-      </section>
+            </pre>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Configuration Validation</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Configuration Validation</h2>
 
-        <BashCodeBlock
-          code={`# Test configuration file syntax (dry-run)
+          <BashCodeBlock
+            code={`# Test configuration file syntax (dry-run)
 pgbalancer -f /etc/pgbalancer/pgbalancer.conf -n
 
 # Check for configuration errors
@@ -717,99 +698,100 @@ bctl reload
 
 # Or via systemd
 sudo systemctl reload pgbalancer`}
-          title="Validate and Reload Configuration"
-        />
-      </section>
+            title="Validate and Reload Configuration"
+          />
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Configuration Parameters Reference</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Configuration Parameters Reference</h2>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-700 text-sm">
-            <thead className="bg-muted">
-              <tr>
-                <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Category</th>
-                <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Key Parameters</th>
-                <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Default</th>
-                <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Connections</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>num_init_children</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">32</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Pre-forked child processes</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">AI Routing</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>enable_ai_load_balance</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Enable machine learning routing</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">AI Routing</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>ai_learning_rate</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">0.01</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Learning rate for weight updates</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">REST API</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>enable_rest_api</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Enable HTTP/JSON API server</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">REST API</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>rest_api_port</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">8080</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">API server port</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">MQTT</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>enable_mqtt</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Enable MQTT event publishing</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Health Check</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>health_check_period</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">0</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Health check interval (seconds)</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Load Balancing</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>load_balance_mode</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Distribute SELECT queries to replicas</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+          <div className="overflow-x-auto">
+            <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-700 text-sm">
+              <thead className="bg-muted">
+                <tr>
+                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Category</th>
+                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Key Parameters</th>
+                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Default</th>
+                  <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Connections</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>num_init_children</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">32</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">Pre-forked child processes</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">AI Routing</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>enable_ai_load_balance</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">Enable machine learning routing</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">AI Routing</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>ai_learning_rate</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">0.01</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">Learning rate for weight updates</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">REST API</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>enable_rest_api</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">Enable HTTP/JSON API server</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">REST API</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>rest_api_port</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">8080</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">API server port</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">MQTT</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>enable_mqtt</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">Enable MQTT event publishing</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Health Check</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>health_check_period</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">0</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">Health check interval (seconds)</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Load Balancing</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3"><code>load_balance_mode</code></td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">off</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-3">Distribute SELECT queries to replicas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Next Steps</h2>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Next Steps</h2>
 
-        <div className="grid md:grid-cols-2 gap-4">
-          <a href="/docs/pgbalancer/load-balancing" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">🤖 AI Load Balancing</h3>
-            <p className="text-sm text-muted-foreground">Machine learning algorithms and intelligent routing</p>
-          </a>
-          <a href="/docs/pgbalancer/rest-api" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">🌐 REST API Reference</h3>
-            <p className="text-sm text-muted-foreground">17 HTTP/JSON endpoints with examples</p>
-          </a>
-          <a href="/docs/pgbalancer/cli-management" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">⌨️ bctl CLI Tool</h3>
-            <p className="text-sm text-muted-foreground">Unified command-line interface</p>
-          </a>
-          <a href="/docs/pgbalancer/high-availability" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">🔒 High Availability</h3>
-            <p className="text-sm text-muted-foreground">Failover, watchdog, and cluster management</p>
-          </a>
-        </div>
-      </section>
-    </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            <a href="/docs/pgbalancer/load-balancing" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
+              <h3 className="font-semibold mb-2">🤖 AI Load Balancing</h3>
+              <p className="text-sm text-muted-foreground">Machine learning algorithms and intelligent routing</p>
+            </a>
+            <a href="/docs/pgbalancer/rest-api" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
+              <h3 className="font-semibold mb-2">🌐 REST API Reference</h3>
+              <p className="text-sm text-muted-foreground">17 HTTP/JSON endpoints with examples</p>
+            </a>
+            <a href="/docs/pgbalancer/cli-management" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
+              <h3 className="font-semibold mb-2">⌨️ bctl CLI Tool</h3>
+              <p className="text-sm text-muted-foreground">Unified command-line interface</p>
+            </a>
+            <a href="/docs/pgbalancer/high-availability" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
+              <h3 className="font-semibold mb-2">🔒 High Availability</h3>
+              <p className="text-sm text-muted-foreground">Failover, watchdog, and cluster management</p>
+            </a>
+          </div>
+        </section>
+      </div>
+    </DocsContentLayout>
   );
 }
