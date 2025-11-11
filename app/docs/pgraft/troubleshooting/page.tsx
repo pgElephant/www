@@ -1,15 +1,16 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
-  title: 'pgraft Troubleshooting - Common Issues & Solutions | pgElephant',
-  description: 'Diagnose and resolve pgraft Raft consensus issues: quorum loss, replication lag, elections, and KV store errors inside PostgreSQL.',
+  title: 'pgRaft Troubleshooting | Common Issues & Fixes',
+  description:
+    'Diagnose and resolve pgRaft consensus issues including quorum loss, replication lag, election churn, snapshot backlogs, and KV store anomalies.',
 }
 
-const quickChecks = `-- Verify cluster health from any node
+const quickSql = `-- Verify cluster health from any node
 SELECT * FROM pgraft_get_cluster_status();
 SELECT * FROM pgraft_log_get_replication_status();
 SELECT * FROM pgraft_get_nodes();`
@@ -27,196 +28,272 @@ if [[ "$LAG" -gt 1000 ]]; then
   echo "$(date --iso-8601=seconds) CRITICAL replication lag: $LAG entries" >> /var/log/pgraft-alerts.log
 fi`
 
-const supportScript = String.raw`#!/usr/bin/env bash
-DEST=/tmp/pgraft-support-$(date +%s)
-mkdir -p "$DEST"
-
-psql -f - <<'SQL'
-\o \${DEST}/cluster_status.txt
-SELECT * FROM pgraft_get_cluster_status();
-SELECT * FROM pgraft_log_get_replication_status();
-SELECT * FROM pgraft_get_nodes();
-SELECT * FROM pgraft_log_get_stats();
-SQL
-
-cp /var/log/postgresql/postgresql-*-main.log "$DEST"/
-tar -C /tmp -czf pgraft-support.tar.gz "$(basename "$DEST")"
-`
+const supportScript = [
+  '#!/usr/bin/env bash',
+  'DEST=/tmp/pgraft-support-$(date +%s)',
+  'mkdir -p "$DEST"',
+  '',
+  "psql -f - <<'SQL'",
+  '\\o ${DEST}/cluster_status.txt',
+  'SELECT * FROM pgraft_get_cluster_status();',
+  'SELECT * FROM pgraft_log_get_replication_status();',
+  'SELECT * FROM pgraft_get_nodes();',
+  'SELECT * FROM pgraft_log_get_stats();',
+  'SQL',
+  '',
+  'cp /var/log/postgresql/postgresql-*-main.log "$DEST"/',
+  'tar -C /tmp -czf pgraft-support.tar.gz "$(basename "$DEST")"',
+].join('\n')
 
 export default function PgraftTroubleshootingPage() {
   return (
-    <DocsContentLayout
+    <GettingStartedLayout
+      product="pgRaft"
       hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'pgraft Troubleshooting',
+        label: 'pgRaft',
+        labelIcon: <PgraftIcon size={20} />, 
+        labelAccent: 'blue',
+        title: 'Restore pgRaft Cluster Health',
         description:
-          'Use these diagnostics, SQL helpers, and remediation steps to restore Raft consensus health across your PostgreSQL cluster.',
+          'Follow these diagnostic cards to recover from quorum loss, replication lag, leadership churn, and storage backlogs. Each step includes SQL and Bash commands you can run immediately.',
+        cta: {
+          href: '/docs/pgraft/troubleshooting',
+          label: 'Bookmark troubleshooting playbook',
+        },
       }}
-      contentWidth="wide"
-    >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Quick Health Checklist</h2>
-          <p className="text-muted-foreground">
-            Run these queries immediately when you suspect cluster drift. They expose leadership, quorum size, replication backlog, and heartbeat timings without leaving psql.
-          </p>
-          <SqlCodeBlock title="Baseline diagnostics" code={quickChecks} />
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="border rounded-lg p-4 space-y-2">
-              <h3 className="font-semibold">Interpretation</h3>
-              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>
-                  <code>state</code> should include exactly one leader; followers should show low <code>last_heartbeat_ms</code> values.
-                </li>
-                <li>
-                  <code>lag_entries</code> above 100 indicates a lagging follower. Above 1000 requires immediate action.
-                </li>
-                <li>
-                  Check <code>messages_processed</code> for sudden drops, which can indicate stalled workers.
-                </li>
-              </ul>
-            </div>
-            <div className="border rounded-lg p-4 space-y-2">
-              <h3 className="font-semibold">When to escalate</h3>
-              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>No leader for longer than the election timeout.</li>
-                <li>Quorum count lower than expected cluster size.</li>
-                <li>Replication lag grows continuously after remedial steps.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Connection &amp; Identity Failures</h2>
-          <p className="text-muted-foreground">
-            Membership issues usually stem from incorrect GUC identity or blocked network routes. Inspect the catalog to verify identity and restart nodes with corrected configuration.
-          </p>
-          <SqlCodeBlock
-            title="Validate node identity"
-            code={`SELECT node_id,
+      theme={{
+        pageBackground: 'bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-950',
+        heroOverlay: 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 dark:from-blue-500/10 dark:to-cyan-500/10',
+        requirementsBorder: 'blue',
+        requirementsBackground: 'bg-white/90 dark:bg-slate-900/70',
+      }}
+      requirements={{
+        title: 'Fast triage checklist',
+        items: [
+          'Run the cluster health SQL below on the leader before making changes',
+          'Confirm only one node reports `state = leader` in `pgraft_cluster_state`',
+          'Capture `journalctl -u postgresql` output from leaders and lagging followers',
+          'Back up `pgraft.data_dir` contents prior to aggressive snapshot cleanup',
+        ],
+        note: 'Perform remediation in a staging or maintenance window whenever possible. Revert temporary settings after the incident.',
+      }}
+      sections={[
+        {
+          title: 'Cluster health baseline',
+          description: 'Collect cluster state, replication backlog, and heartbeat metrics before applying fixes.',
+          cards: [
+            {
+              id: 'baseline-sql',
+              title: 'Gather health snapshot',
+              accent: 'blue',
+              content: (
+                <>
+                  <SqlCodeBlock title="Baseline diagnostics" code={quickSql} />
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Look for exactly one leader, low <code>lag_entries</code>, and matching <code>current_term</code> across nodes.
+                  </p>
+                </>
+              ),
+            },
+            {
+              id: 'baseline-interpret',
+              title: 'Interpretation cues',
+              accent: 'slate',
+              content: (
+                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                  <li>If <code>lag_entries</code> exceeds 100, start recovery on the slow follower.</li>
+                  <li>Quorum must equal the expected cluster size; fewer nodes indicate connectivity or identity drift.</li>
+                  <li>Large gaps between <code>messages_processed</code> on leader vs followers highlight stalled workers.</li>
+                </ul>
+              ),
+            },
+          ],
+        },
+        {
+          title: 'Connectivity & identity',
+          description: 'Resolve node identity mismatches and network blocks that prevent Raft replication.',
+          cards: [
+            {
+              id: 'identity',
+              title: 'Validate node identity',
+              accent: 'cyan',
+              content: (
+                <SqlCodeBlock
+                  title="Catalog review"
+                  code={`SELECT node_id,
        cluster_id,
        address,
        port,
        data_dir
   FROM pgraft_nodes_catalog
  ORDER BY node_id;`}
-          />
-          <BashCodeBlock
-            title="Network health"
-            code={`# Check Raft TCP port reachability
+                />
+              ),
+            },
+            {
+              id: 'network',
+              title: 'Network reachability',
+              accent: 'emerald',
+              content: (
+                <BashCodeBlock
+                  title="Connectivity commands"
+                  code={`# Verify Raft ports
 nc -vz 10.0.0.12 7002
 
-# Ensure pg_hba allows replication user
+# Confirm pg_hba allows replication connections
 psql -c "SELECT * FROM pg_hba_file_rules WHERE user_name = 'pgraft_cluster';"`}
-          />
-          <div className="border-l-4 border-blue-500 bg-blue-50/40 dark:bg-blue-500/10 rounded-r-lg p-4">
-            <h3 className="font-semibold mb-2">Remediation</h3>
-            <ol className="list-decimal list-inside text-sm text-muted-foreground space-y-1">
-              <li>Confirm <code>pgraft.cluster_id</code> is identical on every node.</li>
-              <li>Assign unique <code>pgraft.node_id</code> values; duplicates cause vote conflicts.</li>
-              <li>Restart PostgreSQL if you adjusted <code>shared_preload_libraries</code> or identity GUCs.</li>
-            </ol>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Replication Lag &amp; Stalled Followers</h2>
-          <p className="text-muted-foreground">
-            Lagging followers threaten quorum and can block synchronous commits. Use the following SQL and shell tooling to triage and recover.
-          </p>
-          <SqlCodeBlock
-            title="Inspect lagging followers"
-            code={`SELECT node_id,
+                />
+              ),
+            },
+            {
+              id: 'connect-remediation',
+              title: 'Remediation steps',
+              accent: 'blue',
+              content: (
+                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                  <li>Ensure <code>pgraft.cluster_id</code> matches on every node; mismatched IDs form separate quorums.</li>
+                  <li>Assign unique <code>pgraft.node_id</code> values and restart nodes after updates.</li>
+                  <li>Reload PostgreSQL when altering <code>pg_hba.conf</code> or replication credentials.</li>
+                </ul>
+              ),
+            },
+          ],
+        },
+        {
+          title: 'Replication lag & follower recovery',
+          description: 'Bring slow followers back into quorum and alert on backlogs before they become critical.',
+          cards: [
+            {
+              id: 'lag-inspect',
+              title: 'Inspect lagging followers',
+              accent: 'blue',
+              content: (
+                <SqlCodeBlock
+                  title="Lag diagnostics"
+                  code={`SELECT node_id,
        state,
        lag_entries,
        replication_lag_bytes,
        last_apply_lsn
   FROM pgraft_log_get_replication_status()
  ORDER BY lag_entries DESC;`}
-          />
-          <SqlCodeBlock
-            title="Force resync of a follower"
-            code={`-- Run on the lagging follower after network issues resolve
+                />
+              ),
+            },
+            {
+              id: 'lag-recover',
+              title: 'Force follower resync',
+              accent: 'purple',
+              content: (
+                <SqlCodeBlock
+                  title="Follower catch-up"
+                  code={`-- Run on lagging follower once connectivity is restored
 SELECT pgraft_log_sync_with_leader();`}
-          />
-          <div className="grid md:grid-cols-2 gap-4">
-            <BashCodeBlock title="Lag alert script" code={lagScript} />
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold">Common causes</h3>
-              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Saturated disks or CPU throttling on followers.</li>
-                <li>Network jitter causing packet loss on the Raft port.</li>
-                <li>Followers paused for maintenance without demoting them first.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Leadership Churn</h2>
-          <p className="text-muted-foreground">
-            Frequent elections introduce commit latency spikes and may indicate that heartbeats cannot reach a majority fast enough.
-          </p>
-          <SqlCodeBlock title="Election drift" code={electionDrift} />
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="border rounded-lg p-4 space-y-2">
-              <h3 className="font-semibold">Stabilization tactics</h3>
-              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Increase <code>pgraft.election_timeout</code> by 200–300 ms to absorb spikes.</li>
-                <li>Lower heartbeat interval temporarily when you expect bursty workloads.</li>
-                <li>Verify leader CPU is not saturated; busy loops delay heartbeat dispatch.</li>
-              </ul>
-            </div>
-            <BashCodeBlock
-              title="Adjust timing"
-              code={`psql -c "SELECT pgraft_set_config('election_timeout', '1200ms');"
+                />
+              ),
+            },
+            {
+              id: 'lag-alerting',
+              title: 'Alert on backlog',
+              accent: 'rose',
+              content: <BashCodeBlock title="Lag alert script" code={lagScript} />,
+            },
+          ],
+        },
+        {
+          title: 'Leadership stability',
+          description: 'Reduce election churn and heartbeat noise that introduce latency spikes.',
+          cards: [
+            {
+              id: 'election-drift',
+              title: 'Detect election drift',
+              accent: 'indigo',
+              content: <SqlCodeBlock title="Election analysis" code={electionDrift} />,
+            },
+            {
+              id: 'timing',
+              title: 'Tune timing parameters',
+              accent: 'amber',
+              content: (
+                <BashCodeBlock
+                  title="Adjust timers"
+                  code={`psql -c "SELECT pgraft_set_config('election_timeout', '1200ms');"
 psql -c "SELECT pgraft_set_config('heartbeat_interval', '60ms');"
 psql -c "SELECT pgraft_save_config();"`}
-            />
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Snapshot &amp; Storage Problems</h2>
-          <p className="text-muted-foreground">
-            Snapshot backlogs usually appear when disk space is constrained or snapshot intervals are tuned too high for the workload.
-          </p>
-          <SqlCodeBlock
-            title="Snapshot backlog"
-            code={`SELECT total_entries,
+                />
+              ),
+            },
+            {
+              id: 'stability-tips',
+              title: 'Stabilization tips',
+              accent: 'slate',
+              content: (
+                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                  <li>Increase <code>election_timeout</code> during heavy write bursts.</li>
+                  <li>Ensure leaders have sufficient CPU headroom for heartbeats.</li>
+                  <li>Temporarily disable aggressive failover automation during maintenance.</li>
+                </ul>
+              ),
+            },
+          ],
+        },
+        {
+          title: 'Snapshots & storage',
+          description: 'Clear snapshot backlogs and monitor disk usage for Raft metadata.',
+          cards: [
+            {
+              id: 'snapshot-sql',
+              title: 'Check snapshot backlog',
+              accent: 'cyan',
+              content: (
+                <SqlCodeBlock
+                  title="Snapshot metrics"
+                  code={`SELECT total_entries,
        pending_snapshots,
        last_snapshot_term,
        last_snapshot_index
   FROM pgraft_log_get_stats();`}
-          />
-          <div className="grid md:grid-cols-2 gap-4">
-            <BashCodeBlock
-              title="Snapshot directory usage"
-              code={`du -sh /var/lib/postgresql/pgraft/snapshots
+                />
+              ),
+            },
+            {
+              id: 'snapshot-disk',
+              title: 'Inspect snapshot directory',
+              accent: 'emerald',
+              content: (
+                <BashCodeBlock
+                  title="Disk usage"
+                  code={`du -sh /var/lib/postgresql/pgraft/snapshots
 ls -lh /var/lib/postgresql/pgraft/snapshots | tail -10`}
-            />
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold">Resolution</h3>
-              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Lower <code>pgraft.snapshot_threshold</code> to cut the log sooner.</li>
-                <li>Ensure snapshots reside on high-throughput SSD storage.</li>
-                <li>Archive old snapshots after verifying fresh copies exist on secondary storage.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Replicated KV Store Issues</h2>
-          <p className="text-muted-foreground">
-            pgraft’s KV store shares consensus semantics with SQL writes. Use the helpers below to confirm writes propagate and detect stuck values.
-          </p>
-          <SqlCodeBlock
-            title="End-to-end integrity"
-            code={`DO $$
+                />
+              ),
+            },
+            {
+              id: 'snapshot-remediation',
+              title: 'Remediation tips',
+              accent: 'blue',
+              content: (
+                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                  <li>Lower <code>pgraft.snapshot_threshold</code> to shorten log retention during churn.</li>
+                  <li>Move snapshot storage to SSD tiers for faster compaction.</li>
+                  <li>Archive old snapshots after confirming recent copies exist elsewhere.</li>
+                </ul>
+              ),
+            },
+          ],
+        },
+        {
+          title: 'KV store integrity',
+          description: 'Validate replicated KV operations and watch for oversized payloads.',
+          cards: [
+            {
+              id: 'kv-roundtrip',
+              title: 'Roundtrip test',
+              accent: 'purple',
+              content: (
+                <SqlCodeBlock
+                  title="Health probe"
+                  code={`DO $$
 DECLARE
   k TEXT := 'troubleshoot_' || extract(epoch FROM now());
   v JSONB := jsonb_build_object('status', 'probe');
@@ -230,29 +307,40 @@ BEGIN
   PERFORM pgraft_kv_delete(k);
 END;
 $$;`}
-          />
-          <SqlCodeBlock
-            title="Detect skew"
-            code={`SELECT key,
+                />
+              ),
+            },
+            {
+              id: 'kv-skew',
+              title: 'Detect skewed entries',
+              accent: 'indigo',
+              content: (
+                <SqlCodeBlock
+                  title="Large value audit"
+                  code={`SELECT key,
        pg_column_size(value) AS value_bytes,
        updated_at
   FROM pgraft.kv
  ORDER BY updated_at DESC
  LIMIT 20;`}
-          />
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Collecting Support Bundles</h2>
-          <p className="text-muted-foreground">
-            When opening a support ticket, attach a recent bundle containing cluster status, snapshots of key views, and relevant PostgreSQL logs.
-          </p>
-          <BashCodeBlock
-            title="Support bundle script"
-            code={supportScript}
-          />
-        </section>
-      </div>
-    </DocsContentLayout>
+                />
+              ),
+            },
+          ],
+        },
+        {
+          title: 'Support bundle',
+          description: 'Collect logs and catalog snapshots before contacting pgElephant support.',
+          cards: [
+            {
+              id: 'support-bundle',
+              title: 'Generate support bundle',
+              accent: 'rose',
+              content: <BashCodeBlock title="Support script" code={supportScript} />,
+            },
+          ],
+        },
+      ]}
+    />
   )
 }

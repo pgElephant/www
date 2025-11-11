@@ -1,14 +1,21 @@
-import React from 'react'
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import GettingStartedLayout from '../../../../components/GettingStartedLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import { PgSentinelIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
-  title: 'pgSentinel Troubleshooting - Common Issues and Solutions',
-  description: 'Diagnose pgSentinel deployments: container issues, pgBouncer connectivity, missing metrics, and alert delivery failures.',
+  title: 'pgSentinel Troubleshooting | Common Issues & Fixes',
+  description:
+    'Diagnose pgSentinel startup failures, pgBouncer connectivity issues, missing metrics, and webhook delivery errors using the guided fixes below.',
 }
+
+const requirements = [
+  'Ensure pgSentinel containers are running (`docker compose ps` or `kubectl get pods`)',
+  'Confirm the admin API responds: `curl http://pgsentinel:8080/api/v1/health` should return `{ "status": "healthy" }`',
+  'Verify pgBouncer admin credentials with `psql "postgres://admin:secret@pgbouncer:6432/pgbouncer" -c "SHOW STATS"`',
+  'Check that Prometheus can scrape `/metrics` when `PGSENTINEL_PROMETHEUS_EXPORT` is `true`',
+]
 
 const supportBundle = `#!/usr/bin/env bash
 DEST=/tmp/pgsentinel-support-$(date +%s)
@@ -22,97 +29,152 @@ curl -s http://localhost:8080/api/v1/status > "$DEST/status.json"
 
 pg_dump --schema=pgsentinel --format=custom pgsentinel > "$DEST/metrics.dump"
 
-tar -C /tmp -czf pgsentinel-support.tar.gz "$(basename "$DEST")"`;
+tar -C /tmp -czf pgsentinel-support.tar.gz "$(basename "$DEST")"`
 
-const PgSentinelTroubleshootingPage = () => {
+export default function PgSentinelTroubleshootingPage() {
   return (
-    <DocsContentLayout
+    <GettingStartedLayout
+      product="pgSentinel"
       hero={{
-        badgeLabel: 'pgSentinel',
-        badgeIcon: <PgSentinelIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Troubleshooting Guide',
+        label: 'pgSentinel',
+        labelIcon: <PgSentinelIcon size={20} />, 
+        labelAccent: 'emerald',
+        title: 'Restore pgSentinel Monitoring',
         description:
-          'Resolve startup failures, connectivity problems, and missing metrics in pgSentinel deployments.',
+          'Follow these actionable diagnostics to fix container startup issues, pgBouncer connectivity, missing metrics, and alert delivery in pgSentinel.',
+        cta: {
+          href: '/docs/pgsentinel/troubleshooting',
+          label: 'Bookmark troubleshooting playbook',
+        },
       }}
-      contentWidth="wide"
-    >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Quick Checks</h2>
-          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-            <li><strong>Health endpoint</strong>: <code>curl http://pgsentinel:8080/api/v1/health</code> should return <code>{`{"status":"healthy"}`}</code>.</li>
-            <li><strong>pgBouncer admin</strong>: <code>psql "postgres://admin:secret@pgbouncer:6432/pgbouncer" -c "SHOW STATS"</code> must succeed.</li>
-            <li><strong>Storage DB</strong>: Ensure <code>pgsentinel.metrics</code> table grows over time (<code>SELECT count(*) FROM pgsentinel.samples;</code>).</li>
-            <li><strong>Prometheus scrape</strong>: <code>curl http://pgsentinel:8080/metrics</code> returns metrics when <code>PGSENTINEL_PROMETHEUS_EXPORT=true</code>.</li>
-          </ul>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Containers Fail to Start</h2>
-          <p className="text-muted-foreground">Most startup issues stem from missing DSNs or conflicting ports.</p>
-          <BashCodeBlock
-            title="Diagnostics"
-            code={`docker compose ps
+      theme={{
+        pageBackground: 'bg-gradient-to-br from-slate-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-950',
+        heroOverlay: 'bg-gradient-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-500/10 dark:to-teal-500/10',
+        requirementsBorder: 'emerald',
+        requirementsBackground: 'bg-white/90 dark:bg-slate-900/70',
+      }}
+      requirements={{
+        title: 'Fast triage checklist',
+        items: requirements,
+        note: 'Collect diagnostics in staging before applying production fixes whenever possible. Roll back temporary settings after validation.',
+      }}
+      sections={[
+        {
+          title: 'Containers fail to start',
+          description: 'Most startup errors trace back to missing DSNs or conflicting ports.',
+          cards: [
+            {
+              id: 'container-diag',
+              title: 'Gather diagnostics',
+              accent: 'emerald',
+              content: (
+                <BashCodeBlock
+                  title="Startup checks"
+                  code={`docker compose ps
 docker compose logs pgsentinel | tail -n 50
 lsof -i :8080`}
-          />
-          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-            <li>Verify <code>PGSENTINEL_PGBOUNCER_DSN</code> and <code>PGSENTINEL_STORAGE_DSN</code> are set and reachable.</li>
-            <li>Check Docker secrets or Kubernetes secrets mount with correct permissions.</li>
-            <li>Free port 8080 or remap via <code>ports:</code> if a reverse proxy already listens there.</li>
-          </ul>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">No Metrics or Empty Dashboards</h2>
-          <p className="text-muted-foreground">
-            When charts show <em>No data</em>, polling may be blocked or retention is misconfigured.
-          </p>
-          <SqlCodeBlock
-            title="Verify samples"
-            code={`SELECT now() - max(observed_at) AS last_sample_age
+                />
+              ),
+            },
+            {
+              id: 'container-remediation',
+              title: 'Common fixes',
+              accent: 'slate',
+              content: (
+                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                  <li>Verify <code>PGSENTINEL_PGBOUNCER_DSN</code> and <code>PGSENTINEL_STORAGE_DSN</code> point to reachable services.</li>
+                  <li>Ensure secrets mounted via Docker/Kubernetes have correct permissions.</li>
+                  <li>Free port 8080 (or remap) if a reverse proxy is already listening.</li>
+                </ul>
+              ),
+            },
+          ],
+        },
+        {
+          title: 'Missing metrics or empty dashboards',
+          description: 'Confirm polling succeeds and retention is configured correctly.',
+          cards: [
+            {
+              id: 'metrics-samples',
+              title: 'Check last sample age',
+              accent: 'blue',
+              content: (
+                <SqlCodeBlock
+                  title="Sample recency"
+                  code={`SELECT now() - max(observed_at) AS last_sample_age
   FROM pgsentinel.samples;`}
-          />
-          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-            <li>If <code>last_sample_age</code> exceeds the scrape interval, confirm pgBouncer admin credentials and firewall rules.</li>
-            <li>Increase <code>max_client_conn</code> in pgBouncer if pgSentinel cannot obtain an admin connection.</li>
-            <li>Ensure <code>PGSENTINEL_METRICS_RETENTION_DAYS</code> is not set to 0; defaults to 30 days.</li>
-          </ul>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Alerts Not Firing</h2>
-          <p className="text-muted-foreground">
-            Webhooks only trigger when alert evaluation succeeds and thresholds are crossed.
-          </p>
-          <BashCodeBlock
-            title="Test alert delivery"
-            code={`curl -X POST https://pgsentinel.example.com/api/v1/alerts/test \
+                />
+              ),
+            },
+            {
+              id: 'metrics-remediation',
+              title: 'Remediation tips',
+              accent: 'emerald',
+              content: (
+                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                  <li>Confirm pgBouncer admin credentials and IP allowlists.</li>
+                  <li>Increase <code>max_client_conn</code> on pgBouncer if the admin console rejects pgSentinel.</li>
+                  <li>Set <code>PGSENTINEL_METRICS_RETENTION_DAYS</code> to a positive value (default 30 days).</li>
+                </ul>
+              ),
+            },
+          ],
+        },
+        {
+          title: 'Alerts not firing',
+          description: 'Webhooks only trigger when alert evaluation runs successfully and thresholds are crossed.',
+          cards: [
+            {
+              id: 'alert-test',
+              title: 'Send test notification',
+              accent: 'purple',
+              content: (
+                <BashCodeBlock
+                  title="Test webhook"
+                  code={`curl -X POST https://pgsentinel.example.com/api/v1/alerts/test \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{"webhook_id":"slack-primary"}'`}
-          />
-          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-            <li>Confirm <code>PGSENTINEL_ALERT_INTERVAL</code> is set (default 30s).</li>
-            <li>Inspect <code>pgsentinel.alert_events</code> for suppressed or muted alerts.</li>
-            <li>Check webhook response codes in <code>docker compose logs pgsentinel</code>; retries stop after 5 failures.</li>
-          </ul>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Support Bundle</h2>
-          <p className="text-muted-foreground">
-            Attach a bundle when opening a support ticket to fast-track investigations.
-          </p>
-          <BashCodeBlock title="Collect bundle" code={supportBundle} />
-          <p className="text-sm text-muted-foreground">
-            Upload <code>pgsentinel-support.tar.gz</code> along with system information (Docker version, PostgreSQL version, pgBouncer config snippet).
-          </p>
-        </section>
-      </div>
-    </DocsContentLayout>
+                />
+              ),
+            },
+            {
+              id: 'alert-remediation',
+              title: 'Alert checklist',
+              accent: 'slate',
+              content: (
+                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                  <li>Set <code>PGSENTINEL_ALERT_INTERVAL</code> (default 30s) to enable evaluations.</li>
+                  <li>Review <code>pgsentinel.alert_events</code> for muted or suppressed alerts.</li>
+                  <li>Inspect webhook responses in <code>docker compose logs pgsentinel</code>; pgSentinel stops retrying after five failures.</li>
+                </ul>
+              ),
+            },
+          ],
+        },
+        {
+          title: 'Support bundle',
+          description: 'Collect logs and metrics snapshots before opening a support ticket.',
+          cards: [
+            {
+              id: 'support',
+              title: 'Generate support bundle',
+              accent: 'rose',
+              content: <BashCodeBlock title="Support script" code={supportBundle} />,
+            },
+            {
+              id: 'support-note',
+              title: 'Share with pgElephant support',
+              accent: 'emerald',
+              content: (
+                <p className="text-sm text-muted-foreground">
+                  Upload <code>pgsentinel-support.tar.gz</code> together with Docker version, PostgreSQL version, and relevant pgBouncer configuration snippets.
+                </p>
+              ),
+            },
+          ],
+        },
+      ]}
+    />
   )
 }
-
-export default PgSentinelTroubleshootingPage

@@ -101,6 +101,42 @@ const PgStatInsightsUsagePage = () => {
           </p>
           <SqlCodeBlock title="Reset command" code={maintenance} />
         </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold">Next Steps</h2>
+          <p className="text-muted-foreground">
+            Continue refining observability by tuning configuration parameters, wiring dashboards, and consulting the troubleshooting playbook when metrics look off.
+          </p>
+          <div className="grid md:grid-cols-3 gap-4">
+            <a
+              href="/docs/pg_stat_insights/configuration"
+              className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+            >
+              <h3 className="font-semibold">Configuration Reference</h3>
+              <p className="text-sm text-muted-foreground">
+                Adjust retention, planning metrics, and sampling to match production workloads.
+              </p>
+            </a>
+            <a
+              href="/docs/pg_stat_insights/monitoring"
+              className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+            >
+              <h3 className="font-semibold">Monitoring & Alerts</h3>
+              <p className="text-sm text-muted-foreground">
+                Export metrics to Prometheus/Grafana and build alert rules for regressions.
+              </p>
+            </a>
+            <a
+              href="/docs/pg_stat_insights/troubleshooting"
+              className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+            >
+              <h3 className="font-semibold">Troubleshooting Playbook</h3>
+              <p className="text-sm text-muted-foreground">
+                Resolve preload errors, missing metrics, and overhead concerns with step-by-step fixes.
+              </p>
+            </a>
+          </div>
+        </section>
       </div>
     </DocsContentLayout>
   )

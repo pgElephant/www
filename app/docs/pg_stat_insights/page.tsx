@@ -114,6 +114,11 @@ export default function PgStatInsightsPage() {
               description: 'Wire metrics into Prometheus/Grafana and configure alert rules.'
             },
             {
+              title: 'Troubleshooting',
+              href: '/docs/pg_stat_insights/troubleshooting',
+              description: 'Fix preload errors, missing metrics, excessive overhead, and reset issues.'
+            },
+            {
               title: 'Views Reference',
               href: '/docs/pg_stat_insights/views',
               description: 'Reference for the eleven curated views bundled with pg_stat_insights.'
@@ -133,6 +138,12 @@ export default function PgStatInsightsPage() {
           description: 'Learn how to adjust tracking scope, retention, and planning metrics.',
           href: '/docs/pg_stat_insights/configuration',
           icon: Database
+        },
+        {
+          title: 'Troubleshooting Playbook',
+          description: 'Step-by-step fixes for missing metrics, overhead, and reset problems.',
+          href: '/docs/pg_stat_insights/troubleshooting',
+          icon: Activity
         },
         {
           title: 'Metrics Deep Dive',
