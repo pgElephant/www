@@ -81,17 +81,17 @@ const NeurondBIcon = ({ size = 80 }: { size?: number }) => (
 const neurondbConfig = {
   hero: {
     title: 'NeurondB: Advanced AI Database Extension for PostgreSQL',
-    subtitle: 'Production-grade vector search, machine learning inference, hybrid retrieval, and complete RAG pipeline support—all within PostgreSQL',
+    subtitle: 'Production-grade vector search with 52 ML algorithms, 497 SQL functions, GPU acceleration (CUDA/ROCm/Metal), and complete RAG pipeline—all within PostgreSQL',
     projectName: 'neurondb',
     icon: <NeurondBIcon size={80} />,
   },
   badges: [
     'PostgreSQL 16-18',
-    'Vector Search',
-    'ML Inference',
-    'HNSW Indexing',
-    'Hybrid Search',
-    'RAG Pipeline',
+    '8 Vector Types',
+    '52 ML Algorithms',
+    '497 SQL Functions',
+    'GPU Acceleration',
+    '5 Background Workers',
   ],
   demo: <NeurondBDemoTerminal />,
   architecture: <NeuronDBArchitectureDiagram />,
@@ -100,11 +100,11 @@ const neurondbConfig = {
     items: [
       { 
         title: 'Vector Search & Indexing', 
-        desc: 'Production-grade vector types (float32, float16, int8, binary, sparse). HNSW and IVF indexing with automatic parameter tuning. 10+ distance metrics including L2, Cosine, Inner Product, Manhattan, Hamming. 2x-32x compression with minimal accuracy loss.' 
+        desc: '8 production-grade vector types: vector (float32), vectorp (packed), halfvec (float16), binaryvec (binary), sparsevec (sparse), vecmap (map), vgraph (graph), rtext (retrieval text). HNSW and IVF indexing with automatic tuning. 10+ distance metrics. Product Quantization (PQ) and Optimized PQ (OPQ) for 2x-32x compression.' 
       },
       { 
         title: 'ML & Embeddings', 
-        desc: 'Built-in text, image, and multimodal embedding generation with automatic caching. ONNX runtime integration for custom models. Batch processing with 5x throughput. Fine-tuning support for domain adaptation. Models: all-MiniLM-L6-v2, BERT, CLIP.' 
+        desc: '52 ML algorithms implemented in pure C: Random Forest, XGBoost, LightGBM, CatBoost, Linear/Logistic Regression, Ridge, Lasso, SVM, KNN, Naive Bayes, Decision Trees, Neural Networks, Deep Learning. Built-in embedding generation with caching. ONNX runtime integration. Batch processing with GPU acceleration. Model catalog and versioning.' 
       },
       { 
         title: 'Hybrid Search & Retrieval', 
@@ -120,15 +120,15 @@ const neurondbConfig = {
       },
       { 
         title: 'Background Workers', 
-        desc: 'neuranq: Async job queue with SKIP LOCKED, rate limits, retries, poison job handling. neuranmon: Auto-tuner adjusting search params from SLOs, cache rotation, recall@k tracking. neurandefrag: Index compaction, re-leveling, tombstone pruning, rebuild scheduling. Tenant-aware with QPS/cost budgets.' 
+        desc: '5 production workers: neuranq (async job queue with SKIP LOCKED, retries, poison handling), neuranmon (auto-tuner for search params, cache rotation, recall@k tracking), neurandefrag (index compaction, tombstone pruning, rebuild scheduling), neuranllm (LLM job processing with crash recovery), neuranbatch (batch operations). All tenant-aware with QPS/cost budgets.' 
       },
       { 
         title: 'ML Analytics Suite', 
-        desc: 'K-means and Mini-batch K-means clustering (CPU & GPU). DBSCAN density-based clustering. PCA, OPQ dimensionality reduction. Isolation Forest outlier detection. GMM (Gaussian Mixture Models). Hierarchical clustering. Davies-Bouldin quality metrics. Drift detection for model monitoring.' 
+        desc: 'Comprehensive analytics: K-means, Mini-batch K-means, DBSCAN, GMM, Hierarchical clustering (all GPU-accelerated). Dimensionality reduction: PCA, PCA Whitening, OPQ. Outlier detection: Z-score, Modified Z-score, IQR, Isolation Forest. Quality metrics: Davies-Bouldin Index, Recall@K, Precision@K, F1@K, MRR. Drift detection with temporal monitoring. Topic discovery and modeling.' 
       },
       { 
         title: 'GPU Acceleration', 
-        desc: 'CUDA and ROCm support for NVIDIA and AMD GPUs. Batch distance computation (100x speedup). GPU-accelerated quantization. K-means clustering on GPU (23x faster). Automatic CPU fallback. Multi-stream copy/compute overlap. Configurable memory pools.' 
+        desc: 'Full GPU support: CUDA (NVIDIA), ROCm (AMD), Metal (Apple Silicon). GPU-accelerated ML algorithms: Random Forest, XGBoost, LightGBM, Linear/Logistic Regression, SVM, KNN, Decision Trees, Naive Bayes, GMM, K-means. Batch distance computation (100x speedup). Automatic GPU detection with CPU fallback. Multi-stream compute overlap. Production-ready with memory management.' 
       },
       { 
         title: 'Performance & Optimization', 
@@ -144,7 +144,7 @@ const neurondbConfig = {
       },
       { 
         title: 'PostgreSQL Native Architecture', 
-        desc: 'Pure C implementation following PostgreSQL coding standards. 40+ source files, zero warnings. PGXS build system. Shared memory for caching. WAL integration for durability. SPI for safe database operations. Background worker framework. Standard extension, no core modifications.' 
+        desc: 'Pure C implementation following 100% PostgreSQL coding standards. 144 source files + 64 headers, zero compiler warnings. PGXS build system. 497 SQL functions/types/operators in 6,191 lines. Shared memory for caching. WAL integration for durability. SPI for safe operations. Background worker framework. Standard extension, zero external dependencies, no core modifications.' 
       },
     ],
   },
@@ -253,7 +253,7 @@ const neurondbConfig = {
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-3 py-3 font-medium text-cyan-300 text-xs">ML Algorithms</td>
-          <td className="px-3 py-3 text-green-400 text-xs">K-means, DBSCAN, PCA, GMM, Isolation Forest, Hierarchical</td>
+          <td className="px-3 py-3 text-green-400 text-xs">52 algorithms: RF, XGBoost, LightGBM, CatBoost, SVM, KNN, DT, NB, NN, K-means, DBSCAN, GMM, PCA, etc.</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
@@ -261,7 +261,7 @@ const neurondbConfig = {
         </tr>
         <tr>
           <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Background Workers</td>
-          <td className="px-3 py-3 text-green-400 text-xs">neuranq, neuranmon, neurandefrag</td>
+          <td className="px-3 py-3 text-green-400 text-xs">5 workers: neuranq, neuranmon, neurandefrag, neuranllm, neuranbatch</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
@@ -309,7 +309,7 @@ const neurondbConfig = {
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-3 py-3 font-medium text-cyan-300 text-xs">GPU Support</td>
-          <td className="px-3 py-3 text-green-400 text-xs">CUDA + ROCm (native)</td>
+          <td className="px-3 py-3 text-green-400 text-xs">CUDA + ROCm + Metal (native C/C++)</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
