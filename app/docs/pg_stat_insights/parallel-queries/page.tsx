@@ -1,12 +1,29 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
-import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pg_stat_insights · Parallel Query Analysis',
   description: 'Track parallel worker usage, measure speedups, and tune PostgreSQL parallel query execution with pg_stat_insights.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'inspect-parallel', title: 'Inspect Parallel Adoption' },
+  { id: 'evaluate-speedup', title: 'Evaluate Parallel Speedup' },
+  { id: 'sequential-fallbacks', title: 'Highlight Sequential Fallbacks' },
+  { id: 'tune-configuration', title: 'Tune Configuration' },
+  { id: 'optimize-plans', title: 'Optimise Execution Plans' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pg_stat_insights/io-performance',
+  label: 'I/O Performance Analysis',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pg_stat_insights/slow-queries',
+  label: 'Slow Query Analysis',
 }
 
 const parallelUsage = `SELECT queryid,
@@ -44,36 +61,31 @@ parallel_leader_participation = on`
 
 export default function PgStatInsightsParallelQueriesPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pg_stat_insights',
-        badgeIcon: <PgStatInsightsIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Parallel Query Analysis',
-        description:
-          'Measure parallel worker utilisation, quantify speedups, and uncover queries that should embrace or avoid parallel execution.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Parallel Query Analysis"
+      version="pg_stat_insights Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">1. Inspect Parallel Adoption</h2>
-          <p className="text-muted-foreground">
+      <section id="inspect-parallel">
+        <h2>Inspect Parallel Adoption</h2>
+        <p>
             Start by listing the busiest queries that launched parallel workers. Compare the number planned versus launched to identify executor fallbacks (e.g., due to insufficient workers).
           </p>
           <SqlCodeBlock title="Queries using parallel workers" code={parallelUsage} />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">2. Evaluate Parallel Speedup</h2>
-          <p className="text-muted-foreground">
+      <section id="evaluate-speedup">
+        <h2>Evaluate Parallel Speedup</h2>
+        <p>
             Gauge efficiency by normalising execution time per worker. Small or negative gains suggest the workload is not parallel-friendly.
           </p>
           <SqlCodeBlock title="Execution time per worker" code={speedupRatio} />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">3. Highlight Sequential Fallbacks</h2>
+      <section id="sequential-fallbacks">
+        <h2>Highlight Sequential Fallbacks</h2>
           <SqlCodeBlock
             title="Queries planned for parallelism but executed serially"
             code={`SELECT queryid,
@@ -86,41 +98,40 @@ export default function PgStatInsightsParallelQueriesPage() {
  ORDER BY mean_exec_time DESC
  LIMIT 15;`}
           />
-          <p className="text-sm text-muted-foreground">
-            Reasons include disabled <code>parallel_leader_participation</code>, insufficient workers, or functions marked <code>PARALLEL UNSAFE</code>.
-          </p>
-        </section>
+        <p className="text-sm">
+          Reasons include disabled <code>parallel_leader_participation</code>, insufficient workers, or functions marked <code>PARALLEL UNSAFE</code>.
+        </p>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">4. Tune Configuration</h2>
+      <section id="tune-configuration">
+        <h2>Tune Configuration</h2>
           <BashCodeBlock title="Recommended starting values" code={configuration} />
-          <p className="text-sm text-muted-foreground">
-            Ensure <code>max_worker_processes</code> is set higher than <code>max_parallel_workers</code>, and monitor background worker contention (logical replication, autovacuum) when raising limits.
-          </p>
-        </section>
+        <p className="text-sm">
+          Ensure <code>max_worker_processes</code> is set higher than <code>max_parallel_workers</code>, and monitor background worker contention (logical replication, autovacuum) when raising limits.
+        </p>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">5. Optimise Execution Plans</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold">Encourage parallelism</h3>
-              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+      <section id="optimize-plans">
+        <h2>Optimise Execution Plans</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="border rounded-lg p-4">
+            <h3>Encourage parallelism</h3>
+            <ul className="list-disc list-inside text-sm space-y-1">
                 <li>Use <code>parallel_setup_cost</code> and <code>parallel_tuple_cost</code> to adjust planner sensitivity.</li>
                 <li>Rewrite functions to be <code>PARALLEL SAFE</code> when possible.</li>
                 <li>Partition large tables to enable partition-wise joins and aggregates.</li>
               </ul>
-            </div>
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold">Disable when harmful</h3>
-              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+          </div>
+          <div className="border rounded-lg p-4">
+            <h3>Disable when harmful</h3>
+            <ul className="list-disc list-inside text-sm space-y-1">
                 <li>Set <code>ALTER ROLE user SET max_parallel_workers_per_gather = 0;</code> for latency-critical clients.</li>
                 <li>Use <code>{'/*+ Parallel(0) */'}</code> planner hints (via pg_hint_plan) for known hotspots.</li>
                 <li>Disable parallelism for queries with heavy locking or when CPU is saturated.</li>
-              </ul>
-            </div>
+            </ul>
           </div>
-        </section>
-      </div>
-    </DocsContentLayout>
+        </div>
+      </section>
+    </PostgresDocsLayout>
   )
 }

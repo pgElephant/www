@@ -1,53 +1,44 @@
-export const metadata = {
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../components/PostgresDocsLayout'
+import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
+
+export const metadata: Metadata = {
   title: 'Hybrid Retrieval Overview | NeurondB',
   description:
     'Design hybrid retrieval pipelines that blend BM25, metadata filters, and NeurondB vector search. Learn ranking formulas, index strategies, and fallback plans for production workloads.',
 }
 
-import Link from 'next/link'
-import { Filter, Layers, Search, SlidersHorizontal } from 'lucide-react'
-import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
-import DocsContentLayout from '../../../../../components/DocsContentLayout'
-import { NeurondBIcon } from '../../../../../components/ProductIcons'
+const tableOfContents: TocItem[] = [
+  { id: 'scoring-architecture', title: 'Scoring architecture' },
+  { id: 'metadata-filtering', title: 'Metadata filtering' },
+  { id: 'reranking', title: 'Reranking with cross-encoders' },
+]
 
-const HybridOverviewPage = () => {
+const prevLink: NavLink = {
+  href: '/docs/neurondb/hybrid',
+  label: 'Hybrid Search',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/neurondb/reranking/overview',
+  label: 'Reranking',
+}
+
+export default function HybridOverviewPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'NeurondB',
-        badgeIcon: <NeurondBIcon size={24} />, 
-        badgeTone: 'purple',
-        title: 'Blend lexical and semantic ranking for precision',
-        description:
-          'Combine PostgreSQL full-text search, metadata filters, and NeurondB vector scoring to deliver accurate answers with full control over latency and recall.',
-        actions: (
-          <>
-            <Link
-              href="/docs/neurondb/rag"
-              className="inline-flex items-center gap-2 rounded-xl bg-fuchsia-500/20 px-4 py-2 text-sm font-semibold text-fuchsia-100 transition hover:bg-fuchsia-500/30"
-            >
-              RAG Playbooks
-            </Link>
-            <Link
-              href="/docs/neurondb/features/distance-metrics"
-              className="inline-flex items-center gap-2 rounded-xl border border-fuchsia-400/40 px-4 py-2 text-sm font-semibold text-fuchsia-200 transition hover:border-fuchsia-300"
-            >
-              Distance Metrics
-            </Link>
-          </>
-        ),
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Blend lexical and semantic ranking for precision"
+      version="NeurondB Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-16">
-        <section className="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-8 shadow-xl">
-          <h2 className="text-2xl font-semibold text-white">Scoring architecture</h2>
-          <p className="mt-2 max-w-3xl text-sm text-slate-300">
-            Hybrid retrieval uses multiple rankers and merges results. Use the default weighted sum or build custom scoring pipelines with SQL window functions.
-          </p>
-          <SqlCodeBlock
-            title="Weighted hybrid scoring"
-            code={`WITH hybrid AS (
+      <section id="scoring-architecture">
+        <h2>Scoring architecture</h2>
+        <p>Hybrid retrieval uses multiple rankers and merges results. Use the default weighted sum or build custom scoring pipelines with SQL window functions.</p>
+        <SqlCodeBlock
+          title="Weighted hybrid scoring"
+          code={`WITH hybrid AS (
   SELECT
     d.id,
     lex.rank AS bm25_rank,
@@ -61,17 +52,15 @@ SELECT *
 FROM   hybrid
 ORDER  BY combined_score DESC
 LIMIT  10;`}
-          />
-        </section>
+        />
+      </section>
 
-        <section className="rounded-3xl border border-fuchsia-500/40 bg-fuchsia-500/10 p-8 shadow-xl">
-          <h2 className="text-2xl font-semibold text-white">Metadata filtering</h2>
-          <p className="mt-2 max-w-3xl text-sm text-fuchsia-100">
-            Apply row-level filters and tenant boundaries before scoring to keep results relevant. Use JSONB containment or partitioning for customer isolation.
-          </p>
-          <SqlCodeBlock
-            title="Tenant scoping"
-            code={`WITH query_input AS (
+      <section id="metadata-filtering">
+        <h2>Metadata filtering</h2>
+        <p>Apply row-level filters and tenant boundaries before scoring to keep results relevant. Use JSONB containment or partitioning for customer isolation.</p>
+        <SqlCodeBlock
+          title="Tenant scoping"
+          code={`WITH query_input AS (
   SELECT embed_text('high availability failover guide') AS q_emb,
          'enterprise'::text AS tenant
 )
@@ -84,55 +73,47 @@ FROM   knowledge_base,
 WHERE  metadata ->> 'tenant' = query_input.tenant
 ORDER  BY distance
 LIMIT  15;`}
-          />
-        </section>
+        />
+      </section>
 
-        <section className="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-8 shadow-xl">
-          <h2 className="text-2xl font-semibold text-white">Reranking with cross-encoders</h2>
-          <p className="mt-2 max-w-3xl text-sm text-slate-300">
-            After retrieving top K candidates, rerank them with ONNX cross-encoders for better semantic matching. Combine with canary weights to fail open if the reranker is unavailable.
-          </p>
-          <SqlCodeBlock
-            title="Rerank candidates"
-            code={`WITH
+      <section id="reranking">
+        <h2>Reranking with cross-encoders</h2>
+        <p>After retrieving top K candidates, rerank them with ONNX cross-encoders for better semantic matching. Combine with canary weights to fail open if the reranker is unavailable.</p>
+        <SqlCodeBlock
+          title="Rerank candidates"
+          code={`WITH
 initial AS (
   SELECT id,
          title,
-         content,
-         embedding <-> embed_text('configure synchronous replication') AS distance
+         embedding <-> embed_text('PostgreSQL failover') AS distance
   FROM   docs
   ORDER  BY distance
-  LIMIT  40
+  LIMIT  80
 ),
-reranked AS (
+ranked AS (
   SELECT id,
          neurondb_rerank(
-           model_name => 'cross-encoder-msmarco',
-           query      => 'configure synchronous replication',
-           document   => content
-         ) AS rerank_score
+           model_name => 'cross-encoder-nli-base',
+           query      => 'PostgreSQL failover',
+           document   => title
+         ) AS cross_score
   FROM   initial
 )
-SELECT id,
-       rerank_score
-FROM   reranked
-ORDER  BY rerank_score DESC
-LIMIT  10;`}
-          />
-        </section>
+SELECT id, cross_score
+FROM   ranked
+ORDER  BY cross_score DESC
+LIMIT  15;`}
+        />
+      </section>
 
-        <section className="rounded-3xl border border-slate-700/60 bg-slate-950/80 p-8 shadow-xl">
-          <h2 className="text-2xl font-semibold text-white">Operational checklist</h2>
-          <ul className="mt-4 space-y-3 text-sm text-slate-300">
-            <li className="flex items-start gap-3"><Search className="h-5 w-5 text-fuchsia-300" />Tune BM25 weights with <code className="text-white">ts_rank_cd</code> and store favorites per collection.</li>
-            <li className="flex items-start gap-3"><Layers className="h-5 w-5 text-fuchsia-300" />Use CTE layers for retrieval → reranking → final selection transparency.</li>
-            <li className="flex items-start gap-3"><Filter className="h-5 w-5 text-fuchsia-300" />Pre-filter by tenant, ACL, or language to avoid leaking sensitive content.</li>
-            <li className="flex items-start gap-3"><SlidersHorizontal className="h-5 w-5 text-fuchsia-300" />Expose weighting parameters via configuration tables for runtime tuning.</li>
-          </ul>
-        </section>
-      </div>
-    </DocsContentLayout>
+      <section>
+        <h2>Next Steps</h2>
+        <ul>
+          <li><a href="/docs/neurondb/rag">RAG Playbooks</a> - Complete RAG workflows</li>
+          <li><a href="/docs/neurondb/features/distance-metrics">Distance Metrics</a> - Tune distance functions</li>
+          <li><a href="/docs/neurondb/reranking/overview">Reranking Guide</a> - Cross-encoder reranking</li>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }
-
-export default HybridOverviewPage

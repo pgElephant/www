@@ -1,31 +1,45 @@
 import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
-import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgraft Configuration Guide | PostgreSQL Raft Settings',
   description: 'Tune PostgreSQL and pgraft settings for Raft consensus. Includes postgresql.conf changes, pg_hba rules, runtime management, and performance profiles.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'baseline-settings', title: 'Baseline postgresql.conf Settings' },
+  { id: 'guc-parameters', title: 'pgraft GUC Parameters' },
+  { id: 'pg-hba', title: 'pg_hba.conf Access Control' },
+  { id: 'runtime-config', title: 'Runtime Configuration & Introspection' },
+  { id: 'cluster-management', title: 'Cluster Management Commands' },
+  { id: 'performance-profiles', title: 'Performance Profiles' },
+  { id: 'troubleshooting-config', title: 'Troubleshooting Configuration' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgraft/sql-functions',
+  label: 'SQL Functions',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgraft/performance',
+  label: 'Performance',
+}
+
 export default function PgraftConfigurationPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'pgraft Configuration',
-        description:
-          'Configure PostgreSQL and pgraft to operate as a reliable Raft cluster. This guide covers baseline server settings, pgraft GUC parameters, runtime management functions, and performance profiles for different workloads.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="pgraft Configuration"
+      version="pgraft Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Baseline postgresql.conf Settings</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="baseline-settings">
+        <h2>Baseline postgresql.conf Settings</h2>
+        <p>
             Add these settings to <code>postgresql.conf</code> on every node. Adjust values to match your deployment size and performance goals.
           </p>
           <BashCodeBlock
@@ -45,14 +59,14 @@ max_worker_processes = 32
 shared_buffers = 1GB
 wal_keep_size = '4GB'`}
           />
-          <p className="text-sm text-muted-foreground mt-2">
+          <p>
             Restart PostgreSQL after updating shared_preload_libraries or WAL parameters.
-          </p>
-        </section>
+        </p>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">pgraft GUC Parameters</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="guc-parameters">
+        <h2>pgraft GUC Parameters</h2>
+        <p>
             GUC parameters can be defined in <code>postgresql.conf</code> or set dynamically with <code>ALTER SYSTEM</code>. At minimum, set the identity for each node.
           </p>
           <BashCodeBlock
@@ -75,7 +89,7 @@ pgraft.election_timeout = 1000`}
           <div className="grid md:grid-cols-2 gap-4 mt-6">
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Availability</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul>
                 <li><code>pgraft.quorum_required</code>: Minimum voting nodes (default 3)</li>
                 <li><code>pgraft.failover_enabled</code>: Enable automatic leadership transfer</li>
                 <li><code>pgraft.max_election_retries</code>: Additional retries before alerting</li>
@@ -83,18 +97,18 @@ pgraft.election_timeout = 1000`}
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Performance</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul>
                 <li><code>pgraft.append_batch_size</code>: WAL entries replicated per RPC</li>
                 <li><code>pgraft.replay_parallelism</code>: Apply log entries concurrently</li>
                 <li><code>pgraft.log_retention_mb</code>: Retain additional Raft log for diagnostics</li>
               </ul>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">pg_hba.conf Access Control</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="pg-hba">
+        <h2>pg_hba.conf Access Control</h2>
+        <p>
             Allow pgraft nodes to exchange Raft traffic and standard replication data. Apply these rules on every server.
           </p>
           <BashCodeBlock
@@ -104,14 +118,14 @@ local   replication     postgres                                trust
 host    replication     postgres        10.0.0.0/24             md5
 host    all             pgraft_cluster  10.0.0.0/24             md5`}
           />
-          <p className="text-sm text-muted-foreground mt-2">
+          <p>
             Reload PostgreSQL after editing <code>pg_hba.conf</code> (<code>SELECT pg_reload_conf();</code>).
           </p>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Runtime Configuration &amp; Introspection</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="runtime-config">
+        <h2>Runtime Configuration & Introspection</h2>
+        <p>
             Tune pgraft on the fly and inspect the current Raft state without restarting the cluster.
           </p>
           <SqlCodeBlock
@@ -131,11 +145,11 @@ BEGIN
 END;
 $$;`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Cluster Management Commands</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="cluster-management">
+        <h2>Cluster Management Commands</h2>
+        <p>
             Use these SQL helpers to initialize, expand, and validate Raft clusters. Execute them from the elected leader node.
           </p>
           <SqlCodeBlock
@@ -161,11 +175,11 @@ SELECT * FROM pgraft_get_nodes();
 -- Log, snapshot, and apply statistics
 SELECT * FROM pgraft_log_get_stats();`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Performance Profiles</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="performance-profiles">
+        <h2>Performance Profiles</h2>
+        <p>
             Choose a profile matching your workload characteristics. Apply settings across all nodes to maintain symmetry.
           </p>
           <div className="grid md:grid-cols-3 gap-4">
@@ -203,17 +217,17 @@ pgraft.quorum_required = 3`}
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Troubleshooting Configuration</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="troubleshooting-config">
+        <h2>Troubleshooting Configuration</h2>
+        <p>
             Use these diagnostics when configuration issues arise.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Common Issues</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul>
                 <li>Verify <code>pgraft.node_id</code> uniqueness; duplicates prevent leaders from forming.</li>
                 <li>Ensure <code>pg_hba.conf</code> grants replication access to every Raft node.</li>
                 <li>Restart PostgreSQL when changing <code>shared_preload_libraries</code> or shared memory sizing.</li>
@@ -221,15 +235,14 @@ pgraft.quorum_required = 3`}
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Logs &amp; metrics</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul>
                 <li>Check <code>pg_log</code> for messages tagged <code>pgraft</code> to trace background worker status.</li>
                 <li>Use <code>SELECT * FROM pgraft_log_get_replication_status()</code> to confirm lag after tuning.</li>
                 <li>Expose pgraft metrics to Prometheus to alert on election churn and replication backlog.</li>
               </ul>
             </div>
           </div>
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   )
 }

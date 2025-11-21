@@ -1,13 +1,31 @@
-import React from 'react'
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { PgSentinelIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgSentinel API Reference',
   description: 'REST API endpoints for managing pgSentinel, retrieving metrics, and automating alerts.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'authentication', title: 'Authentication' },
+  { id: 'system-health', title: 'System Health' },
+  { id: 'pools-clients', title: 'Pools & Clients' },
+  { id: 'metrics', title: 'Metrics' },
+  { id: 'alerts', title: 'Alerts' },
+  { id: 'pagination', title: 'Pagination & Query Parameters' },
+  { id: 'webhooks', title: 'Webhooks & Integrations' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgsentinel/metrics',
+  label: 'Metrics Catalog',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgsentinel/dashboard',
+  label: 'Dashboard',
 }
 
 interface Endpoint {
@@ -37,7 +55,7 @@ const endpoints: Record<string, Endpoint[]> = {
   ],
 }
 
-const curlExample = `curl -H "Authorization: Bearer <token>" \
+const curlExample = `curl -H "Authorization: Bearer <token>" \\
   https://pgsentinel.example.com/api/v1/pools`;
 
 const tokenSql = `INSERT INTO pgsentinel.api_tokens (name, token_hash, created_by)
@@ -45,64 +63,58 @@ VALUES ('terraform', crypt('my-token', gen_salt('bf')), 'admin');`;
 
 const PgSentinelApiPage = () => {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgSentinel',
-        badgeIcon: <PgSentinelIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'API Reference',
-        description:
-          'Automate pgBouncer monitoring workflows with pgSentinel’s REST API for pools, metrics, and alerts.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="API Reference"
+      version="pgSentinel Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">1. Authentication</h2>
-          <p className="text-muted-foreground">
-            Obtain a bearer token from the pgSentinel UI or create one via SQL. Include the token in the <code>Authorization</code> header for every request.
-          </p>
-          <SqlCodeBlock title="Create API token" code={tokenSql} />
-          <BashCodeBlock title="Example request" code={curlExample} />
-          <p className="text-sm text-muted-foreground">
-            Tokens inherit the roles of the issuing user. Rotate credentials regularly and revoke via <code>DELETE /api/v1/tokens/{'{'}id{'}'}</code> when compromised.
-          </p>
-        </section>
+      <section id="authentication">
+        <h2>Authentication</h2>
+        <p>
+          Obtain a bearer token from the pgSentinel UI or create one via SQL. Include the token in the <code>Authorization</code> header for every request.
+        </p>
+        <SqlCodeBlock title="Create API token" code={tokenSql} />
+        <BashCodeBlock title="Example request" code={curlExample} />
+        <p className="text-sm">
+          Tokens inherit the roles of the issuing user. Rotate credentials regularly and revoke via <code>DELETE /api/v1/tokens{'{'}id{'}'}</code> when compromised.
+        </p>
+      </section>
 
-        {Object.entries(endpoints).map(([category, items]) => (
-          <section key={category} className="space-y-3">
-            <h2 className="text-2xl font-semibold">{category}</h2>
-            <div className="border rounded-lg divide-y">
-              {items.map((endpoint) => (
-                <div key={endpoint.path} className="p-4">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-700">
-                      {endpoint.method}
-                    </span>
-                    <code className="text-sm">{endpoint.path}</code>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">{endpoint.description}</p>
+      {Object.entries(endpoints).map(([category, items]) => (
+        <section key={category} id={category.toLowerCase().replace(/\s+/g, '-')}>
+          <h2>{category}</h2>
+          <div className="border rounded-lg divide-y">
+            {items.map((endpoint) => (
+              <div key={endpoint.path} className="p-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="rounded bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-700">
+                    {endpoint.method}
+                  </span>
+                  <code className="text-sm">{endpoint.path}</code>
                 </div>
-              ))}
-            </div>
-          </section>
-        ))}
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">2. Pagination &amp; Query Parameters</h2>
-          <p className="text-muted-foreground">
-            Collection endpoints support <code>?page=</code>, <code>?page_size=</code>, and <code>?sort=</code> (e.g. <code>sort=-latency</code>). Use <code>?from=&amp;to=</code> for time range filters on metrics endpoints.
-          </p>
+                <p className="text-sm mt-2">{endpoint.description}</p>
+              </div>
+            ))}
+          </div>
         </section>
+      ))}
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">3. Webhooks &amp; Integrations</h2>
-          <p className="text-muted-foreground">
-            Configure Slack, PagerDuty, or custom webhooks by POSTing to <code>/webhooks</code>. Each webhook can subscribe to alert categories (queue, latency, errors) and includes signed payloads for tamper detection.
-          </p>
-        </section>
-      </div>
-    </DocsContentLayout>
+      <section id="pagination">
+        <h2>Pagination &amp; Query Parameters</h2>
+        <p>
+          Collection endpoints support <code>?page=</code>, <code>?page_size=</code>, and <code>?sort=</code> (e.g. <code>sort=-latency</code>). Use <code>?from=&amp;to=</code> for time range filters on metrics endpoints.
+        </p>
+      </section>
+
+      <section id="webhooks">
+        <h2>Webhooks &amp; Integrations</h2>
+        <p>
+          Configure Slack, PagerDuty, or custom webhooks by POSTing to <code>/webhooks</code>. Each webhook can subscribe to alert categories (queue, latency, errors) and includes signed payloads for tamper detection.
+        </p>
+      </section>
+    </PostgresDocsLayout>
   )
 }
 

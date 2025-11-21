@@ -1,11 +1,30 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'SQL Functions Reference | pgraft',
   description: 'Complete SQL API reference for pgraft Raft consensus functions, views, and key-value store operations.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'cluster-lifecycle', title: 'Cluster Lifecycle' },
+  { id: 'leadership-operations', title: 'Leadership Operations' },
+  { id: 'monitoring-views', title: 'Monitoring Views' },
+  { id: 'consensus-diagnostics', title: 'Consensus Diagnostics' },
+  { id: 'kv-store-api', title: 'Key-Value Store API' },
+  { id: 'maintenance-helpers', title: 'Maintenance & Debug Helpers' },
+  { id: 'automation-recipes', title: 'Automation Recipes' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgraft/raft-protocol',
+  label: 'Raft Protocol',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgraft/config-reference',
+  label: 'Config Reference',
 }
 
 const clusterFunctions = [
@@ -131,21 +150,16 @@ SELECT pgraft_set_debug(false);`,
 
 export default function PgraftSqlReferencePage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'pgraft SQL Reference',
-        description:
-          'Explore every exposed pgraft function and system view for cluster management, Raft monitoring, and replicated key-value storage.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="pgraft SQL Reference"
+      version="pgraft Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Cluster Lifecycle</h2>
-          <p className="text-muted-foreground">
+      <section id="cluster-lifecycle">
+        <h2>Cluster Lifecycle</h2>
+        <p>
             Lifecycle helpers manage initial bootstrap, node membership, and cluster shape changes. Always execute membership changes on the elected leader and confirm quorum before shutting down members.
           </p>
           <div className="grid lg:grid-cols-3 gap-4">
@@ -153,18 +167,18 @@ export default function PgraftSqlReferencePage() {
               <div key={fn.name} className="border rounded-lg p-4 space-y-3">
                 <div>
                   <h3 className="font-semibold">{fn.name}</h3>
-                  <p className="text-sm text-muted-foreground">{fn.description}</p>
+                  <p>{fn.description}</p>
                 </div>
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Returns: {fn.returns}</p>
                 <SqlCodeBlock title="Usage" code={fn.example} />
               </div>
             ))}
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Leadership Operations</h2>
-          <p className="text-muted-foreground">
+      <section id="leadership-operations">
+        <h2>Leadership Operations</h2>
+        <p>
             Leader discovery and transfer functions coordinate manual failovers and allow automation to verify topology.
           </p>
           <div className="grid lg:grid-cols-3 gap-4">
@@ -172,18 +186,18 @@ export default function PgraftSqlReferencePage() {
               <div key={fn.name} className="border rounded-lg p-4 space-y-3">
                 <div>
                   <h3 className="font-semibold">{fn.name}</h3>
-                  <p className="text-sm text-muted-foreground">{fn.description}</p>
+                  <p>{fn.description}</p>
                 </div>
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Returns: {fn.returns}</p>
                 <SqlCodeBlock title="Usage" code={fn.example} />
               </div>
             ))}
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Monitoring Views</h2>
-          <p className="text-muted-foreground">
+      <section id="monitoring-views">
+        <h2>Monitoring Views</h2>
+        <p>
             pgraft exposes lightweight SQL views that surface Raft metrics, node status, and log growth without attaching external agents.
           </p>
           <div className="grid lg:grid-cols-3 gap-4">
@@ -191,17 +205,17 @@ export default function PgraftSqlReferencePage() {
               <div key={view.name} className="border rounded-lg p-4 space-y-3">
                 <div>
                   <h3 className="font-semibold">{view.name}</h3>
-                  <p className="text-sm text-muted-foreground">{view.description}</p>
+                  <p>{view.description}</p>
                 </div>
                 <SqlCodeBlock title="Query" code={view.example} />
               </div>
             ))}
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Consensus Diagnostics</h2>
-          <p className="text-muted-foreground">
+      <section id="consensus-diagnostics">
+        <h2>Consensus Diagnostics</h2>
+        <p>
             Combine status and log views to create dashboards or alerting pipelines. The examples below illustrate common checks for operational readiness.
           </p>
           <div className="grid lg:grid-cols-2 gap-4">
@@ -241,11 +255,11 @@ export default function PgraftSqlReferencePage() {
   FROM pgraft_get_nodes();`}
             />
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Key-Value Store API</h2>
-          <p className="text-muted-foreground">
+      <section id="kv-store-api">
+        <h2>Key-Value Store API</h2>
+        <p>
             pgraft bundles a replicated KV store for small configuration payloads and coordination primitives. Values replicate through the Raft log and honor the same commit guarantees as SQL writes.
           </p>
           <div className="grid lg:grid-cols-3 gap-4">
@@ -253,18 +267,18 @@ export default function PgraftSqlReferencePage() {
               <div key={fn.name} className="border rounded-lg p-4 space-y-3">
                 <div>
                   <h3 className="font-semibold">{fn.name}</h3>
-                  <p className="text-sm text-muted-foreground">{fn.description}</p>
+                  <p>{fn.description}</p>
                 </div>
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Returns: {fn.returns}</p>
                 <SqlCodeBlock title="Usage" code={fn.example} />
               </div>
             ))}
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Maintenance &amp; Debug Helpers</h2>
-          <p className="text-muted-foreground">
+      <section id="maintenance-helpers">
+        <h2>Maintenance & Debug Helpers</h2>
+        <p>
             Runtime configuration functions allow automation pipelines to tune consensus behavior, enable debug logging, and persist safe defaults without restarting PostgreSQL.
           </p>
           <div className="grid lg:grid-cols-3 gap-4">
@@ -272,18 +286,18 @@ export default function PgraftSqlReferencePage() {
               <div key={fn.name} className="border rounded-lg p-4 space-y-3">
                 <div>
                   <h3 className="font-semibold">{fn.name}</h3>
-                  <p className="text-sm text-muted-foreground">{fn.description}</p>
+                  <p>{fn.description}</p>
                 </div>
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Returns: {fn.returns}</p>
                 <SqlCodeBlock title="Usage" code={fn.example} />
               </div>
             ))}
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Automation Recipes</h2>
-          <p className="text-muted-foreground">
+      <section id="automation-recipes">
+        <h2>Automation Recipes</h2>
+        <p>
             Bundle the fundamental commands into reusable automation tasks for DevOps pipelines and incident response playbooks.
           </p>
           <SqlCodeBlock
@@ -301,8 +315,7 @@ SELECT pgraft_set_config('failover_enabled', 'false');
 SELECT pgraft_set_config('failover_enabled', 'true');
 SELECT * FROM pgraft_get_cluster_status();`}
           />
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   )
 }

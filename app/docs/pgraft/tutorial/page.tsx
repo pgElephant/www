@@ -1,12 +1,32 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
-import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgraft Tutorial | Documentation',
   description: 'Step-by-step tutorial for deploying pgraft, bootstrapping clusters, and executing a zero-downtime PostgreSQL major version upgrade.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'prerequisites', title: 'Prerequisites' },
+  { id: 'install', title: 'Install pgraft' },
+  { id: 'bootstrap', title: 'Bootstrap the Leader' },
+  { id: 'register-followers', title: 'Register Followers' },
+  { id: 'logical-replication', title: 'Configure Logical Replication' },
+  { id: 'verify-health', title: 'Verify Cluster Health' },
+  { id: 'cutover', title: 'Perform Cutover' },
+  { id: 'post-migration', title: 'Post-Migration Validation' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgraft/cluster-management',
+  label: 'Cluster Management',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgraft/monitoring',
+  label: 'Monitoring',
 }
 
 const setupCommands = `# Install dependencies and build pgraft (example for Debian/Ubuntu)
@@ -55,77 +75,72 @@ SELECT pgraft_set_config('failover_enabled', 'true');`
 
 export default function PgraftTutorialPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'pgraft Upgrade Tutorial',
-        description:
-          'Follow this guided exercise to install pgraft, form a three-node Raft cluster, and migrate PostgreSQL workloads across major versions without downtime.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="pgraft Upgrade Tutorial"
+      version="pgraft Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Prerequisites</h2>
+      <section id="prerequisites">
+        <h2>Prerequisites</h2>
           <div className="border rounded-lg p-4 space-y-2">
-            <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+            <ul>
               <li>Three PostgreSQL instances (source v14, target v16, plus an additional follower) with SSH access.</li>
               <li>Shared <code>pgraft.cluster_id</code>, unique <code>pgraft.node_id</code>, and open Raft port (default 7001+).</li>
               <li>Replication user with <code>REPLICATION</code> privilege for logical replication.</li>
               <li>Maintenance window to redirect application connections during cutover validation.</li>
             </ul>
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">1. Install pgraft</h2>
-          <p className="text-muted-foreground">
+      <section id="install">
+        <h2>1. Install pgraft</h2>
+        <p>
             Build and install pgraft on each node. Enable the extension in <code>postgresql.conf</code> and restart the service.
           </p>
           <BashCodeBlock title="Build + enable" code={setupCommands} />
           <SqlCodeBlock title="Create extension" code={`CREATE EXTENSION IF NOT EXISTS pgraft;`} />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">2. Bootstrap the Leader</h2>
-          <p className="text-muted-foreground">
+      <section id="bootstrap">
+        <h2>2. Bootstrap the Leader</h2>
+        <p>
             Initialize cluster metadata and set a friendly cluster label. Confirm the node elected itself leader.
           </p>
           <SqlCodeBlock title="Leader initialization" code={leaderBoot} />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">3. Register Followers</h2>
-          <p className="text-muted-foreground">
+      <section id="register-followers">
+        <h2>3. Register Followers</h2>
+        <p>
             Configure the remaining nodes with matching cluster identity and unique node IDs, then register them from the leader.
           </p>
           <SqlCodeBlock title="Add followers" code={followerEnroll} />
           <div className="border rounded-lg p-4 space-y-2">
             <h3 className="font-semibold">Follower checklist</h3>
-            <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+            <ul>
               <li><code>pgraft.port</code> and <code>pg_hba.conf</code> allow leader connectivity.</li>
               <li>Followers report <code>state = 'follower'</code> and <code>lag_entries = 0</code> after initial sync.</li>
               <li>Disk and snapshot directories reside on SSD storage to absorb write bursts.</li>
             </ul>
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">4. Configure Logical Replication</h2>
-          <p className="text-muted-foreground">
+      <section id="logical-replication">
+        <h2>4. Configure Logical Replication</h2>
+        <p>
             pgraft orchestrates leader elections while PostgreSQL logical replication migrates data between major versions.
           </p>
           <SqlCodeBlock title="Create publication/subscription" code={logicalReplication} />
-          <p className="text-sm text-muted-foreground">
+          <p>
             Allow the subscription to copy existing data. Monitor <code>pg_stat_subscription</code> until catch-up is complete.
           </p>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">5. Verify Cluster Health</h2>
-          <p className="text-muted-foreground">
+      <section id="verify-health">
+        <h2>5. Verify Cluster Health</h2>
+        <p>
             Before cutover, ensure Raft consensus is stable and replication slots are healthy.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
@@ -147,11 +162,11 @@ export default function PgraftTutorialPage() {
   FROM pg_stat_subscription;`}
             />
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">6. Perform Cutover</h2>
-          <p className="text-muted-foreground">
+      <section id="cutover">
+        <h2>6. Perform Cutover</h2>
+        <p>
             Drain application traffic, promote the new cluster, and redirect clients to the pgraft 16 cluster.
           </p>
           <SqlCodeBlock title="Cutover checklist" code={cutoverChecklist} />
@@ -161,10 +176,10 @@ export default function PgraftTutorialPage() {
 echo "%include /etc/pgbouncer/pgraft-target.ini" | sudo tee /etc/pgbouncer/databases.ini
 sudo systemctl reload pgbouncer`}
           />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">7. Post-Migration Validation</h2>
+      <section id="post-migration">
+        <h2>7. Post-Migration Validation</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <SqlCodeBlock
               title="Ensure quorum"
@@ -184,22 +199,21 @@ sudo systemctl reload pgbouncer`}
           </div>
           <div className="border rounded-lg p-4">
             <h3 className="font-semibold">Cleanup</h3>
-            <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+            <ul>
               <li>Drop the logical subscription on the new cluster once validation completes.</li>
               <li>Optionally keep the old cluster as a warm standby using pgraft follower mode.</li>
               <li>Update monitoring dashboards to point at the new leader endpoint.</li>
             </ul>
           </div>
-        </section>
+      </section>
 
-        <section className="space-y-3">
-          <h2 className="text-2xl font-semibold">Next Steps</h2>
-          <p className="text-muted-foreground">
+      <section>
+        <h2>Next Steps</h2>
+        <p>
             Explore <a href="/docs/pgraft/config-reference" className="text-blue-500 hover:underline">configuration tuning</a> and the{' '}
             <a href="/docs/pgraft/cluster-management" className="text-blue-500 hover:underline">cluster management</a> guide for more automation patterns.
           </p>
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   )
 }

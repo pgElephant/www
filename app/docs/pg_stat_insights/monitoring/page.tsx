@@ -1,33 +1,44 @@
-import React from 'react'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
-import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'pg_stat_insights Monitoring | Documentation',
   description: 'Integrate pg_stat_insights with Prometheus, Grafana, and alerting pipelines.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'prometheus-exporter', title: 'Prometheus Exporter' },
+  { id: 'grafana-dashboards', title: 'Grafana Dashboards' },
+  { id: 'alerting-rules', title: 'Alerting Rules' },
+  { id: 'automated-resets', title: 'Automated Resets' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pg_stat_insights/usage',
+  label: 'Usage Examples',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pg_stat_insights/troubleshooting',
+  label: 'Troubleshooting',
+}
+
 const PgStatInsightsMonitoringPage = () => {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pg_stat_insights',
-        badgeIcon: <PgStatInsightsIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Monitoring Integration',
-        description:
-          'Export pg_stat_insights metrics to Prometheus, visualise them in Grafana, and create actionable alerting rules.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Monitoring Integration"
+      version="pg_stat_insights Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Prometheus Exporter</h2>
-          <p className="text-muted-foreground">
-            Configure <code>postgres_exporter</code> or the PostgreSQL built-in exporter to scrape pg_stat_insights data using custom queries.
-          </p>
+      <section id="prometheus-exporter">
+        <h2>Prometheus Exporter</h2>
+        <p>
+          Configure <code>postgres_exporter</code> or the PostgreSQL built-in exporter to scrape pg_stat_insights data using custom queries.
+        </p>
           <BashCodeBlock
             title="queries.yaml"
             code={`pg_stat_insights:
@@ -61,13 +72,13 @@ const PgStatInsightsMonitoringPage = () => {
         usage: 'COUNTER'
         description: 'Blocks served from cache'`}
           />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Grafana Dashboards</h2>
-          <p className="text-muted-foreground">
-            Visualise execution time, cache hit ratio, and WAL generation to spot regressions quickly. Import a json dashboard or build panels using the sample PromQL queries below.
-          </p>
+      <section id="grafana-dashboards">
+        <h2>Grafana Dashboards</h2>
+        <p>
+          Visualise execution time, cache hit ratio, and WAL generation to spot regressions quickly. Import a json dashboard or build panels using the sample PromQL queries below.
+        </p>
           <SqlCodeBlock
             title="PromQL: Top queries by runtime"
             code={`topk(10, increase(pg_stat_insights_total_exec_time[5m]))`}
@@ -77,13 +88,13 @@ const PgStatInsightsMonitoringPage = () => {
             code={`1 - (sum(increase(pg_stat_insights_shared_blks_read[5m])) /
      sum(increase(pg_stat_insights_shared_blks_hit[5m]) + increase(pg_stat_insights_shared_blks_read[5m])))`}
           />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Alerting Rules</h2>
-          <p className="text-muted-foreground">
-            Create alerts that trigger when runtime increases beyond a tolerated baseline or when lag accumulates due to IO pressure.
-          </p>
+      <section id="alerting-rules">
+        <h2>Alerting Rules</h2>
+        <p>
+          Create alerts that trigger when runtime increases beyond a tolerated baseline or when lag accumulates due to IO pressure.
+        </p>
           <BashCodeBlock
             title="Alertmanager rule"
             code={`groups:
@@ -98,13 +109,13 @@ const PgStatInsightsMonitoringPage = () => {
           summary: "pg_stat_insights slow query spike"
           description: "Runtime increased past 150s in the last 10 minutes."`}
           />
-        </section>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Automated Resets</h2>
-          <p className="text-muted-foreground">
-            Reset counters during maintenance and archive snapshots for historical comparisons.
-          </p>
+      <section id="automated-resets">
+        <h2>Automated Resets</h2>
+        <p>
+          Reset counters during maintenance and archive snapshots for historical comparisons.
+        </p>
           <SqlCodeBlock
             title="Capture + reset"
             code={`COPY (
@@ -114,9 +125,8 @@ const PgStatInsightsMonitoringPage = () => {
 
 SELECT pg_stat_insights_reset();`}
           />
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   )
 }
 

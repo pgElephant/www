@@ -1,55 +1,69 @@
 import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
-import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgraft Performance Tuning | PostgreSQL Raft Optimization',
   description: 'Guidance for sizing hardware, tuning Raft timeouts, optimizing log replication, and benchmarking pgraft clusters.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'resource-sizing', title: 'Resource Sizing' },
+  { id: 'consensus-timing', title: 'Consensus Timing Profiles' },
+  { id: 'batching', title: 'Batching & Log Throughput' },
+  { id: 'disk-wal', title: 'Disk & WAL Optimization' },
+  { id: 'read-scaling', title: 'Read Scaling & Consistency' },
+  { id: 'benchmarking', title: 'Benchmarking & Observability' },
+  { id: 'troubleshooting-performance', title: 'Troubleshooting Performance' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgraft/configuration',
+  label: 'Configuration',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgraft/troubleshooting',
+  label: 'Troubleshooting',
+}
+
 export default function PgraftPerformancePage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'pgraft Performance Tuning',
-        description:
-          'Achieve predictable throughput and low latency with pgraft by tuning consensus parameters, the WAL pipeline, and system resources. Use these profiles and metrics to optimize production clusters.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="pgraft Performance Tuning"
+      version="pgraft Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Resource Sizing</h2>
+      <section id="resource-sizing">
+        <h2>Resource Sizing</h2>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">CPU</h3>
-              <p className="text-sm text-muted-foreground">
+              <p>
                 Assign at least 4 CPU cores per node. pgraft leverages PostgreSQL background workers plus the Go Raft process, so reserve dedicated cores for Raft RPC handling under sustained write loads.
               </p>
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Memory</h3>
-              <p className="text-sm text-muted-foreground">
+              <p>
                 Allocate <code>shared_buffers</code> at 25% of RAM with a minimum of 1&nbsp;GB. Additional memory keeps snapshots and replication buffers hot and reduces disk churn during catch-up.
               </p>
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Storage</h3>
-              <p className="text-sm text-muted-foreground">
+              <p>
                 Prefer NVMe SSDs for WAL and Raft logs. Configure <code>wal_keep_size</code> large enough to withstand follower outages (&ge; 4&nbsp;GB recommended).
               </p>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Consensus Timing Profiles</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="consensus-timing">
+        <h2>Consensus Timing Profiles</h2>
+        <p>
             Select heartbeat and election timeouts that balance failure detection with leader stability.
           </p>
           <div className="grid md:grid-cols-3 gap-4">
@@ -75,14 +89,14 @@ pgraft.append_batch_size = 1024
 pgraft.replay_parallelism = 8`}
             />
           </div>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p>
             Set these values in <code>postgresql.conf</code> or persist them using <code>SELECT pgraft_set_config(...)</code> followed by <code>pgraft_save_config()</code>.
           </p>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Batching & Log Throughput</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="batching">
+        <h2>Batching & Log Throughput</h2>
+        <p>
             Adjust batching parameters to match transaction volume. Larger batches increase throughput at the expense of latency.
           </p>
           <BashCodeBlock
@@ -103,14 +117,14 @@ pgraft.strict_quorum_commit = on`}
        pending_batches
   FROM pgraft_log_get_stats();`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Disk & WAL Optimization</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="disk-wal">
+        <h2>Disk & WAL Optimization</h2>
+        <p>
             Ensure WAL and Raft logs are flushed efficiently:
           </p>
-          <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+          <ul>
             <li>Enable <code>wal_compression = on</code> to reduce network bandwidth for AppendEntries.</li>
             <li>Consider <code>wal_recycle = on</code> to reuse WAL files and mitigate filesystem fragmentation.</li>
             <li>Use dedicated WAL storage or <code>wal_keep_size</code> to buffer follower downtime without forcing snapshot installs.</li>
@@ -123,11 +137,11 @@ checkpoint_timeout = '5min'
 max_wal_size = '8GB'
 min_wal_size = '2GB'`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Read Scaling & Consistency</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="read-scaling">
+        <h2>Read Scaling & Consistency</h2>
+        <p>
             pgraft allows follower reads when configured appropriately. Adjust staleness tolerances to satisfy query requirements.
           </p>
           <BashCodeBlock
@@ -146,11 +160,11 @@ pgraft.read_staleness_max_ms = 500
        last_apply_lsn
   FROM pgraft_get_nodes();`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Benchmarking & Observability</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="benchmarking">
+        <h2>Benchmarking & Observability</h2>
+        <p>
             Use built-in metrics to validate tuning changes and detect regressions.
           </p>
           <SqlCodeBlock
@@ -182,14 +196,14 @@ SELECT COUNT(*)
  WHERE event_type = 'election'
    AND event_timestamp > now() - interval '10 minutes';`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Troubleshooting Performance</h2>
+      <section id="troubleshooting-performance">
+        <h2>Troubleshooting Performance</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">High replication lag</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+                <ul>
                 <li>Verify network RTT; consider increasing <code>pgraft.append_batch_size</code>.</li>
                 <li>Ensure followers have sufficient I/O bandwidth—watch <code>pg_stat_io</code> counters.</li>
                 <li>Check for slow checkpoints or autovacuum activity on followers.</li>
@@ -197,7 +211,7 @@ SELECT COUNT(*)
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Frequent elections</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+                <ul>
                 <li>Increase <code>pgraft.election_timeout</code> to account for busy leader workloads.</li>
                 <li>Inspect <code>pgraft_log_get_stats()</code> for RPC failures indicating network issues.</li>
                 <li>Confirm CPU saturation is not preventing timely heartbeat processing.</li>
@@ -205,21 +219,20 @@ SELECT COUNT(*)
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Slow snapshot installs</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+                <ul>
                 <li>Upgrade follower disk throughput or reduce snapshot size via <code>pgraft.snapshot_threshold</code>.</li>
                 <li>Take manual base backups and use <code>pg_basebackup</code> for extremely large datasets.</li>
               </ul>
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Write latency spikes</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+                <ul>
                 <li>Inspect <code>avg_append_latency_ms</code> via <code>pgraft_log_get_stats()</code>.</li>
                 <li>Verify synchronous replication is not waiting on a failed follower (consider temporarily demoting it).</li>
               </ul>
             </div>
           </div>
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   )
 }

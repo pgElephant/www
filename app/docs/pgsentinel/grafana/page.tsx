@@ -1,11 +1,26 @@
-import React from 'react'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
-import { PgSentinelIcon } from '../../../../components/ProductIcons'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'pgSentinel Grafana Integration',
   description: 'Import pgSentinel dashboards and connect Prometheus data sources in Grafana.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'configure-datasource', title: 'Configure Prometheus Data Source' },
+  { id: 'provision-dashboards', title: 'Provision Dashboards' },
+  { id: 'customise-panels', title: 'Customise Panels' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgsentinel/dashboard',
+  label: 'Dashboard',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgsentinel/troubleshooting',
+  label: 'Troubleshooting',
 }
 
 const datasource = `apiVersion: 1
@@ -24,51 +39,45 @@ dashboards:
     options:
       path: /var/lib/grafana/dashboards/pgsentinel`;
 
-const importDashboard = `curl -L https://raw.githubusercontent.com/pgElephant/pgsentinel/main/grafana/pgsentinel.json \
+const importDashboard = `curl -L https://raw.githubusercontent.com/pgElephant/pgsentinel/main/grafana/pgsentinel.json \\
   -o /var/lib/grafana/dashboards/pgsentinel/pgsentinel.json
 chown grafana:grafana /var/lib/grafana/dashboards/pgsentinel/pgsentinel.json`; 
 
 const PgSentinelGrafanaPage = () => {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgSentinel',
-        badgeIcon: <PgSentinelIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Grafana Integration',
-        description:
-          'Provision Prometheus data sources, import the pgSentinel dashboard, and customise panels for pgBouncer observability.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Grafana Integration"
+      version="pgSentinel Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">1. Configure Prometheus Data Source</h2>
-          <p className="text-muted-foreground">
-            Provision Grafana with a Prometheus data source pointing to the pgSentinel scrape endpoint.
-          </p>
-          <BashCodeBlock title="datasource.yaml" code={datasource} />
-        </section>
+      <section id="configure-datasource">
+        <h2>Configure Prometheus Data Source</h2>
+        <p>
+          Provision Grafana with a Prometheus data source pointing to the pgSentinel scrape endpoint.
+        </p>
+        <BashCodeBlock title="datasource.yaml" code={datasource} />
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">2. Provision Dashboards</h2>
-          <p className="text-muted-foreground">
-            Enable automatic dashboard loading on Grafana restart.
-          </p>
-          <BashCodeBlock title="dashboard.yaml" code={dashboardProvisioning} />
-          <BashCodeBlock title="Download dashboard" code={importDashboard} />
-        </section>
+      <section id="provision-dashboards">
+        <h2>Provision Dashboards</h2>
+        <p>
+          Enable automatic dashboard loading on Grafana restart.
+        </p>
+        <BashCodeBlock title="dashboard.yaml" code={dashboardProvisioning} />
+        <BashCodeBlock title="Download dashboard" code={importDashboard} />
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">3. Customise Panels</h2>
-          <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-            <li>Clone the default dashboard and adjust pool filters to focus on production vs staging.</li>
-            <li>Add annotations for deploy events by connecting to your CI system’s webhook.</li>
-            <li>Pin the <em>Wait Queue</em> panel to the home dashboard for at-a-glance saturation monitoring.</li>
-          </ul>
-        </section>
-      </div>
-    </DocsContentLayout>
+      <section id="customise-panels">
+        <h2>Customise Panels</h2>
+        <ul className="list-disc list-inside text-sm space-y-1">
+          <li>Clone the default dashboard and adjust pool filters to focus on production vs staging.</li>
+          <li>Add annotations for deploy events by connecting to your CI system's webhook.</li>
+          <li>Pin the <em>Wait Queue</em> panel to the home dashboard for at-a-glance saturation monitoring.</li>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }
 

@@ -1,31 +1,43 @@
 import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
-import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgraft Cluster Management | Operational Playbooks',
   description: 'Create clusters, add and remove nodes, orchestrate failover, and execute maintenance procedures for pgraft-managed PostgreSQL deployments.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'bootstrap', title: 'Bootstrap a New Cluster' },
+  { id: 'add-remove-nodes', title: 'Add and Remove Nodes' },
+  { id: 'monitoring', title: 'Operational Monitoring' },
+  { id: 'failover', title: 'Failover & Leadership Control' },
+  { id: 'rolling-maintenance', title: 'Rolling Maintenance Workflow' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgraft/performance',
+  label: 'Performance',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgraft/tutorial',
+  label: 'Tutorial',
+}
+
 export default function PgraftClusterManagementPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'pgraft Cluster Management',
-        description:
-          'Manage Raft-backed PostgreSQL clusters with pgraft. This guide covers cluster bootstrap, node lifecycle operations, failover orchestration, and rolling maintenance activities.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="pgraft Cluster Management"
+      version="pgraft Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Bootstrap a New Cluster</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="bootstrap">
+        <h2>Bootstrap a New Cluster</h2>
+        <p>
             Run these commands after installing pgraft and configuring the leader node. They initialize metadata, elect the first leader, and confirm that the cluster is healthy.
           </p>
           <SqlCodeBlock
@@ -49,11 +61,11 @@ SELECT * FROM pgraft_get_nodes();
 -- Detailed cluster status including commit indexes
 SELECT * FROM pgraft_get_cluster_status();`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Add and Remove Nodes</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="add-remove-nodes">
+        <h2>Add and Remove Nodes</h2>
+        <p>
             Prepare each follower with the same postgresql.conf identity settings, then register it with the leader. Removing nodes requires leader confirmation to maintain quorum.
           </p>
           <SqlCodeBlock
@@ -78,11 +90,11 @@ SELECT pgraft_remove_node(3);
 SELECT pgraft_quorum_met() AS quorum_ok,
        pgraft_get_nodes();`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Operational Monitoring</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="monitoring">
+        <h2>Operational Monitoring</h2>
+        <p>
             pgraft exposes diagnostic functions for Raft internals. Use them to track leadership, log replication, and worker health in dashboards or alerts.
           </p>
           <SqlCodeBlock
@@ -108,11 +120,11 @@ SELECT *
  ORDER BY event_timestamp DESC
  LIMIT 5;`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Failover &amp; Leadership Control</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="failover">
+        <h2>Failover & Leadership Control</h2>
+        <p>
             Automatic elections occur when the leader misses heartbeat deadlines. Use the following procedures to simulate failover, promote a new leader, or pause elections during maintenance.
           </p>
           <SqlCodeBlock
@@ -139,14 +151,14 @@ psql -c "SELECT pgraft_is_leader(), pgraft_get_leader();"
 # 4. Re-enable automatic failover if disabled
 psql -c "SELECT pgraft_set_config('failover_enabled', 'true');"`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Rolling Maintenance Workflow</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="rolling-maintenance">
+        <h2>Rolling Maintenance Workflow</h2>
+        <p>
             Keep quorum while patching or restarting individual members. Always drain workload and verify replication catch-up before shutting down a node.
           </p>
-          <ol className="space-y-4 text-muted-foreground">
+          <ol>
             <li>
               <strong>1. Drain client traffic.</strong> Redirect application connections away from the target node or remove it from connection poolers.
             </li>
@@ -163,8 +175,7 @@ psql -c "SELECT pgraft_set_config('failover_enabled', 'true');"`}
               <strong>5. Rejoin the cluster.</strong> After startup, pgraft automatically reconnects and catches up; monitor <code>state = 'follower'</code>.
             </li>
           </ol>
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   )
 }

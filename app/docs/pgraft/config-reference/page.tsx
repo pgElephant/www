@@ -1,41 +1,54 @@
 import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
-import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgraft Configuration Reference | GUC Parameters',
   description: 'Reference guide for pgraft configuration parameters, including cluster identity, consensus tuning, storage, and runtime changes.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'key-requirements', title: 'Key Requirements' },
+  { id: 'cluster-identity', title: 'Cluster Identity & Networking' },
+  { id: 'consensus-timing', title: 'Consensus Timing & Batching' },
+  { id: 'storage-snapshot', title: 'Storage & Snapshot Settings' },
+  { id: 'runtime-config', title: 'Runtime Configuration API' },
+  { id: 'validation', title: 'Validation Checklist' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgraft/sql-reference',
+  label: 'SQL Reference',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgraft/troubleshooting',
+  label: 'Troubleshooting',
+}
+
 export default function PgraftConfigReferencePage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'pgraft Configuration Reference',
-        description:
-          'pgraft is configured entirely through PostgreSQL GUC parameters. Keep configuration consistent across all nodes except for identity values. Restart PostgreSQL after modifying preload-related settings.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="pgraft Configuration Reference"
+      version="pgraft Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-          <h3 className="text-lg font-semibold mb-2">Key Requirements</h3>
-          <ul className="list-disc list-inside text-sm text-slate-700 dark:text-slate-200 space-y-1">
+      <section id="key-requirements" className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h2>Key Requirements</h2>
+        <ul>
             <li><code>shared_preload_libraries = 'pgraft'</code> on every server.</li>
             <li>Identical cluster-wide settings for consensus and membership; only node identity differs.</li>
             <li>Create and secure <code>pgraft.data_dir</code> manually before starting PostgreSQL.</li>
             <li>Use the same <code>pgraft.cluster_id</code> across the deployment to prevent accidental partitioning.</li>
           </ul>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Cluster Identity &amp; Networking</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="cluster-identity">
+        <h2>Cluster Identity & Networking</h2>
+        <p>
             Define the Raft cluster name and per-node identifiers. All nodes must agree on <code>pgraft.cluster_id</code>; each node receives a unique <code>pgraft.node_id</code> and port.
           </p>
           <BashCodeBlock
@@ -58,7 +71,7 @@ pgraft.zone = 'us-east-1a'`}
           <div className="grid md:grid-cols-2 gap-4 mt-6">
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Identity Parameters</h3>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul>
                 <li><code>pgraft.cluster_id</code> — Shared string that uniquely names the cluster.</li>
                 <li><code>pgraft.node_id</code> — Integer ID (1-indexed). Do not reuse until a node is fully removed.</li>
                 <li><code>pgraft.address</code> / <code>pgraft.port</code> — Host and port used for Raft RPCs.</li>
@@ -78,11 +91,11 @@ local   all             postgres        trust`}
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Consensus Timing &amp; Batching</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="consensus-timing">
+        <h2>Consensus Timing & Batching</h2>
+        <p>
             Tune election behaviour to balance availability and stability. Maintain the rule of thumb <code>election_timeout = 10 × heartbeat_interval</code>.
           </p>
           <BashCodeBlock
@@ -97,22 +110,22 @@ pgraft.quorum_required = 3`}
           <div className="grid md:grid-cols-3 gap-4 mt-6">
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-1">Low Latency</h3>
-              <p className="text-sm text-muted-foreground">Set heartbeat to 40 ms, election to 400 ms, and batch size to 256. Ideal for single data centre deployments.</p>
+              <p>Set heartbeat to 40 ms, election to 400 ms, and batch size to 256. Ideal for single data centre deployments.</p>
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-1">Balanced (Default)</h3>
-              <p className="text-sm text-muted-foreground">Heartbeat 100 ms, election 1000 ms, batch size 512. Works for most regional clusters.</p>
+              <p>Heartbeat 100 ms, election 1000 ms, batch size 512. Works for most regional clusters.</p>
             </div>
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-1">Geo-Distributed</h3>
-              <p className="text-sm text-muted-foreground">Heartbeat 180 ms, election 2200 ms, batch size 1024 to absorb WAN latency.</p>
+              <p>Heartbeat 180 ms, election 2200 ms, batch size 1024 to absorb WAN latency.</p>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Storage &amp; Snapshot Settings</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="storage-snapshot">
+        <h2>Storage & Snapshot Settings</h2>
+        <p>
             Snapshots prevent log growth by periodically materializing cluster state. Adjust thresholds to control disk usage and recovery time.
           </p>
           <BashCodeBlock
@@ -122,14 +135,14 @@ pgraft.snapshot_threshold = 8000   # Entries before forcing snapshot
 pgraft.snapshot_retention = 3      # Number of snapshots retained per node
 pgraft.log_retention_mb = 256      # Keep additional log for diagnostics`}
           />
-          <p className="text-sm text-muted-foreground mt-2">
+          <p>
             Keep <code>snapshot_threshold</code> lower than the volume of writes generated during maintenance windows so followers can recover using snapshots instead of full log replay.
           </p>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Runtime Configuration API</h2>
-          <p className="text-muted-foreground mb-4">
+      <section id="runtime-config">
+        <h2>Runtime Configuration API</h2>
+        <p>
             Apply live changes without restarting PostgreSQL using SQL helper functions exposed by pgraft.
           </p>
           <SqlCodeBlock
@@ -153,18 +166,17 @@ COMMIT;
 
 -- Repeat on each node or automate via Ansible/Terraform`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Validation Checklist</h2>
-          <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+      <section id="validation">
+        <h2>Validation Checklist</h2>
+        <ul>
             <li>Run <code>SELECT * FROM pgraft_get_cluster_status();</code> to confirm leader identity and quorum.</li>
             <li>Verify file permissions on <code>pgraft.data_dir</code> (<code>chown postgres:postgres</code>, mode 700).</li>
             <li>Ensure firewall rules allow TCP traffic on every configured <code>pgraft.port</code>.</li>
             <li>Monitor <code>pgraft_log_get_stats()</code> for unexpected increases in <code>pending_snapshots</code> after tuning thresholds.</li>
-          </ul>
-        </section>
-      </div>
-    </DocsContentLayout>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }

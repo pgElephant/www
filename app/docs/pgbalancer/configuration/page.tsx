@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import DocsContentLayout from '../../../../components/DocsContentLayout';
-import { PgbalancerIcon } from '../../../../components/ProductIcons';
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout';
 import BashCodeBlock from '../../../../components/BashCodeBlock';
 
 export const metadata: Metadata = {
@@ -8,30 +7,52 @@ export const metadata: Metadata = {
   description: 'Complete configuration reference for pgBalancer - all .conf file parameters, AI load balancing settings, REST API, MQTT, and connection pooling options.',
 };
 
+const tableOfContents: TocItem[] = [
+  { id: 'connection-settings', title: 'Connection Settings' },
+  { id: 'backend-servers', title: 'Backend Server Configuration' },
+  { id: 'ai-load-balancing', title: 'AI Load Balancing Configuration' },
+  { id: 'rest-api', title: 'REST API Configuration' },
+  { id: 'mqtt-events', title: 'MQTT Event Streaming Configuration' },
+  { id: 'load-balancing', title: 'Load Balancing Configuration' },
+  { id: 'health-check', title: 'Health Check Configuration' },
+  { id: 'failover-watchdog', title: 'Failover and Watchdog Configuration' },
+  { id: 'logging', title: 'Logging Configuration' },
+  { id: 'authentication', title: 'Authentication Configuration' },
+  { id: 'advanced-features', title: 'Advanced Features' },
+  { id: 'complete-example', title: 'Complete Configuration Example' },
+  { id: 'validation', title: 'Configuration Validation' },
+  { id: 'parameters-reference', title: 'Configuration Parameters Reference' },
+];
+
+const prevLink: NavLink = {
+  href: '/docs/pgbalancer/getting-started',
+  label: 'Getting Started',
+};
+
+const nextLink: NavLink = {
+  href: '/docs/pgbalancer/connection-pooling',
+  label: 'Connection Pooling Setup',
+};
+
 export default function PgBalancerConfigDocs() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgBalancer',
-        badgeIcon: <PgbalancerIcon size={20} />, 
-        badgeTone: 'cyan',
-        title: 'Configuration Reference',
-        description:
-          'Complete guide to configuring pgBalancer using .conf file format. Configure AI load balancing, REST API, MQTT event streaming, connection pooling, health checks, and failover behavior.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Configuration Reference"
+      version="pgBalancer Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-8">
-        <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-yellow-200 mb-2">⚙️ Configuration File Format</h3>
-          <p className="text-sm text-yellow-100">
-            pgBalancer uses <strong>.conf file format</strong> (same as pgpool-II and PostgreSQL). Configuration file location:
-            <code>/etc/pgbalancer/pgbalancer.conf</code>
-          </p>
-        </div>
+      <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-lg p-6 mb-6">
+        <h3 className="text-lg font-semibold text-yellow-200 mb-2">⚙️ Configuration File Format</h3>
+        <p className="text-sm text-yellow-100">
+          pgBalancer uses <strong>.conf file format</strong> (same as pgpool-II and PostgreSQL). Configuration file location:
+          <code>/etc/pgbalancer/pgbalancer.conf</code>
+        </p>
+      </div>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4 text-white">Connection Settings</h2>
+      <section id="connection-settings">
+        <h2>Connection Settings</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-300 mb-3">Basic Connection Configuration</h3>
@@ -62,10 +83,10 @@ backend_user = 'pgbalancer'
 backend_password = 'StrongPassword123!'`}
             </pre>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Backend Server Configuration</h2>
+      <section id="backend-servers">
+        <h2>Backend Server Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Defining PostgreSQL Backends</h3>
@@ -113,10 +134,10 @@ backend_application_name2 = 'replica2_db'
               <li><code>backend_application_name</code>: Identifier for monitoring</li>
             </ul>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">AI Load Balancing Configuration</h2>
+      <section id="ai-load-balancing">
+        <h2>AI Load Balancing Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Machine Learning Routing Settings</h3>
@@ -158,10 +179,10 @@ ai_optimization_metric = 'response_time'`}
               <li>• <strong>Update interval</strong>: 60s for production, 10s for testing</li>
             </ul>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">REST API Configuration</h2>
+      <section id="rest-api">
+        <h2>REST API Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">HTTP/JSON API Settings</h3>
@@ -208,10 +229,10 @@ rest_api_log_requests = on`}
               <li>... and 9 more endpoints for cluster management</li>
             </ul>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">MQTT Event Streaming Configuration</h2>
+      <section id="mqtt-events">
+        <h2>MQTT Event Streaming Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Real-Time Event Publishing</h3>
@@ -258,10 +279,10 @@ mqtt_publish_interval = 30`}
               <li>• <code>pgbalancer/stats</code> - Periodic statistics</li>
             </ul>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Load Balancing Configuration</h2>
+      <section id="load-balancing">
+        <h2>Load Balancing Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Load Balancing Modes and Settings</h3>
@@ -298,10 +319,10 @@ database_redirect_preference_list = ''
 app_name_redirect_preference_list = ''`}
             </pre>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Health Check Configuration</h2>
+      <section id="health-check">
+        <h2>Health Check Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Backend Health Monitoring</h3>
@@ -356,10 +377,10 @@ log_health_check = off`}
               </ul>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Failover and Watchdog Configuration</h2>
+      <section id="failover-watchdog">
+        <h2>Failover and Watchdog Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">High Availability Settings</h3>
@@ -410,10 +431,10 @@ wd_interval = 10
 wd_priority = 1`}
             </pre>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Logging Configuration</h2>
+      <section id="logging">
+        <h2>Logging Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Logging and Debug Settings</h3>
@@ -456,10 +477,10 @@ client_min_messages = notice
 log_error_verbosity = default`}
             </pre>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Authentication Configuration</h2>
+      <section id="authentication">
+        <h2>Authentication Configuration</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Client and PCP Authentication</h3>
@@ -501,10 +522,10 @@ appuser:md5a1b2c3d4e5f6789012345678901234`}
               </pre>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Advanced Features</h2>
+      <section id="advanced-features">
+        <h2>Advanced Features</h2>
 
           <div className="space-y-6">
             <div>
@@ -567,10 +588,10 @@ memqcache_auto_cache_invalidation = on`}
               </div>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Complete Configuration Example</h2>
+      <section id="complete-example">
+        <h2>Complete Configuration Example</h2>
 
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
             <h3 className="text-lg font-semibold text-cyan-400 mb-3">Production-Ready Configuration</h3>
@@ -678,10 +699,10 @@ log_connections = on
 log_min_messages = info`}
             </pre>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Configuration Validation</h2>
+      <section id="validation">
+        <h2>Configuration Validation</h2>
 
           <BashCodeBlock
             code={`# Test configuration file syntax (dry-run)
@@ -700,10 +721,10 @@ bctl reload
 sudo systemctl reload pgbalancer`}
             title="Validate and Reload Configuration"
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Configuration Parameters Reference</h2>
+      <section id="parameters-reference">
+        <h2>Configuration Parameters Reference</h2>
 
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-700 text-sm">
@@ -767,31 +788,7 @@ sudo systemctl reload pgbalancer`}
               </tbody>
             </table>
           </div>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Next Steps</h2>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <a href="/docs/pgbalancer/load-balancing" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-              <h3 className="font-semibold mb-2">🤖 AI Load Balancing</h3>
-              <p className="text-sm text-muted-foreground">Machine learning algorithms and intelligent routing</p>
-            </a>
-            <a href="/docs/pgbalancer/rest-api" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-              <h3 className="font-semibold mb-2">🌐 REST API Reference</h3>
-              <p className="text-sm text-muted-foreground">17 HTTP/JSON endpoints with examples</p>
-            </a>
-            <a href="/docs/pgbalancer/cli-management" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-              <h3 className="font-semibold mb-2">⌨️ bctl CLI Tool</h3>
-              <p className="text-sm text-muted-foreground">Unified command-line interface</p>
-            </a>
-            <a href="/docs/pgbalancer/high-availability" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-              <h3 className="font-semibold mb-2">🔒 High Availability</h3>
-              <p className="text-sm text-muted-foreground">Failover, watchdog, and cluster management</p>
-            </a>
-          </div>
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   );
 }

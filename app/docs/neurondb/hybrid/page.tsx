@@ -1,300 +1,162 @@
-export const metadata = {
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
+import SqlCodeBlock from '../../../../components/SqlCodeBlock'
+
+export const metadata: Metadata = {
   title: 'Hybrid Search PostgreSQL | Vector + Full-Text BM25 - NeuronDB',
-  description: 'Combine semantic vector search with BM25 full-text search in PostgreSQL. Reciprocal Rank Fusion (RRF), learning-to-rank, and weighted scoring for best-in-class search relevance. Better than Elasticsearch for AI apps.',
-  keywords: [
-    'hybrid search',
-    'hybrid search PostgreSQL',
-    'vector full-text search',
-    'BM25 PostgreSQL',
-    'semantic search combination',
-    'RRF PostgreSQL',
-    'reciprocal rank fusion',
-    'learning to rank',
-    'vector keyword search',
-    'combined search PostgreSQL',
-    'Elasticsearch alternative',
-    'full-text vector search',
-    'search relevance PostgreSQL'
-  ],
-  openGraph: {
-    title: 'Hybrid Search - Vector + Full-Text in PostgreSQL',
-    description: 'Best-in-class search combining semantic vectors with BM25 keyword search. RRF and learning-to-rank in one database.',
-    url: 'https://www.pgelephant.com/docs/neurondb/hybrid',
-  },
+  description: 'Combine semantic vector search with BM25 full-text search in PostgreSQL. Reciprocal Rank Fusion (RRF), learning-to-rank, and weighted scoring for best-in-class search relevance.',
   alternates: {
     canonical: 'https://www.pgelephant.com/docs/neurondb/hybrid',
   },
 }
 
-import React from 'react'
-import Link from 'next/link'
-import { Search, Zap, BarChart3, ArrowRight, CheckCircle } from 'lucide-react'
+const tableOfContents: TocItem[] = [
+  { id: 'what-is-hybrid', title: 'What is Hybrid Search?' },
+  { id: 'implementation', title: 'Implementation' },
+  { id: 'scoring', title: 'Scoring Methods' },
+  { id: 'best-practices', title: 'Best Practices' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/neurondb/indexing',
+  label: 'Indexing',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/neurondb/hybrid/overview',
+  label: 'Hybrid Overview',
+}
 
 export default function Page() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
-      {/* Hero */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-cyan-500/10" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Search className="w-4 h-4" />
-              Hybrid Search
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                Hybrid Search
-              </span>
-            </h1>
-            
-            <p className="text-xl text-white/80 mb-8">
-              Combine vector similarity with full-text search for best-in-class retrieval. Get the semantic understanding of embeddings plus the precision of keyword matching.
-            </p>
-          </div>
-        </div>
+    <PostgresDocsLayout
+      title="Hybrid Search"
+      version="NeurondB Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
+    >
+      <section id="what-is-hybrid">
+        <h2>What is Hybrid Search?</h2>
+        <p>Hybrid search combines <strong>vector similarity</strong> (semantic meaning) with <strong>full-text search</strong> (keyword matching) to provide superior search results that understand both context and exact terms.</p>
+
+        <h3>Vector Search Alone</h3>
+        <ul>
+          <li>✓ Understands semantic meaning</li>
+          <li>✓ Finds conceptually similar content</li>
+          <li>✗ May miss exact keyword matches</li>
+          <li>✗ Can return loosely related results</li>
+        </ul>
+
+        <h3>Full-Text Search Alone</h3>
+        <ul>
+          <li>✓ Precise keyword matching</li>
+          <li>✓ Fast for exact terms</li>
+          <li>✗ No semantic understanding</li>
+          <li>✗ Misses synonyms and context</li>
+        </ul>
+
+        <h3>Hybrid Search = Best of Both</h3>
+        <ul>
+          <li>Semantic understanding from vector embeddings</li>
+          <li>Precise keyword matching from full-text search</li>
+          <li>Superior relevance through combined scoring</li>
+          <li>Handles both conceptual and exact queries</li>
+        </ul>
       </section>
 
-      {/* Main Content */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto space-y-16">
-            
-            {/* What is Hybrid Search */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-              <h2 className="text-3xl font-bold text-white mb-6">What is Hybrid Search?</h2>
-              <p className="text-white/80 text-lg mb-6">
-                Hybrid search combines <strong>vector similarity</strong> (semantic meaning) with <strong>full-text search</strong> (keyword matching) to provide superior search results that understand both context and exact terms.
-              </p>
-              
-              <div className="grid md:grid-cols-2 gap-6 mt-8">
-                <div className="bg-purple-500/10 rounded-lg p-6 border border-purple-500/30">
-                  <h3 className="text-lg font-bold text-purple-300 mb-3">Vector Search Alone</h3>
-                  <ul className="space-y-2 text-white/70 text-sm">
-                    <li>✓ Understands semantic meaning</li>
-                    <li>✓ Finds conceptually similar content</li>
-                    <li>✗ May miss exact keyword matches</li>
-                    <li>✗ Can return loosely related results</li>
-                  </ul>
-                </div>
-                <div className="bg-cyan-500/10 rounded-lg p-6 border border-cyan-500/30">
-                  <h3 className="text-lg font-bold text-cyan-300 mb-3">Full-Text Search Alone</h3>
-                  <ul className="space-y-2 text-white/70 text-sm">
-                    <li>✓ Precise keyword matching</li>
-                    <li>✓ Fast for exact terms</li>
-                    <li>✗ No semantic understanding</li>
-                    <li>✗ Misses synonyms and context</li>
-                  </ul>
-                </div>
-              </div>
+      <section id="implementation">
+        <h2>Implementation</h2>
 
-              <div className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-lg p-6 border border-purple-500/30 mt-6">
-                <h3 className="text-lg font-bold text-green-300 mb-3">Hybrid Search = Best of Both</h3>
-                <ul className="space-y-2 text-white/80">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>Semantic understanding from vector embeddings</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>Precise keyword matching from full-text search</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>Weighted scoring to balance both approaches</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                    <span>Superior relevance and recall</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Basic Hybrid Search */}
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-8">Basic Hybrid Search</h2>
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <h3 className="text-xl font-bold text-white mb-4">Setup Table</h3>
-                <div className="bg-slate-900/50 rounded-lg p-6 mb-6">
-                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
-                    {`
--- Create table with vector and text columns
-CREATE TABLE knowledge_base (
-  id SERIAL PRIMARY KEY,
-  title TEXT,
-  content TEXT,
-  embedding vector(384),
-  ts_vector tsvector
-);
-
--- Create indexes
-CREATE INDEX ON knowledge_base USING hnsw (embedding vector_l2_ops);
-CREATE INDEX ON knowledge_base USING gin (ts_vector);
-
--- Insert data with embeddings and text index
-INSERT INTO knowledge_base (title, content, embedding, ts_vector)
-VALUES (
-  'PostgreSQL Performance',
-  'Optimize queries with indexes and EXPLAIN',
-  embed_text('Optimize queries with indexes and EXPLAIN'),
-  to_tsvector('Optimize queries with indexes and EXPLAIN')
-);`}
-                  </code></pre>
-                </div>
-
-                <h3 className="text-xl font-bold text-white mb-4">Perform Hybrid Search</h3>
-                <div className="bg-slate-900/50 rounded-lg p-6">
-                  <pre className="text-sm overflow-x-auto"><code className="text-green-300">
-                    {`
--- Hybrid search: 70% vector + 30% text
-SELECT * FROM hybrid_search(
-  'knowledge_base',      -- table name
-  'content',             -- text column
-  'embedding',           -- vector column
-  'database optimization', -- query
-  10,                    -- limit
-  0.7,                   -- vector weight (70%)
-  0.3                    -- text weight (30%)
-);
-
--- Returns: id, title, content, vector_score, text_score, hybrid_score`}
-                  </code></pre>
-                </div>
-              </div>
-            </div>
-
-            {/* Reranking */}
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-8">Reranking for Precision</h2>
-              <div className="space-y-6">
-                
-                {/* Cross-Encoder */}
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                  <h3 className="text-xl font-bold text-white mb-4">Cross-Encoder Reranking</h3>
-                  <p className="text-white/70 mb-4">
-                    Cross-encoders jointly encode the query and each candidate for higher precision scoring.
-                  </p>
-                  <div className="bg-slate-900/50 rounded-lg p-6">
-                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
-                      {`
--- Rerank search results with cross-encoder
-SELECT rerank_cross_encoder(
-  'What is PostgreSQL?',                    -- query
-  ARRAY[                                    -- candidate documents
-    'PostgreSQL is a database',
-    'MySQL is also a database',
-    'Redis is a cache'
-  ],
-  'ms-marco-MiniLM-L-6-v2',                -- model
-  3                                         -- top_n
-);
-
--- Returns:
---  idx | score
--- -----+-------
---   0  | 0.945  (most relevant)
---   1  | 0.678
---   2  | 0.123  (least relevant)`}
-                    </code></pre>
-                  </div>
-                </div>
-
-                {/* MMR */}
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                  <h3 className="text-xl font-bold text-white mb-4">MMR (Maximal Marginal Relevance)</h3>
-                  <p className="text-white/70 mb-4">
-                    MMR balances relevance with diversity to avoid redundant results.
-                  </p>
-                  <div className="bg-slate-900/50 rounded-lg p-6">
-                    <pre className="text-sm overflow-x-auto"><code className="text-green-300">
-                      {`
--- MMR reranking for diverse results
-SELECT * FROM mmr_rerank(
-  'knowledge_base',           -- table
-  'embedding',                -- vector column
-  embed_text('database'),     -- query vector
-  20,                         -- fetch top 20 candidates
-  5,                          -- return top 5 diverse results
-  0.7                         -- lambda (0.7 = 70% relevance, 30% diversity)
-);
-
--- Returns: id, title, score, diversity`}
-                    </code></pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Best Practices */}
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-8">Best Practices</h2>
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-slate-400/30 p-8">
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-bold text-cyan-300 mb-3">1. Tune Vector/Text Weights</h3>
-                    <p className="text-white/70 mb-3">
-                      Adjust the balance based on your use case:
-                    </p>
-                    <ul className="space-y-2 text-white/70 text-sm ml-4">
-                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.9/0.1</code></pre> - Heavily semantic (concepts matter more than exact terms)</li>
-                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.7/0.3</code></pre> - Balanced (default, works for most cases)</li>
-                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.5/0.5</code></pre> - Equal weight (both semantic and keywords important)</li>
-                      <li><pre className="text-sm overflow-x-auto"><code className="text-cyan-300">0.3/0.7</code></pre> - Keyword-focused (exact terms critical)</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-bold text-cyan-300 mb-3">2. Index Both Columns</h3>
-                    <div className="bg-slate-900/50 rounded-lg p-4 font-mono text-sm">
-                      <pre className="text-sm overflow-x-auto"><code className="text-green-300">
-                        {`
--- Always index both for performance
-CREATE INDEX ON docs USING hnsw (embedding vector_l2_ops);
-CREATE INDEX ON docs USING gin (ts_vector);`}
-                      </code></pre>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-bold text-cyan-300 mb-3">3. Use Reranking for Top Results</h3>
-                    <p className="text-white/70 text-sm">
-                      Fetch 50-100 candidates with hybrid search, then rerank top 10-20 for best precision.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Next Steps */}
-            <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl border border-purple-500/30 p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">Related Documentation</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <Link href="/docs/neurondb/ml/embeddings" className="flex items-center gap-3 bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-all group">
-                  <Search className="w-6 h-6 text-purple-400" />
-                  <div>
-                    <div className="font-semibold text-white group-hover:text-purple-300">Embeddings</div>
-                    <div className="text-sm text-white/60">Generate embeddings</div>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-white/40 ml-auto" />
-                </Link>
-                <Link href="/docs/neurondb/rag" className="flex items-center gap-3 bg-white/10 hover:bg-white/20 rounded-lg p-4 transition-all group">
-                  <Zap className="w-6 h-6 text-cyan-400" />
-                  <div>
-                    <div className="font-semibold text-white group-hover:text-cyan-300">RAG Pipeline</div>
-                    <div className="text-sm text-white/60">Complete RAG setup</div>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-white/40 ml-auto" />
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </div>
+        <h3>Basic Hybrid Query</h3>
+        <SqlCodeBlock
+          title="Hybrid search query"
+          code={`WITH vector_results AS (
+  SELECT id, content,
+         embedding <=> embed_text('PostgreSQL replication') AS distance
+  FROM documents
+  ORDER BY distance
+  LIMIT 20
+),
+text_results AS (
+  SELECT id, content,
+         ts_rank(to_tsvector('english', content), 
+                 to_tsquery('english', 'PostgreSQL & replication')) AS rank
+  FROM documents
+  WHERE to_tsvector('english', content) @@ to_tsquery('english', 'PostgreSQL & replication')
+  ORDER BY rank DESC
+  LIMIT 20
+)
+SELECT 
+  COALESCE(v.id, t.id) AS id,
+  COALESCE(v.content, t.content) AS content,
+  COALESCE(1.0 - v.distance, 0.0) * 0.6 + COALESCE(t.rank, 0.0) * 0.4 AS score
+FROM vector_results v
+FULL OUTER JOIN text_results t ON v.id = t.id
+ORDER BY score DESC
+LIMIT 10;`}
+        />
       </section>
-    </div>
+
+      <section id="scoring">
+        <h2>Scoring Methods</h2>
+
+        <h3>Weighted Sum</h3>
+        <p>Combine vector and text scores with weights.</p>
+        <SqlCodeBlock
+          title="Weighted scoring"
+          code={`SELECT id, content,
+       (1.0 - vector_distance) * 0.7 + text_rank * 0.3 AS hybrid_score
+FROM (
+  SELECT id, content,
+         embedding <=> embed_text('query') AS vector_distance,
+         ts_rank(to_tsvector('english', content), query_fts) AS text_rank
+  FROM documents, to_tsquery('english', 'query') AS query_fts
+) combined
+ORDER BY hybrid_score DESC
+LIMIT 10;`}
+        />
+
+        <h3>Reciprocal Rank Fusion (RRF)</h3>
+        <p>Combine rankings using RRF algorithm.</p>
+        <SqlCodeBlock
+          title="RRF scoring"
+          code={`WITH vector_ranked AS (
+  SELECT id, ROW_NUMBER() OVER (ORDER BY embedding <=> embed_text('query')) AS v_rank
+  FROM documents
+),
+text_ranked AS (
+  SELECT id, ROW_NUMBER() OVER (ORDER BY ts_rank(...) DESC) AS t_rank
+  FROM documents
+  WHERE to_tsvector('english', content) @@ to_tsquery('english', 'query')
+)
+SELECT v.id,
+       1.0 / (60 + v.v_rank) + 1.0 / (60 + t.t_rank) AS rrf_score
+FROM vector_ranked v
+JOIN text_ranked t ON v.id = t.id
+ORDER BY rrf_score DESC
+LIMIT 10;`}
+        />
+      </section>
+
+      <section id="best-practices">
+        <h2>Best Practices</h2>
+        <ul>
+          <li>Use appropriate weights based on your use case (typically 60-70% vector, 30-40% text)</li>
+          <li>Normalize scores from both sources before combining</li>
+          <li>Consider reranking top-K results with cross-encoders</li>
+          <li>Monitor recall and precision metrics</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Next Steps</h2>
+        <ul>
+          <li><a href="/docs/neurondb/hybrid/overview">Hybrid Overview</a> - Detailed hybrid retrieval guide</li>
+          <li><a href="/docs/neurondb/reranking/overview">Reranking</a> - Improve relevance with reranking</li>
+          <li><a href="/docs/neurondb/rag">RAG Pipelines</a> - Build RAG applications</li>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }
-

@@ -1,8 +1,7 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
-import { PgraftIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'Monitoring and Observability | pgraft',
@@ -10,23 +9,40 @@ export const metadata: Metadata = {
     'Complete monitoring guide for pgraft: metrics, health checks, status views, alerting, performance tracking, and operational insights.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'status-views', title: 'Status Views and Health Functions' },
+  { id: 'log-replication', title: 'Log Replication Monitoring' },
+  { id: 'kv-monitoring', title: 'Key-Value Store Monitoring' },
+  { id: 'performance-metrics', title: 'Performance & Election Metrics' },
+  { id: 'system-views', title: 'System Monitoring Views' },
+  { id: 'alerting', title: 'Alerting & Automation' },
+  { id: 'dashboards', title: 'Dashboards & Visualization' },
+  { id: 'log-analysis', title: 'Log Analysis & Debugging' },
+  { id: 'best-practices', title: 'Best Practices Checklist' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgraft/tutorial',
+  label: 'Tutorial',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgraft/raft-protocol',
+  label: 'Raft Protocol',
+}
+
 export default function PgraftMonitoringPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgRaft',
-        badgeIcon: <PgraftIcon size={20} />, 
-        badgeTone: 'blue',
-        title: 'Monitoring and Observability',
-        description:
-          'Comprehensive guide to monitoring pgraft clusters: status views, metrics, health checks, log analysis, and alerting strategies.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Monitoring and Observability"
+      version="pgraft Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
         <section className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
           <h3 className="text-lg font-semibold mb-3">Monitoring Fundamentals</h3>
-          <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+            <ul>
             <li>
               <strong>Cluster health:</strong> Track leader election, node connectivity, and quorum status.
             </li>
@@ -45,12 +61,12 @@ export default function PgraftMonitoringPage() {
           </ul>
         </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Status Views and Health Functions</h2>
+      <section id="status-views">
+        <h2>Status Views and Health Functions</h2>
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-xl font-semibold">Cluster Overview</h3>
-              <p className="text-sm text-muted-foreground">
+              <p>
                 Primary function for monitoring leadership, quorum, and message counters from any node.
               </p>
               <SqlCodeBlock
@@ -62,7 +78,7 @@ SELECT * FROM pgraft_get_cluster_status();
 -- node_id, current_term, leader_id, state, num_nodes,
 -- messages_processed, heartbeats_sent, elections_triggered`}
               />
-              <div className="text-sm text-muted-foreground bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-3">
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-3">
                 <strong>Health indicators:</strong> All nodes should agree on <code>leader_id</code> and <code>current_term</code>, only one
                 node reports <code>state = 'leader'</code>, and <code>elections_triggered</code> should rarely increase.
               </div>
@@ -90,14 +106,14 @@ SELECT pgraft_get_nodes_from_raft();`}
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Log Replication Monitoring</h2>
+      <section id="log-replication">
+        <h2>Log Replication Monitoring</h2>
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-xl font-semibold">Replication Status</h3>
-              <p className="text-sm text-muted-foreground">
+              <p>
                 Track follower lag and match indexes to keep quorum healthy under load.
               </p>
               <SqlCodeBlock
@@ -109,7 +125,7 @@ SELECT pgraft_get_nodes_from_raft();`}
        state
   FROM pgraft_log_get_replication_status();`}
               />
-              <div className="text-sm text-muted-foreground bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3">
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3">
                 <strong>Alert guidance:</strong> <code>lag_entries &gt; 100</code> (warning), <code>&gt; 1000</code> (critical), or
                 <code>state = 'stalled'</code> requires immediate remediation.
               </div>
@@ -140,10 +156,10 @@ SELECT pgraft_log_sync_with_leader();`}
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Key-Value Store Monitoring</h2>
+      <section id="kv-monitoring">
+        <h2>Key-Value Store Monitoring</h2>
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-xl font-semibold">Usage &amp; Capacity</h3>
@@ -204,10 +220,10 @@ SELECT day,
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Performance &amp; Election Metrics</h2>
+      <section id="performance-metrics">
+        <h2>Performance & Election Metrics</h2>
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-xl font-semibold">Message Throughput</h3>
@@ -254,7 +270,7 @@ SELECT c.node_id,
        elections_triggered::float / GREATEST(current_term, 1) AS elections_per_term
   FROM pgraft_get_cluster_status();`}
               />
-              <div className="text-sm text-muted-foreground bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-3">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-3">
                 <strong>Investigate immediately when:</strong> <code>elections_per_term &gt; 2</code>,
                 <code>current_term</code> spikes unexpectedly, or multiple nodes report <code>state = 'candidate'</code>.
               </div>
@@ -268,10 +284,10 @@ psql -c "SHOW pgraft.snapshot_threshold;"`}
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">System Monitoring Views</h2>
+      <section id="system-views">
+        <h2>System Monitoring Views</h2>
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-xl font-semibold">etcd-Compatible Views</h3>
@@ -300,10 +316,10 @@ SELECT CURRENT_TIMESTAMP AS checked_at,
               <SqlCodeBlock title="Query summary" code={`SELECT * FROM pgraft_health_summary;`} />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Alerting &amp; Automation</h2>
+      <section id="alerting">
+        <h2>Alerting & Automation</h2>
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-xl font-semibold">Database Health Check</h3>
@@ -415,10 +431,10 @@ fi`}
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Dashboards &amp; Visualization</h2>
+      <section id="dashboards">
+        <h2>Dashboards & Visualization</h2>
           <SqlCodeBlock
             title="Sample Grafana queries"
             code={`-- Cluster overview
@@ -441,10 +457,10 @@ SELECT total_keys AS "Total Keys",
        avg_value_size / 1024 AS "Avg Value (KB)"
   FROM pgraft_kv_get_stats();`}
           />
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Log Analysis &amp; Debugging</h2>
+      <section id="log-analysis">
+        <h2>Log Analysis & Debugging</h2>
           <div className="grid lg:grid-cols-2 gap-6">
             <div className="border rounded-lg p-6 space-y-4">
               <h3 className="text-xl font-semibold">PostgreSQL Logs</h3>
@@ -470,11 +486,11 @@ SELECT pgraft_set_debug(false);`}
               />
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Best Practices Checklist</h2>
-          <ul className="space-y-3 text-muted-foreground">
+      <section id="best-practices">
+        <h2>Best Practices Checklist</h2>
+        <ul>
             <li>
               <strong>Continuous monitoring:</strong> Execute health checks every 1–5 minutes via cron or agents.
             </li>
@@ -496,12 +512,12 @@ SELECT pgraft_set_debug(false);`}
             <li>
               <strong>Regular rehearsal:</strong> Test failover and replica catch-up quarterly to validate tooling and runbooks.
             </li>
-          </ul>
-        </section>
+        </ul>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Next Steps</h2>
-          <ul className="space-y-2 text-muted-foreground">
+      <section>
+        <h2>Next Steps</h2>
+        <ul>
             <li>
               <a href="/docs/pgraft/troubleshooting" className="text-blue-500 hover:underline">
                 Troubleshooting Guide
@@ -526,9 +542,8 @@ SELECT pgraft_set_debug(false);`}
               </a>{' '}
               – Complete catalog of functions and views.
             </li>
-          </ul>
-        </section>
-      </div>
-    </DocsContentLayout>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }

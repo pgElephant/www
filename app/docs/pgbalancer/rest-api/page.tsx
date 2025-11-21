@@ -1,43 +1,50 @@
-import { Globe, Lock, Code, Zap, Server } from 'lucide-react'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
-import { PgbalancerIcon } from '../../../../components/ProductIcons'
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'REST API Usage - pgBalancer',
-  description: 'Use pgBalancer REST API for cluster management, monitoring, and automation.'
-};
+  description: 'Use pgBalancer REST API for cluster management, monitoring, and automation.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'enable-api-server', title: 'Enable REST API Server' },
+  { id: 'authentication-security', title: 'Authentication & Security' },
+  { id: 'core-endpoints', title: 'Core API Endpoints' },
+  { id: 'pool-management', title: 'Connection Pool Management' },
+  { id: 'failover-health', title: 'Failover & Health Checks' },
+  { id: 'prometheus-grafana', title: 'Prometheus & Grafana' },
+  { id: 'full-api-spec', title: 'Full API Spec' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgbalancer/load-balancing',
+  label: 'AI-Powered Load Balancing',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgbalancer/cli-management',
+  label: 'CLI Management (bctl)',
+}
 
 export default function RestAPIPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgBalancer',
-        badgeIcon: <PgbalancerIcon size={20} />, 
-        badgeTone: 'cyan',
-        title: 'REST API Usage',
-        description: "Use pgBalancer's HTTP/JSON REST API for cluster management, monitoring, and automation."
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="REST API Usage"
+      version="pgBalancer Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12 text-slate-200">
-        {/* Step 1: API Server Setup */}
-        <section className="space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-blue-500/20 rounded-lg">
-            <Globe className="w-6 h-6 text-blue-400" />
-          </div>
-          <h2 className="text-2xl font-bold m-0">Step 1: Enable REST API Server</h2>
-        </div>
-
-        <p className="text-slate-300">
+      <section id="enable-api-server">
+        <h2>Enable REST API Server</h2>
+        <p>
           pgBalancer includes an integrated REST API server running as a child process:
         </p>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">pgbalancer.conf API Configuration</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# REST API Server Configuration
+        <BashCodeBlock
+          title="pgbalancer.conf API Configuration"
+          code={`# REST API Server Configuration
 enable_rest_api = on                # Enable HTTP API server
 rest_api_port = 8080                # API listens on this port
 rest_api_hostname = '0.0.0.0'       # Listen on all interfaces
@@ -55,13 +62,11 @@ rest_api_cors_origins = '*'         # Allowed origins
 # Enable detailed logging
 rest_api_log_requests = on          # Log all API requests
 rest_api_log_level = 'info'         # info, debug, warn, error`}
-          </pre>
-        </div>
+        />
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Start pgBalancer with API Enabled</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# Start pgBalancer
+        <BashCodeBlock
+          title="Start pgBalancer with API Enabled"
+          code={`# Start pgBalancer
 pgbalancer -f /etc/pgbalancer/pgbalancer.conf
 
 # Verify API is running
@@ -74,69 +79,52 @@ curl -s http://localhost:8080/api/v1/health
   "uptime_seconds": 12345,
   "timestamp": "2025-11-06T12:00:00Z"
 }`}
-          </pre>
-        </div>
+        />
 
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-          <p className="text-sm text-blue-200">
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mt-4">
+          <p className="text-sm">
             <strong>Tip:</strong> Use the REST server for automation and dashboards. For security, expose it behind an API gateway or VPN.
           </p>
         </div>
-        </section>
+      </section>
 
-        {/* Step 2: Authentication & Security */}
-        <section className="space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-purple-500/20 rounded-lg">
-            <Lock className="w-6 h-6 text-purple-400" />
-          </div>
-          <h2 className="text-2xl font-bold m-0">Step 2: Authentication & Security</h2>
-        </div>
-
-        <p className="text-slate-300">
+      <section id="authentication-security">
+        <h2>Authentication & Security</h2>
+        <p>
           Configure TLS, API keys, and RBAC for REST API access:
         </p>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gray-800/60 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-purple-300 mb-3">Enable TLS</h3>
-            <p className="text-slate-300">
-              Secure your API with TLS certificates. Use `rest_api_ssl_cert` and `rest_api_ssl_key` in `pgbalancer.conf`.
+            <h3>Enable TLS</h3>
+            <p>
+              Secure your API with TLS certificates. Use <code>rest_api_ssl_cert</code> and <code>rest_api_ssl_key</code> in <code>pgbalancer.conf</code>.
             </p>
           </div>
           <div className="bg-gray-800/60 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-purple-300 mb-3">API Keys</h3>
-            <p className="text-slate-300">
-              Generate and manage API keys securely. Use `rest_api_auth` and `rest_api_secret_key` in `pgbalancer.conf`.
+            <h3>API Keys</h3>
+            <p>
+              Generate and manage API keys securely. Use <code>rest_api_auth</code> and <code>rest_api_secret_key</code> in <code>pgbalancer.conf</code>.
             </p>
           </div>
         </div>
 
-        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
-          <p className="text-sm text-purple-200">
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
+          <p className="text-sm">
             <strong>Security Reminder:</strong> Always restrict API access with TLS and signed tokens. Rotate keys frequently and audit API usage.
           </p>
         </div>
-        </section>
+      </section>
 
-        {/* Step 3: Core API Endpoints */}
-        <section className="space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-green-500/20 rounded-lg">
-            <Code className="w-6 h-6 text-green-400" />
-          </div>
-          <h2 className="text-2xl font-bold m-0">Step 3: Core API Endpoints</h2>
-        </div>
-
-        <p className="text-slate-300">
+      <section id="core-endpoints">
+        <h2>Core API Endpoints</h2>
+        <p>
           Use the REST API to manage pools, view metrics, and automate failover:
         </p>
 
-        <div className="space-y-6">
-          <div className="bg-gray-800/50 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-green-300 mb-3">List Pools</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# GET /api/v1/pool/processes
+        <BashCodeBlock
+          title="List Pools"
+          code={`# GET /api/v1/pool/processes
 curl -s http://localhost:8080/api/v1/pool/processes | jq
 
 {
@@ -150,28 +138,17 @@ curl -s http://localhost:8080/api/v1/pool/processes | jq
       "pool_counter": 150,
       "backend_id": 0,
       "connected": true
-    },
-    {
-      "pool_pid": 12346,
-      "start_time": "2025-11-06T10:30:00Z",
-      "database": "testdb",
-      "username": "appuser",
-      "create_time": "2025-11-06T10:30:01Z",
-      "pool_counter": 89,
-      "backend_id": 1,
-      "connected": true
     }
   ],
   "total": 32,
   "active": 28,
   "idle": 4
 }`}
-            </pre>
-          </div>
-          <div className="bg-gray-800/50 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-green-300 mb-3">Get Pool Statistics</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# GET /api/v1/pool/stats
+        />
+
+        <BashCodeBlock
+          title="Get Pool Statistics"
+          code={`# GET /api/v1/pool/stats
 curl -s http://localhost:8080/api/v1/pool/stats | jq
 
 {
@@ -186,131 +163,58 @@ curl -s http://localhost:8080/api/v1/pool/stats | jq
   "num_init_children": 32,
   "max_pool": 4
 }`}
-            </pre>
-          </div>
-        </div>
-        </section>
+        />
+      </section>
 
-        {/* Step 4: Pool Management */}
-        <section className="space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-cyan-500/20 rounded-lg">
-            <PgbalancerIcon size={24} />
-          </div>
-          <h2 className="text-2xl font-bold m-0">Step 4: Connection Pool Management</h2>
-        </div>
-
-        <p className="text-slate-300">
+      <section id="pool-management">
+        <h2>Connection Pool Management</h2>
+        <p>
           Monitor and manage connection pools:
         </p>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Get Pool Processes</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# GET /api/v1/pool/processes
-curl -s http://localhost:8080/api/v1/pool/processes | jq
+        <BashCodeBlock
+          title="Get Pool Processes"
+          code={`# GET /api/v1/pool/processes
+curl -s http://localhost:8080/api/v1/pool/processes | jq`}
+        />
 
-{
-  "processes": [
-    {
-      "pool_pid": 12345,
-      "start_time": "2025-11-06T10:30:00Z",
-      "database": "testdb",
-      "username": "appuser",
-      "create_time": "2025-11-06T10:30:01Z",
-      "pool_counter": 150,
-      "backend_id": 0,
-      "connected": true
-    },
-    {
-      "pool_pid": 12346,
-      "start_time": "2025-11-06T10:30:00Z",
-      "database": "testdb",
-      "username": "appuser",
-      "create_time": "2025-11-06T10:30:01Z",
-      "pool_counter": 89,
-      "backend_id": 1,
-      "connected": true
-    }
-  ],
-  "total": 32,
-  "active": 28,
-  "idle": 4
-}`}
-          </pre>
-        </div>
+        <BashCodeBlock
+          title="Get Pool Statistics"
+          code={`# GET /api/v1/pool/stats
+curl -s http://localhost:8080/api/v1/pool/stats | jq`}
+        />
+      </section>
 
-        <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold text-cyan-400 mb-3">Get Pool Statistics</h3>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# GET /api/v1/pool/stats
-curl -s http://localhost:8080/api/v1/pool/stats | jq
-
-{
-  "total_capacity": 128,
-  "active_connections": 45,
-  "idle_connections": 83,
-  "utilization_percent": 35.16,
-  "cache_hits": 15420,
-  "cache_misses": 89,
-  "cache_hit_rate": 99.42,
-  "mode": "transaction",
-  "num_init_children": 32,
-  "max_pool": 4
-}`}
-          </pre>
-        </div>
-        </section>
-
-        {/* Step 5: Failover & Health */}
-        <section className="space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-red-500/20 rounded-lg">
-            <Server className="w-6 h-6 text-red-400" />
-          </div>
-          <h2 className="text-2xl font-bold m-0">Step 5: Failover & Health Checks</h2>
-        </div>
-
-        <p className="text-slate-300">
+      <section id="failover-health">
+        <h2>Failover & Health Checks</h2>
+        <p>
           Automate failover and health monitoring:
         </p>
 
-        <div className="space-y-6">
-          <div className="bg-gray-800/50 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-red-300 mb-3">Trigger Manual Failover</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# POST /api/v1/failover/promote
-curl -X POST http://localhost:8080/api/v1/failover/promote \
-  -H "Content-Type: application/json" \
+        <BashCodeBlock
+          title="Trigger Manual Failover"
+          code={`# POST /api/v1/failover/promote
+curl -X POST http://localhost:8080/api/v1/failover/promote \\
+  -H "Content-Type: application/json" \\
   -d '{"force": true}'
 
 {
   "status": "success",
   "message": "Manual failover initiated"
 }`}
-            </pre>
-          </div>
-        </div>
-        </section>
+        />
+      </section>
 
-        {/* Step 6: Prometheus & Grafana */}
-        <section className="space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-purple-500/20 rounded-lg">
-            <Zap className="w-6 h-6 text-purple-400" />
-          </div>
-          <h2 className="text-2xl font-bold m-0">Step 6: Prometheus & Grafana</h2>
-        </div>
-
-        <p className="text-slate-300">
+      <section id="prometheus-grafana">
+        <h2>Prometheus & Grafana</h2>
+        <p>
           Access real-time metrics and monitoring data:
         </p>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-gray-800/60 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-purple-300 mb-3">Prometheus Metrics</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# GET /metrics (Prometheus format)
+          <BashCodeBlock
+            title="Prometheus Metrics"
+            code={`# GET /metrics (Prometheus format)
 curl -s http://localhost:8080/metrics
 
 # HELP pgbalancer_up Server status (1=up, 0=down)
@@ -319,83 +223,40 @@ pgbalancer_up 1
 
 # HELP pgbalancer_backend_up Backend status (1=up, 0=down)
 # TYPE pgbalancer_backend_up gauge
-pgbalancer_backend_up{node_id="0",hostname="db-primary.internal"} 1
-pgbalancer_backend_up{node_id="1",hostname="db-replica1.internal"} 1
-pgbalancer_backend_up{node_id="2",hostname="db-replica2.internal"} 1
-
-# HELP pgbalancer_backend_queries_total Total queries sent to backend
-# TYPE pgbalancer_backend_queries_total counter
-pgbalancer_backend_queries_total{node_id="0"} 1523
-pgbalancer_backend_queries_total{node_id="1"} 4501
-pgbalancer_backend_queries_total{node_id="2"} 4389
-
-# HELP pgbalancer_pool_utilization_percent Pool utilization percentage
-# TYPE pgbalancer_pool_utilization_percent gauge
-pgbalancer_pool_utilization_percent 35.16`}
-            </pre>
-          </div>
-          <div className="bg-gray-800/60 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-purple-300 mb-3">Status Dashboard Data</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto">
-{`# GET /api/v1/status
+pgbalancer_backend_up{node_id="0",hostname="db-primary.internal"} 1`}
+          />
+          <BashCodeBlock
+            title="Status Dashboard Data"
+            code={`# GET /api/v1/status
 curl -s http://localhost:8080/api/v1/status | jq
 
 {
   "server": {
     "version": "pgbalancer 5.0.0",
-    "uptime_seconds": 432000,
-    "start_time": "2025-11-01T10:00:00Z"
+    "uptime_seconds": 432000
   },
   "backends": {
     "total": 3,
     "up": 3,
-    "down": 0,
-    "primary": 0,
-    "standby": 2
-  },
-  "pool": {
-    "mode": "transaction",
-    "processes": 32,
-    "active_connections": 45,
-    "idle_connections": 83,
-    "utilization": 35.16
-  },
-  "performance": {
-    "queries_per_second": 85.3,
-    "avg_response_time_ms": 11.8,
-    "error_rate": 0.0012
-  },
-  "watchdog": {
-    "enabled": true,
-    "state": "MASTER",
-    "quorum": true,
-    "alive_nodes": 3
+    "down": 0
   }
 }`}
-            </pre>
-          </div>
+          />
         </div>
-        </section>
+      </section>
 
-        {/* Appendix: Full API Spec */}
-        <section className="space-y-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-slate-500/20 rounded-lg">
-            <Code className="w-6 h-6 text-slate-300" />
-          </div>
-          <h2 className="text-2xl font-bold m-0">Appendix: Full API Spec</h2>
-        </div>
-
+      <section id="full-api-spec">
+        <h2>Full API Spec</h2>
         <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-600">
-                <th className="text-left py-2 text-cyan-400">Endpoint</th>
-                <th className="text-left py-2 text-cyan-400">Method</th>
-                <th className="text-left py-2 text-cyan-400">Description</th>
+                <th className="text-left py-2">Endpoint</th>
+                <th className="text-left py-2">Method</th>
+                <th className="text-left py-2">Description</th>
               </tr>
             </thead>
-            <tbody className="text-gray-300">
+            <tbody>
               <tr className="border-b border-gray-700">
                 <td className="py-2 font-mono text-green-400">/api/v1/health</td>
                 <td className="py-2">GET</td>
@@ -451,12 +312,12 @@ curl -s http://localhost:8080/api/v1/status | jq
                 <td className="py-2">GET</td>
                 <td className="py-2">Watchdog status</td>
               </tr>
-              <tr>
+              <tr className="border-b border-gray-700">
                 <td className="py-2 font-mono text-green-400">/metrics</td>
                 <td className="py-2">GET</td>
                 <td className="py-2">Prometheus metrics</td>
               </tr>
-              <tr className="border-b border-gray-700">
+              <tr>
                 <td className="py-2 font-mono text-green-400">/api/v1/failover/promote</td>
                 <td className="py-2">POST</td>
                 <td className="py-2">Manual promotion</td>
@@ -464,8 +325,7 @@ curl -s http://localhost:8080/api/v1/status | jq
             </tbody>
           </table>
         </div>
-        </section>
-      </div>
-    </DocsContentLayout>
+      </section>
+    </PostgresDocsLayout>
   )
 }

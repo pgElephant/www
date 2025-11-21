@@ -1,11 +1,20 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'Views Reference | pg_stat_insights',
   description: 'Reference guide for the 11 pg_stat_insights views with usage examples and diagnostic tips.',
+}
+
+const prevLink: NavLink = {
+  href: '/docs/pg_stat_insights/metrics',
+  label: 'Metrics Reference Guide',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pg_stat_insights/usage',
+  label: 'Usage Examples',
 }
 
 interface ViewDefinition {
@@ -139,39 +148,38 @@ const views: ViewDefinition[] = [
   },
 ]
 
+const tableOfContents: TocItem[] = [
+  { id: 'at-a-glance', title: 'At a Glance' },
+  ...views.map((view) => ({ id: view.name.replace(/\./g, '-'), title: view.name })),
+]
+
 export default function PgStatInsightsViewsPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pg_stat_insights',
-        badgeIcon: <PgStatInsightsIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Views Reference',
-        description:
-          'pg_stat_insights ships eleven purpose-built views for fast diagnostics. Learn what each view offers and how to query it effectively.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Views Reference"
+      version="pg_stat_insights Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">At a Glance</h2>
-          <p className="text-muted-foreground">
-            All views are created alongside the extension and require only <code>SELECT</code> privileges. Most views aggregate the primary statistics to reduce joins during investigations.
-          </p>
-        </section>
+      <section id="at-a-glance">
+        <h2>At a Glance</h2>
+        <p>
+          All views are created alongside the extension and require only <code>SELECT</code> privileges. Most views aggregate the primary statistics to reduce joins during investigations.
+        </p>
+      </section>
 
-        {views.map((view) => (
-          <section key={view.name} className="space-y-3 border rounded-lg p-4">
-            <div>
-              <h3 className="font-semibold text-lg">
-                <code>{view.name}</code>
-              </h3>
-              <p className="text-sm text-muted-foreground">{view.description}</p>
-            </div>
-            <SqlCodeBlock title="Sample query" code={view.sample} />
-          </section>
-        ))}
-      </div>
-    </DocsContentLayout>
+      {views.map((view) => (
+        <section key={view.name} id={view.name.replace(/\./g, '-')} className="space-y-3 border rounded-lg p-4">
+          <div>
+            <h3 className="font-semibold text-lg">
+              <code>{view.name}</code>
+            </h3>
+            <p className="text-sm">{view.description}</p>
+          </div>
+          <SqlCodeBlock title="Sample query" code={view.sample} />
+        </section>
+      ))}
+    </PostgresDocsLayout>
   )
 }

@@ -1,11 +1,26 @@
-import React from 'react'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'pg_stat_insights Usage Examples | Documentation',
   description: 'Practical SQL queries and usage patterns for pg_stat_insights performance analysis',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'common-patterns', title: 'Common Query Patterns' },
+  { id: 'reset-statistics', title: 'Reset Statistics Safely' },
+  { id: 'next-steps', title: 'Next Steps' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pg_stat_insights/views',
+  label: 'Views Reference',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pg_stat_insights/monitoring',
+  label: 'Monitoring Integration',
 }
 
 const examples = [
@@ -64,81 +79,75 @@ const maintenance = `SELECT pg_stat_insights_reset();`;
 
 const PgStatInsightsUsagePage = () => {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pg_stat_insights',
-        badgeIcon: <PgStatInsightsIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Usage Examples',
-        description:
-          'Copy-paste SQL patterns for pg_stat_insights to triage performance regressions, IO pressure, and compilation cost.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Usage Examples"
+      version="pg_stat_insights Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Common Query Patterns</h2>
-          <p className="text-muted-foreground">
-            Use the snippets below as building blocks for dashboards and ad-hoc investigations. Adjust filters to your workload and retain query IDs for repeat analysis.
-          </p>
-          <div className="grid lg:grid-cols-2 gap-4">
-            {examples.map((example) => (
-              <div key={example.title} className="border rounded-lg p-4 space-y-2">
-                <div>
-                  <h3 className="font-semibold">{example.title}</h3>
-                  <p className="text-sm text-muted-foreground">{example.desc}</p>
-                </div>
-                <SqlCodeBlock title="SQL" code={example.query} />
+      <section id="common-patterns">
+        <h2>Common Query Patterns</h2>
+        <p>
+          Use the snippets below as building blocks for dashboards and ad-hoc investigations. Adjust filters to your workload and retain query IDs for repeat analysis.
+        </p>
+        <div className="grid lg:grid-cols-2 gap-4">
+          {examples.map((example) => (
+            <div key={example.title} className="border rounded-lg p-4 space-y-2">
+              <div>
+                <h3 className="font-semibold">{example.title}</h3>
+                <p className="text-sm">{example.desc}</p>
               </div>
-            ))}
-          </div>
-        </section>
+              <SqlCodeBlock title="SQL" code={example.query} />
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Reset Statistics Safely</h2>
-          <p className="text-muted-foreground">
-            Reset counters after collecting baselines to avoid losing trend data unexpectedly.
-          </p>
-          <SqlCodeBlock title="Reset command" code={maintenance} />
-        </section>
+      <section id="reset-statistics">
+        <h2>Reset Statistics Safely</h2>
+        <p>
+          Reset counters after collecting baselines to avoid losing trend data unexpectedly.
+        </p>
+        <SqlCodeBlock title="Reset command" code={maintenance} />
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Next Steps</h2>
-          <p className="text-muted-foreground">
-            Continue refining observability by tuning configuration parameters, wiring dashboards, and consulting the troubleshooting playbook when metrics look off.
-          </p>
-          <div className="grid md:grid-cols-3 gap-4">
-            <a
-              href="/docs/pg_stat_insights/configuration"
-              className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
-            >
-              <h3 className="font-semibold">Configuration Reference</h3>
-              <p className="text-sm text-muted-foreground">
-                Adjust retention, planning metrics, and sampling to match production workloads.
-              </p>
-            </a>
-            <a
-              href="/docs/pg_stat_insights/monitoring"
-              className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
-            >
-              <h3 className="font-semibold">Monitoring & Alerts</h3>
-              <p className="text-sm text-muted-foreground">
-                Export metrics to Prometheus/Grafana and build alert rules for regressions.
-              </p>
-            </a>
-            <a
-              href="/docs/pg_stat_insights/troubleshooting"
-              className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
-            >
-              <h3 className="font-semibold">Troubleshooting Playbook</h3>
-              <p className="text-sm text-muted-foreground">
-                Resolve preload errors, missing metrics, and overhead concerns with step-by-step fixes.
-              </p>
-            </a>
-          </div>
-        </section>
-      </div>
-    </DocsContentLayout>
+      <section id="next-steps">
+        <h2>Next Steps</h2>
+        <p>
+          Continue refining observability by tuning configuration parameters, wiring dashboards, and consulting the troubleshooting playbook when metrics look off.
+        </p>
+        <div className="grid md:grid-cols-3 gap-4">
+          <a
+            href="/docs/pg_stat_insights/configuration"
+            className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+          >
+            <h3 className="font-semibold">Configuration Reference</h3>
+            <p className="text-sm">
+              Adjust retention, planning metrics, and sampling to match production workloads.
+            </p>
+          </a>
+          <a
+            href="/docs/pg_stat_insights/monitoring"
+            className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+          >
+            <h3 className="font-semibold">Monitoring & Alerts</h3>
+            <p className="text-sm">
+              Export metrics to Prometheus/Grafana and build alert rules for regressions.
+            </p>
+          </a>
+          <a
+            href="/docs/pg_stat_insights/troubleshooting"
+            className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+          >
+            <h3 className="font-semibold">Troubleshooting Playbook</h3>
+            <p className="text-sm">
+              Resolve preload errors, missing metrics, and overhead concerns with step-by-step fixes.
+            </p>
+          </a>
+        </div>
+      </section>
+    </PostgresDocsLayout>
   )
 }
 

@@ -1,8 +1,6 @@
 import { Metadata } from 'next'
-import GettingStartedLayout from '../../../../components/GettingStartedLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import BashCodeBlock from '../../../../components/BashCodeBlock'
-import { NeurondBIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'NeurondB Configuration Guide | PostgreSQL Vector Database Settings',
@@ -13,52 +11,52 @@ export const metadata: Metadata = {
   },
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'before-you-begin', title: 'Before you begin' },
+  { id: 'core-configuration', title: 'Core configuration (postgresql.conf)' },
+  { id: 'gpu-acceleration', title: 'GPU acceleration (optional)' },
+  { id: 'runtime-overrides', title: 'Runtime overrides (session-level)' },
+  { id: 'performance-profiles', title: 'Performance profiles' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/neurondb/installation',
+  label: 'Installation',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/neurondb/troubleshooting',
+  label: 'Troubleshooting',
+}
+
 export default function NeurondBConfigurationPage() {
   return (
-    <GettingStartedLayout
-      product="NeurondB"
-      hero={{
-        label: 'NeurondB',
-        labelIcon: <NeurondBIcon size={20} />, 
-        labelAccent: 'indigo',
-        title: 'Configure NeurondB for Production Workloads',
-        description:
-          'Reference every NeurondB GUC parameter with recommended values for search accuracy, GPU acceleration, background workers, and security.',
-        cta: {
-          href: '/docs/neurondb/troubleshooting',
-          label: 'View troubleshooting playbooks',
-        },
-      }}
-      theme={{
-        pageBackground:
-          'bg-gradient-to-br from-slate-50 via-white to-amber-50 dark:from-slate-900 dark:via-slate-800 dark:to-amber-900',
-        heroOverlay:
-          'bg-gradient-to-r from-amber-500/20 to-orange-500/20 dark:from-amber-500/10 dark:to-orange-500/10',
-        requirementsBorder: 'amber',
-        requirementsBackground: 'bg-white/90 dark:bg-slate-900/60',
-      }}
-      requirements={{
-        title: 'Before you begin',
-        items: [
-          'NeurondB extension installed and listed in shared_preload_libraries',
-          'PostgreSQL superuser access for ALTER SYSTEM and configuration reloads',
-          'Baseline metrics for vector workload (QPS, recall targets, latency SLO)',
-          'Optional: GPU drivers (CUDA or ROCm) installed if enabling GPU mode',
-        ],
-      }}
-      sections={[
-        {
-          title: 'Core configuration (postgresql.conf)',
-          description: 'Add the baseline NeurondB checks to your cluster configuration. Adjust vector index tuning, inference options, and background workers.',
-          cards: [
-            {
-              id: 'core-config',
-              title: 'Baseline parameters',
-              accent: 'amber',
-              content: (
-                <SqlCodeBlock
-                  title="postgresql.conf"
-                  code={`# Load extension
+    <PostgresDocsLayout
+      title="Configure NeurondB for Production Workloads"
+      version="NeurondB Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
+    >
+      <section id="before-you-begin">
+        <h2>Before you begin</h2>
+        <p>Ensure you have:</p>
+        <ul>
+          <li>NeurondB extension installed and listed in shared_preload_libraries</li>
+          <li>PostgreSQL superuser access for ALTER SYSTEM and configuration reloads</li>
+          <li>Baseline metrics for vector workload (QPS, recall targets, latency SLO)</li>
+          <li>Optional: GPU drivers (CUDA or ROCm) installed if enabling GPU mode</li>
+        </ul>
+      </section>
+
+      <section id="core-configuration">
+        <h2>Core configuration (postgresql.conf)</h2>
+        <p>Add the baseline NeurondB checks to your cluster configuration. Adjust vector index tuning, inference options, and background workers.</p>
+
+        <h3>Baseline parameters</h3>
+        <SqlCodeBlock
+          title="postgresql.conf"
+          code={`# Load extension
 shared_preload_libraries = 'neurondb'
 
 # Vector index tuning
@@ -75,7 +73,7 @@ neurondb.cache_size_mb = 256
 # Background workers
 neurondb.neuranq_enabled = on
 neurondb.neuranq_naptime = 1000
-neurondb.neuranmon_enabled = on
+neurondb.neuranmon_enabled = on  
 neurondb.neuranmon_naptime = 60000
 neurondb.neurandefrag_enabled = on
 neurondb.neurandefrag_naptime = 300000
@@ -83,23 +81,17 @@ neurondb.neurandefrag_naptime = 300000
 # Performance toggles
 neurondb.enable_prefetch = on
 neurondb.enable_simd = on`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'GPU acceleration (optional)',
-          description: 'Enable GPU kernels for distance computations and embedding inference. Define memory pools and fallback behaviour.',
-          cards: [
-            {
-              id: 'gpu-config',
-              title: 'CUDA / ROCm settings',
-              accent: 'rose',
-              content: (
-                <SqlCodeBlock
-                  title="GPU parameters"
-                  code={`# GPU configuration
+        />
+      </section>
+
+      <section id="gpu-acceleration">
+        <h2>GPU acceleration (optional)</h2>
+        <p>Enable GPU kernels for distance computations and embedding inference. Define memory pools and fallback behaviour.</p>
+
+        <h3>CUDA / ROCm settings</h3>
+        <SqlCodeBlock
+          title="GPU parameters"
+          code={`# GPU configuration
 neurondb.gpu_enabled = off
 neurondb.gpu_backend = 'cuda'         -- or 'rocm'
 neurondb.gpu_device = 0               -- GPU device ordinal
@@ -108,40 +100,29 @@ neurondb.gpu_streams = 2
 neurondb.gpu_memory_pool_mb = 512
 neurondb.gpu_fail_open = on           -- Fallback to CPU
 neurondb.gpu_kernels = 'l2,cosine,ip'`}
-                />
-              ),
-            },
-            {
-              id: 'gpu-validation',
-              title: 'Validate GPU runtime',
-              accent: 'purple',
-              content: (
-                <BashCodeBlock
-                  title="Runtime validation"
-                  code={`-- Confirm GPU kernels are registered
+        />
+
+        <h3>Validate GPU runtime</h3>
+        <SqlCodeBlock
+          title="Runtime validation"
+          code={`-- Confirm GPU kernels are registered
 SELECT *
 FROM   neurondb_gpu_capabilities();
 
 -- Force GPU usage for this session
 SET neurondb.gpu_enabled = on;
 SET neurondb.gpu_backend = 'cuda';`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Runtime overrides (session-level)',
-          description: 'Adjust accuracy, caching, and inference behaviour without restarting PostgreSQL. Ideal for A/B tests and workload experiments.',
-          cards: [
-            {
-              id: 'runtime-overrides',
-              title: 'Session tuning commands',
-              accent: 'cyan',
-              content: (
-                <SqlCodeBlock
-                  title="Session overrides"
-                  code={`-- Improve recall for analytics session
+        />
+      </section>
+
+      <section id="runtime-overrides">
+        <h2>Runtime overrides (session-level)</h2>
+        <p>Adjust accuracy, caching, and inference behaviour without restarting PostgreSQL. Ideal for A/B tests and workload experiments.</p>
+
+        <h3>Session tuning commands</h3>
+        <SqlCodeBlock
+          title="Session overrides"
+          code={`-- Improve recall for analytics session
 SET neurondb.ef_search = 120;
 
 -- Enable GPU acceleration in this session only
@@ -152,92 +133,49 @@ SET neurondb.cache_size_mb = 512;
 
 -- Inspect active configuration
 SELECT * FROM neurondb_config();`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Performance profiles',
-          description: 'Apply recommended parameter combinations for specific workload goals. Use ALTER SYSTEM and reload to persist cluster-wide.',
-          cards: [
-            {
-              id: 'low-latency',
-              title: 'Low latency workloads',
-              accent: 'emerald',
-              content: (
-                <SqlCodeBlock
-                  title="Latency-optimised"
-                  code={`ALTER SYSTEM SET neurondb.ef_search = 20;
+        />
+      </section>
+
+      <section id="performance-profiles">
+        <h2>Performance profiles</h2>
+        <p>Apply recommended parameter combinations for specific workload goals. Use ALTER SYSTEM and reload to persist cluster-wide.</p>
+
+        <h3>Low latency workloads</h3>
+        <SqlCodeBlock
+          title="Latency-optimised"
+          code={`ALTER SYSTEM SET neurondb.ef_search = 20;
 ALTER SYSTEM SET neurondb.enable_prefetch = on;
 ALTER SYSTEM SET neurondb.enable_simd = on;
 ALTER SYSTEM SET neurondb.gpu_enabled = on;`}
-                />
-              ),
-            },
-            {
-              id: 'high-accuracy',
-              title: 'High accuracy workloads',
-              accent: 'indigo',
-              content: (
-                <SqlCodeBlock
-                  title="Recall-optimised"
-                  code={`ALTER SYSTEM SET neurondb.ef_search = 200;
+        />
+
+        <h3>High accuracy workloads</h3>
+        <SqlCodeBlock
+          title="Recall-optimised"
+          code={`ALTER SYSTEM SET neurondb.ef_search = 200;
 ALTER SYSTEM SET neurondb.ef_construction = 500;
 ALTER SYSTEM SET neurondb.m = 32;
 ALTER SYSTEM SET neurondb.batch_inference_size = 16;`}
-                />
-              ),
-            },
-            {
-              id: 'large-scale',
-              title: 'Large-scale deployments',
-              accent: 'amber',
-              content: (
-                <SqlCodeBlock
-                  title="High throughput"
-                  code={`ALTER SYSTEM SET neurondb.cache_size_mb = 1024;
+        />
+
+        <h3>Large-scale deployments</h3>
+        <SqlCodeBlock
+          title="High throughput"
+          code={`ALTER SYSTEM SET neurondb.cache_size_mb = 1024;
 ALTER SYSTEM SET neurondb.inference_threads = 8;
 ALTER SYSTEM SET neurondb.neuranq_batch_size = 200;
 ALTER SYSTEM SET neurondb.enable_prefetch = on;`}
-                />
-              ),
-            },
-          ],
-        },
-      ]}
-      nextSteps={[
-        {
-          href: '/docs/neurondb/performance',
-          title: '🚀 Performance Guide',
-          description: 'Benchmark NeurondB under different parameter profiles and workloads.',
-        },
-        {
-          href: '/docs/neurondb/background-workers',
-          title: '🛠 Background Workers',
-          description: 'Configure neuranq, neuranmon, and neurandefrag scheduling.',
-        },
-        {
-          href: '/docs/neurondb/security',
-          title: '🔐 Security & Compliance',
-          description: 'Enable encryption, differential privacy, and audit logging.',
-        },
-      ]}
-      supportLinks={[
-        {
-          href: 'https://github.com/pgElephant/NeurondB/issues',
-          label: 'GitHub Issues',
-          description: 'Report configuration bugs or request new parameters.',
-          external: true,
-        },
-        {
-          href: 'https://github.com/pgElephant/NeurondB/discussions',
-          label: 'GitHub Discussions',
-          description: 'Share configuration best practices with the community.',
-          external: true,
-        },
-      ]}
-    />
+        />
+      </section>
+
+      <section>
+        <h2>Next Steps</h2>
+        <ul>
+          <li><a href="/docs/neurondb/performance">Performance Guide</a> - Benchmark NeurondB under different parameter profiles and workloads.</li>
+          <li><a href="/docs/neurondb/background-workers">Background Workers</a> - Configure neuranq, neuranmon, and neurandefrag scheduling.</li>
+          <li><a href="/docs/neurondb/security">Security & Compliance</a> - Enable encryption, differential privacy, and audit logging.</li>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }
-

@@ -1,8 +1,7 @@
 import { Metadata } from 'next'
-import GettingStartedLayout from '../../../../components/GettingStartedLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
-import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pg_stat_insights Troubleshooting | Common Issues & Fixes',
@@ -10,177 +9,141 @@ export const metadata: Metadata = {
     'Resolve pg_stat_insights installation problems, missing metrics, high overhead, and reset errors with targeted SQL and configuration steps.',
 }
 
-const requirements = [
-  'Verify `shared_preload_libraries` includes pg_stat_insights and PostgreSQL was restarted',
-  'Run `SELECT * FROM pg_extension WHERE extname = ' + "'pg_stat_insights'" + ';` to confirm the installed version',
-  'Check `log_min_messages = debug1` temporarily if extension loading fails',
-  'Collect `EXPLAIN (ANALYZE, BUFFERS)` plans before tuning query-level metrics',
+const tableOfContents: TocItem[] = [
+  { id: 'fast-triage', title: 'Fast Triage Checklist' },
+  { id: 'extension-load', title: 'Extension Load & Setup' },
+  { id: 'missing-metrics', title: 'Missing or Incomplete Metrics' },
+  { id: 'high-overhead', title: 'High Overhead or Bloat' },
+  { id: 'export-alerting', title: 'Export & Alerting' },
 ]
+
+const prevLink: NavLink = {
+  href: '/docs/pg_stat_insights/monitoring',
+  label: 'Monitoring Integration',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pg_stat_insights/cache-efficiency',
+  label: 'Cache Efficiency Analysis',
+}
 
 export default function PgStatInsightsTroubleshootingPage() {
   return (
-    <GettingStartedLayout
-      product="pg_stat_insights"
-      hero={{
-        label: 'pg_stat_insights',
-        labelIcon: <PgStatInsightsIcon size={20} />, 
-        labelAccent: 'emerald',
-        title: 'Restore pg_stat_insights Telemetry',
-        description:
-          'Use these guided diagnostics to fix preload errors, missing metrics, excessive overhead, and reset issues. Each card provides ready-to-run SQL or configuration commands.',
-        cta: {
-          href: '/docs/pg_stat_insights/troubleshooting',
-          label: 'Bookmark troubleshooting playbook',
-        },
-      }}
-      theme={{
-        pageBackground: 'bg-gradient-to-br from-slate-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-950',
-        heroOverlay: 'bg-gradient-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-500/10 dark:to-teal-500/10',
-        requirementsBorder: 'emerald',
-        requirementsBackground: 'bg-white/90 dark:bg-slate-900/70',
-      }}
-      requirements={{
-        title: 'Fast triage checklist',
-        items: requirements,
-        note: 'Run remediation in staging first. Revert temporary settings (e.g. debug logging) after successful validation.',
-      }}
-      sections={[
-        {
-          title: 'Extension load & setup',
-          description: 'Solve common installation and configuration errors that prevent pg_stat_insights from loading.',
-          cards: [
-            {
-              id: 'preload',
-              title: 'Check shared_preload_libraries',
-              accent: 'emerald',
-              content: (
-                <SqlCodeBlock
-                  title="Confirm preload"
-                  code={`SHOW shared_preload_libraries;`}
-                />
-              ),
-            },
-            {
-              id: 'install',
-              title: 'Install or update extension',
-              accent: 'emerald',
-              content: (
-                <SqlCodeBlock
-                  title="Install commands"
-                  code={`CREATE EXTENSION IF NOT EXISTS pg_stat_insights;
+    <PostgresDocsLayout
+      title="Troubleshooting"
+      version="pg_stat_insights Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
+    >
+      <section id="fast-triage">
+        <h2>Fast Triage Checklist</h2>
+        <p>
+          Use these guided diagnostics to fix preload errors, missing metrics, excessive overhead, and reset issues. Each section provides ready-to-run SQL or configuration commands.
+        </p>
+        <ul>
+          <li>Verify <code>shared_preload_libraries</code> includes pg_stat_insights and PostgreSQL was restarted</li>
+          <li>Run <code>SELECT * FROM pg_extension WHERE extname = 'pg_stat_insights';</code> to confirm the installed version</li>
+          <li>Check <code>log_min_messages = debug1</code> temporarily if extension loading fails</li>
+          <li>Collect <code>EXPLAIN (ANALYZE, BUFFERS)</code> plans before tuning query-level metrics</li>
+        </ul>
+        <p className="text-sm">
+          Run remediation in staging first. Revert temporary settings (e.g. debug logging) after successful validation.
+        </p>
+      </section>
+
+      <section id="extension-load">
+        <h2>Extension Load & Setup</h2>
+        <p>
+          Solve common installation and configuration errors that prevent pg_stat_insights from loading.
+        </p>
+        
+        <h3>Check shared_preload_libraries</h3>
+        <SqlCodeBlock
+          title="Confirm preload"
+          code={`SHOW shared_preload_libraries;`}
+        />
+
+        <h3>Install or update extension</h3>
+        <SqlCodeBlock
+          title="Install commands"
+          code={`CREATE EXTENSION IF NOT EXISTS pg_stat_insights;
 ALTER EXTENSION pg_stat_insights UPDATE;`}
-                />
-              ),
-            },
-            {
-              id: 'log-check',
-              title: 'Capture load errors',
-              accent: 'slate',
-              content: (
-                <BashCodeBlock
-                  title="PostgreSQL logs"
-                  code={`journalctl -u postgresql -n 100 | grep pg_stat_insights`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Missing or incomplete metrics',
-          description: 'Ensure collections are running and view-specific tables are populated.',
-          cards: [
-            {
-              id: 'metrics-check',
-              title: 'Check primary view',
-              accent: 'blue',
-              content: (
-                <SqlCodeBlock
-                  title="Verify rows"
-                  code={`SELECT COUNT(*) AS fingerprints
+        />
+
+        <h3>Capture load errors</h3>
+        <BashCodeBlock
+          title="PostgreSQL logs"
+          code={`journalctl -u postgresql -n 100 | grep pg_stat_insights`}
+        />
+      </section>
+
+      <section id="missing-metrics">
+        <h2>Missing or Incomplete Metrics</h2>
+        <p>
+          Ensure collections are running and view-specific tables are populated.
+        </p>
+
+        <h3>Check primary view</h3>
+        <SqlCodeBlock
+          title="Verify rows"
+          code={`SELECT COUNT(*) AS fingerprints
   FROM pg_stat_insights;`}
-                />
-              ),
-            },
-            {
-              id: 'sampling',
-              title: 'Increase retention & max fingerprints',
-              accent: 'cyan',
-              content: (
-                <SqlCodeBlock
-                  title="Adjust GUCs"
-                  code={`ALTER SYSTEM SET pg_stat_insights.max = 10000;
+        />
+
+        <h3>Increase retention & max fingerprints</h3>
+        <SqlCodeBlock
+          title="Adjust GUCs"
+          code={`ALTER SYSTEM SET pg_stat_insights.max = 10000;
 ALTER SYSTEM SET pg_stat_insights.save = true;
 SELECT pg_reload_conf();`}
-                />
-              ),
-            },
-            {
-              id: 'reset',
-              title: 'Reset safely',
-              accent: 'emerald',
-              content: (
-                <SqlCodeBlock
-                  title="Reset command"
-                  code={`SELECT pg_stat_insights_reset();`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'High overhead or bloat',
-          description: 'Reduce collection overhead when pg_stat_insights impacts latency or memory.',
-          cards: [
-            {
-              id: 'plan-toggle',
-              title: 'Disable planning metrics temporarily',
-              accent: 'amber',
-              content: (
-                <SqlCodeBlock
-                  title="Toggle planning"
-                  code={`ALTER SYSTEM SET pg_stat_insights.track_planning = false;
+        />
+
+        <h3>Reset safely</h3>
+        <SqlCodeBlock
+          title="Reset command"
+          code={`SELECT pg_stat_insights_reset();`}
+        />
+      </section>
+
+      <section id="high-overhead">
+        <h2>High Overhead or Bloat</h2>
+        <p>
+          Reduce collection overhead when pg_stat_insights impacts latency or memory.
+        </p>
+
+        <h3>Disable planning metrics temporarily</h3>
+        <SqlCodeBlock
+          title="Toggle planning"
+          code={`ALTER SYSTEM SET pg_stat_insights.track_planning = false;
 SELECT pg_reload_conf();`}
-                />
-              ),
-            },
-            {
-              id: 'utility-filter',
-              title: 'Filter utility commands',
-              accent: 'indigo',
-              content: (
-                <SqlCodeBlock
-                  title="Utility filter"
-                  code={`ALTER SYSTEM SET pg_stat_insights.track_utility = false;
+        />
+
+        <h3>Filter utility commands</h3>
+        <SqlCodeBlock
+          title="Utility filter"
+          code={`ALTER SYSTEM SET pg_stat_insights.track_utility = false;
 SELECT pg_reload_conf();`}
-                />
-              ),
-            },
-            {
-              id: 'cleanup',
-              title: 'Archive snapshots & vacuum stats schema',
-              accent: 'rose',
-              content: (
-                <SqlCodeBlock
-                  title="Maintenance"
-                  code={`VACUUM ANALYZE pg_stat_insights;
+        />
+
+        <h3>Archive snapshots & vacuum stats schema</h3>
+        <SqlCodeBlock
+          title="Maintenance"
+          code={`VACUUM ANALYZE pg_stat_insights;
 VACUUM ANALYZE pg_stat_insights_plan;`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Export & alerting',
-          description: 'Wire pg_stat_insights metrics into Prometheus/Grafana and alert on regressions.',
-          cards: [
-            {
-              id: 'prometheus',
-              title: 'Prometheus scrape excerpt',
-              accent: 'blue',
-              content: (
-                <BashCodeBlock
-                  title="queries.yml"
-                  code={`pg_stat_insights:
+        />
+      </section>
+
+      <section id="export-alerting">
+        <h2>Export & Alerting</h2>
+        <p>
+          Wire pg_stat_insights metrics into Prometheus/Grafana and alert on regressions.
+        </p>
+
+        <h3>Prometheus scrape excerpt</h3>
+        <BashCodeBlock
+          title="queries.yml"
+          code={`pg_stat_insights:
   query: |
     SELECT queryid,
            calls,
@@ -197,27 +160,18 @@ VACUUM ANALYZE pg_stat_insights_plan;`}
         usage: "COUNTER"
     - mean_exec_time:
         usage: "GAUGE"`}
-                />
-              ),
-            },
-            {
-              id: 'alerting',
-              title: 'Example alert rule',
-              accent: 'purple',
-              content: (
-                <BashCodeBlock
-                  title="Alertmanager rule"
-                  code={`- alert: SlowQueriesSpike
+        />
+
+        <h3>Example alert rule</h3>
+        <BashCodeBlock
+          title="Alertmanager rule"
+          code={`- alert: SlowQueriesSpike
   expr: topk(1, increase(pg_stat_insights_total_exec_time[10m])) > 1.5e05
   for: 5m
   labels:
     severity: warning`}
-                />
-              ),
-            },
-          ],
-        },
-      ]}
-    />
+        />
+      </section>
+    </PostgresDocsLayout>
   )
 }

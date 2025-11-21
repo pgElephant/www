@@ -72,7 +72,7 @@ const DEFAULT_THEME: HubProductTheme = {
 
 export default function DocsHubLanding({ hero, products, resources }: DocsHubLandingProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen bg-page-gradient text-white">
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 opacity-30" style={{ background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.35) 0%, rgba(6, 182, 212, 0.35) 50%, rgba(16, 185, 129, 0.35) 100%)' }} />

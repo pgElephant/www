@@ -1,36 +1,50 @@
-import { Activity, TrendingUp, Settings, Users, Gauge } from 'lucide-react'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
-import { PgbalancerIcon } from '../../../../components/ProductIcons'
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Connection Pooling Setup - pgBalancer',
-  description: 'Configure and monitor connection pooling with pgBalancer for optimal database performance.'
+  description: 'Configure and monitor connection pooling with pgBalancer for optimal database performance.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'pooling-modes', title: 'Pooling Modes Configuration' },
+  { id: 'monitor-utilization', title: 'Monitor Pool Utilization' },
+  { id: 'tune-limits', title: 'Tune Pool Limits' },
+  { id: 'authentication-limits', title: 'Authentication, Limits & Health Checks' },
+  { id: 'multi-tenant', title: 'Multi-tenant Pools' },
+  { id: 'metrics-dashboards', title: 'Metrics & Dashboards' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgbalancer/configuration',
+  label: 'Configuration Reference',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgbalancer/load-balancing',
+  label: 'AI-Powered Load Balancing',
 }
 
 export default function ConnectionPoolingPage() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgBalancer',
-        badgeIcon: <PgbalancerIcon size={20} />, 
-        badgeTone: 'cyan',
-        title: 'Connection Pooling Setup',
-        description: 'Configure and monitor connection pooling with pgBalancer for optimal database performance.'
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Connection Pooling Setup"
+      version="pgBalancer Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12 text-slate-200">
-        <section className="space-y-4">
-          <p>
-            pgBalancer supports three pooling modes with different connection behaviors and tuning knobs. Use the configuration snippet below as a starting point, then adjust limits based on concurrency and SLA targets.
-          </p>
+      <section id="pooling-modes">
+        <h2>Pooling Modes Configuration</h2>
+        <p>
+          pgBalancer supports three pooling modes with different connection behaviors and tuning knobs. Use the configuration snippet below as a starting point, then adjust limits based on concurrency and SLA targets.
+        </p>
 
-          <SqlCodeBlock
-            title="pgbalancer.conf Configuration"
-            language="bash"
-            code={`# Connection Pooling Configuration
+        <BashCodeBlock
+          title="pgbalancer.conf Configuration"
+          code={`# Connection Pooling Configuration
 
 # Pool mode: session, transaction, or statement
 # - session: Connection held for entire client session (default)
@@ -59,28 +73,22 @@ child_max_connections = 0       # Max connections per child (0 = unlimited)
 
 # Connection cache
 connection_cache = on           # Enable connection caching`}
-          />
+        />
 
-          <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-sm text-cyan-100">
-            <strong>Tip:</strong> Use <code>transaction</code> mode for web applications with short-lived requests. Use <code>session</code> mode for long-running analytical queries or applications requiring session state.
-          </div>
-        </section>
+        <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 text-sm mt-4">
+          <strong>Tip:</strong> Use <code>transaction</code> mode for web applications with short-lived requests. Use <code>session</code> mode for long-running analytical queries or applications requiring session state.
+        </div>
+      </section>
 
-        <section className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-cyan-500/20 rounded-lg">
-              <Activity className="w-6 h-6 text-cyan-300" />
-            </div>
-            <h2 className="text-2xl font-semibold text-white">Monitor Pool Utilization</h2>
-          </div>
+      <section id="monitor-utilization">
+        <h2>Monitor Pool Utilization</h2>
+        <p>
+          Query pgBalancer to monitor connection pool usage and identify bottlenecks.
+        </p>
 
-          <p>
-            Query pgBalancer to monitor connection pool usage and identify bottlenecks.
-          </p>
-
-          <SqlCodeBlock
-            title="Check Pool Status via SHOW POOL_PROCESSES"
-            code={`-- Connect to pgBalancer
+        <SqlCodeBlock
+          title="Check Pool Status via SHOW POOL_PROCESSES"
+          code={`-- Connect to pgBalancer
 psql -h localhost -p 9999 -U postgres
 
 -- View all pool processes and their connections
@@ -88,11 +96,11 @@ SHOW POOL_PROCESSES;
 
 -- Output shows:
 -- pool_pid | start_time | database | username | create_time | pool_counter`}
-          />
+        />
 
-          <SqlCodeBlock
-            title="Pool Statistics Query"
-            code={`-- Get pool utilization metrics
+        <SqlCodeBlock
+          title="Pool Statistics Query"
+          code={`-- Get pool utilization metrics
 SELECT 
     database,
     username,
@@ -110,57 +118,46 @@ SELECT
     database
 FROM pool_processes
 GROUP BY database;`}
-          />
-        </section>
+        />
+      </section>
 
-        <section className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/20 rounded-lg">
-              <TrendingUp className="w-6 h-6 text-blue-300" />
-            </div>
-            <h2 className="text-2xl font-semibold text-white">Tune Pool Limits</h2>
-          </div>
+      <section id="tune-limits">
+        <h2>Tune Pool Limits</h2>
+        <p>
+          Adjust max connections and pool sizes based on observed workload patterns. Use structured experiments to determine the right settings.
+        </p>
 
-          <p>
-            Adjust max connections and pool sizes based on observed workload patterns. Use structured experiments to determine the right settings.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="space-y-3 rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
-              <h3 className="text-lg font-semibold text-blue-200">Growth plan</h3>
-              <BashCodeBlock
-                title="Scaled limits"
-                code={`# Increase simultaneous clients
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-3 rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+            <h3>Growth plan</h3>
+            <BashCodeBlock
+              title="Scaled limits"
+              code={`# Increase simultaneous clients
 num_init_children = 48
 max_pool = 6
 
 # Add reserve for admin connections
 reserved_connections = 3`}
-              />
-            </div>
-            <div className="space-y-3 rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
-              <h3 className="text-lg font-semibold text-blue-200">Connection cleanup</h3>
-              <BashCodeBlock
-                title="Lifecycle tuning"
-                code={`connection_life_time = 300
+            />
+          </div>
+          <div className="space-y-3 rounded-xl border border-blue-500/30 bg-blue-500/10 p-4">
+            <h3>Connection cleanup</h3>
+            <BashCodeBlock
+              title="Lifecycle tuning"
+              code={`connection_life_time = 300
 client_idle_limit = 120
 child_life_time = 180`}
-              />
-            </div>
+            />
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-slate-500/20 rounded-lg">
-              <Settings className="w-6 h-6 text-slate-200" />
-            </div>
-            <h2 className="text-2xl font-semibold text-white">Authentication, Limits & Health Checks</h2>
-          </div>
+      <section id="authentication-limits">
+        <h2>Authentication, Limits & Health Checks</h2>
 
-          <SqlCodeBlock
-            title="Authentication & Limits"
-            code={`# Authentication options
+        <SqlCodeBlock
+          title="Authentication & Limits"
+          code={`# Authentication options
 # auth_type = md5 | pam | cert
 # auth_file = '/etc/pgbalancer/userlist.txt'
 # authentication_query = 'SELECT usename, passwd FROM pgbalancer_users'
@@ -176,29 +173,23 @@ health_check_timeout = 10
 health_check_user = 'pgbalancer_health'
 health_check_password = 'SecureHealthPass!'
 health_check_database = 'postgres'`}
-          />
+        />
 
-          <BashCodeBlock
-            title="Create health check role"
-            code={`psql -d postgres -c "CREATE ROLE pgbalancer_health LOGIN PASSWORD 'SecureHealthPass!'"`}
-          />
-        </section>
+        <BashCodeBlock
+          title="Create health check role"
+          code={`psql -d postgres -c "CREATE ROLE pgbalancer_health LOGIN PASSWORD 'SecureHealthPass!'"`}
+        />
+      </section>
 
-        <section className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <Users className="w-6 h-6 text-emerald-300" />
-            </div>
-            <h2 className="text-2xl font-semibold text-white">Multi-tenant Pools</h2>
-          </div>
+      <section id="multi-tenant">
+        <h2>Multi-tenant Pools</h2>
+        <p>
+          Allocate pools per tenant or service by defining user/database pairs. This avoids noisy neighbors and allows granular tuning.
+        </p>
 
-          <p>
-            Allocate pools per tenant or service by defining user/database pairs. This avoids noisy neighbors and allows granular tuning.
-          </p>
-
-          <SqlCodeBlock
-            title="Multi-tenant pgbalancer.conf"
-            code={`# Tenant A pool
+        <SqlCodeBlock
+          title="Multi-tenant pgbalancer.conf"
+          code={`# Tenant A pool
 user1_database = 'tenant_a'
 user1_pool_mode = statement
 user1_max_pool = 8
@@ -207,35 +198,28 @@ user1_max_pool = 8
 user2_database = 'tenant_b'
 user2_pool_mode = transaction
 user2_max_pool = 6`}
-          />
-        </section>
+        />
+      </section>
 
-        <section className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-amber-500/20 rounded-lg">
-              <Gauge className="w-6 h-6 text-amber-300" />
-            </div>
-            <h2 className="text-2xl font-semibold text-white">Metrics & Dashboards</h2>
-          </div>
+      <section id="metrics-dashboards">
+        <h2>Metrics & Dashboards</h2>
+        <p>
+          Integrate with Prometheus and Grafana to visualize pool usage, wait times, and failover events. The REST API exposes counters for automation and alerting.
+        </p>
 
-          <p className="text-slate-300">
-            Integrate with Prometheus and Grafana to visualize pool usage, wait times, and failover events. The REST API exposes counters for automation and alerting.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <SqlCodeBlock
-              title="Pool wait time histogram"
-              code={`SELECT histogram(bucket_ms, wait_event) AS histogram
+        <div className="grid md:grid-cols-2 gap-4">
+          <SqlCodeBlock
+            title="Pool wait time histogram"
+            code={`SELECT histogram(bucket_ms, wait_event) AS histogram
 FROM pgbalancer_wait_times
 WHERE bucket_ms <= 500;`}
-            />
-            <SqlCodeBlock
-              title="REST API snippet"
-              code={`curl -s http://localhost:8080/api/v1/pool/summary | jq`}
-            />
-          </div>
-        </section>
-      </div>
-    </DocsContentLayout>
+          />
+          <BashCodeBlock
+            title="REST API snippet"
+            code={`curl -s http://localhost:8080/api/v1/pool/summary | jq`}
+          />
+        </div>
+      </section>
+    </PostgresDocsLayout>
   )
 }

@@ -117,7 +117,12 @@ interface GettingStartedLayoutProps {
 export default function GettingStartedLayout({
   product,
   hero,
-  theme,
+  theme = {
+    pageBackground: 'bg-page-gradient',
+    heroOverlay: 'bg-hero-gradient',
+    requirementsBorder: 'indigo',
+    requirementsBackground: 'bg-white/90',
+  },
   requirements,
   sections,
   nextSteps,

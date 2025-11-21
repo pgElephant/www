@@ -1,11 +1,27 @@
-import React from 'react'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import { Metadata } from 'next'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { PgSentinelIcon } from '../../../../components/ProductIcons'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'pgSentinel Metrics Catalog',
   description: 'Reference for pgSentinel time-series metrics collected from pgBouncer and PostgreSQL.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'pool-capacity', title: 'Pool Capacity' },
+  { id: 'throughput-latency', title: 'Throughput & Latency' },
+  { id: 'errors-alerts', title: 'Errors & Alerts' },
+  { id: 'prometheus-examples', title: 'Prometheus Examples' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgsentinel/configuration',
+  label: 'Configuration Reference',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgsentinel/api',
+  label: 'API Reference',
 }
 
 const metricGroups = [
@@ -42,44 +58,38 @@ pgsentinel_pool_connections_limit`;
 
 const PgSentinelMetricsPage = () => {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgSentinel',
-        badgeIcon: <PgSentinelIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Metrics Catalog',
-        description:
-          'Browse the Prometheus metrics emitted by pgSentinel and learn how to query them for dashboards and alerts.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Metrics Catalog"
+      version="pgSentinel Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        {metricGroups.map((group) => (
-          <section key={group.title} className="space-y-3">
-            <h2 className="text-2xl font-semibold">{group.title}</h2>
-            <div className="border rounded-lg divide-y">
-              {group.metrics.map((metric) => (
-                <div key={metric.name} className="p-4">
-                  <code className="text-sm font-mono">{metric.name}</code>
-                  <p className="text-sm text-muted-foreground mt-1">{metric.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        ))}
+      {metricGroups.map((group) => (
+        <section key={group.title} id={group.title.toLowerCase().replace(/\s+/g, '-')}>
+          <h2>{group.title}</h2>
+          <div className="border rounded-lg divide-y">
+            {group.metrics.map((metric) => (
+              <div key={metric.name} className="p-4">
+                <code className="text-sm font-mono">{metric.name}</code>
+                <p className="text-sm mt-1">{metric.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Prometheus Examples</h2>
-          <SqlCodeBlock title="Pool saturation" code={prometheusQuery} />
-          <SqlCodeBlock
-            title="95th percentile latency"
-            code={`histogram_quantile(0.95,
+      <section id="prometheus-examples">
+        <h2>Prometheus Examples</h2>
+        <SqlCodeBlock title="Pool saturation" code={prometheusQuery} />
+        <SqlCodeBlock
+          title="95th percentile latency"
+          code={`histogram_quantile(0.95,
   sum(rate(pgsentinel_query_duration_seconds_bucket[5m])) by (le, pool)
 )`}
-          />
-        </section>
-      </div>
-    </DocsContentLayout>
+        />
+      </section>
+    </PostgresDocsLayout>
   )
 }
 

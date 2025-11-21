@@ -2,8 +2,8 @@ import { ReactNode } from 'react'
 import { cn } from '../lib/utils'
 
 const GRADIENTS = {
-  default: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)',
-  slate: 'linear-gradient(135deg, #0b1120 0%, #111c2d 40%, #1f2937 70%, #273445 100%)',
+  default: 'var(--page-gradient)',
+  slate: 'var(--page-gradient)',
 } as const
 
 const BADGE_GRADIENTS = {
@@ -63,16 +63,10 @@ export default function DocsContentLayout({
 
   return (
     <div
-      className={cn('min-h-screen', className)}
-      style={{ background: gradientStyle }}
+      className={cn('min-h-screen bg-page-gradient', className)}
     >
       {hero ? (
-        <section className="relative overflow-hidden py-16 sm:py-20">
-          <div
-            className="absolute inset-0"
-            style={{ background: 'radial-gradient(circle at top, rgba(99, 102, 241, 0.18), transparent 65%)' }}
-          />
-          <div className="absolute inset-0 bg-slate-950/55 backdrop-blur-sm" />
+        <section className="relative overflow-hidden py-16 sm:py-20 bg-hero-gradient">
           <div className={cn('relative mx-auto px-6 lg:px-12 flex flex-col gap-6', heroWidth, heroAlign === 'center' ? 'items-center text-center' : 'items-start text-left')}>
             {hero.badgeLabel ? (
               <div

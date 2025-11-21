@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
-import { PgbalancerIcon } from '../../../../components/ProductIcons'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
@@ -10,388 +9,187 @@ export const metadata: Metadata = {
     'Complete monitoring guide for pgBalancer - REST API metrics, bctl statistics, Prometheus integration, and Grafana dashboards for PostgreSQL cluster management.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'monitoring-options', title: 'Monitoring Options' },
+  { id: 'rest-api-metrics', title: 'REST API Metrics' },
+  { id: 'bctl-cli-monitoring', title: 'bctl CLI Monitoring' },
+  { id: 'prometheus-integration', title: 'Prometheus Integration' },
+  { id: 'grafana-dashboards', title: 'Grafana Dashboards' },
+  { id: 'mqtt-events', title: 'MQTT Event Monitoring' },
+  { id: 'logging-analysis', title: 'Logging and Log Analysis' },
+  { id: 'performance-monitoring', title: 'Performance Monitoring Queries' },
+  { id: 'alerting-best-practices', title: 'Alerting Best Practices' },
+  { id: 'key-metrics-reference', title: 'Key Metrics Reference' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgbalancer/high-availability',
+  label: 'High Availability & Failover',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgbalancer/monitoring',
+  label: 'Monitoring & Metrics',
+}
+
 export default function PgBalancerMetricsDocs() {
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pgBalancer',
-        badgeIcon: <PgbalancerIcon size={20} />, 
-        badgeTone: 'cyan',
-        title: 'Metrics & Monitoring',
-        description:
-          'Comprehensive monitoring guide for pgBalancer using REST API metrics, bctl CLI tools, and integration with Prometheus and Grafana for PostgreSQL cluster observability.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Metrics & Monitoring"
+      version="pgBalancer Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-8 text-slate-200">
-        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-blue-100 mb-2">📊 Monitoring options</h3>
-          <ul className="space-y-1 text-sm text-blue-100">
+      <section id="monitoring-options">
+        <h2>Monitoring Options</h2>
+        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-lg p-6 mb-6">
+          <h3>📊 Monitoring options</h3>
+          <ul className="space-y-1 text-sm">
             <li>✅ <strong>REST API</strong> - Real-time metrics via HTTP/JSON endpoints</li>
             <li>✅ <strong>bctl CLI</strong> - Command-line statistics and status</li>
             <li>✅ <strong>Prometheus</strong> - Time-series metrics collection</li>
             <li>✅ <strong>Grafana</strong> - Visual dashboards and alerting</li>
           </ul>
         </div>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-white">REST API Metrics</h2>
+      <section id="rest-api-metrics">
+        <h2>REST API Metrics</h2>
+        <p>
+          pgBalancer REST API provides real-time metrics on port 8080 (configurable):
+        </p>
 
-          <p className="text-slate-300">
-            pgBalancer REST API provides real-time metrics on port 8080 (configurable):
-          </p>
+        <div className="grid gap-4">
+          <BashCodeBlock
+            title="Backend Node Statistics"
+            code={`curl -s http://localhost:8080/api/v1/backends | jq`}
+          />
+          <BashCodeBlock
+            title="Connection Pool Status"
+            code={`curl -s http://localhost:8080/api/v1/pool/summary | jq`}
+          />
+        </div>
+      </section>
 
-          <div className="grid gap-4">
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Backend Node Statistics</h3>
-              <BashCodeBlock
-                title="List backend stats"
-                code={`curl -s http://localhost:8080/api/v1/backends | jq`}
-              />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Connection Pool Status</h3>
-              <BashCodeBlock
-                title="Connection pools"
-                code={`curl -s http://localhost:8080/api/v1/pool/summary | jq`}
-              />
-            </div>
-          </div>
-        </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">bctl CLI Monitoring</h2>
-
-        <p className="text-muted-foreground mb-4">
+      <section id="bctl-cli-monitoring">
+        <h2>bctl CLI Monitoring</h2>
+        <p>
           Use bctl command-line tool for real-time monitoring and statistics:
         </p>
 
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Node Status</h3>
-            <BashCodeBlock
-              code={`# View all backend nodes
+        <BashCodeBlock
+          title="Node Status"
+          code={`# View all backend nodes
 bctl node-status
 
 # Table format (human-readable)
 bctl node-status --format=table
 
 # JSON format (for scripts)
-bctl node-status --format=json
+bctl node-status --format=json`}
+        />
 
-# Example output (table format):
-# +----+------------------+------+--------+--------------+------------+
-# | ID | Hostname         | Port | Status | Health Score | Queries    |
-# +----+------------------+------+--------+--------------+------------+
-# | 0  | db-primary.local | 5432 | up     | 0.95         | 15234      |
-# | 1  | db-replica1.local| 5432 | up     | 0.88         | 8421       |
-# | 2  | db-replica2.local| 5432 | down   | 0.00         | 0          |
-# +----+------------------+------+--------+--------------+------------+`}
-              title="bctl node-status - Backend Nodes"
-            />
-          </div>
+        <BashCodeBlock
+          title="Pool Status"
+          code={`# View connection pool status
+bctl pool-status --format=table`}
+        />
 
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Pool Status</h3>
-            <BashCodeBlock
-              code={`# View connection pool status
-bctl pool-status --format=table
-
-# Example output:
-# +----------+----------------+---------+-------------+
-# | Database | Total Conns    | Active  | Idle        |
-# +----------+----------------+---------+-------------+
-# | postgres | 64             | 23      | 41          |
-# | appdb    | 32             | 15      | 17          |
-# +----------+----------------+---------+-------------+`}
-              title="bctl pool-status - Connection Pools"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Statistics</h3>
-            <BashCodeBlock
-              code={`# Get comprehensive statistics
+        <BashCodeBlock
+          title="Statistics"
+          code={`# Get comprehensive statistics
 bctl stats --format=table
 
 # Process count
-bctl proc-count
-
-# Detailed process information
-bctl proc-info 1234  # Replace with actual PID
-
-# Query statistics by backend
-bctl stats --format=json | jq '.backends[] | {id, queries, avg_time}'`}
-              title="bctl stats - Query Statistics"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Watchdog Status</h3>
-            <BashCodeBlock
-              code={`# Check watchdog configuration and status
-bctl watchdog-info --format=table
-
-# Example output shows:
-# - Virtual IP status
-# - Watchdog nodes
-# - Leader/follower status
-# - Last heartbeat time`}
-              title="bctl watchdog-info - Cluster Status"
-            />
-          </div>
-        </div>
+bctl proc-count`}
+        />
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Prometheus Integration</h2>
-
-        <p className="text-muted-foreground mb-4">
+      <section id="prometheus-integration">
+        <h2>Prometheus Integration</h2>
+        <p>
           Export pgBalancer metrics to Prometheus using postgres_exporter or custom scraping:
         </p>
 
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Custom Metrics Exporter</h3>
-            <BashCodeBlock
-              code={`# Install postgres_exporter
-wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.15.0/postgres_exporter-0.15.0.linux-amd64.tar.gz
-tar xzf postgres_exporter-0.15.0.linux-amd64.tar.gz
-sudo mv postgres_exporter-0.15.0.linux-amd64/postgres_exporter /usr/local/bin/
-
-# Create custom queries file for pgBalancer metrics
-cat > /etc/prometheus/pgbalancer_queries.yaml <<'EOF'
-pg_balancer_backends:
-  query: "SELECT backend_id, hostname, port, status, health_score, query_count FROM pgbalancer_backends"
-  metrics:
-    - backend_id:
-        usage: "LABEL"
-        description: "Backend node ID"
-    - hostname:
-        usage: "LABEL"  
-        description: "Backend hostname"
-    - status:
-        usage: "GAUGE"
-        description: "Backend status (1=up, 0=down)"
-    - health_score:
-        usage: "GAUGE"
-        description: "AI health score"
-    - query_count:
-        usage: "COUNTER"
-        description: "Total queries processed"
-EOF
-
-# Run postgres_exporter with custom queries
-postgres_exporter \\
-  --web.listen-address=:9187 \\
-  --extend.query-path=/etc/prometheus/pgbalancer_queries.yaml`}
-              title="Prometheus Exporter Setup"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Prometheus Configuration</h3>
-            <div className="bg-gray-800/50 rounded-lg p-6">
-              <h4 className="text-base font-semibold text-cyan-400 mb-3">prometheus.yml</h4>
-              <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
-{`scrape_configs:
+        <BashCodeBlock
+          title="Prometheus Configuration"
+          code={`# prometheus.yml
+scrape_configs:
   # pgBalancer REST API metrics
   - job_name: 'pgbalancer'
     scrape_interval: 15s
     static_configs:
       - targets: ['localhost:8080']
-    metrics_path: '/api/stats'
-    
-  # PostgreSQL via postgres_exporter
-  - job_name: 'postgres'
-    scrape_interval: 30s
-    static_configs:
-      - targets: ['localhost:9187']`}
-              </pre>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Prometheus Queries</h3>
-            <div className="bg-gray-800/50 rounded-lg p-6">
-              <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
-{`# Backend health score over time
-avg(pgbalancer_backend_health_score) by (backend_id)
-
-# Query throughput (queries per second)
-rate(pgbalancer_total_queries[5m])
-
-# Connection pool utilization
-pgbalancer_active_connections / pgbalancer_max_connections
-
-# Average query latency
-rate(pgbalancer_query_time_total[5m]) / rate(pgbalancer_total_queries[5m])
-
-# Backend availability
-count(pgbalancer_backend_status == 1)
-
-# Failed backend detection
-changes(pgbalancer_backend_status[5m]) > 0`}
-              </pre>
-            </div>
-          </div>
-        </div>
+    metrics_path: '/api/stats'`}
+        />
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Grafana Dashboards</h2>
-
-        <p className="text-muted-foreground mb-4">
+      <section id="grafana-dashboards">
+        <h2>Grafana Dashboards</h2>
+        <p>
           Create Grafana dashboards to visualize pgBalancer metrics:
         </p>
 
-        <div className="space-y-4">
-          <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">🎯 Key Dashboard Panels</h4>
-            <ul className="text-sm space-y-1">
-              <li>• <strong>Backend Health Scores</strong> - AI health scoring visualization</li>
-              <li>• <strong>Query Distribution</strong> - Queries per backend over time</li>
-              <li>• <strong>Connection Pool Usage</strong> - Active vs idle connections</li>
-              <li>• <strong>Response Time</strong> - Average query latency by backend</li>
-              <li>• <strong>Failover Events</strong> - Backend up/down timeline</li>
-              <li>• <strong>Load Balance Efficiency</strong> - Query distribution fairness</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Sample Grafana Panel Queries</h3>
-            <div className="bg-gray-800/50 rounded-lg p-6">
-              <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
-{`# Panel 1: Backend Health Scores (Gauge)
-Query: pgbalancer_backend_health_score
-Legend: {{hostname}}:{{port}}
-
-# Panel 2: Queries Per Second (Graph)
-Query: rate(pgbalancer_total_queries[5m])
-Legend: Total QPS
-
-# Panel 3: Backend Query Distribution (Stacked Area)
-Query: rate(pgbalancer_backend_queries[5m])
-Legend: Backend {{backend_id}}
-
-# Panel 4: Connection Pool Usage (Graph)
-Query: pgbalancer_active_connections
-Query: pgbalancer_idle_connections
-Legend: Active | Idle
-
-# Panel 5: Average Response Time (Graph)
-Query: rate(pgbalancer_query_time_total[5m]) / rate(pgbalancer_total_queries[5m])
-Legend: Avg Latency (ms)
-
-# Panel 6: Backend Availability (Stat)
-Query: count(pgbalancer_backend_status == 1)
-Legend: Available Backends`}
-              </pre>
-            </div>
-          </div>
+        <div className="p-4 border rounded-lg mb-4">
+          <h4>🎯 Key Dashboard Panels</h4>
+          <ul className="text-sm space-y-1">
+            <li>• <strong>Backend Health Scores</strong> - AI health scoring visualization</li>
+            <li>• <strong>Query Distribution</strong> - Queries per backend over time</li>
+            <li>• <strong>Connection Pool Usage</strong> - Active vs idle connections</li>
+            <li>• <strong>Response Time</strong> - Average query latency by backend</li>
+            <li>• <strong>Failover Events</strong> - Backend up/down timeline</li>
+            <li>• <strong>Load Balance Efficiency</strong> - Query distribution fairness</li>
+          </ul>
         </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">MQTT Event Monitoring</h2>
-
-        <p className="text-muted-foreground mb-4">
+      <section id="mqtt-events">
+        <h2>MQTT Event Monitoring</h2>
+        <p>
           Monitor pgBalancer events in real-time using MQTT:
         </p>
 
         <BashCodeBlock
+          title="MQTT Event Subscription"
           code={`# Subscribe to all pgBalancer events
 mosquitto_sub -h localhost -t 'pgbalancer/#' -v
 
 # Subscribe to specific event types
 mosquitto_sub -h localhost -t 'pgbalancer/node/status' -v
-mosquitto_sub -h localhost -t 'pgbalancer/failover' -v
-mosquitto_sub -h localhost -t 'pgbalancer/health' -v
-
-# Example MQTT messages:
-
-# Node status change:
-# pgbalancer/node/status {"node_id": 1, "hostname": "db-replica1", "status": "down", "timestamp": "2025-11-06T21:30:00Z"}
-
-# Failover event:
-# pgbalancer/failover {"old_primary": 0, "new_primary": 1, "reason": "health_check_failed", "timestamp": "2025-11-06T21:30:05Z"}
-
-# Health check result:
-# pgbalancer/health {"node_id": 0, "status": "ok", "response_time_ms": 2.5, "timestamp": "2025-11-06T21:30:10Z"}`}
-          title="MQTT Event Subscription"
+mosquitto_sub -h localhost -t 'pgbalancer/failover' -v`}
         />
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Logging and Log Analysis</h2>
-
+      <section id="logging-analysis">
+        <h2>Logging and Log Analysis</h2>
         <BashCodeBlock
+          title="Log Monitoring"
           code={`# View pgBalancer logs
 tail -f /var/log/pgbalancer/pgbalancer.log
 
 # Filter for errors only
 tail -f /var/log/pgbalancer/pgbalancer.log | grep ERROR
 
-# Filter for health check failures
-tail -f /var/log/pgbalancer/pgbalancer.log | grep "health check failed"
-
 # View systemd logs
-sudo journalctl -u pgbalancer -f
-
-# Search for specific events
-sudo journalctl -u pgbalancer --since "1 hour ago" | grep failover
-
-# Export logs for analysis
-sudo journalctl -u pgbalancer --since "1 day ago" > pgbalancer_logs.txt`}
-          title="Log Monitoring"
+sudo journalctl -u pgbalancer -f`}
         />
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Performance Monitoring Queries</h2>
-
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">AI Health Score Tracking</h3>
-            <BashCodeBlock
-              code={`# Monitor AI health scores in real-time
-watch -n 5 'curl -s http://localhost:8080/api/backends | jq ".[] | {id, hostname, health_score, avg_response_time_ms}"'
-
-# Track health score changes over time
-while true; do
-  curl -s http://localhost:8080/api/backends | \\
-    jq -r '.[] | "\\(.timestamp) Backend \\(.id) health=\\(.health_score)"'
-  sleep 10
-done`}
-              title="Real-Time Health Monitoring"
-            />
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Query Distribution Analysis</h3>
-            <BashCodeBlock
-              code={`# Check query distribution across backends
-bctl stats --format=json | \\
-  jq '.backends[] | {id, queries, percentage: (.queries / ($total_queries | tonumber) * 100)}'
-
-# Monitor queries per second by backend
-watch -n 5 'bctl stats --format=table'
-
-# Track load balancing efficiency
-curl -s http://localhost:8080/api/backends | \\
-  jq '[.[] | .query_count] | add / length as $avg | map({id, queries: .query_count, deviation: ((.query_count - $avg) / $avg * 100)})'`}
-              title="Query Distribution Tracking"
-            />
-          </div>
-        </div>
+      <section id="performance-monitoring">
+        <h2>Performance Monitoring Queries</h2>
+        <BashCodeBlock
+          title="Real-Time Health Monitoring"
+          code={`# Monitor AI health scores in real-time
+watch -n 5 'curl -s http://localhost:8080/api/backends | jq ".[] | {id, hostname, health_score, avg_response_time_ms}"'`}
+        />
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Alerting Best Practices</h2>
-
+      <section id="alerting-best-practices">
+        <h2>Alerting Best Practices</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">⚠️ Critical Alerts</h4>
+            <h4>⚠️ Critical Alerts</h4>
             <ul className="text-sm space-y-1">
               <li>• Backend node down (health_score = 0)</li>
               <li>• All backends unavailable</li>
@@ -402,7 +200,7 @@ curl -s http://localhost:8080/api/backends | \\
           </div>
 
           <div className="p-4 border rounded-lg">
-            <h4 className="font-semibold mb-2">⚡ Warning Alerts</h4>
+            <h4>⚡ Warning Alerts</h4>
             <ul className="text-sm space-y-1">
               <li>• Low health score (&lt; 0.5)</li>
               <li>• High response time (&gt; 100ms avg)</li>
@@ -412,95 +210,10 @@ curl -s http://localhost:8080/api/backends | \\
             </ul>
           </div>
         </div>
-
-        <div className="bg-gray-800/50 rounded-lg p-6 mt-6">
-          <h4 className="text-base font-semibold text-cyan-400 mb-3">Example Prometheus Alert Rules</h4>
-          <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
-{`groups:
-  - name: pgbalancer_alerts
-    interval: 30s
-    rules:
-      # Critical: Backend down
-      - alert: PgBalancerBackendDown
-        expr: pgbalancer_backend_status == 0
-        for: 1m
-        labels:
-          severity: critical
-        annotations:
-          summary: "Backend {{ $labels.backend_id }} is down"
-          description: "Backend {{ $labels.hostname }}:{{ $labels.port }} has been down for more than 1 minute"
-
-      # Critical: All backends down
-      - alert: PgBalancerAllBackendsDown
-        expr: count(pgbalancer_backend_status == 1) == 0
-        for: 30s
-        labels:
-          severity: critical
-        annotations:
-          summary: "All pgBalancer backends are down"
-
-      # Warning: Low health score
-      - alert: PgBalancerLowHealthScore
-        expr: pgbalancer_backend_health_score < 0.5
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "Backend {{ $labels.backend_id }} has low health score"
-          description: "Health score: {{ $value }}"
-
-      # Warning: High response time
-      - alert: PgBalancerHighLatency
-        expr: rate(pgbalancer_query_time_total[5m]) / rate(pgbalancer_total_queries[5m]) > 100
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High average query latency detected"
-          description: "Average latency: {{ $value }}ms"
-
-      # Warning: Connection pool saturation
-      - alert: PgBalancerPoolSaturation
-        expr: pgbalancer_active_connections / pgbalancer_max_connections > 0.9
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "Connection pool nearly exhausted"
-          description: "Pool utilization: {{ $value | humanizePercentage }}"`}
-          </pre>
-        </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Monitoring Dashboard Setup</h2>
-
-        <BashCodeBlock
-          code={`# Create monitoring directory
-mkdir -p /etc/pgbalancer/monitoring
-
-# Download Grafana dashboard template
-curl -o /etc/pgbalancer/monitoring/grafana-dashboard.json \\
-  https://raw.githubusercontent.com/pgElephant/pgBalancer/main/monitoring/grafana-dashboard.json
-
-# Import dashboard to Grafana
-# 1. Open Grafana UI
-# 2. Go to Dashboards → Import
-# 3. Upload grafana-dashboard.json
-# 4. Select your Prometheus data source
-# 5. Click Import
-
-# Or use Grafana API
-curl -X POST http://admin:admin@localhost:3000/api/dashboards/db \\
-  -H "Content-Type: application/json" \\
-  -d @/etc/pgbalancer/monitoring/grafana-dashboard.json`}
-          title="Grafana Dashboard Import"
-        />
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Key Metrics Reference</h2>
-
+      <section id="key-metrics-reference">
+        <h2>Key Metrics Reference</h2>
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-700 text-sm">
             <thead className="bg-muted">
@@ -536,46 +249,10 @@ curl -X POST http://admin:admin@localhost:3000/api/dashboards/db \\
                 <td className="border border-gray-300 dark:border-gray-700 p-3">Currently active connections</td>
                 <td className="border border-gray-300 dark:border-gray-700 p-3">REST API, bctl</td>
               </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>avg_response_time</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Gauge</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Average query latency (ms)</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">REST API</td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 dark:border-gray-700 p-3"><code>error_count</code></td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Counter</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">Query errors by backend</td>
-                <td className="border border-gray-300 dark:border-gray-700 p-3">REST API</td>
-              </tr>
             </tbody>
           </table>
         </div>
       </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Next Steps</h2>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          <a href="/docs/pgbalancer/rest-api" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">🌐 REST API Reference</h3>
-            <p className="text-sm text-muted-foreground">Complete API documentation with all 17 endpoints</p>
-          </a>
-          <a href="/docs/pgbalancer/cli-management" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">⌨️ bctl CLI Tool</h3>
-            <p className="text-sm text-muted-foreground">Command-line monitoring and management</p>
-          </a>
-          <a href="/docs/pgbalancer/monitoring" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">📊 Monitoring Integration</h3>
-            <p className="text-sm text-muted-foreground">External monitoring system integration</p>
-          </a>
-          <a href="/docs/pgbalancer/configuration" className="p-4 border rounded-lg hover:border-blue-500 transition-colors">
-            <h3 className="font-semibold mb-2">⚙️ Configuration Reference</h3>
-            <p className="text-sm text-muted-foreground">All .conf file parameters</p>
-          </a>
-        </div>
-      </section>
-      </div>
-    </DocsContentLayout>
-  );
+    </PostgresDocsLayout>
+  )
 }

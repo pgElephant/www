@@ -227,13 +227,7 @@ export default function BlogPage() {
   return (
     <div className="pt-16">
       {/* Hero Section with elegant gradient background - same as main page */}
-      <div 
-        className="relative overflow-hidden"
-        style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
-          position: 'relative'
-        }}
-      >
+      <div className="relative overflow-hidden bg-hero-gradient">
         {/* Elegant overlay gradient - same as Hero */}
         <div 
           className="absolute inset-0"
@@ -300,7 +294,7 @@ export default function BlogPage() {
 
 
       {/* Blog Articles - Split by Category */}
-      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+      <div className="py-24 relative overflow-hidden bg-page-gradient">
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             {/* Technical Blogs */}

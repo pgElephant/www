@@ -1,11 +1,29 @@
 import { Metadata } from 'next'
-import DocsContentLayout from '../../../../components/DocsContentLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { PgStatInsightsIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pg_stat_insights Metrics Reference Guide',
   description: 'Understand the 52 metrics exposed by pg_stat_insights across execution timing, cache efficiency, WAL, JIT, and parallelism.',
+}
+
+const tableOfContents: TocItem[] = [
+  { id: 'workflow-overview', title: 'Workflow Overview' },
+  { id: 'identity-classification', title: 'Identity & Classification' },
+  { id: 'execution-timing', title: 'Execution & Timing' },
+  { id: 'cache-io-wal', title: 'Cache, IO & WAL' },
+  { id: 'advanced', title: 'Advanced (Parallel & JIT)' },
+  { id: 'reset-retention', title: 'Reset & Retention' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pg_stat_insights/configuration',
+  label: 'Configuration Reference',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pg_stat_insights/views',
+  label: 'Views Reference',
 }
 
 interface MetricRow {
@@ -49,41 +67,36 @@ const advancedMetrics: MetricRow[] = [
 const resetSql = `SELECT pg_stat_insights_reset();`;
 
 export default function PgStatInsightsMetricsGuidePage() {
-  const renderMetricSection = (title: string, rows: MetricRow[]) => (
-    <section key={title} className="space-y-4">
-      <h2 className="text-2xl font-semibold">{title}</h2>
+  const renderMetricSection = (id: string, title: string, rows: MetricRow[]) => (
+    <section key={id} id={id} className="space-y-4">
+      <h2>{title}</h2>
       <div className="border rounded-lg divide-y">
         {rows.map((row) => (
           <div key={row.name} className="p-4 space-y-1">
             <h3 className="font-semibold text-base">{row.name}</h3>
-            <p className="text-sm text-muted-foreground">{row.description}</p>
-                </div>
+            <p className="text-sm">{row.description}</p>
+          </div>
         ))}
-            </div>
-          </section>
+      </div>
+    </section>
   )
 
   return (
-    <DocsContentLayout
-      hero={{
-        badgeLabel: 'pg_stat_insights',
-        badgeIcon: <PgStatInsightsIcon size={20} />, 
-        badgeTone: 'emerald',
-        title: 'Metrics Reference Guide',
-        description:
-          'pg_stat_insights adds 52 columns grouped into execution, IO, WAL, JIT, and parallel categories. Use this guide to interpret each metric and craft diagnostics.',
-      }}
-      contentWidth="wide"
+    <PostgresDocsLayout
+      title="Metrics Reference Guide"
+      version="pg_stat_insights Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
     >
-      <div className="space-y-12">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Workflow Overview</h2>
-          <p className="text-muted-foreground">
-            View metrics via <code>pg_stat_insights</code> or specialised views such as <code>pg_stat_insights_plan</code>, <code>pg_stat_insights_io</code>, and <code>pg_stat_insights_waits</code>. Combine identifiers with execution/caching metrics for a holistic profile of each statement.
-          </p>
-          <SqlCodeBlock
-            title="Sample metric projection"
-            code={`SELECT queryid,
+      <section id="workflow-overview">
+        <h2>Workflow Overview</h2>
+        <p>
+          View metrics via <code>pg_stat_insights</code> or specialised views such as <code>pg_stat_insights_plan</code>, <code>pg_stat_insights_io</code>, and <code>pg_stat_insights_waits</code>. Combine identifiers with execution/caching metrics for a holistic profile of each statement.
+        </p>
+        <SqlCodeBlock
+          title="Sample metric projection"
+          code={`SELECT queryid,
        calls,
        total_exec_time,
        shared_blks_hit,
@@ -94,25 +107,24 @@ export default function PgStatInsightsMetricsGuidePage() {
   FROM pg_stat_insights
  ORDER BY total_exec_time DESC
  LIMIT 20;`}
-          />
-          </section>
+        />
+      </section>
 
-        {renderMetricSection('Identity & Classification', identityMetrics)}
-        {renderMetricSection('Execution & Timing', executionMetrics)}
-        {renderMetricSection('Cache, IO & WAL', cacheWalMetrics)}
-        {renderMetricSection('Advanced (Parallel & JIT)', advancedMetrics)}
+      {renderMetricSection('identity-classification', 'Identity & Classification', identityMetrics)}
+      {renderMetricSection('execution-timing', 'Execution & Timing', executionMetrics)}
+      {renderMetricSection('cache-io-wal', 'Cache, IO & WAL', cacheWalMetrics)}
+      {renderMetricSection('advanced', 'Advanced (Parallel & JIT)', advancedMetrics)}
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Reset & Retention</h2>
-          <p className="text-muted-foreground">
-            Metrics accumulate until reset. Schedule resets post-maintenance or collect deltas into historical tables for trend analysis.
-          </p>
-          <SqlCodeBlock title="Reset command" code={resetSql} />
-          <p className="text-sm text-muted-foreground">
-            Resets also clear derived views such as <code>pg_stat_insights_plan</code>. Capture baselines prior to reset if you rely on historical comparisons.
-          </p>
-          </section>
-      </div>
-    </DocsContentLayout>
+      <section id="reset-retention">
+        <h2>Reset & Retention</h2>
+        <p>
+          Metrics accumulate until reset. Schedule resets post-maintenance or collect deltas into historical tables for trend analysis.
+        </p>
+        <SqlCodeBlock title="Reset command" code={resetSql} />
+        <p className="text-sm">
+          Resets also clear derived views such as <code>pg_stat_insights_plan</code>. Capture baselines prior to reset if you rely on historical comparisons.
+        </p>
+      </section>
+    </PostgresDocsLayout>
   )
 }

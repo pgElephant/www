@@ -1,9 +1,7 @@
-import React from 'react'
 import { Metadata } from 'next'
-import GettingStartedLayout from '../../../../components/GettingStartedLayout'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { PgSentinelIcon } from '../../../../components/ProductIcons'
 
 export const metadata: Metadata = {
   title: 'pgSentinel Getting Started - Quick Setup Guide',
@@ -11,50 +9,54 @@ export const metadata: Metadata = {
     'Install pgSentinel, connect to pgBouncer, and ship metrics to Prometheus/Grafana in minutes.',
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'prerequisites', title: 'Prerequisites' },
+  { id: 'step1-launch', title: 'Step 1 · Launch pgSentinel' },
+  { id: 'step2-connect', title: 'Step 2 · Connect to pgBouncer & PostgreSQL' },
+  { id: 'step3-prometheus', title: 'Step 3 · Enable Prometheus/Grafana' },
+  { id: 'next-steps', title: 'Next Steps' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/pgsentinel/troubleshooting',
+  label: 'Troubleshooting',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/pgsentinel/configuration',
+  label: 'Configuration Reference',
+}
+
 const PgSentinelGettingStartedPage = () => {
   return (
-    <GettingStartedLayout
-      product="pgSentinel"
-      hero={{
-        label: 'pgSentinel',
-        labelIcon: <PgSentinelIcon size={20} />, 
-        labelAccent: 'emerald',
-        title: 'Deploy pgSentinel in 3 Steps',
-        description:
-          'Spin up pgSentinel with Docker, connect to pgBouncer, and start visualising pool metrics using the built-in dashboards.',
-        cta: {
-          href: '/docs/pgsentinel/dashboard',
-          label: 'Explore dashboards',
-        },
-      }}
-      theme={{
-        pageBackground: 'bg-gradient-to-br from-slate-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-950',
-        heroOverlay: 'bg-gradient-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-500/10 dark:to-teal-500/10',
-        requirementsBorder: 'emerald',
-        requirementsBackground: 'bg-white/90 dark:bg-slate-900/70',
-      }}
-      requirements={{
-        title: 'Prerequisites',
-        items: [
-          'pgBouncer 1.18+ with admin console enabled',
-          'PostgreSQL 14+ for metrics storage (optional external DB)',
-          'Docker or Kubernetes runtime for container deployment',
-          'Prometheus (optional) for long-term metric retention',
-        ],
-      }}
-      sections={[
-        {
-          title: 'Step 1 · Launch pgSentinel',
-          description: 'Run the official container image or helm chart.',
-          cards: [
-            {
-              id: 'docker',
-              title: 'Docker compose',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="docker-compose.yml"
-                  code={`version: '3.9'
+    <PostgresDocsLayout
+      title="Getting Started with pgSentinel"
+      version="pgSentinel Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
+    >
+      <section id="prerequisites">
+        <h2>Prerequisites</h2>
+        <p>
+          Spin up pgSentinel with Docker, connect to pgBouncer, and start visualising pool metrics using the built-in dashboards.
+        </p>
+        <ul>
+          <li>pgBouncer 1.18+ with admin console enabled</li>
+          <li>PostgreSQL 14+ for metrics storage (optional external DB)</li>
+          <li>Docker or Kubernetes runtime for container deployment</li>
+          <li>Prometheus (optional) for long-term metric retention</li>
+        </ul>
+      </section>
+
+      <section id="step1-launch">
+        <h2>Step 1 · Launch pgSentinel</h2>
+        <p>Run the official container image or helm chart.</p>
+        
+        <h3>Docker compose</h3>
+        <BashCodeBlock
+          title="docker-compose.yml"
+          code={`version: '3.9'
 services:
   pgsentinel:
     image: ghcr.io/pgelephant/pgsentinel:latest
@@ -64,126 +66,73 @@ services:
       - PGSENTINEL_PGBOUNCER_DSN=postgres://admin:secret@pgbouncer:6432/pgbouncer
       - PGSENTINEL_STORAGE_DSN=postgres://pgsentinel:pass@postgres:5432/pgsentinel
       - PGSENTINEL_PROMETHEUS_EXPORT=true`}
-                />
-              ),
-            },
-            {
-              id: 'kubernetes',
-              title: 'Kubernetes (Helm)',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="Install chart"
-                  code={`helm repo add pgelephant https://charts.pgelephant.com
-helm install pgsentinel pgelephant/pgsentinel \
-  --set pgbouncer.dsn=postgres://admin:secret@pgbouncer:6432/pgbouncer \
+        />
+
+        <h3>Kubernetes (Helm)</h3>
+        <BashCodeBlock
+          title="Install chart"
+          code={`helm repo add pgelephant https://charts.pgelephant.com
+helm install pgsentinel pgelephant/pgsentinel \\
+  --set pgbouncer.dsn=postgres://admin:secret@pgbouncer:6432/pgbouncer \\
   --set storage.dsn=postgres://pgsentinel:pass@postgres:5432/pgsentinel`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Step 2 · Connect to pgBouncer & PostgreSQL',
-          description: 'Provide connection strings for pgBouncer admin console and the metrics store.',
-          cards: [
-            {
-              id: 'pgbouncer',
-              title: 'pgBouncer credentials',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="pgbouncer.ini"
-                  code={`[pgbouncer]
+        />
+      </section>
+
+      <section id="step2-connect">
+        <h2>Step 2 · Connect to pgBouncer & PostgreSQL</h2>
+        <p>Provide connection strings for pgBouncer admin console and the metrics store.</p>
+
+        <h3>pgBouncer credentials</h3>
+        <BashCodeBlock
+          title="pgbouncer.ini"
+          code={`[pgbouncer]
 listen_port = 6432
 admin_users = admin
 stats_users = admin
 
 [databases]
 pgbouncer = host=postgres port=5432 dbname=pgbouncer user=admin password=secret`}
-                />
-              ),
-            },
-            {
-              id: 'metrics-db',
-              title: 'Metrics schema',
-              accent: 'emerald',
-              content: (
-                <SqlCodeBlock
-                  title="Create pgSentinel role"
-                  code={`CREATE ROLE pgsentinel WITH LOGIN PASSWORD 'pass';
+        />
+
+        <h3>Metrics schema</h3>
+        <SqlCodeBlock
+          title="Create pgSentinel role"
+          code={`CREATE ROLE pgsentinel WITH LOGIN PASSWORD 'pass';
 CREATE DATABASE pgsentinel OWNER pgsentinel;
 GRANT ALL PRIVILEGES ON DATABASE pgsentinel TO pgsentinel;`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Step 3 · Enable Prometheus/Grafana',
-          description: 'Expose metrics via /metrics and import the starter Grafana dashboard.',
-          cards: [
-            {
-              id: 'prometheus',
-              title: 'Prometheus scrape config',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="prometheus.yml"
-                  code={`scrape_configs:
+        />
+      </section>
+
+      <section id="step3-prometheus">
+        <h2>Step 3 · Enable Prometheus/Grafana</h2>
+        <p>Expose metrics via /metrics and import the starter Grafana dashboard.</p>
+
+        <h3>Prometheus scrape config</h3>
+        <BashCodeBlock
+          title="prometheus.yml"
+          code={`scrape_configs:
   - job_name: 'pgsentinel'
     static_configs:
       - targets: ['pgsentinel:8080']`}
-                />
-              ),
-            },
-            {
-              id: 'grafana-import',
-              title: 'Grafana import',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="Dashboard provisioning"
-                  code={`curl -L https://raw.githubusercontent.com/pgElephant/pgsentinel/main/grafana/pgsentinel.json \
+        />
+
+        <h3>Grafana import</h3>
+        <BashCodeBlock
+          title="Dashboard provisioning"
+          code={`curl -L https://raw.githubusercontent.com/pgElephant/pgsentinel/main/grafana/pgsentinel.json \\
   -o /var/lib/grafana/dashboards/pgsentinel.json`}
-                />
-              ),
-            },
-          ],
-        },
-      ]}
-      nextSteps={[
-        {
-          title: 'Configuration reference',
-          href: '/docs/pgsentinel/configuration',
-          description: 'Tweak retention, authentication, and alert routing.',
-        },
-        {
-          title: 'Metrics catalog',
-          href: '/docs/pgsentinel/metrics',
-          description: 'Understand every pgSentinel metric for dashboards and alerts.',
-        },
-        {
-          title: 'REST API',
-          href: '/docs/pgsentinel/api',
-          description: 'Automate pool actions and integrate with runbooks.',
-        },
-      ]}
-      supportLinks={[
-        {
-          label: 'GitHub Discussions',
-          description: 'Community Q&A and troubleshooting tips.',
-          href: 'https://github.com/pgElephant/pgsentinel/discussions',
-          external: true,
-        },
-        {
-          label: 'Support Email',
-          description: 'Contact pgElephant support with logs and environment details.',
-          href: 'mailto:support@pgelephant.com',
-          external: true,
-        },
-      ]}
-    />
+        />
+      </section>
+
+      <section id="next-steps">
+        <h2>Next Steps</h2>
+        <ul>
+          <li><a href="/docs/pgsentinel/configuration">Configuration reference</a> - Tweak retention, authentication, and alert routing.</li>
+          <li><a href="/docs/pgsentinel/metrics">Metrics catalog</a> - Understand every pgSentinel metric for dashboards and alerts.</li>
+          <li><a href="/docs/pgsentinel/api">REST API</a> - Automate pool actions and integrate with runbooks.</li>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }
 

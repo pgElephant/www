@@ -70,8 +70,8 @@ interface LandingTheme {
 }
 
 const DEFAULT_THEME: LandingTheme = {
-  pageBackground: 'bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-900',
-  heroOverlay: 'bg-gradient-to-r from-indigo-600/20 to-purple-600/20 dark:from-indigo-500/10 dark:to-purple-500/10',
+  pageBackground: 'bg-page-gradient',
+  heroOverlay: 'bg-hero-gradient',
   badgeContainerBg: 'bg-white/80 dark:bg-slate-800/80',
   badgeRing: 'ring-gray-900/10 dark:ring-white/10',
   primaryButtonClass:

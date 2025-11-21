@@ -50,6 +50,12 @@ body {
   line-height: 1.6;
 }
 
+/* CSS Custom Properties for Standardized Gradients */
+:root {
+  --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  --page-gradient: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+}
+
 
 
 
@@ -370,6 +376,111 @@ body {
 
 .premium-divider {
   @apply h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent;
+}
+
+/* Standard Website Gradients - Only Two Gradients for Entire Site */
+/* Hero Gradient: Slight dark gradient for hero sections */
+.bg-hero-gradient {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+/* Page Gradient: Same gradient but slightly lighter for all other pages */
+.bg-page-gradient {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+}
+
+/* PostgreSQL Documentation Styles */
+.postgres-docs-content {
+  @apply text-slate-700 dark:text-slate-300 leading-relaxed;
+}
+
+.postgres-docs-content h1 {
+  @apply text-3xl font-bold text-slate-900 dark:text-white mt-8 mb-4 pb-2 border-b border-slate-200 dark:border-slate-700;
+}
+
+.postgres-docs-content h2 {
+  @apply text-2xl font-semibold text-slate-900 dark:text-white mt-8 mb-4;
+}
+
+.postgres-docs-content h3 {
+  @apply text-xl font-semibold text-slate-900 dark:text-white mt-6 mb-3;
+}
+
+.postgres-docs-content h4 {
+  @apply text-lg font-semibold text-slate-900 dark:text-white mt-4 mb-2;
+}
+
+.postgres-docs-content h5 {
+  @apply text-base font-semibold text-slate-900 dark:text-white mt-4 mb-2;
+}
+
+.postgres-docs-content h6 {
+  @apply text-sm font-semibold text-slate-900 dark:text-white mt-4 mb-2;
+}
+
+.postgres-docs-content p {
+  @apply mb-4 text-slate-700 dark:text-slate-300 leading-relaxed;
+}
+
+.postgres-docs-content a {
+  @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline;
+}
+
+.postgres-docs-content strong {
+  @apply font-semibold text-slate-900 dark:text-white;
+}
+
+.postgres-docs-content em {
+  @apply italic;
+}
+
+.postgres-docs-content code {
+  @apply text-blue-600 dark:text-blue-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.postgres-docs-content pre {
+  @apply bg-slate-900 dark:bg-slate-950 text-slate-100 p-4 rounded-lg overflow-x-auto mb-4;
+}
+
+.postgres-docs-content pre code {
+  @apply text-slate-100 bg-transparent p-0;
+}
+
+.postgres-docs-content ul,
+.postgres-docs-content ol {
+  @apply mb-4 ml-6 space-y-2;
+}
+
+.postgres-docs-content ul {
+  @apply list-disc;
+}
+
+.postgres-docs-content ol {
+  @apply list-decimal;
+}
+
+.postgres-docs-content li {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+.postgres-docs-content blockquote {
+  @apply border-l-4 border-slate-300 dark:border-slate-600 pl-4 italic text-slate-600 dark:text-slate-400 my-4;
+}
+
+.postgres-docs-content table {
+  @apply w-full border-collapse mb-4;
+}
+
+.postgres-docs-content th {
+  @apply bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 px-4 py-2 text-left font-semibold text-slate-900 dark:text-white;
+}
+
+.postgres-docs-content td {
+  @apply border border-slate-300 dark:border-slate-600 px-4 py-2 text-slate-700 dark:text-slate-300;
+}
+
+.postgres-docs-content hr {
+  @apply my-8 border-t border-slate-200 dark:border-slate-700;
 }
 
 @layer utilities {

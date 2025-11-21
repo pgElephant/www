@@ -1,8 +1,7 @@
 import { Metadata } from 'next'
-import GettingStartedLayout from '../../../../components/GettingStartedLayout'
-import BashCodeBlock from '../../../../components/BashCodeBlock'
+import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../components/PostgresDocsLayout'
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
-import { NeurondBIcon } from '../../../../components/ProductIcons'
+import BashCodeBlock from '../../../../components/BashCodeBlock'
 
 export const metadata: Metadata = {
   title: 'Install NeurondB PostgreSQL Vector Database | Step-by-Step Guide',
@@ -13,201 +12,151 @@ export const metadata: Metadata = {
   },
 }
 
+const tableOfContents: TocItem[] = [
+  { id: 'prerequisites', title: 'Prerequisites' },
+  { id: 'ubuntu-debian', title: 'Ubuntu / Debian' },
+  { id: 'macos', title: 'macOS (Homebrew)' },
+  { id: 'rocky-rhel', title: 'Rocky Linux / RHEL' },
+  { id: 'post-installation', title: 'Post-installation checks' },
+]
+
+const prevLink: NavLink = {
+  href: '/docs/neurondb/getting-started',
+  label: 'Getting Started',
+}
+
+const nextLink: NavLink = {
+  href: '/docs/neurondb/configuration',
+  label: 'Configuration',
+}
+
 export default function NeurondBInstallationPage() {
   return (
-    <GettingStartedLayout
-      product="NeurondB"
-      hero={{
-        label: 'NeurondB',
-        labelIcon: <NeurondBIcon size={20} />, 
-        labelAccent: 'indigo',
-        title: 'Install NeurondB on PostgreSQL 16–18',
-        description:
-          'Follow platform-specific build instructions for Ubuntu, Debian, macOS, and Rocky Linux. Prepare dependencies, compile the extension, and verify the installation in minutes.',
-        cta: {
-          href: '/docs/neurondb/getting-started',
-          label: 'View getting started guide',
-        },
-      }}
-      theme={{
-        pageBackground:
-          'bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900',
-        heroOverlay:
-          'bg-gradient-to-r from-indigo-600/20 to-purple-600/20 dark:from-indigo-500/10 dark:to-purple-500/10',
-        requirementsBorder: 'indigo',
-        requirementsBackground: 'bg-white/90 dark:bg-slate-900/60',
-      }}
-      requirements={{
-        title: 'Prerequisites',
-        items: [
-          'PostgreSQL 16, 17, or 18 with superuser access',
-          'gcc/clang toolchain, make, autoconf, libtool',
-          'PostgreSQL server development headers',
-          'Optional: CUDA or ROCm drivers for GPU acceleration',
-        ],
-        note: (
-          <span>
-            Verify that <code className="rounded bg-slate-800 px-1 text-xs text-white">pg_config</code> points to your target PostgreSQL installation before compiling.
-          </span>
-        ),
-      }}
-      sections={[
-        {
-          title: 'Ubuntu / Debian',
-          description: 'Install system packages, fetch NeurondB sources, and compile against PostgreSQL 17 deb packages.',
-          cards: [
-            {
-              id: 'ubuntu-postgres',
-              title: 'Install PostgreSQL',
-              accent: 'indigo',
-              content: (
-                <BashCodeBlock
-                  title="PostgreSQL packages"
-                  code={`sudo apt-get update
-sudo apt-get install -y postgresql-17 \
-    postgresql-server-dev-17 \
+    <PostgresDocsLayout
+      title="Install NeurondB on PostgreSQL 16–18"
+      version="NeurondB Documentation"
+      tableOfContents={tableOfContents}
+      prevLink={prevLink}
+      nextLink={nextLink}
+    >
+      <section id="prerequisites">
+        <h2>Prerequisites</h2>
+        <p>Before installing NeurondB, ensure you have:</p>
+        <ul>
+          <li>PostgreSQL 16, 17, or 18 with superuser access</li>
+          <li>gcc/clang toolchain, make, autoconf, libtool</li>
+          <li>PostgreSQL server development headers</li>
+          <li>Optional: CUDA or ROCm drivers for GPU acceleration</li>
+        </ul>
+        <p>
+          Verify that <code>pg_config</code> points to your target PostgreSQL installation before compiling.
+        </p>
+      </section>
+
+      <section id="ubuntu-debian">
+        <h2>Ubuntu / Debian</h2>
+        <p>Install system packages, fetch NeurondB sources, and compile against PostgreSQL 17 deb packages.</p>
+
+        <h3>Install PostgreSQL</h3>
+        <BashCodeBlock
+          title="PostgreSQL packages"
+          code={`sudo apt-get update
+sudo apt-get install -y postgresql-17 \\
+    postgresql-server-dev-17 \\
     postgresql-contrib-17`}
-                />
-              ),
-            },
-            {
-              id: 'ubuntu-deps',
-              title: 'Install build dependencies',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="Build prerequisites"
-                  code={`sudo apt-get install -y build-essential \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    zlib1g-dev \
+        />
+
+        <h3>Install build dependencies</h3>
+        <BashCodeBlock
+          title="Build prerequisites"
+          code={`sudo apt-get install -y build-essential \\
+    libcurl4-openssl-dev \\
+    libssl-dev \\
+    zlib1g-dev \\
     pkg-config`}
-                />
-              ),
-            },
-            {
-              id: 'ubuntu-build',
-              title: 'Compile & install',
-              accent: 'purple',
-              content: (
-                <BashCodeBlock
-                  title="Build NeurondB"
-                  code={`git clone https://github.com/pgElephant/NeurondB.git
+        />
+
+        <h3>Compile & install</h3>
+        <BashCodeBlock
+          title="Build NeurondB"
+          code={`git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
 make PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config
 sudo make install PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config`}
-                />
-              ),
-            },
-            {
-              id: 'ubuntu-verify',
-              title: 'Verify artifacts',
-              accent: 'blue',
-              content: (
-                <BashCodeBlock
-                  title="Installed files"
-                  code={`ls -lh /usr/lib/postgresql/17/lib/neurondb.so
+        />
+
+        <h3>Verify artifacts</h3>
+        <BashCodeBlock
+          title="Installed files"
+          code={`ls -lh /usr/lib/postgresql/17/lib/neurondb.so
 ls -lh /usr/share/postgresql/17/extension/neurondb*`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'macOS (Homebrew)',
-          description: 'Build NeurondB against Homebrew PostgreSQL. Requires Xcode CLI tools and sudo for installation.',
-          cards: [
-            {
-              id: 'macos-postgres',
-              title: 'Install PostgreSQL 17',
-              accent: 'indigo',
-              content: (
-                <BashCodeBlock
-                  title="Homebrew setup"
-                  code={`brew install postgresql@17
+        />
+      </section>
+
+      <section id="macos">
+        <h2>macOS (Homebrew)</h2>
+        <p>Build NeurondB against Homebrew PostgreSQL. Requires Xcode CLI tools and sudo for installation.</p>
+
+        <h3>Install PostgreSQL 17</h3>
+        <BashCodeBlock
+          title="Homebrew setup"
+          code={`brew install postgresql@17
 brew services start postgresql@17`}
-                />
-              ),
-            },
-            {
-              id: 'macos-build',
-              title: 'Compile & install',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="Build NeurondB"
-                  code={`git clone https://github.com/pgElephant/NeurondB.git
+        />
+
+        <h3>Compile & install</h3>
+        <BashCodeBlock
+          title="Build NeurondB"
+          code={`git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
 make PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config
 sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Rocky Linux / RHEL',
-          description: 'Install PostgreSQL from the PGDG repository, then build NeurondB against the RPM tooling.',
-          cards: [
-            {
-              id: 'rocky-postgres',
-              title: 'Install PostgreSQL packages',
-              accent: 'blue',
-              content: (
-                <BashCodeBlock
-                  title="PostgreSQL 17"
-                  code={`sudo dnf install -y \
-    postgresql17-server \
-    postgresql17-devel \
+        />
+      </section>
+
+      <section id="rocky-rhel">
+        <h2>Rocky Linux / RHEL</h2>
+        <p>Install PostgreSQL from the PGDG repository, then build NeurondB against the RPM tooling.</p>
+
+        <h3>Install PostgreSQL packages</h3>
+        <BashCodeBlock
+          title="PostgreSQL 17"
+          code={`sudo dnf install -y \\
+    postgresql17-server \\
+    postgresql17-devel \\
     postgresql17-contrib`}
-                />
-              ),
-            },
-            {
-              id: 'rocky-deps',
-              title: 'Install build dependencies',
-              accent: 'purple',
-              content: (
-                <BashCodeBlock
-                  title="Build prerequisites"
-                  code={`sudo dnf install -y \
-    gcc \
-    make \
-    curl-devel \
-    openssl-devel \
+        />
+
+        <h3>Install build dependencies</h3>
+        <BashCodeBlock
+          title="Build prerequisites"
+          code={`sudo dnf install -y \\
+    gcc \\
+    make \\
+    curl-devel \\
+    openssl-devel \\
     zlib-devel`}
-                />
-              ),
-            },
-            {
-              id: 'rocky-build',
-              title: 'Compile & install',
-              accent: 'emerald',
-              content: (
-                <BashCodeBlock
-                  title="Build NeurondB"
-                  code={`git clone https://github.com/pgElephant/NeurondB.git
+        />
+
+        <h3>Compile & install</h3>
+        <BashCodeBlock
+          title="Build NeurondB"
+          code={`git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
 make PG_CONFIG=/usr/pgsql-17/bin/pg_config
 sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
-                />
-              ),
-            },
-          ],
-        },
-        {
-          title: 'Post-installation checks',
-          description: 'Enable the extension, verify metadata, and confirm NeurondB is available across your cluster.',
-          cards: [
-            {
-              id: 'create-extension',
-              title: 'Register extension',
-              accent: 'cyan',
-              content: (
-                <SqlCodeBlock
-                  title="Initialize NeurondB"
-                  code={`-- Connect to target database
-\c my_database
+        />
+      </section>
+
+      <section id="post-installation">
+        <h2>Post-installation checks</h2>
+        <p>Enable the extension, verify metadata, and confirm NeurondB is available across your cluster.</p>
+
+        <h3>Register extension</h3>
+        <SqlCodeBlock
+          title="Initialize NeurondB"
+          code={`-- Connect to target database
+\\c my_database
 
 -- Create extension
 CREATE EXTENSION neurondb;
@@ -216,63 +165,26 @@ CREATE EXTENSION neurondb;
 SELECT extversion
 FROM   pg_extension
 WHERE  extname = 'neurondb';`}
-                />
-              ),
-            },
-            {
-              id: 'gpu-note',
-              title: 'Optional GPU configuration',
-              accent: 'rose',
-              content: (
-                <BashCodeBlock
-                  title="postgresql.conf"
-                  code={`# Enable GPU acceleration
+        />
+
+        <h3>Optional GPU configuration</h3>
+        <BashCodeBlock
+          title="postgresql.conf"
+          code={`# Enable GPU acceleration
 neurondb.gpu_enabled = on
 neurondb.gpu_backend = 'cuda'  # or 'rocm'
 neurondb.gpu_memory_pool_mb = 2048`}
-                />
-              ),
-            },
-          ],
-        },
-      ]}
-      nextSteps={[
-        {
-          href: '/docs/neurondb/getting-started',
-          title: '📘 Getting Started',
-          description: 'Load sample data, create vector indexes, and run first searches.',
-        },
-        {
-          href: '/docs/neurondb/configuration',
-          title: '⚙️ Configuration Reference',
-          description: 'Tune GUC parameters for CPU/GPU execution paths and logging.',
-        },
-        {
-          href: '/docs/neurondb/troubleshooting',
-          title: '🛠 Troubleshooting Guide',
-          description: 'Resolve build failures, GPU driver issues, and deployment blockers.',
-        },
-      ]}
-      supportLinks={[
-        {
-          href: 'https://github.com/pgElephant/NeurondB/issues',
-          label: 'GitHub Issues',
-          description: 'Report build problems or request platform support.',
-          external: true,
-        },
-        {
-          href: 'https://github.com/pgElephant/NeurondB/discussions',
-          label: 'GitHub Discussions',
-          description: 'Ask community questions or share installation tips.',
-          external: true,
-        },
-      ]}
-      footerNote={
-        <div className="text-xs text-slate-500 dark:text-slate-400">
-          Need a hardened production build? Contact pgElephant support for pre-built binaries and GPU-tuned configurations.
-        </div>
-      }
-    />
+        />
+      </section>
+
+      <section>
+        <h2>Next Steps</h2>
+        <ul>
+          <li><a href="/docs/neurondb/getting-started">Getting Started</a> - Load sample data, create vector indexes, and run first searches.</li>
+          <li><a href="/docs/neurondb/configuration">Configuration Reference</a> - Tune GUC parameters for CPU/GPU execution paths and logging.</li>
+          <li><a href="/docs/neurondb/troubleshooting">Troubleshooting Guide</a> - Resolve build failures, GPU driver issues, and deployment blockers.</li>
+        </ul>
+      </section>
+    </PostgresDocsLayout>
   )
 }
-
