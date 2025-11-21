@@ -7,13 +7,13 @@ const GRADIENTS = {
 } as const
 
 const BADGE_GRADIENTS = {
-  indigo: 'from-indigo-500 to-purple-500',
-  cyan: 'from-cyan-500 to-sky-500',
-  emerald: 'from-emerald-500 to-teal-500',
-  purple: 'from-purple-500 to-fuchsia-500',
-  blue: 'from-blue-500 to-cyan-500',
-  amber: 'from-amber-500 to-orange-500',
-  slate: 'from-slate-500 to-slate-300',
+  indigo: 'from-slate-700 to-slate-600',
+  cyan: 'from-slate-700 to-slate-600',
+  emerald: 'from-slate-700 to-slate-600',
+  purple: 'from-slate-700 to-slate-600',
+  blue: 'from-slate-700 to-slate-600',
+  amber: 'from-slate-700 to-slate-600',
+  slate: 'from-slate-700 to-slate-600',
 } as const
 
 type BadgeTone = keyof typeof BADGE_GRADIENTS

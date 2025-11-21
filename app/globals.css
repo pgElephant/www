@@ -52,8 +52,19 @@ body {
 
 /* CSS Custom Properties for Standardized Gradients */
 :root {
+  /* Hero sections: slight dark gradient */
   --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  /* All other pages: slightly lighter version */
   --page-gradient: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+}
+
+/* Utility classes for consistent gradients */
+.bg-hero-gradient {
+  background: var(--hero-gradient);
+}
+
+.bg-page-gradient {
+  background: var(--page-gradient);
 }
 
 

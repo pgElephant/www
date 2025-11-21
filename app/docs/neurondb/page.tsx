@@ -15,7 +15,7 @@ export default function Page() {
       hero={{
         badgeLabel: 'NeurondB',
         badgeIcon: <NeurondBIcon size={24} />,
-        badgeGradient: 'from-indigo-600 to-purple-600',
+        badgeGradient: 'from-slate-700 to-slate-600',
         title: 'PostgreSQL AI Vector Extension',
         description:
           'GPU-accelerated vector search, model inference, hybrid retrieval, and RAG orchestration built directly into PostgreSQL. Use this documentation to deploy NeurondB, operate background workers, and embed ML pipelines in SQL.',

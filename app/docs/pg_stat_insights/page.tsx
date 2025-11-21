@@ -15,7 +15,7 @@ export default function PgStatInsightsPage() {
       hero={{
         badgeLabel: 'pg_stat_insights',
         badgeIcon: <PgStatInsightsIcon size={24} />, 
-        badgeGradient: 'from-cyan-600 to-blue-600',
+        badgeGradient: 'from-slate-700 to-slate-600',
         title: 'PostgreSQL Performance Analytics Extension',
         description:
           'Gain instant visibility into query latency, cache efficiency, I/O, and WAL pressure. pg_stat_insights collects 52 metrics across 11 curated views, making it a drop-in upgrade from pg_stat_statements with richer diagnostics.',

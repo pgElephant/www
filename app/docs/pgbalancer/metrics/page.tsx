@@ -43,7 +43,7 @@ export default function PgBalancerMetricsDocs() {
     >
       <section id="monitoring-options">
         <h2>Monitoring Options</h2>
-        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-lg p-6 mb-6">
+        <div className="bg-white/5 border border-slate-200/50 rounded-lg p-6 mb-6">
           <h3>📊 Monitoring options</h3>
           <ul className="space-y-1 text-sm">
             <li>✅ <strong>REST API</strong> - Real-time metrics via HTTP/JSON endpoints</li>

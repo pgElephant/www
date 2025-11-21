@@ -4,40 +4,40 @@ import { ArrowRight } from 'lucide-react'
 
 const ACCENT_STYLES = {
   indigo: {
-    border: 'border-indigo-500',
-    badge: 'from-indigo-600 to-purple-600',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   purple: {
-    border: 'border-purple-500',
-    badge: 'from-purple-600 to-pink-600',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   emerald: {
-    border: 'border-emerald-500',
-    badge: 'from-emerald-600 to-teal-600',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   blue: {
-    border: 'border-blue-500',
-    badge: 'from-blue-600 to-cyan-600',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   cyan: {
-    border: 'border-cyan-500',
-    badge: 'from-cyan-600 to-sky-600',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   pink: {
-    border: 'border-pink-500',
-    badge: 'from-pink-500 to-rose-600',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   rose: {
-    border: 'border-rose-500',
-    badge: 'from-rose-500 to-fuchsia-600',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   amber: {
-    border: 'border-amber-500',
-    badge: 'from-amber-500 to-orange-500',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
   slate: {
-    border: 'border-slate-500',
-    badge: 'from-slate-600 to-slate-400',
+    border: 'border-slate-600',
+    badge: 'from-slate-700 to-slate-600',
   },
 } as const
 

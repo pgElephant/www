@@ -43,7 +43,7 @@ export default function PgBalancerConfigDocs() {
       prevLink={prevLink}
       nextLink={nextLink}
     >
-      <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-lg p-6 mb-6">
+      <div className="bg-white/5 border border-slate-200/50 rounded-lg p-6 mb-6">
         <h3 className="text-lg font-semibold text-yellow-200 mb-2">⚙️ Configuration File Format</h3>
         <p className="text-sm text-yellow-100">
           pgBalancer uses <strong>.conf file format</strong> (same as pgpool-II and PostgreSQL). Configuration file location:

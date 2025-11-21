@@ -101,7 +101,6 @@ export default function PgRaftDocsPage() {
         }
       ]}
       theme={{
-        heroOverlay: 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 dark:from-blue-500/10 dark:to-purple-500/10',
         featureIconClass: 'text-blue-600',
         linkHoverClass: 'hover:text-blue-600',
         quickLinkCardClass:

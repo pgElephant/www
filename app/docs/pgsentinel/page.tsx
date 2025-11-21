@@ -16,7 +16,7 @@ const PgSentinelDocsPage = () => {
       hero={{
         badgeLabel: 'pgSentinel',
         badgeIcon: <PgSentinelIcon size={24} />, 
-        badgeGradient: 'from-emerald-500 to-teal-500',
+        badgeGradient: 'from-slate-700 to-slate-600',
         title: 'pgBouncer Observability Platform',
         description:
           'pgSentinel delivers dashboards, alerting, and analytics for pgBouncer. Build always-on observability with Prometheus, Grafana, and pg_stat_insights integrations.',

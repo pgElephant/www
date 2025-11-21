@@ -75,7 +75,7 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
     <div className="min-h-screen bg-page-gradient text-white">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30" style={{ background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.35) 0%, rgba(6, 182, 212, 0.35) 50%, rgba(16, 185, 129, 0.35) 100%)' }} />
+        <div className="absolute inset-0 opacity-30 bg-hero-gradient" />
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-16 left-16 h-40 w-40 rounded-full bg-purple-500/30 blur-3xl" />
           <div className="absolute top-48 right-24 h-32 w-32 rounded-full bg-cyan-500/25 blur-3xl" />
