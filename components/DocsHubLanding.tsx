@@ -72,29 +72,23 @@ const DEFAULT_THEME: HubProductTheme = {
 
 export default function DocsHubLanding({ hero, products, resources }: DocsHubLandingProps) {
   return (
-    <div className="min-h-screen bg-page-gradient text-white">
+    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 bg-hero-gradient" />
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-16 left-16 h-40 w-40 rounded-full bg-purple-500/30 blur-3xl" />
-          <div className="absolute top-48 right-24 h-32 w-32 rounded-full bg-cyan-500/25 blur-3xl" />
-          <div className="absolute bottom-24 left-1/3 h-48 w-48 rounded-full bg-indigo-500/20 blur-3xl" />
-        </div>
-        <div className="relative mx-auto max-w-6xl px-6 py-24">
+        <div className="relative mx-auto max-w-6xl px-6 py-24 min-h-[400px] flex items-center">
           <div className="text-center">
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-3 rounded-full border border-slate-300/20 bg-white/5 px-4 py-2 backdrop-blur-sm">
               {hero.badgeIcon}
-              <span className="text-sm font-semibold uppercase tracking-wide text-cyan-200">{hero.badgeLabel}</span>
+              <span className="text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">{hero.badgeLabel}</span>
             </div>
-            <h1 className="mt-6 text-5xl font-bold tracking-tight text-white sm:text-6xl">{hero.title}</h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-100/90">{hero.description}</p>
+            <h1 className="mt-6 text-5xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-6xl">{hero.title}</h1>
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">{hero.description}</p>
 
             <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
               {hero.stats.map((stat) => (
-                <div key={stat.label} className="rounded-xl border border-white/15 bg-white/10 px-6 py-5 text-center backdrop-blur-sm">
-                  <div className="text-3xl font-bold text-cyan-300">{stat.value}</div>
-                  <div className="text-sm text-white/80">{stat.label}</div>
+                <div key={stat.label} className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-5 text-center">
+                  <div className="text-3xl font-bold text-slate-900 dark:text-white">{stat.value}</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -123,9 +117,9 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
                     {product.icon}
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-3xl font-bold text-white">{product.name}</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white">{product.name}</h2>
                     <p className={`text-md font-semibold ${theme.accentText}`}>{product.headline}</p>
-                    <p className="mt-3 text-sm text-white/80">{product.summary}</p>
+                    <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">{product.summary}</p>
                   </div>
                 </div>
 
@@ -134,34 +128,34 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
                     <Link
                       key={category.key}
                       href={category.href}
-                      className="group/category flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-cyan-300/40 hover:bg-white/10"
+                      className="group/category flex items-center justify-between gap-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 transition hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700"
                     >
                       <div className="flex items-center gap-3">
                         {category.icon ? (
-                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-cyan-200">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
                             {category.icon}
                           </span>
                         ) : (
-                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-cyan-200">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
                             {CATEGORY_ORDER.indexOf(category.key) + 1}
                           </span>
                         )}
                         <div>
-                          <div className="font-semibold text-white group-hover/category:text-cyan-100">
+                          <div className="font-semibold text-slate-900 dark:text-white group-hover/category:text-slate-700 dark:group-hover/category:text-slate-200">
                             {category.title}
                           </div>
-                          <p className="text-xs text-white/70 group-hover/category:text-white/80">{category.description}</p>
+                          <p className="text-xs text-slate-600 dark:text-slate-400 group-hover/category:text-slate-700 dark:group-hover/category:text-slate-300">{category.description}</p>
                         </div>
                       </div>
-                      <ArrowRight className="h-5 w-5 text-white/40 transition group-hover/category:text-cyan-200 group-hover/category:translate-x-1" />
+                      <ArrowRight className="h-5 w-5 text-slate-400 dark:text-slate-500 transition group-hover/category:text-slate-700 dark:group-hover/category:text-slate-300 group-hover/category:translate-x-1" />
                     </Link>
                   ))}
                 </div>
 
-                <div className="mt-6 border-t border-white/10 pt-6">
+                <div className="mt-6 border-t border-slate-200 dark:border-slate-700 pt-6">
                   <Link
                     href={product.viewAllHref}
-                    className="inline-flex items-center gap-2 font-semibold text-cyan-300 transition hover:text-cyan-200"
+                    className="inline-flex items-center gap-2 font-semibold text-slate-700 dark:text-slate-300 transition hover:text-slate-900 dark:hover:text-white"
                   >
                     View complete documentation
                     <ArrowRight className="h-4 w-4" />
@@ -174,10 +168,10 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
       </section>
 
       {resources && resources.length > 0 ? (
-        <section className="border-t border-white/10 py-20">
+        <section className="border-t border-slate-200 dark:border-slate-700 py-20">
           <div className="mx-auto max-w-6xl px-6 text-center">
-            <h2 className="text-3xl font-bold text-white">Additional Resources</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm text-white/75">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Additional Resources</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-600 dark:text-slate-400">
               Explore downloads, community links, and source code to get the most out of pgElephant products.
             </p>
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -191,14 +185,14 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
                   <Wrapper
                     key={link.href}
                     {...wrapperProps}
-                    className="group flex h-full flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 text-center transition hover:border-cyan-300/50 hover:bg-white/10"
+                    className="group flex h-full flex-col items-center gap-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 text-center transition hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700"
                   >
-                    <span className="flex h-16 w-16 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-cyan-200 transition group-hover:scale-110">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 transition group-hover:scale-110">
                       {link.icon}
                     </span>
-                    <div className="text-lg font-semibold text-white transition group-hover:text-cyan-100">{link.title}</div>
-                    <p className="text-sm text-white/70">{link.description}</p>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-300">
+                    <div className="text-lg font-semibold text-slate-900 dark:text-white transition group-hover:text-slate-700 dark:group-hover:text-slate-200">{link.title}</div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">{link.description}</p>
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300">
                       Learn more
                       <ArrowRight className="h-3 w-3" />
                     </span>

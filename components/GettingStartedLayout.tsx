@@ -137,10 +137,10 @@ export default function GettingStartedLayout({
 
   return (
     <div className={`min-h-screen ${theme.pageBackground}`}>
-      <section className="relative overflow-hidden py-16 sm:py-24">
+      <section className="relative overflow-hidden py-24">
         <div className={`absolute inset-0 ${theme.heroOverlay}`} />
-        <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-          <div className="rounded-2xl bg-white/85 p-8 shadow-lg ring-1 ring-slate-200 dark:bg-slate-900/70 dark:ring-slate-700">
+        <div className="relative mx-auto max-w-5xl px-6 lg:px-8 min-h-[400px] flex items-center">
+          <div className="rounded-2xl bg-white/85 p-8 shadow-lg ring-1 ring-slate-200 dark:bg-slate-900/70 dark:ring-slate-700 w-full">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div

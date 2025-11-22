@@ -85,6 +85,7 @@ sudo make install PG_CONFIG=/usr/lib/postgresql/17/bin/pg_config`}
 
 git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
+./build.sh                    # Prepare build environment
 make PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config
 sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
         />
@@ -97,6 +98,7 @@ sudo make install PG_CONFIG=/opt/homebrew/opt/postgresql@17/bin/pg_config`}
 
 git clone https://github.com/pgElephant/NeurondB.git
 cd NeurondB
+./build.sh                    # Prepare build environment
 make PG_CONFIG=/usr/pgsql-17/bin/pg_config
 sudo make install PG_CONFIG=/usr/pgsql-17/bin/pg_config`}
         />
@@ -114,29 +116,53 @@ SELECT extname, extversion
 FROM   pg_extension
 WHERE  extname = 'neurondb';
 
--- List helper functions
-SELECT proname
+-- Check GPU support (if available)
+SELECT * FROM neurondb_gpu_info();
+
+-- List available vector functions
+SELECT proname, pronargs
 FROM   pg_proc
-WHERE  proname LIKE 'neurondb_%'
+WHERE  proname LIKE 'vector_%' OR proname LIKE 'neurondb_%'
 ORDER  BY proname
-LIMIT  10;`}
+LIMIT  15;`}
         />
 
-        <h3>Load Sample Dataset</h3>
-        <BashCodeBlock
-          title="Load demo dataset"
-          code={`psql -d postgres -f https://raw.githubusercontent.com/pgElephant/NeurondB/main/demo/ML/sql/00_create_demo_schema.sql
-psql -d postgres -f https://raw.githubusercontent.com/pgElephant/NeurondB/main/demo/ML/sql/01_load_vectors.sql`}
-        />
-
-        <h3>Run First Semantic Search</h3>
+        <h3>Create Sample Data</h3>
         <SqlCodeBlock
-          title="Semantic query"
-          code={`SELECT title,
-       embedding <-> embed_text('postgresql vector search overview') AS distance
-FROM   neurondb_demo.corpus
-ORDER  BY distance
-LIMIT  5;`}
+          title="Create test table and insert vectors"
+          code={`-- Create a simple documents table
+CREATE TABLE documents (
+    id SERIAL PRIMARY KEY,
+    title TEXT,
+    content TEXT,
+    embedding vector(384)
+);
+
+-- Insert sample documents with manual vectors
+INSERT INTO documents (title, content, embedding) VALUES
+    ('PostgreSQL Guide', 'Introduction to PostgreSQL database', 
+     '[' || array_to_string((SELECT array_agg(random()::float4) FROM generate_series(1, 384)), ',') || ']'::vector),
+    ('Vector Search', 'Understanding vector similarity search', 
+     '[' || array_to_string((SELECT array_agg(random()::float4) FROM generate_series(1, 384)), ',') || ']'::vector),
+    ('Machine Learning', 'ML algorithms and neural networks', 
+     '[' || array_to_string((SELECT array_agg(random()::float4) FROM generate_series(1, 384)), ',') || ']'::vector);`}
+        />
+
+        <h3>Run First Vector Search</h3>
+        <SqlCodeBlock
+          title="Basic vector similarity search"
+          code={`-- Create a query vector
+WITH query_vec AS (
+    SELECT '[' || array_to_string((SELECT array_agg(random()::float4) FROM generate_series(1, 384)), ',') || ']'::vector(384) AS qv
+)
+SELECT 
+    d.id,
+    d.title,
+    d.content,
+    vector_l2_distance(d.embedding, qv.qv) AS distance
+FROM documents d, query_vec qv
+ORDER BY distance
+LIMIT 5;`}
         />
       </section>
 
@@ -179,21 +205,31 @@ ALTER SYSTEM SET shared_preload_libraries = 'neurondb';
 
         <h3>Insert & Search</h3>
         <SqlCodeBlock
-          title="Semantic search"
-          code={`-- Insert a document with generated embedding
-INSERT INTO documents (title, content, embedding)
-VALUES (
-    'Machine Learning',
-    'Introduction to ML',
-    embed_text('Introduction to Machine Learning')
-);
+          title="Vector operations and similarity search"
+          code={`-- Insert documents with vector embeddings
+INSERT INTO documents (title, content, embedding) VALUES
+    ('Machine Learning', 'Introduction to ML', 
+     '[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]'::vector(384)),
+    ('Deep Learning', 'Neural networks and backpropagation', 
+     '[0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]'::vector(384));
 
--- Query similar documents
-SELECT title, content,
-       embedding <-> embed_text('artificial intelligence') AS distance
-FROM   documents
-ORDER  BY distance
-LIMIT  10;`}
+-- Query similar documents using L2 distance
+SELECT 
+    title, 
+    content,
+    vector_l2_distance(embedding, '[0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85]'::vector(384)) AS distance
+FROM documents
+ORDER BY distance
+LIMIT 10;
+
+-- Alternative: Use distance operator <-> (L2) or <=> (cosine)
+SELECT 
+    title,
+    embedding <-> '[0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85]'::vector(384) AS l2_distance,
+    embedding <=> '[0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85]'::vector(384) AS cosine_distance
+FROM documents
+ORDER BY l2_distance
+LIMIT 10;`}
         />
       </section>
 

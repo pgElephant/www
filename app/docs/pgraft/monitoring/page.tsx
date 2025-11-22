@@ -40,7 +40,7 @@ export default function PgraftMonitoringPage() {
       prevLink={prevLink}
       nextLink={nextLink}
     >
-        <section className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+        <section className="p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg">
           <h3 className="text-lg font-semibold mb-3">Monitoring Fundamentals</h3>
             <ul>
             <li>
@@ -78,7 +78,7 @@ SELECT * FROM pgraft_get_cluster_status();
 -- node_id, current_term, leader_id, state, num_nodes,
 -- messages_processed, heartbeats_sent, elections_triggered`}
               />
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-3">
+              <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-3">
                 <strong>Health indicators:</strong> All nodes should agree on <code>leader_id</code> and <code>current_term</code>, only one
                 node reports <code>state = 'leader'</code>, and <code>elections_triggered</code> should rarely increase.
               </div>

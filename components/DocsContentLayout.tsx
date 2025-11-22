@@ -66,8 +66,8 @@ export default function DocsContentLayout({
       className={cn('min-h-screen bg-page-gradient', className)}
     >
       {hero ? (
-        <section className="relative overflow-hidden py-16 sm:py-20 bg-hero-gradient">
-          <div className={cn('relative mx-auto px-6 lg:px-12 flex flex-col gap-6', heroWidth, heroAlign === 'center' ? 'items-center text-center' : 'items-start text-left')}>
+        <section className="relative overflow-hidden py-24 bg-hero-gradient min-h-[400px] flex items-center">
+          <div className={cn('relative mx-auto px-6 lg:px-12 flex flex-col gap-6 w-full', heroWidth, heroAlign === 'center' ? 'items-center text-center' : 'items-start text-left')}>
             {hero.badgeLabel ? (
               <div
                 className={cn(

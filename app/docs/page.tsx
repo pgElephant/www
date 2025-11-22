@@ -5,7 +5,7 @@ import DocsHubLanding, { type HubProduct, type ResourceLink } from '../../compon
 
 const hero = {
   badgeLabel: 'Documentation Hub',
-  badgeIcon: <BookOpen className="h-4 w-4 text-cyan-300" />, 
+  badgeIcon: <BookOpen className="h-4 w-4 text-slate-600 dark:text-slate-400" />, 
   title: 'Complete Documentation',
   description: 'Comprehensive guides, API references, and troubleshooting playbooks for every pgElephant product. Built by developers, for developers.',
   stats: [
@@ -25,11 +25,11 @@ const hero = {
       'Production-grade AI database extension for PostgreSQL with vector search, ONNX inference, hybrid retrieval, and RAG pipelines.',
     icon: <NeurondBIcon size={40} />, 
     theme: {
-      gradient: 'from-indigo-900/60 via-purple-900/50 to-cyan-900/40',
-      border: 'border-indigo-500/40',
-      glow: 'shadow-indigo-900/40',
-      iconBorder: 'border-indigo-500/50',
-      accentText: 'text-indigo-200',
+      gradient: 'from-slate-800/70 to-slate-900/70',
+      border: 'border-slate-700/60',
+      glow: 'shadow-slate-900/40',
+      iconBorder: 'border-slate-700/70',
+      accentText: 'text-slate-300',
     },
     categories: [
       {
@@ -78,11 +78,11 @@ const hero = {
       'Bring deterministic leader election, replication, and high availability into PostgreSQL clusters with embedded Raft workers.',
     icon: <PgraftIcon size={40} />, 
     theme: {
-      gradient: 'from-blue-900/60 via-indigo-900/50 to-purple-900/40',
-      border: 'border-blue-500/40',
-      glow: 'shadow-blue-900/40',
-      iconBorder: 'border-blue-500/50',
-      accentText: 'text-blue-200',
+      gradient: 'from-slate-800/70 to-slate-900/70',
+      border: 'border-slate-700/60',
+      glow: 'shadow-slate-900/40',
+      iconBorder: 'border-slate-700/70',
+      accentText: 'text-slate-300',
     },
     categories: [
       {
@@ -131,11 +131,11 @@ const hero = {
       'Modern PostgreSQL proxy with machine learning routing, REST API controls, MQTT event streaming, and advanced pooling policies.',
     icon: <PgbalancerIcon size={40} />, 
     theme: {
-      gradient: 'from-cyan-900/60 via-blue-900/50 to-purple-900/40',
-      border: 'border-cyan-500/40',
-      glow: 'shadow-cyan-900/40',
-      iconBorder: 'border-cyan-500/50',
-      accentText: 'text-cyan-200',
+      gradient: 'from-slate-800/70 to-slate-900/70',
+      border: 'border-slate-700/60',
+      glow: 'shadow-slate-900/40',
+      iconBorder: 'border-slate-700/70',
+      accentText: 'text-slate-300',
     },
     categories: [
       {
@@ -184,11 +184,11 @@ const hero = {
       'Deep workload telemetry with 52 metrics across 11 curated views. Track slow queries, cache hit ratio, WAL pressure, and JIT behavior.',
     icon: <PgStatInsightsIcon size={40} />, 
     theme: {
-      gradient: 'from-teal-900/60 via-cyan-900/50 to-blue-900/40',
-      border: 'border-teal-500/40',
-      glow: 'shadow-teal-900/40',
-      iconBorder: 'border-teal-500/50',
-      accentText: 'text-teal-200',
+      gradient: 'from-slate-800/70 to-slate-900/70',
+      border: 'border-slate-700/60',
+      glow: 'shadow-slate-900/40',
+      iconBorder: 'border-slate-700/70',
+      accentText: 'text-slate-300',
     },
     categories: [
       {
@@ -237,11 +237,11 @@ const hero = {
       'Single PostgreSQL-backed endpoint that speaks MongoDB and MySQL wire protocols. Built in Rust for hybrid document workloads.',
     icon: <FauxDbIcon size={40} />, 
     theme: {
-      gradient: 'from-emerald-900/60 via-green-900/50 to-teal-900/40',
-      border: 'border-emerald-500/40',
-      glow: 'shadow-emerald-900/40',
-      iconBorder: 'border-emerald-500/50',
-      accentText: 'text-emerald-200',
+      gradient: 'from-slate-800/70 to-slate-900/70',
+      border: 'border-slate-700/60',
+      glow: 'shadow-slate-900/40',
+      iconBorder: 'border-slate-700/70',
+      accentText: 'text-slate-300',
     },
     categories: [
       {
@@ -290,11 +290,11 @@ const hero = {
       'Web-based monitoring for pgBalancer with Grafana dashboards, Prometheus metrics, and multi-cluster health automation.',
     icon: <PgSentinelIcon size={40} />, 
     theme: {
-      gradient: 'from-purple-900/60 via-indigo-900/50 to-blue-900/40',
-      border: 'border-purple-500/40',
-      glow: 'shadow-purple-900/40',
-      iconBorder: 'border-purple-500/50',
-      accentText: 'text-purple-200',
+      gradient: 'from-slate-800/70 to-slate-900/70',
+      border: 'border-slate-700/60',
+      glow: 'shadow-slate-900/40',
+      iconBorder: 'border-slate-700/70',
+      accentText: 'text-slate-300',
     },
     categories: [
       {

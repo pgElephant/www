@@ -120,7 +120,7 @@ const PgStatInsightsUsagePage = () => {
         <div className="grid md:grid-cols-3 gap-4">
           <a
             href="/docs/pg_stat_insights/configuration"
-            className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+            className="border border-slate-200 dark:border-slate-700 rounded-lg p-4 transition hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             <h3 className="font-semibold">Configuration Reference</h3>
             <p className="text-sm">
@@ -129,7 +129,7 @@ const PgStatInsightsUsagePage = () => {
           </a>
           <a
             href="/docs/pg_stat_insights/monitoring"
-            className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+            className="border border-slate-200 dark:border-slate-700 rounded-lg p-4 transition hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             <h3 className="font-semibold">Monitoring & Alerts</h3>
             <p className="text-sm">
@@ -138,7 +138,7 @@ const PgStatInsightsUsagePage = () => {
           </a>
           <a
             href="/docs/pg_stat_insights/troubleshooting"
-            className="border border-emerald-200/60 dark:border-emerald-500/30 rounded-lg p-4 transition hover:border-emerald-400/80 hover:bg-emerald-50/40 dark:hover:bg-emerald-500/10"
+            className="border border-slate-200 dark:border-slate-700 rounded-lg p-4 transition hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             <h3 className="font-semibold">Troubleshooting Playbook</h3>
             <p className="text-sm">

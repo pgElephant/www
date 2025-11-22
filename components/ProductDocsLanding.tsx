@@ -94,10 +94,10 @@ export default function ProductDocsLanding({ hero, features, docSections, quickL
   return (
     <div className={`min-h-screen ${themeClasses.pageBackground}`}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 sm:py-32">
+      <section className="relative overflow-hidden py-24">
         <div className={`absolute inset-0 ${themeClasses.heroOverlay}`} />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8 min-h-[400px] flex items-center">
+          <div className="mx-auto max-w-3xl text-center w-full">
             <div className="mb-8 flex justify-center">
               <div
                 className={`relative rounded-2xl ${themeClasses.badgeContainerBg} p-2 shadow-2xl ring-1 ${themeClasses.badgeRing}`}

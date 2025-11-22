@@ -43,9 +43,9 @@ export default function PgBalancerConfigDocs() {
       prevLink={prevLink}
       nextLink={nextLink}
     >
-      <div className="bg-white/5 border border-slate-200/50 rounded-lg p-6 mb-6">
-        <h3 className="text-lg font-semibold text-yellow-200 mb-2">⚙️ Configuration File Format</h3>
-        <p className="text-sm text-yellow-100">
+      <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-6 mb-6">
+        <h3 className="text-lg font-semibold mb-2">⚙️ Configuration File Format</h3>
+        <p className="text-sm">
           pgBalancer uses <strong>.conf file format</strong> (same as pgpool-II and PostgreSQL). Configuration file location:
           <code>/etc/pgbalancer/pgbalancer.conf</code>
         </p>
@@ -54,9 +54,9 @@ export default function PgBalancerConfigDocs() {
       <section id="connection-settings">
         <h2>Connection Settings</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-300 mb-3">Basic Connection Configuration</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Basic Connection Configuration</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # CONNECTION SETTINGS
 #------------------------------------------------------------------------------
@@ -88,9 +88,9 @@ backend_password = 'StrongPassword123!'`}
       <section id="backend-servers">
         <h2>Backend Server Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Defining PostgreSQL Backends</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Defining PostgreSQL Backends</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # BACKEND SERVERS (0-indexed)
 #------------------------------------------------------------------------------
@@ -139,9 +139,9 @@ backend_application_name2 = 'replica2_db'
       <section id="ai-load-balancing">
         <h2>AI Load Balancing Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Machine Learning Routing Settings</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Machine Learning Routing Settings</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # AI LOAD BALANCING (Machine Learning Routing)
 #------------------------------------------------------------------------------
@@ -184,9 +184,9 @@ ai_optimization_metric = 'response_time'`}
       <section id="rest-api">
         <h2>REST API Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">HTTP/JSON API Settings</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">HTTP/JSON API Settings</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # REST API CONFIGURATION
 #------------------------------------------------------------------------------
@@ -234,9 +234,9 @@ rest_api_log_requests = on`}
       <section id="mqtt-events">
         <h2>MQTT Event Streaming Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Real-Time Event Publishing</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Real-Time Event Publishing</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # MQTT EVENT STREAMING
 #------------------------------------------------------------------------------
@@ -284,9 +284,9 @@ mqtt_publish_interval = 30`}
       <section id="load-balancing">
         <h2>Load Balancing Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Load Balancing Modes and Settings</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Load Balancing Modes and Settings</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # LOAD BALANCING
 #------------------------------------------------------------------------------
@@ -324,9 +324,9 @@ app_name_redirect_preference_list = ''`}
       <section id="health-check">
         <h2>Health Check Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Backend Health Monitoring</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Backend Health Monitoring</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # HEALTH CHECK
 #------------------------------------------------------------------------------
@@ -382,9 +382,9 @@ log_health_check = off`}
       <section id="failover-watchdog">
         <h2>Failover and Watchdog Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">High Availability Settings</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">High Availability Settings</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # FAILOVER
 #------------------------------------------------------------------------------
@@ -436,9 +436,9 @@ wd_priority = 1`}
       <section id="logging">
         <h2>Logging Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Logging and Debug Settings</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Logging and Debug Settings</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # LOGGING
 #------------------------------------------------------------------------------
@@ -482,9 +482,9 @@ log_error_verbosity = default`}
       <section id="authentication">
         <h2>Authentication Configuration</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Client and PCP Authentication</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Client and PCP Authentication</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#------------------------------------------------------------------------------
 # AUTHENTICATION
 #------------------------------------------------------------------------------
@@ -510,8 +510,8 @@ pcp_socket_dir = '/var/run/pgbalancer'`}
 
           <div className="space-y-2 text-sm">
             <p><strong>Setting up pool_passwd file:</strong></p>
-            <div className="bg-gray-800/50 rounded-lg p-4 mb-4">
-              <pre className="bg-black text-green-400 p-3 rounded overflow-x-auto text-xs">
+            <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 mb-4">
+              <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-3 rounded overflow-x-auto text-xs">
 {`# Format: username:md5password
 # Generate MD5 password hash
 pg_md5 your_password
@@ -530,8 +530,8 @@ appuser:md5a1b2c3d4e5f6789012345678901234`}
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold mb-3">Query Cache</h3>
-              <div className="bg-gray-800/50 rounded-lg p-6">
-                <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+              <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6">
+                <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`# Memory query cache
 memory_cache_enabled = on
 memqcache_method = 'shmem'
@@ -546,8 +546,8 @@ memqcache_maxcache = 400KB`}
 
             <div>
               <h3 className="text-xl font-semibold mb-3">Replication Mode</h3>
-              <div className="bg-gray-800/50 rounded-lg p-6">
-                <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+              <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6">
+                <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`# Replication mode settings
 replication_mode = off
 replicate_select = off
@@ -564,8 +564,8 @@ delay_threshold = 10000000`}
 
             <div>
               <h3 className="text-xl font-semibold mb-3">In-Memory Query Cache</h3>
-              <div className="bg-gray-800/50 rounded-lg p-6">
-                <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+              <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6">
+                <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`# Enable in-memory query result caching
 memory_cache_enabled = on
 
@@ -593,9 +593,9 @@ memqcache_auto_cache_invalidation = on`}
       <section id="complete-example">
         <h2>Complete Configuration Example</h2>
 
-          <div className="bg-gray-800/50 rounded-lg p-6 mb-6">
-            <h3 className="text-lg font-semibold text-cyan-400 mb-3">Production-Ready Configuration</h3>
-            <pre className="bg-black text-green-400 p-4 rounded overflow-x-auto text-sm">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-6 mb-6">
+            <h3 className="text-lg font-semibold mb-3">Production-Ready Configuration</h3>
+            <pre className="bg-slate-900 dark:bg-black text-slate-100 dark:text-green-400 p-4 rounded overflow-x-auto text-sm">
 {`#==============================================================================
 # pgBalancer Production Configuration
 # Modern AI-Powered PostgreSQL Connection Pooler

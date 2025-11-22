@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { NextRequest } from 'next/server';
 import { ImageResponse } from 'next/og';
 
@@ -58,6 +59,7 @@ export async function GET(request: NextRequest) {
   const config = configs[blog] || configs.pgraft;
 
   return new ImageResponse(
+    // eslint-disable-next-line react/display-name
     (
       <div
         style={{

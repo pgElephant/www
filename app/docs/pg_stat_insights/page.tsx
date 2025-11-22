@@ -41,12 +41,12 @@ export default function PgStatInsightsPage() {
           description: 'Collect extended plan, execution, IO, WAL, and JIT metrics for faster root cause analysis.'
         },
         {
-          icon: () => <Activity className="h-6 w-6 text-cyan-400" />,
+          icon: () => <Activity className="h-6 w-6 text-slate-600 dark:text-slate-400" />,
           title: '11 Curated Views',
           description: 'Purpose-built views for cache efficiency, IO profiling, parallel query tuning, and more.'
         },
         {
-          icon: () => <Database className="h-6 w-6 text-emerald-400" />,
+          icon: () => <Database className="h-6 w-6 text-slate-600 dark:text-slate-400" />,
           title: 'Drop-in Upgrade',
           description: 'Extends pg_stat_statements semantics, keeps the same reset functions, and integrates with existing dashboards.'
         }

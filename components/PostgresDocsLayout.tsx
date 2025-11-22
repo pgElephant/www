@@ -83,7 +83,7 @@ export default function PostgresDocsLayout({
           <main className="flex-1 min-w-0">
             {/* Page Title */}
             <div className="mb-8 pb-6 border-b border-slate-200 dark:border-slate-700">
-              <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 leading-tight">
                 {title}
               </h1>
             </div>

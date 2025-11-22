@@ -110,37 +110,9 @@ const Footer = () => {
     <footer 
       role="contentinfo"
       aria-label="Site footer"
-      className="pt-12 pb-6 relative overflow-hidden"
-      style={{
-        background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
-        position: 'relative'
-      }}
+      className="pt-12 pb-6 relative overflow-hidden bg-hero-gradient"
     >
-      {/* Elegant overlay gradient - same as Hero */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-        }}
-      />
       
-      {/* Elegant floating elements - same as Hero */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating orbs */}
-        <div className="absolute top-10 left-10 w-24 h-24 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-20 left-1/4 w-20 h-20 bg-gradient-to-r from-accent-500/12 to-primary-500/12 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        
-        {/* Subtle pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
-            backgroundSize: '32px 32px'
-          }}
-        />
-      </div>
       <div className="container-wide relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Logo and Description */}
