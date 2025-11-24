@@ -52,12 +52,12 @@ const NeurondBDemoTerminal = () => {
   // Initialize sub-tab when main tab changes
   useEffect(() => {
     const structure = tabStructure[activeMainTab]
-    if (structure.subTabs.length > 0 && !activeSubTab) {
+    if (structure.subTabs.length > 0) {
       setActiveSubTab(structure.defaultSubTab)
-    } else if (structure.subTabs.length === 0) {
+    } else {
       setActiveSubTab('')
     }
-  }, [activeMainTab, tabStructure, activeSubTab])
+  }, [activeMainTab, tabStructure])
   const [copied, setCopied] = useState(false)
   const [inPsqlMode, setInPsqlMode] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
@@ -2532,6 +2532,131 @@ const NeurondBDemoTerminal = () => {
     setTimeout(() => setCopied(false), 2000)
   }, [commandHistory])
 
+  // Get dynamic welcome message based on active tab
+  const getWelcomeMessage = useCallback(() => {
+    const getTabName = (tab: string) => {
+      if (tab === 'llm') return 'LLM'
+      return tab.charAt(0).toUpperCase() + tab.slice(1)
+    }
+
+    const getSubTabName = (subTab: string) => {
+      return subTab.split('_').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ')
+    }
+
+    let description = ''
+    let badges: string[] = []
+
+    if (activeMainTab === 'build') {
+      description = 'Building and installing NeurondB extension for PostgreSQL'
+      badges = ['📦 Installation', '⚙️ Configuration', '🔧 Setup']
+    } else if (activeMainTab === 'vectors') {
+      if (activeSubTab === 'operations') {
+        description = 'Vector operations: creation, manipulation, and basic arithmetic on vector data types'
+        badges = ['➕ Vector Creation', '🔢 Arithmetic', '📐 Manipulation']
+      } else if (activeSubTab === 'indexing') {
+        description = 'Vector indexing: creating and using HNSW indexes for fast similarity search'
+        badges = ['🔍 HNSW Index', '⚡ Fast Search', '📊 Index Stats']
+      } else if (activeSubTab === 'distance') {
+        description = 'Distance metrics: L2, cosine, L1, Hamming, and other distance calculations'
+        badges = ['📏 L2 Distance', '📐 Cosine Distance', '🔢 Multiple Metrics']
+      } else if (activeSubTab === 'quantization') {
+        description = 'Vector quantization: FP16, INT8, FP8 compression for memory efficiency'
+        badges = ['💾 Compression', '⚡ Performance', '🎯 Accuracy']
+      }
+    } else if (activeMainTab === 'ml') {
+      if (activeSubTab === 'regression') {
+        description = 'ML regression: linear, polynomial, and advanced regression models'
+        badges = ['📈 Linear Regression', '📊 Polynomial', '🎯 Predictions']
+      } else if (activeSubTab === 'classification') {
+        description = 'ML classification: logistic regression, SVM, and ensemble classifiers'
+        badges = ['🎯 Classification', '📊 SVM', '🌳 Decision Trees']
+      } else if (activeSubTab === 'clustering') {
+        description = 'ML clustering: K-means, DBSCAN, and hierarchical clustering algorithms'
+        badges = ['🔵 K-means', '📊 DBSCAN', '🌳 Hierarchical']
+      } else if (activeSubTab === 'boosting') {
+        description = 'ML boosting: gradient boosting, XGBoost, and ensemble methods'
+        badges = ['🚀 Gradient Boosting', '⚡ XGBoost', '🎯 Ensemble']
+      } else if (activeSubTab === 'neural') {
+        description = 'Neural networks: deep learning models for complex pattern recognition'
+        badges = ['🧠 Neural Networks', '🔗 Deep Learning', '📊 Training']
+      } else if (activeSubTab === 'timeseries') {
+        description = 'Time series analysis: forecasting, anomaly detection, and trend analysis'
+        badges = ['📈 Forecasting', '🔍 Anomaly Detection', '📊 Trends']
+      } else if (activeSubTab === 'automl') {
+        description = 'AutoML: automated model selection, hyperparameter tuning, and optimization'
+        badges = ['🤖 AutoML', '⚙️ Auto-tuning', '🎯 Optimization']
+      } else if (activeSubTab === 'recommender') {
+        description = 'Recommendation systems: collaborative filtering and content-based recommendations'
+        badges = ['💡 Recommendations', '👥 Collaborative', '📝 Content-based']
+      }
+    } else if (activeMainTab === 'embeddings') {
+      if (activeSubTab === 'text') {
+        description = 'Text embeddings: generating vector embeddings from text using pre-trained models'
+        badges = ['📝 Text Embeddings', '🤖 Pre-trained Models', '🔢 Vector Generation']
+      } else if (activeSubTab === 'batch') {
+        description = 'Batch embeddings: processing multiple texts efficiently in batches'
+        badges = ['⚡ Batch Processing', '📦 Bulk Operations', '🚀 Performance']
+      } else if (activeSubTab === 'config') {
+        description = 'Embedding configuration: customizing models, dimensions, and parameters'
+        badges = ['⚙️ Configuration', '🎛️ Custom Models', '📊 Parameters']
+      } else if (activeSubTab === 'hf_models') {
+        description = 'Hugging Face models: using popular transformer models for embeddings'
+        badges = ['🤗 Hugging Face', '🔄 Transformers', '📚 Model Library']
+      } else if (activeSubTab === 'multimodal') {
+        description = 'Multimodal embeddings: processing text, images, and other data types'
+        badges = ['🖼️ Images', '📝 Text', '🎨 Multimodal']
+      }
+    } else if (activeMainTab === 'llm') {
+      if (activeSubTab === 'integration') {
+        description = 'LLM integration: connecting to large language models for text generation'
+        badges = ['🤖 LLM Integration', '💬 Text Generation', '🔗 API Connection']
+      } else if (activeSubTab === 'reranking') {
+        description = 'LLM reranking: using language models to improve search result ranking'
+        badges = ['📊 Reranking', '🎯 Relevance', '🔍 Search Quality']
+      } else if (activeSubTab === 'rag') {
+        description = 'RAG (Retrieval-Augmented Generation): combining vector search with LLM generation'
+        badges = ['🔍 Retrieval', '🤖 Generation', '💡 RAG Pipeline']
+      }
+    } else if (activeMainTab === 'gpu') {
+      description = 'GPU acceleration: leveraging CUDA, ROCm, and Metal for high-performance computing'
+      badges = ['🚀 CUDA', '⚡ ROCm', '🍎 Metal', '🔥 GPU Compute']
+    } else if (activeMainTab === 'hybrid') {
+      description = 'Hybrid search: combining vector similarity with full-text search for better results'
+      badges = ['🔍 Vector Search', '📝 Full-text', '🎯 Hybrid Fusion']
+    } else if (activeMainTab === 'advanced') {
+      if (activeSubTab === 'sparse') {
+        description = 'Sparse vectors: efficient storage and search for high-dimensional sparse data'
+        badges = ['💾 Sparse Storage', '⚡ Efficient Search', '📊 High Dimensions']
+      } else if (activeSubTab === 'quantization') {
+        description = 'Advanced quantization: binary, scalar, and product quantization techniques'
+        badges = ['💾 Binary Quantization', '⚡ Scalar Quantization', '🎯 Product Quantization']
+      } else if (activeSubTab === 'workers') {
+        description = 'Background workers: async processing, defragmentation, and monitoring workers'
+        badges = ['⚙️ Async Workers', '🔧 Defragmentation', '📊 Monitoring']
+      } else if (activeSubTab === 'onnx') {
+        description = 'ONNX models: running optimized machine learning models in PostgreSQL'
+        badges = ['🤖 ONNX Runtime', '⚡ Optimized Models', '📊 Inference']
+      } else if (activeSubTab === 'metrics') {
+        description = 'Performance metrics: monitoring query performance, index stats, and system metrics'
+        badges = ['📊 Query Metrics', '⚡ Performance', '📈 Statistics']
+      } else if (activeSubTab === 'planner') {
+        description = 'Query planner: advanced query optimization and execution planning'
+        badges = ['🎯 Query Planning', '⚡ Optimization', '📊 Execution']
+      } else if (activeSubTab === 'types') {
+        description = 'Advanced types: custom vector types, sparse vectors, and specialized data structures'
+        badges = ['📦 Custom Types', '💾 Sparse Vectors', '🔧 Specialized']
+      }
+    }
+
+    const tabDisplay = activeSubTab 
+      ? `${getTabName(activeMainTab)}: ${getSubTabName(activeSubTab)}`
+      : getTabName(activeMainTab)
+
+    return { description, badges, tabDisplay }
+  }, [activeMainTab, activeSubTab])
+
   return (
     <div className="bg-black rounded-lg shadow-2xl border border-gray-700 overflow-hidden">
       {/* Terminal Header */}
@@ -2627,27 +2752,34 @@ const NeurondBDemoTerminal = () => {
         }}
       >
         {/* Welcome Message */}
-        {commandHistory.length === 0 && !isRunning && (
-          <div className="text-gray-500 mb-4">
-            <div className="text-cyan-400 text-base font-bold mb-2 flex items-center gap-2">
-              <Terminal className="w-5 h-5" />
-              NeurondB Interactive Demo Terminal
+        {commandHistory.length === 0 && !isRunning && (() => {
+          const { description, badges, tabDisplay } = getWelcomeMessage()
+          return (
+            <div className="text-gray-500 mb-4">
+              <div className="text-cyan-400 text-base font-bold mb-2 flex items-center gap-2">
+                <Terminal className="w-5 h-5" />
+                NeurondB Interactive Demo Terminal
+              </div>
+              <div className="text-gray-400 text-xs mb-3">
+                {description || 'PostgreSQL extension for AI/ML with vector search, hybrid retrieval, and ONNX inference'}
+              </div>
+              {badges.length > 0 && (
+                <div className="text-emerald-400 text-xs font-semibold mb-2 flex flex-wrap gap-2">
+                  {badges.map((badge, idx) => (
+                    <span key={idx} className="px-2 py-1 bg-emerald-400/10 rounded">{badge}</span>
+                  ))}
+                </div>
+              )}
+              <div className="text-gray-600 text-xs mt-2">
+                {tabDisplay ? (
+                  <>Ready to demonstrate <span className="text-cyan-400 font-semibold">{tabDisplay}</span>. Click "Run Demo" to begin.</>
+                ) : (
+                  'Select a tab above and click "Run Demo" to begin exploring NeuronDB capabilities'
+                )}
+              </div>
             </div>
-            <div className="text-gray-400 text-xs mb-3">
-              PostgreSQL extension for AI/ML with vector search, hybrid retrieval, and ONNX inference
-            </div>
-            <div className="text-emerald-400 text-xs font-semibold mb-2 flex flex-wrap gap-2">
-              <span className="px-2 py-1 bg-emerald-400/10 rounded">✨ 5 Vector Types</span>
-              <span className="px-2 py-1 bg-emerald-400/10 rounded">🧠 52 ML Algorithms</span>
-              <span className="px-2 py-1 bg-emerald-400/10 rounded">⚡ 473 SQL Functions</span>
-              <span className="px-2 py-1 bg-emerald-400/10 rounded">🚀 GPU Acceleration</span>
-              <span className="px-2 py-1 bg-emerald-400/10 rounded">🔄 4 Background Workers</span>
-            </div>
-            <div className="text-gray-600 text-xs mt-2">
-              Select a tab above and click "Run Demo" to begin exploring NeuronDB capabilities
-            </div>
-          </div>
-        )}
+          )
+        })()}
 
         {/* Command History */}
         {commandHistory.map((cmd, index) => (
