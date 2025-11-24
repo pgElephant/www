@@ -183,52 +183,66 @@ const NeurondBDemoTerminal = () => {
     }
   ], [])
 
-  // Vector Operations Sub-Tab Commands (from 027_vector_basic.sql)
+  // Vector Operations Sub-Tab Commands (from 027_vector_basic.sql, 009_vector_ops_basic.sql)
   const vectorOperationsCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
     {
-      command: 'SELECT vector \'[1,2,3]\' AS a1, vector \'{1,2,3}\' AS a2, array_to_vector(ARRAY[4,5,6]::float8[]) AS a3;',
+      command: 'SELECT vector \'[1,2,3]\' AS a1, vector \'{1,2,3}\' AS a2, array_to_vector(ARRAY[4,5,6]::float8[]) AS a3, array_to_vector_float4(ARRAY[1.0,2.0,3.0]::real[]) AS a4;',
       output: [
-        '  a1   |  a2   |  a3',
-        '-------+-------+-------',
-        ' [1,2,3] | [1,2,3] | [4,5,6]',
+        '  a1   |  a2   |  a3   |  a4',
+        '-------+-------+-------+-------',
+        ' [1,2,3] | [1,2,3] | [4,5,6] | [1,2,3]',
         '(1 row)',
         '',
-        '\x1b[36m-- Vector creation: bracket, brace, and array formats\x1b[0m'
+        '\x1b[36m-- Vector creation: bracket, brace, and array formats\x1b[0m',
+        '\x1b[32m-- Supports float4, float8, and integer arrays\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector \'[1,2,3]\' + vector \'[4,5,6]\' AS plus, vector \'[7,8,9]\' - vector \'[1,2,3]\' AS minus;',
+      command: 'SELECT vector_dims(\'[1,2,3,4,5]\'::vector) AS dims, vector_norm(\'[3,4]\'::vector) AS norm, vector_normalize(\'[1,2,3,4,5]\'::vector) AS normalized;',
       output: [
-        '   plus    |   minus',
-        '-----------+----------',
-        ' [5,7,9]   | [6,6,6]',
+        ' dims | norm |           normalized',
+        '------+------+------------------------',
+        '  5   | 5.0  | [0.1348,0.2697,0.4045,...]',
         '(1 row)',
         '',
-        '\x1b[36m-- Vector arithmetic: addition and subtraction\x1b[0m'
+        '\x1b[36m-- Vector properties: dimensions, L2 norm, normalization\x1b[0m',
+        '\x1b[32m-- Normalized vector has unit length (norm = 1.0)\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector_mul(vector \'[1,1,1]\', 2.0) AS left_scale, vector \'[4,4,4]\' * 0.5 AS right_scale;',
+      command: 'SELECT vector_add(\'[1,2,3]\'::vector, \'[4,5,6]\'::vector) AS addition, vector_sub(\'[4,5,6]\'::vector, \'[1,2,3]\'::vector) AS subtraction, vector_mul(\'[1,2,3]\'::vector, 2.0) AS scalar_multiplication;',
       output: [
-        ' left_scale | right_scale',
-        '------------+-------------',
-        ' [2,2,2]    | [2,2,2]',
+        '  addition  | subtraction | scalar_multiplication',
+        '------------+-------------+----------------------',
+        ' [5,7,9]    | [3,3,3]     | [2,4,6]',
         '(1 row)',
         '',
-        '\x1b[36m-- Scalar multiplication: element-wise scaling\x1b[0m'
+        '\x1b[36m-- Vector arithmetic: addition, subtraction, scalar multiplication\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector_get(vector \'[9,8,7]\', 0) AS idx0, vector_get(vector \'[9,8,7]\', 2) AS idx2;',
+      command: 'SELECT vector_concat(\'[1,2,3]\'::vector, \'[4,5,6]\'::vector) AS concatenated, vector_dims(vector_concat(\'[1,2,3]\'::vector, \'[4,5,6]\'::vector)) AS concat_dims;',
+      output: [
+        ' concatenated | concat_dims',
+        '--------------+-------------',
+        ' [1,2,3,4,5,6]|      6',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Vector concatenation: combine two vectors\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_get(\'[9,8,7]\'::vector, 0) AS idx0, vector_get(\'[9,8,7]\'::vector, 2) AS idx2;',
       output: [
         ' idx0 | idx2',
         '------+------',
@@ -240,7 +254,7 @@ const NeurondBDemoTerminal = () => {
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector_set(vector \'[1,2,3]\', 0, 11) AS set0, vector_set(vector \'[1,2,3]\', 2, 33) AS set2;',
+      command: 'SELECT vector_set(\'[1,2,3]\'::vector, 0, 11) AS set0, vector_set(\'[1,2,3]\'::vector, 2, 33) AS set2;',
       output: [
         '  set0   |  set2',
         '---------+--------',
@@ -252,26 +266,27 @@ const NeurondBDemoTerminal = () => {
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector_dims(vector \'[1,2,3,4,5]\') AS dims, vector_norm(vector \'[3,4]\') AS norm;',
+      command: 'SELECT vector_to_array(\'[10,20,30]\'::vector) AS arr, array_to_vector(ARRAY[1.0,2.0,3.0]::real[]) AS vec, vector_to_array_float4(\'[10,20,30]\'::vector) AS arr_f4;',
       output: [
-        ' dims | norm',
-        '------+------',
-        '  5   | 5.0',
+        '      arr       |   vec   |    arr_f4',
+        '----------------+---------+-----------',
+        ' {10,20,30}     | [1,2,3] | {10,20,30}',
         '(1 row)',
         '',
-        '\x1b[36m-- Vector dimensions and L2 norm (magnitude)\x1b[0m'
+        '\x1b[36m-- Array ↔ Vector conversion (roundtrip)\x1b[0m',
+        '\x1b[32m-- Supports float4, float8, and integer arrays\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector_to_array(vector \'[10,20,30]\') AS arr, array_to_vector(ARRAY[1.0,2.0,3.0]::real[]) AS vec;',
+      command: 'SELECT vector_cast_dimension(\'[1,2,3,4,5]\'::vector, 3) AS truncate, vector_cast_dimension(\'[1,2,3]\'::vector, 5) AS pad;',
       output: [
-        '      arr       |   vec',
-        '----------------+--------',
-        ' {10,20,30}     | [1,2,3]',
+        ' truncate |    pad',
+        '----------+--------',
+        ' [1,2,3]  | [1,2,3,0,0]',
         '(1 row)',
         '',
-        '\x1b[36m-- Array ↔ Vector conversion (roundtrip)\x1b[0m'
+        '\x1b[36m-- Dimension casting: truncate or pad vectors\x1b[0m'
       ],
       isPsqlCommand: true
     }
@@ -280,7 +295,7 @@ const NeurondBDemoTerminal = () => {
   // Vector Indexing Sub-Tab Commands (from 036_index_basic.sql)
   const vectorIndexingCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -365,7 +380,7 @@ const NeurondBDemoTerminal = () => {
   // Vector Distance Sub-Tab Commands (from 030_core_basic.sql)
   const vectorDistanceCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -447,7 +462,7 @@ const NeurondBDemoTerminal = () => {
   // Vector Quantization Sub-Tab Commands (from 027_vector_basic.sql)
   const vectorQuantizationCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -522,7 +537,7 @@ const NeurondBDemoTerminal = () => {
   // ML Algorithms Tab Commands (from actual test files)
   const mlCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -631,7 +646,7 @@ const NeurondBDemoTerminal = () => {
   // Embeddings Tab Commands
   const embeddingCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -729,7 +744,7 @@ const NeurondBDemoTerminal = () => {
   // GPU Acceleration Tab Commands (from 010_gpu_info_basic.sql)
   const gpuCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -822,7 +837,7 @@ const NeurondBDemoTerminal = () => {
   // Hybrid Search Tab Commands (from 011_hybrid_search_basic.sql)
   const hybridCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -876,7 +891,7 @@ const NeurondBDemoTerminal = () => {
 
   const usageCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: [
         'psql (16.3)',
         'Type "help" for help.',
@@ -1050,7 +1065,7 @@ const NeurondBDemoTerminal = () => {
   // RAG Pipeline Tab Commands
   const ragCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1106,7 +1121,7 @@ const NeurondBDemoTerminal = () => {
   // Reranking (Flash Attention) Tab Commands
   const rerankingCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1154,7 +1169,7 @@ const NeurondBDemoTerminal = () => {
   // Sparse Vectors Tab Commands
   const sparseCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1215,7 +1230,7 @@ const NeurondBDemoTerminal = () => {
   // Quantization (FP8) Tab Commands
   const quantizationCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1277,7 +1292,7 @@ const NeurondBDemoTerminal = () => {
   // Multimodal Tab Commands
   const multimodalCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1358,7 +1373,7 @@ const NeurondBDemoTerminal = () => {
   // Background Workers Tab Commands
   const workersCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1453,7 +1468,7 @@ const NeurondBDemoTerminal = () => {
   // ML Regression Sub-Tab Commands (from 001_linreg_basic.sql, 006_ridge_basic.sql, 007_lasso_basic.sql)
   const mlRegressionCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1525,21 +1540,21 @@ const NeurondBDemoTerminal = () => {
     }
   ], [])
 
-  // ML Classification Sub-Tab Commands (from 002_logreg_basic.sql, 004_svm_basic.sql, 012_nb_basic.sql)
+  // ML Classification Sub-Tab Commands (from 002_logreg_basic.sql, 004_svm_basic.sql, 012_nb_basic.sql, 005_dt_basic.sql)
   const mlClassificationCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
     {
-      command: 'CREATE TEMP TABLE logreg_model AS SELECT neurondb.train(\'default\', \'logistic_regression\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{"max_iters": 1000, "learning_rate": 0.01}\'::jsonb)::integer AS model_id;',
+      command: 'CREATE TEMP TABLE logreg_model AS SELECT neurondb.train(\'default\', \'logistic_regression\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{"max_iters": 1000, "learning_rate": 0.01, "lambda": 0.001}\'::jsonb)::integer AS model_id;',
       output: [
         'SELECT 1',
         '',
         '\x1b[36m-- Training Logistic Regression for classification\x1b[0m',
-        '\x1b[36m-- Max iterations: 1000, Learning rate: 0.01\x1b[0m'
+        '\x1b[36m-- Max iterations: 1000, Learning rate: 0.01, Lambda: 0.001\x1b[0m'
       ],
       isPsqlCommand: true
     },
@@ -1568,21 +1583,32 @@ const NeurondBDemoTerminal = () => {
       isPsqlCommand: true
     },
     {
+      command: 'CREATE TEMP TABLE dt_model AS SELECT train_decision_tree_classifier(\'test_train_view\', \'features\', \'label\', 10, 2)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Decision Tree classifier\x1b[0m',
+        '\x1b[36m-- Max depth: 10, Min samples split: 2\x1b[0m',
+        '\x1b[32m-- Interpretable tree-based classifier\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
       command: 'CREATE TEMP TABLE nb_model AS SELECT neurondb.train(\'default\', \'naive_bayes\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
       output: [
         'SELECT 1',
         '',
         '\x1b[36m-- Training Naive Bayes classifier\x1b[0m',
-        '\x1b[32m-- Fast probabilistic classifier\x1b[0m'
+        '\x1b[32m-- Fast probabilistic classifier (CPU-only)\x1b[0m'
       ],
       isPsqlCommand: true
     }
   ], [])
 
-  // ML Clustering Sub-Tab Commands (from 015_kmeans_basic.sql, 013_gmm_basic.sql, 017_hierarchical_basic.sql, 018_dbscan_basic.sql)
+  // ML Clustering Sub-Tab Commands (from 015_kmeans_basic.sql, 013_gmm_basic.sql, 017_hierarchical_basic.sql, 018_dbscan_basic.sql, 016_minibatch_kmeans_basic.sql)
   const mlClusteringCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1612,6 +1638,20 @@ const NeurondBDemoTerminal = () => {
       isPsqlCommand: true
     },
     {
+      command: 'WITH clusters AS (SELECT unnest(cluster_minibatch_kmeans(\'test_train_view\', \'features\', 3, 100, 100)) AS cluster_id) SELECT COUNT(DISTINCT cluster_id) AS num_clusters FROM clusters;',
+      output: [
+        ' num_clusters',
+        '--------------',
+        '      3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Mini-Batch K-Means: faster for large datasets\x1b[0m',
+        '\x1b[36m-- Batch size: 100, k=3 clusters\x1b[0m',
+        '\x1b[32m-- 10x faster than standard K-Means on large data\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
       command: 'CREATE TEMP TABLE gmm_model AS SELECT neurondb.train(\'default\', \'gmm\', \'test_train_view\', NULL, ARRAY[\'features\'], \'{"n_components": 3, "max_iters": 100}\'::jsonb)::integer AS model_id;',
       output: [
         'SELECT 1',
@@ -1631,7 +1671,8 @@ const NeurondBDemoTerminal = () => {
         '(1 row)',
         '',
         '\x1b[36m-- DBSCAN clustering: density-based\x1b[0m',
-        '\x1b[36m-- eps=0.5, min_pts=5, noise points marked as -1\x1b[0m'
+        '\x1b[36m-- eps=0.5, min_pts=5, noise points marked as -1\x1b[0m',
+        '\x1b[32m-- Discovers clusters of arbitrary shape\x1b[0m'
       ],
       isPsqlCommand: true
     },
@@ -1644,7 +1685,8 @@ const NeurondBDemoTerminal = () => {
         '(1 row)',
         '',
         '\x1b[36m-- Hierarchical clustering: agglomerative\x1b[0m',
-        '\x1b[36m-- Linkage: average, k=3 clusters\x1b[0m'
+        '\x1b[36m-- Linkage: average, k=3 clusters\x1b[0m',
+        '\x1b[32m-- Builds dendrogram of cluster relationships\x1b[0m'
       ],
       isPsqlCommand: true
     }
@@ -1653,7 +1695,7 @@ const NeurondBDemoTerminal = () => {
   // ML Boosting Sub-Tab Commands (from 003_rf_basic.sql, 019_xgboost_basic.sql, 020_catboost_basic.sql, 021_lightgbm_basic.sql)
   const mlBoostingCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1716,7 +1758,7 @@ const NeurondBDemoTerminal = () => {
   // ML Neural Network Sub-Tab Commands (from 022_neural_network_basic.sql)
   const mlNeuralCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1748,7 +1790,7 @@ const NeurondBDemoTerminal = () => {
   // ML Time Series Sub-Tab Commands (from 024_timeseries_basic.sql, 029_arima_basic.sql)
   const mlTimeseriesCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1797,7 +1839,7 @@ const NeurondBDemoTerminal = () => {
   // ML AutoML Sub-Tab Commands (from 025_automl_basic.sql)
   const mlAutomlCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1842,7 +1884,7 @@ const NeurondBDemoTerminal = () => {
   // ML Recommender Sub-Tab Commands (from 028_recommender_basic.sql)
   const mlRecommenderCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1906,7 +1948,7 @@ const NeurondBDemoTerminal = () => {
   // Embeddings Batch Sub-Tab Commands (from 032_embeddings_batch.sql)
   const embeddingsBatchCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -1956,7 +1998,7 @@ const NeurondBDemoTerminal = () => {
   // Embeddings Config Sub-Tab Commands (from 033_embeddings_config.sql)
   const embeddingsConfigCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -2015,7 +2057,7 @@ const NeurondBDemoTerminal = () => {
   // Embeddings HF Models Sub-Tab Commands (from 034_embeddings_hf_models.sql)
   const embeddingsHfModelsCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -2063,7 +2105,7 @@ const NeurondBDemoTerminal = () => {
   // Advanced ONNX Sub-Tab Commands (from 047_onnx_basic.sql)
   const advancedOnnxCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -2110,7 +2152,7 @@ const NeurondBDemoTerminal = () => {
   // Advanced Metrics Sub-Tab Commands (from 046_metrics_basic.sql)
   const advancedMetricsCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -2147,7 +2189,7 @@ const NeurondBDemoTerminal = () => {
   // Advanced Planner Sub-Tab Commands (from 043_planner_basic.sql)
   const advancedPlannerCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -2193,7 +2235,7 @@ const NeurondBDemoTerminal = () => {
   // Advanced Types Sub-Tab Commands (from 045_types_basic.sql)
   const advancedTypesCommands = useMemo(() => [
     {
-      command: 'psql -d vectordb',
+      command: 'psql -d neurondb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
@@ -2560,7 +2602,6 @@ const NeurondBDemoTerminal = () => {
                 key={subTab}
             onClick={() => {
                   setActiveSubTab(subTab)
-              resetDemo()
             }}
             disabled={isRunning}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all capitalize ${
@@ -2588,14 +2629,22 @@ const NeurondBDemoTerminal = () => {
         {/* Welcome Message */}
         {commandHistory.length === 0 && !isRunning && (
           <div className="text-gray-500 mb-4">
-            <div className="text-cyan-400 text-base font-bold mb-2">
+            <div className="text-cyan-400 text-base font-bold mb-2 flex items-center gap-2">
+              <Terminal className="w-5 h-5" />
               NeurondB Interactive Demo Terminal
             </div>
-            <div className="text-gray-400 text-xs">
+            <div className="text-gray-400 text-xs mb-3">
               PostgreSQL extension for AI/ML with vector search, hybrid retrieval, and ONNX inference
             </div>
+            <div className="text-emerald-400 text-xs font-semibold mb-2 flex flex-wrap gap-2">
+              <span className="px-2 py-1 bg-emerald-400/10 rounded">✨ 5 Vector Types</span>
+              <span className="px-2 py-1 bg-emerald-400/10 rounded">🧠 52 ML Algorithms</span>
+              <span className="px-2 py-1 bg-emerald-400/10 rounded">⚡ 473 SQL Functions</span>
+              <span className="px-2 py-1 bg-emerald-400/10 rounded">🚀 GPU Acceleration</span>
+              <span className="px-2 py-1 bg-emerald-400/10 rounded">🔄 4 Background Workers</span>
+            </div>
             <div className="text-gray-600 text-xs mt-2">
-              Select a tab above and click "Run Demo" to begin
+              Select a tab above and click "Run Demo" to begin exploring NeuronDB capabilities
             </div>
           </div>
         )}
@@ -2607,7 +2656,7 @@ const NeurondBDemoTerminal = () => {
             <div className="flex items-start gap-2 mb-1 font-mono">
               {cmd.isPsqlCommand ? (
                 <>
-                  <span className="text-emerald-400 font-bold whitespace-nowrap">vectordb=#</span>
+                  <span className="text-emerald-400 font-bold whitespace-nowrap">neurondb=#</span>
                   <span className="text-gray-200 break-all">{cmd.command}</span>
                 </>
               ) : (
@@ -2673,7 +2722,7 @@ const NeurondBDemoTerminal = () => {
           <div className="flex items-center gap-2 font-mono">
             {inPsqlMode ? (
               <>
-                <span className="text-emerald-400 font-bold whitespace-nowrap">vectordb=#</span>
+                <span className="text-emerald-400 font-bold whitespace-nowrap">neurondb=#</span>
                 <span className="text-gray-200 ml-2">{currentCommand}</span>
                 <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
               </>
@@ -2692,7 +2741,7 @@ const NeurondBDemoTerminal = () => {
           <div className="flex items-center gap-2 mt-2 font-mono">
             {inPsqlMode ? (
               <>
-                <span className="text-emerald-400 font-bold whitespace-nowrap">vectordb=#</span>
+                <span className="text-emerald-400 font-bold whitespace-nowrap">neurondb=#</span>
                 <span className={`inline-block w-2 h-4 bg-emerald-400 ml-1 ${cursorVisible ? 'opacity-100' : 'opacity-0'}`}></span>
               </>
             ) : (
@@ -2778,8 +2827,18 @@ const NeurondBDemoTerminal = () => {
             ) : (
               <span className="text-gray-500">
                 {commandHistory.length > 0 
-                  ? `Demo complete (${commandHistory.length} commands executed)` 
-                  : 'Ready'}
+                  ? (
+                    <span className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-emerald-400" />
+                      <span>Demo complete ({commandHistory.length} commands executed)</span>
+                    </span>
+                  )
+                  : (
+                    <span className="flex items-center gap-2">
+                      <Terminal className="w-4 h-4 text-cyan-400" />
+                      <span>Ready to explore NeuronDB</span>
+                    </span>
+                  )}
               </span>
             )}
           </div>

@@ -209,6 +209,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/neurondb/advanced-features/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/advanced-features">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/advanced-features/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/neurondb/analytics/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/analytics">> = Specific
