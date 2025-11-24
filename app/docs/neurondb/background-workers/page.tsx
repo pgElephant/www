@@ -119,6 +119,16 @@ SELECT * FROM neurondb_worker_status();
       </section>
 
       <section>
+        <h2>Worker Details</h2>
+        <ul>
+          <li><a href="/docs/neurondb/background-workers/neuranq">neuranq</a> - Async job queue executor</li>
+          <li><a href="/docs/neurondb/background-workers/neuranmon">neuranmon</a> - Live query auto-tuner</li>
+          <li><a href="/docs/neurondb/background-workers/neurandefrag">neurandefrag</a> - Index maintenance</li>
+          <li><a href="/docs/neurondb/background-workers/neuranllm">neuranllm</a> - LLM job processor</li>
+        </ul>
+      </section>
+
+      <section>
         <h2>Next Steps</h2>
         <ul>
           <li><a href="/docs/neurondb/configuration">Configuration</a> - Worker settings</li>

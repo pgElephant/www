@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { ArrowRight, Database, Loader2, Zap, Crown, Network, Shield, FileText, Cpu, Server, Users, Activity, Layers, Monitor, BarChart3, Eye, Bell, Brain, Search } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import HeroTemplate from '@/components/templates/HeroTemplate'
 
 type BG = { from: string; via?: string; to: string }
 const palette = {
@@ -194,24 +195,7 @@ const Hero = () => {
   const current = products[currentProduct]
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ 
-        backgroundImage: 'url(/hero-bg-technical.svg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        position: 'relative'
-      }}
-    >
-      {/* Additional overlay for better text contrast */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.3) 0%, rgba(26, 26, 46, 0.4) 50%, rgba(83, 52, 131, 0.2) 100%)'
-        }}
-      />
-
+    <HeroTemplate className="relative overflow-hidden">
       <div className="container-extra-wide pt-20 pb-16 relative z-10">
         <div className="max-w-7xl mx-auto">
 
@@ -331,7 +315,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
+    </HeroTemplate>
   )
 }
 

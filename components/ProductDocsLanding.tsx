@@ -102,7 +102,7 @@ export default function ProductDocsLanding({ hero, features, docSections, quickL
               <div
                 className={`relative rounded-2xl ${themeClasses.badgeContainerBg} p-2 shadow-2xl ring-1 ${themeClasses.badgeRing}`}
               >
-                <div className={`flex items-center space-x-2 rounded-xl bg-gradient-to-r ${hero.badgeGradient} px-4 py-2 text-white`}>
+                <div className={`flex items-center space-x-2 rounded-xl bg-slate-700 px-4 py-2 text-white`}>
                   {hero.badgeIcon}
                   <span className="text-lg font-semibold">{hero.badgeLabel}</span>
                 </div>

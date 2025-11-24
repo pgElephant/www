@@ -2,6 +2,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Calendar, Clock, User, Tag, Eye, ThumbsUp, MessageCircle, TrendingUp, BookOpen, Code, Database, Server, Zap, Award, Globe, Users } from 'lucide-react'
+import HeroTemplate from '@/components/templates/HeroTemplate'
+import PageTemplate from '@/components/templates/PageTemplate'
 
 export const metadata: Metadata = {
   title: 'Blog - pgElephant',
@@ -134,7 +136,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
       <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-white/30 h-full flex flex-col">
           {/* Large Stock Image */}
-          <div className={`relative w-full aspect-[3/2] overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center ${isAnnouncement ? 'bg-gradient-to-br from-gray-900 via-slate-900 to-black' : 'bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20'}`}>
+          <div className={`relative w-full aspect-[3/2] overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center ${isAnnouncement ? 'bg-slate-900' : 'bg-slate-800/50'}`}>
             {post.slug === 'pgraft' ? (
               <Image
                 src="/blog/pgraft/header.svg?v=7"
@@ -225,46 +227,9 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
 
 export default function BlogPage() {
   return (
-    <div className="pt-16">
-      {/* Hero Section with elegant gradient background - same as main page */}
-      <div className="relative overflow-hidden bg-hero-gradient">
-        {/* Elegant overlay gradient - same as Hero */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
-        {/* Elegant floating elements - same as Hero */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating orbs */}
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          
-          {/* Subtle pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
-              backgroundSize: '32px 32px'
-            }}
-          />
-        </div>
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.12) 1px, transparent 0)',
-              backgroundSize: '48px 48px'
-            }}
-          />
-        </div>
-
+    <PageTemplate className="pt-16">
+      {/* Hero Section */}
+      <HeroTemplate overlay={true}>
         <div className="container-wide py-28 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
@@ -288,10 +253,7 @@ export default function BlogPage() {
             </div>
           </div>
         </div>
-      </div>
-
-
-
+      </HeroTemplate>
 
       {/* Blog Articles - Split by Category */}
       <div className="py-24 relative overflow-hidden bg-page-gradient">
@@ -321,6 +283,6 @@ export default function BlogPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageTemplate>
   )
 }

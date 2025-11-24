@@ -390,15 +390,8 @@ body {
 }
 
 /* Standard Website Gradients - Only Two Gradients for Entire Site */
-/* Hero Gradient: Slight dark gradient for hero sections */
-.bg-hero-gradient {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-}
-
-/* Page Gradient: Same gradient but slightly lighter for all other pages */
-.bg-page-gradient {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
-}
+/* Hero and Page gradients are defined above using CSS variables */
+/* This ensures consistency across the entire website */
 
 /* PostgreSQL Documentation Styles */
 .postgres-docs-content {

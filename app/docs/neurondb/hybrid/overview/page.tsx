@@ -12,6 +12,7 @@ const tableOfContents: TocItem[] = [
   { id: 'scoring-architecture', title: 'Scoring architecture' },
   { id: 'metadata-filtering', title: 'Metadata filtering' },
   { id: 'reranking', title: 'Reranking with cross-encoders' },
+  { id: 'hybrid-search-function', title: 'Hybrid Search Function' },
 ]
 
 const prevLink: NavLink = {
@@ -106,9 +107,50 @@ LIMIT  15;`}
         />
       </section>
 
+      <section id="hybrid-search-function">
+        <h2>Hybrid Search Function</h2>
+        <p>NeuronDB provides a <code>hybrid_search</code> function that combines vector similarity and full-text search in a single call:</p>
+        <SqlCodeBlock
+          title="Hybrid search function"
+          code={`-- Hybrid search combining vector and text search
+SELECT 
+    search_result.id,
+    hybrid_search_test.title,
+    hybrid_search_test.content,
+    search_result.score
+FROM hybrid_search_test,
+    LATERAL hybrid_search(
+        'hybrid_search_test',                    -- table name
+        embed_text('database systems', 'all-MiniLM-L6-v2'),  -- query vector
+        'database systems',                       -- query text for FTS
+        '{}'::text,                              -- additional config
+        0.7,                                     -- alpha: vector weight (0-1)
+        5                                        -- top K results
+    ) AS search_result(id, score)
+WHERE hybrid_search_test.id = search_result.id
+ORDER BY search_result.score DESC
+LIMIT 5;`}
+        />
+        <p><strong>Function Signature:</strong></p>
+        <pre><code>hybrid_search(
+    table_name TEXT,    -- Source table name
+    query_vector VECTOR, -- Query embedding vector
+    query_text TEXT,    -- Query text for full-text search
+    config TEXT,        -- Additional configuration (JSON string)
+    alpha REAL,         -- Vector weight (0.0-1.0), 1-alpha = text weight
+    top_k INTEGER       -- Number of results to return
+) RETURNS TABLE (
+    id INTEGER,         -- Row ID from source table
+    score REAL          -- Combined relevance score
+)</code></pre>
+      </section>
+
       <section>
         <h2>Next Steps</h2>
         <ul>
+          <li><a href="/docs/neurondb/hybrid/multi-vector">Multi-Vector Search</a> - Multiple embeddings per document</li>
+          <li><a href="/docs/neurondb/hybrid/faceted-search">Faceted Search</a> - Category-aware filtering</li>
+          <li><a href="/docs/neurondb/hybrid/temporal-search">Temporal Search</a> - Time-decay relevance</li>
           <li><a href="/docs/neurondb/rag">RAG Playbooks</a> - Complete RAG workflows</li>
           <li><a href="/docs/neurondb/features/distance-metrics">Distance Metrics</a> - Tune distance functions</li>
           <li><a href="/docs/neurondb/reranking/overview">Reranking Guide</a> - Cross-encoder reranking</li>

@@ -164,16 +164,20 @@ LIMIT 10;`}
         <p>Partitions the vector space into clusters (centroids). At query time, only the nearest clusters are searched. Best for very large datasets where index build time and memory are critical.</p>
         <SqlCodeBlock
           title="IVF index examples"
-          code={`-- Create IVF index with 100 lists (adjust based on dataset size)
-CREATE INDEX ON documents USING ivfflat (embedding vector_l2_ops)
-WITH (lists = 100);
+          code={`-- Create IVF index with 10 lists (adjust based on dataset size)
+CREATE INDEX ON documents USING ivf (embedding vector_l2_ops)
+WITH (lists = 10);
 
 -- IVF with cosine distance
-CREATE INDEX ON documents USING ivfflat (embedding vector_cosine_ops)
+CREATE INDEX ON documents USING ivf (embedding vector_cosine_ops)
+WITH (lists = 10);
+
+-- IVF with custom parameters
+CREATE INDEX ON documents USING ivf (embedding vector_l2_ops)
 WITH (lists = 100);
 
 -- Runtime tuning: probes controls how many lists to search (higher = better recall, slower)
-SET ivfflat.probes = 10;
+SET ivf.probes = 10;
 
 SELECT * FROM documents
 ORDER BY embedding <-> '[0.1, 0.2, 0.3]'::vector
@@ -261,17 +265,17 @@ SET hnsw.ef_search = 200;`}
 
         <h3>IVF Parameters</h3>
         <ul>
-          <li><strong>lists</strong> (build-time): Number of clusters. Rule of thumb: <code>sqrt(num_rows)</code> for datasets &gt; 1M. Typical range: 100–10,000.</li>
-          <li><strong>ivfflat.probes</strong> (runtime GUC, default: 1): Number of clusters to search at query time. Higher = better recall, slower queries. Typical range: 1–100.</li>
+          <li><strong>lists</strong> (build-time): Number of clusters. Rule of thumb: <code>sqrt(num_rows)</code> for datasets &gt; 1M. Typical range: 10–10,000.</li>
+          <li><strong>ivf.probes</strong> (runtime GUC, default: 1): Number of clusters to search at query time. Higher = better recall, slower queries. Typical range: 1–100.</li>
         </ul>
         <SqlCodeBlock
           title="IVF tuning"
           code={`-- Build-time tuning (for 10M rows, sqrt(10M) ~ 3162)
-CREATE INDEX ON documents USING ivfflat (embedding vector_l2_ops)
+CREATE INDEX ON documents USING ivf (embedding vector_l2_ops)
 WITH (lists = 3000);
 
 -- Runtime tuning for better recall
-SET ivfflat.probes = 20;`}
+SET ivf.probes = 20;`}
         />
       </section>
 

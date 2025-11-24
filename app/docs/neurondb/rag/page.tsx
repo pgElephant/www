@@ -144,10 +144,18 @@ LIMIT 5;`}
       </section>
 
       <section>
+        <h2>RAG Components</h2>
+        <ul>
+          <li><a href="/docs/neurondb/rag/llm-integration">LLM Integration</a> - Hugging Face and OpenAI integration</li>
+          <li><a href="/docs/neurondb/rag/document-processing">Document Processing</a> - Text processing and NLP</li>
+        </ul>
+      </section>
+
+      <section>
         <h2>Next Steps</h2>
         <ul>
           <li><a href="/docs/neurondb/hybrid">Hybrid Search</a> - Advanced hybrid search techniques</li>
-          <li><a href="/docs/neurondb/reranking">Reranking</a> - Cross-encoder reranking guide</li>
+          <li><a href="/docs/neurondb/reranking/overview">Reranking</a> - Cross-encoder reranking guide</li>
           <li><a href="/docs/neurondb/ml/inference">ML Inference</a> - ONNX model deployment</li>
         </ul>
       </section>

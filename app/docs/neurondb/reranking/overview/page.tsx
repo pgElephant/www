@@ -21,8 +21,8 @@ const prevLink: NavLink = {
 }
 
 const nextLink: NavLink = {
-  href: '/docs/neurondb/rag',
-  label: 'RAG Pipelines',
+  href: '/docs/neurondb/reranking/cross-encoder',
+  label: 'Cross-Encoder',
 }
 
 export default function RerankingOverviewPage() {
@@ -95,6 +95,16 @@ SET neurondb.session_rerank_batch_size = 32;`}
   COUNT(*) FILTER (WHERE cross_score > 0.7) AS high_quality_count
 FROM reranked_results;`}
         />
+      </section>
+
+      <section>
+        <h2>Reranking Methods</h2>
+        <ul>
+          <li><a href="/docs/neurondb/reranking/cross-encoder">Cross-Encoder</a> - Neural reranking models</li>
+          <li><a href="/docs/neurondb/reranking/llm-reranking">LLM Reranking</a> - GPT/Claude-powered scoring</li>
+          <li><a href="/docs/neurondb/reranking/colbert">ColBERT</a> - Late interaction models</li>
+          <li><a href="/docs/neurondb/reranking/ensemble">Ensemble</a> - Combine multiple strategies</li>
+        </ul>
       </section>
 
       <section>

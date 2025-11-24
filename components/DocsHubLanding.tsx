@@ -63,7 +63,7 @@ interface DocsHubLandingProps {
 const CATEGORY_ORDER: ProductCategoryKey[] = [...CATEGORY_KEYS]
 
 const DEFAULT_THEME: HubProductTheme = {
-  gradient: 'from-slate-800/70 to-slate-900/70',
+  gradient: 'bg-slate-800/70', // Using solid color instead of gradient
   border: 'border-slate-700/60',
   glow: 'shadow-slate-900/40',
   iconBorder: 'border-slate-700/70',
@@ -108,7 +108,7 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
             return (
               <div
                 key={product.id}
-                className={`group relative rounded-2xl border-2 ${theme.border} bg-gradient-to-br ${theme.gradient} p-8 shadow-xl transition duration-300 hover:-translate-y-1 hover:scale-[1.01] ${theme.glow}`}
+                className={`group relative rounded-2xl border-2 ${theme.border} bg-slate-800/70 p-8 shadow-xl transition duration-300 hover:-translate-y-1 hover:scale-[1.01] ${theme.glow}`}
               >
                 <div className="flex items-start gap-6">
                   <div

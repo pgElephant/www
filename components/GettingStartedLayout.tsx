@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { ArrowRight } from 'lucide-react'
+import HeroTemplate from '@/components/templates/HeroTemplate'
 
 const ACCENT_STYLES = {
   indigo: {
@@ -137,9 +138,8 @@ export default function GettingStartedLayout({
 
   return (
     <div className={`min-h-screen ${theme.pageBackground}`}>
-      <section className="relative overflow-hidden py-24">
-        <div className={`absolute inset-0 ${theme.heroOverlay}`} />
-        <div className="relative mx-auto max-w-5xl px-6 lg:px-8 min-h-[400px] flex items-center">
+      <HeroTemplate className="py-24 min-h-[400px] flex items-center">
+        <div className="relative mx-auto max-w-5xl px-6 lg:px-8 w-full">
           <div className="rounded-2xl bg-white/85 p-8 shadow-lg ring-1 ring-slate-200 dark:bg-slate-900/70 dark:ring-slate-700 w-full">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
@@ -176,7 +176,7 @@ export default function GettingStartedLayout({
             </div>
           </div>
         </div>
-      </section>
+      </HeroTemplate>
 
       <section className="mx-auto max-w-4xl space-y-12 px-6 pb-24 lg:px-8">
         <div className={`rounded-2xl border ${requirementsBorderClass} ${requirementsBackgroundClass} p-6 shadow-sm dark:border-opacity-60`}> 

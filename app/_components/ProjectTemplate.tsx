@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import HeroTemplate from '@/components/templates/HeroTemplate';
+import SectionTemplate from '@/components/templates/SectionTemplate';
 
 type SectionHeadingProps = {
   children: React.ReactNode;
@@ -11,7 +13,7 @@ function SectionHeading({ children, kicker, className = '' }: SectionHeadingProp
     <div className={`text-center mb-14 ${className}`}>
       {kicker && <div className="text-xs tracking-wider font-semibold text-indigo-500 uppercase mb-2">{kicker}</div>}
       <h2 className={`text-2xl md:text-3xl font-bold ${className === 'text-white' ? 'text-white' : 'text-slate-900'} mb-3`}>{children}</h2>
-      <div className="mx-auto h-1 w-28 bg-gradient-to-r from-indigo-500 to-sky-500 rounded" />
+      <div className="mx-auto h-1 w-28 bg-slate-400 rounded" />
     </div>
   );
 }
@@ -78,23 +80,11 @@ export default function ProjectTemplate({
   return (
     <div>
       {/* Hero */}
-      <section 
-        className="py-16 text-white relative overflow-hidden"
-        style={{ 
-          backgroundImage: 'url(/hero-bg-technical.svg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          position: 'relative'
-        }}
+      <HeroTemplate
+        backgroundImage="/hero-bg-technical.svg"
+        overlay={true}
+        className="py-16 text-white"
       >
-        {/* Additional overlay for better text contrast */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.3) 0%, rgba(26, 26, 46, 0.4) 50%, rgba(83, 52, 131, 0.2) 100%)'
-          }}
-        />
                 <div className="container-extra-wide pt-20 pb-16 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
@@ -129,20 +119,20 @@ export default function ProjectTemplate({
             </div>
           </div>
         </div>
-      </section>
+      </HeroTemplate>
 
       {/* Architecture Diagram */}
       {architecture && (
-        <section className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <SectionTemplate background="hero" padding="xl">
           <div className="container-wide">
             {architecture}
           </div>
-        </section>
+        </SectionTemplate>
       )}
 
       {/* High-Level Feature Pillars */}
       {featurePillars && (
-        <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <SectionTemplate background="hero" padding="xl" className="relative overflow-hidden">
           <div className="container-wide">
             <SectionHeading kicker={featurePillars.kicker} className="text-white">Why {hero.projectName}</SectionHeading>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -154,37 +144,36 @@ export default function ProjectTemplate({
               ))}
             </div>
           </div>
-        </section>
+        </SectionTemplate>
       )}
 
       {/* Feature Matrix */}
       {featureMatrix && (
-        <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+        <SectionTemplate background="hero" padding="xl" className="text-white relative overflow-hidden">
           <div className="container-wide relative z-10">
             <SectionHeading kicker="Depth" className="text-white">Feature Matrix</SectionHeading>
             <div className="overflow-x-auto">
               {featureMatrix}
             </div>
           </div>
-        </section>
+        </SectionTemplate>
       )}
 
       {/* Feature Comparison */}
       {featureComparison && (
-        <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <SectionTemplate background="hero" padding="xl" className="relative overflow-hidden">
           <div className="container-wide relative z-10">
             <SectionHeading kicker="Comparison" className="text-white">Feature Comparison</SectionHeading>
             <div className="overflow-x-auto">
               {featureComparison}
             </div>
           </div>
-        </section>
+        </SectionTemplate>
       )}
 
       {/* Docs Links */}
       {docsLinks && (
-        <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+        <SectionTemplate background="hero" padding="xl" className="relative overflow-hidden">
           <div className="container-wide">
             <SectionHeading kicker="Internals" className="text-white">Technical Documentation</SectionHeading>
             <div className="text-center max-w-3xl mx-auto">
@@ -201,13 +190,12 @@ export default function ProjectTemplate({
               </div>
             </div>
           </div>
-        </section>
+        </SectionTemplate>
       )}
 
       {/* CTA Section */}
       {ctaSection && (
-        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900">
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_30%,rgba(99,102,241,0.4),transparent_60%)]" />
+        <SectionTemplate background="hero" padding="xl" className="relative overflow-hidden">
           <div className="container-wide relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               {ctaSection.kicker && (
@@ -225,7 +213,7 @@ export default function ProjectTemplate({
                 <Link
                   href={ctaSection.primaryCTA.href}
                   {...(ctaSection.primaryCTA.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-indigo-500/50"
+                  className="inline-flex items-center px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-slate-500/50"
                 >
                   {ctaSection.primaryCTA.label}
                   <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -247,7 +235,7 @@ export default function ProjectTemplate({
               </div>
             </div>
           </div>
-        </section>
+        </SectionTemplate>
       )}
     </div>
   );
