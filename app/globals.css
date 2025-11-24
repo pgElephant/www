@@ -51,9 +51,17 @@ body {
 }
 
 /* CSS Custom Properties for Theme System */
+/* 
+ * IMPORTANT: Only TWO gradients for the entire website:
+ * 1. --hero-gradient: Used for hero sections and footer
+ * 2. --page-gradient: Used for all other page content
+ * 
+ * Change these values to update gradients across the entire site.
+ */
 :root {
-  /* Global Gradients */
+  /* Hero and Footer Gradient (dark) */
   --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  /* Page Gradient (used for all other content) */
   --page-gradient: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
   
   /* Primary Colors */

@@ -131,7 +131,7 @@ const NeurondBDemoTerminal = () => {
       ]
     },
     {
-      command: 'cat << EOF >> /etc/postgresql/16/main/postgresql.conf',
+      command: 'cat << EOF >> /etc/postgresql/18/main/postgresql.conf',
       output: [
         '\x1b[36m# NeurondB Configuration\x1b[0m',
         '# Load extension on PostgreSQL startup',
@@ -159,7 +159,7 @@ const NeurondBDemoTerminal = () => {
       command: 'sudo systemctl restart postgresql',
       output: [
         '\x1b[33mRestarting PostgreSQL...\x1b[0m',
-        '● postgresql.service - PostgreSQL 16 database server',
+        '● postgresql.service - PostgreSQL 18 database server',
         '   Loaded: loaded',
         '   Active: active (running) since Thu 2025-10-31 12:00:00 UTC',
         '',
@@ -174,7 +174,7 @@ const NeurondBDemoTerminal = () => {
         '',
         '    neurondb_version    ',
         '------------------------',
-        ' NeurondB 1.0.0 (PG 16)',
+        ' NeurondB 1.0.0 (PG 18)',
         '(1 row)',
         '',
         '\x1b[32m✓ NeurondB extension installed successfully\x1b[0m',
@@ -187,7 +187,7 @@ const NeurondBDemoTerminal = () => {
   const vectorOperationsCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -296,7 +296,7 @@ const NeurondBDemoTerminal = () => {
   const vectorIndexingCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -381,7 +381,7 @@ const NeurondBDemoTerminal = () => {
   const vectorDistanceCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -463,7 +463,7 @@ const NeurondBDemoTerminal = () => {
   const vectorQuantizationCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -538,7 +538,7 @@ const NeurondBDemoTerminal = () => {
   const mlCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -647,7 +647,7 @@ const NeurondBDemoTerminal = () => {
   const embeddingCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -745,7 +745,7 @@ const NeurondBDemoTerminal = () => {
   const gpuCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -838,7 +838,7 @@ const NeurondBDemoTerminal = () => {
   const hybridCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -893,7 +893,7 @@ const NeurondBDemoTerminal = () => {
     {
       command: 'psql -d neurondb',
       output: [
-        'psql (16.3)',
+        'psql (18.3)',
         'Type "help" for help.',
         ''
       ],
@@ -1066,7 +1066,7 @@ const NeurondBDemoTerminal = () => {
   const ragCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1122,7 +1122,7 @@ const NeurondBDemoTerminal = () => {
   const rerankingCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1170,7 +1170,7 @@ const NeurondBDemoTerminal = () => {
   const sparseCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1231,7 +1231,7 @@ const NeurondBDemoTerminal = () => {
   const quantizationCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1293,7 +1293,7 @@ const NeurondBDemoTerminal = () => {
   const multimodalCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1374,7 +1374,7 @@ const NeurondBDemoTerminal = () => {
   const workersCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1469,7 +1469,7 @@ const NeurondBDemoTerminal = () => {
   const mlRegressionCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1544,7 +1544,7 @@ const NeurondBDemoTerminal = () => {
   const mlClassificationCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1609,7 +1609,7 @@ const NeurondBDemoTerminal = () => {
   const mlClusteringCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1696,7 +1696,7 @@ const NeurondBDemoTerminal = () => {
   const mlBoostingCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1759,7 +1759,7 @@ const NeurondBDemoTerminal = () => {
   const mlNeuralCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1791,7 +1791,7 @@ const NeurondBDemoTerminal = () => {
   const mlTimeseriesCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1840,7 +1840,7 @@ const NeurondBDemoTerminal = () => {
   const mlAutomlCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1885,7 +1885,7 @@ const NeurondBDemoTerminal = () => {
   const mlRecommenderCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1949,7 +1949,7 @@ const NeurondBDemoTerminal = () => {
   const embeddingsBatchCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -1999,7 +1999,7 @@ const NeurondBDemoTerminal = () => {
   const embeddingsConfigCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -2058,7 +2058,7 @@ const NeurondBDemoTerminal = () => {
   const embeddingsHfModelsCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -2106,7 +2106,7 @@ const NeurondBDemoTerminal = () => {
   const advancedOnnxCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -2153,7 +2153,7 @@ const NeurondBDemoTerminal = () => {
   const advancedMetricsCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -2190,7 +2190,7 @@ const NeurondBDemoTerminal = () => {
   const advancedPlannerCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -2236,7 +2236,7 @@ const NeurondBDemoTerminal = () => {
   const advancedTypesCommands = useMemo(() => [
     {
       command: 'psql -d neurondb',
-      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      output: ['psql (18.3)', 'Type "help" for help.', ''],
       isShellCommand: true,
       entersPsql: true
     },
@@ -2654,6 +2654,7 @@ const NeurondBDemoTerminal = () => {
       ? `${getTabName(activeMainTab)}: ${getSubTabName(activeSubTab)}`
       : getTabName(activeMainTab)
 
+    // Only return content if we have a specific description for the selected demo
     return { description, badges, tabDisplay }
   }, [activeMainTab, activeSubTab])
 
@@ -2760,9 +2761,11 @@ const NeurondBDemoTerminal = () => {
                 <Terminal className="w-5 h-5" />
                 NeurondB Interactive Demo Terminal
               </div>
-              <div className="text-gray-400 text-xs mb-3">
-                {description || 'PostgreSQL extension for AI/ML with vector search, hybrid retrieval, and ONNX inference'}
-              </div>
+              {description && (
+                <div className="text-gray-400 text-xs mb-3">
+                  {description}
+                </div>
+              )}
               {badges.length > 0 && (
                 <div className="text-emerald-400 text-xs font-semibold mb-2 flex flex-wrap gap-2">
                   {badges.map((badge, idx) => (

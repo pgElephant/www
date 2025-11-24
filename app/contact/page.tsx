@@ -127,7 +127,7 @@ Message: ${formData.message}
     <div className="pt-16">
       {/* Hero Section with technical background - same as main page */}
       <div 
-        className="relative overflow-hidden"
+        className="relative overflow-hidden bg-hero-gradient"
         style={{ 
           backgroundImage: 'url(/hero-bg-technical.svg)',
           backgroundSize: 'cover',
@@ -137,12 +137,7 @@ Message: ${formData.message}
         }}
       >
         {/* Additional overlay for better text contrast */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.3) 0%, rgba(26, 26, 46, 0.4) 50%, rgba(83, 52, 131, 0.2) 100%)'
-          }}
-        />
+        <div className="absolute inset-0 bg-black/20" />
 
   <div className="container-extra-wide pt-20 pb-16 relative z-10">
           <div className="max-w-7xl mx-auto">
@@ -175,7 +170,7 @@ Message: ${formData.message}
       </div>
 
       {/* Professional Contact Methods */}
-      <div className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+      <div className="py-24 relative overflow-hidden bg-page-gradient">
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             {/* Professional Header */}
@@ -379,12 +374,7 @@ Message: ${formData.message}
       </div>
 
       {/* Professional Contact Form Section */}
-      <div 
-        className="py-24"
-        style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`
-        }}
-      >
+      <div className="py-24 bg-page-gradient">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

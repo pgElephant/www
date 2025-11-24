@@ -261,22 +261,23 @@ export const productThemes: Record<ProductId, ProductTheme> = {
 // ============================================================================
 // GLOBAL GRADIENTS
 // ============================================================================
+// 
+// IMPORTANT: The entire website uses ONLY TWO gradients:
+// 1. Hero/Footer Gradient: Used for hero sections and footer
+// 2. Page Gradient: Used for all other page content
+//
+// Change these values to update gradients across the entire site.
 
 export const gradients = {
-  // Hero section gradient (dark)
+  // Hero and Footer gradient (dark, used for hero sections and footer)
   hero: {
     css: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)',
     tailwind: 'bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950',
   },
-  // Page background gradient (lighter)
+  // Page background gradient (used for all other page content)
   page: {
     css: 'linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%)',
     tailwind: 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900',
-  },
-  // Overlay gradients
-  overlay: {
-    hero: 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 dark:from-blue-500/10 dark:to-purple-500/10',
-    page: 'bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-900',
   },
 }
 

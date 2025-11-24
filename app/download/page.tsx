@@ -244,7 +244,7 @@ const DownloadPage = () => {
     <div className="pt-0">
       {/* Unified Professional Hero */}
       <section 
-        className="relative text-center overflow-hidden"
+        className="relative text-center overflow-hidden bg-hero-gradient"
         style={{ 
           backgroundImage: 'url(/hero-bg-technical.svg)',
           backgroundSize: 'cover',
@@ -254,12 +254,7 @@ const DownloadPage = () => {
         }}
       >
         {/* Additional overlay for better text contrast */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(15, 15, 35, 0.3) 0%, rgba(26, 26, 46, 0.4) 50%, rgba(83, 52, 131, 0.2) 100%)'
-          }}
-        />
+        <div className="absolute inset-0 bg-black/20" />
 
         <div className="container-extra-wide mx-auto relative z-10 pt-20 pb-16">
           <div className="max-w-7xl mx-auto">
@@ -294,7 +289,7 @@ const DownloadPage = () => {
       </section>
 
       {/* pgElephant Products - Card-Based Layout */}
-      <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+      <section className="py-24 relative overflow-hidden bg-page-gradient">
         <div className="container-wide mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">pgElephant Products</h2>
@@ -513,7 +508,7 @@ const DownloadPage = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+      <section className="py-20 relative overflow-hidden bg-page-gradient">
         <div className="container-wide mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-thin text-white mb-4">Why Choose pgElephant?</h2>
