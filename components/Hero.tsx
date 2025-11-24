@@ -1,35 +1,22 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ArrowRight, Database, Loader2, Zap, Crown, Network, Shield, FileText, Cpu, Server, Users, Activity, Layers, Monitor, BarChart3, Eye, Bell, Brain, Search } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 import HeroTemplate from '@/components/templates/HeroTemplate'
-
-type BG = { from: string; via?: string; to: string }
-const palette = {
-  // Modern Tech Stack Colors
-  primary: '#4f46e5',      // Indigo-600
-  primaryLight: '#6366f1', // Indigo-500
-  primaryDark: '#3730a3',  // Indigo-800
-  secondary: '#06b6d4',    // Cyan-500
-  secondaryLight: '#22d3ee', // Cyan-400
-  secondaryDark: '#0891b2',  // Cyan-600
-  accent: '#10b981',       // Emerald-500
-  accentLight: '#34d399',  // Emerald-400
-  accentDark: '#059669',   // Emerald-600
-  // Neutral colors
-  neutral: '#18181b',      // Zinc-900
-  neutralLight: '#27272a', // Zinc-800
-  neutralMedium: '#3f3f46', // Zinc-700
-  white: '#FFFFFF',
-  // Legacy compatibility
-  navy: '#1E293B',
-  slate: '#334155'
-}
+import { 
+  NeurondBIcon, 
+  PgbalancerIcon, 
+  PgraftIcon, 
+  FauxDbIcon, 
+  PgSentinelIcon, 
+  PgStatInsightsIcon,
+  getProductIcon 
+} from '@/components/ProductIcons'
+import { getAllProducts, type ProductId } from '@/config/products'
+import { getProductTheme } from '@/config/theme'
 
 type Product = {
-  id: string
+  id: ProductId
   name: string
   title: string
   description: string
@@ -37,153 +24,33 @@ type Product = {
   description3: string
   description4: string
   description5: string
-  icon: string
-  color: string
-  bg: BG
 }
-
-// Custom pgbalancer icon component
-const PgbalancerIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-cyan-400" style={{ width: size * 0.7, height: size * 0.7 }} />
-    <Loader2 className="text-green-400 absolute -top-1 -right-1 animate-spin" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Zap className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-  </div>
-)
-
-// Custom pgraft icon component
-const PgraftIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
-// Custom FauxDB icon component
-const FauxDbIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-emerald-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <FileText className="text-orange-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Layers className="text-blue-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
-// Custom pgSentinel icon component
-const PgSentinelIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Monitor className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Eye className="text-green-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Bell className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
-// Custom pg_stat_insights icon component
-const PgStatInsightsIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <BarChart3 className="text-purple-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Database className="text-blue-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Activity className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Eye className="text-orange-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
-// Custom NeurondB icon component
-const NeurondBIcon = ({ size = 24 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Brain className="text-indigo-400" style={{ width: size * 0.7, height: size * 0.7 }} />
-    <Database className="text-teal-400 absolute -bottom-1 -right-1" style={{ width: size * 0.35, height: size * 0.35 }} />
-    <Zap className="text-yellow-400 absolute -top-1 -left-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Search className="text-purple-400 absolute -top-1 -right-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-  </div>
-)
 
 const Hero = () => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
-  const products: Product[] = [
-    {
-      id: 'neurondb',
-      name: 'NeurondB',
-      title: 'Enterprise AI Database Extension for PostgreSQL',
-      description: '• Production-grade vector search: HNSW + IVF indexing, 10+ distance metrics, up to 32x compression',
-      description2: '• ML inference & embeddings: ONNX runtime, text/image/multimodal models, batch processing',
-      description3: '• Hybrid search & RAG: Semantic + FTS, cross-encoder reranking, complete in-database RAG pipeline',
-      description4: '• GPU acceleration: CUDA/ROCm support, 100x speedup for matrix ops, auto CPU fallback',
-      description5: '• Enterprise ready: 100+ SQL functions, background workers, monitoring, PG 16-18 compatible',
-      icon: 'neurondb-custom',
-      color: `from-[${palette.primary}] to-[${palette.secondary}]`,
-      bg: { from: palette.primaryDark, via: palette.primary, to: palette.secondary }
-    },
-    {
-      id: 'fauxdb',
-      name: 'FauxDB',
-      title: 'Dual-Protocol Database: MongoDB + MySQL on PostgreSQL',
-      description: '• Dual-protocol support: MongoDB AND MySQL wire protocols simultaneously',
-      description2: '• Connect with MongoDB clients (mongosh, PyMongo) OR MySQL clients (mysql, Tableau)',
-      description3: '• Access the SAME data through both protocols with PostgreSQL ACID guarantees',
-      description4: '• Advanced SQL translator converts MySQL queries to PostgreSQL automatically',
-      description5: '• Rust-powered high-performance with geospatial, aggregation, and monitoring',
-      icon: 'fauxdb-custom',
-      color: `from-[${palette.accent}] to-[${palette.accentLight}]`,
-      bg: { from: palette.accentDark, via: palette.accent, to: palette.accentLight }
-    },
-    {
-      id: 'pgraft',
-      name: 'pgraft',
-      title: 'PostgreSQL Raft Consensus Clustering',
-      description: '• Native Raft consensus algorithm for PostgreSQL clusters',
-      description2: '• Automatic leader election with split-brain prevention',
-      description3: '• Strong consistency guarantees across all cluster nodes',
-      description4: '• Zero-downtime failover with mathematical fault tolerance',
-      description5: '• Production-grade clustering with background worker integration',
-      icon: 'pgraft-custom',
-      color: `from-[${palette.primaryDark}] to-[${palette.secondaryDark}]`,
-      bg: { from: palette.primaryDark, via: palette.primary, to: palette.secondaryDark }
-    },
-    {
-      id: 'pgbalancer',
-      name: 'pgbalancer',
-      title: 'AI-Enhanced PostgreSQL Connection Pooling',
-      description: '• Machine learning-powered connection optimization and load balancing',
-      description2: '• Intelligent query routing with predictive performance scaling',
-      description3: '• Real-time traffic analysis with adaptive connection management',
-      description4: '• REST API for monitoring and automated optimization insights',
-      description5: '• AI-driven pooling strategies with health monitoring integration',
-      icon: 'pgbalancer-custom',
-      color: `from-[${palette.accentDark}] to-[${palette.primaryLight}]`,
-      bg: { from: palette.accentDark, via: palette.primary, to: palette.primaryLight }
-    },
-    {
-      id: 'pgsentinel',
-      name: 'pgSentinel',
-      title: 'Professional PostgreSQL Monitoring Platform',
-      description: '• Comprehensive real-time monitoring with Grafana dashboards',
-      description2: '• Advanced alerting system with Prometheus integration',
-      description3: '• Performance analytics with query optimization insights',
-      description4: '• Docker-based deployment with complete observability stack',
-      description5: '• Enterprise-grade monitoring with automated health checks',
-      icon: 'pgsentinel-custom',
-      color: `from-[${palette.primary}] to-[${palette.secondary}]`,
-      bg: { from: palette.primary, via: palette.primaryLight, to: palette.secondary }
-    },
-    {
-      id: 'pg-stat-insights',
-      name: 'pg_stat_insights',
-      title: 'Deep PostgreSQL Performance Analytics',
-      description: '• Advanced query performance analysis with pg_stat_statements',
-      description2: '• Table and index usage statistics with optimization recommendations',
-      description3: '• Cache hit ratio monitoring with buffer pool analysis',
-      description4: '• Replication lag tracking with failover insights',
-      description5: '• Comprehensive database health metrics and reporting',
-      icon: 'pg-stat-insights-custom',
-      color: `from-[${palette.secondaryDark}] to-[${palette.accent}]`,
-      bg: { from: palette.secondaryDark, via: palette.secondary, to: palette.accent }
-    }
-  ]
+  // Get products from centralized config
+  const allProducts = getAllProducts()
+  const products: Product[] = allProducts.map(product => ({
+    id: product.id,
+    name: product.displayName,
+    title: product.tagline,
+    description: product.items[0] || '',
+    description2: product.items[1] || '',
+    description3: product.items[2] || '',
+    description4: product.items[3] || '',
+    description5: product.items[4] || '',
+  }))
+
+  // Icon mapping
+  const iconMap: Record<ProductId, React.ComponentType<{ size?: number }>> = {
+    neurondb: NeurondBIcon,
+    pgraft: PgraftIcon,
+    pgbalancer: PgbalancerIcon,
+    fauxdb: FauxDbIcon,
+    pgsentinel: PgSentinelIcon,
+    'pg-stat-insights': PgStatInsightsIcon,
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -205,27 +72,10 @@ const Hero = () => {
                 <div className="mb-6">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-20 h-20 flex items-center justify-center">
-                      {current.icon === 'neurondb-custom' ? (
-                        <NeurondBIcon size={80} />
-                      ) : current.icon === 'pgbalancer-custom' ? (
-                        <PgbalancerIcon size={80} />
-                      ) : current.icon === 'pgraft-custom' ? (
-                        <PgraftIcon size={80} />
-                      ) : current.icon === 'fauxdb-custom' ? (
-                        <FauxDbIcon size={80} />
-                      ) : current.icon === 'pgsentinel-custom' ? (
-                        <PgSentinelIcon size={80} />
-                      ) : current.icon === 'pg-stat-insights-custom' ? (
-                        <PgStatInsightsIcon size={80} />
-                      ) : (
-                        <Image 
-                          src={current.icon} 
-                          alt={`${current.name} icon`}
-                          width={80}
-                          height={80}
-                          className="w-20 h-20"
-                        />
-                      )}
+                      {(() => {
+                        const IconComponent = iconMap[current.id]
+                        return IconComponent ? <IconComponent size={80} /> : null
+                      })()}
                     </div>
                     <div className="text-left">
                       <h1 className="text-2xl md:text-3xl font-light text-white drop-shadow-lg">
@@ -251,25 +101,30 @@ const Hero = () => {
 
               {/* Dots */}
               <div className="flex justify-center gap-2 mb-4">
-                {products.map((p, index) => (
-                  <button
-                    key={p.id}
-                    onClick={() => setCurrentProduct(index)}
-                    className="w-3 h-3 rounded-full transition-all duration-300 hover:scale-125"
-                    style={{
-                      backgroundColor:
-                        index === currentProduct ? '#4f46e5' : 'rgba(255,255,255,0.3)',
-                      boxShadow: index === currentProduct ? '0 0 12px rgba(79, 70, 229, 0.6)' : 'none'
-                    }}
-                    aria-label={`Show ${p.name}`}
-                  />
-                ))}
+                {products.map((p, index) => {
+                  const theme = getProductTheme(p.id)
+                  const isActive = index === currentProduct
+                  return (
+                    <button
+                      key={p.id}
+                      onClick={() => setCurrentProduct(index)}
+                      className="w-3 h-3 rounded-full transition-all duration-300 hover:scale-125"
+                      style={{
+                        backgroundColor: isActive ? 'var(--primary-600)' : 'rgba(255,255,255,0.3)',
+                        boxShadow: isActive ? '0 0 12px rgba(79, 70, 229, 0.6)' : 'none'
+                      }}
+                      aria-label={`Show ${p.name}`}
+                    />
+                  )
+                })}
               </div>
 
               {/* Product links */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                  {products.map((product) => {
                    const active = product.id === current.id
+                   const theme = getProductTheme(product.id)
+                   const IconComponent = iconMap[product.id]
                    return (
                      <Link
                        key={product.id}
@@ -281,31 +136,8 @@ const Hero = () => {
                          boxShadow: active ? '0 8px 32px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)' : '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
                        }}
                      >
-                       {product.icon === 'neurondb-custom' ? (
-                         <NeurondBIcon size={20} />
-                       ) : product.icon === 'pgbalancer-custom' ? (
-                         <PgbalancerIcon size={20} />
-                       ) : product.icon === 'pgraft-custom' ? (
-                         <PgraftIcon size={20} />
-                       ) : product.icon === 'fauxdb-custom' ? (
-                         <FauxDbIcon size={20} />
-                       ) : product.icon === 'pgsentinel-custom' ? (
-                         <PgSentinelIcon size={20} />
-                       ) : product.icon === 'pg-stat-insights-custom' ? (
-                         <PgStatInsightsIcon size={20} />
-                       ) : (
-                         <Image 
-                           src={product.icon} 
-                           alt={`${product.name} icon`}
-                           width={20}
-                           height={20}
-                           className="w-5 h-5"
-                           style={{ filter: active ? 'none' : 'brightness(0.8)' }}
-                         />
-                       )}
-                       <span
-                         className="font-medium text-white drop-shadow-sm"
-                       >
+                       {IconComponent && <IconComponent size={20} />}
+                       <span className="font-medium text-white drop-shadow-sm">
                          {product.name}
                        </span>
                      </Link>

@@ -3,8 +3,34 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Gradient Boosting | NeuronDB ML Algorithms',
-  description: 'XGBoost, LightGBM, and CatBoost gradient boosting algorithms in NeuronDB for classification and regression.',
+  title: 'Gradient Boosting in AI PostgreSQL | XGBoost, LightGBM, CatBoost in NeurondB',
+  description: 'Complete guide to gradient boosting in NeurondB (AI PostgreSQL extension): XGBoost, LightGBM, and CatBoost algorithms. Alternative to PostgreSQL.ai and pgml for gradient boosting. Learn how to train, predict, and evaluate models in PostgreSQL with SQL examples and GPU acceleration.',
+  keywords: [
+    'XGBoost NeurondB',
+    'AI PostgreSQL XGBoost',
+    'PostgreSQL.ai XGBoost',
+    'pgml XGBoost',
+    'LightGBM PostgreSQL',
+    'CatBoost SQL',
+    'gradient boosting',
+    'boosting algorithms',
+    'XGBoost training',
+    'LightGBM hyperparameters',
+    'CatBoost classification',
+    'ensemble learning',
+    'GPU gradient boosting',
+    'machine learning SQL',
+    'PostgreSQL AI ML'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/ml/gradient-boosting',
+  },
+  openGraph: {
+    title: 'Gradient Boosting in NeurondB | XGBoost, LightGBM, CatBoost',
+    description: 'Train XGBoost, LightGBM, and CatBoost models in PostgreSQL with NeurondB. Complete guide with SQL examples and GPU support.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/ml/gradient-boosting',
+  },
 }
 
 const tableOfContents: TocItem[] = [

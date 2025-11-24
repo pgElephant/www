@@ -3,8 +3,34 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Recommendation Systems | NeuronDB ML Algorithms',
-  description: 'Build recommendation systems using collaborative filtering and ranking in NeuronDB.',
+  title: 'Recommendation Systems in AI PostgreSQL | Collaborative Filtering in NeurondB',
+  description: 'Build recommendation systems in NeurondB (AI PostgreSQL extension) using collaborative filtering. Alternative to PostgreSQL.ai and pgml for recommendations. Learn train_collaborative_filter(), predict_collaborative_filter(), and evaluation with SQL examples for user-item recommendations.',
+  keywords: [
+    'collaborative filtering NeurondB',
+    'AI PostgreSQL recommendations',
+    'PostgreSQL.ai recommendations',
+    'pgml recommendations',
+    'recommendation systems',
+    'ALS algorithm',
+    'user-item recommendations',
+    'rating prediction',
+    'matrix factorization',
+    'recommender systems SQL',
+    'collaborative filtering PostgreSQL',
+    'train_collaborative_filter',
+    'predict_collaborative_filter',
+    'recommendation algorithms',
+    'PostgreSQL AI recommendations'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/ml/recommendation-systems',
+  },
+  openGraph: {
+    title: 'Collaborative Filtering in NeurondB | Recommendation Systems',
+    description: 'Build recommendation systems in PostgreSQL with NeurondB collaborative filtering. Complete guide with SQL examples.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/ml/recommendation-systems',
+  },
 }
 
 const tableOfContents: TocItem[] = [

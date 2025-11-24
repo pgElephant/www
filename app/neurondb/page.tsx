@@ -1,106 +1,32 @@
 import React from 'react';
-import ProjectTemplate from '../_components/ProjectTemplate';
+import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
 import NeurondBDemoTerminal from '@/components/NeurondBDemoTerminal';
 import NeuronDBArchitectureDiagram from '@/components/NeuronDBArchitectureDiagram';
-import { Brain, Database, Zap, Search, Cpu, Shield, BarChart3, Layers } from 'lucide-react';
-import { Metadata } from 'next';
+import { generateProductPageMetadata } from '@/config/seo';
 
-export const metadata: Metadata = {
-  title: 'NeurondB - AI Database PostgreSQL Extension | Vector Database, RAG Pipeline & ML Inference',
-  description: 'Production-grade AI database extension for PostgreSQL with vector search, RAG pipeline, machine learning inference, and hybrid retrieval. HNSW indexing, ONNX runtime, GPU acceleration (CUDA/ROCm), embeddings generation, cross-encoder reranking. Complete in-database RAG with semantic search, full-text search, and LLM integration. PostgreSQL 16-18 compatible AI extension.',
-  keywords: [
-    'ai database', 'ai database postgresql', 'postgres ai', 'postgresql ai extension', 'postgres ai extension',
-    'vector database', 'vector database postgresql', 'postgres vector database', 'vector search postgresql',
-    'rag pipeline', 'rag database', 'rag postgresql', 'retrieval augmented generation postgresql',
-    'semantic search postgresql', 'semantic database', 'similarity search postgresql',
-    'machine learning postgresql', 'ml inference postgresql', 'postgres ml', 'postgresql machine learning',
-    'embeddings database', 'embedding generation postgresql', 'text embeddings postgresql',
-    'hnsw index', 'hnsw postgresql', 'vector index postgresql', 'ann search postgresql',
-    'hybrid search', 'hybrid search postgresql', 'vector full text search',
-    'onnx postgresql', 'onnx runtime postgresql', 'ml models postgresql',
-    'gpu accelerated database', 'cuda postgresql', 'rocm postgresql',
-    'ai powered database', 'llm database', 'gpt database', 'chatgpt database',
-    'langchain postgresql', 'llamaindex postgresql', 'rag framework postgresql',
-    'pgvector alternative', 'postgres ai comparison', 'postgresql ai tools',
-    'neurondb', 'neurondB', 'pg ai', 'pgai', 'postgres vector',
-    'document retrieval postgresql', 'knowledge base postgresql', 'ai search postgresql',
-    'reranking postgresql', 'cross encoder postgresql', 'mmr postgresql',
-    'batch inference postgresql', 'model serving postgresql', 'inference engine postgresql',
-    'postgres analytics', 'k-means postgresql', 'clustering postgresql',
-    'dimensionality reduction postgresql', 'pca postgresql', 'dbscan postgresql',
-    'production ai database', 'enterprise ai database', 'scalable vector database',
-    'open source vector database', 'free vector database', 'vector database open source'
-  ].join(', '),
-  openGraph: {
-    title: 'NeurondB - AI Database PostgreSQL Extension | Vector Database, RAG & ML',
-    description: 'Production-grade AI database extension for PostgreSQL. Vector search with HNSW indexing, complete RAG pipeline, ML inference with ONNX, GPU acceleration, hybrid search, and embeddings generation. Open source PostgreSQL AI extension.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/neurondb',
-    siteName: 'pgElephant',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/og-neurondb.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'NeurondB - AI Database Extension for PostgreSQL with Vector Search and RAG',
-      }
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'NeurondB - AI Database PostgreSQL Extension | Vector Database & RAG',
-    description: 'Production-grade AI database for PostgreSQL. Vector search, RAG pipeline, ML inference, GPU acceleration, hybrid search. Open source PostgreSQL AI extension.',
-    images: ['https://www.pgelephant.com/og-neurondb.jpg'],
-  },
-  alternates: {
-    canonical: 'https://www.pgelephant.com/neurondb',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
-
-// Custom NeurondB icon component
-const NeurondBIcon = ({ size = 80 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Brain className="text-indigo-400 animate-pulse" style={{ width: size * 0.7, height: size * 0.7 }} />
-    <Database className="text-teal-400 absolute -bottom-2 -right-2 animate-bounce" style={{ width: size * 0.35, height: size * 0.35, animationDelay: '0.5s' }} />
-    <Zap className="text-yellow-400 absolute -top-2 -left-2 animate-pulse" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '1s' }} />
-    <Search className="text-purple-400 absolute -top-2 -right-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '1.5s' }} />
-  </div>
-)
+export const metadata = generateProductPageMetadata('neurondb');
 
 const neurondbConfig = {
+  productId: 'neurondb' as const,
   hero: {
-    title: 'NeurondB: Advanced AI Database Extension for PostgreSQL',
-    subtitle: 'Production-grade vector search with 52 ML algorithms, 497 SQL functions, GPU acceleration (CUDA/ROCm/Metal), and complete RAG pipeline—all within PostgreSQL',
-    projectName: 'neurondb',
-    icon: <NeurondBIcon size={80} />,
+    subtitle: 'Production-grade vector search with 52 ML algorithms, 473 SQL functions, GPU acceleration (CUDA/ROCm/Metal), and complete RAG pipeline—all within PostgreSQL',
   },
+  demo: <NeurondBDemoTerminal />,
   badges: [
     'PostgreSQL 16-18',
-    '8 Vector Types',
+    '5 Vector Types',
     '52 ML Algorithms',
-    '497 SQL Functions',
+    '473 SQL Functions',
     'GPU Acceleration',
-    '5 Background Workers',
+    '4 Background Workers',
   ],
-  demo: <NeurondBDemoTerminal />,
   architecture: <NeuronDBArchitectureDiagram />,
   featurePillars: {
     kicker: 'Comprehensive AI Database Features',
     items: [
       { 
         title: 'Vector Search & Indexing', 
-        desc: '8 production-grade vector types: vector (float32), vectorp (packed), halfvec (float16), binaryvec (binary), sparsevec (sparse), vecmap (map), vgraph (graph), rtext (retrieval text). HNSW and IVF indexing with automatic tuning. 10+ distance metrics. Product Quantization (PQ) and Optimized PQ (OPQ) for 2x-32x compression.' 
+        desc: '5 production-grade vector types: vector (float32), vectorp (packed), vecmap (sparse map), vgraph (graph-based), rtext (retrieval text). HNSW and IVF indexing with automatic tuning. Multiple distance metrics: L2 (Euclidean), Cosine, Inner Product, Manhattan, Hamming, Jaccard. Product Quantization (PQ) and Optimized PQ (OPQ) for 2x-32x compression.' 
       },
       { 
         title: 'ML & Embeddings', 
@@ -120,7 +46,7 @@ const neurondbConfig = {
       },
       { 
         title: 'Background Workers', 
-        desc: '5 production workers: neuranq (async job queue with SKIP LOCKED, retries, poison handling), neuranmon (auto-tuner for search params, cache rotation, recall@k tracking), neurandefrag (index compaction, tombstone pruning, rebuild scheduling), neuranllm (LLM job processing with crash recovery), neuranbatch (batch operations). All tenant-aware with QPS/cost budgets.' 
+        desc: '4 production workers: neuranq (async job queue executor with SKIP LOCKED, retries, poison handling, batch processing), neuranmon (live query auto-tuner for search params, cache rotation, recall@k tracking), neurandefrag (automatic index maintenance, compaction, tombstone pruning, rebuild scheduling), neuranllm (LLM job processing with crash recovery). All tenant-aware with QPS/cost budgets.' 
       },
       { 
         title: 'ML Analytics Suite', 
@@ -144,7 +70,7 @@ const neurondbConfig = {
       },
       { 
         title: 'PostgreSQL Native Architecture', 
-        desc: 'Pure C implementation following 100% PostgreSQL coding standards. 144 source files + 64 headers, zero compiler warnings. PGXS build system. 497 SQL functions/types/operators in 6,191 lines. Shared memory for caching. WAL integration for durability. SPI for safe operations. Background worker framework. Standard extension, zero external dependencies, no core modifications.' 
+        desc: 'Pure C implementation following 100% PostgreSQL coding standards. 144 source files + 64 headers, zero compiler warnings. PGXS build system. 473 SQL functions/types/operators. Shared memory for caching. WAL integration for durability. SPI for safe operations. Background worker framework. Standard extension, zero external dependencies, no core modifications.' 
       },
     ],
   },
@@ -261,7 +187,7 @@ const neurondbConfig = {
         </tr>
         <tr>
           <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Background Workers</td>
-          <td className="px-3 py-3 text-green-400 text-xs">5 workers: neuranq, neuranmon, neurandefrag, neuranllm, neuranbatch</td>
+          <td className="px-3 py-3 text-green-400 text-xs">4 workers: neuranq, neuranmon, neurandefrag, neuranllm</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
           <td className="px-3 py-3 text-red-300 text-xs">None</td>
@@ -343,6 +269,6 @@ const neurondbConfig = {
 };
 
 export default function NeurondBPage() {
-  return <ProjectTemplate {...neurondbConfig} />;
+  return <ProductPageTemplate {...neurondbConfig} />;
 }
 

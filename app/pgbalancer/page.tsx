@@ -1,147 +1,17 @@
 import React from 'react';
-import ProjectTemplate from '../_components/ProjectTemplate';
+import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
 import PgbalancerDemoTerminal from '@/components/PgbalancerDemoTerminal';
 import PgbalancerSEO from '@/components/SEO/PgbalancerSEO';
-import { Database, Network, Zap, BarChart3, Brain, Cpu } from 'lucide-react';
-import { Metadata } from 'next';
+import { generateProductPageMetadata } from '@/config/seo';
 
-export const metadata: Metadata = {
-  title: 'pgbalancer - PostgreSQL Connection Pooler & Load Balancer | pgpool-II Alternative with HAProxy Mode',
-  description: 'Modern PostgreSQL connection pooler and load balancer with pgpool-II compatibility and HAProxy-like connection balancing. AI-powered machine learning load balancing, automatic failover, REST API, MQTT clustering, and watchdog support. Production-ready alternative to pgpool-II, PgBouncer, and HAProxy for PostgreSQL. Built-in health monitoring and intelligent query routing.',
-  keywords: [
-    // Primary pgpool-II keywords
-    'pgpool-ii', 'pgpool-ii alternative', 'pgpool ii', 'pgpool', 'pgpool alternative',
-    'pgpool-ii fork', 'modern pgpool-ii', 'pgpool-ii replacement', 'better than pgpool-ii',
-    'pgpool-ii vs pgbalancer', 'migrate from pgpool-ii', 'pgpool-ii modern alternative',
-    
-    // HAProxy keywords
-    'haproxy postgresql', 'haproxy database', 'haproxy alternative', 'haproxy load balancer',
-    'haproxy connection pooling', 'haproxy postgres', 'load balancer like haproxy',
-    'haproxy mode', 'connection balancer haproxy', 'haproxy for postgresql',
-    
-    // Failover keywords
-    'postgresql failover', 'automatic failover postgresql', 'database failover',
-    'failover postgresql', 'postgres failover solution', 'automatic database failover',
-    'zero downtime failover', 'failover and recovery', 'postgresql high availability failover',
-    'instant failover postgresql', 'failover detection', 'watchdog failover',
-    
-    // Connection pooler keywords
-    'postgresql connection pooler', 'connection pooler', 'database connection pooler',
-    'postgres connection pooler', 'connection pool postgresql', 'pooler postgresql',
-    'pgbouncer alternative', 'pgcat alternative', 'odyssey alternative',
-    'best postgresql connection pooler', 'connection pooling middleware',
-    
-    // Load balancer keywords
-    'postgresql load balancer', 'database load balancer', 'postgres load balancer',
-    'load balancing postgresql', 'query load balancing', 'connection load balancing',
-    'intelligent load balancing', 'read write load balancing', 'statement level load balancing',
-    
-    // AI and ML keywords
-    'ai postgresql pooling', 'machine learning load balancing', 'ai-powered connection pooler',
-    'predictive query routing', 'adaptive learning database', 'intelligent backend selection',
-    
-    // Core product keywords
-    'pgbalancer', 'pg balancer', 'postgres balancer', 'postgresql pooling',
-    'database connection pooling', 'connection pool management', 'postgresql clustering',
-    
-    // High availability keywords
-    'postgresql ha', 'database high availability', 'postgres high availability',
-    'ha postgresql', 'high availability solution', 'zero downtime postgresql',
-    'high availability load balancer', 'ha connection pooler',
-    
-    // Modern features
-    'rest api postgresql', 'rest api connection pooler', 'http api pooler',
-    'mqtt clustering', 'yaml configuration', 'cli connection pooler', 'bctl cli',
-    'jwt authentication pooler', 'modern connection pooler',
-    
-    // Technical features
-    'watchdog support', 'health monitoring postgresql', 'backend health check',
-    'query cache', 'connection cache', 'session pooling', 'transaction pooling',
-    'statement level load balance', 'query based load balancing',
-    
-    // Comparison and migration
-    'pgpool-ii vs pgbouncer', 'pgpool-ii vs haproxy', 'connection pooler comparison',
-    'migrate from pgpool', 'pgpool to pgbalancer', 'haproxy to pgbalancer',
-    'best postgresql pooling solution', 'enterprise connection pooler',
-    
-    // Use cases
-    'postgresql replication pooling', 'read replica load balancing', 'master slave pooling',
-    'multi master postgresql', 'streaming replication pooling', 'logical replication pooling',
-    
-    // Problem solving keywords
-    'too many postgresql connections', 'connection limit postgresql', 'optimize postgresql connections',
-    'postgresql connection pooling best practices', 'reduce connection overhead',
-    'connection pooling strategy', 'database connection management'
-  ].join(', '),
-  authors: [
-    { name: 'pgElephant Team', url: 'https://www.pgelephant.com' }
-  ],
-  category: 'Database Management Software',
-  classification: 'Database Tools',
-  openGraph: {
-    title: 'pgbalancer - Modern PostgreSQL Connection Pooler with REST API',
-    description: 'Production-ready PostgreSQL connection pooler and load balancer with REST API, CLI tool, YAML configuration, and JWT authentication. Modern fork of pgpool-II.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/pgbalancer',
-    siteName: 'pgElephant',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/og-pgbalancer.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'pgbalancer - Modern PostgreSQL Connection Pooler',
-        type: 'image/jpeg',
-      }
-    ],
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@pgElephant',
-    creator: '@pgElephant',
-    title: 'pgbalancer - Modern PostgreSQL Connection Pooler with REST API',
-    description: 'Production-ready PostgreSQL connection pooler with REST API, CLI tool, YAML configuration, and watchdog support. Modern fork of pgpool-II.',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/twitter-pgbalancer.jpg',
-        alt: 'pgbalancer - Modern PostgreSQL Connection Pooler',
-        width: 1200,
-        height: 600,
-      }
-    ],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    'max-image-preview': 'large',
-    'max-snippet': -1,
-    'max-video-preview': -1,
-  },
-  alternates: {
-    canonical: 'https://www.pgelephant.com/pgbalancer',
-    types: {
-      'application/rss+xml': 'https://www.pgelephant.com/blog/rss.xml',
-    },
-  },
-};
-
-// Custom pgbalancer icon component
-const PgbalancerIcon = ({ size = 80 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-blue-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Network className="text-green-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.2s' }} />
-    <Zap className="text-yellow-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.7s' }} />
-    <BarChart3 className="text-orange-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.1s' }} />
-  </div>
-)
+export const metadata = generateProductPageMetadata('pgbalancer');
 
 const pgbalancerConfig = {
+  productId: 'pgbalancer' as const,
   hero: {
-    title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
     subtitle: 'Production-ready connection pooling with AI load balancing, REST API, MQTT clustering, and JWT authentication',
-    projectName: 'pgbalancer',
-    icon: <PgbalancerIcon size={80} />,
   },
+  demo: <PgbalancerDemoTerminal />,
   badges: [
     'PostgreSQL 13-18',
     'AI Load Balancing',
@@ -153,7 +23,6 @@ const pgbalancerConfig = {
     'Watchdog Support',
     'Production Ready',
   ],
-  demo: <PgbalancerDemoTerminal />,
   features: [
     { icon: '🧠', iconColor: 'text-purple-500', title: 'AI Load Balancing', desc: 'Machine learning algorithm with adaptive learning, response time prediction, and health scoring. Learns from query patterns.' },
     { icon: '📊', iconColor: 'text-cyan-500', title: 'Predictive Analytics', desc: 'AI forecasts query execution times, analyzes complexity, and predicts backend performance based on historical data.' },
@@ -788,7 +657,7 @@ export default function PgbalancerPage() {
   return (
     <>
       <PgbalancerSEO />
-      <ProjectTemplate {...pgbalancerConfig} />
+      <ProductPageTemplate {...pgbalancerConfig} />
     </>
   );
 }

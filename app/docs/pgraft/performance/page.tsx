@@ -69,8 +69,7 @@ export default function PgraftPerformancePage() {
           <div className="grid md:grid-cols-3 gap-4">
             <BashCodeBlock
               title="Low latency (LAN)"
-              code={`pgraft.heartbeat_interval = 40
-pgraft.election_timeout = 400
+              code={`pgraft.election_timeout = 400
 pgraft.append_batch_size = 256
 pgraft.replay_parallelism = 4`}
             />

@@ -3,10 +3,34 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../comp
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'RAG with PostgreSQL | NeuronDB Retrieval Augmented Generation',
-  description: 'Build production RAG (Retrieval Augmented Generation) applications with NeuronDB and PostgreSQL. Combine vector search + full-text search for AI chatbots, document Q&A, and knowledge bases.',
+  title: 'RAG Pipeline in AI PostgreSQL | Retrieval Augmented Generation with NeurondB',
+  description: 'Build production RAG (Retrieval Augmented Generation) applications with NeurondB (AI PostgreSQL extension). Alternative to PostgreSQL.ai for RAG pipelines. Learn vector search, full-text search, embeddings, and LLM integration for AI chatbots, document Q&A, and knowledge bases.',
+  keywords: [
+    'RAG pipeline NeurondB',
+    'AI PostgreSQL RAG',
+    'PostgreSQL.ai RAG',
+    'pgml RAG',
+    'Retrieval Augmented Generation',
+    'RAG PostgreSQL',
+    'vector search RAG',
+    'document Q&A',
+    'AI chatbot',
+    'knowledge base search',
+    'RAG implementation',
+    'semantic search RAG',
+    'LLM integration',
+    'embedding RAG',
+    'hybrid search RAG',
+    'PostgreSQL AI RAG'
+  ].join(', '),
   alternates: {
     canonical: 'https://www.pgelephant.com/docs/neurondb/rag',
+  },
+  openGraph: {
+    title: 'RAG Pipeline in NeurondB | Retrieval Augmented Generation',
+    description: 'Build production RAG applications with NeurondB. Complete guide to vector search, embeddings, and LLM integration.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/rag',
   },
 }
 

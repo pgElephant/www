@@ -1,96 +1,16 @@
 import React from 'react';
-import ProjectTemplate from '../_components/ProjectTemplate';
+import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
 import FauxDbDemoTerminal from '@/components/FauxDbDemoTerminal';
-import { Database, FileText, Layers, Activity } from 'lucide-react';
-import { Metadata } from 'next';
+import { generateProductPageMetadata } from '@/config/seo';
 
-export const metadata: Metadata = {
-  title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL | Wire Protocol Compatibility',
-  description: 'FauxDB is the ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Built in Rust with pure PostgreSQL backend. Connect with mongosh OR mysql client—access the same data through both protocols with ACID guarantees, SQL translator, and zero external dependencies.',
-  keywords: [
-    // Primary keywords
-    'fauxdb', 'dual-protocol database', 'mongodb mysql postgresql', 'multi-protocol database',
-    // MongoDB compatibility
-    'mongodb compatible postgresql', 'mongodb wire protocol', 'mongosh postgresql', 'mongodb alternative',
-    'mongodb to postgresql', 'mongodb postgresql proxy', 'mongodb replica postgresql',
-    // MySQL compatibility
-    'mysql compatible postgresql', 'mysql wire protocol', 'mysql postgresql proxy', 'mysql protocol postgresql',
-    'mysql to postgresql', 'mysql connector postgresql', 'mysql translation postgresql',
-    // Wire protocol
-    'wire protocol compatibility', 'database protocol translation', 'protocol proxy database',
-    'dual wire protocol', 'multi-protocol database server',
-    // Migration and compatibility
-    'migrate mongodb to postgresql', 'migrate mysql to postgresql', 'mongodb postgresql migration',
-    'mysql postgresql migration', 'database migration tool', 'zero downtime migration',
-    // Document database
-    'document database postgresql', 'jsonb mongodb', 'postgresql document store',
-    'nosql postgresql', 'document oriented database', 'schema-less postgresql',
-    // Technical features
-    'rust database', 'postgresql backend', 'acid transactions nosql', 'sql translator',
-    'query translation engine', 'bson postgresql', 'mongodb queries postgresql',
-    // Use cases
-    'mongodb postgresql compatibility', 'mysql postgresql compatibility', 'legacy application migration',
-    'multi-client database', 'hybrid database access', 'protocol abstraction layer',
-    // Competitive
-    'ferretdb alternative', 'mongosql alternative', 'best mongodb postgresql',
-    'production mongodb compatibility', 'enterprise database migration',
-    // Open source
-    'open source mongodb alternative', 'rust mongodb', 'rust mysql proxy', 'postgresql proxy'
-  ].join(', '),
-  openGraph: {
-    title: 'FauxDB - Dual-Protocol Database: MongoDB + MySQL on PostgreSQL',
-    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Built in Rust with pure PostgreSQL backend. Connect with mongosh OR mysql client—access the same data through both protocols.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/fauxdb',
-    siteName: 'pgElephant',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/og-fauxdb.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'FauxDB - Dual-Protocol Database Server',
-      }
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'FauxDB - Dual-Protocol Database | MongoDB + MySQL on PostgreSQL',
-    description: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously. Connect with mongosh OR mysql client—access the same data through both protocols.',
-    images: ['https://www.pgelephant.com/og-fauxdb.jpg'],
-  },
-  alternates: {
-    canonical: 'https://www.pgelephant.com/fauxdb',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
-
-// Custom FauxDB icon component
-const FauxDbIcon = ({ size = 80 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-emerald-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <FileText className="text-orange-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.3s' }} />
-    <Layers className="text-blue-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.8s' }} />
-    <Activity className="text-red-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.2s' }} />
-  </div>
-)
+export const metadata = generateProductPageMetadata('fauxdb');
 
 const fauxdbConfig = {
+  productId: 'fauxdb' as const,
   hero: {
-    title: 'FauxDB: Dual-Protocol Database Server',
     subtitle: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously—backed by pure PostgreSQL. Connect with MongoDB clients OR MySQL clients, access the same data through both protocols.',
-    projectName: 'FauxDB',
-    icon: <FauxDbIcon size={80} />,
   },
+  demo: <FauxDbDemoTerminal />,
   badges: [
     'MongoDB + MySQL Protocols',
     'Dual-Protocol Access',
@@ -99,7 +19,6 @@ const fauxdbConfig = {
     'SQL Translator',
     'ACID Transactions',
   ],
-  demo: <FauxDbDemoTerminal />,
   featurePillars: {
     kicker: 'Key Features',
     items: [
@@ -277,5 +196,5 @@ const fauxdbConfig = {
 };
 
 export default function FauxDbPage() {
-  return <ProjectTemplate {...fauxdbConfig} />;
+  return <ProductPageTemplate {...fauxdbConfig} />;
 }

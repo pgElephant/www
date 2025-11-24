@@ -3,8 +3,30 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'LLM Reranking | NeuronDB Reranking',
-  description: 'GPT/Claude-powered scoring for reranking using LLM models in NeuronDB.',
+  title: 'LLM Reranking in NeurondB | ndb_llm_rerank() Function Guide',
+  description: 'Complete guide to LLM reranking in NeurondB using ndb_llm_rerank() function. Learn how to rerank search results with Large Language Models (GPT, Claude, Hugging Face) for high-quality semantic relevance scoring in PostgreSQL.',
+  keywords: [
+    'LLM reranking NeurondB',
+    'ndb_llm_rerank',
+    'GPT reranking',
+    'Claude reranking',
+    'Hugging Face reranking',
+    'language model reranking',
+    'semantic reranking',
+    'LLM search relevance',
+    'OpenAI reranking',
+    'neural reranking models',
+    'query document scoring'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/reranking/llm-reranking',
+  },
+  openGraph: {
+    title: 'LLM Reranking in NeurondB | GPT/Claude Reranking Guide',
+    description: 'Rerank search results with LLMs in NeurondB. Complete guide to ndb_llm_rerank() function and LLM integration.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/reranking/llm-reranking',
+  },
 }
 
 const tableOfContents: TocItem[] = [

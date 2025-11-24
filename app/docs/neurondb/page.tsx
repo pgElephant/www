@@ -4,9 +4,58 @@ import ProductDocsLanding from '../../../components/ProductDocsLanding'
 import { NeurondBIcon } from '../../../components/ProductIcons'
 
 export const metadata = {
-  title: 'NeurondB Documentation | PostgreSQL AI Vector Extension',
+  title: 'NeurondB Documentation | AI PostgreSQL Extension | PostgreSQL.ai Alternative | pgml Alternative',
   description:
-    'Deploy, configure, and operate NeurondB: GPU-accelerated vector search, machine learning inference, hybrid retrieval, RAG pipelines, and background workers for PostgreSQL.'
+    'NeurondB: The complete AI PostgreSQL extension for vector search, machine learning, and AI workloads. Alternative to PostgreSQL.ai, pgml, and PostgreSQLml. GPU-accelerated vector search, HNSW indexing, ML inference, hybrid retrieval, RAG pipelines, and ONNX model deployment directly in PostgreSQL.',
+  keywords: [
+    'NeurondB',
+    'AI PostgreSQL',
+    'AI Postgres',
+    'PostgreSQL AI extension',
+    'PostgreSQL.ai',
+    'PostgreSQL.ai alternative',
+    'pgml',
+    'pgml alternative',
+    'PostgreSQLml',
+    'PostgreSQL ML',
+    'PostgreSQL machine learning',
+    'AI extension for PostgreSQL',
+    'PostgreSQL vector search',
+    'GPU-accelerated vector database',
+    'HNSW index',
+    'vector similarity search',
+    'machine learning in PostgreSQL',
+    'ONNX inference',
+    'hybrid search',
+    'RAG pipeline',
+    'vector embeddings',
+    'semantic search',
+    'neural network database',
+    'vector indexing',
+    'cosine similarity',
+    'L2 distance',
+    'approximate nearest neighbor',
+    'ANN search',
+    'embedding generation',
+    'PostgreSQL AI',
+    'Postgres AI',
+    'AI database extension'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb',
+  },
+  openGraph: {
+    title: 'NeurondB Documentation | PostgreSQL AI Vector Extension',
+    description: 'Complete guide to GPU-accelerated vector search, ML inference, and RAG pipelines in PostgreSQL with NeurondB.',
+    type: 'website',
+    url: 'https://www.pgelephant.com/docs/neurondb',
+    siteName: 'pgElephant',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NeurondB Documentation | PostgreSQL AI Vector Extension',
+    description: 'Complete guide to GPU-accelerated vector search, ML inference, and RAG pipelines in PostgreSQL.',
+  },
 }
 
 export default function Page() {
@@ -16,9 +65,9 @@ export default function Page() {
         badgeLabel: 'NeurondB',
         badgeIcon: <NeurondBIcon size={24} />,
         badgeGradient: 'from-slate-700 to-slate-600',
-        title: 'PostgreSQL AI Vector Extension',
+        title: 'PostgreSQL AI Vector Extension | Alternative to PostgreSQL.ai & pgml',
         description:
-          'GPU-accelerated vector search, model inference, hybrid retrieval, and RAG orchestration built directly into PostgreSQL. Use this documentation to deploy NeurondB, operate background workers, and embed ML pipelines in SQL.',
+          'GPU-accelerated vector search, model inference, hybrid retrieval, and RAG orchestration built directly into PostgreSQL. NeurondB is a complete AI PostgreSQL extension and alternative to PostgreSQL.ai, pgml, and PostgreSQLml. Use this documentation to deploy NeurondB, operate background workers, and embed ML pipelines in SQL.',
         ctas: [
           {
             label: 'Get Started',

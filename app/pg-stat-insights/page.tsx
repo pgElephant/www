@@ -1,111 +1,19 @@
 import React from 'react';
-import ProjectTemplate from '../_components/ProjectTemplate';
+import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
 import PgStatInsightsDemoTerminal from '@/components/PgStatInsightsDemoTerminal';
-import { Metadata } from 'next';
+import { generateProductPageMetadata } from '@/config/seo';
 import { 
   TrendingUp, Database, Zap, Target, Eye, AlertTriangle,
   BarChart3, PieChart, Activity, Clock, Lock, HardDrive,
   Search, CheckCircle, FileText, Layers
 } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'pg_stat_insights - PostgreSQL Performance Monitoring Extension | 52 Metrics, 11 Views',
-  description: 'Advanced PostgreSQL query performance monitoring extension with 52 comprehensive metrics across 11 pre-built views. Track slow queries, cache efficiency, WAL generation, and optimize database performance. Drop-in replacement for pg_stat_statements with enhanced analytics. PostgreSQL 16-18 compatible.',
-  keywords: [
-    // Primary keywords
-    'pg_stat_insights', 'PostgreSQL performance monitoring', 'PostgreSQL query analytics',
-    'pg_stat_statements alternative', 'database performance extension', 'SQL optimization',
-    
-    // Core metrics
-    '52 metrics', '11 views', 'query performance tracking', 'execution time monitoring',
-    'cache hit analysis', 'WAL generation tracking', 'JIT statistics', 'buffer I/O metrics',
-    
-    // Technical keywords
-    'pg_stat_statements', 'PostgreSQL query analysis', 'slow query detection', 'cache misses',
-    'buffer cache efficiency', 'response time categorization', 'time-series data',
-    
-    // Feature keywords
-    'query optimization', 'performance monitoring extension', 'database analytics',
-    'execution statistics', 'plan optimization', 'parallel query monitoring',
-    'replication lag tracking', 'WAL monitoring', 'JIT compilation stats',
-    
-    // Integration keywords
-    'Prometheus PostgreSQL', 'Grafana dashboards', 'PostgreSQL 16', 'PostgreSQL 17', 'PostgreSQL 18',
-    'postgres_exporter', 'TAP testing', 'database monitoring tools',
-    
-    // Use case keywords
-    'database performance tuning', 'PostgreSQL optimization', 'production monitoring',
-    'query performance analysis', 'database health monitoring', 'SQL performance tracking'
-  ].join(', '),
-  authors: [
-    { name: 'pgElephant Team', url: 'https://www.pgelephant.com' }
-  ],
-  category: 'Database Analytics Software',
-  classification: 'Database Tools',
-  openGraph: {
-    title: 'pg_stat_insights - Deep PostgreSQL Performance Analytics',
-    description: 'Comprehensive PostgreSQL performance analytics with query optimization, table/index analysis, and intelligent recommendations for production databases.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/pg-stat-insights',
-    siteName: 'pgElephant',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/og-pg-stat-insights.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'pg_stat_insights - PostgreSQL Performance Analytics',
-        type: 'image/jpeg',
-      }
-    ],
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@pgElephant',
-    creator: '@pgElephant',
-    title: 'pg_stat_insights - Deep PostgreSQL Performance Analytics',
-    description: 'Comprehensive performance analytics with query optimization, table/index analysis, and intelligent recommendations.',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/twitter-pg-stat-insights.jpg',
-        alt: 'pg_stat_insights - PostgreSQL Analytics',
-        width: 1200,
-        height: 600,
-      }
-    ],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    'max-image-preview': 'large',
-    'max-snippet': -1,
-    'max-video-preview': -1,
-  },
-  alternates: {
-    canonical: 'https://www.pgelephant.com/pg-stat-insights',
-    types: {
-      'application/rss+xml': 'https://www.pgelephant.com/blog/rss.xml',
-    },
-  },
-};
-
-// Custom pg_stat_insights icon component
-const PgStatInsightsIcon = ({ size = 80 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-blue-500" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <TrendingUp className="text-green-400 absolute -top-2 -right-2 animate-pulse" style={{ width: size * 0.35, height: size * 0.35, animationDelay: '0.2s' }} />
-    <BarChart3 className="text-purple-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.4s' }} />
-    <Eye className="text-cyan-400 absolute top-0 left-0 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.6s' }} />
-    <Zap className="text-yellow-400 absolute -bottom-2 -right-2" style={{ width: size * 0.25, height: size * 0.25 }} />
-  </div>
-);
+export const metadata = generateProductPageMetadata('pg-stat-insights');
 
 const pgStatInsightsConfig = {
+  productId: 'pg-stat-insights' as const,
   hero: {
-    title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
     subtitle: '52 comprehensive metrics across 11 pre-built views for query optimization, cache analysis, and WAL monitoring',
-    projectName: 'pg_stat_insights',
-    icon: <PgStatInsightsIcon size={80} />,
   },
   badges: [
     'PostgreSQL 16-18',
@@ -712,10 +620,6 @@ asyncio.run(analyze_database())`,
 };
 
 export default function PgStatInsightsPage() {
-  return (
-    <>
-      <ProjectTemplate {...pgStatInsightsConfig} />
-    </>
-  );
+  return <ProductPageTemplate {...pgStatInsightsConfig} />;
 }
 

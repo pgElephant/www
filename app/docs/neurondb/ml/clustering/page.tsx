@@ -3,8 +3,35 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'NeuronDB · Clustering (K-means, GMM, Hierarchical, DBSCAN)',
-  description: 'Cluster large datasets directly in PostgreSQL using NeuronDB. Includes K-means, GMM, Mini-batch K-means, Hierarchical, and DBSCAN with training, evaluation, and deployment.',
+  title: 'Clustering in AI PostgreSQL | K-means, DBSCAN, GMM in NeurondB',
+  description: 'Complete guide to clustering algorithms in NeurondB (AI PostgreSQL extension): K-means, DBSCAN, Gaussian Mixture Models (GMM), Mini-batch K-means, and Hierarchical clustering. Alternative to PostgreSQL.ai and pgml for ML clustering in PostgreSQL.',
+  keywords: [
+    'K-means clustering NeurondB',
+    'AI PostgreSQL clustering',
+    'PostgreSQL.ai clustering',
+    'pgml clustering',
+    'DBSCAN PostgreSQL',
+    'GMM clustering',
+    'hierarchical clustering',
+    'vector clustering',
+    'unsupervised learning PostgreSQL',
+    'cluster analysis SQL',
+    'K-means SQL',
+    'density-based clustering',
+    'Gaussian mixture model',
+    'Davies-Bouldin index',
+    'cluster quality metrics',
+    'PostgreSQL ML clustering'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/ml/clustering',
+  },
+  openGraph: {
+    title: 'Clustering Algorithms in NeurondB | K-means, DBSCAN, GMM',
+    description: 'Cluster vectors directly in PostgreSQL with NeurondB. Complete guide to K-means, DBSCAN, GMM, and hierarchical clustering.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/ml/clustering',
+  },
 }
 
 const tableOfContents: TocItem[] = [

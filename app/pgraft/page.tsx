@@ -1,92 +1,16 @@
 import React from 'react';
-import ProjectTemplate from '../_components/ProjectTemplate';
+import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
 import PgraftDemoTerminal from '@/components/PgraftDemoTerminal';
-import { Database, Crown, Network, Shield } from 'lucide-react';
-import { Metadata } from 'next';
+import { generateProductPageMetadata } from '@/config/seo';
 
-export const metadata: Metadata = {
-  title: 'pgraft - PostgreSQL Raft Consensus Extension | Automatic Leader Election & Zero Split-Brain',
-  description: 'Production-ready Raft consensus for distributed PostgreSQL clusters. Built on etcd-io/raft with automatic leader election, crash-safe replication, 100% split-brain prevention, zero-downtime failover, and comprehensive SQL API. Native background worker architecture with no external dependencies.',
-  keywords: [
-    // Primary keywords
-    'postgresql raft', 'raft consensus postgresql', 'postgresql consensus', 'pgraft',
-    'postgresql leader election', 'automatic leader election', 'distributed postgresql',
-    // High availability
-    'postgresql high availability', 'postgresql ha', 'postgresql clustering', 'postgresql failover',
-    'zero downtime postgresql', 'split-brain prevention', 'automatic failover postgresql',
-    // Distributed systems
-    'distributed database', 'distributed consensus', 'consensus algorithm', 'raft algorithm',
-    'etcd raft', 'etcd-io raft', 'raft protocol', 'paxos alternative',
-    // PostgreSQL clustering
-    'postgresql cluster', 'database clustering', 'postgres cluster manager',
-    'postgresql replication', 'multi-master postgresql', 'cluster management postgresql',
-    // Technical features
-    'crash-safe replication', 'log replication', 'state machine replication',
-    'quorum-based consensus', 'majority voting', 'term-based leader election',
-    // Use cases
-    'postgresql production clustering', 'enterprise postgresql ha', 'postgresql disaster recovery',
-    'postgres fault tolerance', 'distributed key-value store', 'postgresql synchronization',
-    // Alternatives and comparisons
-    'patroni alternative', 'stolon alternative', 'repmgr alternative', 'pacemaker postgresql',
-    'postgresql ha solutions', 'best postgresql clustering', 'postgresql high availability tools',
-    // Extensions and integration
-    'postgresql extension', 'postgres background worker', 'postgresql native clustering',
-    'sql api clustering', 'postgresql extension ha', 'no external dependencies postgresql'
-  ].join(', '),
-  openGraph: {
-    title: 'pgraft - PostgreSQL Raft Consensus Extension | Leader Election & HA',
-    description: 'Production-ready Raft consensus for PostgreSQL with automatic leader election, crash-safe replication, and 100% split-brain prevention. Built on proven etcd-io/raft library.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/pgraft',
-    siteName: 'pgElephant',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/og-pgraft.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'pgraft - PostgreSQL Raft Consensus Extension',
-      }
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'pgraft - PostgreSQL Raft Consensus | Leader Election & HA',
-    description: 'Production-ready Raft consensus for PostgreSQL clusters with automatic leader election, crash-safe replication, and 100% split-brain prevention.',
-    images: ['https://www.pgelephant.com/og-pgraft.jpg'],
-  },
-  alternates: {
-    canonical: 'https://www.pgelephant.com/pgraft',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
-
-// Custom pgraft icon component
-const PgraftIcon = ({ size = 80 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-blue-400 animate-pulse" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Crown className="text-yellow-400 absolute -top-2 -right-2 animate-bounce" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.5s' }} />
-    <Network className="text-green-400 absolute -bottom-2 -left-2 animate-pulse" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '1s' }} />
-    <Shield className="text-purple-400 absolute -bottom-2 -right-2 animate-pulse" style={{ width: size * 0.2, height: size * 0.2, animationDelay: '1.5s' }} />
-    </div>
-)
+export const metadata = generateProductPageMetadata('pgraft');
 
 const pgraftConfig = {
+  productId: 'pgraft' as const,
   hero: {
-    title: 'pgraft: PostgreSQL Raft Consensus Extension',
     subtitle: 'Production-ready Raft consensus for distributed PostgreSQL clusters with automatic leader election, crash-safe replication, and 100% split-brain prevention',
-    projectName: 'pgraft',
-    icon: <PgraftIcon size={80} />,
   },
+  demo: <PgraftDemoTerminal />,
   badges: [
     'PostgreSQL 14-17',
     'etcd-io/raft',
@@ -95,7 +19,6 @@ const pgraftConfig = {
     'Background Worker',
     'etcd-Compatible KV',
   ],
-  demo: <PgraftDemoTerminal />,
   featurePillars: {
     kicker: 'Key Features',
     items: [
@@ -240,5 +163,5 @@ const pgraftConfig = {
 };
 
 export default function PgraftPage() {
-  return <ProjectTemplate {...pgraftConfig} />;
+  return <ProductPageTemplate {...pgraftConfig} />;
 }

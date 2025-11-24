@@ -4,8 +4,35 @@ import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Getting Started with NeurondB | PostgreSQL AI Vector Extension',
-  description: 'Install NeurondB, configure PostgreSQL, and run your first vector-search queries with embeddings, semantic search, and RAG workflows.',
+  title: 'Getting Started with NeurondB | AI PostgreSQL Extension Installation Guide',
+  description: 'Complete NeurondB installation guide for PostgreSQL 16-18. Install the AI PostgreSQL extension (alternative to PostgreSQL.ai, pgml) and run your first GPU-accelerated vector search queries with embeddings, semantic search, and RAG workflows.',
+  keywords: [
+    'NeurondB installation',
+    'AI PostgreSQL installation',
+    'PostgreSQL AI extension setup',
+    'PostgreSQL.ai alternative',
+    'pgml alternative',
+    'PostgreSQL ML extension',
+    'NeurondB quick start',
+    'vector search tutorial',
+    'PostgreSQL AI setup',
+    'GPU vector search setup',
+    'NeurondB configuration',
+    'vector database installation',
+    'semantic search PostgreSQL',
+    'embedding generation setup',
+    'AI extension for PostgreSQL',
+    'Postgres AI extension'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/getting-started',
+  },
+  openGraph: {
+    title: 'Getting Started with NeurondB | Installation & Quick Start',
+    description: 'Complete NeurondB installation guide for PostgreSQL. Learn vector search, embeddings, and RAG workflows.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/getting-started',
+  },
 }
 
 const tableOfContents: TocItem[] = [
@@ -35,7 +62,7 @@ export default function NeurondBGettingStarted() {
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          NeurondB is an AI-capable PostgreSQL extension that provides GPU-accelerated vector search, ONNX model inference, and hybrid retrieval. This guide covers installation, configuration, and your first semantic search queries.
+          NeurondB is an AI-capable PostgreSQL extension that provides GPU-accelerated vector search, ONNX model inference, and hybrid retrieval. As an alternative to PostgreSQL.ai, pgml, and PostgreSQLml, NeurondB offers comprehensive AI and machine learning capabilities directly in PostgreSQL. This guide covers installation, configuration, and your first semantic search queries.
         </p>
         <p>
           NeurondB enables you to:
@@ -45,7 +72,11 @@ export default function NeurondBGettingStarted() {
           <li>Run ONNX model inference directly in PostgreSQL</li>
           <li>Combine vector, keyword, and metadata filters for hybrid retrieval</li>
           <li>Build RAG (Retrieval Augmented Generation) pipelines with SQL workflows</li>
+          <li>Train and deploy machine learning models using SQL (alternative to pgml and PostgreSQL.ai)</li>
         </ul>
+        <p>
+          <strong>Why NeurondB?</strong> If you're looking for an AI extension for PostgreSQL, NeurondB provides a complete solution for vector search, machine learning, and AI workloads. Unlike PostgreSQL.ai or pgml, NeurondB combines vector search, ML inference, hybrid retrieval, and RAG pipelines in a single, integrated extension.
+        </p>
       </section>
 
       <section id="requirements">

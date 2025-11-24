@@ -5,24 +5,26 @@ import { Download, ArrowRight, Package, Code, Database, Server, Terminal, Github
 import Link from 'next/link'
 import Image from 'next/image'
 
-// Colors from pgElephant icon (darker variants)
+// Use theme config colors
+import { colors } from '@/config/theme'
+
 const palette = {
-  iconTeal: '#025A6B',
-  iconTealLight: '#036B7D',
-  iconTealMedium: '#045E70',
-  iconTealDark: '#054A56',
-  // Supporting colors
-  navy: '#1E293B',
-  navyDeep: '#0F172A',
-  slate: '#334155',
-  cyan: '#0EA5E9',
-  cyanDeep: '#0284C7',
-  teal: '#14B8A6',
-  tealDeep: '#0D9488',
-  gray100: '#F8FAFC',
-  gray300: '#CBD5E1',
-  white: '#FFFFFF',
-  orange: '#F97316',
+  iconTeal: colors.secondary[700],
+  iconTealLight: colors.secondary[600],
+  iconTealMedium: colors.secondary[700],
+  iconTealDark: colors.secondary[800],
+  // Supporting colors from theme
+  navy: colors.cool[800],
+  navyDeep: colors.cool[900],
+  slate: colors.cool[700],
+  cyan: colors.secondary[500],
+  cyanDeep: colors.secondary[600],
+  teal: colors.accent[500],
+  tealDeep: colors.accent[600],
+  gray100: colors.cool[50],
+  gray300: colors.cool[300],
+  white: colors.white,
+  orange: '#F97316', // Keep specific orange for download page
   orangeDark: '#EA580C'
 }
 
@@ -40,70 +42,20 @@ const trustBar = [
   { icon: Globe2, label: 'Global CDN Delivery' },
 ]
 
-const unifiedHeroGradient = 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)'
+// Use theme gradient
+import { gradients } from '@/config/theme'
 
-// Custom icon components
-const PgbalancerIcon = () => (
-  <div className="relative w-12 h-12 flex items-center justify-center">
-    <Database className="w-8 h-8 text-cyan-400" />
-    <Loader2 className="w-4 h-4 text-green-400 absolute -top-1 -right-1 animate-spin" />
-    <Zap className="w-3 h-3 text-yellow-400 absolute -bottom-1 -left-1" />
-  </div>
-)
+const unifiedHeroGradient = gradients.hero.css
 
-const PgraftIcon = () => (
-  <div className="relative w-12 h-12 flex items-center justify-center">
-    <Database className="w-7 h-7 text-blue-400" />
-    <Crown className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
-    <Network className="w-3 h-3 text-green-400 absolute -bottom-1 -left-1" />
-    <Shield className="w-3 h-3 text-purple-400 absolute -bottom-1 -right-1" />
-  </div>
-)
+// Use centralized ProductIcons
+import { PgbalancerIcon, PgraftIcon, FauxDbIcon, PgSentinelIcon, PgStatInsightsIcon, NeurondBIcon } from '@/components/ProductIcons'
 
-const FauxDbIcon = () => (
-  <div className="relative w-12 h-12 flex items-center justify-center">
-    <Database className="w-7 h-7 text-emerald-400" />
-    <FileText className="w-4 h-4 text-orange-400 absolute -top-1 -right-1" />
-    <Layers className="w-3 h-3 text-blue-400 absolute -bottom-1 -left-1" />
-    <Activity className="w-3 h-3 text-red-400 absolute -bottom-1 -right-1" />
-  </div>
-)
-
-const RaleIcon = () => (
-  <div className="relative w-12 h-12 flex items-center justify-center">
-    <Users className="w-7 h-7 text-indigo-400" />
-    <Crown className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
-    <Network className="w-3 h-3 text-green-400 absolute -bottom-1 -left-1" />
-    <Activity className="w-3 h-3 text-cyan-400 absolute -bottom-1 -right-1" />
-  </div>
-)
-
-const RamIcon = () => (
-  <div className="relative w-12 h-12 flex items-center justify-center">
-    <Server className="w-7 h-7 text-cyan-400" />
-    <Cpu className="w-4 h-4 text-green-400 absolute -top-1 -right-1" />
-    <Activity className="w-3 h-3 text-orange-400 absolute -bottom-1 -left-1" />
-    <Shield className="w-3 h-3 text-purple-400 absolute -bottom-1 -right-1" />
-  </div>
-)
-
-const NeuronDBIcon = () => (
-  <div className="relative w-12 h-12 flex items-center justify-center">
-    <Database className="w-7 h-7 text-purple-400" />
-    <Cpu className="w-4 h-4 text-pink-400 absolute -top-1 -right-1" />
-    <Zap className="w-3 h-3 text-yellow-400 absolute -bottom-1 -left-1" />
-    <Network className="w-3 h-3 text-cyan-400 absolute -bottom-1 -right-1" />
-  </div>
-)
-
-const PgStatInsightsIcon = () => (
-  <div className="relative w-12 h-12 flex items-center justify-center">
-    <Activity className="w-7 h-7 text-teal-400" />
-    <Star className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
-    <Database className="w-3 h-3 text-cyan-400 absolute -bottom-1 -left-1" />
-    <Zap className="w-3 h-3 text-orange-400 absolute -bottom-1 -right-1" />
-  </div>
-)
+// Icon wrappers for size compatibility (using centralized ProductIcons)
+const PgbalancerIconWrapper = () => <PgbalancerIcon size={48} />
+const PgraftIconWrapper = () => <PgraftIcon size={48} />
+const FauxDbIconWrapper = () => <FauxDbIcon size={48} />
+const NeurondBIconWrapper = () => <NeurondBIcon size={48} />
+const PgStatInsightsIconWrapper = () => <PgStatInsightsIcon size={48} />
 
 const DownloadPage = () => {
   // Function to get appropriate icon for download type
@@ -367,29 +319,25 @@ const DownloadPage = () => {
                     <div className="flex items-start gap-6 mb-6">
                       {/* Product Icon */}
                       <div className="flex-shrink-0">
-                        {product.icon === 'neurondb-custom' ? (
-                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-purple-400/30 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
-                            <NeuronDBIcon />
-                          </div>
-                        ) : product.icon === 'pg_stat_insights-custom' ? (
-                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-teal-400/30 bg-gradient-to-br from-teal-500/20 to-cyan-500/20">
-                            <PgStatInsightsIcon />
-                          </div>
-                        ) : product.icon === 'pgbalancer-custom' ? (
-                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-cyan-400/30 bg-gradient-to-br from-cyan-500/20 to-blue-500/20">
-                            <PgbalancerIcon />
-                          </div>
-                        ) : product.icon === 'pgraft-custom' ? (
-                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-blue-400/30 bg-gradient-to-br from-blue-500/20 to-purple-500/20">
-                            <PgraftIcon />
-                          </div>
-                        ) : product.icon === 'fauxdb-custom' ? (
-                          <div className="w-20 h-20 flex items-center justify-center rounded-xl border-2 border-emerald-400/30 bg-gradient-to-br from-emerald-500/20 to-green-500/20">
-                            <FauxDbIcon />
-                          </div>
-                        ) : (
-                          <Image src={product.icon} alt={`${product.name} icon`} width={80} height={80} className="w-20 h-20 object-contain rounded-xl border-2 border-white/20" />
-                        )}
+                        {(() => {
+                          const iconMap: Record<string, { Icon: React.ComponentType<{ size?: number }>, gradient: string, border: string }> = {
+                            'neurondb-custom': { Icon: NeurondBIcon, gradient: 'from-purple-500/20 to-pink-500/20', border: 'border-purple-400/30' },
+                            'pg_stat_insights-custom': { Icon: PgStatInsightsIcon, gradient: 'from-teal-500/20 to-cyan-500/20', border: 'border-teal-400/30' },
+                            'pgbalancer-custom': { Icon: PgbalancerIcon, gradient: 'from-cyan-500/20 to-blue-500/20', border: 'border-cyan-400/30' },
+                            'pgraft-custom': { Icon: PgraftIcon, gradient: 'from-blue-500/20 to-purple-500/20', border: 'border-blue-400/30' },
+                            'fauxdb-custom': { Icon: FauxDbIcon, gradient: 'from-emerald-500/20 to-green-500/20', border: 'border-emerald-400/30' },
+                          }
+                          const iconConfig = iconMap[product.icon || '']
+                          if (iconConfig) {
+                            const { Icon, gradient, border } = iconConfig
+                            return (
+                              <div className={`w-20 h-20 flex items-center justify-center rounded-xl border-2 ${border} bg-gradient-to-br ${gradient}`}>
+                                <Icon size={80} />
+                              </div>
+                            )
+                          }
+                          return <Image src={product.icon || ''} alt={`${product.name} icon`} width={80} height={80} className="w-20 h-20 object-contain rounded-xl border-2 border-white/20" />
+                        })()}
                       </div>
 
                       {/* Product Name & Badges */}

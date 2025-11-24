@@ -4,24 +4,26 @@ import React from 'react'
 import { Github, MessageCircle, Users, BookOpen, ArrowRight, Code, Bug, FileText, Heart, Star, Zap, Trophy, Award, TrendingUp, Globe, Calendar, Clock, UserCheck, Shield, Lightbulb, Server, Database } from 'lucide-react'
 import Link from 'next/link'
 
-// Colors from pgElephant icon (darker variants)
+// Use theme config colors
+import { colors } from '@/config/theme'
+
 const palette = {
-  iconTeal: '#025A6B',
-  iconTealLight: '#036B7D',
-  iconTealMedium: '#045E70',
-  iconTealDark: '#054A56',
-  // Supporting colors
-  navy: '#1E293B',
-  navyDeep: '#0F172A',
-  slate: '#334155',
-  cyan: '#0EA5E9',
-  cyanDeep: '#0284C7',
-  teal: '#14B8A6',
-  tealDeep: '#0D9488',
-  gray100: '#F8FAFC',
-  gray300: '#CBD5E1',
-  white: '#FFFFFF',
-  orange: '#F97316',
+  iconTeal: colors.secondary[700],
+  iconTealLight: colors.secondary[600],
+  iconTealMedium: colors.secondary[700],
+  iconTealDark: colors.secondary[800],
+  // Supporting colors from theme
+  navy: colors.cool[800],
+  navyDeep: colors.cool[900],
+  slate: colors.cool[700],
+  cyan: colors.secondary[500],
+  cyanDeep: colors.secondary[600],
+  teal: colors.accent[500],
+  tealDeep: colors.accent[600],
+  gray100: colors.cool[50],
+  gray300: colors.cool[300],
+  white: colors.white,
+  orange: '#F97316', // Keep specific orange for community page
   orangeDark: '#EA580C'
 }
 

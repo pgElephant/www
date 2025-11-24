@@ -3,8 +3,31 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Ensemble Reranking | NeuronDB Reranking',
-  description: 'Combine multiple reranking strategies for best results using ensemble methods in NeuronDB.',
+  title: 'Ensemble Reranking in NeurondB | MMR, RRF, Weighted & Borda Count',
+  description: 'Complete guide to ensemble reranking in NeurondB: MMR (Maximal Marginal Relevance), RRF (Reciprocal Rank Fusion), weighted ensemble, and Borda count methods. Learn how to combine multiple reranking models for optimal search relevance and diversity.',
+  keywords: [
+    'ensemble reranking',
+    'MMR reranking',
+    'Reciprocal Rank Fusion',
+    'RRF reranking',
+    'Borda count',
+    'weighted ensemble',
+    'maximal marginal relevance',
+    'diversity reranking',
+    'multi-model reranking',
+    'rerank_ensemble_weighted',
+    'rerank_ensemble_borda',
+    'mmr_rerank function'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/reranking/ensemble',
+  },
+  openGraph: {
+    title: 'Ensemble Reranking in NeurondB | MMR, RRF, Weighted Methods',
+    description: 'Combine multiple reranking models in NeurondB using MMR, RRF, weighted ensemble, and Borda count methods.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/reranking/ensemble',
+  },
 }
 
 const tableOfContents: TocItem[] = [

@@ -1,105 +1,18 @@
 import React from 'react';
-import ProjectTemplate from '../_components/ProjectTemplate';
-import { Metadata } from 'next';
+import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
+import { generateProductPageMetadata } from '@/config/seo';
 import { 
   Activity, Shield, TrendingUp, Eye, Bell, BarChart3, 
   Network, Cpu, HardDrive, Clock, Server, Zap,
   Globe, CheckCircle, AlertTriangle, LineChart
 } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'pgSentinel - Professional pgbalancer Management & Monitoring Platform | Real-Time PostgreSQL Insights',
-  description: 'pgSentinel is a comprehensive web-based management and monitoring platform for pgbalancer with real-time metrics, Prometheus/Grafana integration, pg_stat_insights analytics, and professional dashboards. Enterprise-grade monitoring for PostgreSQL connection pooling.',
-  keywords: [
-    // Primary keywords
-    'pgSentinel', 'pgbalancer monitoring', 'pgbalancer management', 'PostgreSQL monitoring platform',
-    'connection pool monitoring', 'database monitoring', 'real-time database metrics',
-    
-    // Technical keywords
-    'Prometheus PostgreSQL', 'Grafana PostgreSQL', 'pg_stat_insights', 'PostgreSQL performance monitoring',
-    'database health monitoring', 'connection pool metrics', 'PostgreSQL analytics',
-    
-    // Feature keywords
-    'real-time monitoring', 'WebSocket monitoring', 'PostgreSQL dashboards', 'database observability',
-    'metrics visualization', 'alert management', 'performance analytics',
-    
-    // Integration keywords
-    'Prometheus metrics', 'Grafana dashboards', 'REST API monitoring', 'FastAPI backend',
-    'Next.js monitoring', 'React dashboards', 'TypeScript monitoring',
-    
-    // Use case keywords
-    'production monitoring', 'enterprise monitoring', 'database ops', 'DevOps PostgreSQL',
-    'site reliability engineering', 'database performance tuning'
-  ].join(', '),
-  authors: [
-    { name: 'pgElephant Team', url: 'https://www.pgelephant.com' }
-  ],
-  category: 'Database Monitoring Software',
-  classification: 'Database Tools',
-  openGraph: {
-    title: 'pgSentinel - Professional pgbalancer Management & Monitoring',
-    description: 'Comprehensive web-based monitoring platform for pgbalancer with real-time metrics, Prometheus integration, and professional dashboards. Enterprise-grade PostgreSQL monitoring.',
-    type: 'website',
-    url: 'https://www.pgelephant.com/pgsentinel',
-    siteName: 'pgElephant',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/og-pgsentinel.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'pgSentinel - Professional pgbalancer Monitoring',
-        type: 'image/jpeg',
-      }
-    ],
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@pgElephant',
-    creator: '@pgElephant',
-    title: 'pgSentinel - Professional pgbalancer Management & Monitoring',
-    description: 'Real-time monitoring and management platform for pgbalancer with Prometheus, Grafana, and pg_stat_insights integration.',
-    images: [
-      {
-        url: 'https://www.pgelephant.com/twitter-pgsentinel.jpg',
-        alt: 'pgSentinel - Professional Monitoring Platform',
-        width: 1200,
-        height: 600,
-      }
-    ],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    'max-image-preview': 'large',
-    'max-snippet': -1,
-    'max-video-preview': -1,
-  },
-  alternates: {
-    canonical: 'https://www.pgelephant.com/pgsentinel',
-    types: {
-      'application/rss+xml': 'https://www.pgelephant.com/blog/rss.xml',
-    },
-  },
-};
-
-// Custom pgSentinel icon component
-const PgSentinelIcon = ({ size = 80 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Eye className="text-blue-500 animate-pulse" style={{ width: size * 0.7, height: size * 0.7 }} />
-    <Shield className="text-purple-400 absolute -top-2 -left-2 animate-pulse" style={{ width: size * 0.3, height: size * 0.3, animationDelay: '0.2s' }} />
-    <Activity className="text-green-400 absolute -top-2 -right-2" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Bell className="text-orange-400 absolute -bottom-2 -right-2 animate-bounce" style={{ width: size * 0.25, height: size * 0.25, animationDelay: '0.5s' }} />
-    <TrendingUp className="text-cyan-400 absolute -bottom-2 -left-2" style={{ width: size * 0.25, height: size * 0.25 }} />
-  </div>
-);
+export const metadata = generateProductPageMetadata('pgsentinel');
 
 const pgSentinelConfig = {
+  productId: 'pgsentinel' as const,
   hero: {
-    title: 'pgSentinel: Professional Web-Based Monitoring for pgbalancer',
     subtitle: 'Enterprise monitoring platform with real-time WebSocket updates, Prometheus metrics, Grafana dashboards, and pg_stat_insights analytics',
-    projectName: 'pgSentinel',
-    icon: <PgSentinelIcon size={80} />,
   },
   badges: [
     'Real-Time Monitoring',
@@ -855,10 +768,6 @@ pgbalancer_backend_health{backend="primary"}`,
 };
 
 export default function PgSentinelPage() {
-  return (
-    <>
-      <ProjectTemplate {...pgSentinelConfig} />
-    </>
-  );
+  return <ProductPageTemplate {...pgSentinelConfig} />;
 }
 

@@ -3,11 +3,34 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../comp
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'NeurondB Configuration Guide | PostgreSQL Vector Database Settings',
+  title: 'AI PostgreSQL Configuration | NeurondB GUC Settings & Tuning Guide',
   description:
-    'Complete configuration reference for NeurondB. Tune HNSW indexes, GPU acceleration, background workers, and performance profiles for production workloads.',
+    'Complete configuration reference for NeurondB (AI PostgreSQL extension). Learn GUC parameters for HNSW indexes, GPU acceleration, background workers, and production tuning. Alternative to PostgreSQL.ai and pgml configuration. Includes postgresql.conf settings and runtime overrides.',
+  keywords: [
+    'NeurondB configuration',
+    'AI PostgreSQL configuration',
+    'PostgreSQL.ai configuration',
+    'pgml configuration',
+    'PostgreSQL GUC settings',
+    'HNSW configuration',
+    'GPU acceleration settings',
+    'vector database configuration',
+    'NeurondB tuning',
+    'postgresql.conf NeurondB',
+    'performance tuning',
+    'background workers config',
+    'index configuration',
+    'production settings',
+    'PostgreSQL AI settings'
+  ].join(', '),
   alternates: {
     canonical: 'https://www.pgelephant.com/docs/neurondb/configuration',
+  },
+  openGraph: {
+    title: 'NeurondB Configuration Guide | PostgreSQL Settings & Tuning',
+    description: 'Complete NeurondB configuration reference. Tune HNSW indexes, GPU acceleration, and performance for production.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/configuration',
   },
 }
 

@@ -3,10 +3,37 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../comp
 import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Vector Indexing & ANN Search | HNSW, IVFFlat for PostgreSQL - NeuronDB',
-  description: 'Complete guide to vector indexing in NeuronDB PostgreSQL. Learn HNSW, IVFFlat, LSH algorithms, distance metrics (cosine, L2, dot product), and optimize ANN (Approximate Nearest Neighbor) search performance. 10M+ vectors, millisecond queries.',
+  title: 'Vector Indexing in AI PostgreSQL | HNSW, IVF Indexes for NeurondB',
+  description: 'Complete guide to vector indexing in NeurondB (AI PostgreSQL extension). Learn HNSW and IVF indexes, distance metrics (cosine, L2, inner product), and optimize ANN search. Alternative to PostgreSQL.ai for vector indexing in PostgreSQL.',
+  keywords: [
+    'HNSW index PostgreSQL',
+    'AI PostgreSQL indexing',
+    'PostgreSQL.ai indexing',
+    'pgml vector search',
+    'IVF index vector search',
+    'vector indexing',
+    'ANN search',
+    'approximate nearest neighbor',
+    'HNSW algorithm',
+    'vector similarity index',
+    'cosine distance index',
+    'L2 distance index',
+    'vector database indexing',
+    'high-dimensional indexing',
+    'nearest neighbor search',
+    'ef_search tuning',
+    'ef_construction parameter',
+    'IVF lists parameter',
+    'PostgreSQL AI vector index'
+  ].join(', '),
   alternates: {
     canonical: 'https://www.pgelephant.com/docs/neurondb/indexing',
+  },
+  openGraph: {
+    title: 'Vector Indexing & ANN Search | HNSW, IVF for NeurondB',
+    description: 'Complete guide to HNSW and IVF vector indexes in NeurondB. Optimize ANN search for 10M+ vectors with millisecond latency.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/indexing',
   },
 }
 

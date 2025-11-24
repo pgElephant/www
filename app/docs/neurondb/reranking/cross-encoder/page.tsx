@@ -3,8 +3,30 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Cross-Encoder Reranking | NeuronDB Reranking',
-  description: 'Neural reranking models for improved relevance using cross-encoder models in NeuronDB.',
+  title: 'Cross-Encoder Reranking in NeurondB | rerank_cross_encoder() Guide',
+  description: 'Complete guide to cross-encoder reranking in NeurondB using rerank_cross_encoder(), rerank_flash(), and rerank_long_context() functions. Learn how to improve search relevance with neural reranking models, batch processing, and Flash Attention optimization.',
+  keywords: [
+    'cross-encoder reranking',
+    'rerank_cross_encoder',
+    'neural reranking',
+    'search result reranking',
+    'relevance scoring',
+    'rerank_flash',
+    'Flash Attention reranking',
+    'long context reranking',
+    'MS MARCO reranking',
+    'semantic reranking',
+    'query document matching'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/reranking/cross-encoder',
+  },
+  openGraph: {
+    title: 'Cross-Encoder Reranking in NeurondB | Neural Reranking Guide',
+    description: 'Improve search relevance with cross-encoder reranking in NeurondB. Complete guide with SQL examples and Flash Attention optimization.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/reranking/cross-encoder',
+  },
 }
 
 const tableOfContents: TocItem[] = [

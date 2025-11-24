@@ -3,9 +3,30 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Hybrid Retrieval Overview | NeurondB',
-  description:
-    'Design hybrid retrieval pipelines that blend BM25, metadata filters, and NeurondB vector search. Learn ranking formulas, index strategies, and fallback plans for production workloads.',
+  title: 'Hybrid Search in NeurondB | Vector + Full-Text Search Fusion Guide',
+  description: 'Complete guide to hybrid search in NeurondB combining vector similarity and full-text search. Learn hybrid_search() function, fusion algorithms, metadata filtering, and production deployment strategies for optimal retrieval performance.',
+  keywords: [
+    'hybrid search NeurondB',
+    'vector text search fusion',
+    'semantic keyword search',
+    'hybrid retrieval',
+    'BM25 vector search',
+    'multi-signal search',
+    'hybrid_search function',
+    'lexical semantic fusion',
+    'metadata filtering',
+    'reranking search results',
+    'production search pipeline'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/hybrid/overview',
+  },
+  openGraph: {
+    title: 'Hybrid Search in NeurondB | Vector + Full-Text Fusion',
+    description: 'Combine vector similarity and full-text search in NeurondB. Complete guide to hybrid retrieval pipelines.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/hybrid/overview',
+  },
 }
 
 const tableOfContents: TocItem[] = [

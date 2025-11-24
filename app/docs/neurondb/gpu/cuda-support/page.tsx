@@ -4,8 +4,34 @@ import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../../components/BashCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'CUDA Support | NeuronDB GPU Acceleration',
-  description: 'NVIDIA GPU acceleration for vector operations and ML inference in NeuronDB.',
+  title: 'CUDA GPU Support in AI PostgreSQL | NVIDIA GPU Acceleration for NeurondB',
+  description: 'Complete guide to NVIDIA CUDA GPU acceleration in NeurondB (AI PostgreSQL extension) for vector operations and ML inference. Alternative to PostgreSQL.ai GPU support. Learn CUDA configuration, GPU-accelerated distance calculations, and optimize performance for vector search and ML workloads.',
+  keywords: [
+    'CUDA NeurondB',
+    'AI PostgreSQL GPU',
+    'PostgreSQL.ai GPU',
+    'pgml GPU',
+    'NVIDIA GPU acceleration',
+    'GPU vector search',
+    'CUDA configuration',
+    'GPU distance calculations',
+    'vector_l2_distance_gpu',
+    'vector_cosine_distance_gpu',
+    'GPU machine learning',
+    'CUDA PostgreSQL',
+    'GPU inference',
+    'NVIDIA vector database',
+    'PostgreSQL AI GPU'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/gpu/cuda-support',
+  },
+  openGraph: {
+    title: 'CUDA GPU Support in NeurondB | NVIDIA GPU Acceleration',
+    description: 'Configure NVIDIA CUDA GPU acceleration in NeurondB for vector search and ML inference. Complete setup guide.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/gpu/cuda-support',
+  },
 }
 
 const tableOfContents: TocItem[] = [

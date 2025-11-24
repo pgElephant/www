@@ -3,8 +3,35 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Embedding Generation | NeuronDB ML',
-  description: 'Generate embeddings from text, images, and multimodal data with intelligent caching in NeuronDB.',
+  title: 'Text Embeddings in AI PostgreSQL | embed_text() in NeurondB',
+  description: 'Generate text embeddings in NeurondB (AI PostgreSQL extension) using embed_text() and embed_text_batch() functions. Alternative to PostgreSQL.ai and pgml for embedding generation. Learn vector embeddings, model configuration, caching, and batch processing for semantic search and RAG.',
+  keywords: [
+    'text embeddings NeurondB',
+    'AI PostgreSQL embeddings',
+    'PostgreSQL.ai embeddings',
+    'pgml embeddings',
+    'embed_text function',
+    'embedding generation PostgreSQL',
+    'vector embeddings',
+    'semantic embeddings',
+    'sentence transformers',
+    'embedding cache',
+    'batch embeddings',
+    'embedding models',
+    'Hugging Face embeddings',
+    'OpenAI embeddings',
+    'embedding API',
+    'PostgreSQL AI embeddings'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/ml/embedding-generation',
+  },
+  openGraph: {
+    title: 'Text Embedding Generation in NeurondB | embed_text() Guide',
+    description: 'Generate text embeddings in PostgreSQL with NeurondB. Complete guide to embed_text(), batch processing, and caching.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/ml/embedding-generation',
+  },
 }
 
 const tableOfContents: TocItem[] = [

@@ -3,8 +3,34 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../../c
 import SqlCodeBlock from '../../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Random Forest | NeuronDB ML Algorithms',
-  description: 'Random Forest ensemble learning method for classification and regression with GPU acceleration support in NeuronDB.',
+  title: 'Random Forest in NeurondB | AI PostgreSQL ML Classification & Regression',
+  description: 'Train Random Forest models in NeurondB (AI PostgreSQL extension) for classification and regression. Complete guide with SQL examples, hyperparameters, prediction, and evaluation. Alternative to pgml and PostgreSQL.ai for machine learning in PostgreSQL.',
+  keywords: [
+    'Random Forest NeurondB',
+    'PostgreSQL machine learning',
+    'AI PostgreSQL ML',
+    'PostgreSQL.ai ML',
+    'pgml Random Forest',
+    'Random Forest classification',
+    'Random Forest regression',
+    'ensemble learning PostgreSQL',
+    'ML in SQL',
+    'NeurondB train function',
+    'NeurondB predict',
+    'decision trees PostgreSQL',
+    'GPU machine learning',
+    'PostgreSQL AI ML',
+    'Postgres machine learning'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/ml/random-forest',
+  },
+  openGraph: {
+    title: 'Random Forest in NeurondB | ML Classification & Regression',
+    description: 'Train Random Forest models in PostgreSQL with NeurondB. Complete guide with SQL examples and GPU acceleration.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/ml/random-forest',
+  },
 }
 
 const tableOfContents: TocItem[] = [

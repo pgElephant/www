@@ -1,3 +1,12 @@
+/**
+ * Tailwind CSS Configuration
+ * 
+ * Note: These values are synchronized with config/theme.ts
+ * When updating theme values, ensure both files are kept in sync.
+ * 
+ * TODO: Consider using tailwind.config.ts or a build step to import from theme.ts
+ */
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,7 +17,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Modern Tech Stack - Primary Colors
+        // Synchronized with config/theme.ts - Primary Colors
         primary: {
           50: '#eef2ff',
           100: '#e0e7ff',
@@ -21,7 +30,7 @@ module.exports = {
           800: '#3730a3',
           900: '#312e81',
         },
-        // Modern Tech Stack - Secondary Colors
+        // Synchronized with config/theme.ts - Secondary Colors
         secondary: {
           50: '#ecfeff',
           100: '#cffafe',
@@ -34,20 +43,7 @@ module.exports = {
           800: '#155e75',
           900: '#164e63',
         },
-        // Modern Tech Stack - Neutral Colors
-        neutral: {
-          50: '#fafafa',
-          100: '#f4f4f5',
-          200: '#e4e4e7',
-          300: '#d4d4d8',
-          400: '#a1a1aa',
-          500: '#71717a',
-          600: '#52525b',
-          700: '#3f3f46',
-          800: '#27272a',
-          900: '#18181b',
-        },
-        // Modern Tech Stack - Accent Colors
+        // Synchronized with config/theme.ts - Accent Colors
         accent: {
           50: '#ecfdf5',
           100: '#d1fae5',
@@ -59,6 +55,19 @@ module.exports = {
           700: '#047857',
           800: '#065f46',
           900: '#064e3b',
+        },
+        // Synchronized with config/theme.ts - Neutral Colors
+        neutral: {
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
         },
         // Legacy cool colors for backward compatibility
         cool: {
@@ -75,28 +84,15 @@ module.exports = {
         },
       },
       fontFamily: {
-        // Modern, clean sans-serif fonts
+        // Synchronized with config/theme.ts
         sans: ['Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        
-        // Premium heading fonts - great for titles and headers
         heading: ['Poppins', 'Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
-        
-        // Professional body text
         body: ['Inter', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        
-        // Display fonts for hero sections and large text
         display: ['Space Grotesk', 'Poppins', 'Inter', 'system-ui', 'sans-serif'],
-        
-        // Monospace for code and terminal
         mono: ['JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Consolas', 'monospace'],
-        
-        // Modern geometric fonts
+        // Additional font families
         geometric: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
-        
-        // Tech/cyberpunk style fonts
         tech: ['Orbitron', 'Exo 2', 'Inter', 'system-ui', 'sans-serif'],
-        
-        // Elegant serif for special sections
         serif: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
       },
       maxWidth: {
@@ -105,11 +101,13 @@ module.exports = {
         '9xl': '1600px',
       },
       animation: {
+        // Synchronized with config/theme.ts
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-out',
         'bounce-gentle': 'bounceGentle 2s infinite',
       },
       keyframes: {
+        // Synchronized with config/theme.ts
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },

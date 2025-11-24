@@ -4,8 +4,30 @@ import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'NeuronDB · Background Workers',
-  description: 'Asynchronous job execution, auto-tuning, and index maintenance with NeuronDB background workers.',
+  title: 'Background Workers in NeurondB | neuranq, neuranmon, neurandefrag Guide',
+  description: 'Complete guide to NeurondB background workers: neuranq (async job queue), neuranmon (auto-tuner), and neurandefrag (index maintenance). Learn how to configure, monitor, and optimize background workers for vector search, ML inference, and index management.',
+  keywords: [
+    'NeurondB background workers',
+    'neuranq worker',
+    'neuranmon auto-tuner',
+    'neurandefrag index maintenance',
+    'async job queue',
+    'background workers PostgreSQL',
+    'index defragmentation',
+    'auto-tuning workers',
+    'worker monitoring',
+    'job queue management',
+    'index maintenance'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://www.pgelephant.com/docs/neurondb/background-workers',
+  },
+  openGraph: {
+    title: 'Background Workers in NeurondB | neuranq, neuranmon, neurandefrag',
+    description: 'Complete guide to NeurondB background workers for async jobs, auto-tuning, and index maintenance.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/background-workers',
+  },
 }
 
 const tableOfContents: TocItem[] = [
