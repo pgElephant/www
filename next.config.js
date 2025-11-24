@@ -272,6 +272,12 @@ const nextConfig = {
         destination: '/blog/pg-stat-insights/:path*',
         permanent: true,
       },
+      // NeuronDB documentation redirects
+      {
+        source: '/docs/neurondb/llm',
+        destination: '/docs/neurondb/rag/llm-integration',
+        permanent: true,
+      },
       {
         source: '/postgresql-clustering',
         destination: '/pgraft',

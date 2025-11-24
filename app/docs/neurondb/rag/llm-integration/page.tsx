@@ -81,7 +81,7 @@ SET neurondb.huggingface_endpoint = 'https://api-inference.huggingface.co';`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on LLM integration, provider configuration, model selection, and cost optimization, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/llm/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/llm" target="_blank" rel="noopener noreferrer">
             LLM Integration Documentation
           </a>
         </p>
