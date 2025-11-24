@@ -21,7 +21,11 @@ const neurondbConfig = {
     'GPU Acceleration',
     '4 Background Workers',
   ],
-  architecture: <NeuronDBArchitectureDiagram />,
+  architecture: {
+    title: 'Architecture',
+    subtitle: 'Complete AI database architecture with vector search, ML inference, and RAG pipeline',
+    content: <NeuronDBArchitectureDiagram />,
+  },
   featurePillars: {
     kicker: 'Comprehensive AI Database Features',
     items: [
@@ -75,82 +79,80 @@ const neurondbConfig = {
       },
     ],
   },
-  featureMatrix: (
-    <div className="space-y-4">
-      <div>
-        <h3 className="text-2xl font-bold text-white mb-2">Production Capabilities</h3>
-        <p className="text-slate-400 text-sm mb-4">Comprehensive AI database features built for enterprise production workloads</p>
-      </div>
-      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
-        <thead className="bg-slate-800/60">
-          <tr className="text-left">
-            <th className="px-4 py-3 font-semibold text-white">Capability</th>
-            <th className="px-4 py-3 font-semibold text-white">Description</th>
-            <th className="px-4 py-3 font-semibold text-white">Performance</th>
-            <th className="px-4 py-3 font-semibold text-white">Production Ready</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-slate-700 bg-slate-800/40">
-          <tr>
+  featureMatrix: {
+    title: 'Production Capabilities',
+    subtitle: 'Comprehensive AI database features built for enterprise production workloads',
+    content: (
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+      <thead className="bg-slate-800/60">
+        <tr className="text-left">
+          <th className="px-4 py-3 font-semibold text-white">Capability</th>
+          <th className="px-4 py-3 font-semibold text-white">Description</th>
+          <th className="px-4 py-3 font-semibold text-white">Performance</th>
+          <th className="px-4 py-3 font-semibold text-white">Production Ready</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+        <tr>
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/vector-engine" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
                 Vector Search
               </Link>
             </td>
-            <td className="px-4 py-3 text-slate-300">5 vector types, HNSW/IVF indexing, 10+ distance metrics, quantization (FP16/INT8/Binary)</td>
-            <td className="px-4 py-3 text-slate-300">Sub-millisecond on millions</td>
-            <td className="px-4 py-3 text-green-400">✓</td>
-          </tr>
-          <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 text-slate-300">HNSW indexing, multiple distance metrics, quantization</td>
+          <td className="px-4 py-3 text-slate-300">Sub-millisecond on millions</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+        <tr className="bg-slate-800/60">
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/ml/inference" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
                 ML Inference
               </Link>
             </td>
-            <td className="px-4 py-3 text-slate-300">52 ML algorithms, ONNX runtime, batch processing, embedding generation</td>
-            <td className="px-4 py-3 text-slate-300">High-throughput batch ops</td>
-            <td className="px-4 py-3 text-green-400">✓</td>
-          </tr>
-          <tr>
+          <td className="px-4 py-3 text-slate-300">ONNX runtime, batch processing, embedding generation</td>
+          <td className="px-4 py-3 text-slate-300">High-throughput batch ops</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+        <tr>
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/hybrid" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
                 Hybrid Search
               </Link>
             </td>
-            <td className="px-4 py-3 text-slate-300">Vector + FTS, multi-vector, faceted, temporal decay</td>
-            <td className="px-4 py-3 text-slate-300">Optimized query planning</td>
-            <td className="px-4 py-3 text-green-400">✓</td>
-          </tr>
-          <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 text-slate-300">Vector + FTS, multi-vector, faceted, temporal</td>
+          <td className="px-4 py-3 text-slate-300">Optimized query planning</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+        <tr className="bg-slate-800/60">
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/reranking/overview" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
                 Reranking
               </Link>
             </td>
-            <td className="px-4 py-3 text-slate-300">Cross-encoder, LLM, ColBERT, MMR, ensemble strategies</td>
-            <td className="px-4 py-3 text-slate-300">GPU-accelerated, sub-10ms</td>
-            <td className="px-4 py-3 text-green-400">✓</td>
-          </tr>
-          <tr>
+          <td className="px-4 py-3 text-slate-300">Cross-encoder, LLM, ColBERT, ensemble</td>
+          <td className="px-4 py-3 text-slate-300">GPU-accelerated support</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+        <tr>
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/background-workers" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
                 Background Workers
               </Link>
             </td>
-            <td className="px-4 py-3 text-slate-300">4 workers: queue executor, auto-tuner, index maintenance, LLM processing</td>
-            <td className="px-4 py-3 text-slate-300">Non-blocking async ops</td>
-            <td className="px-4 py-3 text-green-400">✓</td>
-          </tr>
-          <tr className="bg-slate-800/60">
+          <td className="px-4 py-3 text-slate-300">Queue executor, auto-tuner, index maintenance</td>
+          <td className="px-4 py-3 text-slate-300">Non-blocking async ops</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+        <tr className="bg-slate-800/60">
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/rag" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
                 RAG Pipeline
               </Link>
             </td>
-            <td className="px-4 py-3 text-slate-300">Complete in-database RAG: chunking, retrieval, reranking, LLM integration, guardrails</td>
-            <td className="px-4 py-3 text-slate-300">End-to-end optimization</td>
-            <td className="px-4 py-3 text-green-400">✓</td>
-          </tr>
+          <td className="px-4 py-3 text-slate-300">Complete in-database RAG with document processing</td>
+          <td className="px-4 py-3 text-slate-300">End-to-end optimization</td>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
           <tr>
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/analytics" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
@@ -209,37 +211,28 @@ const neurondbConfig = {
             </td>
             <td className="px-4 py-3 text-slate-300">Pure C implementation, 473 SQL functions, zero external dependencies, WAL integration</td>
             <td className="px-4 py-3 text-slate-300">Zero core modifications</td>
-            <td className="px-4 py-3 text-green-400">✓</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+          <td className="px-4 py-3 text-green-400">✓</td>
+        </tr>
+      </tbody>
+    </table>
   ),
-  featureComparison: (
-    <div className="space-y-6">
-      {/* Section Heading */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
-          NeurondB vs. Alternatives
-        </h2>
-        <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-          Comprehensive comparison of NeurondB with other PostgreSQL AI and vector extensions
-        </p>
-        <div className="mx-auto h-1 w-28 bg-slate-400 rounded mt-4" />
-      </div>
-
-      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
-        <thead className="bg-slate-800/60">
-          <tr className="text-left">
-            <th className="px-3 py-3 font-semibold text-white text-xs">Feature</th>
-            <th className="px-3 py-3 font-semibold text-white text-xs">NeurondB</th>
-            <th className="px-3 py-3 font-semibold text-white text-xs">pgvector</th>
-            <th className="px-3 py-3 font-semibold text-white text-xs">pgvectorscale</th>
-            <th className="px-3 py-3 font-semibold text-white text-xs">pgai</th>
-            <th className="px-3 py-3 font-semibold text-white text-xs">PostgresML</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+  },
+  featureComparison: {
+    title: 'NeurondB vs. Alternatives',
+    subtitle: 'Comprehensive comparison of NeurondB with other PostgreSQL AI and vector extensions',
+    content: (
+    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+      <thead className="bg-slate-800/60">
+        <tr className="text-left">
+          <th className="px-3 py-3 font-semibold text-white text-xs">Feature</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">NeurondB</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">pgvector</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">pgvectorscale</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">pgai</th>
+          <th className="px-3 py-3 font-semibold text-white text-xs">PostgresML</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
         <tr>
           <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Vector Indexing</td>
           <td className="px-3 py-3 text-green-400 text-xs">HNSW + IVF</td>
@@ -490,8 +483,8 @@ const neurondbConfig = {
         </tr>
       </tbody>
     </table>
-    </div>
   ),
+  },
   ctaSection: {
     kicker: 'Get Started',
     title: 'Transform PostgreSQL into an AI Database',

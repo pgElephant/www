@@ -29,7 +29,11 @@ export interface ProductPageTemplateProps {
   }
   badges?: string[]
   demo?: React.ReactNode
-  architecture?: React.ReactNode
+  architecture?: React.ReactNode | {
+    title?: string
+    subtitle?: string
+    content: React.ReactNode
+  }
   featurePillars?: {
     kicker?: string
     items: Array<{ title: string; desc: string }>
@@ -40,8 +44,16 @@ export interface ProductPageTemplateProps {
     title: string
     desc: string
   }>
-  featureMatrix?: React.ReactNode
-  featureComparison?: React.ReactNode
+  featureMatrix?: React.ReactNode | {
+    title?: string
+    subtitle?: string
+    content: React.ReactNode
+  }
+  featureComparison?: React.ReactNode | {
+    title?: string
+    subtitle?: string
+    content: React.ReactNode
+  }
   docsLinks?: Array<{ href: string; title: string; desc: string; external?: boolean }>
   ctaSection?: {
     kicker?: string
@@ -145,7 +157,28 @@ export default function ProductPageTemplate({
       {architecture && (
         <SectionTemplate background="hero" padding="xl">
           <div className="container-wide">
-            {architecture}
+            {typeof architecture === 'object' && 'content' in architecture ? (
+              <>
+                {(architecture.title || architecture.subtitle) && (
+                  <div className="text-center mb-14">
+                    {architecture.title && (
+                      <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                        {architecture.title}
+                      </h2>
+                    )}
+                    {architecture.subtitle && (
+                      <p className="text-lg text-white/90 max-w-3xl mx-auto mb-4">
+                        {architecture.subtitle}
+                      </p>
+                    )}
+                    <div className="mx-auto h-1 w-28 bg-slate-400 rounded" />
+                  </div>
+                )}
+                {architecture.content}
+              </>
+            ) : (
+              architecture
+            )}
           </div>
         </SectionTemplate>
       )}
@@ -183,7 +216,28 @@ export default function ProductPageTemplate({
       {featureMatrix && (
         <SectionTemplate background="page" padding="xl">
           <div className="container-wide">
-            {featureMatrix}
+            {typeof featureMatrix === 'object' && 'content' in featureMatrix ? (
+              <>
+                {(featureMatrix.title || featureMatrix.subtitle) && (
+                  <div className="text-center mb-14">
+                    {featureMatrix.title && (
+                      <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+                        {featureMatrix.title}
+                      </h2>
+                    )}
+                    {featureMatrix.subtitle && (
+                      <p className="text-lg text-slate-600 max-w-3xl mx-auto mb-4">
+                        {featureMatrix.subtitle}
+                      </p>
+                    )}
+                    <div className="mx-auto h-1 w-28 bg-slate-400 rounded" />
+                  </div>
+                )}
+                {featureMatrix.content}
+              </>
+            ) : (
+              featureMatrix
+            )}
           </div>
         </SectionTemplate>
       )}
@@ -192,7 +246,28 @@ export default function ProductPageTemplate({
       {featureComparison && (
         <SectionTemplate background="page" padding="xl">
           <div className="container-wide">
-            {featureComparison}
+            {typeof featureComparison === 'object' && 'content' in featureComparison ? (
+              <>
+                {(featureComparison.title || featureComparison.subtitle) && (
+                  <div className="text-center mb-14">
+                    {featureComparison.title && (
+                      <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+                        {featureComparison.title}
+                      </h2>
+                    )}
+                    {featureComparison.subtitle && (
+                      <p className="text-lg text-slate-600 max-w-3xl mx-auto mb-4">
+                        {featureComparison.subtitle}
+                      </p>
+                    )}
+                    <div className="mx-auto h-1 w-28 bg-slate-400 rounded" />
+                  </div>
+                )}
+                {featureComparison.content}
+              </>
+            ) : (
+              featureComparison
+            )}
           </div>
         </SectionTemplate>
       )}
