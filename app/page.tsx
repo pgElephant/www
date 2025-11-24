@@ -2,7 +2,6 @@ import React from 'react'
 import Hero from '@/components/Hero'
 import NeuronDBShowcase from '@/components/NeuronDBShowcase'
 import WhyPgElephant from '@/components/WhyPgElephant'
-import ClusterArchitecture from '@/components/ClusterArchitecture'
 import FeaturesList from '@/components/FeaturesList'
 import ProductSchema from '@/components/SEO/ProductSchema'
 
@@ -75,7 +74,6 @@ export default function Home() {
         <Hero />
         <WhyPgElephant />
         <NeuronDBShowcase />
-        <ClusterArchitecture />
         <FeaturesList />
       </main>
     </>
