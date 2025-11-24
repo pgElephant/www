@@ -4,36 +4,40 @@ import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Background Workers in NeurondB | neuranq, neuranmon, neurandefrag Guide',
-  description: 'Complete guide to NeurondB background workers: neuranq (async job queue), neuranmon (auto-tuner), and neurandefrag (index maintenance). Learn how to configure, monitor, and optimize background workers for vector search, ML inference, and index management.',
+  title: 'Background Workers | Async Processing & Monitoring | NeurondB',
+  description: 'Dedicated workers for async processing, monitoring, and maintenance to keep your system running optimally. Includes job queue execution, auto-tuning, index maintenance, and LLM processing workers.',
   keywords: [
-    'NeurondB background workers',
-    'neuranq worker',
-    'neuranmon auto-tuner',
-    'neurandefrag index maintenance',
-    'async job queue',
-    'background workers PostgreSQL',
-    'index defragmentation',
-    'auto-tuning workers',
-    'worker monitoring',
-    'job queue management',
-    'index maintenance'
+    'background workers',
+    'async processing',
+    'monitoring workers',
+    'maintenance workers',
+    'job queue',
+    'auto-tuning',
+    'index maintenance',
+    'neuranq',
+    'neuranmon',
+    'neurandefrag',
+    'neuranllm',
+    'background tasks',
+    'async jobs'
   ].join(', '),
   alternates: {
     canonical: 'https://www.pgelephant.com/docs/neurondb/background-workers',
   },
   openGraph: {
-    title: 'Background Workers in NeurondB | neuranq, neuranmon, neurandefrag',
-    description: 'Complete guide to NeurondB background workers for async jobs, auto-tuning, and index maintenance.',
+    title: 'Background Workers | Async Processing & Monitoring',
+    description: 'Dedicated workers for async processing, monitoring, and maintenance to keep your system running optimally.',
     type: 'article',
     url: 'https://www.pgelephant.com/docs/neurondb/background-workers',
   },
 }
 
 const tableOfContents: TocItem[] = [
+  { id: 'overview', title: 'Overview' },
   { id: 'neuranq', title: 'neuranq - Async Job Queue' },
   { id: 'neuranmon', title: 'neuranmon - Auto-Tuner' },
   { id: 'neurandefrag', title: 'neurandefrag - Index Maintenance' },
+  { id: 'neuranllm', title: 'neuranllm - LLM Processor' },
   { id: 'monitoring', title: 'Monitor Workers' },
 ]
 
@@ -56,9 +60,38 @@ export default function Page() {
       prevLink={prevLink}
       nextLink={nextLink}
     >
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          <strong>Background Workers</strong> are dedicated processes that handle async processing, monitoring, 
+          and maintenance tasks to keep your NeurondB system running optimally. These workers operate independently 
+          from query processing, ensuring that maintenance and optimization tasks don't impact query performance.
+        </p>
+
+        <h3>Available Workers</h3>
+        <ul>
+          <li><strong>neuranq:</strong> Async job queue executor for batch operations</li>
+          <li><strong>neuranmon:</strong> Auto-tuner for query performance optimization</li>
+          <li><strong>neurandefrag:</strong> Index maintenance and defragmentation</li>
+          <li><strong>neuranllm:</strong> LLM job processor for async generation</li>
+        </ul>
+
+        <h3>Benefits</h3>
+        <ul>
+          <li><strong>Non-Blocking:</strong> Maintenance tasks don't impact query performance</li>
+          <li><strong>Automatic:</strong> Workers run continuously without manual intervention</li>
+          <li><strong>Configurable:</strong> Tune worker behavior to match your workload</li>
+          <li><strong>Observable:</strong> Monitor worker status and performance metrics</li>
+        </ul>
+      </section>
+
       <section id="neuranq">
         <h2>neuranq - Async Job Queue</h2>
-        <p>Asynchronous job queue executor with SKIP LOCKED, rate limits, retries, and poison job handling. Perfect for batch embedding generation, model inference, and long-running operations.</p>
+        <p>
+          Asynchronous job queue executor with SKIP LOCKED, rate limits, retries, and poison job handling. 
+          Perfect for batch embedding generation, model inference, and long-running operations that should 
+          not block query processing.
+        </p>
 
         <h3>Features</h3>
         <ul>
@@ -124,6 +157,33 @@ neurondb.neurandefrag_fragmentation_threshold = 0.30  # Rebuild at 30%`}
         />
       </section>
 
+      <section id="neuranllm">
+        <h2>neuranllm - LLM Processor</h2>
+        <p>
+          Dedicated worker for processing LLM generation jobs asynchronously. Handles prompt processing, 
+          token generation, and response streaming without blocking database operations.
+        </p>
+
+        <h3>Features</h3>
+        <ul>
+          <li><strong>Async Generation:</strong> Process LLM requests in the background</li>
+          <li><strong>Token Streaming:</strong> Stream tokens as they're generated</li>
+          <li><strong>Rate Limiting:</strong> Control API usage and costs</li>
+          <li><strong>Error Handling:</strong> Automatic retries with exponential backoff</li>
+        </ul>
+
+        <h3>Configuration</h3>
+        <BashCodeBlock
+          title="postgresql.conf"
+          code={`# postgresql.conf
+neurondb.neuranllm_enabled = on
+neurondb.neuranllm_naptime = 5000        # Check queue every 5 seconds
+neurondb.neuranllm_batch_size = 10       # Process 10 jobs per cycle
+neurondb.neuranllm_max_tokens = 2048     # Maximum tokens per generation
+neurondb.neuranllm_rate_limit = 100     # Requests per minute`}
+        />
+      </section>
+
       <section id="monitoring">
         <h2>Monitor Workers</h2>
         <SqlCodeBlock
@@ -136,7 +196,26 @@ SELECT * FROM neurondb_worker_status();
 -- --------------+---------+---------------------+----------------+---------------
 --  neuranq      | running | 2025-11-03 12:30:15 |      427       |      12.3
 --  neuranmon    | running | 2025-11-03 12:30:10 |       89       |      45.7
---  neurandefrag | running | 2025-11-03 12:28:00 |       23       |     234.8`}
+--  neurandefrag | running | 2025-11-03 12:28:00 |       23       |     234.8
+--  neuranllm    | running | 2025-11-03 12:29:45 |       156      |      234.1`}
+        />
+
+        <h3>Worker Metrics</h3>
+        <SqlCodeBlock
+          title="Detailed worker metrics"
+          code={`-- Get detailed metrics for a specific worker
+SELECT * FROM neurondb_worker_metrics('neuranq')
+WHERE timestamp > NOW() - INTERVAL '1 hour'
+ORDER BY timestamp DESC;
+
+-- Monitor job queue depth
+SELECT 
+  queue_name,
+  pending_jobs,
+  processing_jobs,
+  completed_jobs,
+  failed_jobs
+FROM neurondb_queue_stats();`}
         />
       </section>
 

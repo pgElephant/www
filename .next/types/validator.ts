@@ -272,6 +272,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/docs/neurondb/embedding-engine/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/embedding-engine">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/embedding-engine/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/docs/neurondb/features/distance-metrics/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/features/distance-metrics">> = Specific
@@ -429,6 +438,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/installation">> = Specific
   const handler = {} as typeof import("../../app/docs/neurondb/installation/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/ml-engine/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/ml-engine">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/ml-engine/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -780,6 +798,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/troubleshooting">> = Specific
   const handler = {} as typeof import("../../app/docs/neurondb/troubleshooting/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/docs/neurondb/vector-engine/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/docs/neurondb/vector-engine">> = Specific
+  const handler = {} as typeof import("../../app/docs/neurondb/vector-engine/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

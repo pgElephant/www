@@ -22,16 +22,19 @@ const NeurondBDemoTerminal = () => {
   const [activeMainTab, setActiveMainTab] = useState<'build' | 'vectors' | 'ml' | 'embeddings' | 'llm' | 'gpu' | 'hybrid' | 'advanced'>('build')
   const [activeSubTab, setActiveSubTab] = useState<string>('')
 
-  // Tab structure definition
+  // Comprehensive tab structure covering all NeuronDB features
   const tabStructure = useMemo(() => ({
     build: { subTabs: [], defaultSubTab: '' },
-    vectors: { subTabs: [], defaultSubTab: '' },
+    vectors: { 
+      subTabs: ['operations', 'indexing', 'distance', 'quantization'],
+      defaultSubTab: 'operations'
+    },
     ml: { 
-      subTabs: ['algorithms', 'clustering', 'regression', 'classification', 'outliers', 'metrics'],
-      defaultSubTab: 'algorithms'
+      subTabs: ['regression', 'classification', 'clustering', 'boosting', 'neural', 'timeseries', 'automl', 'recommender'],
+      defaultSubTab: 'regression'
     },
     embeddings: {
-      subTabs: ['text', 'multimodal', 'batch', 'config'],
+      subTabs: ['text', 'batch', 'config', 'hf_models', 'multimodal'],
       defaultSubTab: 'text'
     },
     llm: {
@@ -41,7 +44,7 @@ const NeurondBDemoTerminal = () => {
     gpu: { subTabs: [], defaultSubTab: '' },
     hybrid: { subTabs: [], defaultSubTab: '' },
     advanced: {
-      subTabs: ['sparse', 'quantization', 'workers'],
+      subTabs: ['sparse', 'quantization', 'workers', 'onnx', 'metrics', 'planner', 'types'],
       defaultSubTab: 'sparse'
     }
   }), [])
@@ -180,8 +183,8 @@ const NeurondBDemoTerminal = () => {
     }
   ], [])
 
-  // Vector Operations Tab Commands
-  const vectorCommands = useMemo(() => [
+  // Vector Operations Sub-Tab Commands (from 027_vector_basic.sql)
+  const vectorOperationsCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
       output: ['psql (16.3)', 'Type "help" for help.', ''],
@@ -189,88 +192,334 @@ const NeurondBDemoTerminal = () => {
       entersPsql: true
     },
     {
-      command: 'SELECT \'[1,2,3]\'::vector + \'[4,5,6]\'::vector AS addition;',
+      command: 'SELECT vector \'[1,2,3]\' AS a1, vector \'{1,2,3}\' AS a2, array_to_vector(ARRAY[4,5,6]::float8[]) AS a3;',
       output: [
-        '  addition  ',
-        '------------',
-        ' [5,7,9]',
+        '  a1   |  a2   |  a3',
+        '-------+-------+-------',
+        ' [1,2,3] | [1,2,3] | [4,5,6]',
         '(1 row)',
         '',
-        '\x1b[36m-- Vector addition: element-wise sum\x1b[0m'
+        '\x1b[36m-- Vector creation: bracket, brace, and array formats\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector_l2_distance(\'[1,0,0]\'::vector, \'[0,1,0]\'::vector) AS euclidean;',
+      command: 'SELECT vector \'[1,2,3]\' + vector \'[4,5,6]\' AS plus, vector \'[7,8,9]\' - vector \'[1,2,3]\' AS minus;',
       output: [
-        '  euclidean  ',
-        '-------------',
-        ' 1.41421356',
+        '   plus    |   minus',
+        '-----------+----------',
+        ' [5,7,9]   | [6,6,6]',
         '(1 row)',
         '',
-        '\x1b[36m-- L2 (Euclidean) distance between vectors\x1b[0m'
+        '\x1b[36m-- Vector arithmetic: addition and subtraction\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT vector_cosine_distance(\'[1,0,0]\'::vector, \'[1,0,0]\'::vector) AS cosine;',
+      command: 'SELECT vector_mul(vector \'[1,1,1]\', 2.0) AS left_scale, vector \'[4,4,4]\' * 0.5 AS right_scale;',
       output: [
-        '  cosine  ',
-        '----------',
-        ' 0.000000',
+        ' left_scale | right_scale',
+        '------------+-------------',
+        ' [2,2,2]    | [2,2,2]',
         '(1 row)',
         '',
-        '\x1b[36m-- Cosine distance: 0 means identical direction\x1b[0m'
+        '\x1b[36m-- Scalar multiplication: element-wise scaling\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT quantize_vector_i8(\'[0.5, 0.3, -0.2, 0.8]\'::vector) AS int8_quantized;',
+      command: 'SELECT vector_get(vector \'[9,8,7]\', 0) AS idx0, vector_get(vector \'[9,8,7]\', 2) AS idx2;',
       output: [
-        '      int8_quantized      ',
-        '-------------------------',
-        ' \\x7f4ccc19ff',
+        ' idx0 | idx2',
+        '------+------',
+        '  9   |  7',
         '(1 row)',
         '',
-        '\x1b[36m-- 8x compression: float32 → int8\x1b[0m',
-        '\x1b[32m-- Memory saved: 75% reduction\x1b[0m'
+        '\x1b[36m-- Element access: 0-based indexing\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'CREATE TABLE products (id INT, name TEXT, features vector(128));',
+      command: 'SELECT vector_set(vector \'[1,2,3]\', 0, 11) AS set0, vector_set(vector \'[1,2,3]\', 2, 33) AS set2;',
       output: [
-        'CREATE TABLE',
+        '  set0   |  set2',
+        '---------+--------',
+        ' [11,2,3] | [1,2,33]',
+        '(1 row)',
         '',
-        '\x1b[36m-- Product feature vectors for similarity search\x1b[0m'
+        '\x1b[36m-- Element mutation: set specific indices\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'INSERT INTO products VALUES (1, \'Laptop\', array_fill(random()::float, ARRAY[128])::float[]::vector), (2, \'Phone\', array_fill(random()::float, ARRAY[128])::float[]::vector);',
+      command: 'SELECT vector_dims(vector \'[1,2,3,4,5]\') AS dims, vector_norm(vector \'[3,4]\') AS norm;',
       output: [
-        'INSERT 0 2',
+        ' dims | norm',
+        '------+------',
+        '  5   | 5.0',
+        '(1 row)',
         '',
-        '\x1b[32m-- 2 products with 128-dim feature vectors\x1b[0m'
+        '\x1b[36m-- Vector dimensions and L2 norm (magnitude)\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT name, features <-> (SELECT features FROM products WHERE id = 1) AS similarity FROM products ORDER BY similarity;',
+      command: 'SELECT vector_to_array(vector \'[10,20,30]\') AS arr, array_to_vector(ARRAY[1.0,2.0,3.0]::real[]) AS vec;',
       output: [
-        '  name   | similarity',
-        '---------+------------',
-        ' Laptop  |  0.000000',
-        ' Phone   |  1.234567',
-        '(2 rows)',
+        '      arr       |   vec',
+        '----------------+--------',
+        ' {10,20,30}     | [1,2,3]',
+        '(1 row)',
         '',
-        '\x1b[36m-- Finding similar products using vector distance\x1b[0m'
+        '\x1b[36m-- Array ↔ Vector conversion (roundtrip)\x1b[0m'
       ],
       isPsqlCommand: true
     }
   ], [])
 
-  // ML Algorithms Tab Commands
+  // Vector Indexing Sub-Tab Commands (from 036_index_basic.sql)
+  const vectorIndexingCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TABLE index_test_table (id SERIAL PRIMARY KEY, embedding vector(28), label integer);',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Table for vector indexing tests\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO index_test_table (embedding, label) SELECT array_to_vector(ARRAY[random(), random(), random()]::float8[]) AS features, (random() * 10)::integer AS label FROM generate_series(1, 100);',
+      output: [
+        'INSERT 0 100',
+        '',
+        '\x1b[32m-- 100 test vectors inserted\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE INDEX idx_test_hnsw_default ON index_test_table USING hnsw (embedding vector_l2_ops);',
+      output: [
+        'CREATE INDEX',
+        '',
+        '\x1b[36m-- HNSW index with default parameters\x1b[0m',
+        '\x1b[32m-- L2 (Euclidean) distance operator\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE INDEX idx_test_hnsw_custom ON index_test_table USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 200);',
+      output: [
+        'CREATE INDEX',
+        '',
+        '\x1b[36m-- HNSW index with custom parameters:\x1b[0m',
+        '\x1b[36m   m = 16 (max connections per node)\x1b[0m',
+        '\x1b[36m   ef_construction = 200 (build quality)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE INDEX idx_test_hnsw_cosine ON index_test_table USING hnsw (embedding vector_cosine_ops) WITH (m = 16, ef_construction = 200);',
+      output: [
+        'CREATE INDEX',
+        '',
+        '\x1b[36m-- HNSW index for cosine distance\x1b[0m',
+        '\x1b[32m-- Optimized for angular similarity\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE INDEX idx_test_ivf ON index_test_table USING ivf (embedding vector_l2_ops) WITH (lists = 10);',
+      output: [
+        'CREATE INDEX',
+        '',
+        '\x1b[36m-- IVF (Inverted File) index\x1b[0m',
+        '\x1b[36m   lists = 10 (number of clusters)\x1b[0m',
+        '\x1b[32m-- Faster build, good for large datasets\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT id, embedding <-> (SELECT embedding FROM index_test_table LIMIT 1) AS distance FROM index_test_table ORDER BY embedding <-> (SELECT embedding FROM index_test_table LIMIT 1) LIMIT 10;',
+      output: [
+        ' id | distance',
+        '----+----------',
+        '  1 |  0.000000',
+        ' 23 |  0.234567',
+        ' 45 |  0.456789',
+        '(10 rows)',
+        '',
+        '\x1b[36m-- KNN query using HNSW index (<-> operator)\x1b[0m',
+        '\x1b[32m-- Query executed in 0.5ms using index\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Vector Distance Sub-Tab Commands (from 030_core_basic.sql)
+  const vectorDistanceCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT vector_l2_distance(vector \'[1,0,0]\', vector \'[0,1,0]\') AS l2_distance, vector \'[3,0,0]\' <-> vector \'[0,4,0]\' AS l2_operator;',
+      output: [
+        ' l2_distance | l2_operator',
+        '-------------+-------------',
+        '  1.414214   |   5.000000',
+        '(1 row)',
+        '',
+        '\x1b[36m-- L2 (Euclidean) distance: function and operator\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_cosine_distance(vector \'[1,0,0]\', vector \'[0,1,0]\') AS cosine_distance, vector \'[1,0,0]\' <=> vector \'[0,1,0]\' AS cosine_operator;',
+      output: [
+        ' cosine_distance | cosine_operator',
+        '-----------------+-----------------',
+        '     1.000000    |    1.000000',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Cosine distance: orthogonal vectors (90°)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_inner_product(vector \'[1,2,3]\', vector \'[3,2,1]\') AS inner_product, vector \'[1,2,3]\' <#> vector \'[3,2,1]\' AS ip_operator;',
+      output: [
+        ' inner_product | ip_operator',
+        '---------------+-------------',
+        '     10.000000 |   10.000000',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Inner product (dot product): function and operator\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_l1_distance(vector \'[5,1]\', vector \'[3,4]\') AS l1_distance, vector_hamming_distance(vector \'[1,0,0]\', vector \'[0,1,0]\') AS hamming;',
+      output: [
+        ' l1_distance | hamming',
+        '-------------+---------',
+        '   5.000000  |    2',
+        '(1 row)',
+        '',
+        '\x1b[36m-- L1 (Manhattan) and Hamming distances\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_chebyshev_distance(vector \'[1,2,3]\', vector \'[4,5,6]\') AS chebyshev, vector_minkowski_distance(vector \'[1,2]\', vector \'[4,5]\', 2.0) AS minkowski_p2;',
+      output: [
+        ' chebyshev | minkowski_p2',
+        '-----------+--------------',
+        '  3.000000 |   4.242641',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Chebyshev (L∞) and Minkowski (generalized) distances\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_l2_distance(v, v) AS l2_identical, vector_cosine_distance(v, v) AS cosine_identical FROM (SELECT vector \'[1,2,3,4,5]\' AS v) t;',
+      output: [
+        ' l2_identical | cosine_identical',
+        '--------------+------------------',
+        '   0.000000   |     0.000000',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Identical vectors: zero distance (as expected)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Vector Quantization Sub-Tab Commands (from 027_vector_basic.sql)
+  const vectorQuantizationCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT vector_quantize_fp16(vector \'[1.0,2.0,3.0]\') IS NOT NULL AS fp16_quantized;',
+      output: [
+        ' fp16_quantized',
+        '----------------',
+        '       t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- FP16 quantization: 2x compression (float32 → float16)\x1b[0m',
+        '\x1b[32m-- Memory saved: 50% reduction\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_quantize_int8(vector \'[1.0,2.0,3.0]\', vector \'[0.0,0.0,0.0]\', vector \'[10.0,20.0,30.0]\') IS NOT NULL AS int8_quantized;',
+      output: [
+        ' int8_quantized',
+        '----------------',
+        '       t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- INT8 quantization: 4x compression\x1b[0m',
+        '\x1b[36m-- Requires min/max vectors for scaling\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT quantize_fp8_e4m3(vector \'[1.0,2.0,3.0,4.0,5.0]\') IS NOT NULL AS fp8_e4m3;',
+      output: [
+        ' fp8_e4m3',
+        '----------',
+        '    t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- FP8 E4M3 quantization: 4x compression\x1b[0m',
+        '\x1b[36m-- 4 exponent bits, 3 mantissa bits\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT quantize_fp8_e5m2(vector \'[1.0,2.0,3.0,4.0,5.0]\') IS NOT NULL AS fp8_e5m2;',
+      output: [
+        ' fp8_e5m2',
+        '----------',
+        '    t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- FP8 E5M2 quantization: 4x compression\x1b[0m',
+        '\x1b[36m-- 5 exponent bits, 2 mantissa bits (better range)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'WITH quantized AS (SELECT quantize_fp8_e4m3(vector \'[1.0,2.0,3.0]\') AS q) SELECT dequantize_fp8(q) IS NOT NULL AS dequantized FROM quantized;',
+      output: [
+        ' dequantized',
+        '-------------',
+        '      t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Dequantization: restore original vector\x1b[0m',
+        '\x1b[32m-- Round-trip preserves 95%+ accuracy\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML Algorithms Tab Commands (from actual test files)
   const mlCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
@@ -279,75 +528,101 @@ const NeurondBDemoTerminal = () => {
       entersPsql: true
     },
     {
-      command: 'CREATE TABLE customer_data (id INT, features vector(10));',
-      output: ['CREATE TABLE', '', '\x1b[36m-- Table for ML algorithms demo\x1b[0m'],
-      isPsqlCommand: true
-    },
-    {
-      command: 'INSERT INTO customer_data SELECT i, array_fill(random()::float, ARRAY[10])::float[]::vector FROM generate_series(1, 500) i;',
+      command: 'CREATE TEMP TABLE sample_train_subset AS SELECT features, label FROM test_train_view LIMIT 1000;',
       output: [
-        'INSERT 0 500',
+        'SELECT 1000',
         '',
-        '\x1b[32m-- 500 customer feature vectors generated\x1b[0m'
+        '\x1b[36m-- Training dataset: 1000 samples with features and labels\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT cluster_kmeans(\'customer_data\', \'features\', 5, 100) AS kmeans_result;',
+      command: 'CREATE TEMP TABLE model_temp AS SELECT neurondb.train(\'default\', \'linear_regression\', \'sample_train_subset\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
       output: [
-        '                kmeans_result                ',
-        '---------------------------------------------',
-        ' {"clusters": 5, "iterations": 23,',
-        '  "inertia": 45.67, "converged": true}',
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Linear Regression model\x1b[0m',
+        '\x1b[32m-- Model ID: 12345 (stored in neurondb.ml_models)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT algorithm, n_samples, n_features, ROUND(mse::numeric, 6) AS mse, ROUND(r_squared::numeric, 6) AS r_squared FROM neurondb.ml_models m, model_temp t WHERE m.model_id = t.model_id;',
+      output: [
+        '     algorithm      | n_samples | n_features |   mse   | r_squared',
+        '--------------------+-----------+------------+---------+----------',
+        ' linear_regression  |   1000    |     28     | 0.234567|  0.856789',
         '(1 row)',
         '',
-        '\x1b[36m-- K-Means clustering: 5 customer segments identified\x1b[0m',
-        '\x1b[36m-- Converged in 23 iterations\x1b[0m',
-        '\x1b[32m-- Algorithm: Lloyd\'s K-Means with k-means++ initialization\x1b[0m'
+        '\x1b[36m-- Model metrics: MSE and R² score\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT id, cluster_id, centroid_distance FROM neurondb_cluster_assignments(\'customer_data\', \'features\', 5) LIMIT 5;',
+      command: 'CREATE TEMP TABLE metrics_temp AS SELECT neurondb.evaluate((SELECT model_id FROM model_temp), \'test_test_view\', \'features\', \'label\') AS metrics;',
       output: [
-        ' id | cluster_id | centroid_distance',
-        '----+------------+------------------',
-        '  1 |      3     |       0.234',
-        '  2 |      1     |       0.456',
-        '  3 |      3     |       0.189',
-        '  4 |      5     |       0.678',
-        '  5 |      2     |       0.345',
-        '(5 rows)',
+        'SELECT 1',
         '',
-        '\x1b[36m-- Each customer assigned to nearest cluster\x1b[0m'
+        '\x1b[36m-- Evaluating model on test set\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT detect_outliers(\'customer_data\', \'features\', 0.95) AS outlier_count;',
+      command: 'SELECT \'MSE\' AS metric, ROUND((metrics->>\'mse\')::numeric, 6)::text AS value FROM metrics_temp UNION ALL SELECT \'RMSE\', ROUND((metrics->>\'rmse\')::numeric, 6)::text FROM metrics_temp UNION ALL SELECT \'R²\', ROUND((metrics->>\'r_squared\')::numeric, 6)::text FROM metrics_temp ORDER BY metric;',
       output: [
-        ' outlier_count',
-        '---------------',
-        '      12',
-        '(1 row)',
+        ' metric |  value',
+        '--------+--------',
+        ' MSE    | 0.234567',
+        ' R²     | 0.856789',
+        ' RMSE   | 0.484321',
+        '(3 rows)',
         '',
-        '\x1b[36m-- Outlier Detection: 12 anomalous customers (2.4%)\x1b[0m',
-        '\x1b[36m-- Algorithm: Isolation Forest with 95% confidence\x1b[0m'
+        '\x1b[36m-- Evaluation metrics on test set\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT reduce_dimensionality_pca(\'customer_data\', \'features\', 3) AS pca_result;',
+      command: 'CREATE TEMP TABLE rf_model AS SELECT neurondb.train(\'default\', \'random_forest\', \'sample_train_subset\', \'label\', ARRAY[\'features\'], \'{"n_trees": 3}\'::jsonb)::integer AS model_id;',
       output: [
-        '                     pca_result                     ',
-        '-------------------------------------------------------',
-        ' {"components": 3, "explained_variance": [0.45, 0.23, 0.12],',
-        '  "total_variance_explained": 0.80}',
-        '(1 row)',
+        'SELECT 1',
         '',
-        '\x1b[36m-- PCA: Reduced 10 → 3 dimensions\x1b[0m',
-        '\x1b[36m-- Retained 80% of variance\x1b[0m',
-        '\x1b[32m-- Algorithm: Singular Value Decomposition (SVD)\x1b[0m'
+        '\x1b[36m-- Training Random Forest with 3 trees\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'Accuracy\' AS metric, ROUND((metrics->>\'accuracy\')::numeric, 4) AS value FROM (SELECT neurondb.evaluate((SELECT model_id FROM rf_model), \'test_test_view\', \'features\', \'label\') AS metrics) m UNION ALL SELECT \'Precision\', ROUND((metrics->>\'precision\')::numeric, 4) FROM (SELECT neurondb.evaluate((SELECT model_id FROM rf_model), \'test_test_view\', \'features\', \'label\') AS metrics) m;',
+      output: [
+        '  metric   | value',
+        '-----------+-------',
+        ' Accuracy  | 0.9234',
+        ' Precision | 0.9156',
+        '(2 rows)',
+        '',
+        '\x1b[36m-- Random Forest classification metrics\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE kmeans_model AS SELECT train_kmeans_model_id(\'sample_train_subset\', \'features\', 3, 100) AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training K-Means clustering (k=3, max_iter=100)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'Inertia\' AS metric, ROUND((metrics->>\'inertia\')::numeric, 6)::text AS value FROM (SELECT evaluate_kmeans_by_model_id((SELECT model_id FROM kmeans_model), \'test_test_view\', \'features\') AS metrics) m UNION ALL SELECT \'N_Clusters\', (metrics->>\'n_clusters\')::text FROM (SELECT evaluate_kmeans_by_model_id((SELECT model_id FROM kmeans_model), \'test_test_view\', \'features\') AS metrics) m;',
+      output: [
+        '   metric    |  value',
+        '-------------+--------',
+        ' Inertia     | 45.234567',
+        ' N_Clusters  | 3',
+        '(2 rows)',
+        '',
+        '\x1b[36m-- K-Means clustering evaluation\x1b[0m',
+        '\x1b[32m-- Lower inertia = better clustering\x1b[0m'
       ],
       isPsqlCommand: true
     }
@@ -451,7 +726,7 @@ const NeurondBDemoTerminal = () => {
     }
   ], [])
 
-  // GPU Acceleration Tab Commands
+  // GPU Acceleration Tab Commands (from 010_gpu_info_basic.sql)
   const gpuCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
@@ -460,79 +735,91 @@ const NeurondBDemoTerminal = () => {
       entersPsql: true
     },
     {
-      command: 'SELECT neurondb_gpu_info();',
+      command: 'SELECT neurondb_gpu_enable() AS gpu_enabled;',
       output: [
-        '                     neurondb_gpu_info                      ',
-        '------------------------------------------------------------',
-        ' {"device": "NVIDIA RTX 4090", "memory": "24GB",',
-        '  "compute_capability": "8.9", "cuda_version": "12.6",',
-        '  "status": "available"}',
+        ' gpu_enabled',
+        '-------------',
+        '      t',
         '(1 row)',
         '',
-        '\x1b[36m-- GPU detected and available for acceleration\x1b[0m'
+        '\x1b[36m-- GPU acceleration enabled for current session\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT neurondb_gpu_enable(true);',
+      command: 'SELECT * FROM neurondb_gpu_info();',
       output: [
-        ' neurondb_gpu_enable',
-        '---------------------',
-        ' GPU enabled',
+        ' device_name | memory_gb | compute_capability | cuda_version | status',
+        '-------------+-----------+--------------------+--------------+--------',
+        ' RTX 4090    |    24     |        8.9         |    12.6      | available',
         '(1 row)',
         '',
-        '\x1b[32m-- GPU acceleration activated for current session\x1b[0m'
+        '\x1b[36m-- GPU Information:\x1b[0m',
+        '\x1b[36m   • Device: NVIDIA RTX 4090\x1b[0m',
+        '\x1b[36m   • Memory: 24GB\x1b[0m',
+        '\x1b[36m   • Compute Capability: 8.9\x1b[0m',
+        '\x1b[36m   • CUDA Version: 12.6\x1b[0m',
+        '\x1b[32m   • Status: Available ✓\x1b[0m'
       ],
       isPsqlCommand: true
     },
     {
-      command: 'SELECT cluster_kmeans_gpu(\'customer_data\', \'features\', 10, 100);',
+      command: 'SELECT * FROM neurondb_gpu_stats();',
       output: [
-        '                 cluster_kmeans_gpu                 ',
-        '-------------------------------------------------------',
-        ' {"clusters": 10, "iterations": 18, "inertia": 234.5,',
-        '  "device": "GPU", "speedup": "23.4x"}',
-        '(1 row)',
-        '',
-        '\x1b[36m-- GPU K-Means: 500 vectors, 10 clusters\x1b[0m',
-        '\x1b[32m-- 23.4x speedup vs CPU (18ms vs 421ms)\x1b[0m'
-      ],
-      isPsqlCommand: true
-    },
-    {
-      command: 'SELECT vector_l2_distance_gpu(features, \'[0.5,0.3,...]\'::vector) FROM products ORDER BY 1 LIMIT 3;',
-      output: [
-        ' vector_l2_distance_gpu',
-        '------------------------',
-        '        0.234',
-        '        0.567',
-        '        0.891',
-        '(3 rows)',
-        '',
-        '\x1b[36m-- Batch GPU distance calculation\x1b[0m',
-        '\x1b[32m-- 100x faster for large batches\x1b[0m'
-      ],
-      isPsqlCommand: true
-    },
-    {
-      command: 'SELECT * FROM pg_stat_neurondb_gpu;',
-      output: [
-        ' backend_pid | queries | batches | avg_batch_size | avg_latency_ms | fallback_count',
-        '-------------+---------+---------+----------------+----------------+----------------',
-        '   12345     |   1847  |    92   |      8192      |      2.3       |       0',
+        ' queries | batches | avg_batch_size | avg_latency_ms | fallback_count',
+        '---------+---------+----------------+----------------+----------------',
+        '  1847   |   92    |      8192       |      2.3       |       0',
         '(1 row)',
         '',
         '\x1b[36m-- GPU Statistics:\x1b[0m',
         '\x1b[36m   • 1847 GPU queries executed\x1b[0m',
-        '\x1b[36m   • Avg batch: 8192 vectors\x1b[0m',
+        '\x1b[36m   • 92 batches processed\x1b[0m',
+        '\x1b[36m   • Avg batch size: 8192 vectors\x1b[0m',
         '\x1b[36m   • Avg latency: 2.3ms\x1b[0m',
         '\x1b[32m   • Zero fallbacks to CPU ✓\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neurondb_llm_gpu_available() AS llm_gpu_available;',
+      output: [
+        ' llm_gpu_available',
+        '-------------------',
+        '        t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- LLM GPU acceleration available\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT * FROM neurondb_llm_gpu_info();',
+      output: [
+        ' device_name | memory_gb | status',
+        '-------------+-----------+--------',
+        ' RTX 4090    |    24     | available',
+        '(1 row)',
+        '',
+        '\x1b[36m-- LLM GPU information\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_l2_distance_gpu(\'[1,2,3]\'::vector, \'[4,5,6]\'::vector) AS gpu_l2_distance, vector_cosine_distance_gpu(\'[1,2,3]\'::vector, \'[4,5,6]\'::vector) AS gpu_cosine_distance;',
+      output: [
+        ' gpu_l2_distance | gpu_cosine_distance',
+        '-----------------+---------------------',
+        '    5.196152     |      0.025347',
+        '(1 row)',
+        '',
+        '\x1b[36m-- GPU-accelerated distance calculations\x1b[0m',
+        '\x1b[32m-- 100x faster for large batches\x1b[0m'
       ],
       isPsqlCommand: true
     }
   ], [])
 
-  // Hybrid Search Tab Commands  
+  // Hybrid Search Tab Commands (from 011_hybrid_search_basic.sql)
   const hybridCommands = useMemo(() => [
     {
       command: 'psql -d vectordb',
@@ -541,7 +828,7 @@ const NeurondBDemoTerminal = () => {
       entersPsql: true
     },
     {
-      command: 'CREATE TABLE knowledge_base (id SERIAL PRIMARY KEY, title TEXT, content TEXT, embedding vector(384), ts_vector tsvector);',
+      command: 'CREATE TEMP TABLE hybrid_search_test (id SERIAL PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, embedding VECTOR(384), fts_vector tsvector);',
       output: [
         'CREATE TABLE',
         '',
@@ -550,7 +837,7 @@ const NeurondBDemoTerminal = () => {
       isPsqlCommand: true
     },
     {
-      command: 'INSERT INTO knowledge_base (title, content, embedding, ts_vector) VALUES (\'PostgreSQL Performance\', \'Optimize queries with indexes and EXPLAIN\', embed_text(\'Optimize queries with indexes and EXPLAIN\'), to_tsvector(\'Optimize queries with indexes and EXPLAIN\'));',
+      command: 'INSERT INTO hybrid_search_test (title, content, embedding, fts_vector) VALUES (\'PostgreSQL Database\', \'PostgreSQL is a powerful open-source relational database management system\', embed_text(\'PostgreSQL is a powerful open-source relational database management system\', \'all-MiniLM-L6-v2\'), to_tsvector(\'PostgreSQL is a powerful open-source relational database management system\'));',
       output: [
         'INSERT 0 1',
         '',
@@ -559,11 +846,11 @@ const NeurondBDemoTerminal = () => {
       isPsqlCommand: true
     },
     {
-      command: 'SELECT * FROM hybrid_search(\'knowledge_base\', \'content\', \'embedding\', \'database optimization\', 10, 0.7, 0.3);',
+      command: 'SELECT search_result.id, hybrid_search_test.title, hybrid_search_test.content, search_result.score FROM hybrid_search_test, LATERAL hybrid_search(\'hybrid_search_test\', embed_text(\'database systems\', \'all-MiniLM-L6-v2\'), \'database systems\', \'{}\'::text, 0.7, 5) AS search_result(id, score) WHERE hybrid_search_test.id = search_result.id ORDER BY search_result.score DESC LIMIT 5;',
       output: [
-        ' id |        title         |              content              | vector_score | text_score | hybrid_score',
-        '----+----------------------+-----------------------------------+--------------+------------+-------------',
-        '  1 | PostgreSQL Performance| Optimize queries with indexes...  |     0.92     |    0.85    |     0.90',
+        ' id |        title         |              content              | score',
+        '----+----------------------+-----------------------------------+-------',
+        '  1 | PostgreSQL Database  | PostgreSQL is a powerful...      | 0.92',
         '(1 row)',
         '',
         '\x1b[36m-- Hybrid Search: 70% vector + 30% BM25 text search\x1b[0m',
@@ -573,33 +860,15 @@ const NeurondBDemoTerminal = () => {
       isPsqlCommand: true
     },
     {
-      command: 'SELECT rerank_cross_encoder(\'What is PostgreSQL?\', ARRAY[\'PostgreSQL is a database\', \'MySQL is also a database\', \'Redis is a cache\'], \'ms-marco-MiniLM\', 3);',
+      command: 'WITH vector_results AS (SELECT id, embedding <-> embed_text(\'database systems\', \'all-MiniLM-L6-v2\') AS distance FROM hybrid_search_test ORDER BY distance LIMIT 5), text_results AS (SELECT id, ts_rank(to_tsvector(\'english\', title || \' \' || content), to_tsquery(\'english\', \'database & systems\')) AS rank FROM hybrid_search_test WHERE to_tsvector(\'english\', title || \' \' || content) @@ to_tsquery(\'english\', \'database & systems\') ORDER BY rank DESC LIMIT 5) SELECT COALESCE(v.id, t.id) AS id, hybrid_search_test.title FROM vector_results v FULL OUTER JOIN text_results t ON v.id = t.id JOIN hybrid_search_test ON hybrid_search_test.id = COALESCE(v.id, t.id) ORDER BY COALESCE(v.distance, 0.0) + COALESCE(t.rank, 0.0) DESC LIMIT 5;',
       output: [
-        ' idx | score ',
-        '-----+-------',
-        '  0  | 0.945',
-        '  1  | 0.678',
-        '  2  | 0.123',
-        '(3 rows)',
+        ' id |        title',
+        '----+----------------------',
+        '  1 | PostgreSQL Database',
+        '(1 row)',
         '',
-        '\x1b[36m-- Cross-encoder reranking for higher precision\x1b[0m',
-        '\x1b[32m-- Improved relevance: 94.5% vs 67.8% vs 12.3%\x1b[0m'
-      ],
-      isPsqlCommand: true
-    },
-    {
-      command: 'SELECT * FROM mmr_rerank(\'knowledge_base\', \'embedding\', embed_text(\'database\'), 20, 5, 0.7);',
-      output: [
-        ' id |  title   |   score   | diversity',
-        '----+----------+-----------+-----------',
-        '  1 | Doc A    |   0.923   |   1.000',
-        '  5 | Doc E    |   0.856   |   0.834',
-        ' 12 | Doc L    |   0.789   |   0.756',
-        '(3 rows)',
-        '',
-        '\x1b[36m-- MMR (Maximal Marginal Relevance) reranking\x1b[0m',
-        '\x1b[36m-- Balances relevance (70%) with diversity (30%)\x1b[0m',
-        '\x1b[32m-- Avoids redundant results ✓\x1b[0m'
+        '\x1b[36m-- Hybrid Search Fusion: combining vector and text results\x1b[0m',
+        '\x1b[32m-- Optimal relevance through multi-modal retrieval\x1b[0m'
       ],
       isPsqlCommand: true
     }
@@ -1181,33 +1450,846 @@ const NeurondBDemoTerminal = () => {
     }
   ], [])
 
+  // ML Regression Sub-Tab Commands (from 001_linreg_basic.sql, 006_ridge_basic.sql, 007_lasso_basic.sql)
+  const mlRegressionCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TEMP TABLE model_temp AS SELECT neurondb.train(\'default\', \'linear_regression\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Linear Regression model\x1b[0m',
+        '\x1b[32m-- Model ID: 12345 stored in neurondb.ml_models\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT algorithm, n_samples, ROUND(mse::numeric, 6) AS mse, ROUND(r_squared::numeric, 6) AS r_squared FROM neurondb.ml_models m, model_temp t WHERE m.model_id = t.model_id;',
+      output: [
+        '     algorithm      | n_samples |   mse   | r_squared',
+        '--------------------+-----------+---------+----------',
+        ' linear_regression  |   1000    | 0.234567|  0.856789',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Model metrics: MSE and R² score\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE metrics_temp AS SELECT neurondb.evaluate((SELECT model_id FROM model_temp), \'test_test_view\', \'features\', \'label\') AS metrics;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Evaluating model on test set (optimized C batch processing)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'MSE\' AS metric, ROUND((metrics->>\'mse\')::numeric, 6)::text AS value FROM metrics_temp UNION ALL SELECT \'RMSE\', ROUND((metrics->>\'rmse\')::numeric, 6)::text FROM metrics_temp UNION ALL SELECT \'R²\', ROUND((metrics->>\'r_squared\')::numeric, 6)::text FROM metrics_temp ORDER BY metric;',
+      output: [
+        ' metric |  value',
+        '--------+--------',
+        ' MSE    | 0.234567',
+        ' R²     | 0.856789',
+        ' RMSE   | 0.484321',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Evaluation metrics on test set\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE ridge_model AS SELECT neurondb.train(\'default\', \'ridge\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{"alpha": 0.1}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Ridge Regression (L2 regularization)\x1b[0m',
+        '\x1b[36m-- Alpha: 0.1 (regularization strength)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE lasso_model AS SELECT neurondb.train(\'default\', \'lasso\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{"alpha": 0.1}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Lasso Regression (L1 regularization)\x1b[0m',
+        '\x1b[36m-- Alpha: 0.1 (feature selection via sparsity)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML Classification Sub-Tab Commands (from 002_logreg_basic.sql, 004_svm_basic.sql, 012_nb_basic.sql)
+  const mlClassificationCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TEMP TABLE logreg_model AS SELECT neurondb.train(\'default\', \'logistic_regression\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{"max_iters": 1000, "learning_rate": 0.01}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Logistic Regression for classification\x1b[0m',
+        '\x1b[36m-- Max iterations: 1000, Learning rate: 0.01\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'Accuracy\' AS metric, ROUND((metrics->>\'accuracy\')::numeric, 4) AS value FROM (SELECT neurondb.evaluate((SELECT model_id FROM logreg_model), \'test_test_view\', \'features\', \'label\') AS metrics) m UNION ALL SELECT \'Precision\', ROUND((metrics->>\'precision\')::numeric, 4) FROM (SELECT neurondb.evaluate((SELECT model_id FROM logreg_model), \'test_test_view\', \'features\', \'label\') AS metrics) m UNION ALL SELECT \'F1\', ROUND((metrics->>\'f1_score\')::numeric, 4) FROM (SELECT neurondb.evaluate((SELECT model_id FROM logreg_model), \'test_test_view\', \'features\', \'label\') AS metrics) m;',
+      output: [
+        '  metric   | value',
+        '-----------+-------',
+        ' Accuracy  | 0.9234',
+        ' F1        | 0.9156',
+        ' Precision | 0.9123',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Classification metrics on test set\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE svm_model AS SELECT neurondb.train(\'default\', \'svm\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{"C": 1.0, "max_iters": 1000}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training SVM (Support Vector Machine)\x1b[0m',
+        '\x1b[36m-- C: 1.0 (regularization parameter)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE nb_model AS SELECT neurondb.train(\'default\', \'naive_bayes\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Naive Bayes classifier\x1b[0m',
+        '\x1b[32m-- Fast probabilistic classifier\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML Clustering Sub-Tab Commands (from 015_kmeans_basic.sql, 013_gmm_basic.sql, 017_hierarchical_basic.sql, 018_dbscan_basic.sql)
+  const mlClusteringCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TEMP TABLE kmeans_model AS SELECT train_kmeans_model_id(\'test_train_view\', \'features\', 3, 100) AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training K-Means clustering (k=3, max_iter=100)\x1b[0m',
+        '\x1b[32m-- Lloyd\'s algorithm with k-means++ initialization\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'Inertia\' AS metric, ROUND((metrics->>\'inertia\')::numeric, 6)::text AS value FROM (SELECT evaluate_kmeans_by_model_id((SELECT model_id FROM kmeans_model), \'test_test_view\', \'features\') AS metrics) m UNION ALL SELECT \'N_Clusters\', (metrics->>\'n_clusters\')::text FROM (SELECT evaluate_kmeans_by_model_id((SELECT model_id FROM kmeans_model), \'test_test_view\', \'features\') AS metrics) m UNION ALL SELECT \'N_Iterations\', (metrics->>\'n_iterations\')::text FROM (SELECT evaluate_kmeans_by_model_id((SELECT model_id FROM kmeans_model), \'test_test_view\', \'features\') AS metrics) m;',
+      output: [
+        '   metric    |  value',
+        '-------------+--------',
+        ' Inertia     | 45.234567',
+        ' N_Clusters  | 3',
+        ' N_Iterations| 23',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- K-Means evaluation: lower inertia = better clustering\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE gmm_model AS SELECT neurondb.train(\'default\', \'gmm\', \'test_train_view\', NULL, ARRAY[\'features\'], \'{"n_components": 3, "max_iters": 100}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training GMM (Gaussian Mixture Model)\x1b[0m',
+        '\x1b[36m-- 3 components, 100 max iterations\x1b[0m',
+        '\x1b[32m-- Probabilistic clustering with soft assignments\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'WITH clusters AS (SELECT unnest(cluster_dbscan(\'test_train_view\', \'features\', 0.5, 5)) AS cluster_id) SELECT COUNT(DISTINCT cluster_id) FILTER (WHERE cluster_id != -1) AS num_clusters, COUNT(*) FILTER (WHERE cluster_id = -1) AS noise_points FROM clusters;',
+      output: [
+        ' num_clusters | noise_points',
+        '--------------+--------------',
+        '      5       |      12',
+        '(1 row)',
+        '',
+        '\x1b[36m-- DBSCAN clustering: density-based\x1b[0m',
+        '\x1b[36m-- eps=0.5, min_pts=5, noise points marked as -1\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'WITH clusters AS (SELECT unnest(cluster_hierarchical(\'test_train_view\', \'features\', 3, \'average\')) AS cluster_id) SELECT COUNT(DISTINCT cluster_id) AS num_clusters FROM clusters;',
+      output: [
+        ' num_clusters',
+        '--------------',
+        '      3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Hierarchical clustering: agglomerative\x1b[0m',
+        '\x1b[36m-- Linkage: average, k=3 clusters\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML Boosting Sub-Tab Commands (from 003_rf_basic.sql, 019_xgboost_basic.sql, 020_catboost_basic.sql, 021_lightgbm_basic.sql)
+  const mlBoostingCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TEMP TABLE rf_model AS SELECT neurondb.train(\'default\', \'random_forest\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{"n_trees": 3}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Random Forest with 3 trees\x1b[0m',
+        '\x1b[32m-- Ensemble of decision trees with bagging\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'Accuracy\' AS metric, ROUND((metrics->>\'accuracy\')::numeric, 4) AS value FROM (SELECT neurondb.evaluate((SELECT model_id FROM rf_model), \'test_test_view\', \'features\', \'label\') AS metrics) m UNION ALL SELECT \'Precision\', ROUND((metrics->>\'precision\')::numeric, 4) FROM (SELECT neurondb.evaluate((SELECT model_id FROM rf_model), \'test_test_view\', \'features\', \'label\') AS metrics) m;',
+      output: [
+        '  metric   | value',
+        '-----------+-------',
+        ' Accuracy  | 0.9234',
+        ' Precision | 0.9156',
+        '(2 rows)',
+        '',
+        '\x1b[36m-- Random Forest classification metrics\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE xgb_model AS SELECT neurondb.train(\'default\', \'xgboost\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training XGBoost (Extreme Gradient Boosting)\x1b[0m',
+        '\x1b[32m-- GPU-accelerated gradient boosting\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE lgb_model AS SELECT neurondb.train(\'default\', \'lightgbm\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training LightGBM (Light Gradient Boosting)\x1b[0m',
+        '\x1b[32m-- Fast, memory-efficient gradient boosting\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE cat_model AS SELECT neurondb.train(\'default\', \'catboost\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training CatBoost (Categorical Boosting)\x1b[0m',
+        '\x1b[32m-- Handles categorical features automatically\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML Neural Network Sub-Tab Commands (from 022_neural_network_basic.sql)
+  const mlNeuralCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TEMP TABLE nn_model AS SELECT neurondb.train(\'default\', \'neural_network\', \'test_train_view\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Neural Network (Deep Learning)\x1b[0m',
+        '\x1b[32m-- Multi-layer perceptron with backpropagation\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neurondb.predict((SELECT model_id FROM nn_model), array_to_vector_float8(ARRAY[7.0, 14.0]::double precision[])) AS prediction;',
+      output: [
+        ' prediction',
+        '------------',
+        '   0.8567',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Neural network inference on new data\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML Time Series Sub-Tab Commands (from 024_timeseries_basic.sql, 029_arima_basic.sql)
+  const mlTimeseriesCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TABLE ts_data (id serial PRIMARY KEY, features vector, label double precision);',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Time series data table\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO ts_data (features, label) SELECT array_to_vector_float8(ARRAY[x::double precision]) AS features, (x::double precision + random()*0.1) AS label FROM generate_series(1, 30) x;',
+      output: [
+        'INSERT 0 30',
+        '',
+        '\x1b[32m-- 30 time series samples inserted\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE ts_model AS SELECT neurondb.train(\'default\', \'timeseries\', \'ts_data\', \'label\', ARRAY[\'features\'], \'{}\'::jsonb)::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Time Series forecasting model\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neurondb.predict((SELECT model_id FROM ts_model), array_to_vector_float8(ARRAY[31::double precision])) AS forecast;',
+      output: [
+        ' forecast',
+        '---------',
+        ' 31.2345',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Forecasting next time step\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML AutoML Sub-Tab Commands (from 025_automl_basic.sql)
+  const mlAutomlCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TEMP TABLE automl_model AS SELECT auto_train(\'test_train_view\', \'features\', \'label\', \'classification\', \'accuracy\')::integer AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- AutoML: Automated model selection and hyperparameter tuning\x1b[0m',
+        '\x1b[32m-- Task: classification, Metric: accuracy\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT model_id FROM automl_model;',
+      output: [
+        ' model_id',
+        '----------',
+        '   12345',
+        '(1 row)',
+        '',
+        '\x1b[36m-- AutoML selected best model automatically\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT algorithm, ROUND((metrics->>\'accuracy\')::numeric, 4) AS accuracy FROM neurondb.ml_models m, automl_model a WHERE m.model_id = a.model_id;',
+      output: [
+        '  algorithm  | accuracy',
+        '-------------+----------',
+        ' xgboost     |  0.9456',
+        '(1 row)',
+        '',
+        '\x1b[36m-- AutoML selected XGBoost as best algorithm\x1b[0m',
+        '\x1b[32m-- Achieved 94.56% accuracy with optimized hyperparameters\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // ML Recommender Sub-Tab Commands (from 028_recommender_basic.sql)
+  const mlRecommenderCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TABLE cf_ratings (user_id INTEGER, item_id INTEGER, rating FLOAT4);',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Collaborative filtering ratings table\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO cf_ratings (user_id, item_id, rating) SELECT (random() * 99 + 1)::INTEGER, (random() * 49 + 1)::INTEGER, (random() * 4 + 1)::FLOAT4 FROM generate_series(1, 1000);',
+      output: [
+        'INSERT 0 1000',
+        '',
+        '\x1b[32m-- 1000 ratings inserted (users × items)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT COUNT(DISTINCT user_id) AS users, COUNT(DISTINCT item_id) AS items, COUNT(*) AS ratings FROM cf_ratings;',
+      output: [
+        ' users | items | ratings',
+        '-------+-------+---------',
+        '  100  |  50   |  1000',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Dataset: 100 users, 50 items, 1000 ratings\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TEMP TABLE cf_model AS SELECT train_collaborative_filter(\'cf_ratings\', \'user_id\', \'item_id\', \'rating\') AS model_id;',
+      output: [
+        'SELECT 1',
+        '',
+        '\x1b[36m-- Training Collaborative Filtering (ALS algorithm)\x1b[0m',
+        '\x1b[32m-- Matrix factorization for recommendation\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT user_id, item_id, predicted_rating FROM predict_collaborative_filter((SELECT model_id FROM cf_model), 1, 5) LIMIT 5;',
+      output: [
+        ' user_id | item_id | predicted_rating',
+        '---------+---------+-----------------',
+        '    1    |    1    |     4.234',
+        '    1    |    2    |     3.567',
+        '    1    |    3    |     4.891',
+        '(5 rows)',
+        '',
+        '\x1b[36m-- Predicting ratings for user 1, top 5 items\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Embeddings Batch Sub-Tab Commands (from 032_embeddings_batch.sql)
+  const embeddingsBatchCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'WITH batch_result AS (SELECT embed_text_batch(ARRAY[\'First text\', \'Second text\', \'Third text\']) AS embeddings) SELECT \'Batch embedding\' AS test_name, array_length(batch_result.embeddings, 1) AS batch_size FROM batch_result;',
+      output: [
+        '   test_name    | batch_size',
+        '----------------+------------',
+        ' Batch embedding|     3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Batch embedding: 3 texts → 3 vectors in one call\x1b[0m',
+        '\x1b[32m-- 5x faster than individual embed_text() calls\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT array_length(embed_text_batch(ARRAY[\'Valid text\', NULL, \'Another text\']), 1) AS batch_size;',
+      output: [
+        ' batch_size',
+        '------------',
+        '     3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Batch handles NULL elements gracefully\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT unnest(embed_text_batch(ARRAY[\'AI\', \'ML\', \'DL\'])) AS batch_embeddings;',
+      output: [
+        '              batch_embeddings               ',
+        '-----------------------------------------------',
+        ' [0.456,0.234,...]  (384 dimensions)',
+        ' [0.567,0.123,...]  (384 dimensions)',
+        ' [0.678,0.345,...]  (384 dimensions)',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Batch embedding: 3 texts → 3 vectors\x1b[0m',
+        '\x1b[32m-- Efficient parallel processing\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Embeddings Config Sub-Tab Commands (from 033_embeddings_config.sql)
+  const embeddingsConfigCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT configure_embedding_model(\'test_model\', \'{"batch_size": 32, "normalize": true, "device": "cpu", "timeout_ms": 5000}\'::text) AS config_success;',
+      output: [
+        ' config_success',
+        '----------------',
+        '       t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Configuring embedding model parameters\x1b[0m',
+        '\x1b[36m   batch_size: 32, normalize: true, device: cpu\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT config_json->>\'batch_size\' AS batch_size, config_json->>\'normalize\' AS normalize FROM neurondb.neurondb_embedding_model_config WHERE model_name = \'test_model\';',
+      output: [
+        ' batch_size | normalize',
+        '------------+-----------',
+        '    32      |   true',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Configuration stored and retrieved\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT get_embedding_model_config(\'test_model\') IS NOT NULL AS config_exists, (get_embedding_model_config(\'test_model\'))->>\'batch_size\' AS batch_size;',
+      output: [
+        ' config_exists | batch_size',
+        '--------------+------------',
+        '      t        |    32',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Get embedding model configuration\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neurondb_embed(\'Alias test\') IS NOT NULL AS alias_works, array_length(neurondb_embed_batch(ARRAY[\'Text 1\', \'Text 2\']), 1) AS batch_alias;',
+      output: [
+        ' alias_works | batch_alias',
+        '-------------+-------------',
+        '      t      |      2',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Function aliases: neurondb_embed, neurondb_embed_batch\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Embeddings HF Models Sub-Tab Commands (from 034_embeddings_hf_models.sql)
+  const embeddingsHfModelsCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT \'sentence-transformers/all-MiniLM-L6-v2\' AS model_name, 384 AS expected_dims, vector_dims(embed_text(\'Test text\', \'sentence-transformers/all-MiniLM-L6-v2\')) AS actual_dims;',
+      output: [
+        '            model_name             | expected_dims | actual_dims',
+        '----------------------------------+---------------+-------------',
+        ' sentence-transformers/all-MiniLM-L6-v2 |     384      |    384',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Hugging Face model: all-MiniLM-L6-v2 (384 dim, fast)\x1b[0m',
+        '\x1b[32m-- Default model for text embeddings\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'sentence-transformers/all-mpnet-base-v2\' AS model_name, 768 AS expected_dims, vector_dims(embed_text(\'Test text\', \'sentence-transformers/all-mpnet-base-v2\')) AS actual_dims;',
+      output: [
+        '            model_name              | expected_dims | actual_dims',
+        '-----------------------------------+---------------+-------------',
+        ' sentence-transformers/all-mpnet-base-v2 |     768      |    768',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Higher quality model: all-mpnet-base-v2 (768 dim)\x1b[0m',
+        '\x1b[32m-- Better accuracy for complex queries\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT \'sentence-transformers/all-MiniLM-L12-v2\' AS model_name, 384 AS expected_dims, vector_dims(embed_text(\'Test text\', \'sentence-transformers/all-MiniLM-L12-v2\')) AS actual_dims;',
+      output: [
+        '            model_name              | expected_dims | actual_dims',
+        '-----------------------------------+---------------+-------------',
+        ' sentence-transformers/all-MiniLM-L12-v2 |     384      |    384',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Better quality than L6: all-MiniLM-L12-v2 (384 dim)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Advanced ONNX Sub-Tab Commands (from 047_onnx_basic.sql)
+  const advancedOnnxCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT neurondb_hf_embedding(\'sentence-transformers/all-MiniLM-L6-v2\', \'Test text\') IS NOT NULL AS onnx_embedding;',
+      output: [
+        ' onnx_embedding',
+        '----------------',
+        '       t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- ONNX runtime: HuggingFace embedding inference\x1b[0m',
+        '\x1b[32m-- Optimized model execution via ONNX\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT array_length(neurondb_hf_tokenize(\'sentence-transformers/all-MiniLM-L6-v2\', \'Test text\'), 1) AS token_count;',
+      output: [
+        ' token_count',
+        '-------------',
+        '      3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- ONNX tokenization: text → token IDs\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neurondb_hf_classify(\'text-classification-model\', \'Test text\') AS classification_result;',
+      output: [
+        ' classification_result',
+        '------------------------',
+        ' positive',
+        '(1 row)',
+        '',
+        '\x1b[36m-- ONNX classification: text → label\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Advanced Metrics Sub-Tab Commands (from 046_metrics_basic.sql)
+  const advancedMetricsCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT * FROM pg_stat_neurondb();',
+      output: [
+        ' backend_pid | queries | cache_hits | cache_misses | avg_latency_ms',
+        '-------------+---------+------------+--------------+----------------',
+        '   12345     |   1847  |    1654    |     193      |      2.3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- NeuronDB statistics view\x1b[0m',
+        '\x1b[36m   • 1847 queries executed\x1b[0m',
+        '\x1b[36m   • 1654 cache hits (89.4% hit rate)\x1b[0m',
+        '\x1b[36m   • Avg latency: 2.3ms\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT pg_neurondb_stat_reset() AS stats_reset;',
+      output: [
+        ' stats_reset',
+        '-------------',
+        '      t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Statistics reset\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Advanced Planner Sub-Tab Commands (from 043_planner_basic.sql)
+  const advancedPlannerCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TABLE planner_test_table (id SERIAL PRIMARY KEY, embedding vector(28), label integer);',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Table for query planner tests\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE INDEX idx_planner_hnsw ON planner_test_table USING hnsw (embedding vector_l2_ops);',
+      output: [
+        'CREATE INDEX',
+        '',
+        '\x1b[36m-- HNSW index for query optimization\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'EXPLAIN (ANALYZE, BUFFERS) SELECT id, embedding <-> (SELECT embedding FROM planner_test_table LIMIT 1) AS distance FROM planner_test_table ORDER BY embedding <-> (SELECT embedding FROM planner_test_table LIMIT 1) LIMIT 10;',
+      output: [
+        '                                    QUERY PLAN',
+        '--------------------------------------------------------------------------------',
+        ' Limit  (cost=0.00..8.45 rows=10) (actual time=0.234..1.567 rows=10 loops=1)',
+        '   ->  Index Scan using idx_planner_hnsw on planner_test_table',
+        '       (cost=0.00..845.23 rows=1000) (actual time=0.232..1.564 rows=10 loops=1)',
+        '       Order By: (embedding <-> \'[0.123,0.456,...]\'::vector)',
+        ' Planning Time: 0.123 ms',
+        ' Execution Time: 1.589 ms',
+        '(5 rows)',
+        '',
+        '\x1b[36m-- Query planner uses HNSW index for KNN search\x1b[0m',
+        '\x1b[32m-- Optimized execution plan with index scan\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Advanced Types Sub-Tab Commands (from 045_types_basic.sql)
+  const advancedTypesCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT vector_quantize_int8(vector \'[1,2,3,4,5]\'::vector, vector \'[0,0,0,0,0]\'::vector, vector \'[10,10,10,10,10]\'::vector) IS NOT NULL AS int8_quantized;',
+      output: [
+        ' int8_quantized',
+        '----------------',
+        '       t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- INT8 quantization: 4x compression\x1b[0m',
+        '\x1b[36m-- Requires min/max vectors for scaling\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_quantize_fp16(vector \'[1,2,3,4,5]\'::vector) IS NOT NULL AS fp16_quantized;',
+      output: [
+        ' fp16_quantized',
+        '----------------',
+        '       t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- FP16 quantization: 2x compression\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT vector_quantize_binary(vector \'[1,2,3,4,5]\'::vector) IS NOT NULL AS binary_quantized;',
+      output: [
+        ' binary_quantized',
+        '------------------',
+        '        t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Binary quantization: 32x compression\x1b[0m',
+        '\x1b[32m-- Extreme compression for approximate search\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT COUNT(*) AS count, AVG(vector_norm(embedding)) AS avg_norm FROM (SELECT vector \'[1,2,3]\'::vector AS embedding UNION ALL SELECT vector \'[4,5,6]\'::vector) t;',
+      output: [
+        ' count |  avg_norm',
+        '-------+-----------',
+        '   2   |  4.183300',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Vector aggregates: COUNT, AVG on vector norms\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
   // Get commands based on active main tab and sub tab
   const getCommands = useCallback(() => {
     // Handle main tabs without sub-tabs
     if (activeMainTab === 'build') return buildCommands
-    if (activeMainTab === 'vectors') return vectorCommands
     if (activeMainTab === 'gpu') return gpuCommands
     if (activeMainTab === 'hybrid') return hybridCommands
 
-    // Handle main tabs with sub-tabs
+    // Handle Vectors main tab with sub-tabs
+    if (activeMainTab === 'vectors') {
+      switch (activeSubTab) {
+        case 'operations': return vectorOperationsCommands
+        case 'indexing': return vectorIndexingCommands
+        case 'distance': return vectorDistanceCommands
+        case 'quantization': return vectorQuantizationCommands
+        default: return vectorOperationsCommands
+      }
+    }
+
+    // Handle ML main tab with sub-tabs
     if (activeMainTab === 'ml') {
       switch (activeSubTab) {
-        case 'algorithms': return mlCommands
-        case 'clustering': return mlCommands // Can be expanded later
-        case 'regression': return mlCommands
-        case 'classification': return mlCommands
-        case 'outliers': return mlCommands
-        case 'metrics': return mlCommands
-        default: return mlCommands
+        case 'regression': return mlRegressionCommands
+        case 'classification': return mlClassificationCommands
+        case 'clustering': return mlClusteringCommands
+        case 'boosting': return mlBoostingCommands
+        case 'neural': return mlNeuralCommands
+        case 'timeseries': return mlTimeseriesCommands
+        case 'automl': return mlAutomlCommands
+        case 'recommender': return mlRecommenderCommands
+        default: return mlRegressionCommands
       }
     }
 
     if (activeMainTab === 'embeddings') {
       switch (activeSubTab) {
         case 'text': return embeddingCommands
+        case 'batch': return embeddingsBatchCommands
+        case 'config': return embeddingsConfigCommands
+        case 'hf_models': return embeddingsHfModelsCommands
         case 'multimodal': return multimodalCommands
-        case 'batch': return embeddingCommands
-        case 'config': return embeddingCommands
         default: return embeddingCommands
       }
     }
@@ -1226,12 +2308,16 @@ const NeurondBDemoTerminal = () => {
         case 'sparse': return sparseCommands
         case 'quantization': return quantizationCommands
         case 'workers': return workersCommands
+        case 'onnx': return advancedOnnxCommands
+        case 'metrics': return advancedMetricsCommands
+        case 'planner': return advancedPlannerCommands
+        case 'types': return advancedTypesCommands
         default: return sparseCommands
       }
     }
 
     return buildCommands
-  }, [activeMainTab, activeSubTab, buildCommands, vectorCommands, mlCommands, embeddingCommands, gpuCommands, hybridCommands, ragCommands, rerankingCommands, sparseCommands, quantizationCommands, multimodalCommands, workersCommands])
+  }, [activeMainTab, activeSubTab, buildCommands, vectorOperationsCommands, vectorIndexingCommands, vectorDistanceCommands, vectorQuantizationCommands, mlRegressionCommands, mlClassificationCommands, mlClusteringCommands, mlBoostingCommands, mlNeuralCommands, mlTimeseriesCommands, mlAutomlCommands, mlRecommenderCommands, embeddingCommands, embeddingsBatchCommands, embeddingsConfigCommands, embeddingsHfModelsCommands, multimodalCommands, gpuCommands, hybridCommands, ragCommands, rerankingCommands, sparseCommands, quantizationCommands, advancedOnnxCommands, advancedMetricsCommands, advancedPlannerCommands, advancedTypesCommands, workersCommands])
 
   // Cleanup all intervals and timeouts
   const cleanup = useCallback(() => {
@@ -1448,21 +2534,21 @@ const NeurondBDemoTerminal = () => {
         {/* Main Tabs */}
         <div className="flex gap-2 flex-wrap mb-2">
           {(['build', 'vectors', 'ml', 'embeddings', 'llm', 'gpu', 'hybrid', 'advanced'] as const).map((mainTab) => (
-            <button
+          <button
               key={mainTab}
-              onClick={() => {
+            onClick={() => {
                 setActiveMainTab(mainTab)
-                resetDemo()
-              }}
-              disabled={isRunning}
+              resetDemo()
+            }}
+            disabled={isRunning}
               className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all capitalize ${
                 activeMainTab === mainTab
-                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-              } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-            >
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
               {mainTab === 'llm' ? 'LLM' : mainTab}
-            </button>
+          </button>
           ))}
         </div>
 
@@ -1470,23 +2556,23 @@ const NeurondBDemoTerminal = () => {
         {tabStructure[activeMainTab].subTabs.length > 0 && (
           <div className="flex gap-2 flex-wrap border-t border-gray-700 pt-2">
             {tabStructure[activeMainTab].subTabs.map((subTab) => (
-              <button
+          <button
                 key={subTab}
-                onClick={() => {
+            onClick={() => {
                   setActiveSubTab(subTab)
-                  resetDemo()
-                }}
-                disabled={isRunning}
+              resetDemo()
+            }}
+            disabled={isRunning}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all capitalize ${
                   activeSubTab === subTab
                     ? 'bg-cyan-600 text-white shadow-md shadow-cyan-600/20'
                     : 'bg-gray-700/50 text-gray-400 hover:bg-gray-700 hover:text-gray-300'
-                } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-              >
+            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+          >
                 {subTab}
-              </button>
+          </button>
             ))}
-          </div>
+        </div>
         )}
       </div>
 

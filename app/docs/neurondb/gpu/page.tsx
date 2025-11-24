@@ -4,10 +4,30 @@ import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'GPU-Accelerated Vector Search | NeuronDB PostgreSQL Performance',
-  description: 'Enable GPU acceleration for NeuronDB with NVIDIA CUDA, AMD ROCm, or Apple Metal. Achieve 10-100x faster vector similarity search, HNSW indexing, and embedding generation.',
+  title: 'GPU Accelerator | CUDA, ROCm & Metal Support | NeurondB',
+  description: 'CUDA and ROCm support for parallel matrix operations with automatic fallback to CPU for maximum compatibility. Accelerate vector search, ML inference, and embedding generation with 10-100x speedup.',
+  keywords: [
+    'GPU accelerator',
+    'CUDA support',
+    'ROCm support',
+    'Metal support',
+    'GPU acceleration',
+    'parallel matrix operations',
+    'automatic CPU fallback',
+    'GPU vector search',
+    'GPU ML inference',
+    'NVIDIA CUDA',
+    'AMD ROCm',
+    'Apple Metal'
+  ].join(', '),
   alternates: {
     canonical: 'https://www.pgelephant.com/docs/neurondb/gpu',
+  },
+  openGraph: {
+    title: 'GPU Accelerator | CUDA, ROCm & Metal Support',
+    description: 'Accelerate vector operations and ML inference with GPU support. Automatic CPU fallback for maximum compatibility.',
+    type: 'article',
+    url: 'https://www.pgelephant.com/docs/neurondb/gpu',
   },
 }
 
@@ -16,12 +36,14 @@ const tableOfContents: TocItem[] = [
   { id: 'gpu-operations', title: 'GPU-Accelerated Operations' },
   { id: 'configuration', title: 'Configuration' },
   { id: 'sql-examples', title: 'SQL Examples' },
+  { id: 'automatic-fallback', title: 'Automatic CPU Fallback' },
   { id: 'building', title: 'Building with GPU Support' },
+  { id: 'performance-tuning', title: 'Performance Tuning' },
 ]
 
 const prevLink: NavLink = {
-  href: '/docs/neurondb/indexing',
-  label: 'Indexing',
+  href: '/docs/neurondb/embedding-engine',
+  label: 'Embedding Engine',
 }
 
 const nextLink: NavLink = {
@@ -32,7 +54,7 @@ const nextLink: NavLink = {
 export default function Page() {
   return (
     <PostgresDocsLayout
-      title="GPU Acceleration"
+      title="GPU Accelerator"
       version="NeurondB Documentation"
       tableOfContents={tableOfContents}
       prevLink={prevLink}
@@ -40,11 +62,29 @@ export default function Page() {
     >
       <section id="overview">
         <h2>Overview</h2>
-        <p>NeuronDB provides optional GPU acceleration for compute-intensive vector operations using <strong>NVIDIA CUDA</strong>, <strong>AMD ROCm</strong>, or <strong>Apple Metal</strong>. GPU support is completely optional and automatically falls back to CPU when unavailable.</p>
+        <p>
+          The <strong>GPU Accelerator</strong> provides optional GPU acceleration for compute-intensive operations 
+          using <strong>NVIDIA CUDA</strong>, <strong>AMD ROCm</strong>, or <strong>Apple Metal</strong>. GPU support 
+          is completely optional and automatically falls back to CPU when unavailable, ensuring maximum compatibility 
+          across different hardware configurations.
+        </p>
+
+        <h3>Key Features</h3>
+        <ul>
+          <li><strong>Multi-Platform Support:</strong> CUDA (NVIDIA), ROCm (AMD), and Metal (Apple)</li>
+          <li><strong>Automatic Fallback:</strong> Seamlessly falls back to CPU when GPU is unavailable</li>
+          <li><strong>Parallel Operations:</strong> Batch processing with multiple GPU streams</li>
+          <li><strong>Memory Management:</strong> Efficient GPU memory pooling and allocation</li>
+          <li><strong>Zero Configuration:</strong> Works out of the box with automatic detection</li>
+        </ul>
+
+        <h3>Performance Improvements</h3>
         <ul>
           <li><strong>100x</strong> Batch Distance Speedup</li>
           <li><strong>23x</strong> K-Means Clustering</li>
-          <li><strong>2.3ms</strong> Avg GPU Latency</li>
+          <li><strong>10-15x</strong> ONNX Model Inference</li>
+          <li><strong>50x</strong> Quantization Operations</li>
+          <li><strong>2.3ms</strong> Average GPU Latency</li>
         </ul>
       </section>
 
@@ -158,6 +198,34 @@ ORDER BY 1 LIMIT 10;`}
         />
       </section>
 
+      <section id="automatic-fallback">
+        <h2>Automatic CPU Fallback</h2>
+        <p>
+          NeurondB automatically falls back to CPU execution when GPU is unavailable, ensuring your application 
+          continues to work regardless of hardware configuration. This provides maximum compatibility without 
+          requiring separate builds or configurations.
+        </p>
+
+        <h3>Fallback Scenarios</h3>
+        <ul>
+          <li><strong>No GPU Available:</strong> Automatically uses CPU</li>
+          <li><strong>GPU Out of Memory:</strong> Falls back to CPU for remaining operations</li>
+          <li><strong>GPU Driver Issues:</strong> Gracefully degrades to CPU</li>
+          <li><strong>Unsupported Operations:</strong> CPU execution for operations without GPU kernels</li>
+        </ul>
+
+        <SqlCodeBlock
+          title="Check GPU status"
+          code={`-- Check if GPU is available and enabled
+SELECT * FROM neurondb_gpu_status();
+
+-- Returns:
+--  gpu_enabled | gpu_backend | gpu_device | gpu_memory_mb | fallback_count
+-- -------------+-------------+------------+---------------+----------------
+--  true        | cuda        | 0          | 8192          | 0`}
+        />
+      </section>
+
       <section id="building">
         <h2>Building with GPU Support</h2>
 
@@ -213,10 +281,61 @@ sudo apt-get install -y rocm-dev
         />
       </section>
 
+      <section id="performance-tuning">
+        <h2>Performance Tuning</h2>
+
+        <h3>Batch Size Optimization</h3>
+        <p>
+          Larger batch sizes improve GPU utilization but increase memory usage. Tune based on your GPU memory 
+          and query patterns.
+        </p>
+        <SqlCodeBlock
+          title="Optimize batch size"
+          code={`-- Start with default (8192)
+SET neurondb.gpu_batch_size = 8192;
+
+-- Increase for high-throughput scenarios
+SET neurondb.gpu_batch_size = 16384;
+
+-- Decrease if running out of memory
+SET neurondb.gpu_batch_size = 4096;`}
+        />
+
+        <h3>Memory Pool Configuration</h3>
+        <p>
+          Pre-allocate GPU memory to reduce allocation overhead and improve performance.
+        </p>
+        <SqlCodeBlock
+          title="Configure memory pool"
+          code={`-- Allocate 1GB memory pool (adjust based on GPU memory)
+SET neurondb.gpu_memory_pool_mb = 1024;
+
+-- For multi-GPU setups, configure per device
+SET neurondb.gpu_device = 0;
+SET neurondb.gpu_memory_pool_mb = 2048;`}
+        />
+
+        <h3>Stream Configuration</h3>
+        <p>
+          Multiple streams enable concurrent operations and better GPU utilization.
+        </p>
+        <SqlCodeBlock
+          title="Configure streams"
+          code={`-- Use 2 streams for concurrent operations
+SET neurondb.gpu_streams = 2;
+
+-- Increase for high-throughput scenarios
+SET neurondb.gpu_streams = 4;`}
+        />
+      </section>
+
       <section>
-        <h2>Next Steps</h2>
+        <h2>Related Documentation</h2>
         <ul>
-          <li><a href="/docs/neurondb/configuration">Configuration Reference</a> - Tune GPU parameters</li>
+          <li><a href="/docs/neurondb/vector-engine">Vector Engine</a> - GPU-accelerated vector search</li>
+          <li><a href="/docs/neurondb/ml-engine">ML Engine</a> - GPU-accelerated ML inference</li>
+          <li><a href="/docs/neurondb/embedding-engine">Embedding Engine</a> - GPU-accelerated embeddings</li>
+          <li><a href="/docs/neurondb/configuration">Configuration</a> - Complete GPU configuration reference</li>
           <li><a href="/docs/neurondb/performance">Performance Guide</a> - Benchmark GPU vs CPU</li>
           <li><a href="/docs/neurondb/troubleshooting">Troubleshooting</a> - Fix GPU issues</li>
         </ul>
