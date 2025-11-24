@@ -65,7 +65,7 @@ FROM documents;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on GPU auto-detection, fallback behavior, and manual configuration, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/gpu/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/gpu" target="_blank" rel="noopener noreferrer">
             GPU Auto-Detection Documentation
           </a>
         </p>

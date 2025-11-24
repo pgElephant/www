@@ -64,7 +64,7 @@ SELECT * FROM neurondb.index_maintenance_status;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on index maintenance, defragmentation strategies, and performance optimization, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/workers/neurandefrag/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/background-workers/neurandefrag" target="_blank" rel="noopener noreferrer">
             neurandefrag Documentation
           </a>
         </p>

@@ -64,7 +64,7 @@ SELECT * FROM neurondb.tuning_recommendations;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on query auto-tuning, performance optimization, and monitoring, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/workers/neuranmon/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/background-workers/neuranmon" target="_blank" rel="noopener noreferrer">
             neuranmon Documentation
           </a>
         </p>

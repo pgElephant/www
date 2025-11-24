@@ -78,7 +78,7 @@ SELECT status, COUNT(*) FROM neurondb.neurondb_job_queue GROUP BY status;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on job queue management, batch processing, error handling, and performance tuning, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/workers/neuranq/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/background-workers/neuranq" target="_blank" rel="noopener noreferrer">
             neuranq Documentation
           </a>
         </p>

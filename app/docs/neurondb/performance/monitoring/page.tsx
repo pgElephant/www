@@ -87,7 +87,7 @@ SELECT * FROM neurondb_worker_status();`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on monitoring, metrics interpretation, and alerting, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/performance/monitoring/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/performance/monitoring" target="_blank" rel="noopener noreferrer">
             Monitoring Documentation
           </a>
         </p>

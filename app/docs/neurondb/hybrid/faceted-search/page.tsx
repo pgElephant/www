@@ -89,7 +89,7 @@ SELECT facet_counts(
         <h2>Learn More</h2>
         <p>
           For detailed documentation on faceted search, facet hierarchies, filtering strategies, and performance optimization, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/hybrid/faceted/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/hybrid/faceted-search" target="_blank" rel="noopener noreferrer">
             Faceted Search Documentation
           </a>
         </p>

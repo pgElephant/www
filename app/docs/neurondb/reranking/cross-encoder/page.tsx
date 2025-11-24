@@ -187,7 +187,7 @@ rerank_long_context(
         <h2>Learn More</h2>
         <p>
           For detailed documentation on cross-encoder models, model selection, fine-tuning, and performance optimization, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/reranking/cross-encoder/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/reranking/cross-encoder" target="_blank" rel="noopener noreferrer">
             Cross-Encoder Documentation
           </a>
         </p>

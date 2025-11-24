@@ -230,7 +230,7 @@ SET neurondb.embedding_cache_size = 10000;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on embedding models, providers, caching strategies, and multimodal embeddings, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/ml/embeddings/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/ml/embeddings" target="_blank" rel="noopener noreferrer">
             Embedding Generation Documentation
           </a>
         </p>

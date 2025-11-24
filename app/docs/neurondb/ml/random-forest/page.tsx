@@ -228,7 +228,7 @@ FROM rf_metrics_temp m;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on Random Forest parameters, hyperparameter tuning, feature importance, and GPU optimization, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/ml/random-forest/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/ml/random-forest" target="_blank" rel="noopener noreferrer">
             Random Forest Documentation
           </a>
         </p>

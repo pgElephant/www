@@ -116,7 +116,7 @@ SELECT davies_bouldin_index(
         <h2>Learn More</h2>
         <p>
           For detailed documentation on all quality metrics, choosing appropriate metrics, benchmarking, and interpretation, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/analytics/quality/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/ml/quality-metrics" target="_blank" rel="noopener noreferrer">
             Quality Metrics Documentation
           </a>
         </p>

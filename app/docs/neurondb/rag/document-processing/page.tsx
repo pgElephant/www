@@ -78,7 +78,7 @@ SELECT tokenize_text('Hello world', 'whitespace') AS tokens;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on document processing, chunking strategies, tokenization, and NLP features, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/nlp/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/rag/document-processing" target="_blank" rel="noopener noreferrer">
             Document Processing Documentation
           </a>
         </p>

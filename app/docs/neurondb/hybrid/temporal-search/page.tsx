@@ -78,7 +78,7 @@ LIMIT 10;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on temporal search, decay functions, time windowing, and freshness scoring, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/hybrid/temporal/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/hybrid/temporal-search" target="_blank" rel="noopener noreferrer">
             Temporal Search Documentation
           </a>
         </p>

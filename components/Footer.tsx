@@ -3,46 +3,22 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { Github, Twitter, Linkedin, Mail, Globe, Users, BookOpen, Download, Database, Loader2, Zap, Crown, Network, Shield, FileText, Layers, Activity, Cpu, Server } from 'lucide-react'
+import { Github, Twitter, Linkedin, Mail, Globe, Users, BookOpen, Download, Users as UsersIcon, Server, Cpu, Shield, Activity, Crown, Network } from 'lucide-react'
+import { PgbalancerIcon, PgraftIcon, FauxDbIcon, NeurondBIcon, PgSentinelIcon, PgStatInsightsIcon } from '@/components/ProductIcons'
+import { colors } from '@/config/theme'
 
-// Colors from pgElephant icon (darker variants)
+// Use theme config colors
 const palette = {
-  iconTeal: '#025A6B',
-  iconTealLight: '#036B7D',
-  iconTealMedium: '#045E70',
-  iconTealDark: '#054A56',
+  iconTeal: colors.secondary[700],
+  iconTealLight: colors.secondary[600],
+  iconTealMedium: colors.secondary[700],
+  iconTealDark: colors.secondary[800],
 }
 
-// Custom icon components
-const PgbalancerIcon = ({ size = 16 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-cyan-400" style={{ width: size * 0.7, height: size * 0.7 }} />
-    <Loader2 className="text-green-400 absolute -top-1 -right-1 animate-spin" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Zap className="text-yellow-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-  </div>
-)
-
-const PgraftIcon = ({ size = 16 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-blue-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Shield className="text-purple-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
-const FauxDbIcon = ({ size = 16 }: { size?: number }) => (
-  <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Database className="text-emerald-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <FileText className="text-orange-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Layers className="text-blue-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
+// Legacy icon components (for Rale and Ram - keep for backward compatibility)
 const RaleIcon = ({ size = 16 }: { size?: number }) => (
   <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-    <Users className="text-indigo-400" style={{ width: size * 0.6, height: size * 0.6 }} />
+    <UsersIcon className="text-indigo-400" style={{ width: size * 0.6, height: size * 0.6 }} />
     <Crown className="text-yellow-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
     <Network className="text-green-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
     <Activity className="text-cyan-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
@@ -161,28 +137,35 @@ const Footer = () => {
                       className="group flex items-center gap-2 text-white/90 hover:text-white transition-all duration-300 text-sm"
                     >
                       <div className="w-4 h-4 group-hover:scale-110 transition-transform duration-300 bg-transparent rounded flex items-center justify-center">
-                        {item.icon === 'pgbalancer-custom' ? (
-                          <PgbalancerIcon size={12} />
-                        ) : item.icon === 'pgraft-custom' ? (
-                          <PgraftIcon size={12} />
-                        ) : item.icon === 'fauxdb-custom' ? (
-                          <FauxDbIcon size={12} />
-                        ) : item.icon === 'rale-custom' ? (
-                          <RaleIcon size={12} />
-                        ) : item.icon === 'ram-custom' ? (
-                          <RamIcon size={12} />
-                        ) : item.icon.startsWith('/') || item.icon.startsWith('http') ? (
-                          <Image 
-                            src={item.icon} 
-                            alt={`${item.name} icon`} 
-                            width={12} 
-                            height={12} 
-                            className="w-3 h-3 object-contain"
-                            unoptimized
-                          />
-                        ) : (
-                          <span className="text-xs">{item.icon}</span>
-                        )}
+                        {(() => {
+                          const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
+                            'pgbalancer-custom': PgbalancerIcon,
+                            'pgraft-custom': PgraftIcon,
+                            'fauxdb-custom': FauxDbIcon,
+                            'neurondb-custom': NeurondBIcon,
+                            'pgsentinel-custom': PgSentinelIcon,
+                            'pg-stat-insights-custom': PgStatInsightsIcon,
+                            'rale-custom': RaleIcon,
+                            'ram-custom': RamIcon,
+                          }
+                          const IconComponent = iconMap[item.icon || '']
+                          if (IconComponent) {
+                            return <IconComponent size={12} />
+                          }
+                          if (item.icon && (item.icon.startsWith('/') || item.icon.startsWith('http'))) {
+                            return (
+                              <Image 
+                                src={item.icon} 
+                                alt={`${item.name} icon`} 
+                                width={12} 
+                                height={12} 
+                                className="w-3 h-3 object-contain"
+                                unoptimized
+                              />
+                            )
+                          }
+                          return <span className="text-xs">{item.icon}</span>
+                        })()}
                       </div>
                       <div>
                         <div className="font-medium">{item.name}</div>

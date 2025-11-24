@@ -82,7 +82,7 @@ FROM generate_series(0, 9) AS topic_id;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on topic modeling, choosing number of topics, topic interpretation, and visualization, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/analytics/topics/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/ml/topic-discovery" target="_blank" rel="noopener noreferrer">
             Topic Discovery Documentation
           </a>
         </p>

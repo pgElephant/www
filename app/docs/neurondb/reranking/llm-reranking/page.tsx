@@ -126,7 +126,7 @@ SET neurondb.openai_api_key = 'your-openai-api-key';`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on LLM reranking, model configuration, cost optimization, and prompt engineering, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/reranking/llm/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/reranking/llm-reranking" target="_blank" rel="noopener noreferrer">
             LLM Reranking Documentation
           </a>
         </p>

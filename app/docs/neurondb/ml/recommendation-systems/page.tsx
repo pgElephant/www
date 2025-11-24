@@ -209,7 +209,7 @@ ORDER BY metric;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on recommendation algorithms, evaluation metrics, cold start problems, and hybrid recommendation systems, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/ml/recommender/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/ml/recommendation-systems" target="_blank" rel="noopener noreferrer">
             Recommendation Systems Documentation
           </a>
         </p>

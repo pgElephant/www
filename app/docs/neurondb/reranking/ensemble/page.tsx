@@ -270,7 +270,7 @@ ORDER BY rrf.score DESC;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on ensemble strategies, weight optimization, and combining rerankers, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/reranking/ensemble/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/reranking/ensemble" target="_blank" rel="noopener noreferrer">
             Ensemble Reranking Documentation
           </a>
         </p>

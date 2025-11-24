@@ -99,7 +99,7 @@ SELECT detect_trend(
         <h2>Learn More</h2>
         <p>
           For detailed documentation on time series analysis, forecasting models, seasonality detection, and anomaly detection in time series, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/ml/timeseries/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/ml/time-series" target="_blank" rel="noopener noreferrer">
             Time Series Documentation
           </a>
         </p>

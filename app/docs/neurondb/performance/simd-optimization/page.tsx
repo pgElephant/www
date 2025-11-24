@@ -72,7 +72,7 @@ LIMIT 10;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on SIMD optimization, compiler flags, and performance tuning, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/performance/optimization/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/performance/simd-optimization" target="_blank" rel="noopener noreferrer">
             SIMD Optimization Documentation
           </a>
         </p>

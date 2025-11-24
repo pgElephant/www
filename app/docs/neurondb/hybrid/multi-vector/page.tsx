@@ -78,7 +78,7 @@ LIMIT 10;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation on multi-vector strategies, embedding selection, weight optimization, and performance tuning, visit:{' '}
-          <a href="https://pgelephant.com/neurondb/hybrid/multi-vector/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb/hybrid/multi-vector" target="_blank" rel="noopener noreferrer">
             Multi-Vector Documentation
           </a>
         </p>

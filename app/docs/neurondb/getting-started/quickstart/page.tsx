@@ -117,7 +117,7 @@ LIMIT 5;`}
         <h2>Learn More</h2>
         <p>
           For detailed documentation, examples, and comprehensive guides, visit:{' '}
-          <a href="https://pgelephant.com/neurondb" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.pgelephant.com/docs/neurondb" target="_blank" rel="noopener noreferrer">
             Detailed Documentation
           </a>
         </p>
