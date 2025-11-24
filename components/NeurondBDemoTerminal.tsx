@@ -18,7 +18,43 @@ const NeurondBDemoTerminal = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
-  const [activeTab, setActiveTab] = useState<'build' | 'usage' | 'vectors' | 'ml' | 'embeddings' | 'gpu' | 'hybrid'>('build')
+  // Two-level tab structure: mainTab -> subTab
+  const [activeMainTab, setActiveMainTab] = useState<'build' | 'vectors' | 'ml' | 'embeddings' | 'llm' | 'gpu' | 'hybrid' | 'advanced'>('build')
+  const [activeSubTab, setActiveSubTab] = useState<string>('')
+
+  // Tab structure definition
+  const tabStructure = useMemo(() => ({
+    build: { subTabs: [], defaultSubTab: '' },
+    vectors: { subTabs: [], defaultSubTab: '' },
+    ml: { 
+      subTabs: ['algorithms', 'clustering', 'regression', 'classification', 'outliers', 'metrics'],
+      defaultSubTab: 'algorithms'
+    },
+    embeddings: {
+      subTabs: ['text', 'multimodal', 'batch', 'config'],
+      defaultSubTab: 'text'
+    },
+    llm: {
+      subTabs: ['integration', 'reranking', 'rag'],
+      defaultSubTab: 'integration'
+    },
+    gpu: { subTabs: [], defaultSubTab: '' },
+    hybrid: { subTabs: [], defaultSubTab: '' },
+    advanced: {
+      subTabs: ['sparse', 'quantization', 'workers'],
+      defaultSubTab: 'sparse'
+    }
+  }), [])
+
+  // Initialize sub-tab when main tab changes
+  useEffect(() => {
+    const structure = tabStructure[activeMainTab]
+    if (structure.subTabs.length > 0 && !activeSubTab) {
+      setActiveSubTab(structure.defaultSubTab)
+    } else if (structure.subTabs.length === 0) {
+      setActiveSubTab('')
+    }
+  }, [activeMainTab, tabStructure, activeSubTab])
   const [copied, setCopied] = useState(false)
   const [inPsqlMode, setInPsqlMode] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
@@ -742,19 +778,460 @@ const NeurondBDemoTerminal = () => {
     }
   ], [])
 
-  // Get commands based on active tab
-  const getCommands = useCallback(() => {
-    switch (activeTab) {
-      case 'build': return buildCommands
-      case 'vectors': return vectorCommands
-      case 'ml': return mlCommands
-      case 'embeddings': return embeddingCommands
-      case 'gpu': return gpuCommands
-      case 'hybrid': return hybridCommands
-      case 'usage':
-      default: return usageCommands
+  // RAG Pipeline Tab Commands
+  const ragCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'CREATE TABLE knowledge_base (id SERIAL PRIMARY KEY, content TEXT, embedding vector(384));',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Knowledge base for RAG pipeline\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO knowledge_base (content, embedding) VALUES (\'PostgreSQL is a powerful open-source relational database management system. It provides advanced features including ACID compliance, full-text search, and extensibility through extensions.\', embed_text(\'PostgreSQL is a powerful open-source relational database management system. It provides advanced features including ACID compliance, full-text search, and extensibility through extensions.\'));',
+      output: [
+        'INSERT 0 1',
+        '',
+        '\x1b[36m-- Document embedded and stored\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'WITH query_vec AS (SELECT embed_text(\'What is PostgreSQL?\') AS query_embedding), ranked_results AS (SELECT content AS document, embedding <-> query_embedding AS distance FROM knowledge_base, query_vec ORDER BY distance LIMIT 3) SELECT document, distance AS similarity_score FROM ranked_results;',
+      output: [
+        '                    document                     | similarity_score',
+        '------------------------------------------------+------------------',
+        ' PostgreSQL is a powerful open-source...        |        0.125',
+        '(1 row)',
+        '',
+        '\x1b[36m-- RAG Pipeline: Query → Embed → Retrieve → Rank\x1b[0m',
+        '\x1b[32m-- Retrieved most relevant document for query\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT idx, score, docs[idx] AS document FROM (SELECT ARRAY[\'PostgreSQL is a powerful relational database\', \'Machine learning models can be trained in SQL\', \'Vector search enables semantic similarity\'] AS docs) AS d, LATERAL ndb_llm_rerank(\'machine learning\', docs, \'ms-marco-MiniLM-L-6-v2\', 5) AS rerank_result ORDER BY score DESC;',
+      output: [
+        ' idx | score |              document',
+        '-----+-------+-----------------------------------',
+        '  1  | 0.945 | Machine learning models can be...',
+        '  2  | 0.678 | Vector search enables semantic...',
+        '  0  | 0.234 | PostgreSQL is a powerful...',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- LLM-powered reranking improves relevance\x1b[0m',
+        '\x1b[32m-- Cross-encoder model scores query-document pairs\x1b[0m'
+      ],
+      isPsqlCommand: true
     }
-  }, [activeTab, buildCommands, vectorCommands, mlCommands, embeddingCommands, gpuCommands, hybridCommands, usageCommands])
+  ], [])
+
+  // Reranking (Flash Attention) Tab Commands
+  const rerankingCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT COUNT(*) AS result_count FROM rerank_flash(\'machine learning\', ARRAY[\'machine learning algorithms\', \'deep learning models\', \'neural networks\'], NULL, 3);',
+      output: [
+        ' result_count',
+        '-------------',
+        '      3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Flash Attention reranking for fast, accurate results\x1b[0m',
+        '\x1b[32m-- Optimized attention mechanism for long contexts\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT COUNT(*) AS result_count FROM rerank_flash(\'natural language processing\', ARRAY[\'NLP models\', \'text processing\', \'language models\'], \'cross-encoder\', 2);',
+      output: [
+        ' result_count',
+        '-------------',
+        '      2',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Custom model: cross-encoder for precision\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT COUNT(*) AS result_count FROM rerank_long_context(\'query text\', ARRAY[\'document 1\', \'document 2\', \'document 3\'], 8192, 3);',
+      output: [
+        ' result_count',
+        '-------------',
+        '      3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Long context reranking: handles up to 8192 tokens\x1b[0m',
+        '\x1b[32m-- Flash Attention enables efficient processing of long sequences\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Sparse Vectors Tab Commands
+  const sparseCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT sparse_vector_in(\'{vocab_size:30522, model:SPLADE, tokens:[100,200,300], weights:[0.5,0.8,0.3]}\') IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Sparse vector created with SPLADE model\x1b[0m',
+        '\x1b[36m-- Only stores non-zero token weights (memory efficient)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT sparse_vector_dot_product(\'{vocab_size:30522, model:SPLADE, tokens:[100,200], weights:[0.5,0.8]}\'::sparse_vector, \'{vocab_size:30522, model:SPLADE, tokens:[100,200], weights:[0.3,0.7]}\'::sparse_vector) AS dot_product;',
+      output: [
+        ' dot_product',
+        '------------',
+        '    0.710',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Sparse vector dot product: efficient computation\x1b[0m',
+        '\x1b[32m-- Only processes overlapping tokens (fast)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT (\'{vocab_size:30522, model:SPLADE, tokens:[100,200], weights:[0.5,0.8]}\'::sparse_vector <*> \'{vocab_size:30522, model:SPLADE, tokens:[100,200], weights:[0.3,0.7]}\'::sparse_vector) AS result;',
+      output: [
+        ' result',
+        '-------',
+        ' 0.710',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Sparse vector operator <*> for dot product\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT bm25_score(\'machine learning\', \'machine learning algorithms\', 1.5, 0.75) AS score;',
+      output: [
+        '  score',
+        '--------',
+        ' 2.345',
+        '(1 row)',
+        '',
+        '\x1b[36m-- BM25 score: classic information retrieval metric\x1b[0m',
+        '\x1b[32m-- Combines term frequency with inverse document frequency\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Quantization (FP8) Tab Commands
+  const quantizationCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT quantize_fp8_e4m3(\'[1.0,2.0,3.0,4.0,5.0]\'::vector) IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- FP8 E4M3 quantization: 4 exponent, 3 mantissa bits\x1b[0m',
+        '\x1b[32m-- 4x memory reduction: float32 → fp8 (75% compression)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT quantize_fp8_e5m2(\'[1.0,2.0,3.0,4.0,5.0]\'::vector) IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- FP8 E5M2 quantization: 5 exponent, 2 mantissa bits\x1b[0m',
+        '\x1b[36m-- Better range, slightly less precision\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'WITH quantized AS (SELECT quantize_fp8_e4m3(\'[1.0,2.0,3.0]\'::vector) AS q) SELECT dequantize_fp8(q) IS NOT NULL AS dequantized FROM quantized;',
+      output: [
+        ' dequantized',
+        '-------------',
+        '      t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Dequantization: restore original vector (with minimal loss)\x1b[0m',
+        '\x1b[32m-- Round-trip quantization preserves 95%+ accuracy\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT auto_quantize(\'[1.0,2.0,3.0]\'::vector, \'fp8_e4m3\') IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- Auto quantization: automatic format selection\x1b[0m',
+        '\x1b[32m-- Optimizes for accuracy vs memory trade-off\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Multimodal Tab Commands
+  const multimodalCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT clip_embed(\'machine learning\', \'text\') IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- CLIP text embedding: unified text-image representation\x1b[0m',
+        '\x1b[32m-- Enables cross-modal search (text ↔ image)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT clip_embed(\'image_path\', \'image\') IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- CLIP image embedding: visual content → vector\x1b[0m',
+        '\x1b[36m-- Same embedding space as text (semantic alignment)\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT imagebind_embed(\'natural language processing\', \'text\') IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- ImageBind text embedding: multi-modal foundation model\x1b[0m',
+        '\x1b[32m-- Supports text, image, audio, video, depth, thermal\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT imagebind_embed(\'audio_path\', \'audio\') IS NOT NULL AS created;',
+      output: [
+        ' created',
+        '--------',
+        ' t',
+        '(1 row)',
+        '',
+        '\x1b[36m-- ImageBind audio embedding: sound → vector\x1b[0m',
+        '\x1b[32m-- Unified embedding space across all modalities\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'CREATE TABLE media (id SERIAL, type TEXT, content TEXT, embedding vector(512));',
+      output: [
+        'CREATE TABLE',
+        '',
+        '\x1b[36m-- Multi-modal media table\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'INSERT INTO media (type, content, embedding) VALUES (\'text\', \'A red car\', clip_embed(\'A red car\', \'text\')), (\'image\', \'car.jpg\', clip_embed(\'car.jpg\', \'image\'));',
+      output: [
+        'INSERT 0 2',
+        '',
+        '\x1b[36m-- Cross-modal search: find images matching text queries\x1b[0m',
+        '\x1b[32m-- Query: "red car" → finds matching images ✓\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Background Workers Tab Commands
+  const workersCommands = useMemo(() => [
+    {
+      command: 'psql -d vectordb',
+      output: ['psql (16.3)', 'Type "help" for help.', ''],
+      isShellCommand: true,
+      entersPsql: true
+    },
+    {
+      command: 'SELECT proname as function_name, pronargs as num_args FROM pg_proc WHERE pronamespace = \'neurondb\'::regnamespace AND (proname LIKE \'%neuran%\' OR proname LIKE \'%worker%\') ORDER BY proname;',
+      output: [
+        '   function_name   | num_args',
+        '-------------------+----------',
+        ' neurandefrag_run  |    0',
+        ' neuranllm_process |    1',
+        ' neuranmon_sample  |    0',
+        ' neuranq_run_once  |    0',
+        '(4 rows)',
+        '',
+        '\x1b[36m-- Background worker functions available\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT pid, backend_type, state FROM pg_stat_activity WHERE backend_type = \'background worker\' AND (query LIKE \'%neuron%\' OR application_name LIKE \'%neuron%\') ORDER BY backend_start DESC;',
+      output: [
+        '  pid  |  backend_type   | state',
+        '-------+-----------------+-------',
+        ' 12345 | background worker | active',
+        ' 12346 | background worker | active',
+        ' 12347 | background worker | active',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Background workers running:\x1b[0m',
+        '\x1b[36m   • neuranq:      Async job queue executor\x1b[0m',
+        '\x1b[36m   • neuranmon:    Live query auto-tuner\x1b[0m',
+        '\x1b[36m   • neurandefrag: Index maintenance worker\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neuranq_run_once() AS queue_processed;',
+      output: [
+        ' queue_processed',
+        '-----------------',
+        '        12',
+        '(1 row)',
+        '',
+        '\x1b[36m-- neuranq: Processed 12 jobs from queue\x1b[0m',
+        '\x1b[32m-- Jobs: embedding generation, model inference, batch ops\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neuranmon_sample() AS tuner_sampled;',
+      output: [
+        ' tuner_sampled',
+        '---------------',
+        '       8',
+        '(1 row)',
+        '',
+        '\x1b[36m-- neuranmon: Sampled 8 queries for auto-tuning\x1b[0m',
+        '\x1b[32m-- Auto-adjusting HNSW parameters (ef_search, m) for optimal performance\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT neurandefrag_run() AS defrag_executed;',
+      output: [
+        ' defrag_executed',
+        '-----------------',
+        '        3',
+        '(1 row)',
+        '',
+        '\x1b[36m-- neurandefrag: Optimized 3 indexes\x1b[0m',
+        '\x1b[32m-- Actions: compaction, tombstone pruning, rebuild scheduling\x1b[0m'
+      ],
+      isPsqlCommand: true
+    },
+    {
+      command: 'SELECT schemaname, tablename, CASE WHEN tablename = \'neurondb_job_queue\' THEN \'Queue Worker\' WHEN tablename = \'neurondb_query_metrics\' THEN \'Tuner Worker\' WHEN tablename = \'neurondb_llm_jobs\' THEN \'LLM Worker\' ELSE \'Other\' END as worker_type FROM pg_tables WHERE schemaname = \'neurondb\' AND tablename LIKE \'%job%\' OR tablename LIKE \'%metric%\' ORDER BY tablename;',
+      output: [
+        ' schemaname |      tablename       |  worker_type',
+        '------------+----------------------+--------------',
+        ' neurondb   | neurondb_job_queue   | Queue Worker',
+        ' neurondb   | neurondb_llm_jobs    | LLM Worker',
+        ' neurondb   | neurondb_query_metrics| Tuner Worker',
+        '(3 rows)',
+        '',
+        '\x1b[36m-- Worker tables for job tracking and metrics\x1b[0m'
+      ],
+      isPsqlCommand: true
+    }
+  ], [])
+
+  // Get commands based on active main tab and sub tab
+  const getCommands = useCallback(() => {
+    // Handle main tabs without sub-tabs
+    if (activeMainTab === 'build') return buildCommands
+    if (activeMainTab === 'vectors') return vectorCommands
+    if (activeMainTab === 'gpu') return gpuCommands
+    if (activeMainTab === 'hybrid') return hybridCommands
+
+    // Handle main tabs with sub-tabs
+    if (activeMainTab === 'ml') {
+      switch (activeSubTab) {
+        case 'algorithms': return mlCommands
+        case 'clustering': return mlCommands // Can be expanded later
+        case 'regression': return mlCommands
+        case 'classification': return mlCommands
+        case 'outliers': return mlCommands
+        case 'metrics': return mlCommands
+        default: return mlCommands
+      }
+    }
+
+    if (activeMainTab === 'embeddings') {
+      switch (activeSubTab) {
+        case 'text': return embeddingCommands
+        case 'multimodal': return multimodalCommands
+        case 'batch': return embeddingCommands
+        case 'config': return embeddingCommands
+        default: return embeddingCommands
+      }
+    }
+
+    if (activeMainTab === 'llm') {
+      switch (activeSubTab) {
+        case 'integration': return ragCommands
+        case 'reranking': return rerankingCommands
+        case 'rag': return ragCommands
+        default: return ragCommands
+      }
+    }
+
+    if (activeMainTab === 'advanced') {
+      switch (activeSubTab) {
+        case 'sparse': return sparseCommands
+        case 'quantization': return quantizationCommands
+        case 'workers': return workersCommands
+        default: return sparseCommands
+      }
+    }
+
+    return buildCommands
+  }, [activeMainTab, activeSubTab, buildCommands, vectorCommands, mlCommands, embeddingCommands, gpuCommands, hybridCommands, ragCommands, rerankingCommands, sparseCommands, quantizationCommands, multimodalCommands, workersCommands])
 
   // Cleanup all intervals and timeouts
   const cleanup = useCallback(() => {
@@ -909,7 +1386,14 @@ const NeurondBDemoTerminal = () => {
     setCommandHistory([])
     setCurrentCommand('')
     setIsTyping(false)
-  }, [cleanup])
+    // Reset sub-tab to default when main tab changes
+    const structure = tabStructure[activeMainTab]
+    if (structure.subTabs.length > 0) {
+      setActiveSubTab(structure.defaultSubTab)
+    } else {
+      setActiveSubTab('')
+    }
+  }, [cleanup, activeMainTab, tabStructure])
 
   const copyToClipboard = useCallback(() => {
     const text = commandHistory
@@ -961,107 +1445,49 @@ const NeurondBDemoTerminal = () => {
           </div>
         </div>
         
-        {/* Tabs */}
-        <div className="flex gap-2 flex-wrap">
-          <button
-            onClick={() => {
-              setActiveTab('build')
-              resetDemo()
-            }}
-            disabled={isRunning}
-            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
-              activeTab === 'build'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-          >
-            Build
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('usage')
-              resetDemo()
-            }}
-            disabled={isRunning}
-            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
-              activeTab === 'usage'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-          >
-            Usage
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('vectors')
-              resetDemo()
-            }}
-            disabled={isRunning}
-            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
-              activeTab === 'vectors'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-          >
-            Vectors
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('ml')
-              resetDemo()
-            }}
-            disabled={isRunning}
-            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
-              activeTab === 'ml'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-          >
-            ML Algos
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('embeddings')
-              resetDemo()
-            }}
-            disabled={isRunning}
-            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
-              activeTab === 'embeddings'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-          >
-            Embeddings
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('gpu')
-              resetDemo()
-            }}
-            disabled={isRunning}
-            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
-              activeTab === 'gpu'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-          >
-            GPU
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('hybrid')
-              resetDemo()
-            }}
-            disabled={isRunning}
-            className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
-              activeTab === 'hybrid'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-            } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
-          >
-            Hybrid
-          </button>
+        {/* Main Tabs */}
+        <div className="flex gap-2 flex-wrap mb-2">
+          {(['build', 'vectors', 'ml', 'embeddings', 'llm', 'gpu', 'hybrid', 'advanced'] as const).map((mainTab) => (
+            <button
+              key={mainTab}
+              onClick={() => {
+                setActiveMainTab(mainTab)
+                resetDemo()
+              }}
+              disabled={isRunning}
+              className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all capitalize ${
+                activeMainTab === mainTab
+                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+              } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+            >
+              {mainTab === 'llm' ? 'LLM' : mainTab}
+            </button>
+          ))}
         </div>
+
+        {/* Sub Tabs (shown when main tab has sub-tabs) */}
+        {tabStructure[activeMainTab].subTabs.length > 0 && (
+          <div className="flex gap-2 flex-wrap border-t border-gray-700 pt-2">
+            {tabStructure[activeMainTab].subTabs.map((subTab) => (
+              <button
+                key={subTab}
+                onClick={() => {
+                  setActiveSubTab(subTab)
+                  resetDemo()
+                }}
+                disabled={isRunning}
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all capitalize ${
+                  activeSubTab === subTab
+                    ? 'bg-cyan-600 text-white shadow-md shadow-cyan-600/20'
+                    : 'bg-gray-700/50 text-gray-400 hover:bg-gray-700 hover:text-gray-300'
+                } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
+              >
+                {subTab}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Terminal Content */}
