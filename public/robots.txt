@@ -3,6 +3,7 @@ Allow: /
 
 # Sitemap location
 Sitemap: https://www.pgelephant.com/sitemap.xml
+Sitemap: https://www.pgelephant.com/sitemap_index.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

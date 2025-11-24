@@ -2,11 +2,15 @@
 const nextConfig = {
   // Performance optimizations
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion', 'react-markdown'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'react-markdown', '@vercel/analytics', '@vercel/speed-insights'],
     webpackBuildWorker: true,
     gzipSize: true,
     optimizeCss: true,
     scrollRestoration: true,
+    // Optimize server components
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
   },
   // Temporarily disable ESLint during build
   eslint: {

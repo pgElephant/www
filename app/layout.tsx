@@ -27,12 +27,15 @@ const OrganizationSchema = dynamic(() => import('@/components/SEO/OrganizationSc
 })
 
 // Optimized font configurations - reduced to essential fonts only
+// Only preload the primary font for better performance
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
-  preload: true
+  weight: ['400', '500', '600', '700'],
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
 })
 
 const poppins = Poppins({ 
@@ -40,7 +43,8 @@ const poppins = Poppins({
   variable: '--font-poppins',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
-  preload: false
+  preload: false,
+  fallback: ['system-ui', 'arial'],
 })
 
 const spaceGrotesk = Space_Grotesk({ 
@@ -48,7 +52,8 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
   display: 'swap',
   weight: ['400', '500', '600'],
-  preload: false
+  preload: false,
+  fallback: ['system-ui', 'arial'],
 })
 
 const jetbrainsMono = JetBrains_Mono({ 
@@ -56,7 +61,8 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
   display: 'swap',
   weight: ['400', '500', '600'],
-  preload: false
+  preload: false,
+  fallback: ['monospace'],
 })
 
 const outfit = Outfit({ 
@@ -64,7 +70,8 @@ const outfit = Outfit({
   variable: '--font-outfit',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
-  preload: false
+  preload: false,
+  fallback: ['system-ui', 'arial'],
 })
 
 export const viewport: Viewport = {
@@ -201,10 +208,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        {/* Resource hints for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href="https://twitter.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {/* Preload critical resources */}
+        <link rel="preload" href="/og-image.jpg" as="image" type="image/jpeg" />
+        <link rel="prefetch" href="/favicon.svg" as="image" />
   <link rel="manifest" href="/manifest.json" />
         
   {/* Primary favicon - SVG for best visibility (modern browsers) */}

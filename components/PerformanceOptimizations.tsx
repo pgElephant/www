@@ -49,14 +49,31 @@ const PerformanceOptimizations: React.FC = () => {
 
             // Preload critical resources
             const criticalResources = [
-              '/api/health',
-              '/og-image.jpg'
+              '/og-image.jpg',
+              '/favicon.svg'
             ];
 
             criticalResources.forEach(resource => {
               const link = document.createElement('link');
               link.rel = 'prefetch';
               link.href = resource;
+              link.as = resource.endsWith('.jpg') || resource.endsWith('.svg') ? 'image' : 'fetch';
+              document.head.appendChild(link);
+            });
+
+            // Preconnect to external domains
+            const externalDomains = [
+              'https://fonts.googleapis.com',
+              'https://fonts.gstatic.com',
+              'https://www.google-analytics.com',
+              'https://www.googletagmanager.com'
+            ];
+
+            externalDomains.forEach(domain => {
+              const link = document.createElement('link');
+              link.rel = 'preconnect';
+              link.href = domain;
+              link.crossOrigin = domain.includes('fonts') ? 'anonymous' : undefined;
               document.head.appendChild(link);
             });
 
