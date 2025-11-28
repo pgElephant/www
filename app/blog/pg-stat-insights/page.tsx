@@ -4,7 +4,7 @@ import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 
 export const metadata = {
   title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
-  description: 'Track 52 metrics across 11 views for complete PostgreSQL query performance monitoring, cache analysis, and WAL tracking. Drop-in replacement for pg_stat_statements with enhanced analytics.',
+  description: 'Track 52 metrics across 11 views for PostgreSQL query performance monitoring, cache analysis, and WAL tracking. Drop-in replacement for pg_stat_statements with analytics.',
   openGraph: {
     title: 'pg_stat_insights: PostgreSQL Performance Monitoring',
     description: '52 Metrics, 11 Views, Deep Insights - Drop-in Replacement for pg_stat_statements',
@@ -26,17 +26,17 @@ const markdown = `![pg_stat_insights blog header](/blog/pg-stat-insights/header.
 
 ## Executive Summary
 
-PostgreSQL databases need comprehensive performance monitoring to identify slow queries, optimize cache usage, and track resource consumption. **pg_stat_insights** provides **52 comprehensive metrics** across **11 pre-built views**, making it the most complete pg_stat_statements replacement available. Compatible with PostgreSQL 16, 17, and 18.
+PostgreSQL databases need performance monitoring to identify slow queries, optimize cache usage, and track resource consumption. pg_stat_insights provides 52 metrics across 11 pre-built views. It is a pg_stat_statements replacement. Compatible with PostgreSQL 16, 17, and 18.
 
-## Introduction: The Performance Monitoring Challenge
+## Introduction
 
-Database administrators need deep visibility into query performance to maintain optimal database health. Standard PostgreSQL statistics provide basic metrics, but lack the granularity needed for effective optimization and troubleshooting.
+Database administrators need visibility into query performance. Standard PostgreSQL statistics provide basic metrics. They lack the granularity needed for optimization and troubleshooting.
 
-pg_stat_insights extends PostgreSQL's native statistics with enhanced analytics, response time categorization, WAL tracking, JIT statistics, and time-series aggregation—all in a single extension.
+pg_stat_insights extends PostgreSQL's native statistics. It adds enhanced analytics, response time categorization, WAL tracking, JIT statistics, and time-series aggregation. All in one extension.
 
-## What Makes pg_stat_insights Different?
+## What Makes pg_stat_insights Different
 
-### 52 Comprehensive Metrics
+### 52 Metrics
 
 pg_stat_insights tracks every aspect of query execution:
 
@@ -588,8 +588,8 @@ psql -d your_database -c "COPY (
 
 ## Why pg_stat_insights Over Alternatives?
 
-### Comprehensive Metrics
-Unlike pg_stat_statements (44 columns) or pg_stat_monitor (58 columns), pg_stat_insights provides **52 carefully selected metrics** that cover all aspects of query performance without overwhelming users with unnecessary data.
+### Metrics
+Unlike pg_stat_statements (44 columns) or pg_stat_monitor (58 columns), pg_stat_insights provides 52 metrics that cover all aspects of query performance without overwhelming users with unnecessary data.
 
 ### Pre-Built Analytics
 With **11 ready-to-use views**, you get instant access to:
@@ -600,7 +600,7 @@ With **11 ready-to-use views**, you get instant access to:
 - Response time distribution
 - Replication health monitoring
 
-No need to write complex queries—the views do the work for you.
+No need to write complex queries. The views do the work for you.
 
 ### Production Quality
 - **150 TAP tests** ensure reliability
@@ -608,15 +608,15 @@ No need to write complex queries—the views do the work for you.
 - **PostgreSQL 16-18** compatibility tested
 - **Zero compilation warnings** - production-grade C code
 
-### Easy Integration
+### Integration
 - **Drop-in replacement** for pg_stat_statements
-- **Simple SQL queries** for all analytics
-- **Comprehensive API** for custom integrations
+- **SQL queries** for all analytics
+- **API** for custom integrations
 - **30+ pages of documentation**
 
-## Getting Started Today
+## Getting Started
 
-Ready to gain deep insights into your PostgreSQL performance? Here's your quickstart:
+Quickstart:
 
 \`\`\`bash
 # 1. Clone and install
@@ -645,22 +645,22 @@ psql -d your_database -c "SELECT * FROM pg_stat_insights_top_by_time LIMIT 10;"
 
 ## Conclusion
 
-pg_stat_insights represents a significant advancement in PostgreSQL performance monitoring by providing 52 comprehensive metrics across 11 pre-built views. Its unique combination of detailed metrics, ready-to-use analytics views, response time categorization, and production-ready testing makes it the ideal choice for organizations serious about PostgreSQL performance optimization.
+pg_stat_insights provides 52 metrics across 11 pre-built views for PostgreSQL performance monitoring. It combines detailed metrics, analytics views, response time categorization, and production testing. It works for organizations that need PostgreSQL performance optimization.
 
-### Key Takeaways
+### Key Points
 
 1. **Comprehensive**: 52 metrics covering execution, cache, WAL, JIT, and parallel operations
-2. **Ready-to-Use**: 11 pre-built views for instant performance insights
+2. **Ready-to-Use**: 11 pre-built views for performance insights
 3. **Drop-in Replacement**: Compatible with pg_stat_statements queries
 4. **Production Tested**: 150 TAP tests with 100% code coverage
-5. **Easy Integration**: Simple SQL interface for all monitoring needs
-6. **Well-Documented**: 30+ pages of comprehensive documentation
+5. **Integration**: SQL interface for all monitoring needs
+6. **Documentation**: 30+ pages of documentation
 
-Whether you're optimizing query performance, troubleshooting slow queries, or monitoring production databases, pg_stat_insights provides the visibility you need to keep PostgreSQL running at peak performance.
+Whether you optimize query performance, troubleshoot slow queries, or monitor production databases, pg_stat_insights gives you the visibility you need to keep PostgreSQL running at peak performance.
 
 ---
 
-*pg_stat_insights is developed with care for the PostgreSQL community. Version 1.0 | PostgreSQL 16, 17, 18 supported*`;
+pg_stat_insights is developed for the PostgreSQL community. Version 1.0. PostgreSQL 16, 17, 18 supported.`;
 
 export default function PgStatInsightsBlogPost() {
   return (

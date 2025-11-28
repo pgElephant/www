@@ -22,23 +22,23 @@ const markdown = `![NeuronDB header](/blog/neurondb/header.svg?v=7)
 
 # NeuronDB: PostgreSQL AI Vector Database Extension
 
-📦 **[View on GitHub](https://github.com/pgElephant/NeurondB)** | 📥 **[Download Latest Release](https://github.com/pgElephant/NeurondB/releases)** | 📖 **[Documentation](https://www.pgelephant.com/docs/neurondb)**
+**[View on GitHub](https://github.com/pgElephant/NeurondB)** | **[Download Latest Release](https://github.com/pgElephant/NeurondB/releases)** | **[Documentation](https://www.pgelephant.com/docs/neurondb)**
 
 ## Executive Summary
 
-Modern AI applications require efficient vector similarity search, semantic retrieval, and machine learning inference capabilities directly in the database. **NeuronDB** provides a **production-ready PostgreSQL extension** that transforms your database into a complete AI platform with vector search, ML inference, GPU acceleration, and hybrid retrieval—all while maintaining full pgvector compatibility.
+AI applications need vector similarity search, semantic retrieval, and machine learning inference in the database. NeuronDB is a PostgreSQL extension. It adds vector search, ML inference, GPU acceleration, and hybrid retrieval to PostgreSQL. It maintains full pgvector compatibility.
 
-## Introduction: The AI Database Challenge
+## Introduction
 
-Building AI applications with PostgreSQL traditionally requires multiple tools: pgvector for vectors, separate ML frameworks for embeddings, external services for GPU acceleration, and custom code for hybrid search. This fragmentation creates complexity, latency, and operational overhead.
+Building AI applications with PostgreSQL requires multiple tools. You use pgvector for vectors. You use separate ML frameworks for embeddings. You use external services for GPU acceleration. You write custom code for hybrid search. This creates complexity, latency, and operational overhead.
 
-NeuronDB unifies these capabilities into a single PostgreSQL extension—giving you semantic search, RAG (Retrieval Augmented Generation), recommendation systems, and ML inference directly in your database.
+NeuronDB unifies these capabilities in one PostgreSQL extension. You get semantic search, RAG, recommendation systems, and ML inference in your database.
 
-## What Makes NeuronDB Different?
+## What Makes NeuronDB Different
 
 ### Vector Search Capabilities
 
-NeuronDB provides enterprise-grade vector search with advanced indexing:
+NeuronDB provides vector search with advanced indexing:
 
 **Indexing Algorithms**
 - **HNSW** (Hierarchical Navigable Small World) - Sub-10ms queries on 100M+ vectors
@@ -66,7 +66,7 @@ NeuronDB provides enterprise-grade vector search with advanced indexing:
 
 ### ML Inference Engine
 
-Built-in machine learning capabilities eliminate external API dependencies:
+Built-in machine learning eliminates external API dependencies:
 
 **Embedding Generation**
 - 50+ pre-trained models (BERT, sentence-transformers, OpenAI-compatible)
@@ -88,7 +88,7 @@ Built-in machine learning capabilities eliminate external API dependencies:
 
 ### Hybrid Search
 
-Combine vector similarity with traditional search for superior relevance:
+Combine vector similarity with traditional search:
 
 **Search Types**
 - Vector similarity search
@@ -105,7 +105,7 @@ Combine vector similarity with traditional search for superior relevance:
 
 ### GPU Acceleration
 
-Optional CUDA support for 10-100x performance improvements:
+Optional CUDA support for performance improvements:
 
 **GPU Features**
 - CUDA kernel optimization
@@ -513,41 +513,41 @@ SELECT * FROM vectors ORDER BY embedding <=> '[1,2,3...]' LIMIT 10;
 ## Roadmap
 
 **Upcoming Features**
-- ✅ HNSW and IVFFlat indexing
-- ✅ GPU acceleration (CUDA)
-- ✅ 50+ embedding models
-- ✅ Hybrid search
-- 🚧 Quantization improvements
-- 🚧 Distributed indexing
-- 📋 Multi-modal search (image + text)
-- 📋 Sparse vector support
-- 📋 Graph-based retrieval
+- HNSW and IVFFlat indexing
+- GPU acceleration (CUDA)
+- 50+ embedding models
+- Hybrid search
+- Quantization improvements
+- Distributed indexing
+- Multi-modal search (image + text)
+- Sparse vector support
+- Graph-based retrieval
 
 ## Community and Support
 
 **Get Involved**
-- 🐛 [Report Issues](https://github.com/pgElephant/NeurondB/issues)
-- 💬 [Discussions](https://github.com/pgElephant/NeurondB/discussions)
-- 📖 [Documentation](https://www.pgelephant.com/docs/neurondb)
-- 🤝 [Contributing Guide](https://github.com/pgElephant/NeurondB/blob/main/CONTRIBUTING.md)
+- [Report Issues](https://github.com/pgElephant/NeurondB/issues)
+- [Discussions](https://github.com/pgElephant/NeurondB/discussions)
+- [Documentation](https://www.pgelephant.com/docs/neurondb)
+- [Contributing Guide](https://github.com/pgElephant/NeurondB/blob/main/CONTRIBUTING.md)
 
 **Commercial Support**
 For production deployments, enterprise support, and custom features, contact [support@pgelephant.com](mailto:support@pgelephant.com)
 
 ## Conclusion
 
-NeuronDB transforms PostgreSQL into a complete AI platform, eliminating the need for separate vector databases, ML services, and complex integrations. With production-ready performance, GPU acceleration, and comprehensive AI capabilities, NeuronDB enables you to build semantic search, RAG applications, and recommendation systems entirely within PostgreSQL.
+NeuronDB adds AI capabilities to PostgreSQL. You do not need separate vector databases, ML services, or complex integrations. NeuronDB provides performance, GPU acceleration, and AI capabilities. You build semantic search, RAG applications, and recommendation systems in PostgreSQL.
 
-**Get Started Today**
-- 📥 [Download NeuronDB](https://github.com/pgElephant/NeurondB/releases)
-- 📖 [Read the Docs](https://www.pgelephant.com/docs/neurondb)
-- 🚀 [Quick Start Guide](https://www.pgelephant.com/docs/neurondb/getting-started)
+**Get Started**
+- [Download NeuronDB](https://github.com/pgElephant/NeurondB/releases)
+- [Read the Docs](https://www.pgelephant.com/docs/neurondb)
+- [Quick Start Guide](https://www.pgelephant.com/docs/neurondb/getting-started)
 
 ---
 
 **About pgElephant**
 
-pgElephant builds production-ready PostgreSQL extensions for modern data workloads. Our mission is to extend PostgreSQL's capabilities while maintaining its reliability, simplicity, and open-source philosophy.
+pgElephant builds PostgreSQL extensions for data workloads. We extend PostgreSQL's capabilities while maintaining reliability, simplicity, and open-source philosophy.
 
 Other projects: [pg_stat_insights](https://www.pgelephant.com/docs/pg-stat-insights) | [pgBalancer](https://www.pgelephant.com/docs/pgbalancer) | [pgRaft](https://www.pgelephant.com/docs/pgraft)
 `;

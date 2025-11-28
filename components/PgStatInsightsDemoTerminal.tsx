@@ -123,7 +123,7 @@ const PgStatInsightsDemoTerminal = () => {
         ' SELECT COUNT(*) GROUP BY date |         234567 |         12345 |   246912',
         '(5 rows)',
         '',
-        '-- High I/O queries—consider indexing or query optimization'
+        '-- High I/O queries. Consider indexing or query optimization'
       ]
     },
     {

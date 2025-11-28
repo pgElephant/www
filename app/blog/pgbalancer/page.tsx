@@ -28,17 +28,17 @@ const markdown = `![pgbalancer blog header](/blog/pgbalancer/header.svg?v=7)
 
 PostgreSQL applications need efficient connection pooling to handle thousands of concurrent clients without overwhelming database servers. **pgbalancer** solves this by providing AI-powered connection pooling with machine learning load balancing, REST API management, and distributed MQTT coordination. Built as a modern evolution of pgpool-II, it adds intelligent query routing and contemporary DevOps-friendly tooling.
 
-## Introduction: The Connection Pooling Challenge
+## Introduction
 
-Database connections are expensive to create and maintain. Each connection consumes server resources—memory, CPU, and file descriptors. When applications scale to thousands of concurrent users, direct database connections become a bottleneck.
+Database connections are expensive. Each connection consumes memory, CPU, and file descriptors. Applications scale to thousands of concurrent users. Direct database connections become a bottleneck.
 
-Traditional connection poolers solve resource management but lack intelligence in query distribution. pgbalancer addresses this by combining efficient connection pooling with machine learning algorithms that learn query patterns and optimize backend selection in real-time.
+Traditional connection poolers manage resources. They lack intelligence in query distribution. pgbalancer combines connection pooling with machine learning. It learns query patterns and optimizes backend selection in real-time.
 
-## What Makes pgbalancer Different?
+## What Makes pgbalancer Different
 
 ### AI-Powered Load Balancing
 
-pgbalancer uses machine learning algorithms to intelligently route queries:
+pgbalancer uses machine learning to route queries:
 
 - **Adaptive Learning**: Learns from query execution patterns and response times
 - **Health Scoring**: Real-time backend scoring based on performance (0.0-1.0 scale)
@@ -52,9 +52,9 @@ The AI engine tracks metrics for each backend node:
 - Predicted load based on historical patterns
 - Health scores updated after each query
 
-### Production REST API
+### REST API
 
-Unlike traditional poolers that use binary protocols, pgbalancer provides a production-ready HTTP/JSON API:
+pgbalancer provides an HTTP/JSON API:
 
 \`\`\`
 POST   /api/v1/auth/login           # JWT authentication
@@ -65,7 +65,7 @@ GET    /api/v1/health/stats         # Health metrics
 POST   /api/v1/control/reload       # Configuration reload
 \`\`\`
 
-The REST API runs as a dedicated child process with <10ms response time, providing real-time access to cluster state and management functions.
+The REST API runs as a dedicated child process with under 10ms response time. It provides access to cluster state and management functions.
 
 ### MQTT Distributed Coordination
 
@@ -109,9 +109,9 @@ bctl --verbose health
 
 ## Core Architecture
 
-### The AI Intelligence Layer
+### The Intelligence Layer
 
-pgbalancer's AI engine sits between the connection pooler and backend databases:
+pgbalancer's machine learning engine sits between the connection pooler and backend databases:
 
 \`\`\`
 ┌─────────────────────────────────────────┐
@@ -315,7 +315,7 @@ The AI load balancing engine can be tuned via configuration:
 - Default: \`0.4\` (40% weight)
 - Combined with response_time_weight and load_weight (must sum to 1.0)
 
-## Advanced Features
+## Additional Features
 
 ### Intelligent Query Cache
 
@@ -1031,14 +1031,14 @@ mqtt_password = 'secure-password'
 
 ## Conclusion
 
-pgbalancer represents the evolution of PostgreSQL connection pooling—combining proven pooling technologies with modern AI, comprehensive APIs, and distributed coordination. Whether you're scaling a single application or managing enterprise PostgreSQL clusters, pgbalancer provides the intelligence and tooling needed for production deployments.
+pgbalancer combines pooling technologies with machine learning, APIs, and distributed coordination. Whether you scale a single application or manage PostgreSQL clusters, pgbalancer provides the tools needed for production deployments.
 
-**Key Takeaways:**
-- AI-powered load balancing learns and adapts to your workload
-- Production REST API enables modern DevOps workflows
+**Key Points:**
+- Load balancing learns and adapts to your workload
+- REST API enables DevOps workflows
 - MQTT clustering provides distributed coordination
-- Professional CLI tool simplifies management
-- Built on battle-tested pgpool-II foundation
+- CLI tool simplifies management
+- Built on pgpool-II foundation
 - Compatible with PostgreSQL 13-18
 
 Ready to deploy? Check out the **[Getting Started Guide](https://www.pgelephant.com/docs/pgbalancer/getting-started)** or explore the **[GitHub repository](https://github.com/pgElephant/pgbalancer)**.
@@ -1059,7 +1059,7 @@ Ready to deploy? Check out the **[Getting Started Guide](https://www.pgelephant.
 pgbalancer is part of the pgElephant suite of PostgreSQL tools designed for modern cloud-native deployments. Explore our other projects:
 
 - **[pgraft](https://www.pgelephant.com/pgraft)**: Raft-based consensus for PostgreSQL
-- **[pg_stat_insights](https://www.pgelephant.com/pg-stat-insights)**: Advanced performance monitoring
+- **[pg_stat_insights](https://www.pgelephant.com/pg-stat-insights)**: Performance monitoring
 - **[neurondb](https://www.pgelephant.com/neurondb)**: GPU-accelerated PostgreSQL for ML
 
 `;
@@ -1089,7 +1089,7 @@ export default function PgbalancerBlogPost() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
               Comments
             </h2>
-            
+
             {/* Giscus Comments - Persistent GitHub Discussions */}
             <GiscusComments
               repo="pgElephant/www"

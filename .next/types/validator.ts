@@ -47,6 +47,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 }
 
 
+// Validate ../../app/blog/neurondb-semantic-search-guide/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/neurondb-semantic-search-guide">> = Specific
+  const handler = {} as typeof import("../../app/blog/neurondb-semantic-search-guide/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/blog/neurondb/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/blog/neurondb">> = Specific

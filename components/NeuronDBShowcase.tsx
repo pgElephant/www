@@ -20,11 +20,10 @@ const NeuronDBShowcase = () => {
             <Zap className="w-5 h-5 text-yellow-400 animate-pulse" />
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Production-Grade AI Database Extension
+            AI Database Extension
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-4">
-            Transform PostgreSQL into a powerful AI database with vector search, machine learning inference, 
-            hybrid retrieval, and complete RAG pipeline support—all natively in PostgreSQL.
+            Add vector search, machine learning inference, hybrid retrieval, and RAG pipeline support to PostgreSQL.
           </p>
           <p className="text-lg text-indigo-300 max-w-2xl mx-auto">
             Built with PostgreSQL C standards. Zero external dependencies. Production-ready.

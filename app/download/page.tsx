@@ -36,10 +36,10 @@ const trustBadges = [
 ]
 
 const trustBar = [
-  { icon: Briefcase, label: 'Enterprise-Ready' },
+  { icon: Briefcase, label: 'Production Ready' },
   { icon: Lock, label: 'Cryptographically Signed' },
   { icon: Award, label: 'Verified Releases' },
-  { icon: Globe2, label: 'Global CDN Delivery' },
+  { icon: Globe2, label: 'CDN Delivery' },
 ]
 
 // Use theme gradient

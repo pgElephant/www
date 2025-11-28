@@ -4,7 +4,7 @@ import SqlCodeBlock from '../../../../components/SqlCodeBlock'
 
 export const metadata: Metadata = {
   title: 'ML Analytics Suite | NeuronDB',
-  description: 'Comprehensive machine learning algorithms for clustering, dimensionality reduction, outlier detection, and embedding quality assessment — all in SQL.',
+  description: 'Comprehensive machine learning algorithms for clustering, dimensionality reduction, outlier detection, and embedding quality assessment, all in SQL.',
 }
 
 const tableOfContents: TocItem[] = [
@@ -81,7 +81,7 @@ FROM cluster_dbscan(
 );`}
         />
         <ul>
-          <li>No need to specify cluster count — DBSCAN finds density-based groupings</li>
+          <li>No need to specify cluster count. DBSCAN finds density-based groupings</li>
           <li>Handles noise and outliers automatically</li>
           <li>Works well with non-spherical clusters</li>
         </ul>

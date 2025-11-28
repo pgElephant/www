@@ -8,7 +8,7 @@ export const metadata = generateProductPageMetadata('pgraft');
 const pgraftConfig = {
   productId: 'pgraft' as const,
   hero: {
-    subtitle: 'Production-ready Raft consensus for distributed PostgreSQL clusters with automatic leader election, crash-safe replication, and 100% split-brain prevention',
+    subtitle: 'Raft consensus for distributed PostgreSQL clusters with automatic leader election, crash-safe replication, and split-brain prevention',
   },
   demo: <PgraftDemoTerminal />,
   badges: [
@@ -22,15 +22,15 @@ const pgraftConfig = {
   featurePillars: {
     kicker: 'Key Features',
     items: [
-      { title: 'Automatic Leader Election', desc: 'Quorum-based, deterministic, fully automated leader election using proven etcd-io/raft implementation.' },
+      { title: 'Automatic Leader Election', desc: 'Quorum-based, deterministic leader election using etcd-io/raft implementation.' },
       { title: 'Crash-Safe Replication', desc: 'All state changes replicated and persisted across nodes. Survives crashes and network partitions.' },
-      { title: '100% Split-Brain Prevention', desc: 'Mathematical guarantee via Raft consensus protocol—never more than one leader per term.' },
-      { title: 'Zero-Downtime Failover', desc: 'Sub-second detection and automatic recovery. Seamless failover with no service interruption.' },
-      { title: 'Production-Grade Raft', desc: 'Built on proven etcd-io/raft library used in production by etcd, Kubernetes, and other systems.' },
-      { title: 'Native PostgreSQL Integration', desc: 'Background worker architecture with no external dependencies. Pure PostgreSQL extension.' },
-      { title: 'Comprehensive SQL API', desc: 'Full cluster management via SQL functions. Monitor, manage, and control through standard SQL.' },
-      { title: 'Built-in Observability', desc: 'Status functions, metrics, detailed logging, and monitoring hooks for complete cluster visibility.' },
-      { title: 'etcd-Compatible KV Store', desc: 'Raft-replicated key-value storage included. Perfect for distributed configuration and coordination.' },
+      { title: 'Split-Brain Prevention', desc: 'Mathematical guarantee via Raft consensus protocol. Never more than one leader per term.' },
+      { title: 'Zero-Downtime Failover', desc: 'Sub-second detection and automatic recovery. Failover with no service interruption.' },
+      { title: 'Raft Implementation', desc: 'Built on etcd-io/raft library used by etcd, Kubernetes, and other systems.' },
+      { title: 'PostgreSQL Integration', desc: 'Background worker architecture with no external dependencies. Pure PostgreSQL extension.' },
+      { title: 'SQL API', desc: 'Full cluster management via SQL functions. Monitor, manage, and control through standard SQL.' },
+      { title: 'Observability', desc: 'Status functions, metrics, detailed logging, and monitoring hooks for cluster visibility.' },
+      { title: 'etcd-Compatible KV Store', desc: 'Raft-replicated key-value storage included. For distributed configuration and coordination.' },
     ],
   },
   featureMatrix: (

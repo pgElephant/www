@@ -10,7 +10,7 @@ export const metadata = generateProductPageMetadata('neurondb');
 const neurondbConfig = {
   productId: 'neurondb' as const,
   hero: {
-    subtitle: 'Production-grade vector search with 52 ML algorithms, 473 SQL functions, GPU acceleration (CUDA/ROCm/Metal), and complete RAG pipeline—all within PostgreSQL',
+    subtitle: 'Production-grade vector search with 52 ML algorithms, 473 SQL functions, GPU acceleration, and complete RAG pipeline, all within PostgreSQL',
   },
   demo: <NeurondBDemoTerminal />,
   badges: [
@@ -487,8 +487,8 @@ const neurondbConfig = {
   },
   ctaSection: {
     kicker: 'Get Started',
-    title: 'Transform PostgreSQL into an AI Database',
-    description: 'Install NeurondB and start building semantic search, RAG applications, and ML-powered features—all within your existing PostgreSQL infrastructure.',
+    title: 'Add AI Capabilities to PostgreSQL',
+    description: 'Install NeurondB. Build semantic search, RAG applications, and ML features in your PostgreSQL infrastructure.',
     primaryCTA: { href: '/docs/neurondb/getting-started', label: 'View Documentation' },
     secondaryCTA: { href: 'https://github.com/pgElephant/NeurondB', label: 'View on GitHub', external: true },
   },

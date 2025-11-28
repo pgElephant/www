@@ -63,7 +63,7 @@ const CommunityPage = () => {
     {
       icon: Shield,
       title: 'Follow Code of Conduct',
-      description: 'Our community follows a clear code of conduct to ensure a safe and inclusive environment.'
+      description: 'Our community follows a code of conduct to ensure a safe and inclusive environment.'
     },
     {
       icon: Lightbulb,
@@ -73,7 +73,7 @@ const CommunityPage = () => {
     {
       icon: Users,
       title: 'Collaborate',
-      description: 'Work together to build something amazing. Collaboration is key to our success.'
+      description: 'Work together to build something useful. Collaboration is important.'
     }
   ]
 

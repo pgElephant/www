@@ -9,7 +9,7 @@ export const metadata = generateProductPageMetadata('pgbalancer');
 const pgbalancerConfig = {
   productId: 'pgbalancer' as const,
   hero: {
-    subtitle: 'Production-ready connection pooling with AI load balancing, REST API, MQTT clustering, and JWT authentication',
+    subtitle: 'Connection pooling with load balancing, REST API, MQTT clustering, and JWT authentication',
   },
   demo: <PgbalancerDemoTerminal />,
   badges: [
@@ -24,27 +24,27 @@ const pgbalancerConfig = {
     'Production Ready',
   ],
   features: [
-    { icon: '🧠', iconColor: 'text-purple-500', title: 'AI Load Balancing', desc: 'Machine learning algorithm with adaptive learning, response time prediction, and health scoring. Learns from query patterns.' },
-    { icon: '📊', iconColor: 'text-cyan-500', title: 'Predictive Analytics', desc: 'AI forecasts query execution times, analyzes complexity, and predicts backend performance based on historical data.' },
-    { icon: '⚖️', iconColor: 'text-green-500', title: 'Adaptive Routing', desc: 'Intelligent query distribution using exploration vs exploitation strategy, weighted selection, and health scoring.' },
-    { icon: '🚀', iconColor: 'text-blue-500', title: 'REST API', desc: 'Production-ready HTTP/JSON API with 17 endpoints including /api/v1/nodes, /api/v1/status, and AI statistics.' },
+    { icon: '🧠', iconColor: 'text-purple-500', title: 'Load Balancing', desc: 'Machine learning algorithm with adaptive learning, response time prediction, and health scoring. Learns from query patterns.' },
+    { icon: '📊', iconColor: 'text-cyan-500', title: 'Predictive Analytics', desc: 'Forecasts query execution times, analyzes complexity, and predicts backend performance based on historical data.' },
+    { icon: '⚖️', iconColor: 'text-green-500', title: 'Adaptive Routing', desc: 'Query distribution using exploration vs exploitation strategy, weighted selection, and health scoring.' },
+    { icon: '🚀', iconColor: 'text-blue-500', title: 'REST API', desc: 'HTTP/JSON API with 17 endpoints including /api/v1/nodes, /api/v1/status, and statistics.' },
     { icon: '📡', iconColor: 'text-orange-500', title: 'MQTT Clustering', desc: 'Distributed coordination via MQTT with event publishing for node status, failover events, and health checks.' },
     { icon: '🔧', iconColor: 'text-teal-500', title: 'bctl CLI Tool', desc: 'Command-line client with box-drawing tables, JSON output, and MQTT integration for cluster management.' },
     { icon: '🔐', iconColor: 'text-pink-500', title: 'JWT Authentication', desc: 'Optional HMAC-SHA256 JWT tokens with Bearer format, 1-hour expiry, and backwards-compatible password auth.' },
-    { icon: '🔄', iconColor: 'text-indigo-500', title: 'Connection Pooling', desc: 'Efficient connection reuse with configurable pool sizes (num_init_children, max_pool), connection timeouts, and cleanup.' },
+    { icon: '🔄', iconColor: 'text-indigo-500', title: 'Connection Pooling', desc: 'Connection reuse with configurable pool sizes (num_init_children, max_pool), connection timeouts, and cleanup.' },
     { icon: '🏥', iconColor: 'text-red-500', title: 'Health Monitoring', desc: 'Continuous backend health checks with configurable intervals, timeout detection, and automatic node recovery.' },
     { icon: '🐕', iconColor: 'text-yellow-500', title: 'Watchdog Support', desc: 'Multi-node coordination with leader election, automatic failover, and coordinated recovery across instances.' },
-    { icon: '🎯', iconColor: 'text-violet-500', title: 'Query Analysis', desc: 'Smart query parsing with read/write detection, complexity estimation (0-100 scale), and optimal backend selection.' },
-    { icon: '⚡', iconColor: 'text-red-500', title: 'High Performance', desc: 'Ultra-fast C implementation with <10ms REST API response time and <0.5ms query routing overhead.' },
+    { icon: '🎯', iconColor: 'text-violet-500', title: 'Query Analysis', desc: 'Query parsing with read/write detection, complexity estimation (0-100 scale), and optimal backend selection.' },
+    { icon: '⚡', iconColor: 'text-red-500', title: 'Performance', desc: 'C implementation with under 10ms REST API response time and under 0.5ms query routing overhead.' },
   ],
   featurePillars: {
-    kicker: 'AI-Powered Features & Architecture',
+    kicker: 'Features and Architecture',
     items: [
-      { title: 'AI Load Balancing Engine', desc: 'Machine learning algorithm with adaptive learning rate (10%), exploration vs exploitation (20%), and weighted random selection. Learns from query execution patterns and automatically optimizes routing decisions.' },
-      { title: 'Predictive Query Routing', desc: 'AI analyzes query complexity (0-100 scale), estimates rows, detects read/write operations, and predicts execution time. Routes queries to optimal backends based on health scores and current load (0.0-1.0 scale).' },
-      { title: 'Health Scoring & Metrics', desc: 'Each backend node tracked with avg_response_time, current_load, total_queries, success/failed queries, error_rate, predicted_load, and health_score. Metrics decay over time for freshness.' },
-      { title: 'Adaptive Learning System', desc: 'AI updates node metrics after each query execution. Learns from feedback (response time, success/failure) and adjusts health scores. Continuous model improvement with success rate tracking.' },
-      { title: 'REST API Management', desc: 'Production HTTP/JSON API with 17 endpoints: /api/v1/status (server stats), /api/v1/nodes (backend management), /api/v1/health/stats, /api/v1/control/reload, /api/v1/watchdog/info, and AI statistics.' },
+      { title: 'Load Balancing Engine', desc: 'Machine learning algorithm with adaptive learning rate (10%), exploration vs exploitation (20%), and weighted random selection. Learns from query execution patterns and optimizes routing decisions.' },
+      { title: 'Predictive Query Routing', desc: 'Analyzes query complexity (0-100 scale), estimates rows, detects read/write operations, and predicts execution time. Routes queries to optimal backends based on health scores and current load (0.0-1.0 scale).' },
+      { title: 'Health Scoring and Metrics', desc: 'Each backend node tracked with avg_response_time, current_load, total_queries, success/failed queries, error_rate, predicted_load, and health_score. Metrics decay over time for freshness.' },
+      { title: 'Adaptive Learning System', desc: 'Updates node metrics after each query execution. Learns from feedback (response time, success/failure) and adjusts health scores. Continuous model improvement with success rate tracking.' },
+      { title: 'REST API Management', desc: 'HTTP/JSON API with 17 endpoints: /api/v1/status (server stats), /api/v1/nodes (backend management), /api/v1/health/stats, /api/v1/control/reload, /api/v1/watchdog/info, and statistics.' },
       { title: 'MQTT Event Publishing', desc: 'Distributed coordination via MQTT protocol. Publishes node_status changes, failover_events, and health_check results to topics: pgbalancer/cluster/health, pgbalancer/cluster/failover, pgbalancer/cluster/config.' },
       { title: 'bctl CLI Tool', desc: 'Command-line client with MQTT integration. Commands: bctl nodes, bctl status, bctl health, bctl watchdog-status. Supports --table (box-drawing), --json, and --verbose output formats.' },
       { title: 'JWT Authentication', desc: 'Optional HMAC-SHA256 JWT tokens. Login endpoint: POST /api/v1/auth/login. Bearer token format with 1-hour expiry (3600s). Backwards compatible with password authentication.' },
@@ -352,13 +352,13 @@ const pgbalancerConfig = {
         <tr className="bg-slate-800/60">
           <td className="px-4 py-3 font-medium text-purple-300">bctl Management</td>
           <td className="px-4 py-3 text-slate-300">Command-line utility for cluster administration</td>
-          <td className="px-4 py-3 text-slate-300">Easy configuration, monitoring integration</td>
+          <td className="px-4 py-3 text-slate-300">Configuration, monitoring integration</td>
           <td className="px-4 py-3 text-slate-300">Fast CLI operations, real-time monitoring</td>
           <td className="px-4 py-3 text-slate-300">DevOps-friendly, automation ready</td>
         </tr>
         <tr>
           <td className="px-4 py-3 font-medium text-orange-300">Real-Time Metrics</td>
-          <td className="px-4 py-3 text-slate-300">Comprehensive monitoring with Prometheus integration</td>
+          <td className="px-4 py-3 text-slate-300">Monitoring with Prometheus integration</td>
           <td className="px-4 py-3 text-slate-300">AI insights, performance analytics</td>
           <td className="px-4 py-3 text-slate-300">Low-latency metrics, ML-enhanced</td>
           <td className="px-4 py-3 text-slate-300">Cloud-native monitoring, scalable</td>
@@ -468,7 +468,7 @@ const pgbalancerConfig = {
             <td className="px-4 py-3 font-medium text-slate-200">Real-Time Metrics</td>
             <td className="px-4 py-3 text-purple-400">✓ Prometheus + AI</td>
             <td className="px-4 py-3 text-yellow-400">~ Basic stats</td>
-            <td className="px-4 py-3 text-yellow-400">~ Simple metrics</td>
+            <td className="px-4 py-3 text-yellow-400">~ Basic metrics</td>
             <td className="px-4 py-3 text-yellow-400">~ Basic monitoring</td>
           </tr>
         </tbody>
@@ -635,7 +635,7 @@ client.subscribe_to_events(handle_event)`,
     },
     {
       title: 'Configuration',
-      desc: 'Comprehensive configuration reference for optimal performance.',
+      desc: 'Configuration reference for performance.',
       href: '/docs/pgbalancer/configuration',
     },
     {
@@ -647,7 +647,7 @@ client.subscribe_to_events(handle_event)`,
   ctaSection: {
     kicker: 'Get Started',
     title: 'Deploy pgbalancer for Production',
-    description: 'Install pgbalancer and start scaling your PostgreSQL connections with AI-powered load balancing, automatic failover, and comprehensive monitoring.',
+    description: 'Install pgbalancer and start scaling your PostgreSQL connections with load balancing, automatic failover, and monitoring.',
     primaryCTA: { href: '/docs/pgbalancer/getting-started', label: 'View Documentation' },
     secondaryCTA: { href: 'https://github.com/pgElephant/pgBalancer', label: 'View on GitHub', external: true },
   },

@@ -72,10 +72,10 @@ pgraft.zone = 'us-east-1a'`}
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-2">Identity Parameters</h3>
               <ul>
-                <li><code>pgraft.cluster_id</code> — Shared string that uniquely names the cluster.</li>
-                <li><code>pgraft.node_id</code> — Integer ID (1-indexed). Do not reuse until a node is fully removed.</li>
-                <li><code>pgraft.address</code> / <code>pgraft.port</code> — Host and port used for Raft RPCs.</li>
-                <li><code>pgraft.data_dir</code> — Filesystem path for Raft log and snapshots.</li>
+                <li><code>pgraft.cluster_id</code>: Shared string that uniquely names the cluster.</li>
+                <li><code>pgraft.node_id</code>: Integer ID (1-indexed). Do not reuse until a node is fully removed.</li>
+                <li><code>pgraft.address</code> / <code>pgraft.port</code>: Host and port used for Raft RPCs.</li>
+                <li><code>pgraft.data_dir</code>: Filesystem path for Raft log and snapshots.</li>
               </ul>
             </div>
             <div className="border rounded-lg p-4">

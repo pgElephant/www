@@ -42,7 +42,7 @@ pgraft runs as a PostgreSQL extension using background workers, not as a separat
 
 - No additional processes to manage
 - Direct access to PostgreSQL's shared memory and storage
-- Seamless integration with existing PostgreSQL security and monitoring
+- Integration with existing PostgreSQL security and monitoring
 - Zero network hops between consensus and database operations
 
 ### Proven Consensus Algorithm
@@ -62,13 +62,13 @@ Split-brain happens when multiple nodes think they're the leader, causing data c
 - **Term Monotonicity**: Each election increases the term number; higher terms always win
 - **Single Leader Per Term**: The Raft algorithm mathematically ensures only one leader can exist in any given term
 
-For a three-node cluster, this means at least two nodes must agree before any leadership change. In a network partition, only the partition containing the majority can elect a leader—making split-brain mathematically impossible.
+For a three-node cluster, at least two nodes must agree before any leadership change. In a network partition, only the partition containing the majority elects a leader. This makes split-brain mathematically impossible.
 
 ## Core Architecture
 
 ### The Hybrid C/Go Design
 
-pgraft uses a sophisticated architecture that combines PostgreSQL's C extension system with Go's powerful concurrency model:
+pgraft combines PostgreSQL's C extension system with Go's concurrency model:
 
 \`\`\`
 ┌─────────────────────────────────────────┐
@@ -97,7 +97,7 @@ pgraft uses a sophisticated architecture that combines PostgreSQL's C extension 
 └─────────────────────────────────────────┘
 \`\`\`
 
-**C Layer**: Provides the PostgreSQL integration through background workers and SQL functions. This layer manages shared memory state, exposes cluster operations through SQL, and drives the Raft engine's tick mechanism.
+**C Layer**: Handles the PostgreSQL integration through background workers and SQL functions. This layer manages shared memory state, exposes cluster operations through SQL, and drives the Raft engine's tick mechanism.
 
 **Go Layer**: Implements the Raft state machine using etcd-io/raft. Handles leader election, log replication, snapshot management, and all consensus protocol details.
 
@@ -258,7 +258,7 @@ Output:
 (3 rows)
 \`\`\`
 
-## Complete SQL Function Reference
+## SQL Function Reference
 
 ### Cluster Management Functions
 
@@ -364,7 +364,7 @@ Output:
 
 #### pgraft_get_cluster_status()
 
-Get comprehensive cluster status information.
+Get cluster status information.
 
 \`\`\`sql
 SELECT * FROM pgraft_get_cluster_status();
@@ -510,11 +510,11 @@ Output:
 
 ## Building Distributed Applications with pgraft
 
-While pgraft doesn't provide a built-in key-value store API, it gives you the fundamental Raft consensus primitives to build distributed applications with strong consistency guarantees.
+While pgraft does not include a built-in key-value store API, it gives you the fundamental Raft consensus primitives to build distributed applications with strong consistency guarantees.
 
 ### Example: Distributed Configuration Store
 
-Here's a complete example of building a distributed configuration management system:
+Here is an example of building a distributed configuration management system:
 
 \`\`\`sql
 -- Create schema for configuration store
@@ -723,7 +723,7 @@ Output:
 
 ### Health Check Queries
 
-Create a comprehensive health check function:
+Create a health check function:
 
 \`\`\`sql
 CREATE OR REPLACE FUNCTION pgraft_health_check()
@@ -875,7 +875,7 @@ GRANT SELECT ON pgraft_get_nodes TO pgraft_monitor;
 **Three-Node Cluster (Recommended Minimum)**
 - Tolerates 1 node failure
 - Requires 2 nodes for quorum
-- Ideal for most production deployments
+- Works for most production deployments
 
 **Five-Node Cluster (High Availability)**
 - Tolerates 2 node failures
@@ -906,28 +906,28 @@ GRANT SELECT ON pgraft_get_nodes TO pgraft_monitor;
 
 Traditional PostgreSQL high availability solutions like Patroni require external coordination services such as etcd, Consul, or Zookeeper to manage cluster consensus and failover decisions. These external dependencies introduce significant operational complexity and additional points of failure. etcd, for example, is a standalone application that operates independently of PostgreSQL, requiring separate installation, configuration, and maintenance. This architectural separation means that cluster coordination happens outside the database, creating network hops and potential synchronization issues between the coordination layer and the actual database state.
 
-pgraft eliminates these external dependencies entirely by embedding the Raft consensus protocol directly within PostgreSQL as a native extension. Unlike Patroni's approach of relying on external tools like etcd, pgraft provides built-in consensus capabilities without requiring any standalone applications or additional infrastructure components. The consensus engine runs as part of PostgreSQL's background worker architecture, ensuring tight integration with the database's internal state and operations.
+pgraft eliminates these external dependencies by embedding the Raft consensus protocol directly within PostgreSQL as a native extension. Unlike Patroni's approach of relying on external tools like etcd, pgraft includes built-in consensus capabilities without requiring any standalone applications or additional infrastructure components. The consensus engine runs as part of PostgreSQL's background worker architecture, ensuring tight integration with the database's internal state and operations.
 
-This native integration approach means that pgraft operates as a single, self-contained component within PostgreSQL, rather than requiring multiple separate systems to coordinate cluster behavior. While Patroni and etcd must communicate over the network to maintain cluster state, pgraft's consensus operations happen within the same process space as PostgreSQL, providing faster failover detection and more reliable cluster coordination. The result is a simpler deployment model with fewer moving parts, reduced resource overhead, and stronger guarantees about cluster consistency and availability.
+pgraft operates as a single component within PostgreSQL. It does not require multiple separate systems to coordinate cluster behavior. Patroni and etcd communicate over the network to maintain cluster state. pgraft's consensus operations happen within the same process space as PostgreSQL. This provides faster failover detection and more reliable cluster coordination. The result is a simpler deployment model with fewer moving parts, reduced resource overhead, and stronger guarantees about cluster consistency and availability.
 
 ## Conclusion
 
-pgraft represents a significant advancement in PostgreSQL high availability by bringing enterprise-grade consensus directly into the database. Its unique combination of native integration, proven Raft implementation, and mathematical guarantees against split-brain scenarios makes it an compelling choice for organizations requiring reliable, highly available PostgreSQL deployments.
+pgraft adds consensus to PostgreSQL for high availability. It combines native integration, Raft implementation, and split-brain prevention. It works for organizations that need reliable, highly available PostgreSQL deployments.
 
-### Key Takeaways
+### Key Points
 
 1. **Native Integration**: No external dependencies or coordination services required
-2. **Production Ready**: Built on battle-tested etcd-io/raft with comprehensive testing
+2. **Production Ready**: Built on etcd-io/raft with testing
 3. **Strong Guarantees**: Mathematical prevention of split-brain conditions
-4. **Simple Operations**: Unified management through SQL functions
+4. **Operations**: Unified management through SQL functions
 5. **Flexible**: Build custom distributed applications on top of Raft primitives
-6. **Well-Documented**: Comprehensive documentation and active community support
+6. **Documentation**: Documentation and community support
 
-Whether you're running PostgreSQL in the cloud, on-premises, or on Kubernetes, pgraft provides a solid foundation for building resilient database infrastructure. Its zero-dependency architecture, sub-second failover capabilities, and strong consistency guarantees make it particularly well-suited for mission-critical applications where data integrity and availability are paramount.
+Whether you run PostgreSQL in the cloud, on-premises, or on Kubernetes, pgraft builds resilient database infrastructure. Its zero-dependency architecture, sub-second failover, and consistency guarantees work for mission-critical applications where data integrity and availability matter.
 
-## Getting Started Today
+## Getting Started
 
-Ready to try pgraft? Here's your quickstart:
+Quickstart:
 
 \`\`\`bash
 # 1. Clone and install

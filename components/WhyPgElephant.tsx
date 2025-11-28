@@ -8,32 +8,32 @@ const WhyPgElephant = () => {
     {
       icon: Database,
       title: 'MongoDB Compatibility',
-      description: 'FauxDB provides full MongoDB wire protocol compatibility with PostgreSQL storage reliability and ACID transactions.'
+      description: 'FauxDB provides MongoDB wire protocol compatibility with PostgreSQL storage and ACID transactions.'
     },
     {
       icon: Shield,
       title: 'Raft Consensus Clustering',
-      description: 'pgraft delivers native Raft consensus for PostgreSQL with automatic leader election and split-brain prevention.'
+      description: 'pgraft provides Raft consensus for PostgreSQL with automatic leader election and split-brain prevention.'
     },
     {
       icon: Zap,
-      title: 'AI-Powered Connection Pooling',
-      description: 'pgbalancer uses machine learning for intelligent load balancing, query routing, and predictive scaling.'
+      title: 'Connection Pooling',
+      description: 'pgbalancer uses machine learning for load balancing, query routing, and scaling.'
     },
     {
       icon: Lock,
-      title: 'Production-Grade Reliability',
-      description: 'Battle-tested components with strong consistency guarantees and zero-downtime operations.'
+      title: 'Reliability',
+      description: 'Components with consistency guarantees and zero-downtime operations.'
     },
     {
       icon: Globe,
-      title: 'Modern Architecture',
-      description: 'Rust-powered performance, distributed systems design, and cloud-native deployment capabilities.'
+      title: 'Architecture',
+      description: 'Rust-powered performance, distributed systems design, and cloud-native deployment.'
     },
     {
       icon: Users,
-      title: 'Open Source Foundation',
-      description: 'Transparent development, community-driven features, and enterprise support options available.'
+      title: 'Open Source',
+      description: 'Transparent development, community-driven features, and enterprise support options.'
     }
   ]
 
@@ -52,8 +52,8 @@ const WhyPgElephant = () => {
             Why PgElephant?
           </h2>
           <p className="text-xl text-white/90 leading-relaxed font-light drop-shadow-lg">
-            Three specialized PostgreSQL tools: FauxDB (MongoDB-compatible document database), 
-            pgraft (Raft consensus clustering), and pgbalancer (AI-powered connection pooling).
+            Three PostgreSQL tools: FauxDB (MongoDB-compatible document database), 
+            pgraft (Raft consensus clustering), and pgbalancer (connection pooling).
           </p>
         </div>
 

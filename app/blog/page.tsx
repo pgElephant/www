@@ -45,8 +45,8 @@ const blogStats = [
 const blogPosts = [
   {
     slug: 'pg-stat-insights-1-0-0',
-    title: 'pg_stat_insights 1.0.0 — Release Announcement',
-    excerpt: 'We’re excited to announce pg_stat_insights 1.0.0 — advanced PostgreSQL performance monitoring with 52 metrics across 11 views. Production-ready, easy to install.',
+    title: 'pg_stat_insights 1.0.0 Release Announcement',
+    excerpt: 'pg_stat_insights 1.0.0 is a PostgreSQL performance monitoring extension. It provides 52 metrics across 11 views. Production-ready and easy to install.',
     content: 'pg_stat_insights 1.0.0 delivers comprehensive query performance insights with 52 metrics, 11 pre-built views, response-time categories, and PostgreSQL 16–17 compatibility.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
@@ -60,28 +60,45 @@ const blogPosts = [
     comments: 0,
     tags: ['PostgreSQL', 'Performance Monitoring', 'Release', 'pg_stat_insights']
   },
-    {
-      slug: 'neurondb',
-      title: 'NeuronDB: PostgreSQL AI Vector Database Extension',
-      excerpt: 'Transform PostgreSQL into an AI platform with vector search, ML inference, and RAG capabilities. HNSW indexing, GPU acceleration, 10+ distance metrics, and full pgvector compatibility.',
-      content: 'NeuronDB is a production-ready PostgreSQL extension that provides vector search, machine learning inference, GPU acceleration, and hybrid retrieval capabilities for building semantic search, RAG applications, and recommendation systems.',
-      author: 'pgElephant Team',
-      authorRole: 'Core Developers',
-      date: '2025-02-20',
-      readTime: '22 min read',
-      category: 'Technical',
-      featured: true,
-      icon: 'neurondb',
-      views: 0,
-      likes: 0,
-      comments: 0,
-      tags: ['AI', 'Vector Database', 'Machine Learning', 'Semantic Search', 'RAG', 'PostgreSQL']
-    },
+  {
+    slug: 'neurondb',
+    title: 'NeuronDB: PostgreSQL AI Vector Database Extension',
+    excerpt: 'NeuronDB adds vector search, ML inference, and RAG capabilities to PostgreSQL. It includes HNSW indexing, GPU acceleration, 10+ distance metrics, and full pgvector compatibility.',
+    content: 'NeuronDB is a production-ready PostgreSQL extension that provides vector search, machine learning inference, GPU acceleration, and hybrid retrieval capabilities for building semantic search, RAG applications, and recommendation systems.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-20',
+    readTime: '22 min read',
+    category: 'Technical',
+    featured: true,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['AI', 'Vector Database', 'Machine Learning', 'Semantic Search', 'RAG', 'PostgreSQL']
+  },
+  {
+    slug: 'neurondb-semantic-search-guide',
+    title: 'Semantic Search Over Text with NeuronDB',
+    excerpt: 'Learn how to implement semantic search over text using NeuronDB with real-world examples, SQL queries, and production-ready code. Complete guide to building document search systems, RAG pipelines, and hybrid search.',
+    content: 'Comprehensive guide to implementing semantic search with NeuronDB. Includes real-world examples, step-by-step SQL queries, RAG pipeline construction, hybrid search techniques, and production optimization strategies.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-19',
+    readTime: '25 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['NeuronDB', 'Semantic Search', 'RAG', 'Vector Search', 'PostgreSQL', 'Tutorial', 'AI']
+  },
   {
     slug: 'pgbalancer',
-    title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
-    excerpt: 'Modern connection pooling meets artificial intelligence. pgbalancer brings intelligent load balancing, automatic failover, and ML-powered optimization to PostgreSQL connection management.',
-    content: 'pgbalancer is a next-generation PostgreSQL connection pooler that combines traditional pooling capabilities with AI-driven load balancing, REST API management, and MQTT clustering for modern cloud-native applications.',
+    title: 'pgbalancer: PostgreSQL Connection Pooler',
+    excerpt: 'PostgreSQL connection pooler with load balancing, automatic failover, and optimization for connection management.',
+    content: 'pgbalancer is a PostgreSQL connection pooler that combines pooling capabilities with load balancing, REST API management, and MQTT clustering for cloud-native applications.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-02-15',
@@ -97,8 +114,8 @@ const blogPosts = [
   {
     slug: 'pg-stat-insights',
     title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
-    excerpt: 'Comprehensive PostgreSQL performance monitoring with 52 metrics, 11 pre-built views, and deep insights into query execution, cache efficiency, WAL generation, and JIT compilation.',
-    content: 'pg_stat_insights is a drop-in replacement for pg_stat_statements that provides enhanced PostgreSQL performance monitoring with response time categorization, advanced cache analysis, and comprehensive query insights.',
+    excerpt: 'PostgreSQL performance monitoring with 52 metrics, 11 pre-built views, and insights into query execution, cache efficiency, WAL generation, and JIT compilation.',
+    content: 'pg_stat_insights is a drop-in replacement for pg_stat_statements that provides PostgreSQL performance monitoring with response time categorization, cache analysis, and query insights.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-01-29',
@@ -240,7 +257,7 @@ export default function BlogPage() {
             <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto">
               Technical insights, tutorials, and updates from our team building the future of PostgreSQL clustering
             </p>
-            
+
             {/* Blog Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
               {blogStats.map((stat, index) => (

@@ -62,7 +62,7 @@ export default function NeurondBGettingStarted() {
       <section id="introduction">
         <h2>Introduction</h2>
         <p>
-          NeurondB is an AI-capable PostgreSQL extension that provides GPU-accelerated vector search, ONNX model inference, and hybrid retrieval. As an alternative to PostgreSQL.ai, pgml, and PostgreSQLml, NeurondB offers comprehensive AI and machine learning capabilities directly in PostgreSQL. This guide covers installation, configuration, and your first semantic search queries.
+          NeurondB is a PostgreSQL extension that provides GPU-accelerated vector search, ONNX model inference, and hybrid retrieval. It offers AI and machine learning capabilities in PostgreSQL. This guide covers installation, configuration, and your first semantic search queries.
         </p>
         <p>
           NeurondB enables you to:
@@ -71,11 +71,11 @@ export default function NeurondBGettingStarted() {
           <li>Perform fast similarity search on high-dimensional vectors</li>
           <li>Run ONNX model inference directly in PostgreSQL</li>
           <li>Combine vector, keyword, and metadata filters for hybrid retrieval</li>
-          <li>Build RAG (Retrieval Augmented Generation) pipelines with SQL workflows</li>
-          <li>Train and deploy machine learning models using SQL (alternative to pgml and PostgreSQL.ai)</li>
+          <li>Build RAG pipelines with SQL workflows</li>
+          <li>Train and deploy machine learning models using SQL</li>
         </ul>
         <p>
-          <strong>Why NeurondB?</strong> If you're looking for an AI extension for PostgreSQL, NeurondB provides a complete solution for vector search, machine learning, and AI workloads. Unlike PostgreSQL.ai or pgml, NeurondB combines vector search, ML inference, hybrid retrieval, and RAG pipelines in a single, integrated extension.
+          <strong>Why NeurondB?</strong> NeurondB provides a solution for vector search, machine learning, and AI workloads. It combines vector search, ML inference, hybrid retrieval, and RAG pipelines in one extension.
         </p>
       </section>
 

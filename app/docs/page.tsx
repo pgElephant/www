@@ -6,8 +6,8 @@ import DocsHubLanding, { type HubProduct, type ResourceLink } from '../../compon
 const hero = {
   badgeLabel: 'Documentation Hub',
   badgeIcon: <BookOpen className="h-4 w-4 text-slate-600 dark:text-slate-400" />, 
-  title: 'Complete Documentation',
-  description: 'Comprehensive guides, API references, and troubleshooting playbooks for every pgElephant product. Built by developers, for developers.',
+  title: 'Documentation',
+  description: 'Guides, API references, and troubleshooting for every pgElephant product.',
   stats: [
     { label: 'Products', value: '6' },
     { label: 'Guides', value: '40+' },
@@ -22,7 +22,7 @@ const hero = {
     name: 'NeurondB',
     headline: 'PostgreSQL AI Vector Extension',
     summary:
-      'Production-grade AI database extension for PostgreSQL with vector search, ONNX inference, hybrid retrieval, and RAG pipelines.',
+      'PostgreSQL extension with vector search, ONNX inference, hybrid retrieval, and RAG pipelines.',
     icon: <NeurondBIcon size={40} />, 
     theme: {
       gradient: 'from-slate-800/70 to-slate-900/70',
@@ -75,7 +75,7 @@ const hero = {
     name: 'pgRaft',
     headline: 'PostgreSQL Raft Consensus Extension',
     summary:
-      'Bring deterministic leader election, replication, and high availability into PostgreSQL clusters with embedded Raft workers.',
+      'Deterministic leader election, replication, and high availability for PostgreSQL clusters with embedded Raft workers.',
     icon: <PgraftIcon size={40} />, 
     theme: {
       gradient: 'from-slate-800/70 to-slate-900/70',

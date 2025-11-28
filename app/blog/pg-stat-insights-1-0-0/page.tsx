@@ -3,16 +3,16 @@ import GiscusComments from '../../../components/GiscusComments';
 import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 
 export const metadata = {
-  title: 'pg_stat_insights 1.0.0 — Release Announcement',
-  description: 'We are excited to announce pg_stat_insights 1.0.0 — an advanced PostgreSQL performance monitoring extension with 52 metrics across 11 views. Production-ready, compatible with PostgreSQL 16, 17, and 18.',
+  title: 'pg_stat_insights 1.0.0 Release Announcement',
+  description: 'We are excited to announce pg_stat_insights 1.0.0, an advanced PostgreSQL performance monitoring extension with 52 metrics across 11 views. Production-ready and compatible with PostgreSQL 16, 17, and 18.',
   openGraph: {
-    title: 'pg_stat_insights 1.0.0 — Release Announcement',
+    title: 'pg_stat_insights 1.0.0 Release Announcement',
     description: 'Advanced PostgreSQL performance monitoring with 52 metrics and 11 views. PostgreSQL 16/17/18 support.',
     images: ['/blog/pg-stat-insights/og-image-v9.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'pg_stat_insights 1.0.0 — Release Announcement',
+    title: 'pg_stat_insights 1.0.0 Release Announcement',
     description: 'Advanced PostgreSQL performance monitoring with 52 metrics and 11 views. PostgreSQL 16/17/18 support.',
     images: ['/blog/pg-stat-insights/og-image-v9.jpg'],
   },
@@ -20,17 +20,17 @@ export const metadata = {
 
 const markdown = `![pg_stat_insights header](/blog/pg-stat-insights/header.svg?v=7)
 
-# pg_stat_insights 1.0.0 — Release Announcement
+# pg_stat_insights 1.0.0 Release Announcement
 
-📦 **[Download v1.0.0](https://github.com/pgElephant/pg_stat_insights/releases/tag/v1.0.0)**  ·  💻 **[Source Code](https://github.com/pgElephant/pg_stat_insights)**  ·  📖 **[Documentation](https://www.pgelephant.com/docs/pg-stat-insights)**
+**[Download v1.0.0](https://github.com/pgElephant/pg_stat_insights/releases/tag/v1.0.0)**  ·  **[Source Code](https://github.com/pgElephant/pg_stat_insights)**  ·  **[Documentation](https://www.pgelephant.com/docs/pg-stat-insights)**
 
 ## Executive Summary
 
-Today we’re releasing **pg_stat_insights 1.0.0**, a production-ready PostgreSQL performance monitoring extension that delivers **52 comprehensive metrics** across **11 purpose-built views**. It’s a powerful, drop-in enhancement to standard PostgreSQL statistics, designed to help you identify slow queries, understand cache behavior, track WAL generation, and make data-driven tuning decisions.
+We are releasing pg_stat_insights 1.0.0, a PostgreSQL performance monitoring extension with 52 metrics across 11 views. It is a drop-in enhancement to standard PostgreSQL statistics. It helps you identify slow queries, understand cache behavior, track WAL generation, and make tuning decisions.
 
-- ✅ PostgreSQL 16, 17, and 18 compatibility
-- ✅ Build artifacts for Ubuntu, Rocky Linux, and macOS
-- ✅ Easy install with packages or build-from-source
+- PostgreSQL 16, 17, and 18 compatibility
+- Build artifacts for Ubuntu, Rocky Linux, and macOS
+- Install with packages or build-from-source
 
 ## What’s in this release
 
@@ -76,7 +76,7 @@ sha256sum -c SHA256SUMS
 
 Huge thanks to the PostgreSQL community and early users who helped shape this release with feedback and testing.
 
-— pgElephant Team
+pgElephant Team
 `;
 
 export default function PgStatInsightsReleaseBlog() {
@@ -92,8 +92,8 @@ export default function PgStatInsightsReleaseBlog() {
             <h3 className="text-2xl font-bold text-white mb-4">Share This Announcement</h3>
             <ShareOnLinkedIn
               url="https://www.pgelephant.com/blog/pg-stat-insights-1-0-0"
-              title="📊 pg_stat_insights 1.0.0 — Release Announcement"
-              summary="We’re excited to release pg_stat_insights 1.0.0 — Advanced PostgreSQL performance monitoring with 52 metrics and 11 pre-built views. Production-ready and easy to install."
+              title="pg_stat_insights 1.0.0 Release Announcement"
+              summary="We are releasing pg_stat_insights 1.0.0, a PostgreSQL performance monitoring extension with 52 metrics and 11 pre-built views. Production-ready and installable."
               hashtags={[
                 'PostgreSQL',
                 'PerformanceMonitoring',

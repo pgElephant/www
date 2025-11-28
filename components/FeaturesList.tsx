@@ -30,7 +30,7 @@ const FeaturesList = () => {
   const projects = [
     {
       name: 'NeurondB',
-      description: 'Enterprise AI Database Extension for PostgreSQL',
+      description: 'AI Database Extension for PostgreSQL',
       icon: <Brain className="w-8 h-8" />,
       color: 'primary',
       link: '/neurondb',
@@ -52,7 +52,7 @@ const FeaturesList = () => {
         },
         {
           title: 'GPU Acceleration',
-          description: 'CUDA/ROCm support, 100x speedup for batch operations, automatic CPU fallback',
+          description: 'CUDA/ROCm support, faster batch operations, automatic CPU fallback',
           icon: <Zap className="w-5 h-5" />
         },
         {
@@ -71,7 +71,7 @@ const FeaturesList = () => {
           icon: <Code className="w-5 h-5" />
         },
         {
-          title: 'Enterprise Security',
+          title: 'Security',
           description: 'Vector encryption (AES-GCM), differential privacy, RLS integration, audit logging',
           icon: <Shield className="w-5 h-5" />
         }
@@ -96,7 +96,7 @@ const FeaturesList = () => {
         },
         {
           title: 'Failover & Recovery',
-          description: 'Automatic failover detection and seamless recovery',
+          description: 'Automatic failover detection and recovery',
           icon: <Shield className="w-5 h-5" />
         },
         {
@@ -218,7 +218,7 @@ const FeaturesList = () => {
         },
         {
           title: 'Automatic Leader Election',
-          description: 'Seamless leader election and failover',
+          description: 'Leader election and failover',
           icon: <Crown className="w-5 h-5" />
         },
         {
@@ -374,7 +374,7 @@ Enterprise Solutions
             </span>
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto font-light">
-            Comprehensive database solutions for enterprise-grade high availability, distributed consensus, and seamless data migration.
+            Database solutions for high availability, distributed consensus, and data migration.
           </p>
         </div>
 

@@ -13,7 +13,7 @@ export const metadata = generateProductPageMetadata('pg-stat-insights');
 const pgStatInsightsConfig = {
   productId: 'pg-stat-insights' as const,
   hero: {
-    subtitle: '52 comprehensive metrics across 11 pre-built views for query optimization, cache analysis, and WAL monitoring',
+    subtitle: '52 metrics across 11 pre-built views for query optimization, cache analysis, and WAL monitoring',
   },
   badges: [
     'PostgreSQL 16-18',
@@ -27,27 +27,27 @@ const pgStatInsightsConfig = {
   ],
   demo: <PgStatInsightsDemoTerminal />,
   features: [
-    { icon: '📊', iconColor: 'text-blue-500', title: '52 Comprehensive Metrics', desc: 'Execution time, plan time, cache hits, WAL generation, JIT stats, buffer I/O, parallel workers, and timing data—all in one extension.' },
-    { icon: '🎯', iconColor: 'text-purple-500', title: '11 Pre-Built Views', desc: 'Instant access to top slow queries, cache misses, I/O intensive operations, errors, histogram summaries, and time-series aggregation.' },
-    { icon: '⚡', iconColor: 'text-green-500', title: 'Response Time Categories', desc: 'Categorize queries by execution time: <1ms, 1-10ms, 10-100ms, 100ms-1s, 1-10s, >10s for SLA monitoring.' },
-    { icon: '💾', iconColor: 'text-cyan-500', title: 'Cache Efficiency Analysis', desc: 'Enhanced cache analysis with hit/miss ratios, shared_blks_hit, shared_blks_read, and buffer cache optimization insights.' },
+    { icon: '📊', iconColor: 'text-blue-500', title: '52 Metrics', desc: 'Execution time, plan time, cache hits, WAL generation, JIT stats, buffer I/O, parallel workers, and timing data, all in one extension.' },
+    { icon: '🎯', iconColor: 'text-purple-500', title: '11 Pre-Built Views', desc: 'Access to top slow queries, cache misses, I/O intensive operations, errors, histogram summaries, and time-series aggregation.' },
+    { icon: '⚡', iconColor: 'text-green-500', title: 'Response Time Categories', desc: 'Categorize queries by execution time: under 1ms, 1-10ms, 10-100ms, 100ms-1s, 1-10s, over 10s for SLA monitoring.' },
+    { icon: '💾', iconColor: 'text-cyan-500', title: 'Cache Efficiency Analysis', desc: 'Cache analysis with hit/miss ratios, shared_blks_hit, shared_blks_read, and buffer cache optimization insights.' },
     { icon: '📝', iconColor: 'text-orange-500', title: 'WAL Generation Tracking', desc: 'Monitor write-ahead log per query: wal_records, wal_fpi, wal_bytes, wal_buffers_full for write optimization.' },
     { icon: '⚙️', iconColor: 'text-pink-500', title: 'JIT Compilation Stats', desc: 'Track JIT functions, generation time, inlining, optimization, emission, and deform operations for query performance.' },
     { icon: '🔄', iconColor: 'text-red-500', title: 'Parallel Query Monitoring', desc: 'Track parallel_workers_to_launch vs parallel_workers_launched for parallel query efficiency analysis.' },
-    { icon: '🧪', iconColor: 'text-yellow-500', title: '150 TAP Tests', desc: 'Comprehensive test suite with 16 test files, 150 test cases, 100% code coverage, and PostgreSQL 18 compatibility.' },
-    { icon: '📈', iconColor: 'text-indigo-500', title: 'Prometheus & Grafana', desc: 'Pre-built Prometheus queries, Grafana dashboards (8 panels), and 11 alert rules for production monitoring integration.' },
+    { icon: '🧪', iconColor: 'text-yellow-500', title: '150 TAP Tests', desc: 'Test suite with 16 test files, 150 test cases, 100% code coverage, and PostgreSQL 18 compatibility.' },
+    { icon: '📈', iconColor: 'text-indigo-500', title: 'Prometheus and Grafana', desc: 'Pre-built Prometheus queries, Grafana dashboards (8 panels), and 11 alert rules for production monitoring integration.' },
   ],
   featurePillars: {
     kicker: '52 Metrics Across 11 Views',
     items: [
       { title: 'Main Statistics View (pg_stat_insights)', desc: '52 columns including userid, dbid, queryid, query text, plans, total/min/max/mean/stddev plan/exec times, rows, all buffer I/O metrics, WAL stats, JIT stats, parallel workers, and timestamps.' },
-      { title: 'Top Queries by Time', desc: 'pg_stat_insights_top_by_time view shows slowest queries by total_exec_time. Perfect for identifying performance bottlenecks and optimization opportunities.' },
-      { title: 'Top Queries by Calls', desc: 'pg_stat_insights_top_by_calls view shows most frequently executed queries. Ideal for finding high-frequency operations that need caching or optimization.' },
-      { title: 'I/O Intensive Operations', desc: 'pg_stat_insights_top_by_io view identifies highest I/O consumers based on shared_blks_read + temp_blks_read. Find disk-heavy queries.' },
+      { title: 'Top Queries by Time', desc: 'pg_stat_insights_top_by_time view shows slowest queries by total_exec_time. Identifies performance bottlenecks and optimization opportunities.' },
+      { title: 'Top Queries by Calls', desc: 'pg_stat_insights_top_by_calls view shows most frequently executed queries. Finds high-frequency operations that need caching or optimization.' },
+      { title: 'I/O Intensive Operations', desc: 'pg_stat_insights_top_by_io view identifies highest I/O consumers based on shared_blks_read + temp_blks_read. Finds disk-heavy queries.' },
       { title: 'Cache Miss Analysis', desc: 'pg_stat_insights_top_cache_misses view shows poor cache performers. Includes cache_hit_ratio calculation for buffer optimization.' },
-      { title: 'Slow Query Detection', desc: 'pg_stat_insights_slow_queries view filters queries with mean_exec_time > 100ms. Automatic slow query identification for tuning.' },
-      { title: 'Error Tracking', desc: 'pg_stat_insights_errors view shows queries with execution errors. Track failed queries for debugging and reliability improvement.' },
-      { title: 'Plan Estimation Issues', desc: 'pg_stat_insights_plan_errors view identifies plan estimation problems. Compare estimated vs actual rows for query planner accuracy.' },
+      { title: 'Slow Query Detection', desc: 'pg_stat_insights_slow_queries view filters queries with mean_exec_time over 100ms. Automatic slow query identification for tuning.' },
+      { title: 'Error Tracking', desc: 'pg_stat_insights_errors view shows queries with execution errors. Tracks failed queries for debugging and reliability improvement.' },
+      { title: 'Plan Estimation Issues', desc: 'pg_stat_insights_plan_errors view identifies plan estimation problems. Compares estimated vs actual rows for query planner accuracy.' },
       { title: 'Response Time Histograms', desc: 'pg_stat_insights_histogram_summary aggregates queries into time buckets: <1ms, 1-10ms, 10-100ms, 100ms-1s, 1-10s, >10s for SLA tracking.' },
       { title: 'Time-Series Aggregation', desc: 'pg_stat_insights_by_bucket view provides time-series data with bucket-based aggregation for trend analysis and capacity planning.' },
       { title: 'Replication Monitoring', desc: 'pg_stat_insights_replication view tracks WAL sender/receiver stats, lag (write/flush/replay), sync_state, and replication health across all standbys.' },
@@ -173,7 +173,7 @@ const pgStatInsightsConfig = {
         
         {/* 52 Metrics Breakdown */}
         <div className="mt-6 bg-slate-800/40 border border-slate-600 rounded-lg p-6">
-          <h4 className="text-lg font-bold text-white text-center mb-4">52 Comprehensive Metrics</h4>
+          <h4 className="text-lg font-bold text-white text-center mb-4">52 Metrics</h4>
           <div className="grid grid-cols-4 gap-4 text-xs">
             <div>
               <div className="font-semibold text-blue-300 mb-2">Execution Metrics (10)</div>
@@ -487,7 +487,7 @@ asyncio.run(analyze_database())`,
   ],
   comparison: {
     title: 'Why pg_stat_insights?',
-    description: 'Comprehensive PostgreSQL analytics in a single integrated package',
+    description: 'PostgreSQL analytics in a single package',
     items: [
       {
         feature: 'Query Analytics',
@@ -600,7 +600,7 @@ asyncio.run(analyze_database())`,
   },
   installation: {
     title: 'Enable in Minutes',
-    description: 'Add comprehensive analytics to your PostgreSQL database',
+    description: 'Add analytics to your PostgreSQL database',
     steps: [
       'Install PostgreSQL extensions (pg_stat_statements, etc.)',
       'Configure shared_preload_libraries',
@@ -613,7 +613,7 @@ asyncio.run(analyze_database())`,
   ctaSection: {
     kicker: 'Get Started',
     title: 'Monitor PostgreSQL Performance',
-    description: 'Install pg_stat_insights and track 52 comprehensive metrics across 11 pre-built views to identify slow queries, optimize cache performance, and monitor database health.',
+    description: 'Install pg_stat_insights and track 52 metrics across 11 pre-built views to identify slow queries, optimize cache performance, and monitor database health.',
     primaryCTA: { href: '/docs/pg-stat-insights/getting-started', label: 'View Documentation' },
     secondaryCTA: { href: 'https://github.com/pgElephant/pg_stat_insights', label: 'View on GitHub', external: true },
   },

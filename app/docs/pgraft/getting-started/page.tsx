@@ -44,7 +44,7 @@ export default function GettingStartedPage() {
 
       <section id="installation">
         <h2>Install pgraft in 3 Steps</h2>
-        <p>Embed the Raft consensus protocol inside PostgreSQL. Follow this guide to install pgraft, promote your first leader, and scale out a resilient cluster in minutes.</p>
+        <p>Embed the Raft consensus protocol inside PostgreSQL. Follow this guide to install pgraft, promote your first leader, and scale out a cluster.</p>
 
         <h3>Step 1 · Install Build Dependencies</h3>
         <p>Install PostgreSQL server headers, the Go toolchain, and build essentials on your platform.</p>

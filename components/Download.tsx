@@ -9,7 +9,7 @@ const Download = () => {
   const components = [
     {
       title: 'NeurondB',
-      description: 'Advanced AI Database Extension for PostgreSQL with vector search and ML',
+      description: 'PostgreSQL extension with vector search and ML',
       icon: Database,
       packages: {
         debian: 'neurondb-postgresql-17',

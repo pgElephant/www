@@ -38,7 +38,7 @@ export default function GettingStartedPage() {
       <section id="prerequisites">
         <h2>Prerequisites</h2>
         <p>
-          Enable 52 query performance metrics and 11 curated diagnostic views in under five minutes. Follow the three-step onboarding to install the extension, and then explore deeper tuning guides below.
+          Enable 52 query performance metrics and 11 diagnostic views. Follow the three-step installation, then explore tuning guides below.
         </p>
         <p>
           pg_stat_insights ships as a single extension and requires no external collectors. Load it at startup, create the extension, then query the telemetry views immediately.
@@ -98,7 +98,7 @@ LIMIT  10;`}
 
       <section id="complete-installation">
         <h2>Complete Installation Reference</h2>
-        <p>Build from source, install via packages, or automate with CI—use the commands below as a template.</p>
+        <p>Build from source, install via packages, or automate with CI. Use the commands below as a template.</p>
         
         <h3>Build from source</h3>
         <BashCodeBlock

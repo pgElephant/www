@@ -6,7 +6,7 @@ import { PgraftIcon } from '../../../components/ProductIcons'
 export const metadata = {
   title: 'pgRaft Documentation | PostgreSQL Raft Consensus Extension',
   description:
-    'Deploy, configure, and operate pgRaft to add Raft consensus, leader election, and high availability to PostgreSQL clusters. Complete guides for installation, configuration, cluster management, tuning, and diagnostics.'
+    'Deploy, configure, and operate pgRaft to add Raft consensus, leader election, and high availability to PostgreSQL clusters. Guides for installation, configuration, cluster management, tuning, and diagnostics.'
 }
 
 export default function PgRaftDocsPage() {

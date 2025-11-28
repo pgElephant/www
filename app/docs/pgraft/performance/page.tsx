@@ -204,7 +204,7 @@ SELECT COUNT(*)
               <h3 className="font-semibold mb-2">High replication lag</h3>
                 <ul>
                 <li>Verify network RTT; consider increasing <code>pgraft.append_batch_size</code>.</li>
-                <li>Ensure followers have sufficient I/O bandwidth—watch <code>pg_stat_io</code> counters.</li>
+                <li>Ensure followers have sufficient I/O bandwidth. Watch <code>pg_stat_io</code> counters.</li>
                 <li>Check for slow checkpoints or autovacuum activity on followers.</li>
               </ul>
             </div>

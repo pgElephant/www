@@ -7,37 +7,37 @@ const Features = () => {
     {
       icon: Zap,
       title: 'Automated Failover',
-      description: 'Intelligent leader election with RALE consensus. Automatic failover in under 30 seconds with zero data loss.',
+      description: 'Leader election with RALE consensus. Automatic failover in under 30 seconds with zero data loss.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Shield,
-      title: 'Advanced Security',
-      description: 'TLS encryption, role-based access control, and comprehensive audit logging for production environments.',
+      title: 'Security',
+      description: 'TLS encryption, role-based access control, and audit logging for production environments.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Globe,
       title: 'Multi-Zone Replication',
-      description: 'Distribute your database across multiple availability zones for maximum resilience and performance.',
+      description: 'Distribute your database across multiple availability zones for resilience and performance.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: BarChart3,
-      title: 'Advanced Monitoring',
-      description: 'Real-time metrics, health checks, and comprehensive observability with Prometheus integration.',
+      title: 'Monitoring',
+      description: 'Real-time metrics, health checks, and observability with Prometheus integration.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Terminal,
-      title: 'CLI & API',
-      description: 'Powerful command-line interface and REST API for automation and integration workflows.',
+      title: 'CLI and API',
+      description: 'Command-line interface and REST API for automation and integration workflows.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Database,
       title: 'Zero Downtime',
-      description: 'Seamless failover with no service interruption. Built for production environments that cannot tolerate downtime.',
+      description: 'Failover with no service interruption. Built for production environments that cannot tolerate downtime.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     }
   ]

@@ -38,29 +38,29 @@ const Footer = () => {
   const year = new Date().getFullYear()
   const navigation = {
     products: [
-      { name: 'pgSentinel', href: '/pgsentinel', description: 'Monitoring Platform', icon: '👁️' },
-      { name: 'pg_stat_insights', href: '/pg-stat-insights', description: 'Performance Analytics', icon: '📊' },
+      { name: 'pgSentinel', href: '/pgsentinel', description: 'Monitoring Platform', icon: '' },
+      { name: 'pg_stat_insights', href: '/pg-stat-insights', description: 'Performance Analytics', icon: '' },
       { name: 'pgraft', href: '/pgraft', description: 'Raft Extension', icon: 'pgraft-custom' },
       { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling', icon: 'pgbalancer-custom' },
       { name: 'FauxDB', href: '/fauxdb', description: 'Document Database', icon: 'fauxdb-custom' },
     ],
     resources: [
-      { name: 'Documentation', href: '/docs', description: 'Complete technical guides', icon: '📚' },
-      { name: 'Download', href: '/download', description: 'Get started quickly', icon: '⬇️' },
-      { name: 'Blog', href: '/blog', description: 'Latest insights & updates', icon: '📝' },
-      { name: 'Community', href: '/community', description: 'Join our community', icon: '👥' },
+      { name: 'Documentation', href: '/docs', description: 'Technical guides', icon: '' },
+      { name: 'Download', href: '/download', description: 'Get started', icon: '' },
+      { name: 'Blog', href: '/blog', description: 'Insights and updates', icon: '' },
+      { name: 'Community', href: '/community', description: 'Join our community', icon: '' },
     ],
     enterprise: [
-      { name: 'Enterprise Support', href: '/contact', description: '24/7 dedicated support', icon: '🛡️' },
-      { name: 'Professional Services', href: '/contact', description: 'Expert consulting', icon: '🎯' },
-      { name: 'Training', href: '/contact', description: 'Comprehensive training', icon: '🎓' },
-      { name: 'Partnership', href: '/contact', description: 'Become a partner', icon: '🤝' },
+      { name: 'Enterprise Support', href: '/contact', description: '24/7 dedicated support', icon: '' },
+      { name: 'Professional Services', href: '/contact', description: 'Expert consulting', icon: '' },
+      { name: 'Training', href: '/contact', description: 'Training', icon: '' },
+      { name: 'Partnership', href: '/contact', description: 'Become a partner', icon: '' },
     ],
     company: [
-      { name: 'About Us', href: '/', description: 'Our mission & vision', icon: '🏢' },
-      { name: 'Careers', href: '/community', description: 'Join our team', icon: '💼' },
-      { name: 'Press Kit', href: '/contact', description: 'Media resources', icon: '📰' },
-      { name: 'Contact', href: '/contact', description: 'Get in touch', icon: '📞' },
+      { name: 'About Us', href: '/', description: 'Our mission and vision', icon: '' },
+      { name: 'Careers', href: '/community', description: 'Join our team', icon: '' },
+      { name: 'Press Kit', href: '/contact', description: 'Media resources', icon: '' },
+      { name: 'Contact', href: '/contact', description: 'Get in touch', icon: '' },
     ],
   }
 

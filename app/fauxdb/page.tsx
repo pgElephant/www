@@ -8,7 +8,7 @@ export const metadata = generateProductPageMetadata('fauxdb');
 const fauxdbConfig = {
   productId: 'fauxdb' as const,
   hero: {
-    subtitle: 'The ONLY database with MongoDB AND MySQL wire protocol support simultaneously—backed by pure PostgreSQL. Connect with MongoDB clients OR MySQL clients, access the same data through both protocols.',
+    subtitle: 'The only database with MongoDB and MySQL wire protocol support simultaneously, backed by pure PostgreSQL. Connect with MongoDB clients or MySQL clients, and access the same data through both protocols.',
   },
   demo: <FauxDbDemoTerminal />,
   badges: [
@@ -22,7 +22,7 @@ const fauxdbConfig = {
   featurePillars: {
     kicker: 'Key Features',
     items: [
-      { title: 'Dual-Protocol Support', desc: 'MongoDB AND MySQL wire protocols simultaneously! Connect with mongosh OR mysql client—access the SAME data through both protocols.' },
+      { title: 'Dual-Protocol Support', desc: 'MongoDB and MySQL wire protocols simultaneously. Connect with mongosh or mysql client, and access the same data through both protocols.' },
       { title: 'MongoDB Wire Protocol', desc: 'Full MongoDB compatibility. Use mongosh, PyMongo, Node.js driver, and all MongoDB clients with zero changes.' },
       { title: 'MySQL Wire Protocol', desc: 'Standard MySQL protocol support via msql-srv. Connect with mysql client, Tableau, PowerBI, and all MySQL tools.' },
       { title: 'SQL Query Translator', desc: 'Automatic MySQL → PostgreSQL query translation. Handles backticks, data types, functions, LIMIT syntax, and 20+ patterns.' },

@@ -3,7 +3,7 @@ import PostgresDocsLayout, { type TocItem, type NavLink } from '../../../../comp
 import BashCodeBlock from '../../../../components/BashCodeBlock'
 
 export const metadata: Metadata = {
-  title: 'Getting Started with pgBalancer | AI-Powered PostgreSQL Load Balancer',
+  title: 'Getting Started with pgBalancer | PostgreSQL Load Balancer',
   description: 'Install, configure, and launch pgBalancer in minutes. Includes build instructions, configuration samples, REST API usage, and verification steps.',
 }
 
@@ -34,7 +34,7 @@ export default function PgBalancerGettingStarted() {
       nextLink={nextLink}
     >
       <p>
-        Deploy the AI-powered PostgreSQL load balancer with intelligent routing, REST API management, and MQTT event streaming. Follow this step-by-step guide to build from source, configure pools, and verify your installation.
+        Deploy the PostgreSQL load balancer with routing, REST API management, and MQTT event streaming. Follow this guide to build from source, configure pools, and verify your installation.
       </p>
 
       <section id="requirements">
