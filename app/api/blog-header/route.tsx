@@ -67,18 +67,9 @@ export async function GET(request: NextRequest) {
           height: '400px',
           display: 'flex',
           position: 'relative',
-          background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)',
+          backgroundColor: '#1f2937',
         }}
       >
-        {/* Overlay gradient */}
-        <div
-          style={{
-            position: 'absolute',
-            width: '1200px',
-            height: '400px',
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)',
-          }}
-        />
 
         {/* Icon placeholder - simplified for ImageResponse */}
         <div

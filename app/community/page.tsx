@@ -281,19 +281,12 @@ const CommunityPage = () => {
 
       {/* Discord Hero Section */}
       <div 
-        className="relative overflow-hidden style={{ backgroundColor: '#1f2937' }}"
+        className="relative overflow-hidden"
         style={{ 
+          backgroundColor: '#1f2937',
           position: 'relative'
         }}
       >
-        {/* Elegant overlay gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
         {/* Elegant floating elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Floating orbs */}
@@ -482,14 +475,6 @@ const CommunityPage = () => {
           position: 'relative'
         }}
       >
-        {/* Elegant overlay gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
         {/* Elegant floating elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Floating orbs */}
@@ -667,14 +652,6 @@ const CommunityPage = () => {
           position: 'relative'
         }}
       >
-        {/* Elegant overlay gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
         {/* Elegant floating elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Floating orbs */}
@@ -930,14 +907,6 @@ const CommunityPage = () => {
           position: 'relative'
         }}
       >
-        {/* Elegant overlay gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
         {/* Elegant floating elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Floating orbs */}

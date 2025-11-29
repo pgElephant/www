@@ -12,17 +12,9 @@ export default function TermsPage() {
       <div 
         className="relative overflow-hidden py-28"
         style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
+          backgroundColor: '#1f2937',
         }}
       >
-        {/* Elegant overlay gradient */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-          }}
-        />
-        
         {/* Floating orbs */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
@@ -46,7 +38,7 @@ export default function TermsPage() {
       <div 
         className="py-20"
         style={{ 
-          background: `linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%)`,
+          backgroundColor: '#1f2937',
         }}
       >
         <div className="container-wide mx-auto px-6">
