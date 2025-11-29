@@ -27,9 +27,9 @@ const markdown = `![NeuronDB header](/blog/neurondb/header.svg?v=7)
 
 ## Introduction
 
-Keyword search fails when queries and documents use different words. You search for "how to improve database speed" but get no results. Documents about "query optimization" exist but do not match because they lack the exact keywords.
+Keyword search fails when queries and documents use different words. You search for \`how to improve database speed\` but get no results. Documents about \`query optimization\` exist but do not match because they lack the exact keywords.
 
-Semantic search solves this. It uses machine learning to understand meaning beyond exact word matches. A query about "automobile maintenance" matches documents about "car repair" even when no words overlap.
+Semantic search solves this. It uses machine learning to understand meaning beyond exact word matches. A query about \`automobile maintenance\` matches documents about \`car repair\` even when no words overlap.
 
 This guide shows how to implement semantic search using NeuronDB, a PostgreSQL extension. You will build a complete system from schema design to query execution. All SQL queries work as written.
 
@@ -69,23 +69,15 @@ ORDER BY embedding <=> embed_text('database systems', 'sentence-transformers/all
 LIMIT 5;
 \`\`\`
 
-This query finds documents about "database systems" even though the document text says "relational database". The system understands these concepts are related.
+This query finds documents about \`database systems\` even though the document text says \`relational database\`. The system understands these concepts are related.
 
 Continue reading to build a complete production system.
 
 ## What is Semantic Search
 
-Traditional search matches exact keywords. Semantic search matches meaning. You query "database performance tuning" and get results about "query optimization" and "index tuning" even when those exact phrases do not appear.
+Traditional search matches exact keywords. Semantic search matches meaning. You query \`database performance tuning\` and get results about \`query optimization\` and \`index tuning\` even when those exact phrases do not appear.
 
-Semantic search handles four tasks:
-
-1. Intent understanding. Queries match conceptually related content. "Ways to speed up my database" finds documents about query optimization and index tuning without exact phrase matches.
-
-2. Synonym recognition. The system treats "automobile", "car", "vehicle", and "auto" as equivalent concepts. You do not need synonym dictionaries.
-
-3. Context awareness. The system distinguishes ambiguous terms. "Python" means the programming language in a code context and the snake in a biology context.
-
-4. Natural language. Users write queries in plain English. They do not need boolean operators or search syntax knowledge.
+Semantic search handles four tasks. Intent understanding matches queries to conceptually related content. \`Ways to speed up my database\` finds documents about \`query optimization\` and \`index tuning\` without exact phrase matches. Synonym recognition treats \`automobile\`, \`car\`, \`vehicle\`, and \`auto\` as equivalent concepts. You do not need synonym dictionaries. Context awareness distinguishes ambiguous terms. \`Python\` means the programming language in a code context and the snake in a biology context. Natural language processing lets users write queries in plain English. They do not need boolean operators or search syntax knowledge.
 
 ### How It Works
 
@@ -127,11 +119,13 @@ NeuronDB includes components for semantic search in PostgreSQL. Understanding th
 
 ## Building a Complete Document Search System
 
-Build a semantic search system for technical documentation. The system handles queries like "How do I improve database performance?" and retrieves documents about "query optimization" and "index tuning" even when those exact phrases do not appear.
+Build a semantic search system for technical documentation. The system handles queries like \`How do I improve database performance?\` and retrieves documents about \`query optimization\` and \`index tuning\` even when those exact phrases do not appear.
 
 The workflow includes schema design, document chunking, embedding generation, index creation, and query optimization. Follow these steps to create a production-ready system.
 
-### Step 1: Create the Schema
+### Create the Schema
+
+Define the database structure for storing documents and their chunks. Create two tables: one for complete documents with metadata, and another for document chunks that will store embeddings. We'll also create indexes to improve query performance. Run these commands to set up the schema:
 
 \`\`\`sql
 -- Create documents table
@@ -172,7 +166,11 @@ CREATE INDEX idx_chunks_doc_id ON document_chunks(doc_id);
 (4 rows)
 \`\`\`
 
-### Step 2: Ingest Documents
+The verification query shows we created four database objects: the documents table, the document_chunks table, and their associated sequences for auto-incrementing IDs. The schema is ready to store documents and their chunks.
+
+### Ingest Documents
+
+Add sample documents to the system. Insert technical documents with titles, content, source URLs, document types, and metadata. The metadata includes categories and tags that we'll use later for filtering. Run this INSERT statement to add the documents:
 
 \`\`\`sql
 -- Insert sample technical documents
@@ -212,9 +210,11 @@ FROM documents d;
 (5 rows)
 \`\`\`
 
-### Step 3: Chunk Documents
+The verification query shows we inserted five documents. Each document has a doc_id, title, and metadata. The chunk_count and chunks_with_embeddings columns show zero because we haven't created chunks yet. We'll create chunks in the next step.
 
-For better search results, split long documents into smaller chunks:
+### Chunk Documents
+
+Split long documents into smaller chunks for better search results. Large documents are harder to match precisely. Smaller chunks improve retrieval accuracy. We'll split documents by sentences, filter out very short chunks, and store each chunk with its position index. Run this query to create chunks:
 
 \`\`\`sql
 -- Simple chunking strategy: Split by sentences
@@ -251,7 +251,11 @@ ORDER BY doc_id;
 (5 rows)
 \`\`\`
 
-### Step 4: Generate Embeddings
+The verification query shows chunks were created for each document. Document 1 has 5 chunks, document 2 has 4 chunks, document 3 has 3 chunks, document 4 has 5 chunks, and document 5 has 3 chunks. Each chunk is ready for embedding generation.
+
+### Generate Embeddings
+
+Convert chunk text into vector embeddings that capture semantic meaning. NeuronDB supports multiple embedding models. We'll use the sentence-transformers/all-MiniLM-L6-v2 model, which produces 384-dimensional vectors. This model balances speed and quality. Run this UPDATE statement to generate embeddings for all chunks:
 
 NeuronDB supports multiple embedding models. Use [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), a fast and efficient 384-dimensional model:
 
@@ -275,7 +279,9 @@ FROM document_chunks;
 (1 row)
 \`\`\`
 
-All chunks now have 384-dimensional embeddings ready for semantic search.
+The verification query confirms all 20 chunks now have embeddings. Each chunk has a 384-dimensional vector that represents its semantic content. These embeddings enable similarity search. We can now find chunks that are semantically similar to user queries.
+
+### Create Vector Index
 
 **Note**: The function signature is \`embed_text(text, model)\`. The model parameter is optional. If omitted, it defaults to [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
 
@@ -297,9 +303,7 @@ NeuronDB supports embedding models from [Hugging Face](https://huggingface.co/):
 **1024-dim models** (best quality):
   - [BAAI/bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5)
 
-### Step 5: Create Vector Index
-
-For fast similarity search, create an [HNSW](https://arxiv.org/abs/1603.09320) index:
+For fast similarity search on large datasets, create an HNSW index. HNSW indexes provide sub-10ms query performance even with millions of vectors. The index uses cosine distance for similarity calculations. We'll create the index with parameters that balance query speed and index build time. Run this CREATE INDEX statement:
 
 \`\`\`sql
 CREATE INDEX idx_chunks_embedding ON document_chunks 
@@ -321,17 +325,15 @@ WHERE tablename = 'document_chunks';
 (4 rows)
 \`\`\`
 
-The HNSW index is now ready to provide fast approximate nearest neighbor search for semantic queries.
+The verification query shows four indexes exist on the document_chunks table. The HNSW index on the embedding column enables fast approximate nearest neighbor search. Queries will use this index to find similar vectors quickly. The system is ready for semantic search queries.
 
 ## Semantic Search Query Examples
 
 These queries demonstrate how semantic search works in practice. They use the document chunks created in the previous steps.
 
-### Query 1: Basic Semantic Search
+### Basic Semantic Search
 
-**User Query**: "How do database indexes work?"
-
-This query finds relevant content even though the exact phrase "database indexes work" doesn't appear in our documents:
+Semantic search finds relevant content even when exact keywords don't match. A user asks \`How do database indexes work?\` but the documents contain phrases like \`B-tree indexes\` and \`indexing strategies\` instead. The system understands these are related concepts. We'll run a query that converts the user's question into an embedding, then finds the most similar document chunks using vector distance:
 
 \`\`\`sql
 WITH query_embedding AS (
@@ -363,13 +365,11 @@ LIMIT 5;
 (5 rows)
 \`\`\`
 
-The query correctly identifies content about "B-tree indexes", "GiST indexes", and "indexing strategies" even though the exact phrase "database indexes work" doesn't appear in the documents. Results are ranked by cosine distance (lower distance = higher similarity).
+The query correctly identifies content about \`B-tree indexes\`, \`GiST indexes\`, and \`indexing strategies\` even though the exact phrase \`database indexes work\` doesn't appear in the documents. Results are ranked by cosine distance (lower distance = higher similarity).
 
-### Query 2: Understanding Synonyms
+### Understanding Synonyms
 
-**User Query**: "What is retrieval augmented generation?"
-
-This demonstrates semantic understanding. The query uses "retrieval augmented generation" while documents contain "RAG". The system recognizes these as equivalent concepts:
+Semantic search recognizes synonyms and related terms. A user asks \`What is retrieval augmented generation?\` but the documents use the acronym \`RAG\`. The system understands these refer to the same concept. We'll run a query that finds documents about \`RAG\` even when the query uses the full phrase:
 
 \`\`\`sql
 WITH query_embedding AS (
@@ -400,13 +400,11 @@ LIMIT 5;
 (5 rows)
 \`\`\`
 
-Even though the query uses "retrieval augmented generation" while the documents mention "RAG", the semantic search correctly finds the relevant content. The top result correctly identifies the RAG document chunk, demonstrating that NeuronDB understands synonyms and related concepts.
+Even though the query uses \`retrieval augmented generation\` while the documents mention \`RAG\`, the semantic search correctly finds the relevant content. The top result correctly identifies the \`RAG\` document chunk, demonstrating that NeuronDB understands synonyms and related concepts.
 
-### Query 3: Natural Language Queries
+### Natural Language Queries
 
-**User Query**: "machine learning model training tips"
-
-This query finds relevant content about ML best practices:
+Users can ask questions in natural language without knowing SQL or search syntax. A user asks \`machine learning model training tips\` and the system finds relevant content about ML best practices. We'll run a query that processes the natural language question and retrieves the most relevant document chunks:
 
 \`\`\`sql
 WITH query_embedding AS (
@@ -624,11 +622,11 @@ WHERE dc.chunk_id = u.chunk_id;
 
 ## Building a RAG Pipeline
 
-[Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401) (RAG) combines semantic search with LLM generation. Build a RAG system with these steps:
+[Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401) (RAG) combines semantic search with LLM generation. Build a RAG system that retrieves relevant context and generates accurate responses.
 
-### Step 1: Query Processing
+### Query Processing
 
-\`\`\`sql
+Store user queries in a table that tracks the RAG pipeline state. Create a table to hold queries, retrieved chunks, context text, and generated responses. We'll insert a sample query to demonstrate the pipeline. Run these commands to set up query processing:
 CREATE TABLE rag_queries (
     query_id SERIAL PRIMARY KEY,
     user_query TEXT NOT NULL,
@@ -647,9 +645,11 @@ VALUES (
 );
 \`\`\`
 
-### Step 2: Retrieve Relevant Context
+The query processing table is created and a sample query is stored. The query includes metadata about the LLM model and parameters that will be used for response generation.
 
-\`\`\`sql
+### Retrieve Relevant Context
+
+Find the most relevant document chunks for the user's query using semantic search. Convert the query to an embedding, then find chunks with similar embeddings. Rank results by similarity score. We'll retrieve the top 5 most relevant chunks. Run this query to retrieve context:
 WITH query_embedding AS (
     SELECT embed_text(
         'How can I improve PostgreSQL query performance?',
@@ -688,11 +688,11 @@ FROM relevant_chunks;
 (5 rows)
 \`\`\`
 
-The RAG pipeline retrieves the most relevant context chunks. The query successfully retrieves chunks about PostgreSQL performance tuning, which are the most relevant for answering "How can I improve PostgreSQL query performance?"
+The query retrieved five chunks ranked by similarity to the user's question. The top result is about PostgreSQL performance tuning, which directly answers the question. The chunks are ordered by relevance, with the most similar chunk ranked first. These chunks will be combined into context for the LLM.
 
-### Step 3: Build Context
+### Build Context
 
-\`\`\`sql
+Combine the retrieved chunks into a single context string that the LLM can use. Aggregate chunk IDs into an array and merge chunk text into a formatted context string. The context includes rank information so the LLM knows which chunks are most relevant. We'll build the context from the top 5 chunks. Run this query to build the context:
 WITH query_embedding AS (
     SELECT embed_text(
         'How can I improve PostgreSQL query performance?',
@@ -727,9 +727,9 @@ SELECT
 FROM context_build;
 \`\`\`
 
-### Step 4: Generate Response
+The query built a context string containing the top 5 relevant chunks. The chunk_ids array contains the IDs of chunks used in the context. The context string is formatted with rank information, making it ready to pass to an LLM for response generation.
 
-Pass the context to an LLM such as [OpenAI GPT](https://platform.openai.com/docs/models) or [Anthropic Claude](https://www.anthropic.com/claude) to generate a response grounded in the retrieved documents.
+Pass the context to an LLM such as [OpenAI GPT](https://platform.openai.com/docs/models) or [Anthropic Claude](https://www.anthropic.com/claude) to generate a response grounded in the retrieved documents. The LLM uses the context to answer the user's question with information from your knowledge base.
 
 ## Performance Optimization
 
@@ -748,16 +748,18 @@ The m parameter controls the number of connections per layer. The ef_constructio
 
 ### Embedding Caching
 
-NeuronDB automatically caches embeddings to improve performance:
+NeuronDB automatically caches embeddings to improve performance. Check cache statistics and available tables in the neurondb schema:
 
 \`\`\`sql
 -- Check cache statistics
 SELECT * FROM neurondb.embedding_cache_stats;
-\`\`\`
 
-**Note**: The exact cache statistics table name may vary by NeuronDB version. Check the \`neurondb\` schema for available statistics tables:
-
-\`\`\`
+-- Note: The exact cache statistics table name may vary by NeuronDB version
+-- Check the neurondb schema for available statistics tables
+SELECT tablename
+FROM pg_tables
+WHERE schemaname = 'neurondb'
+ORDER BY tablename;
        tablename        
 ------------------------
  embedding_cache
@@ -802,11 +804,9 @@ Use hybrid search when exact keyword matching matters alongside semantic underst
 
 ## Real-World Use Cases
 
-### 1. Customer Support Knowledge Base
+### Customer Support Knowledge Base
 
-Search through support articles using natural language:
-
-\`\`\`sql
+Support teams handle questions in natural language. Users ask \`How do I reset my password?\` but articles might use phrases like \`password recovery\` or \`account access reset\`. Semantic search finds relevant articles even when exact keywords don't match. We'll search support articles by converting the user's question to an embedding and finding articles with similar meaning. Filter results by category to narrow the search scope. Run this query to find relevant support articles:
 WITH query_embedding AS (
     SELECT embed_text(
         'How do I reset my password?',
@@ -825,11 +825,9 @@ ORDER BY embedding <=> qe.embedding
 LIMIT 3;
 \`\`\`
 
-### 2. Legal Document Search
+### Legal Document Search
 
-Find relevant legal clauses using semantic understanding:
-
-\`\`\`sql
+Legal professionals need to find clauses and provisions across large document collections. Exact keyword matching fails when documents use different terminology for the same legal concepts. Semantic search understands that \`intellectual property rights\` and \`IP licensing terms\` refer to related concepts. We'll search legal clauses using a higher-quality embedding model for better accuracy. Filter by effective date to ensure only current clauses are returned. Run this query to find relevant legal clauses:
 WITH query_embedding AS (
     SELECT embed_text(
         'intellectual property rights and licensing terms',
@@ -848,11 +846,9 @@ ORDER BY embedding <=> qe.embedding
 LIMIT 10;
 \`\`\`
 
-### 3. Product Search
+### Product Search
 
-Enable natural language product discovery:
-
-\`\`\`sql
+E-commerce sites need product search that understands user intent. Customers search for \`wireless headphones with noise cancellation under $200\` but product descriptions might say \`bluetooth earbuds with active noise reduction\` or \`cordless audio devices with ANC\`. Semantic search matches products based on meaning, not exact words. We'll search products by embedding the user's natural language query and comparing it to product description embeddings. Filter by stock status to show only available products. Run this query to find matching products:
 WITH query_embedding AS (
     SELECT embed_text(
         'wireless headphones with noise cancellation under $200',
@@ -874,25 +870,18 @@ LIMIT 20;
 
 ## Conclusion
 
-This guide showed how to implement semantic search using NeuronDB. You learned:
+This guide showed how to implement semantic search using NeuronDB. You learned how semantic search differs from keyword search by understanding meaning beyond exact word matches. You learned how to set up NeuronDB and create embedding vectors that capture semantic relationships in your data. You learned how to build a complete document search system from schema design through query execution. You learned how to create RAG pipelines for retrieval-augmented generation that combine semantic search with LLM capabilities. You learned how to optimize performance with indexes and batch processing for production workloads.
 
-- How semantic search differs from keyword search
-- How to set up NeuronDB and create embedding vectors
-- How to build a complete document search system
-- How to create RAG pipelines for retrieval-augmented generation
-- How to optimize performance with indexes and batch processing
+NeuronDB adds semantic search directly to PostgreSQL. You build search systems using SQL syntax without external services. The extension works with PostgreSQL 16, 17, and 18. It supports embedding models from Hugging Face, giving you access to hundreds of pre-trained models. It provides GPU acceleration for faster embedding generation and efficient indexing with HNSW and IVFFlat algorithms.
 
-NeuronDB adds semantic search directly to PostgreSQL. You build search systems using SQL syntax. The extension works with PostgreSQL 16, 17, and 18. It supports embedding models from Hugging Face. It provides GPU acceleration and efficient indexing.
-
-Use semantic search for knowledge bases, document search, and RAG applications. All queries in this guide are production-ready.
+Use semantic search for knowledge bases, document search, and RAG applications. All queries in this guide are production-ready and can be adapted to your specific use case.
 
 ## Resources
 
 - [Documentation](https://pgelephant.com/neurondb)
 - [GitHub Repository](https://github.com/pgElephant/NeurondB)
 - [Support Email](mailto:admin@pgelephant.com)
-
-All SQL queries in this guide are production-ready. Adapt them to your use case.`;
+`;
 
 export default function BlogPost() {
     return (
