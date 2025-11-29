@@ -257,8 +257,8 @@ export default function BlogPage() {
   return (
     <PageTemplate className="pt-16">
       {/* Hero Section */}
-      <HeroTemplate overlay={true}>
-        <div className="container-wide py-28 relative z-10">
+      <HeroTemplate overlay={false}>
+        <div className="container-wide relative z-10">
           <div className="max-w-6xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
               Blog

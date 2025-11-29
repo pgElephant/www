@@ -64,7 +64,7 @@ const Hero = () => {
 
   return (
     <HeroTemplate className="relative overflow-hidden">
-      <div className="container-extra-wide pt-20 pb-16 relative z-10">
+      <div className="container-extra-wide relative z-10">
         <div className="max-w-7xl mx-auto">
 
           {/* Product showcase */}

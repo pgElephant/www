@@ -129,17 +129,12 @@ Message: ${formData.message}
       <div 
         className="relative overflow-hidden bg-hero-gradient"
         style={{ 
-          backgroundImage: 'url(/hero-bg-technical.svg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#1f2937',
           position: 'relative'
         }}
       >
-        {/* Additional overlay for better text contrast */}
-        <div className="absolute inset-0 bg-black/20" />
 
-  <div className="container-extra-wide pt-20 pb-16 relative z-10">
+        <div className="container-extra-wide relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-thin text-white mb-6 drop-shadow-lg">

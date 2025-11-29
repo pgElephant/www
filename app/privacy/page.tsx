@@ -10,7 +10,7 @@ export default function PrivacyPage() {
     <div className="pt-16">
       {/* Hero Section */}
       <div 
-        className="relative overflow-hidden py-28"
+        className="relative overflow-hidden min-h-[400px] flex items-center"
         style={{ 
           backgroundColor: '#1f2937',
         }}
@@ -22,7 +22,7 @@ export default function PrivacyPage() {
           <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
-        <div className="container-wide mx-auto px-6 relative z-10">
+        <div className="container-wide mx-auto px-6 relative z-10 w-full py-20">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
               Privacy Policy

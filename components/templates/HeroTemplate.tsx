@@ -21,24 +21,17 @@ export default function HeroTemplate({
   return (
     <section
       className={cn(
-        'relative overflow-hidden bg-hero-gradient',
+        'relative overflow-hidden bg-hero-gradient min-h-[400px] flex items-center',
         className
       )}
-      style={
-        backgroundImage
-          ? {
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }
-          : undefined
-      }
+      style={{
+        backgroundColor: '#1f2937',
+      }}
     >
       {overlay && (
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       )}
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10 w-full py-20">{children}</div>
     </section>
   )
 }

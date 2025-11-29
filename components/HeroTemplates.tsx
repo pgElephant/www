@@ -24,8 +24,8 @@ export interface MainHeroProps {
 
 export function MainHero({ title, description, cta, badge }: MainHeroProps) {
   return (
-    <section className="relative overflow-hidden py-24 bg-hero-gradient">
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative overflow-hidden min-h-[400px] flex items-center bg-hero-gradient">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full py-20">
         <div className="mx-auto max-w-3xl text-center">
           {badge && (
             <div className="mb-8 flex justify-center">
@@ -81,8 +81,8 @@ export interface ProductHeroProps {
 
 export function ProductHero({ badgeLabel, badgeIcon, title, description, ctas }: ProductHeroProps) {
   return (
-    <section className="relative overflow-hidden py-24 bg-hero-gradient">
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative overflow-hidden min-h-[400px] flex items-center bg-hero-gradient">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full py-20">
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-8 flex justify-center">
             <div className="relative rounded-2xl bg-white/80 dark:bg-slate-800/80 p-2 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-700">

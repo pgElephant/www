@@ -109,11 +109,10 @@ export default function ProductPageTemplate({
     <div>
       {/* Hero Section */}
       <HeroTemplate
-        backgroundImage="/hero-bg-technical.svg"
-        overlay={true}
-        className="py-16 text-white"
+        overlay={false}
+        className="text-white"
       >
-        <div className="container-extra-wide pt-20 pb-16 relative z-10">
+        <div className="container-extra-wide relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
               {/* Left side - Icon */}

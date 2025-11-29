@@ -74,8 +74,8 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="relative mx-auto max-w-6xl px-6 py-24 min-h-[400px] flex items-center">
+      <section className="relative overflow-hidden min-h-[400px] flex items-center">
+        <div className="relative mx-auto max-w-6xl px-6 w-full py-20">
           <div className="text-center">
             <div className="inline-flex items-center gap-3 rounded-full border border-slate-300/20 bg-white/5 px-4 py-2 backdrop-blur-sm">
               {hero.badgeIcon}

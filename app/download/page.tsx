@@ -243,20 +243,15 @@ const DownloadPage = () => {
   return (
     <div className="pt-0">
       {/* Unified Professional Hero */}
-      <section 
-        className="relative text-center overflow-hidden bg-hero-gradient"
-        style={{ 
-          backgroundImage: 'url(/hero-bg-technical.svg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          position: 'relative'
-        }}
-      >
-        {/* Additional overlay for better text contrast */}
-        <div className="absolute inset-0 bg-black/20" />
+        <section 
+          className="relative text-center overflow-hidden bg-hero-gradient min-h-[400px] flex items-center"
+          style={{ 
+            backgroundColor: '#1f2937',
+            position: 'relative'
+          }}
+        >
 
-        <div className="container-extra-wide mx-auto relative z-10 pt-20 pb-16">
+        <div className="container-extra-wide mx-auto relative z-10 w-full py-20">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-center gap-4 mb-6">
               <Image src="/ico/pgElephant_HD.ico" alt="pgElephant" width={80} height={80} className="drop-shadow-2xl" />
