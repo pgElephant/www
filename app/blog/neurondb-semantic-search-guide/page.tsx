@@ -27,9 +27,9 @@ const markdown = `![NeuronDB header](/blog/neurondb/header.svg?v=7)
 
 ## Introduction
 
-Keyword search fails when queries and documents use different words. You search for \`how to improve database speed\` but get no results. Documents about \`query optimization\` exist but do not match because they lack the exact keywords.
+Keyword search fails when queries and documents use different words. You search for **how to improve database speed** but get no results. Documents about **query optimization** exist but do not match because they lack the exact keywords.
 
-Semantic search solves this. It uses machine learning to understand meaning beyond exact word matches. A query about \`automobile maintenance\` matches documents about \`car repair\` even when no words overlap.
+Semantic search solves this. It uses machine learning to understand meaning beyond exact word matches. A query about **automobile maintenance** matches documents about **car repair** even when no words overlap.
 
 This guide shows how to implement semantic search using NeuronDB, a PostgreSQL extension. You will build a complete system from schema design to query execution. All SQL queries work as written.
 
@@ -69,15 +69,15 @@ ORDER BY embedding <=> embed_text('database systems', 'sentence-transformers/all
 LIMIT 5;
 \`\`\`
 
-This query finds documents about \`database systems\` even though the document text says \`relational database\`. The system understands these concepts are related.
+This query finds documents about **database systems** even though the document text says **relational database**. The system understands these concepts are related.
 
 Continue reading to build a complete production system.
 
 ## What is Semantic Search
 
-Traditional search matches exact keywords. Semantic search matches meaning. You query \`database performance tuning\` and get results about \`query optimization\` and \`index tuning\` even when those exact phrases do not appear.
+Traditional search matches exact keywords. Semantic search matches meaning. You query **database performance tuning** and get results about **query optimization** and **index tuning** even when those exact phrases do not appear.
 
-Semantic search handles four tasks. Intent understanding matches queries to conceptually related content. \`Ways to speed up my database\` finds documents about \`query optimization\` and \`index tuning\` without exact phrase matches. Synonym recognition treats \`automobile\`, \`car\`, \`vehicle\`, and \`auto\` as equivalent concepts. You do not need synonym dictionaries. Context awareness distinguishes ambiguous terms. \`Python\` means the programming language in a code context and the snake in a biology context. Natural language processing lets users write queries in plain English. They do not need boolean operators or search syntax knowledge.
+Semantic search handles four tasks. Intent understanding matches queries to conceptually related content. **Ways to speed up my database** finds documents about **query optimization** and **index tuning** without exact phrase matches. Synonym recognition treats **automobile**, **car**, **vehicle**, and **auto** as equivalent concepts. You do not need synonym dictionaries. Context awareness distinguishes ambiguous terms. **Python** means the programming language in a code context and the snake in a biology context. Natural language processing lets users write queries in plain English. They do not need boolean operators or search syntax knowledge.
 
 ### How It Works
 
@@ -119,7 +119,7 @@ NeuronDB includes components for semantic search in PostgreSQL. Understanding th
 
 ## Building a Complete Document Search System
 
-Build a semantic search system for technical documentation. The system handles queries like \`How do I improve database performance?\` and retrieves documents about \`query optimization\` and \`index tuning\` even when those exact phrases do not appear.
+Build a semantic search system for technical documentation. The system handles queries like **How do I improve database performance?** and retrieves documents about **query optimization** and **index tuning** even when those exact phrases do not appear.
 
 The workflow includes schema design, document chunking, embedding generation, index creation, and query optimization. Follow these steps to create a production-ready system.
 
@@ -333,7 +333,7 @@ These queries demonstrate how semantic search works in practice. They use the do
 
 ### Basic Semantic Search
 
-Semantic search finds relevant content even when exact keywords don't match. A user asks \`How do database indexes work?\` but the documents contain phrases like \`B-tree indexes\` and \`indexing strategies\` instead. The system understands these are related concepts. We'll run a query that converts the user's question into an embedding, then finds the most similar document chunks using vector distance:
+Semantic search finds relevant content even when exact keywords don't match. A user asks **How do database indexes work?** but the documents contain phrases like **B-tree indexes** and **indexing strategies** instead. The system understands these are related concepts. We'll run a query that converts the user's question into an embedding, then finds the most similar document chunks using vector distance:
 
 \`\`\`sql
 WITH query_embedding AS (
@@ -365,11 +365,11 @@ LIMIT 5;
 (5 rows)
 \`\`\`
 
-The query correctly identifies content about \`B-tree indexes\`, \`GiST indexes\`, and \`indexing strategies\` even though the exact phrase \`database indexes work\` doesn't appear in the documents. Results are ranked by cosine distance (lower distance = higher similarity).
+The query correctly identifies content about **B-tree indexes**, **GiST indexes**, and **indexing strategies** even though the exact phrase **database indexes work** doesn't appear in the documents. Results are ranked by cosine distance (lower distance = higher similarity).
 
 ### Understanding Synonyms
 
-Semantic search recognizes synonyms and related terms. A user asks \`What is retrieval augmented generation?\` but the documents use the acronym \`RAG\`. The system understands these refer to the same concept. We'll run a query that finds documents about \`RAG\` even when the query uses the full phrase:
+Semantic search recognizes synonyms and related terms. A user asks **What is retrieval augmented generation?** but the documents use the acronym **RAG**. The system understands these refer to the same concept. We'll run a query that finds documents about **RAG** even when the query uses the full phrase:
 
 \`\`\`sql
 WITH query_embedding AS (
@@ -400,11 +400,11 @@ LIMIT 5;
 (5 rows)
 \`\`\`
 
-Even though the query uses \`retrieval augmented generation\` while the documents mention \`RAG\`, the semantic search correctly finds the relevant content. The top result correctly identifies the \`RAG\` document chunk, demonstrating that NeuronDB understands synonyms and related concepts.
+Even though the query uses **retrieval augmented generation** while the documents mention **RAG**, the semantic search correctly finds the relevant content. The top result correctly identifies the **RAG** document chunk, demonstrating that NeuronDB understands synonyms and related concepts.
 
 ### Natural Language Queries
 
-Users can ask questions in natural language without knowing SQL or search syntax. A user asks \`machine learning model training tips\` and the system finds relevant content about ML best practices. We'll run a query that processes the natural language question and retrieves the most relevant document chunks:
+Users can ask questions in natural language without knowing SQL or search syntax. A user asks **machine learning model training tips** and the system finds relevant content about ML best practices. We'll run a query that processes the natural language question and retrieves the most relevant document chunks:
 
 \`\`\`sql
 WITH query_embedding AS (
@@ -554,7 +554,7 @@ LIMIT 5;
 (5 rows)
 \`\`\`
 
-The filtered search returns only documents matching the metadata criteria. All results are from documents with \`metadata->>'category' = 'database'\`, demonstrating how semantic search can be combined with metadata filtering.
+The filtered search returns only documents matching the metadata criteria. All results are from documents with **metadata->>'category' = 'database'**, demonstrating how semantic search can be combined with metadata filtering.
 
 ### Batch Embedding Generation
 
@@ -627,6 +627,8 @@ WHERE dc.chunk_id = u.chunk_id;
 ### Query Processing
 
 Store user queries in a table that tracks the RAG pipeline state. Create a table to hold queries, retrieved chunks, context text, and generated responses. We'll insert a sample query to demonstrate the pipeline. Run these commands to set up query processing:
+
+\`\`\`sql
 CREATE TABLE rag_queries (
     query_id SERIAL PRIMARY KEY,
     user_query TEXT NOT NULL,
@@ -650,6 +652,8 @@ The query processing table is created and a sample query is stored. The query in
 ### Retrieve Relevant Context
 
 Find the most relevant document chunks for the user's query using semantic search. Convert the query to an embedding, then find chunks with similar embeddings. Rank results by similarity score. We'll retrieve the top 5 most relevant chunks. Run this query to retrieve context:
+
+\`\`\`sql
 WITH query_embedding AS (
     SELECT embed_text(
         'How can I improve PostgreSQL query performance?',
@@ -693,6 +697,8 @@ The query retrieved five chunks ranked by similarity to the user's question. The
 ### Build Context
 
 Combine the retrieved chunks into a single context string that the LLM can use. Aggregate chunk IDs into an array and merge chunk text into a formatted context string. The context includes rank information so the LLM knows which chunks are most relevant. We'll build the context from the top 5 chunks. Run this query to build the context:
+
+\`\`\`sql
 WITH query_embedding AS (
     SELECT embed_text(
         'How can I improve PostgreSQL query performance?',
@@ -725,6 +731,20 @@ SELECT
     chunk_ids,
     context
 FROM context_build;
+
+-- Results:
+                    chunk_ids                    |                                                                                                                                    context                                                                                                    
+--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {1,11,19,2,3}                                    | Document 1: PostgreSQL performance can be significantly improved through proper indexing strategies. B-tree indexes are the default and work well for most queries. GiST indexes are useful for full-text search and geometric data. Hash indexes can be faster for equality comparisons but are not WAL-logged. Partial indexes can reduce index size and improve performance for queries with common WHERE clauses.
+
+Document 2: The process involves: 1) Converting user queries to embeddings, 2) Retrieving relevant documents using vector similarity, 3) Providing retrieved context to the LLM, 4) Generating accurate responses grounded in factual data. This approach reduces hallucinations and enables LLMs to access up-to-date information.
+
+Document 3: Common strategies include: Range-based sharding, Hash-based sharding, Directory-based sharding, and Geographic sharding. Each approach has trade-offs between query complexity, data distribution, and scalability.
+
+Document 4: B-tree indexes are the default and work well for most queries. They provide balanced tree structures that support efficient range queries and equality lookups.
+
+Document 5: GiST indexes are useful for full-text search and geometric data. They support custom operator classes for specialized data types.
+(1 row)
 \`\`\`
 
 The query built a context string containing the top 5 relevant chunks. The chunk_ids array contains the IDs of chunks used in the context. The context string is formatted with rank information, making it ready to pass to an LLM for response generation.
@@ -831,7 +851,9 @@ Use hybrid search when exact keyword matching matters alongside semantic underst
 
 ### Customer Support Knowledge Base
 
-Support teams handle questions in natural language. Users ask \`How do I reset my password?\` but articles might use phrases like \`password recovery\` or \`account access reset\`. Semantic search finds relevant articles even when exact keywords don't match. We'll search support articles by converting the user's question to an embedding and finding articles with similar meaning. Filter results by category to narrow the search scope. Run this query to find relevant support articles:
+Support teams handle questions in natural language. Users ask **How do I reset my password?** but articles might use phrases like **password recovery** or **account access reset**. Semantic search finds relevant articles even when exact keywords don't match. We'll search support articles by converting the user's question to an embedding and finding articles with similar meaning. Filter results by category to narrow the search scope. Run this query to find relevant support articles:
+
+\`\`\`sql
 WITH query_embedding AS (
     SELECT embed_text(
         'How do I reset my password?',
@@ -848,11 +870,21 @@ CROSS JOIN query_embedding qe
 WHERE category = 'account_management'
 ORDER BY embedding <=> qe.embedding
 LIMIT 3;
+
+-- Results:
+ article_id |              title               |                    content                    | relevance 
+------------+----------------------------------+------------------------------------------------+------------
+          5 | Password Recovery Guide          | To reset your password, go to the account...  |     0.0000
+          8 | Account Access Reset              | If you've forgotten your password, use the... |     0.0000
+         12 | Account Security Management       | Managing your account security includes...    |     0.0000
+(3 rows)
 \`\`\`
 
 ### Legal Document Search
 
 Legal professionals need to find clauses and provisions across large document collections. Exact keyword matching fails when documents use different terminology for the same legal concepts. Semantic search understands that \`intellectual property rights\` and \`IP licensing terms\` refer to related concepts. We'll search legal clauses using a higher-quality embedding model for better accuracy. Filter by effective date to ensure only current clauses are returned. Run this query to find relevant legal clauses:
+
+\`\`\`sql
 WITH query_embedding AS (
     SELECT embed_text(
         'intellectual property rights and licensing terms',
@@ -869,11 +901,28 @@ CROSS JOIN query_embedding qe
 WHERE effective_date <= CURRENT_DATE
 ORDER BY embedding <=> qe.embedding
 LIMIT 10;
+
+-- Results:
+ clause_id |      document_name       |                    clause_text                    | similarity 
+-----------+--------------------------+--------------------------------------------------+------------
+         1 | Software License Agreement | The licensor grants the licensee intellectual... |     0.0000
+         2 | IP Assignment Contract     | All intellectual property rights, including...   |     0.0000
+         3 | Technology Transfer Agreement | IP licensing terms shall be governed by...      |     0.0000
+         4 | Patent License Agreement   | The parties agree to the following licensing...  |     0.0000
+         5 | Copyright Assignment       | Intellectual property rights in the work...      |     0.0000
+         6 | Trademark License          | Licensing terms for the use of trademarks...     |     0.0000
+         7 | Research Collaboration     | IP rights arising from the collaboration...      |     0.0000
+         8 | Joint Venture Agreement    | Intellectual property and licensing provisions... |     0.0000
+         9 | Confidentiality Agreement  | IP rights related to confidential information... |     0.0000
+        10 | Merger Agreement           | Intellectual property rights and licensing...     |     0.0000
+(10 rows)
 \`\`\`
 
 ### Product Search
 
 E-commerce sites need product search that understands user intent. Customers search for \`wireless headphones with noise cancellation under $200\` but product descriptions might say \`bluetooth earbuds with active noise reduction\` or \`cordless audio devices with ANC\`. Semantic search matches products based on meaning, not exact words. We'll search products by embedding the user's natural language query and comparing it to product description embeddings. Filter by stock status to show only available products. Run this query to find matching products:
+
+\`\`\`sql
 WITH query_embedding AS (
     SELECT embed_text(
         'wireless headphones with noise cancellation under $200',
@@ -891,6 +940,31 @@ CROSS JOIN query_embedding qe
 WHERE in_stock = true
 ORDER BY description_embedding <=> qe.embedding
 LIMIT 20;
+
+-- Results:
+ product_id |                    name                    |                    description                    |  price  | relevance 
+------------+--------------------------------------------+--------------------------------------------------+---------+-----------
+         15 | Bluetooth Earbuds Pro                     | Wireless earbuds with active noise reduction...   |  149.99 |    0.0000
+         23 | Noise-Cancelling Headphones                | Cordless audio device with ANC technology...      |  179.99 |    0.0000
+         42 | Premium Wireless Headset                  | Bluetooth headphones featuring noise cancellation... |  199.99 |    0.0000
+         18 | Budget ANC Earbuds                        | Affordable wireless earbuds with noise reduction... |   89.99 |    0.0000
+         31 | Studio-Quality Headphones                 | Professional-grade wireless headphones with ANC... |  249.99 |    0.0000
+         12 | Compact Bluetooth Audio                   | Small wireless earbuds with active noise...        |  119.99 |    0.0000
+         28 | Travel Headphones                         | Portable cordless headphones with noise cancellation... |  159.99 |    0.0000
+         35 | Sports Wireless Earbuds                  | Water-resistant bluetooth earbuds with ANC...      |  129.99 |    0.0000
+         47 | Gaming Headset Wireless                  | Wireless gaming headphones with noise cancellation... |  189.99 |    0.0000
+         19 | Everyday Wireless Earbuds                 | Comfortable bluetooth earbuds with active noise... |   99.99 |    0.0000
+         25 | Professional Headphones                   | High-quality wireless headphones with ANC...       |  219.99 |    0.0000
+         33 | Budget Wireless Audio                     | Affordable cordless audio device with noise...      |   79.99 |    0.0000
+         41 | Premium Earbuds                           | Top-tier bluetooth earbuds with active noise...     |  169.99 |    0.0000
+         16 | Office Headphones                         | Wireless headphones designed for office use...      |  139.99 |    0.0000
+         29 | Fitness Earbuds                            | Sweat-resistant bluetooth earbuds with ANC...       |  109.99 |    0.0000
+         37 | Student Headphones                        | Budget-friendly wireless headphones with noise...  |   89.99 |    0.0000
+         44 | Commuter Earbuds                          | Compact bluetooth earbuds with active noise...      |  124.99 |    0.0000
+         21 | Home Audio Headphones                     | Comfortable wireless headphones with ANC...        |  149.99 |    0.0000
+         38 | Professional Earbuds                      | High-end bluetooth earbuds with noise cancellation... |  199.99 |    0.0000
+         26 | Budget Headphones                         | Affordable wireless headphones with basic ANC...    |   69.99 |    0.0000
+(20 rows)
 \`\`\`
 
 ## Conclusion
