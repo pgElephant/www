@@ -964,8 +964,8 @@ Join the community and start building more reliable PostgreSQL infrastructure to
 export default function PgraftBlogPost() {
   return (
     <div className="pt-16">
-      {/* Blog Content - Using gradient's right bottom color */}
-      <div style={{ backgroundColor: '#4b5563' }}>
+      {/* Blog Content */}
+      <div style={{ backgroundColor: '#1f2937' }}>
         <BlogMarkdown>{markdown}</BlogMarkdown>
         
         {/* Share Section */}

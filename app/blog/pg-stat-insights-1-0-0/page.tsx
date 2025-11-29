@@ -83,7 +83,7 @@ export default function PgStatInsightsReleaseBlog() {
   return (
     <div className="pt-16">
       {/* Blog Content */}
-      <div style={{ backgroundColor: '#4b5563' }}>
+      <div style={{ backgroundColor: '#1f2937' }}>
         <BlogMarkdown>{markdown}</BlogMarkdown>
 
         {/* Share Section */}
@@ -113,7 +113,7 @@ export default function PgStatInsightsReleaseBlog() {
       <div 
         className="relative overflow-hidden py-16 px-6"
         style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
+          backgroundColor: '#1f2937',
         }}
       >
         <div 

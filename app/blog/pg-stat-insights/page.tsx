@@ -666,7 +666,7 @@ export default function PgStatInsightsBlogPost() {
   return (
     <div className="pt-16">
       {/* Blog Content */}
-      <div style={{ backgroundColor: '#4b5563' }}>
+      <div style={{ backgroundColor: '#1f2937' }}>
         <BlogMarkdown>{markdown}</BlogMarkdown>
         
         {/* Share Section */}
