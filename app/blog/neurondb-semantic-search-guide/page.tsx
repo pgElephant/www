@@ -67,6 +67,12 @@ SELECT content,
 FROM test_docs
 ORDER BY embedding <=> embed_text('database systems', 'sentence-transformers/all-MiniLM-L6-v2')
 LIMIT 5;
+
+-- Results:
+           content            | similarity 
+------------------------------+------------
+ PostgreSQL is a powerful relational database |     0.0000
+(1 row)
 \`\`\`
 
 This query finds documents about **database systems** even though the document text says **relational database**. The system understands these concepts are related.
@@ -345,9 +351,8 @@ WITH query_embedding AS (
 SELECT 
     dc.chunk_id,
     d.title,
-    dc.chunk_text,
-    1 - (dc.embedding <=> qe.embedding) AS similarity_score,
-    RANK() OVER (ORDER BY dc.embedding <=> qe.embedding) AS rank
+    left(dc.chunk_text, 100) || '...' AS preview,
+    1 - (dc.embedding <=> qe.embedding) AS similarity_score
 FROM document_chunks dc
 JOIN documents d ON dc.doc_id = d.doc_id
 CROSS JOIN query_embedding qe
@@ -355,13 +360,13 @@ ORDER BY dc.embedding <=> qe.embedding
 LIMIT 5;
 
 -- Results:
- chunk_id |             title             |                    preview                    | similarity_score | rank 
-----------+-------------------------------+------------------------------------------------+------------------+------
-        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... |           0.0000 |    1
-       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    |           0.0000 |    1
-       19 | Database Sharding Strategies  | Common strategies include: Range-based...      |           0.0000 |    1
-        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     |           0.0000 |    1
-        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       |           0.0000 |    1
+ chunk_id |             title             |                    preview                    | similarity_score 
+----------+-------------------------------+------------------------------------------------+------------------
+        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... |           0.0000
+       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    |           0.0000
+       19 | Database Sharding Strategies  | Common strategies include: Range-based...      |           0.0000
+        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     |           0.0000
+        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       |           0.0000
 (5 rows)
 \`\`\`
 
@@ -773,48 +778,9 @@ NeuronDB automatically caches embeddings to improve performance. Check cache sta
 \`\`\`sql
 -- Check cache statistics
 SELECT * FROM neurondb.embedding_cache_stats;
-
--- *Note*: The exact cache statistics table name may vary by NeuronDB version
--- Check the neurondb schema for available statistics tables
-SELECT tablename
-FROM pg_tables
-WHERE schemaname = 'neurondb'
-ORDER BY tablename;
-
--- Results:
-       tablename        
-------------------------
- embedding_cache
- llm_cache
- query_metrics
- prometheus_metrics
- llm_stats
- embedding_stats
- model_cache
- vector_index_stats
- chunk_metadata
- document_stats
- index_performance
- query_cache
- search_analytics
- performance_metrics
- system_stats
- health_checks
- configuration
- schema_version
- migration_log
- error_log
- audit_log
- access_log
- session_cache
- token_cache
- rate_limit_stats
- connection_pool_stats
- resource_usage
- task_queue
- background_jobs
-(29 rows)
 \`\`\`
+
+*Note*: The exact cache statistics table name may vary by NeuronDB version.
 
 ### GPU Acceleration
 
@@ -882,7 +848,7 @@ LIMIT 3;
 
 ### Legal Document Search
 
-Legal professionals need to find clauses and provisions across large document collections. Exact keyword matching fails when documents use different terminology for the same legal concepts. Semantic search understands that \`intellectual property rights\` and \`IP licensing terms\` refer to related concepts. We'll search legal clauses using a higher-quality embedding model for better accuracy. Filter by effective date to ensure only current clauses are returned. Run this query to find relevant legal clauses:
+Legal professionals need to find clauses and provisions across large document collections. Exact keyword matching fails when documents use different terminology for the same legal concepts. Semantic search understands that **intellectual property rights** and **IP licensing terms** refer to related concepts. We'll search legal clauses using a higher-quality embedding model for better accuracy. Filter by effective date to ensure only current clauses are returned. Run this query to find relevant legal clauses:
 
 \`\`\`sql
 WITH query_embedding AS (
@@ -920,7 +886,7 @@ LIMIT 10;
 
 ### Product Search
 
-E-commerce sites need product search that understands user intent. Customers search for \`wireless headphones with noise cancellation under $200\` but product descriptions might say \`bluetooth earbuds with active noise reduction\` or \`cordless audio devices with ANC\`. Semantic search matches products based on meaning, not exact words. We'll search products by embedding the user's natural language query and comparing it to product description embeddings. Filter by stock status to show only available products. Run this query to find matching products:
+E-commerce sites need product search that understands user intent. Customers search for **wireless headphones with noise cancellation under $200** but product descriptions might say **bluetooth earbuds with active noise reduction** or **cordless audio devices with ANC**. Semantic search matches products based on meaning, not exact words. We'll search products by embedding the user's natural language query and comparing it to product description embeddings. Filter by stock status to show only available products. Run this query to find matching products:
 
 \`\`\`sql
 WITH query_embedding AS (
