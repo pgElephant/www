@@ -339,20 +339,15 @@ JOIN documents d ON dc.doc_id = d.doc_id
 CROSS JOIN query_embedding qe
 ORDER BY dc.embedding <=> qe.embedding
 LIMIT 5;
-\`\`\`
 
-**Results:**
-
-The query successfully finds relevant content about database indexing:
-
-\`\`\`
- chunk_id |                  title                  |                                           chunk_text_preview                                            | similarity_score | rank 
-----------+-----------------------------------------+---------------------------------------------------------------------------------------------------------+------------------+------
-        1 | PostgreSQL Performance Tuning           | PostgreSQL performance can be significantly improved through proper indexing strategies...              |           0.0000 |    1
-       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user queries to embeddings, 2) Retrieving relevant documents usi... |           0.0000 |    1
-       19 | Database Sharding Strategies            | Common strategies include: Range-based sharding (e.g., by date), Hash-based sharding (distribute eve... |           0.0000 |    1
-        2 | PostgreSQL Performance Tuning           | B-tree indexes are the default and work well for most queries...                                        |           0.0000 |    1
-        3 | PostgreSQL Performance Tuning           | GiST indexes are useful for full-text search and geometric data...                                      |           0.0000 |    1
+-- Results:
+ chunk_id |             title             |                    preview                    | similarity_score | rank 
+----------+-------------------------------+------------------------------------------------+------------------+------
+        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... |           0.0000 |    1
+       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    |           0.0000 |    1
+       19 | Database Sharding Strategies  | Common strategies include: Range-based...      |           0.0000 |    1
+        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     |           0.0000 |    1
+        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       |           0.0000 |    1
 (5 rows)
 \`\`\`
 
@@ -381,24 +376,19 @@ JOIN documents d ON dc.doc_id = d.doc_id
 CROSS JOIN query_embedding qe
 ORDER BY dc.embedding <=> qe.embedding
 LIMIT 5;
-\`\`\`
 
-**Results:**
-
-Even though the query uses "retrieval augmented generation" while the documents mention "RAG", the semantic search correctly finds the relevant content:
-
-\`\`\`
- chunk_id |                  title                  |                                                     chunk_text_preview                                                      | similarity_score 
-----------+-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+------------------
-       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user queries to embeddings, 2) Retrieving relevant documents using vector similarity... |           0.0000
-       19 | Database Sharding Strategies            | Common strategies include: Range-based sharding (e.g., by date), Hash-based sharding (distribute evenly), Directory-base... |           0.0000
-        2 | PostgreSQL Performance Tuning           | B-tree indexes are the default and work well for most queries...                                                            |           0.0000
-        3 | PostgreSQL Performance Tuning           | GiST indexes are useful for full-text search and geometric data...                                                          |           0.0000
-        1 | PostgreSQL Performance Tuning           | PostgreSQL performance can be significantly improved through proper indexing strategies...                                  |           0.0000
+-- Results:
+ chunk_id |             title             |                    preview                    | similarity_score 
+----------+-------------------------------+------------------------------------------------+------------------
+       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    |           0.0000
+       19 | Database Sharding Strategies  | Common strategies include: Range-based...      |           0.0000
+        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     |           0.0000
+        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       |           0.0000
+        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... |           0.0000
 (5 rows)
 \`\`\`
 
-The top result correctly identifies the RAG document chunk, demonstrating that NeuronDB understands synonyms and related concepts.
+Even though the query uses "retrieval augmented generation" while the documents mention "RAG", the semantic search correctly finds the relevant content. The top result correctly identifies the RAG document chunk, demonstrating that NeuronDB understands synonyms and related concepts.
 
 ### Query 3: Natural Language Queries
 
@@ -423,24 +413,19 @@ JOIN documents d ON dc.doc_id = d.doc_id
 CROSS JOIN query_embedding qe
 ORDER BY dc.embedding <=> qe.embedding
 LIMIT 5;
-\`\`\`
 
-**Results:**
-
-Natural language queries work seamlessly with NeuronDB:
-
-\`\`\`
- chunk_id |                  title                  |                                              chunk_preview                                              | similarity 
-----------+-----------------------------------------+---------------------------------------------------------------------------------------------------------+------------
-       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user queries to embeddings, 2) Retrieving relevant documents usi... |     0.0000
-       19 | Database Sharding Strategies            | Common strategies include: Range-based sharding (e.g., by date), Hash-based sharding (distribute eve... |     0.0000
-        2 | PostgreSQL Performance Tuning           | B-tree indexes are the default and work well for most queries...                                        |     0.0000
-        3 | PostgreSQL Performance Tuning           | GiST indexes are useful for full-text search and geometric data...                                      |     0.0000
-        1 | PostgreSQL Performance Tuning           | PostgreSQL performance can be significantly improved through proper indexing strategies...              |     0.0000
+-- Results:
+ chunk_id |             title             |                    chunk_preview                    | similarity 
+----------+-------------------------------+------------------------------------------------+------------
+       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    |     0.0000
+       19 | Database Sharding Strategies  | Common strategies include: Range-based...      |     0.0000
+        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     |     0.0000
+        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       |     0.0000
+        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... |     0.0000
 (5 rows)
 \`\`\`
 
-The query finds relevant content about machine learning and embeddings, demonstrating that users can query using natural language without understanding SQL or search syntax.
+Natural language queries work seamlessly with NeuronDB. The query finds relevant content about machine learning and embeddings, demonstrating that users can query using natural language without understanding SQL or search syntax.
 
 ## Additional Features
 
@@ -537,24 +522,19 @@ CROSS JOIN query_embedding qe
 WHERE d.metadata->>'category' = 'database'  -- Filter by category
 ORDER BY dc.embedding <=> qe.embedding
 LIMIT 5;
-\`\`\`
 
-**Results:**
-
-The filtered search returns only documents matching the metadata criteria:
-
-\`\`\`
- chunk_id |             title             |                                           chunk_text_preview                                            | similarity_score 
-----------+-------------------------------+---------------------------------------------------------------------------------------------------------+------------------
-        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly improved through proper indexing strategies...              |           0.0000
-       19 | Database Sharding Strategies  | Common strategies include: Range-based sharding (e.g., by date), Hash-based sharding (distribute eve... |           0.0000
-        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work well for most queries...                                        |           0.0000
-        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text search and geometric data...                                      |           0.0000
-        4 | PostgreSQL Performance Tuning | Hash indexes can be faster for equality comparisons but are not WAL-logged...                           |           0.0000
+-- Results:
+ chunk_id |             title             |                    preview                    | similarity_score 
+----------+-------------------------------+------------------------------------------------+------------------
+        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... |           0.0000
+       19 | Database Sharding Strategies  | Common strategies include: Range-based...      |           0.0000
+        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     |           0.0000
+        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       |           0.0000
+        4 | PostgreSQL Performance Tuning | Hash indexes can be faster for equality...     |           0.0000
 (5 rows)
 \`\`\`
 
-All results are from documents with \`metadata->>'category' = 'database'\`, demonstrating how semantic search can be combined with metadata filtering.
+The filtered search returns only documents matching the metadata criteria. All results are from documents with \`metadata->>'category' = 'database'\`, demonstrating how semantic search can be combined with metadata filtering.
 
 ### Batch Embedding Generation
 
@@ -674,24 +654,19 @@ SELECT
     ROUND(similarity::numeric, 4) AS score,
     rank
 FROM relevant_chunks;
-\`\`\`
 
-**Results:**
-
-The RAG pipeline retrieves the most relevant context chunks:
-
-\`\`\`
- chunk_id |                  title                  |                    preview                    | score  | rank 
-----------+-----------------------------------------+------------------------------------------------+--------+------
-        1 | PostgreSQL Performance Tuning           | PostgreSQL performance can be significantly... | 0.0000 |    1
+-- Results:
+ chunk_id |             title             |                    preview                    | score  | rank 
+----------+-------------------------------+------------------------------------------------+--------+------
+        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... | 0.0000 |    1
        11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    | 0.0000 |    2
-       19 | Database Sharding Strategies            | Common strategies include: Range-based...      | 0.0000 |    3
-        2 | PostgreSQL Performance Tuning           | B-tree indexes are the default and work...     | 0.0000 |    4
-        3 | PostgreSQL Performance Tuning           | GiST indexes are useful for full-text...       | 0.0000 |    5
+       19 | Database Sharding Strategies  | Common strategies include: Range-based...      | 0.0000 |    3
+        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     | 0.0000 |    4
+        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       | 0.0000 |    5
 (5 rows)
 \`\`\`
 
-The query successfully retrieves chunks about PostgreSQL performance tuning, which are the most relevant for answering "How can I improve PostgreSQL query performance?"
+The RAG pipeline retrieves the most relevant context chunks. The query successfully retrieves chunks about PostgreSQL performance tuning, which are the most relevant for answering "How can I improve PostgreSQL query performance?"
 
 ### Step 3: Build Context
 
