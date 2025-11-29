@@ -82,6 +82,9 @@ export default function ProductPageTemplate({
   ctaSection,
 }: ProductPageTemplateProps) {
   const product = getProduct(productId)
+  if (!product) {
+    throw new Error(`Product ${productId} not found`)
+  }
   const theme = getProductTheme(productId)
   const ProductIcon = getProductIcon(productId)
 

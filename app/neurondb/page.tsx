@@ -77,6 +77,14 @@ const neurondbConfig = {
         title: 'PostgreSQL Native Architecture', 
         desc: 'Pure C implementation following 100% PostgreSQL coding standards. 144 source files + 64 headers, zero compiler warnings. PGXS build system. 473 SQL functions/types/operators. Shared memory for caching. WAL integration for durability. SPI for safe operations. Background worker framework. Standard extension, zero external dependencies, no core modifications.' 
       },
+      { 
+        title: 'NeuronAgent: AI Agent Runtime', 
+        desc: 'REST API and WebSocket agent runtime system with long-term memory, tool execution, and streaming responses. Features agent state machine, HNSW-based vector search for context retrieval, extensible tool registry (SQL, HTTP, Code, Shell), background jobs, and API key authentication. Integrates seamlessly with NeuronDB for embeddings and LLM operations.' 
+      },
+      { 
+        title: 'NeuronMCP: Model Context Protocol Server', 
+        desc: 'MCP server enabling MCP-compatible clients (like Claude Desktop) to access NeuronDB through stdio communication. Full JSON-RPC 2.0 implementation with vector operations, ML tools, resource management, and middleware support. Provides tools for vector search, embedding generation, model training, and database schema management.' 
+      },
     ],
   },
   featureMatrix: {

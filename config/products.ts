@@ -45,7 +45,7 @@ export interface ProductBadges {
 // PRODUCT CONFIGURATIONS
 // ============================================================================
 
-export const products: Record<ProductId, ProductMetadata & ProductFeatures & ProductBadges> = {
+export const products: Record<'neurondb' | 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights', ProductMetadata & ProductFeatures & ProductBadges> = {
   neurondb: {
     id: 'neurondb',
     name: 'neurondb',
@@ -77,11 +77,11 @@ export const products: Record<ProductId, ProductMetadata & ProductFeatures & Pro
     postgresqlVersions: ['16', '17', '18'],
     title: 'AI Database Features',
     items: [
-      'Vector search: HNSW and IVF indexing, 10+ distance metrics, up to 32x compression',
-      'ML inference and embeddings: ONNX runtime, text/image/multimodal models, batch processing',
-      'Hybrid search and RAG: Semantic and full-text search, cross-encoder reranking, in-database RAG pipeline',
-      'GPU acceleration: CUDA and ROCm support, faster matrix operations, automatic CPU fallback',
-      'Production ready: 100+ SQL functions, background workers, monitoring, PostgreSQL 16-18 compatible',
+      'Vector search uses HNSW and IVF indexing. Supports 10 distance metrics. Compression up to 32x.',
+      'ML inference runs ONNX models. Generates text, image, and multimodal embeddings. Processes batches.',
+      'Hybrid search combines semantic and full-text search. Cross-encoder reranking. In-database RAG pipeline.',
+      'GPU acceleration supports CUDA and ROCm. Faster matrix operations. Falls back to CPU automatically.',
+      'Includes 100 SQL functions. Background workers handle jobs. Monitoring included. Works with PostgreSQL 16-18.',
     ],
     badges: [
       'PostgreSQL 16-18',
@@ -125,15 +125,15 @@ export const products: Record<ProductId, ProductMetadata & ProductFeatures & Pro
     postgresqlVersions: ['14', '15', '16', '17', '18'],
     title: 'Key Features',
     items: [
-      'Automatic Leader Election: Quorum-based, deterministic leader election using etcd-io/raft.',
-      'Crash-Safe Replication: All state changes replicated and persisted across nodes. Survives crashes and network partitions.',
-      'Split-Brain Prevention: Mathematical guarantee via Raft consensus protocol. Never more than one leader per term.',
-      'Zero-Downtime Failover: Sub-second detection and automatic recovery. Failover with no service interruption.',
-      'Raft Implementation: Built on etcd-io/raft library used by etcd, Kubernetes, and other systems.',
-      'PostgreSQL Integration: Background worker architecture with no external dependencies. Pure PostgreSQL extension.',
-      'SQL API: Full cluster management via SQL functions. Monitor, manage, and control through standard SQL.',
-      'Observability: Status functions, metrics, detailed logging, and monitoring hooks for cluster visibility.',
-      'etcd-Compatible KV Store: Raft-replicated key-value storage included. For distributed configuration and coordination.',
+      'Leader election uses quorum-based voting. Uses etcd-io/raft for deterministic results.',
+      'Replication persists all state changes across nodes. Survives crashes and network partitions.',
+      'Split-brain prevention uses Raft consensus. Ensures one leader per term.',
+      'Failover completes in under one second. No service interruption during failover.',
+      'Uses etcd-io/raft library. Same library used by etcd and Kubernetes.',
+      'Runs as PostgreSQL background worker. No external dependencies. Pure PostgreSQL extension.',
+      'SQL API provides cluster management functions. Monitor and control via SQL.',
+      'Status functions show cluster state. Metrics and logging included.',
+      'Includes etcd-compatible key-value store. Raft-replicated. For distributed configuration.',
     ],
     badges: [
       'PostgreSQL 14-17',
@@ -170,10 +170,10 @@ export const products: Record<ProductId, ProductMetadata & ProductFeatures & Pro
     postgresqlVersions: ['13', '14', '15', '16', '17', '18'],
     title: 'Core Features',
     items: [
-      'Load Balancing: Machine learning algorithms analyze query patterns and server health for routing.',
-      'REST API Management: 17 HTTP/JSON endpoints for cluster orchestration, health checks, and automation.',
-      'Connection Pooling: Session, transaction, and statement pooling with configurable health checks.',
-      'MQTT Event Streaming: Push real-time status, failover, and metric events to observability pipelines.',
+      'Load balancing routes queries using machine learning. Analyzes query patterns and server health.',
+      'REST API provides 17 HTTP endpoints. Handles cluster orchestration, health checks, and automation.',
+      'Connection pooling supports session, transaction, and statement modes. Configurable health checks.',
+      'MQTT streams status, failover, and metric events. Real-time updates to observability pipelines.',
     ],
     badges: [
       'PostgreSQL 13+',
@@ -206,11 +206,11 @@ export const products: Record<ProductId, ProductMetadata & ProductFeatures & Pro
     postgresqlVersions: ['14', '15', '16', '17', '18'],
     title: 'Key Features',
     items: [
-      'Dual-protocol support: MongoDB and MySQL wire protocols simultaneously',
-      'Connect with MongoDB clients or MySQL clients',
-      'Access the same data through both protocols with PostgreSQL ACID guarantees',
-      'SQL translator converts MySQL queries to PostgreSQL automatically',
-      'Rust-powered with geospatial, aggregation, and monitoring',
+      'Supports MongoDB and MySQL wire protocols. Both protocols work simultaneously.',
+      'Connect using MongoDB clients or MySQL clients.',
+      'Access the same data through both protocols. PostgreSQL ACID guarantees apply.',
+      'SQL translator converts MySQL queries to PostgreSQL automatically.',
+      'Built with Rust. Includes geospatial, aggregation, and monitoring features.',
     ],
     badges: [
       'MongoDB Protocol',
@@ -242,11 +242,11 @@ export const products: Record<ProductId, ProductMetadata & ProductFeatures & Pro
     postgresqlVersions: ['13', '14', '15', '16', '17', '18'],
     title: 'Key Features',
     items: [
-      'Real-time monitoring with Grafana dashboards',
-      'Alerting system with Prometheus integration',
-      'Performance analytics with query optimization insights',
-      'Docker-based deployment with observability stack',
-      'Monitoring with automated health checks',
+      'Real-time monitoring uses Grafana dashboards.',
+      'Alerting integrates with Prometheus.',
+      'Performance analytics shows query optimization insights.',
+      'Deploys with Docker. Includes observability stack.',
+      'Automated health checks monitor system status.',
     ],
     badges: [
       'Grafana Dashboards',
@@ -278,11 +278,11 @@ export const products: Record<ProductId, ProductMetadata & ProductFeatures & Pro
     postgresqlVersions: ['14', '15', '16', '17', '18'],
     title: 'Key Features',
     items: [
-      'Advanced query performance analysis with pg_stat_statements',
-      'Table and index usage statistics with optimization recommendations',
-      'Cache hit ratio monitoring with buffer pool analysis',
-      'Replication lag tracking with failover insights',
-      'Comprehensive database health metrics and reporting',
+      'Query performance analysis uses pg_stat_statements.',
+      'Table and index usage statistics include optimization recommendations.',
+      'Cache hit ratio monitoring includes buffer pool analysis.',
+      'Replication lag tracking shows failover insights.',
+      'Database health metrics and reporting included.',
     ],
     badges: [
       'PostgreSQL 14+',
@@ -303,7 +303,10 @@ export const products: Record<ProductId, ProductMetadata & ProductFeatures & Pro
  * Get product configuration by ID
  */
 export function getProduct(productId: ProductId) {
-  return products[productId]
+  if (productId in products) {
+    return products[productId as keyof typeof products]
+  }
+  return undefined
 }
 
 /**
@@ -324,7 +327,10 @@ export function getProductIds(): ProductId[] {
  * Generate metadata for a product page
  */
 export function generateProductMetadata(productId: ProductId): Metadata {
-  const product = products[productId]
+  const product = getProduct(productId)
+  if (!product) {
+    throw new Error(`Product ${productId} not found`)
+  }
   
   return {
     title: `${product.displayName} - ${product.tagline} | pgElephant`,
@@ -374,7 +380,10 @@ export function generateProductMetadata(productId: ProductId): Metadata {
  * Generate metadata for a product docs page
  */
 export function generateDocsMetadata(productId: ProductId, pageTitle?: string): Metadata {
-  const product = products[productId]
+  const product = getProduct(productId)
+  if (!product) {
+    throw new Error(`Product ${productId} not found`)
+  }
   const title = pageTitle 
     ? `${pageTitle} | ${product.displayName} Documentation`
     : `${product.displayName} Documentation | pgElephant`

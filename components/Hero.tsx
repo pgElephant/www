@@ -13,7 +13,6 @@ import {
   getProductIcon 
 } from '@/components/ProductIcons'
 import { getAllProducts, type ProductId } from '@/config/products'
-import { getProductTheme } from '@/config/theme'
 
 type Product = {
   id: ProductId
@@ -29,21 +28,8 @@ type Product = {
 const Hero = () => {
   const [currentProduct, setCurrentProduct] = useState(0)
 
-  // Get products from centralized config
-  const allProducts = getAllProducts()
-  const products: Product[] = allProducts.map(product => ({
-    id: product.id,
-    name: product.displayName,
-    title: product.tagline,
-    description: product.items[0] || '',
-    description2: product.items[1] || '',
-    description3: product.items[2] || '',
-    description4: product.items[3] || '',
-    description5: product.items[4] || '',
-  }))
-
   // Icon mapping
-  const iconMap: Record<ProductId, React.ComponentType<{ size?: number }>> = {
+  const iconMap: Partial<Record<ProductId, React.ComponentType<{ size?: number }>>> = {
     neurondb: NeurondBIcon,
     pgraft: PgraftIcon,
     pgbalancer: PgbalancerIcon,
@@ -51,6 +37,21 @@ const Hero = () => {
     pgsentinel: PgSentinelIcon,
     'pg-stat-insights': PgStatInsightsIcon,
   }
+
+  // Get products from centralized config
+  const allProducts = getAllProducts()
+  const products: Product[] = allProducts
+    .filter(product => iconMap[product.id]) // Only include products with icons
+    .map(product => ({
+      id: product.id,
+      name: product.displayName,
+      title: product.tagline,
+      description: product.items[0] || '',
+      description2: product.items[1] || '',
+      description3: product.items[2] || '',
+      description4: product.items[3] || '',
+      description5: product.items[4] || '',
+    }))
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -85,7 +86,7 @@ const Hero = () => {
                         {current.title}
                       </h2>
                       <p className="text-base font-light text-white/85 mt-1 drop-shadow-lg">
-                        Enterprise-grade PostgreSQL solutions combining reliability with modern flexibility
+                        PostgreSQL extensions for production use
                       </p>
                     </div>
                   </div>
@@ -102,7 +103,6 @@ const Hero = () => {
               {/* Dots */}
               <div className="flex justify-center gap-2 mb-4">
                 {products.map((p, index) => {
-                  const theme = getProductTheme(p.id)
                   const isActive = index === currentProduct
                   return (
                     <button
@@ -123,7 +123,6 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                  {products.map((product) => {
                    const active = product.id === current.id
-                   const theme = getProductTheme(product.id)
                    const IconComponent = iconMap[product.id]
                    return (
                      <Link

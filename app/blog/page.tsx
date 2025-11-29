@@ -46,8 +46,8 @@ const blogPosts = [
   {
     slug: 'pg-stat-insights-1-0-0',
     title: 'pg_stat_insights 1.0.0 Release Announcement',
-    excerpt: 'pg_stat_insights 1.0.0 is a PostgreSQL performance monitoring extension. It provides 52 metrics across 11 views. Production-ready and easy to install.',
-    content: 'pg_stat_insights 1.0.0 delivers comprehensive query performance insights with 52 metrics, 11 pre-built views, response-time categories, and PostgreSQL 16–17 compatibility.',
+    excerpt: 'pg_stat_insights 1.0.0 is a PostgreSQL performance monitoring extension. Provides 52 metrics across 11 views. Production-ready. Easy to install.',
+    content: 'pg_stat_insights 1.0.0 provides query performance insights. Includes 52 metrics, 11 views, response-time categories. Works with PostgreSQL 16-17.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-02-21',
@@ -63,8 +63,8 @@ const blogPosts = [
   {
     slug: 'neurondb',
     title: 'NeuronDB: PostgreSQL AI Vector Database Extension',
-    excerpt: 'NeuronDB adds vector search, ML inference, and RAG capabilities to PostgreSQL. It includes HNSW indexing, GPU acceleration, 10+ distance metrics, and full pgvector compatibility.',
-    content: 'NeuronDB is a production-ready PostgreSQL extension that provides vector search, machine learning inference, GPU acceleration, and hybrid retrieval capabilities for building semantic search, RAG applications, and recommendation systems.',
+    excerpt: 'NeuronDB adds vector search, ML inference, and RAG capabilities to PostgreSQL. Includes HNSW indexing, GPU acceleration, 10 distance metrics, and pgvector compatibility.',
+    content: 'NeuronDB is a PostgreSQL extension. Provides vector search, machine learning inference, GPU acceleration, and hybrid retrieval. For semantic search, RAG applications, and recommendation systems.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-02-20',
@@ -80,8 +80,8 @@ const blogPosts = [
   {
     slug: 'neurondb-semantic-search-guide',
     title: 'Semantic Search Over Text with NeuronDB',
-    excerpt: 'Learn how to implement semantic search over text using NeuronDB with real-world examples, SQL queries, and production-ready code. Complete guide to building document search systems, RAG pipelines, and hybrid search.',
-    content: 'Comprehensive guide to implementing semantic search with NeuronDB. Includes real-world examples, step-by-step SQL queries, RAG pipeline construction, hybrid search techniques, and production optimization strategies.',
+    excerpt: 'Implement semantic search over text using NeuronDB. Includes examples, SQL queries, and code. Guide to building document search systems, RAG pipelines, and hybrid search.',
+    content: 'Guide to implementing semantic search with NeuronDB. Includes examples, SQL queries, RAG pipeline construction, hybrid search techniques, and optimization strategies.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-02-19',
@@ -97,8 +97,8 @@ const blogPosts = [
   {
     slug: 'pgbalancer',
     title: 'pgbalancer: PostgreSQL Connection Pooler',
-    excerpt: 'PostgreSQL connection pooler with load balancing, automatic failover, and optimization for connection management.',
-    content: 'pgbalancer is a PostgreSQL connection pooler that combines pooling capabilities with load balancing, REST API management, and MQTT clustering for cloud-native applications.',
+    excerpt: 'PostgreSQL connection pooler with load balancing, automatic failover, and connection management optimization.',
+    content: 'pgbalancer is a PostgreSQL connection pooler. Combines pooling with load balancing, REST API management, and MQTT clustering.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-02-15',
@@ -114,8 +114,8 @@ const blogPosts = [
   {
     slug: 'pg-stat-insights',
     title: 'pg_stat_insights: PostgreSQL Performance Monitoring Extension',
-    excerpt: 'PostgreSQL performance monitoring with 52 metrics, 11 pre-built views, and insights into query execution, cache efficiency, WAL generation, and JIT compilation.',
-    content: 'pg_stat_insights is a drop-in replacement for pg_stat_statements that provides PostgreSQL performance monitoring with response time categorization, cache analysis, and query insights.',
+    excerpt: 'PostgreSQL performance monitoring with 52 metrics, 11 views, and insights into query execution, cache efficiency, WAL generation, and JIT compilation.',
+    content: 'pg_stat_insights replaces pg_stat_statements. Provides PostgreSQL performance monitoring with response time categorization, cache analysis, and query insights.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-01-29',
@@ -131,8 +131,8 @@ const blogPosts = [
   {
     slug: 'pgraft',
     title: 'pgraft: Raft-Based PostgreSQL Extension',
-    excerpt: 'Executive Summary: In distributed database systems, achieving consensus across multiple nodes while maintaining data consistency and preventing split-brain scenarios is one of the most challenging engineering problems.',
-    content: 'pgraft addresses this challenge by embedding the battle-tested Raft consensus protocol directly into PostgreSQL as a native extension.',
+    excerpt: 'In distributed database systems, achieving consensus across multiple nodes while maintaining data consistency and preventing split-brain is challenging.',
+    content: 'pgraft embeds the Raft consensus protocol into PostgreSQL as a native extension.',
     author: 'pgElephant Team',
     authorRole: 'Core Developers',
     date: '2025-01-15',
@@ -152,7 +152,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
   const isAnnouncement = post.category === 'Announcement'
   return (
     <article className="group h-full">
-      <Link href={`/blog/${post.slug}`} className="block h-full">
+      <Link href={`/blog/${post.slug}`} className="block h-full" aria-label={`Read ${post.title}`}>
         <div className="bg-white/10 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 group-hover:border-white/30 h-full flex flex-col">
           {/* Large Stock Image */}
           <div className={`relative w-full aspect-[3/2] overflow-hidden flex-shrink-0 border border-white/20 flex items-center justify-center ${isAnnouncement ? 'bg-slate-900' : 'bg-slate-800/50'}`}>
@@ -196,6 +196,15 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               <Image
                 src="/blog/neurondb/header.svg?v=7"
                 alt="NeuronDB blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'neurondb-semantic-search-guide' ? (
+              <Image
+                src="/blog/neurondb/header.svg?v=7"
+                alt="NeuronDB Semantic Search Guide blog header"
                 fill
                 className="object-cover"
                 unoptimized
@@ -255,7 +264,7 @@ export default function BlogPage() {
               Blog
             </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto">
-              Technical insights, tutorials, and updates from our team building the future of PostgreSQL clustering
+              Technical insights, tutorials, and updates about PostgreSQL extensions
             </p>
 
             {/* Blog Stats */}
@@ -281,7 +290,7 @@ export default function BlogPage() {
             {/* Technical Blogs */}
             <div className="text-center mb-10">
               <h2 className="text-4xl md:text-5xl font-thin text-white mb-2 tracking-tight">Technical Blogs</h2>
-              <p className="text-lg text-white/80 max-w-2xl mx-auto">Deep dives, tutorials, and engineering notes.</p>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">Tutorials and technical notes.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-20">
               {blogPosts.filter(p => p.category === 'Technical').map((post, i) => (
@@ -292,7 +301,7 @@ export default function BlogPage() {
             {/* Announcements */}
             <div className="text-center mb-10">
               <h2 className="text-4xl md:text-5xl font-thin text-white mb-2 tracking-tight">Announcements</h2>
-              <p className="text-lg text-white/80 max-w-2xl mx-auto">Releases, product updates, and news.</p>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">Releases and product updates.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {blogPosts.filter(p => p.category === 'Announcement').map((post, i) => (

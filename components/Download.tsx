@@ -18,7 +18,21 @@ const Download = () => {
       downloadLinks: {
         deb: 'https://github.com/pgElephant/NeurondB/releases/latest',
         rpm: 'https://github.com/pgElephant/NeurondB/releases/latest'
-      }
+      },
+      components: [
+        {
+          name: 'NeuronAgent',
+          description: 'AI agent runtime with REST API and WebSocket',
+          githubUrl: 'https://github.com/pgElephant/NeurondB/tree/main/NeuronAgent',
+          docsUrl: '/docs/neurondb/neuronagent'
+        },
+        {
+          name: 'NeuronMCP',
+          description: 'Model Context Protocol server for MCP clients',
+          githubUrl: 'https://github.com/pgElephant/NeurondB/tree/main/NeuronMCP',
+          docsUrl: '/docs/neurondb/neuronmcp'
+        }
+      ]
     },
     {
       title: 'FauxDB',
@@ -818,6 +832,46 @@ const Download = () => {
                     yum install {component.packages.rpm}
                   </code>
                 </div>
+
+                {/* Components Section for NeuronDB */}
+                {component.components && component.components.length > 0 && (
+                  <div className="mt-6 pt-6 border-t border-slate-400/30">
+                    <h4 className="text-sm font-semibold text-white/90 mb-3 flex items-center">
+                      <Zap className="w-4 h-4 mr-2 text-teal-400" />
+                      Components
+                    </h4>
+                    <div className="space-y-3">
+                      {component.components.map((comp: any) => (
+                        <div key={comp.name} className="bg-slate-100/10 rounded-lg p-3 border border-slate-400/20">
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <h5 className="text-sm font-semibold text-white mb-1">{comp.name}</h5>
+                              <p className="text-xs text-white/70 mb-2">{comp.description}</p>
+                              <div className="flex items-center gap-3">
+                                <a
+                                  href={comp.docsUrl}
+                                  className="text-xs text-teal-400 hover:text-teal-300 transition-colors flex items-center gap-1"
+                                >
+                                  <BookOpen className="w-3 h-3" />
+                                  Docs
+                                </a>
+                                <a
+                                  href={comp.githubUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-xs text-teal-400 hover:text-teal-300 transition-colors flex items-center gap-1"
+                                >
+                                  <Github className="w-3 h-3" />
+                                  GitHub
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}

@@ -6,7 +6,7 @@
  */
 
 import { Metadata } from 'next'
-import { products, generateProductMetadata, generateDocsMetadata, type ProductId } from './products'
+import { products, generateProductMetadata, generateDocsMetadata, getProduct, type ProductId } from './products'
 
 // ============================================================================
 // BASE SEO CONFIGURATION
@@ -203,7 +203,10 @@ export function generateOrganizationSchema() {
  * Generate SoftwareApplication structured data for a product
  */
 export function generateProductSchema(productId: ProductId) {
-  const product = products[productId]
+  const product = getProduct(productId)
+  if (!product) {
+    throw new Error(`Product ${productId} not found`)
+  }
   
   return {
     '@context': 'https://schema.org',

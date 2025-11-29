@@ -155,6 +155,14 @@ export default function Page() {
           ]
         },
         {
+          title: 'Components',
+          description: 'NeuronDB ecosystem components: NeuronAgent for agent runtime and NeuronMCP for MCP protocol support.',
+          items: [
+            { title: 'NeuronAgent', href: '/docs/neurondb/neuronagent', description: 'AI agent runtime with REST API, WebSocket, long-term memory, and tool execution.' },
+            { title: 'NeuronMCP', href: '/docs/neurondb/neuronmcp', description: 'Model Context Protocol server for MCP-compatible clients like Claude Desktop.' }
+          ]
+        },
+        {
           title: 'API Reference',
           description: 'Browse SQL functions, operators, and data types exported by NeurondB.',
           items: [

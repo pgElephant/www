@@ -10,6 +10,7 @@ import {
 import dynamic from 'next/dynamic'
 import PerformanceOptimizations from '@/components/PerformanceOptimizations'
 import ClientOnlyComponents from '@/components/ClientOnlyComponents'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 import './globals.css'
 
 // Lazy load components for better performance
@@ -403,6 +404,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <PerformanceOptimizations />
         <OrganizationSchema />
         <Header />

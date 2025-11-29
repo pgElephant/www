@@ -7,7 +7,7 @@ import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
   title: 'pgElephant | PostgreSQL Platform - AI Database, Vector Search and RAG Pipeline',
-  description: 'pgElephant provides PostgreSQL solutions: NeurondB AI database extension with vector search, RAG pipeline, ML inference, and GPU acceleration. Plus pgbalancer connection pooling, pgraft Raft extension for leader election, FauxDB dual-protocol database (MongoDB + MySQL), pgSentinel monitoring, and pg_stat_insights analytics. Production-ready AI database for PostgreSQL.',
+  description: 'pgElephant provides PostgreSQL extensions: NeurondB AI database extension with vector search, RAG pipeline, ML inference, and GPU acceleration. Plus pgbalancer connection pooling, pgraft Raft extension for leader election, FauxDB dual-protocol database (MongoDB + MySQL), pgSentinel monitoring, and pg_stat_insights analytics.',
   keywords: [
     // AI Database & Vector Search Keywords
     'ai database', 'ai database postgresql', 'postgres ai', 'postgresql ai extension', 'postgres ai extension',
@@ -29,13 +29,13 @@ export const metadata = {
   ].join(', '),
   openGraph: {
     title: 'pgElephant - PostgreSQL Platform | AI Database, Vector Search and RAG',
-    description: 'PostgreSQL solutions: NeurondB AI database extension with vector search, RAG pipeline, ML inference, and GPU acceleration. Plus pgbalancer connection pooling, pgraft Raft extension, FauxDB dual-protocol database (MongoDB + MySQL), pgSentinel monitoring, and pg_stat_insights analytics. Production-ready AI database for PostgreSQL.',
+    description: 'PostgreSQL extensions: NeurondB AI database extension with vector search, RAG pipeline, ML inference, and GPU acceleration. Plus pgbalancer connection pooling, pgraft Raft extension, FauxDB dual-protocol database (MongoDB + MySQL), pgSentinel monitoring, and pg_stat_insights analytics.',
     images: [
       {
         url: '/og-image.jpg?v=2',
         width: 1200,
         height: 630,
-        alt: 'pgElephant Enterprise PostgreSQL Platform with AI Database',
+        alt: 'pgElephant PostgreSQL Extensions',
       }
     ],
     type: 'website',
@@ -45,7 +45,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'pgElephant - PostgreSQL Platform | AI Database and Vector Search',
-    description: 'PostgreSQL solutions: NeurondB AI database with vector search, RAG pipeline, ML inference, GPU acceleration. Plus pgbalancer, pgraft, FauxDB, pgSentinel, and pg_stat_insights. Production-ready AI database.',
+    description: 'PostgreSQL extensions: NeurondB AI database with vector search, RAG pipeline, ML inference, GPU acceleration. Plus pgbalancer, pgraft, FauxDB, pgSentinel, and pg_stat_insights.',
     images: ['/og-image.jpg?v=2'],
     creator: '@pgElephant',
     site: '@pgElephant',

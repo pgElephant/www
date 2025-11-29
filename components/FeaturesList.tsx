@@ -74,6 +74,16 @@ const FeaturesList = () => {
           title: 'Security',
           description: 'Vector encryption (AES-GCM), differential privacy, RLS integration, audit logging',
           icon: <Shield className="w-5 h-5" />
+        },
+        {
+          title: 'NeuronAgent',
+          description: 'AI agent runtime with REST API, WebSocket, long-term memory, and tool execution',
+          icon: <Server className="w-5 h-5" />
+        },
+        {
+          title: 'NeuronMCP',
+          description: 'Model Context Protocol server for MCP-compatible clients like Claude Desktop',
+          icon: <Terminal className="w-5 h-5" />
         }
       ]
     },
@@ -366,15 +376,15 @@ Enterprise Solutions
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-light mb-6 leading-tight">
             <span className="text-white">
-              PostgreSQL Enterprise
+              PostgreSQL
             </span>
             <br />
             <span className="text-purple-300 font-heading">
-              Platform Suite
+              Extensions
             </span>
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto font-light">
-            Database solutions for high availability, distributed consensus, and data migration.
+            Extensions for high availability, distributed consensus, and data migration.
           </p>
         </div>
 
@@ -383,8 +393,8 @@ Enterprise Solutions
           {/* Enterprise Solutions Matrix */}
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-slate-400/20 overflow-hidden mb-12 shadow-xl">
             <div className="p-8 border-b border-slate-400/20">
-              <h3 className="text-2xl font-semibold text-white mb-2">Enterprise Database Solutions</h3>
-              <p className="text-white/90">Comprehensive platform comparison for enterprise database infrastructure</p>
+              <h3 className="text-2xl font-semibold text-white mb-2">Database Extensions</h3>
+              <p className="text-white/90">Extension comparison for database infrastructure</p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -662,7 +672,7 @@ Enterprise Solutions
                   
                   <div className="mt-8 pt-6 border-t border-slate-400/20">
                     <Link href={project.link} className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
-                      View Enterprise Details
+                      View Details
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -677,11 +687,10 @@ Enterprise Solutions
         <div className="mt-20 text-center relative z-10">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30 max-w-5xl mx-auto">
             <h3 className="text-3xl font-light mb-4 text-white">
-              Complete Database Solution Suite
+              Database Extensions
             </h3>
             <p className="text-lg text-white/90 mb-8 max-w-3xl mx-auto">
-              Transform your database infrastructure with enterprise-grade PostgreSQL solutions. 
-              Reduce costs, improve reliability, and accelerate your digital transformation.
+              PostgreSQL extensions for production use. Reduces costs. Improves reliability.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="text-center p-4">
@@ -700,15 +709,15 @@ Enterprise Solutions
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="/download" className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
                 <Database className="w-5 h-5" />
-                Download All Projects
+                Download
               </a>
               <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-light hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5" />
-                View Documentation
+                Documentation
               </a>
               <a href="/contact" className="border-2 border-white/40 text-white px-8 py-4 rounded-lg font-light hover:bg-white/20 hover:text-white transition-colors flex items-center justify-center gap-2">
                 <Users className="w-5 h-5" />
-                Contact Sales
+                Contact
               </a>
             </div>
           </div>

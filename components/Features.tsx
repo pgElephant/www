@@ -7,37 +7,37 @@ const Features = () => {
     {
       icon: Zap,
       title: 'Automated Failover',
-      description: 'Leader election with RALE consensus. Automatic failover in under 30 seconds with zero data loss.',
+      description: 'Leader election uses RALE consensus. Failover completes in under 30 seconds. Zero data loss.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Shield,
       title: 'Security',
-      description: 'TLS encryption, role-based access control, and audit logging for production environments.',
+      description: 'TLS encryption, role-based access control, and audit logging included.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Globe,
       title: 'Multi-Zone Replication',
-      description: 'Distribute your database across multiple availability zones for resilience and performance.',
+      description: 'Distributes database across multiple availability zones. Improves resilience and performance.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: BarChart3,
       title: 'Monitoring',
-      description: 'Real-time metrics, health checks, and observability with Prometheus integration.',
+      description: 'Real-time metrics, health checks, and observability. Prometheus integration included.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Terminal,
       title: 'CLI and API',
-      description: 'Command-line interface and REST API for automation and integration workflows.',
+      description: 'Command-line interface and REST API. Supports automation and integration workflows.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     },
     {
       icon: Database,
       title: 'Zero Downtime',
-      description: 'Failover with no service interruption. Built for production environments that cannot tolerate downtime.',
+      description: 'Failover occurs with no service interruption. For production environments.',
       color: 'bg-white/10 backdrop-blur-sm text-white border border-white/20'
     }
   ]
@@ -54,10 +54,10 @@ const Features = () => {
       <div className="container-wide">
         <div className="max-w-4xl mx-auto text-center mb-20">
           <h2 className="text-5xl font-thin text-white mb-8">
-            Enterprise-Grade Features
+            Features
           </h2>
           <p className="text-xl text-white/90 leading-relaxed">
-            Built for production environments that demand reliability, security, and performance at scale.
+            Production-ready features for reliability, security, and performance.
           </p>
         </div>
 
@@ -82,10 +82,10 @@ const Features = () => {
         <div className="premium-card p-16">
           <div className="text-center mb-16">
             <h3 className="text-4xl font-thin text-white mb-6">
-              Proven Performance
+              Performance Metrics
             </h3>
             <p className="text-xl text-white/90">
-              Real-world metrics from production deployments
+              Metrics from production deployments
             </p>
           </div>
           

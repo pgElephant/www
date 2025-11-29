@@ -51,8 +51,8 @@ const Footer = () => {
       { name: 'Community', href: '/community', description: 'Join our community', icon: '' },
     ],
     enterprise: [
-      { name: 'Enterprise Support', href: '/contact', description: '24/7 dedicated support', icon: '' },
-      { name: 'Professional Services', href: '/contact', description: 'Expert consulting', icon: '' },
+      { name: 'Support', href: '/contact', description: 'Support available', icon: '' },
+      { name: 'Services', href: '/contact', description: 'Consulting available', icon: '' },
       { name: 'Training', href: '/contact', description: 'Training', icon: '' },
       { name: 'Partnership', href: '/contact', description: 'Become a partner', icon: '' },
     ],
@@ -106,7 +106,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-white/90 text-sm leading-relaxed mb-6 text-center md:text-left max-w-sm mx-auto md:mx-0">
-              Enterprise-grade PostgreSQL platform with distributed consensus, automatic failover, and MongoDB compatibility for modern applications.
+              PostgreSQL extensions with distributed consensus, automatic failover, and MongoDB compatibility.
             </p>
             {/* Social links */}
             <div className="flex justify-center md:justify-start gap-4" aria-label="Social links">

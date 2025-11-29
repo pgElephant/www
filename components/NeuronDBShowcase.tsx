@@ -16,7 +16,7 @@ const NeuronDBShowcase = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-full mb-6 backdrop-blur-sm">
             <Brain className="w-6 h-6 text-indigo-400 animate-pulse" />
-            <span className="text-indigo-400 font-semibold text-sm">NeurondB - Enterprise AI Database</span>
+            <span className="text-indigo-400 font-semibold text-sm">NeurondB - AI Database Extension</span>
             <Zap className="w-5 h-5 text-yellow-400 animate-pulse" />
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -26,7 +26,7 @@ const NeuronDBShowcase = () => {
             Add vector search, machine learning inference, hybrid retrieval, and RAG pipeline support to PostgreSQL.
           </p>
           <p className="text-lg text-indigo-300 max-w-2xl mx-auto">
-            Built with PostgreSQL C standards. Zero external dependencies. Production-ready.
+            Built with PostgreSQL C standards. Zero external dependencies.
           </p>
         </div>
 

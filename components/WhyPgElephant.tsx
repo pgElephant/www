@@ -8,32 +8,32 @@ const WhyPgElephant = () => {
     {
       icon: Database,
       title: 'MongoDB Compatibility',
-      description: 'FauxDB provides MongoDB wire protocol compatibility with PostgreSQL storage and ACID transactions.'
+      description: 'FauxDB supports MongoDB wire protocol. Uses PostgreSQL storage with ACID transactions.'
     },
     {
       icon: Shield,
       title: 'Raft Consensus Clustering',
-      description: 'pgraft provides Raft consensus for PostgreSQL with automatic leader election and split-brain prevention.'
+      description: 'pgraft implements Raft consensus for PostgreSQL. Automatic leader election. Prevents split-brain.'
     },
     {
       icon: Zap,
       title: 'Connection Pooling',
-      description: 'pgbalancer uses machine learning for load balancing, query routing, and scaling.'
+      description: 'pgbalancer uses machine learning for load balancing and query routing. Supports scaling.'
     },
     {
       icon: Lock,
       title: 'Reliability',
-      description: 'Components with consistency guarantees and zero-downtime operations.'
+      description: 'Components provide consistency guarantees. Zero-downtime operations supported.'
     },
     {
       icon: Globe,
       title: 'Architecture',
-      description: 'Rust-powered performance, distributed systems design, and cloud-native deployment.'
+      description: 'Built with Rust for performance. Distributed systems design. Cloud-native deployment.'
     },
     {
       icon: Users,
       title: 'Open Source',
-      description: 'Transparent development, community-driven features, and enterprise support options.'
+      description: 'Open source development. Community-driven features. Enterprise support available.'
     }
   ]
 
@@ -49,11 +49,10 @@ const WhyPgElephant = () => {
       <div className="container-extra-wide relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-white drop-shadow-2xl shadow-2xl mb-6">
-            Why PgElephant?
+            Products
           </h2>
           <p className="text-xl text-white/90 leading-relaxed font-light drop-shadow-lg">
-            Three PostgreSQL tools: FauxDB (MongoDB-compatible document database), 
-            pgraft (Raft consensus clustering), and pgbalancer (connection pooling).
+            Three PostgreSQL tools: FauxDB for MongoDB compatibility, pgraft for Raft consensus clustering, and pgbalancer for connection pooling.
           </p>
         </div>
 
@@ -82,7 +81,7 @@ const WhyPgElephant = () => {
         <div className="text-center mt-16">
           <div className="inline-flex items-center gap-2 text-white/80 text-sm font-light drop-shadow-lg">
             <div className="w-2 h-2 bg-green-400 rounded-full drop-shadow-lg"></div>
-            Trusted by enterprises worldwide
+            Used in production environments
           </div>
         </div>
       </div>
