@@ -40,49 +40,49 @@ export function BlogMarkdown({ children }: { children: string }) {
         remarkPlugins={[remarkGfm]}
         components={{
           // Headings with proper sizing and styling
-          h1({node, ...props}) {
+          h1({ node, ...props }) {
             return <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 mt-12 first:mt-0 leading-tight drop-shadow-lg" {...props} />;
           },
-          h2({node, ...props}) {
+          h2({ node, ...props }) {
             return <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6 mt-10 leading-tight drop-shadow-lg" {...props} />;
           },
-          h3({node, ...props}) {
+          h3({ node, ...props }) {
             return <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 mt-8 leading-tight drop-shadow-lg" {...props} />;
           },
-          h4({node, ...props}) {
+          h4({ node, ...props }) {
             return <h4 className="text-xl md:text-2xl font-semibold text-white mb-3 mt-6 leading-tight drop-shadow-lg" {...props} />;
           },
-          h5({node, ...props}) {
+          h5({ node, ...props }) {
             return <h5 className="text-lg md:text-xl font-semibold text-white mb-3 mt-5 leading-tight drop-shadow-lg" {...props} />;
           },
-          h6({node, ...props}) {
+          h6({ node, ...props }) {
             return <h6 className="text-base md:text-lg font-semibold text-white mb-2 mt-4 leading-tight drop-shadow-lg" {...props} />;
           },
-          
+
           // Paragraphs with better spacing and readability
-          p({node, ...props}) {
+          p({ node, ...props }) {
             return <p className="text-white/90 text-lg leading-relaxed mb-6 drop-shadow-sm" {...props} />;
           },
-          
+
           // Lists with proper styling
-          ul({node, ...props}) {
+          ul({ node, ...props }) {
             return <ul className="list-disc list-inside text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-4" {...props} />;
           },
-          ol({node, ...props}) {
+          ol({ node, ...props }) {
             return <ol className="list-decimal list-inside text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-4" {...props} />;
           },
-          li({node, ...props}) {
+          li({ node, ...props }) {
             return <li className="mb-2 drop-shadow-sm" {...props} />;
           },
-          
+
           // Code blocks with syntax highlighting
-          code({node, className, children, ...props}) {
+          code({ node, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             const codeText = String(children).replace(/\n$/, '');
 
             // Check if this contains both query and output (has "Output:" or table-like content)
             const hasOutput = codeText.includes('Output:') || codeText.includes('---') ||
-                           (codeText.includes('SELECT') && codeText.includes('log_size'));
+              (codeText.includes('SELECT') && codeText.includes('log_size'));
             const isLongContent = codeText.split('\n').length > 10;
 
             return match ? (
@@ -109,12 +109,12 @@ export function BlogMarkdown({ children }: { children: string }) {
                   language={match[1]}
                 >
                   {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <div className="w-full">
-                      <pre className={`${className} rounded-lg text-sm shadow-2xl w-full ${hasOutput ? 'min-h-[120px]' : 'min-h-[80px]'} flex flex-col justify-start border border-gray-600/30`} style={style}>
-                        <div className="flex-1 p-4">
+                    <div className="w-full max-w-full">
+                      <pre className={`${className} rounded-lg text-sm shadow-2xl w-full max-w-full ${hasOutput ? 'min-h-[120px]' : 'min-h-[80px]'} flex flex-col justify-start border border-gray-600/30 overflow-x-hidden`} style={style}>
+                        <div className="flex-1 p-4 w-full max-w-full overflow-hidden">
                           {tokens.map((line, i) => (
-                            <div key={i} {...getLineProps({ line })} className="min-h-[1.5rem] flex items-start w-full">
-                              <span className="flex-1 whitespace-pre-wrap break-words">
+                            <div key={i} {...getLineProps({ line })} className="min-h-[1.5rem] w-full max-w-full overflow-hidden">
+                              <span className="whitespace-pre-wrap break-words break-all" style={{ wordBreak: 'break-all', overflowWrap: 'anywhere' }}>
                                 {line.map((token, tokenKey) => (
                                   <span key={tokenKey} {...getTokenProps({ token })} />
                                 ))}
@@ -137,31 +137,31 @@ export function BlogMarkdown({ children }: { children: string }) {
               </code>
             );
           },
-          
+
           // Tables with proper styling
-          table({node, ...props}) {
+          table({ node, ...props }) {
             return (
               <div className="overflow-x-auto my-8">
                 <table className="min-w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl" {...props} />
               </div>
             );
           },
-          thead({node, ...props}) {
+          thead({ node, ...props }) {
             return <thead className="bg-white/20" {...props} />;
           },
-          tbody({node, ...props}) {
+          tbody({ node, ...props }) {
             return <tbody className="divide-y divide-white/10" {...props} />;
           },
-          tr({node, ...props}) {
+          tr({ node, ...props }) {
             return <tr className="hover:bg-white/5 transition-colors" {...props} />;
           },
-          th({node, ...props}) {
+          th({ node, ...props }) {
             return <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider" {...props} />;
           },
-          td({node, ...props}) {
+          td({ node, ...props }) {
             return <td className="px-6 py-4 text-sm text-white/90" {...props} />;
           },
-          
+
           // Images with proper styling (use Next/Image to avoid lint warnings)
           img({ node, ...props }) {
             const src = (props as any).src as string | undefined
@@ -180,18 +180,30 @@ export function BlogMarkdown({ children }: { children: string }) {
               </div>
             )
           },
-          
+
           // Blockquotes with styling
-          blockquote({node, ...props}) {
+          blockquote({ node, ...props }) {
             return <blockquote className="border-l-4 border-primary-500 pl-6 py-2 my-6 bg-white/5 rounded-r-lg italic text-white/80" {...props} />;
           },
-          
+
           // Strong and emphasis
-          strong({node, ...props}) {
+          strong({ node, ...props }) {
             return <strong className="font-semibold text-white" {...props} />;
           },
-          em({node, ...props}) {
+          em({ node, ...props }) {
             return <em className="italic text-white/95" {...props} />;
+          },
+
+          // Links with proper styling
+          a({ node, ...props }) {
+            return (
+              <a
+                className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors duration-200"
+                target="_blank"
+                rel="noopener noreferrer"
+                {...props}
+              />
+            );
           }
         }}
       >
