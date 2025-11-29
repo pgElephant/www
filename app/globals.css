@@ -52,15 +52,15 @@ body {
 
 /* CSS Custom Properties for Theme System */
 /* 
- * IMPORTANT: Only TWO gradients for the entire website:
+ * IMPORTANT: Only TWO solid backgrounds for the entire website:
  * 1. --hero-gradient: Used for hero sections and footer
  * 2. --page-gradient: Used for all other page content
  * 
- * Change these values to update gradients across the entire site.
+ * Change these values to update backgrounds across the entire site.
  */
 :root {
   /* Hero and Footer - Solid color (dark) */
-  --hero-gradient: #0f172a;
+  --hero-gradient: #1f2937;
   /* Page Background - Solid color (used for all other content) - matches blog posts */
   --page-gradient: #1f2937;
   

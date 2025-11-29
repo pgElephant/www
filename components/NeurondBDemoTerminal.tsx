@@ -2294,6 +2294,116 @@ const NeurondBDemoTerminal = () => {
     }
   ], [])
 
+  // NeuronAgent Commands
+  const neuronagentCommands = useMemo(() => [
+    {
+      command: 'cd NeuronAgent && go run cmd/agent-server/main.go',
+      output: [
+        '\x1b[32mStarting NeuronAgent server...\x1b[0m',
+        'Database connection established',
+        'Running migrations...',
+        '\x1b[32m✓ Migrations completed\x1b[0m',
+        'Starting HTTP server on :8080',
+        '\x1b[32m✓ NeuronAgent server ready\x1b[0m',
+        '\x1b[36m  REST API: http://localhost:8080/api/v1\x1b[0m',
+        '\x1b[36m  WebSocket: ws://localhost:8080/ws\x1b[0m',
+        '\x1b[36m  Health: http://localhost:8080/health\x1b[0m'
+      ],
+      isShellCommand: true
+    },
+    {
+      command: 'curl -X POST http://localhost:8080/api/v1/agents \\',
+      output: [
+        '  -H "Authorization: Bearer YOUR_API_KEY" \\',
+        '  -H "Content-Type: application/json" \\',
+        '  -d \'{"name": "research_agent", "profile": "research", "tools": ["sql", "http"]}\''
+      ],
+      isShellCommand: true
+    },
+    {
+      command: '',
+      output: [
+        '{',
+        '  "id": "550e8400-e29b-41d4-a716-446655440000",',
+        '  "name": "research_agent",',
+        '  "profile": "research",',
+        '  "tools": ["sql", "http"],',
+        '  "created_at": "2025-01-15T10:30:00Z",',
+        '  "status": "active"',
+        '}',
+        '',
+        '\x1b[32m✓ Agent created successfully\x1b[0m',
+        '\x1b[36m  Agent ID: 550e8400-e29b-41d4-a716-446655440000\x1b[0m'
+      ],
+      isShellCommand: true
+    },
+    {
+      command: 'curl -X POST http://localhost:8080/api/v1/sessions \\',
+      output: [
+        '  -H "Authorization: Bearer YOUR_API_KEY" \\',
+        '  -H "Content-Type: application/json" \\',
+        '  -d \'{"agent_id": "550e8400-e29b-41d4-a716-446655440000"}\''
+      ],
+      isShellCommand: true
+    },
+    {
+      command: '',
+      output: [
+        '{',
+        '  "id": "660e8400-e29b-41d4-a716-446655440001",',
+        '  "agent_id": "550e8400-e29b-41d4-a716-446655440000",',
+        '  "created_at": "2025-01-15T10:31:00Z",',
+        '  "status": "active"',
+        '}',
+        '',
+        '\x1b[32m✓ Session created successfully\x1b[0m',
+        '\x1b[36m  Session ID: 660e8400-e29b-41d4-a716-446655440001\x1b[0m'
+      ],
+      isShellCommand: true
+    },
+    {
+      command: 'curl -X POST http://localhost:8080/api/v1/sessions/660e8400-e29b-41d4-a716-446655440001/messages \\',
+      output: [
+        '  -H "Authorization: Bearer YOUR_API_KEY" \\',
+        '  -H "Content-Type: application/json" \\',
+        '  -d \'{"role": "user", "content": "Find documents about machine learning"}\''
+      ],
+      isShellCommand: true
+    },
+    {
+      command: '',
+      output: [
+        '{',
+        '  "id": "770e8400-e29b-41d4-a716-446655440002",',
+        '  "session_id": "660e8400-e29b-41d4-a716-446655440001",',
+        '  "role": "assistant",',
+        '  "content": "I found 5 documents about machine learning using vector search...",',
+        '  "tools_used": ["sql"],',
+        '  "created_at": "2025-01-15T10:32:00Z"',
+        '}',
+        '',
+        '\x1b[32m✓ Message processed successfully\x1b[0m',
+        '\x1b[36m  Agent used SQL tool to query NeuronDB vector search\x1b[0m',
+        '\x1b[36m  Retrieved 5 relevant documents from memory\x1b[0m'
+      ],
+      isShellCommand: true
+    },
+    {
+      command: 'curl http://localhost:8080/health',
+      output: [
+        '{',
+        '  "status": "healthy",',
+        '  "database": "connected",',
+        '  "neurondb": "ready",',
+        '  "version": "1.0.0"',
+        '}',
+        '',
+        '\x1b[32m✓ NeuronAgent service is healthy\x1b[0m'
+      ],
+      isShellCommand: true
+    }
+  ], [])
+
   // Get commands based on active main tab and sub tab
   const getCommands = useCallback(() => {
     // Handle main tabs without sub-tabs
@@ -2360,8 +2470,14 @@ const NeurondBDemoTerminal = () => {
       }
     }
 
+    // Handle NeuronAgent tab
+    if (activeMainTab === 'neuronagent') return neuronagentCommands
+
+    // Handle NeuronMCP tab (placeholder for now)
+    if (activeMainTab === 'neuronmcp') return buildCommands
+
     return buildCommands
-  }, [activeMainTab, activeSubTab, buildCommands, vectorOperationsCommands, vectorIndexingCommands, vectorDistanceCommands, vectorQuantizationCommands, mlRegressionCommands, mlClassificationCommands, mlClusteringCommands, mlBoostingCommands, mlNeuralCommands, mlTimeseriesCommands, mlAutomlCommands, mlRecommenderCommands, embeddingCommands, embeddingsBatchCommands, embeddingsConfigCommands, embeddingsHfModelsCommands, multimodalCommands, gpuCommands, hybridCommands, ragCommands, rerankingCommands, sparseCommands, quantizationCommands, advancedOnnxCommands, advancedMetricsCommands, advancedPlannerCommands, advancedTypesCommands, workersCommands])
+  }, [activeMainTab, activeSubTab, buildCommands, vectorOperationsCommands, vectorIndexingCommands, vectorDistanceCommands, vectorQuantizationCommands, mlRegressionCommands, mlClassificationCommands, mlClusteringCommands, mlBoostingCommands, mlNeuralCommands, mlTimeseriesCommands, mlAutomlCommands, mlRecommenderCommands, embeddingCommands, embeddingsBatchCommands, embeddingsConfigCommands, embeddingsHfModelsCommands, multimodalCommands, gpuCommands, hybridCommands, ragCommands, rerankingCommands, sparseCommands, quantizationCommands, advancedOnnxCommands, advancedMetricsCommands, advancedPlannerCommands, advancedTypesCommands, workersCommands, neuronagentCommands])
 
   // Cleanup all intervals and timeouts
   const cleanup = useCallback(() => {

@@ -11,7 +11,7 @@ export const metadata = generateProductPageMetadata('neurondb');
 const neurondbConfig = {
   productId: 'neurondb' as const,
   hero: {
-    subtitle: 'Production-grade vector search with 52 ML algorithms, 473 SQL functions, GPU acceleration, and complete RAG pipeline, all within PostgreSQL',
+    subtitle: 'Vector search with 52 ML algorithms, 473 SQL functions, GPU acceleration, and RAG pipeline, all within PostgreSQL',
   },
   demo: <NeurondBDemoTerminal />,
   badges: [
@@ -62,15 +62,15 @@ const neurondbConfig = {
   ],
   architecture: {
     title: 'Architecture',
-    subtitle: 'Complete AI database architecture with vector search, ML inference, and RAG pipeline',
+    subtitle: 'AI database architecture with vector search, ML inference, and RAG pipeline',
     content: <NeuronDBArchitectureDiagram />,
   },
   featurePillars: {
-    kicker: 'Comprehensive AI Database Features',
+    kicker: 'AI Database Features',
     items: [
       { 
         title: 'Vector Search & Indexing', 
-        desc: '5 production-grade vector types: vector (float32), vectorp (packed), vecmap (sparse map), vgraph (graph-based), rtext (retrieval text). HNSW and IVF indexing with automatic tuning. Multiple distance metrics: L2 (Euclidean), Cosine, Inner Product, Manhattan, Hamming, Jaccard. Product Quantization (PQ) and Optimized PQ (OPQ) for 2x-32x compression.' 
+        desc: '5 vector types: vector (float32), vectorp (packed), vecmap (sparse map), vgraph (graph-based), rtext (retrieval text). HNSW and IVF indexing with automatic tuning. Multiple distance metrics: L2 (Euclidean), Cosine, Inner Product, Manhattan, Hamming, Jaccard. Product Quantization (PQ) and Optimized PQ (OPQ) for 2x-32x compression.' 
       },
       { 
         title: 'ML & Embeddings', 
@@ -81,12 +81,12 @@ const neurondbConfig = {
         desc: 'Combine vector similarity with full-text search (BM25). Weighted scoring (70% vector + 30% text). Multi-vector documents. Faceted search with category filters. Temporal decay for time-sensitive relevance. Optimal for real-world search scenarios.' 
       },
       { 
-        title: 'Advanced Reranking', 
+        title: 'Reranking', 
         desc: 'Cross-encoder neural reranking for precision improvement. LLM-powered scoring (GPT-4, Claude). ColBERT late interaction models. MMR (Maximal Marginal Relevance) for diversity. Ensemble strategies combining multiple rankers. Sub-10ms latency.' 
       },
       { 
-        title: 'Complete RAG Pipeline', 
-        desc: 'End-to-end Retrieval Augmented Generation in PostgreSQL. Document chunking and processing. Semantic retrieval with reranking. LLM integration for answer generation. Context management. Guardrails for content safety. Production-ready RAG in SQL.' 
+        title: 'RAG Pipeline', 
+        desc: 'Retrieval Augmented Generation in PostgreSQL. Document chunking and processing. Semantic retrieval with reranking. LLM integration for answer generation. Context management. Guardrails for content safety. RAG in SQL.' 
       },
       { 
         title: 'Background Workers', 
@@ -94,18 +94,18 @@ const neurondbConfig = {
       },
       { 
         title: 'ML Analytics Suite', 
-        desc: 'Comprehensive analytics: K-means, Mini-batch K-means, DBSCAN, GMM, Hierarchical clustering (all GPU-accelerated). Dimensionality reduction: PCA, PCA Whitening, OPQ. Outlier detection: Z-score, Modified Z-score, IQR, Isolation Forest. Quality metrics: Davies-Bouldin Index, Recall@K, Precision@K, F1@K, MRR. Drift detection with temporal monitoring. Topic discovery and modeling.' 
+        desc: 'Analytics: K-means, Mini-batch K-means, DBSCAN, GMM, Hierarchical clustering (all GPU-accelerated). Dimensionality reduction: PCA, PCA Whitening, OPQ. Outlier detection: Z-score, Modified Z-score, IQR, Isolation Forest. Quality metrics: Davies-Bouldin Index, Recall@K, Precision@K, F1@K, MRR. Drift detection with temporal monitoring. Topic discovery and modeling.' 
       },
       { 
         title: 'GPU Acceleration', 
-        desc: 'Full GPU support: CUDA (NVIDIA), ROCm (AMD), Metal (Apple Silicon). GPU-accelerated ML algorithms: Random Forest, XGBoost, LightGBM, Linear/Logistic Regression, SVM, KNN, Decision Trees, Naive Bayes, GMM, K-means. Batch distance computation (100x speedup). Automatic GPU detection with CPU fallback. Multi-stream compute overlap. Production-ready with memory management.' 
+        desc: 'GPU support: CUDA (NVIDIA), ROCm (AMD), Metal (Apple Silicon). GPU-accelerated ML algorithms: Random Forest, XGBoost, LightGBM, Linear/Logistic Regression, SVM, KNN, Decision Trees, Naive Bayes, GMM, K-means. Batch distance computation (100x speedup). Automatic GPU detection with CPU fallback. Multi-stream compute overlap. Memory management.' 
       },
       { 
         title: 'Performance & Optimization', 
         desc: 'SIMD-optimized distance calculations (AVX2, AVX-512, NEON). Intelligent query planning with cost estimates. ANN buffer cache for hot centroids. WAL compression with delta encoding. Parallel kNN execution. Predictive prefetching. Sub-millisecond searches on millions of vectors.' 
       },
       { 
-        title: 'Enterprise Security', 
+        title: 'Security', 
         desc: 'Vector encryption (AES-GCM via OpenSSL). Differential privacy for embeddings. Row-level security (RLS) integration. Multi-tenant isolation. HMAC-SHA256 signed results. Audit logging with tamper detection. Usage metering and governance policies. GDPR-compliant data handling.' 
       },
       { 
@@ -118,17 +118,17 @@ const neurondbConfig = {
       },
       { 
         title: 'NeuronAgent: AI Agent Runtime', 
-        desc: 'REST API and WebSocket agent runtime system with long-term memory, tool execution, and streaming responses. Features agent state machine, HNSW-based vector search for context retrieval, extensible tool registry (SQL, HTTP, Code, Shell), background jobs, and API key authentication. Integrates seamlessly with NeuronDB for embeddings and LLM operations.' 
+        desc: 'REST API and WebSocket agent runtime system with long-term memory, tool execution, and streaming responses. Features agent state machine, HNSW-based vector search for context retrieval, tool registry (SQL, HTTP, Code, Shell), background jobs, and API key authentication. Integrates with NeuronDB for embeddings and LLM operations.' 
       },
       { 
         title: 'NeuronMCP: Model Context Protocol Server', 
-        desc: 'MCP server enabling MCP-compatible clients (like Claude Desktop) to access NeuronDB through stdio communication. Full JSON-RPC 2.0 implementation with vector operations, ML tools, resource management, and middleware support. Provides tools for vector search, embedding generation, model training, and database schema management.' 
+        desc: 'MCP server enabling MCP-compatible clients (like Claude Desktop) to access NeuronDB through stdio communication. JSON-RPC 2.0 implementation with vector operations, ML tools, resource management, and middleware support. Provides tools for vector search, embedding generation, model training, and database schema management.' 
       },
     ],
   },
   featureMatrix: {
-    title: 'Production Capabilities',
-    subtitle: 'Comprehensive AI database features built for enterprise production workloads',
+    title: 'Capabilities',
+    subtitle: 'AI database features',
     content: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
@@ -233,7 +233,7 @@ const neurondbConfig = {
           <tr className="bg-slate-800/60">
             <td className="px-4 py-3 font-medium">
               <Link href="/docs/neurondb/security" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
-                Enterprise Security
+                Security
               </Link>
             </td>
             <td className="px-4 py-3 text-slate-300">Vector encryption (AES-GCM), differential privacy, RLS integration, multi-tenant isolation</td>
@@ -286,7 +286,7 @@ const neurondbConfig = {
   },
   featureComparison: {
     title: 'NeurondB vs. Alternatives',
-    subtitle: 'Comprehensive comparison of NeurondB with other PostgreSQL AI and vector extensions',
+    subtitle: 'Comparison of NeurondB with other PostgreSQL AI and vector extensions',
     content: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
@@ -494,7 +494,7 @@ const neurondbConfig = {
         </tr>
         <tr className="bg-slate-800/60">
           <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Documentation</td>
-          <td className="px-3 py-3 text-green-400 text-xs">Comprehensive (473 functions documented)</td>
+          <td className="px-3 py-3 text-green-400 text-xs">473 functions documented</td>
           <td className="px-3 py-3 text-green-400 text-xs">Good</td>
           <td className="px-3 py-3 text-yellow-300 text-xs">Moderate</td>
           <td className="px-3 py-3 text-yellow-300 text-xs">Moderate</td>
@@ -509,12 +509,12 @@ const neurondbConfig = {
           <td className="px-3 py-3 text-green-400 text-xs">Active</td>
         </tr>
         <tr className="bg-slate-800/60">
-          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Production Readiness</td>
-          <td className="px-3 py-3 text-green-400 text-xs">Enterprise-ready</td>
-          <td className="px-3 py-3 text-green-400 text-xs">Production-ready</td>
+          <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Readiness</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Ready</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Ready</td>
           <td className="px-3 py-3 text-yellow-300 text-xs">Beta</td>
           <td className="px-3 py-3 text-yellow-300 text-xs">Early stage</td>
-          <td className="px-3 py-3 text-green-400 text-xs">Production-ready</td>
+          <td className="px-3 py-3 text-green-400 text-xs">Ready</td>
         </tr>
         <tr>
           <td className="px-3 py-3 font-medium text-cyan-300 text-xs">Dependencies</td>

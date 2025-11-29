@@ -1,8 +1,6 @@
 import React from 'react'
 import Hero from '@/components/Hero'
-import NeuronDBShowcase from '@/components/NeuronDBShowcase'
 import WhyPgElephant from '@/components/WhyPgElephant'
-import FeaturesList from '@/components/FeaturesList'
 import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
@@ -73,8 +71,6 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <WhyPgElephant />
-        <NeuronDBShowcase />
-        <FeaturesList />
       </main>
     </>
   )

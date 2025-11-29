@@ -2,15 +2,11 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { Brain, Database, Zap, Search, Cpu, Shield, BarChart3, Network, ArrowRight, Activity, Code, CheckCircle } from 'lucide-react'
+import { Brain, Database, Zap, Search, Cpu, Shield, BarChart3, Activity, CheckCircle } from 'lucide-react'
 
 const NeuronDBShowcase = () => {
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-950 via-indigo-950 to-slate-950 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/30 via-transparent to-transparent"></div>
-      <div className="absolute inset-0 bg-grid-slate-800/20 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      
+    <section className="py-24 px-4 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
@@ -192,85 +188,6 @@ const NeuronDBShowcase = () => {
           </div>
         </div>
 
-        {/* Key Metrics */}
-        <div className="grid md:grid-cols-4 gap-6 mb-16">
-          <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-xl p-6 backdrop-blur-sm text-center">
-            <div className="text-4xl font-bold text-indigo-400 mb-2">100+</div>
-            <div className="text-sm text-slate-300">SQL Functions</div>
-          </div>
-          <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-xl p-6 backdrop-blur-sm text-center">
-            <div className="text-4xl font-bold text-purple-400 mb-2">&lt;1ms</div>
-            <div className="text-sm text-slate-300">Vector Search</div>
-          </div>
-          <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-xl p-6 backdrop-blur-sm text-center">
-            <div className="text-4xl font-bold text-pink-400 mb-2">32x</div>
-            <div className="text-sm text-slate-300">Compression</div>
-          </div>
-          <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-xl p-6 backdrop-blur-sm text-center">
-            <div className="text-4xl font-bold text-cyan-400 mb-2">100x</div>
-            <div className="text-sm text-slate-300">GPU Speedup</div>
-          </div>
-        </div>
-
-        {/* Technology Stack */}
-        <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 mb-12">
-          <h3 className="text-2xl font-bold text-white mb-6 text-center">
-            Built with Production-Grade Technology
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500/20 rounded-lg mb-3">
-                <Database className="w-8 h-8 text-blue-400" />
-              </div>
-              <h4 className="text-white font-semibold mb-1">PostgreSQL Native</h4>
-              <p className="text-xs text-slate-400">Pure C implementation, PGXS build, zero core mods</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500/20 rounded-lg mb-3">
-                <Cpu className="w-8 h-8 text-green-400" />
-              </div>
-              <h4 className="text-white font-semibold mb-1">ONNX Runtime</h4>
-              <p className="text-xs text-slate-400">ML inference with BERT, CLIP, custom models</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-500/20 rounded-lg mb-3">
-                <Network className="w-8 h-8 text-purple-400" />
-              </div>
-              <h4 className="text-white font-semibold mb-1">SIMD Optimized</h4>
-              <p className="text-xs text-slate-400">AVX2, AVX-512, NEON for maximum performance</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500/20 rounded-lg mb-3">
-                <Zap className="w-8 h-8 text-red-400" />
-              </div>
-              <h4 className="text-white font-semibold mb-1">Zero Warnings</h4>
-              <p className="text-xs text-slate-400">40+ source files, clean compile, production-ready</p>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="inline-flex flex-col sm:flex-row gap-4">
-            <Link 
-              href="/neurondb" 
-              className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-indigo-500/50 flex items-center gap-2"
-            >
-              <span>Explore NeurondB</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link 
-              href="/docs/neurondb/getting-started" 
-              className="group px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-lg transition-all border border-slate-600 hover:border-slate-500 flex items-center gap-2"
-            >
-              <Code className="w-5 h-5" />
-              <span>Get Started</span>
-            </Link>
-          </div>
-          <p className="mt-6 text-sm text-slate-400">
-            PostgreSQL 16, 17, and 18 compatible • Open Source • Production Ready
-          </p>
-        </div>
       </div>
     </section>
   )

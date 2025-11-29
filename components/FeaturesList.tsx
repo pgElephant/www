@@ -23,7 +23,8 @@ import {
   BookOpen,
   Search,
   Brain,
-  BarChart3
+  BarChart3,
+  Bot
 } from 'lucide-react'
 
 const FeaturesList = () => {
@@ -74,16 +75,6 @@ const FeaturesList = () => {
           title: 'Security',
           description: 'Vector encryption (AES-GCM), differential privacy, RLS integration, audit logging',
           icon: <Shield className="w-5 h-5" />
-        },
-        {
-          title: 'NeuronAgent',
-          description: 'AI agent runtime with REST API, WebSocket, long-term memory, and tool execution',
-          icon: <Server className="w-5 h-5" />
-        },
-        {
-          title: 'NeuronMCP',
-          description: 'Model Context Protocol server for MCP-compatible clients like Claude Desktop',
-          icon: <Terminal className="w-5 h-5" />
         }
       ]
     },
@@ -291,6 +282,84 @@ const FeaturesList = () => {
           icon: <Shield className="w-5 h-5" />
         }
       ]
+    },
+    {
+      name: 'NeuronAgent',
+      description: 'AI Agent Runtime for NeuronDB',
+      icon: <Bot className="w-8 h-8" />,
+      color: 'primary',
+      link: '/docs/neurondb/neuronagent',
+      features: [
+        {
+          title: 'REST API & WebSocket',
+          description: 'Agent runtime system with REST API and WebSocket endpoints for real-time communication',
+          icon: <Server className="w-5 h-5" />
+        },
+        {
+          title: 'Long-Term Memory',
+          description: 'HNSW-based vector search for context retrieval and persistent agent memory',
+          icon: <Brain className="w-5 h-5" />
+        },
+        {
+          title: 'Tool Execution',
+          description: 'Extensible tool registry supporting SQL, HTTP, Code, and Shell operations',
+          icon: <Code className="w-5 h-5" />
+        },
+        {
+          title: 'Streaming Responses',
+          description: 'Real-time streaming responses for interactive agent applications',
+          icon: <Activity className="w-5 h-5" />
+        },
+        {
+          title: 'Background Jobs',
+          description: 'Async job processing with API key authentication for secure access',
+          icon: <Zap className="w-5 h-5" />
+        },
+        {
+          title: 'NeuronDB Integration',
+          description: 'Seamless integration with NeuronDB for embeddings and LLM operations',
+          icon: <Database className="w-5 h-5" />
+        }
+      ]
+    },
+    {
+      name: 'NeuronMCP',
+      description: 'Model Context Protocol Server for NeuronDB',
+      icon: <Terminal className="w-8 h-8" />,
+      color: 'primary',
+      link: '/docs/neurondb/neuronmcp',
+      features: [
+        {
+          title: 'MCP Protocol',
+          description: 'Full JSON-RPC 2.0 implementation with stdio communication for MCP-compatible clients',
+          icon: <Network className="w-5 h-5" />
+        },
+        {
+          title: 'Vector Operations',
+          description: 'Tools for vector search, embedding generation, and similarity queries',
+          icon: <Search className="w-5 h-5" />
+        },
+        {
+          title: 'ML Tools',
+          description: 'Model training, inference, and analytics through MCP interface',
+          icon: <Cpu className="w-5 h-5" />
+        },
+        {
+          title: 'Resource Management',
+          description: 'Database schema management and resource access control',
+          icon: <Settings className="w-5 h-5" />
+        },
+        {
+          title: 'Claude Desktop Support',
+          description: 'Works with Claude Desktop and other MCP-compatible applications',
+          icon: <Terminal className="w-5 h-5" />
+        },
+        {
+          title: 'Middleware Support',
+          description: 'Extensible middleware for custom integrations and workflows',
+          icon: <Code className="w-5 h-5" />
+        }
+      ]
     }
   ]
 
@@ -336,18 +405,10 @@ const FeaturesList = () => {
       id="features" 
       className="section-padding relative overflow-hidden"
       style={{
-        background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
+        backgroundColor: '#1f2937',
         position: 'relative'
       }}
     >
-      {/* Elegant overlay gradient - same as Hero */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(16, 185, 129, 0.15) 100%)'
-        }}
-      />
-      
       {/* Elegant floating elements - same as Hero */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating orbs */}
@@ -376,16 +437,9 @@ Enterprise Solutions
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-light mb-6 leading-tight">
             <span className="text-white">
-              PostgreSQL
-            </span>
-            <br />
-            <span className="text-purple-300 font-heading">
-              Extensions
+              Products
             </span>
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto font-light">
-            Extensions for high availability, distributed consensus, and data migration.
-          </p>
         </div>
 
         {/* Professional Features Overview */}
@@ -394,22 +448,26 @@ Enterprise Solutions
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-slate-400/20 overflow-hidden mb-12 shadow-xl">
             <div className="p-8 border-b border-slate-400/20">
               <h3 className="text-2xl font-semibold text-white mb-2">Database Extensions</h3>
-              <p className="text-white/90">Extension comparison for database infrastructure</p>
+              <p className="text-white/90">PostgreSQL extensions and services comparison</p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-slate-400/20 bg-white/5">
-                    <th className="text-left p-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Product</th>
-                    <th className="text-left p-3 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Focus Area</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Key Capabilities</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Performance Metrics</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Implementation</th>
-                    <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Enterprise Use</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {projects.map((project, index) => {
+            
+            {/* PostgreSQL Extensions Section */}
+            <div className="mb-12">
+              <h3 className="text-2xl font-semibold text-white mb-4">PostgreSQL Extensions</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-slate-400/20 bg-white/5">
+                      <th className="text-left p-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Product</th>
+                      <th className="text-left p-3 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Focus Area</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Key Capabilities</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Performance Metrics</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Implementation</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Enterprise Use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {projects.filter(p => ['NeurondB', 'pgbalancer', 'pg_stat_insights', 'pgraft'].includes(p.name)).map((project, index) => {
                     const colors = getColorClasses(project.color)
                     return (
                       <tr key={project.name} className="border-b border-slate-400/10 hover:bg-white/5 transition-all duration-200">
@@ -633,13 +691,200 @@ Enterprise Solutions
                       </tr>
                     )
                   })}
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
+            
+            {/* PostgreSQL Services Section */}
+            <div className="mt-12">
+              <h3 className="text-2xl font-semibold text-white mb-4">PostgreSQL Services</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-slate-400/20 bg-white/5">
+                      <th className="text-left p-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Product</th>
+                      <th className="text-left p-3 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Focus Area</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Key Capabilities</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/5">Performance Metrics</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/6">Implementation</th>
+                      <th className="text-left px-3 py-4 text-white font-semibold text-sm uppercase tracking-wider w-1/8">Enterprise Use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {projects.filter(p => ['pgSentinel', 'FauxDB', 'NeuronAgent', 'NeuronMCP'].includes(p.name)).map((project, index) => {
+                      const colors = getColorClasses(project.color)
+                      return (
+                        <tr key={project.name} className="border-b border-slate-400/10 hover:bg-white/5 transition-all duration-200">
+                          <td className="p-4">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
+                                {project.icon}
+                              </div>
+                              <div>
+                                <h3 className="text-base font-light text-white">{project.name}</h3>
+                                <p className={`text-xs ${colors.accent}`}>{project.description}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="p-3">
+                            <div className="space-y-1">
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Monitoring</span>
+                                  <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Management</span>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Migration</span>
+                                  <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-light rounded-full text-center">Compatibility</span>
+                                </>
+                              )}
+                              {project.name === 'NeuronAgent' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs font-light rounded-full text-center">AI Agent</span>
+                                  <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Runtime</span>
+                                </>
+                              )}
+                              {project.name === 'NeuronMCP' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">MCP Server</span>
+                                  <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Protocol</span>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.features.slice(0, 4).map((feature, featureIndex) => (
+                                <div key={featureIndex} className="flex items-center gap-2 text-white/90">
+                                  <CheckCircle className="w-3 h-3 text-green-400 flex-shrink-0" />
+                                  <span className="text-xs font-light">{feature.title}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <div className="text-xs text-white/90">• 5s update interval</div>
+                                  <div className="text-xs text-white/90">• &lt;50ms API response</div>
+                                  <div className="text-xs text-white/90">• 30+ metrics</div>
+                                  <div className="text-xs text-white/90">• Real-time WebSocket</div>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Rust performance</div>
+                                  <div className="text-xs text-white/90">• MongoDB compatible</div>
+                                  <div className="text-xs text-white/90">• SQL translation</div>
+                                  <div className="text-xs text-white/90">• Production ready</div>
+                                </>
+                              )}
+                              {project.name === 'NeuronAgent' && (
+                                <>
+                                  <div className="text-xs text-white/90">• REST API & WebSocket</div>
+                                  <div className="text-xs text-white/90">• Vector search integration</div>
+                                  <div className="text-xs text-white/90">• Tool execution</div>
+                                  <div className="text-xs text-white/90">• Streaming responses</div>
+                                </>
+                              )}
+                              {project.name === 'NeuronMCP' && (
+                                <>
+                                  <div className="text-xs text-white/90">• JSON-RPC 2.0</div>
+                                  <div className="text-xs text-white/90">• Stdio communication</div>
+                                  <div className="text-xs text-white/90">• MCP-compatible</div>
+                                  <div className="text-xs text-white/90">• Claude Desktop ready</div>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Next.js 14 + React 18</div>
+                                  <div className="text-xs text-white/90">• FastAPI Python backend</div>
+                                  <div className="text-xs text-white/90">• Docker Compose</div>
+                                  <div className="text-xs text-white/90">• Production-ready</div>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Rust-based engine</div>
+                                  <div className="text-xs text-white/90">• PostgreSQL backend</div>
+                                  <div className="text-xs text-white/90">• Docker ready</div>
+                                  <div className="text-xs text-white/90">• Cloud native</div>
+                                </>
+                              )}
+                              {project.name === 'NeuronAgent' && (
+                                <>
+                                  <div className="text-xs text-white/90">• REST API server</div>
+                                  <div className="text-xs text-white/90">• WebSocket support</div>
+                                  <div className="text-xs text-white/90">• NeuronDB integration</div>
+                                  <div className="text-xs text-white/90">• Production-ready</div>
+                                </>
+                              )}
+                              {project.name === 'NeuronMCP' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Go implementation</div>
+                                  <div className="text-xs text-white/90">• JSON-RPC protocol</div>
+                                  <div className="text-xs text-white/90">• Stdio transport</div>
+                                  <div className="text-xs text-white/90">• MCP standard</div>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Production monitoring</div>
+                                  <div className="text-xs text-white/90">• DevOps automation</div>
+                                  <div className="text-xs text-white/90">• Performance tuning</div>
+                                  <div className="text-xs text-white/90">• Capacity planning</div>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• MongoDB migration</div>
+                                  <div className="text-xs text-white/90">• Legacy app support</div>
+                                  <div className="text-xs text-white/90">• Protocol compatibility</div>
+                                  <div className="text-xs text-white/90">• Data transformation</div>
+                                </>
+                              )}
+                              {project.name === 'NeuronAgent' && (
+                                <>
+                                  <div className="text-xs text-white/90">• AI agent applications</div>
+                                  <div className="text-xs text-white/90">• Long-term memory systems</div>
+                                  <div className="text-xs text-white/90">• Tool orchestration</div>
+                                  <div className="text-xs text-white/90">• RAG workflows</div>
+                                </>
+                              )}
+                              {project.name === 'NeuronMCP' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Claude Desktop integration</div>
+                                  <div className="text-xs text-white/90">• MCP client access</div>
+                                  <div className="text-xs text-white/90">• Vector search tools</div>
+                                  <div className="text-xs text-white/90">• ML model management</div>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
           </div>
 
           {/* Enterprise Capabilities Overview */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
             {projects.map((project, index) => {
               const colors = getColorClasses(project.color)
               return (
@@ -679,47 +924,6 @@ Enterprise Solutions
                 </div>
               )
             })}
-          </div>
-        </div>
-
-
-        {/* Enterprise CTA */}
-        <div className="mt-20 text-center relative z-10">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-400/30 max-w-5xl mx-auto">
-            <h3 className="text-3xl font-light mb-4 text-white">
-              Database Extensions
-            </h3>
-            <p className="text-lg text-white/90 mb-8 max-w-3xl mx-auto">
-              PostgreSQL extensions for production use. Reduces costs. Improves reliability.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center p-4">
-                <div className="text-2xl font-light text-green-400 mb-2">99.99%</div>
-                <div className="text-sm text-white/90">Uptime SLA</div>
-              </div>
-              <div className="text-center p-4">
-                <div className="text-2xl font-light text-blue-400 mb-2">50%</div>
-                <div className="text-sm text-white/90">Cost Reduction</div>
-              </div>
-              <div className="text-center p-4">
-                <div className="text-2xl font-light text-purple-400 mb-2">24/7</div>
-                <div className="text-sm text-white/90">Enterprise Support</div>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/download" className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-4 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
-                <Database className="w-5 h-5" />
-                Download
-              </a>
-              <a href="/docs" className="border-2 border-white text-white px-8 py-4 rounded-lg font-light hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-                <Shield className="w-5 h-5" />
-                Documentation
-              </a>
-              <a href="/contact" className="border-2 border-white/40 text-white px-8 py-4 rounded-lg font-light hover:bg-white/20 hover:text-white transition-colors flex items-center justify-center gap-2">
-                <Users className="w-5 h-5" />
-                Contact
-              </a>
-            </div>
           </div>
         </div>
       </div>

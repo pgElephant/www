@@ -38,7 +38,7 @@ const WhyPgElephant = () => {
   ]
 
   return (
-    <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)' }}>
+    <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
       {/* Floating Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl" />
