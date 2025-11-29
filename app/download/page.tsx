@@ -244,7 +244,7 @@ const DownloadPage = () => {
     <div className="pt-0">
       {/* Unified Professional Hero */}
       <section 
-        className="relative text-center overflow-hidden bg-slate-950"
+        className="relative text-center overflow-hidden bg-hero-gradient"
         style={{ 
           backgroundImage: 'url(/hero-bg-technical.svg)',
           backgroundSize: 'cover',
@@ -475,7 +475,7 @@ const DownloadPage = () => {
       </section>
 
       {/* Quick Start Section */}
-      <section className="py-24 border-t border-b border-gray-100 relative overflow-hidden" style={{ background: unifiedHeroGradient }}>
+      <section className="py-24 border-t border-b border-gray-100 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-orange-400/10 rounded-full blur-2xl animate-pulse" />

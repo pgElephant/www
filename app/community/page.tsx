@@ -174,7 +174,7 @@ const CommunityPage = () => {
       </div>
 
       {/* Community Platforms - Enhanced Layout */}
-      <div className="py-20 relative overflow-hidden style={{ backgroundColor: '#1f2937' }}">
+      <div className="py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             <div className="space-y-16">
@@ -470,8 +470,9 @@ const CommunityPage = () => {
 
       {/* GitHub Hero Section */}
       <div 
-        className="relative overflow-hidden style={{ backgroundColor: '#1f2937' }}"
+        className="relative overflow-hidden"
         style={{ 
+          backgroundColor: '#1f2937',
           position: 'relative'
         }}
       >
@@ -647,8 +648,9 @@ const CommunityPage = () => {
 
       {/* Community Forum Hero Section */}
       <div 
-        className="relative overflow-hidden style={{ backgroundColor: '#1f2937' }}"
+        className="relative overflow-hidden"
         style={{ 
+          backgroundColor: '#1f2937',
           position: 'relative'
         }}
       >
@@ -902,8 +904,9 @@ const CommunityPage = () => {
 
       {/* Community Guidelines Section */}
       <div 
-        className="py-20 relative overflow-hidden style={{ backgroundColor: '#1f2937' }}"
+        className="py-20 relative overflow-hidden"
         style={{ 
+          backgroundColor: '#1f2937',
           position: 'relative'
         }}
       >

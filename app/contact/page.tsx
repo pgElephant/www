@@ -170,7 +170,7 @@ Message: ${formData.message}
       </div>
 
       {/* Professional Contact Methods */}
-      <div className="py-24 relative overflow-hidden style={{ backgroundColor: '#1f2937' }}">
+      <div className="py-24 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="container-wide">
           <div className="max-w-7xl mx-auto">
             {/* Professional Header */}
@@ -374,7 +374,7 @@ Message: ${formData.message}
       </div>
 
       {/* Professional Contact Form Section */}
-      <div className="py-24 style={{ backgroundColor: '#1f2937' }}">
+      <div className="py-24" style={{ backgroundColor: '#1f2937' }}>
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

@@ -137,12 +137,10 @@ body {
 
 /* Utility classes for consistent solid backgrounds */
 .bg-hero-gradient {
-  background: var(--hero-gradient);
   background-color: #1f2937;
 }
 
 .bg-page-gradient {
-  background: var(--page-gradient);
   background-color: #1f2937;
 }
 
