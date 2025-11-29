@@ -108,10 +108,10 @@ const WhyPgElephant = () => {
     <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
       <div className="container-extra-wide relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-white drop-shadow-2xl shadow-2xl mb-6">
+          <h2 className="text-4xl md:text-5xl font-light text-white mb-6">
             Products
           </h2>
-          <p className="text-xl text-white/90 leading-relaxed font-light drop-shadow-lg">
+          <p className="text-xl text-white/90 leading-relaxed font-light">
             PostgreSQL extensions and tools for AI, high availability, connection pooling, monitoring, and multi-protocol support.
           </p>
         </div>
@@ -123,11 +123,11 @@ const WhyPgElephant = () => {
               <Link
                 key={index}
                 href={product.href}
-                className="bg-white/10 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-white/20 hover:shadow-xl hover:bg-white/15 hover:border-cyan-500/50 transition-all duration-300 relative z-10 group flex flex-col h-full"
+                className="bg-white/10 p-8 rounded-xl border border-white/20 hover:bg-white/15 hover:border-cyan-500/50 transition-all duration-300 relative z-10 group flex flex-col h-full"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/20 group-hover:border-cyan-500/50 transition-colors flex-shrink-0">
-                    <IconComponent className="w-6 h-6 text-white drop-shadow-lg group-hover:text-cyan-300 transition-colors" />
+                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center border border-white/20 group-hover:border-cyan-500/50 transition-colors flex-shrink-0">
+                    <IconComponent className="w-6 h-6 text-white group-hover:text-cyan-300 transition-colors" />
                   </div>
                   <span className="text-xs text-white/60 font-light px-2 py-1 bg-white/5 rounded border border-white/10">
                     {product.postgresqlVersions}
@@ -140,11 +140,11 @@ const WhyPgElephant = () => {
                   </span>
                 </div>
                 
-                <h3 className="text-xl font-light text-white mb-3 drop-shadow-lg group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-xl font-light text-white mb-3 group-hover:text-cyan-300 transition-colors">
                   {product.title}
                 </h3>
                 
-                <p className="text-white/90 leading-relaxed font-light drop-shadow-sm mb-4 text-sm">
+                <p className="text-white/90 leading-relaxed font-light mb-4 text-sm">
                   {product.description}
                 </p>
                 
