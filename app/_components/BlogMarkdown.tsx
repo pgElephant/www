@@ -109,16 +109,14 @@ export function BlogMarkdown({ children }: { children: string }) {
                   language={match[1]}
                 >
                   {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <div className="w-full max-w-full">
-                      <pre className={`${className} rounded-lg text-sm shadow-2xl w-full max-w-full ${hasOutput ? 'min-h-[120px]' : 'min-h-[80px]'} flex flex-col justify-start border border-gray-600/30 overflow-x-hidden`} style={style}>
-                        <div className="flex-1 p-4 w-full max-w-full overflow-hidden">
+                    <div className="w-full max-w-full overflow-x-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1)' }}>
+                      <pre className={`${className} rounded-lg text-sm shadow-2xl ${hasOutput ? 'min-h-[120px]' : 'min-h-[80px]'} flex flex-col justify-start border border-gray-600/30 overflow-x-auto`} style={style}>
+                        <div className="flex-1 p-4 min-w-max">
                           {tokens.map((line, i) => (
-                            <div key={i} {...getLineProps({ line })} className="min-h-[1.5rem] w-full max-w-full overflow-hidden">
-                              <span className="whitespace-pre-wrap break-words break-all" style={{ wordBreak: 'break-all', overflowWrap: 'anywhere' }}>
-                                {line.map((token, tokenKey) => (
-                                  <span key={tokenKey} {...getTokenProps({ token })} />
-                                ))}
-                              </span>
+                            <div key={i} {...getLineProps({ line })} className="min-h-[1.5rem] whitespace-pre">
+                              {line.map((token, tokenKey) => (
+                                <span key={tokenKey} {...getTokenProps({ token })} />
+                              ))}
                             </div>
                           ))}
                         </div>

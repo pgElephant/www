@@ -681,13 +681,13 @@ FROM relevant_chunks;
 The RAG pipeline retrieves the most relevant context chunks:
 
 \`\`\`
- chunk_id |                  title                  |                                                 preview                                                 | score  | rank 
-----------+-----------------------------------------+---------------------------------------------------------------------------------------------------------+--------+------
-        1 | PostgreSQL Performance Tuning           | PostgreSQL performance can be significantly improved through proper indexing strategies...              | 0.0000 |    1
-       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user queries to embeddings, 2) Retrieving relevant documents usi... | 0.0000 |    2
-       19 | Database Sharding Strategies            | Common strategies include: Range-based sharding (e.g., by date), Hash-based sharding (distribute eve... | 0.0000 |    3
-        2 | PostgreSQL Performance Tuning           | B-tree indexes are the default and work well for most queries...                                        | 0.0000 |    4
-        3 | PostgreSQL Performance Tuning           | GiST indexes are useful for full-text search and geometric data...                                      | 0.0000 |    5
+ chunk_id |                  title                  |                    preview                    | score  | rank 
+----------+-----------------------------------------+------------------------------------------------+--------+------
+        1 | PostgreSQL Performance Tuning           | PostgreSQL performance can be significantly... | 0.0000 |    1
+       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    | 0.0000 |    2
+       19 | Database Sharding Strategies            | Common strategies include: Range-based...      | 0.0000 |    3
+        2 | PostgreSQL Performance Tuning           | B-tree indexes are the default and work...     | 0.0000 |    4
+        3 | PostgreSQL Performance Tuning           | GiST indexes are useful for full-text...       | 0.0000 |    5
 (5 rows)
 \`\`\`
 
