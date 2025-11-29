@@ -21,7 +21,7 @@ export default function HeroTemplate({
   return (
     <section
       className={cn(
-        'relative overflow-hidden min-h-[400px] flex items-center',
+        'relative overflow-hidden flex items-center h-[400px] md:h-[500px]',
         className
       )}
       style={{
@@ -31,7 +31,7 @@ export default function HeroTemplate({
       {overlay && (
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       )}
-      <div className="relative z-10 w-full pt-32 pb-20">{children}</div>
+      <div className="relative z-10 w-full">{children}</div>
     </section>
   )
 }
