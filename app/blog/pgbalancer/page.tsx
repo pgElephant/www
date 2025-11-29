@@ -1066,7 +1066,7 @@ pgbalancer is part of the pgElephant suite of PostgreSQL tools designed for mode
 
 export default function PgbalancerBlogPost() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen style={{ backgroundColor: '#1f2937' }}">
       <article className="max-w-4xl mx-auto px-6 py-16">
         {/* Content */}
         <div className="prose prose-invert prose-lg max-w-none">

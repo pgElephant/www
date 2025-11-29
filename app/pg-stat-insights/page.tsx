@@ -56,7 +56,7 @@ const pgStatInsightsConfig = {
   featureMatrix: (
     <div className="space-y-8">
       {/* 11 Views Overview */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700">
+      <div className="style={{ backgroundColor: '#1f2937' }} p-8 rounded-xl border border-slate-700">
         <h3 className="text-2xl font-bold text-white mb-6 text-center">11 Pre-Built Views for Complete Performance Visibility</h3>
         
         <div className="grid grid-cols-3 gap-4">

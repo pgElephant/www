@@ -244,7 +244,7 @@ const DownloadPage = () => {
     <div className="pt-0">
       {/* Unified Professional Hero */}
       <section 
-        className="relative text-center overflow-hidden bg-hero-gradient"
+        className="relative text-center overflow-hidden bg-slate-950"
         style={{ 
           backgroundImage: 'url(/hero-bg-technical.svg)',
           backgroundSize: 'cover',
@@ -289,7 +289,7 @@ const DownloadPage = () => {
       </section>
 
       {/* pgElephant Products - Card-Based Layout */}
-      <section className="py-24 relative overflow-hidden bg-page-gradient">
+      <section className="py-24 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="container-wide mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">pgElephant Products</h2>
@@ -508,7 +508,7 @@ const DownloadPage = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-20 relative overflow-hidden bg-page-gradient">
+      <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="container-wide mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-thin text-white mb-4">Why Choose pgElephant?</h2>

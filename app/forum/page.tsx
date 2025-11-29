@@ -78,7 +78,7 @@ const ForumPage = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-page-gradient text-white">
+    <div className="min-h-screen style={{ backgroundColor: '#1f2937' }} text-white">
       <div className="container mx-auto px-6 py-16 max-w-7xl">
         {/* Header */}
         <div className="mb-12 text-center">

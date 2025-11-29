@@ -56,7 +56,7 @@ const pgbalancerConfig = {
   featureMatrix: (
     <div className="space-y-8">
       {/* Architecture Diagram */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700">
+      <div className="style={{ backgroundColor: '#1f2937' }} p-8 rounded-xl border border-slate-700">
         <h3 className="text-2xl font-bold text-white mb-6 text-center">3-Node PostgreSQL Cluster Architecture</h3>
         
         <div className="space-y-6">

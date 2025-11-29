@@ -59,10 +59,10 @@ body {
  * Change these values to update gradients across the entire site.
  */
 :root {
-  /* Hero and Footer Gradient (dark) */
-  --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  /* Page Gradient (used for all other content) */
-  --page-gradient: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+  /* Hero and Footer - Solid color (dark) */
+  --hero-gradient: #0f172a;
+  /* Page Background - Solid color (used for all other content) - matches blog posts */
+  --page-gradient: #1f2937;
   
   /* Primary Colors */
   --primary-50: #eef2ff;
@@ -142,6 +142,7 @@ body {
 
 .bg-page-gradient {
   background: var(--page-gradient);
+  background-color: #1f2937;
 }
 
 

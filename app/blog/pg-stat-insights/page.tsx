@@ -700,7 +700,7 @@ export default function PgStatInsightsBlogPost() {
       <div 
         className="relative overflow-hidden py-16 px-6"
         style={{ 
-          background: `linear-gradient(135deg, #070d1a 0%, #111827 25%, #1f2937 50%, #374151 75%, #4b5563 100%)`,
+          backgroundColor: '#1f2937',
         }}
       >
         <div 
