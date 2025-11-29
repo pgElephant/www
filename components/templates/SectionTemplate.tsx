@@ -20,10 +20,17 @@ export default function SectionTemplate({
 }: SectionTemplateProps) {
   const backgroundClass =
     background === 'hero'
-      ? 'bg-hero-gradient'
+      ? ''
       : background === 'page'
-      ? 'bg-page-gradient'
+      ? ''
       : 'bg-transparent'
+  
+  const backgroundColor =
+    background === 'hero'
+      ? '#111827'
+      : background === 'page'
+      ? '#1f2937'
+      : 'transparent'
 
   const paddingClass = {
     none: '',
@@ -34,7 +41,10 @@ export default function SectionTemplate({
   }[padding]
 
   return (
-    <section className={cn(backgroundClass, paddingClass, className)}>
+    <section 
+      className={cn(backgroundClass, paddingClass, className)}
+      style={backgroundColor !== 'transparent' ? { backgroundColor } : undefined}
+    >
       {children}
     </section>
   )

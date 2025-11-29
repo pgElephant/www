@@ -1,13 +1,20 @@
 'use client'
 
 import React from 'react'
-import { Brain, Network, Zap, Database, BarChart3, Activity } from 'lucide-react'
 import Link from 'next/link'
+import {
+  NeurondBIcon,
+  PgraftIcon,
+  PgbalancerIcon,
+  FauxDbIcon,
+  PgStatInsightsIcon,
+  PgSentinelIcon,
+} from '@/components/ProductIcons'
 
 const WhyPgElephant = () => {
   const products = [
     {
-      icon: Brain,
+      icon: NeurondBIcon,
       title: 'NeuronDB',
       category: 'AI Database Extension',
       description: 'AI database extension with vector search, RAG pipeline, ML inference, and GPU acceleration.',
@@ -23,7 +30,7 @@ const WhyPgElephant = () => {
       href: '/neurondb'
     },
     {
-      icon: Network,
+      icon: PgraftIcon,
       title: 'pgraft',
       category: 'High Availability Extension',
       description: 'Raft consensus for PostgreSQL with automatic leader election and split-brain prevention.',
@@ -39,7 +46,7 @@ const WhyPgElephant = () => {
       href: '/pgraft'
     },
     {
-      icon: Zap,
+      icon: PgbalancerIcon,
       title: 'pgBalancer',
       category: 'Connection Pooler & Load Balancer',
       description: 'Connection pooler with load balancing, REST API, and machine learning query routing.',
@@ -55,7 +62,7 @@ const WhyPgElephant = () => {
       href: '/pgbalancer'
     },
     {
-      icon: Database,
+      icon: FauxDbIcon,
       title: 'FauxDB',
       category: 'Dual-Protocol Database',
       description: 'Dual-protocol database supporting MongoDB and MySQL wire protocols on PostgreSQL.',
@@ -71,7 +78,7 @@ const WhyPgElephant = () => {
       href: '/fauxdb'
     },
     {
-      icon: BarChart3,
+      icon: PgStatInsightsIcon,
       title: 'pg_stat_insights',
       category: 'Performance Analytics Extension',
       description: 'Performance analytics extension with query analysis and optimization recommendations.',
@@ -87,7 +94,7 @@ const WhyPgElephant = () => {
       href: '/pg-stat-insights'
     },
     {
-      icon: Activity,
+      icon: PgSentinelIcon,
       title: 'pgSentinel',
       category: 'Monitoring Platform',
       description: 'Monitoring platform with Grafana dashboards, Prometheus integration, and real-time metrics.',
@@ -127,7 +134,7 @@ const WhyPgElephant = () => {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center border border-white/20 group-hover:border-cyan-500/50 transition-colors flex-shrink-0">
-                    <IconComponent className="w-6 h-6 text-white group-hover:text-cyan-300 transition-colors" />
+                    <IconComponent size={24} className="text-white group-hover:text-cyan-300 transition-colors" />
                   </div>
                   <span className="text-xs text-white/60 font-light px-2 py-1 bg-white/5 rounded border border-white/10">
                     {product.postgresqlVersions}

@@ -10,7 +10,7 @@ export interface ContentTemplateProps {
 
 /**
  * ContentTemplate - Wrapper for main content areas between hero and footer
- * Uses bg-page-gradient and provides consistent max-width and padding
+ * Uses solid background color and provides consistent max-width and padding
  */
 export default function ContentTemplate({
   children,
@@ -31,7 +31,10 @@ export default function ContentTemplate({
   }[maxWidth]
 
   return (
-    <div className={cn('bg-page-gradient', className)}>
+    <div 
+      className={cn(className)}
+      style={{ backgroundColor: '#1f2937' }}
+    >
       <div
         className={cn(
           'mx-auto px-4 sm:px-6 lg:px-8',

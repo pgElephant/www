@@ -9,7 +9,7 @@ export interface PageTemplateProps {
 
 /**
  * PageTemplate - Main page wrapper component
- * Uses bg-page-gradient for consistent page background
+ * Uses solid background color for consistent page background
  */
 export default function PageTemplate({
   children,
@@ -17,7 +17,10 @@ export default function PageTemplate({
   containerClassName,
 }: PageTemplateProps) {
   return (
-    <div className={cn('min-h-screen bg-page-gradient', className)}>
+    <div 
+      className={cn('min-h-screen', className)}
+      style={{ backgroundColor: '#1f2937' }}
+    >
       <div className={cn('w-full', containerClassName)}>{children}</div>
     </div>
   )

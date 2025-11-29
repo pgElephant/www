@@ -164,7 +164,7 @@ export default function ProductPageTemplate({
 
       {/* Component Cards Section */}
       {componentCards && componentCards.length > 0 && (
-        <SectionTemplate background="hero" padding="xl">
+        <SectionTemplate background="page" padding="xl">
           <div className="container-wide">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
@@ -214,7 +214,7 @@ export default function ProductPageTemplate({
 
       {/* Architecture Diagram */}
       {architecture && (
-        <SectionTemplate background="hero" padding="xl">
+        <SectionTemplate background="page" padding="xl">
           <div className="container-wide">
             {typeof architecture === 'object' && 'content' in architecture ? (
               <>
@@ -244,7 +244,7 @@ export default function ProductPageTemplate({
 
       {/* High-Level Feature Pillars */}
       {featurePillars && (
-        <SectionTemplate background="hero" padding="xl" className="relative overflow-hidden">
+        <SectionTemplate background="page" padding="xl" className="relative overflow-hidden">
           <div className="container-wide">
             <div className="text-center mb-14">
               {featurePillars.kicker && (
@@ -384,7 +384,7 @@ export default function ProductPageTemplate({
 
       {/* CTA Section */}
       {ctaSection && (
-        <SectionTemplate background="hero" padding="xl">
+        <SectionTemplate background="page" padding="xl">
           <div className="container-wide">
             <div className="max-w-4xl mx-auto text-center">
               {ctaSection.kicker && (

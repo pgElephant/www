@@ -125,37 +125,36 @@ Message: ${formData.message}
 
   return (
     <div className="pt-16">
-      {/* Hero Section with technical background - same as main page */}
+      {/* Hero Section */}
       <div 
-        className="relative overflow-hidden bg-hero-gradient"
+        className="relative overflow-hidden bg-hero-gradient min-h-[400px] flex items-center"
         style={{ 
           position: 'relative'
         }}
       >
-
-        <div className="container-extra-wide relative z-10">
+        <div className="container-extra-wide mx-auto relative z-10 w-full py-20">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-thin text-white mb-6 drop-shadow-lg">
+              <h1 className="text-4xl md:text-5xl font-thin text-white mb-6">
                 Contact Us
               </h1>
-              <p className="text-xl mb-8 leading-relaxed text-white drop-shadow-lg">
+              <p className="text-xl mb-8 leading-relaxed text-white">
                 Get in touch with our team for support, sales, or technical questions. We're here to help you succeed with pgElephant's enterprise-grade PostgreSQL solutions.
               </p>
               
               {/* Contact Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
                 <div className="text-center">
-                  <div className="text-3xl font-thin text-white mb-2 drop-shadow-lg">&lt; 2hrs</div>
-                  <div className="text-sm text-white/80 drop-shadow-lg">Response Time</div>
+                  <div className="text-3xl font-thin text-white mb-2">&lt; 2hrs</div>
+                  <div className="text-sm text-white/80">Response Time</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-thin text-white mb-2 drop-shadow-lg">24/7</div>
-                  <div className="text-sm text-white/80 drop-shadow-lg">Enterprise Support</div>
+                  <div className="text-3xl font-thin text-white mb-2">24/7</div>
+                  <div className="text-sm text-white/80">Enterprise Support</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-thin text-white mb-2 drop-shadow-lg">99.9%</div>
-                  <div className="text-sm text-white/80 drop-shadow-lg">Uptime SLA</div>
+                  <div className="text-3xl font-thin text-white mb-2">99.9%</div>
+                  <div className="text-sm text-white/80">Uptime SLA</div>
                 </div>
               </div>
             </div>

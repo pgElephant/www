@@ -10,7 +10,7 @@ export interface HeroTemplateProps {
 
 /**
  * HeroTemplate - Standardized hero section wrapper
- * Uses bg-hero-gradient background for consistent hero styling
+ * Uses solid background color for consistent hero styling
  */
 export default function HeroTemplate({
   children,
@@ -21,7 +21,7 @@ export default function HeroTemplate({
   return (
     <section
       className={cn(
-        'relative overflow-hidden bg-hero-gradient min-h-[400px] flex items-center',
+        'relative overflow-hidden min-h-[400px] flex items-center',
         className
       )}
       style={{

@@ -133,35 +133,35 @@ const CommunityPage = () => {
 
   return (
     <div className="pt-16">
-      {/* Hero Section with technical background - same as main page */}
+      {/* Hero Section */}
       <div 
-        className="relative overflow-hidden bg-hero-gradient"
+        className="relative overflow-hidden bg-hero-gradient min-h-[400px] flex items-center"
         style={{ 
           position: 'relative'
         }}
       >
-
-        <div className="container-extra-wide relative z-10">
+        <div className="container-extra-wide mx-auto relative z-10 w-full py-20">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6 drop-shadow-lg">
-              Community
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto drop-shadow-lg">
-              Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
-            </p>
-            
-            {/* Community Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
-              {communityStats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="flex justify-center mb-2">
-                    <stat.icon className={`w-8 h-8 ${stat.color}`} />
+              <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
+                Community
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto">
+                Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
+              </p>
+              
+              {/* Community Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
+                {communityStats.map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="flex justify-center mb-2">
+                      <stat.icon className={`w-8 h-8 ${stat.color}`} />
+                    </div>
+                    <div className="text-3xl font-thin text-white mb-2">{stat.value}</div>
+                    <div className="text-sm text-white/80">{stat.label}</div>
                   </div>
-                  <div className="text-3xl font-thin text-white mb-2 drop-shadow-lg">{stat.value}</div>
-                  <div className="text-sm text-white/80 drop-shadow-lg">{stat.label}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -943,7 +943,6 @@ const CommunityPage = () => {
           </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }
