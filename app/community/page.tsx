@@ -134,9 +134,9 @@ const CommunityPage = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section 
-        className="relative text-center overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
-        style={{ 
+      <section
+        className="relative text-center overflow-hidden flex items-center h-[467px] md:h-[583px] pt-20"
+        style={{
           backgroundColor: '#111827'
         }}
       >
@@ -148,7 +148,7 @@ const CommunityPage = () => {
             <p className="text-xl md:text-2xl text-white mb-8 max-w-4xl mx-auto drop-shadow-lg">
               Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
             </p>
-            
+
             {/* Community Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
               {communityStats.map((stat, index) => (
@@ -175,19 +175,19 @@ const CommunityPage = () => {
                   {/* Platform Header with Stats */}
                   <div className="flex flex-col lg:flex-row lg:items-center mb-8 gap-6">
                     <div className="flex items-center">
-                      <div 
-                        className="w-16 h-16 flex items-center justify-center mr-6 rounded-xl" 
-                        style={{ 
-                          backgroundColor: platform.id === 'github' ? '#24292e' : 
-                                          platform.id === 'discord' ? '#5865f2' : '#f8fafc'
+                      <div
+                        className="w-16 h-16 flex items-center justify-center mr-6 rounded-xl"
+                        style={{
+                          backgroundColor: platform.id === 'github' ? '#24292e' :
+                            platform.id === 'discord' ? '#5865f2' : '#f8fafc'
                         }}
                       >
-                        <platform.icon 
-                          className="w-8 h-8" 
-                          style={{ 
-                            color: platform.id === 'github' ? '#ffffff' : 
-                                   platform.id === 'discord' ? '#ffffff' : '#6366f1'
-                          }} 
+                        <platform.icon
+                          className="w-8 h-8"
+                          style={{
+                            color: platform.id === 'github' ? '#ffffff' :
+                              platform.id === 'discord' ? '#ffffff' : '#6366f1'
+                          }}
                         />
                       </div>
                       <div>
@@ -202,7 +202,7 @@ const CommunityPage = () => {
                         </p>
                       </div>
                     </div>
-                    
+
                     {/* Platform Stats */}
                     <div className="flex flex-wrap gap-4 lg:ml-auto">
                       {Object.entries(platform.stats).map(([key, value]) => (
@@ -272,9 +272,9 @@ const CommunityPage = () => {
       </div>
 
       {/* Discord Hero Section */}
-      <div 
+      <div
         className="relative overflow-hidden"
-        style={{ 
+        style={{
           backgroundColor: '#1f2937',
           position: 'relative'
         }}
@@ -285,7 +285,7 @@ const CommunityPage = () => {
           <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-indigo-500/15 to-blue-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          
+
           {/* Subtle pattern overlay */}
           <div
             className="absolute inset-0 opacity-10"
@@ -461,9 +461,9 @@ const CommunityPage = () => {
       </div>
 
       {/* GitHub Hero Section */}
-      <div 
+      <div
         className="relative overflow-hidden"
-        style={{ 
+        style={{
           backgroundColor: '#1f2937',
           position: 'relative'
         }}
@@ -474,7 +474,7 @@ const CommunityPage = () => {
           <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-gray-500/20 to-slate-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-slate-500/15 to-gray-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-gray-500/10 to-slate-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          
+
           {/* Subtle pattern overlay */}
           <div
             className="absolute inset-0 opacity-10"
@@ -639,9 +639,9 @@ const CommunityPage = () => {
       </div>
 
       {/* Community Forum Hero Section */}
-      <div 
+      <div
         className="relative overflow-hidden"
-        style={{ 
+        style={{
           backgroundColor: '#1f2937',
           position: 'relative'
         }}
@@ -652,7 +652,7 @@ const CommunityPage = () => {
           <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-teal-500/15 to-cyan-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-cyan-500/10 to-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          
+
           {/* Subtle pattern overlay */}
           <div
             className="absolute inset-0 opacity-10"
@@ -895,9 +895,9 @@ const CommunityPage = () => {
       </div>
 
       {/* Community Guidelines Section */}
-      <div 
+      <div
         className="py-20 relative overflow-hidden"
-        style={{ 
+        style={{
           backgroundColor: '#1f2937',
           position: 'relative'
         }}
@@ -908,7 +908,7 @@ const CommunityPage = () => {
           <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-purple-500/15 to-blue-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          
+
           {/* Subtle pattern overlay */}
           <div
             className="absolute inset-0 opacity-10"
@@ -926,7 +926,7 @@ const CommunityPage = () => {
               <h2 className="text-3xl font-thin text-white mb-4">Community Guidelines</h2>
               <p className="text-lg text-white/90">Our principles for a welcoming and productive community</p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {guidelines.map((guideline, index) => (
                 <div key={index} className="text-center">

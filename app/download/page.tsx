@@ -249,28 +249,27 @@ const DownloadPage = () => {
             backgroundColor: '#111827'
           }}
         >
-
         <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">Downloads</h1>
-            <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Downloads</h1>
+            <p className="text-lg md:text-xl text-white mb-6 max-w-2xl mx-auto drop-shadow-lg">
               Official pgElephant releases. Open source PostgreSQL extensions and tools for modern distributed systems.
             </p>
             {/* Trust Bar */}
-            <div className="flex flex-wrap justify-center gap-6 mb-10">
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
               {trustBar.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20 text-base font-semibold">
-                  <item.icon className="w-5 h-5" />
+                <div key={i} className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20 text-sm font-semibold">
+                  <item.icon className="w-4 h-4" />
                   {item.label}
                 </div>
               ))}
             </div>
             {/* Download Stats */}
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3">
               {downloadStats.map((stat, i) => (
-                <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm px-6 py-4 rounded-xl min-w-[120px] border border-white/20">
-                  <stat.icon className={`w-7 h-7 mb-1 ${stat.color}`} />
-                  <span className="text-2xl font-thin text-white">{stat.value}</span>
+                <div key={i} className="flex flex-col items-center bg-white/10 backdrop-blur-sm px-5 py-3 rounded-xl min-w-[110px] border border-white/20">
+                  <stat.icon className={`w-6 h-6 mb-1 ${stat.color}`} />
+                  <span className="text-xl font-bold text-white">{stat.value}</span>
                   <span className="text-xs text-white">{stat.label}</span>
                 </div>
               ))}

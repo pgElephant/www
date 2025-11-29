@@ -127,7 +127,7 @@ Message: ${formData.message}
     <div className="pt-16">
       {/* Hero Section */}
       <div 
-        className="relative overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
+        className="relative overflow-hidden flex items-center h-[467px] md:h-[583px] pt-20"
         style={{ 
           backgroundColor: '#111827'
         }}
