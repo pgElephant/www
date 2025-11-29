@@ -137,7 +137,6 @@ const CommunityPage = () => {
       <div 
         className="relative overflow-hidden bg-hero-gradient"
         style={{ 
-          backgroundColor: '#1f2937',
           position: 'relative'
         }}
       >
