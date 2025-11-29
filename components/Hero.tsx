@@ -82,16 +82,16 @@ const Hero = () => {
                       <h1 className="text-2xl md:text-3xl font-light text-white drop-shadow-lg">
                         {current.name}
                       </h1>
-                      <h2 className="text-xl md:text-2xl font-bold text-white/95 mt-1 drop-shadow-lg">
+                      <h2 className="text-xl md:text-2xl font-bold text-white mt-1 drop-shadow-lg">
                         {current.title}
                       </h2>
-                      <p className="text-base font-light text-white/85 mt-1 drop-shadow-lg">
+                      <p className="text-base font-light text-white mt-1 drop-shadow-lg">
                         PostgreSQL extensions for production use
                       </p>
                     </div>
                   </div>
                 </div>
-                    <div className="text-lg max-w-4xl space-y-2 text-left pl-12 text-white/95 drop-shadow-lg">
+                    <div className="text-lg max-w-4xl space-y-2 text-left pl-12 text-white drop-shadow-lg">
                       <p>{current.description}</p>
                       <p>{current.description2}</p>
                       <p>{current.description3}</p>

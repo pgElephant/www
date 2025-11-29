@@ -244,18 +244,15 @@ const DownloadPage = () => {
     <div className="pt-0">
       {/* Unified Professional Hero */}
         <section 
-          className="relative text-center overflow-hidden bg-hero-gradient min-h-[400px] flex items-center"
+          className="relative text-center overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
           style={{ 
-            position: 'relative'
+            backgroundColor: '#111827'
           }}
         >
 
-        <div className="container-extra-wide mx-auto relative z-10 w-full py-20">
+        <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <Image src="/ico/pgElephant_HD.ico" alt="pgElephant" width={80} height={80} className="drop-shadow-2xl" />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">pgElephant Download Center</h1>
+            <h1 className="text-5xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">Downloads</h1>
             <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow-lg">
               Official pgElephant releases. Open source PostgreSQL extensions and tools for modern distributed systems.
             </p>

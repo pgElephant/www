@@ -135,12 +135,12 @@ const CommunityPage = () => {
     <div className="pt-16">
       {/* Hero Section */}
       <div 
-        className="relative overflow-hidden bg-hero-gradient min-h-[400px] flex items-center"
+        className="relative overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
         style={{ 
-          position: 'relative'
+          backgroundColor: '#111827'
         }}
       >
-        <div className="container-extra-wide mx-auto relative z-10 w-full py-20">
+        <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-6xl mx-auto text-center">
               <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
@@ -158,7 +158,7 @@ const CommunityPage = () => {
                       <stat.icon className={`w-8 h-8 ${stat.color}`} />
                     </div>
                     <div className="text-3xl font-thin text-white mb-2">{stat.value}</div>
-                    <div className="text-sm text-white/80">{stat.label}</div>
+                    <div className="text-sm text-white">{stat.label}</div>
                   </div>
                 ))}
               </div>

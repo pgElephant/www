@@ -127,12 +127,12 @@ Message: ${formData.message}
     <div className="pt-16">
       {/* Hero Section */}
       <div 
-        className="relative overflow-hidden bg-hero-gradient min-h-[400px] flex items-center"
+        className="relative overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
         style={{ 
-          position: 'relative'
+          backgroundColor: '#111827'
         }}
       >
-        <div className="container-extra-wide mx-auto relative z-10 w-full py-20">
+        <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-thin text-white mb-6">
@@ -146,15 +146,15 @@ Message: ${formData.message}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
                 <div className="text-center">
                   <div className="text-3xl font-thin text-white mb-2">&lt; 2hrs</div>
-                  <div className="text-sm text-white/80">Response Time</div>
+                  <div className="text-sm text-white">Response Time</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-thin text-white mb-2">24/7</div>
-                  <div className="text-sm text-white/80">Enterprise Support</div>
+                  <div className="text-sm text-white">Enterprise Support</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-thin text-white mb-2">99.9%</div>
-                  <div className="text-sm text-white/80">Uptime SLA</div>
+                  <div className="text-sm text-white">Uptime SLA</div>
                 </div>
               </div>
             </div>

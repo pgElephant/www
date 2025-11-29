@@ -130,7 +130,7 @@ export default function ProductPageTemplate({
                   {heroTitle}
                 </div>
                 {hero.subtitle && (
-                  <div className="text-lg lg:text-xl font-semibold text-white/90 mb-8 leading-relaxed drop-shadow-lg">
+                  <div className="text-lg lg:text-xl font-semibold text-white mb-8 leading-relaxed drop-shadow-lg">
                     {hero.subtitle}
                   </div>
                 )}
