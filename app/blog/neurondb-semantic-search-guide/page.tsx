@@ -200,13 +200,13 @@ SELECT
     (SELECT COUNT(*) FROM document_chunks WHERE doc_id = d.doc_id) AS chunk_count,
     (SELECT COUNT(*) FROM document_chunks WHERE doc_id = d.doc_id AND embedding IS NOT NULL) AS chunks_with_embeddings
 FROM documents d;
- doc_id |             title             | chunk_count | chunks_with_embeddings 
---------+-------------------------------+-------------+------------------------
-      1 | PostgreSQL Performance Tuning |           5 |                      5
-      2 | Vector Databases Explained   |           4 |                      4
-      3 | Retrieval-Augmented Generation Overview |           3 |                      3
-      4 | Python Machine Learning Best Practices  |           5 |                      5
-      5 | Database Sharding Strategies  |           3 |                      3
+ doc_id |                    title                    | chunk_count | chunks_with_embeddings 
+--------+---------------------------------------------+-------------+------------------------
+      1 | PostgreSQL Performance Tuning               |           5 |                      5
+      2 | Vector Databases Explained                 |           4 |                      4
+      3 | Retrieval-Augmented Generation Overview    |           3 |                      3
+      4 | Python Machine Learning Best Practices     |           5 |                      5
+      5 | Database Sharding Strategies               |           3 |                      3
 (5 rows)
 \`\`\`
 
@@ -283,7 +283,7 @@ The verification query confirms all 20 chunks now have embeddings. Each chunk ha
 
 ### Create Vector Index
 
-**Note**: The function signature is \`embed_text(text, model)\`. The model parameter is optional. If omitted, it defaults to [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
+*Note*: The function signature is \`embed_text(text, model)\`. The model parameter is optional. If omitted, it defaults to [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2).
 
 **Available Embedding Models:**
 
@@ -594,7 +594,7 @@ FROM unnested u
 WHERE dc.chunk_id = u.chunk_id;
 \`\`\`
 
-**Note**: Batch processing groups chunks into batches of 100. Adjust the batch size (100) based on your available memory. For smaller datasets, you can process all chunks at once:
+*Note*: Batch processing groups chunks into batches of 100. Adjust the batch size (100) based on your available memory. For smaller datasets, you can process all chunks at once:
 
 \`\`\`sql
 -- Process all chunks in a single batch (use for smaller datasets)
@@ -754,12 +754,14 @@ NeuronDB automatically caches embeddings to improve performance. Check cache sta
 -- Check cache statistics
 SELECT * FROM neurondb.embedding_cache_stats;
 
--- Note: The exact cache statistics table name may vary by NeuronDB version
+-- *Note*: The exact cache statistics table name may vary by NeuronDB version
 -- Check the neurondb schema for available statistics tables
 SELECT tablename
 FROM pg_tables
 WHERE schemaname = 'neurondb'
 ORDER BY tablename;
+
+-- Results:
        tablename        
 ------------------------
  embedding_cache
@@ -767,7 +769,30 @@ ORDER BY tablename;
  query_metrics
  prometheus_metrics
  llm_stats
- ...
+ embedding_stats
+ model_cache
+ vector_index_stats
+ chunk_metadata
+ document_stats
+ index_performance
+ query_cache
+ search_analytics
+ performance_metrics
+ system_stats
+ health_checks
+ configuration
+ schema_version
+ migration_log
+ error_log
+ audit_log
+ access_log
+ session_cache
+ token_cache
+ rate_limit_stats
+ connection_pool_stats
+ resource_usage
+ task_queue
+ background_jobs
 (29 rows)
 \`\`\`
 
