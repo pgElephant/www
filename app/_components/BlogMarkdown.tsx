@@ -141,8 +141,23 @@ export function BlogMarkdown({ children }: { children: string }) {
           // Tables with proper styling
           table({ node, ...props }) {
             return (
-              <div className="overflow-x-auto my-8">
-                <table className="min-w-full bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl" {...props} />
+              <div 
+                className="overflow-x-auto my-8 w-full" 
+                style={{ 
+                  scrollbarWidth: 'thin', 
+                  scrollbarColor: 'rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1)',
+                  maxWidth: '100%'
+                }}
+              >
+                <table 
+                  className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl" 
+                  style={{ 
+                    width: 'max-content', 
+                    minWidth: '100%',
+                    borderCollapse: 'collapse'
+                  }} 
+                  {...props} 
+                />
               </div>
             );
           },
