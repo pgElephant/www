@@ -31,7 +31,8 @@ const Footer = () => {
     <footer 
       role="contentinfo"
       aria-label="Site footer"
-      className="relative overflow-hidden bg-hero-gradient border-t border-slate-700/50"
+      className="relative overflow-hidden border-t border-slate-700/50"
+      style={{ backgroundColor: '#111827' }}
     >
       <div className="w-full">
         {/* Main Footer Content - Full Width */}
