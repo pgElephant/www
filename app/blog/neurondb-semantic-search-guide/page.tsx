@@ -956,7 +956,7 @@ export default function BlogPost() {
                 title="Semantic Search Over Text with NeuronDB"
             />
             {/* Blog Content */}
-            <div style={{ backgroundColor: '#374151' }}>
+            <div style={{ backgroundColor: '#1f2937' }}>
                 <BlogMarkdown>{markdown}</BlogMarkdown>
 
                 {/* Share Section */}

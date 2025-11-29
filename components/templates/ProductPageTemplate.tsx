@@ -29,6 +29,12 @@ export interface ProductPageTemplateProps {
   }
   badges?: string[]
   demo?: React.ReactNode
+  componentCards?: Array<{
+    title: string
+    description: string[]
+    href: string
+    icon?: React.ReactNode
+  }>
   architecture?: React.ReactNode | {
     title?: string
     subtitle?: string
@@ -73,6 +79,7 @@ export default function ProductPageTemplate({
   hero,
   badges,
   demo,
+  componentCards,
   architecture,
   featurePillars,
   features,
@@ -155,6 +162,56 @@ export default function ProductPageTemplate({
           </div>
         </div>
       </HeroTemplate>
+
+      {/* Component Cards Section */}
+      {componentCards && componentCards.length > 0 && (
+        <SectionTemplate background="hero" padding="xl">
+          <div className="container-wide">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                NeuronDB Ecosystem
+              </h2>
+              <p className="text-lg text-white/90 max-w-3xl mx-auto mb-4">
+                Complete AI database platform with core engine and runtime components
+              </p>
+              <div className="mx-auto h-1 w-28 bg-slate-400 rounded" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              {componentCards.map((card, index) => (
+                <Link
+                  key={index}
+                  href={card.href}
+                  className="group bg-slate-800/60 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/80 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-1"
+                >
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-start gap-4 mb-4">
+                      {card.icon && (
+                        <div className="flex-shrink-0">
+                          {card.icon}
+                        </div>
+                      )}
+                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                        {card.title}
+                      </h3>
+                    </div>
+                    <ul className="flex-1 space-y-2 mb-4">
+                      {card.description.map((line, i) => (
+                        <li key={i} className="text-slate-300 text-sm leading-relaxed flex items-start">
+                          <span className="text-cyan-400 mr-2 flex-shrink-0">•</span>
+                          <span>{line}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-auto text-cyan-400 text-sm font-semibold group-hover:text-cyan-300 transition-colors">
+                      Learn more →
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </SectionTemplate>
+      )}
 
       {/* Architecture Diagram */}
       {architecture && (

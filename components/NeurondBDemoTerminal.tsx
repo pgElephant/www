@@ -19,7 +19,7 @@ const NeurondBDemoTerminal = () => {
   const [cursorVisible, setCursorVisible] = useState(true)
   const [speedMultiplier, setSpeedMultiplier] = useState(1)
   // Two-level tab structure: mainTab -> subTab
-  const [activeMainTab, setActiveMainTab] = useState<'build' | 'vectors' | 'ml' | 'embeddings' | 'llm' | 'gpu' | 'hybrid' | 'advanced'>('build')
+  const [activeMainTab, setActiveMainTab] = useState<'build' | 'vectors' | 'ml' | 'embeddings' | 'llm' | 'gpu' | 'hybrid' | 'advanced' | 'neuronagent' | 'neuronmcp'>('build')
   const [activeSubTab, setActiveSubTab] = useState<string>('')
 
   // Comprehensive tab structure covering all NeuronDB features
@@ -46,7 +46,9 @@ const NeurondBDemoTerminal = () => {
     advanced: {
       subTabs: ['sparse', 'quantization', 'workers', 'onnx', 'metrics', 'planner', 'types'],
       defaultSubTab: 'sparse'
-    }
+    },
+    neuronagent: { subTabs: [], defaultSubTab: '' },
+    neuronmcp: { subTabs: [], defaultSubTab: '' }
   }), [])
 
   // Initialize sub-tab when main tab changes
@@ -2701,7 +2703,7 @@ const NeurondBDemoTerminal = () => {
         
         {/* Main Tabs */}
         <div className="flex gap-2 flex-wrap mb-2">
-          {(['build', 'vectors', 'ml', 'embeddings', 'llm', 'gpu', 'hybrid', 'advanced'] as const).map((mainTab) => (
+          {(['build', 'vectors', 'ml', 'embeddings', 'llm', 'gpu', 'hybrid', 'advanced', 'neuronagent', 'neuronmcp'] as const).map((mainTab) => (
           <button
               key={mainTab}
             onClick={() => {
@@ -2715,7 +2717,7 @@ const NeurondBDemoTerminal = () => {
                 : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
             } ${isRunning ? 'cursor-not-allowed opacity-50' : ''}`}
           >
-              {mainTab === 'llm' ? 'LLM' : mainTab}
+              {mainTab === 'llm' ? 'LLM' : mainTab === 'neuronagent' ? 'NeuronAgent' : mainTab === 'neuronmcp' ? 'NeuronMCP' : mainTab}
           </button>
           ))}
         </div>

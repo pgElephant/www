@@ -4,6 +4,7 @@ import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
 import NeurondBDemoTerminal from '@/components/NeurondBDemoTerminal';
 import NeuronDBArchitectureDiagram from '@/components/NeuronDBArchitectureDiagram';
 import { generateProductPageMetadata } from '@/config/seo';
+import { Server, Bot, Database } from 'lucide-react';
 
 export const metadata = generateProductPageMetadata('neurondb');
 
@@ -20,6 +21,44 @@ const neurondbConfig = {
     '473 SQL Functions',
     'GPU Acceleration',
     '4 Background Workers',
+  ],
+  componentCards: [
+    {
+      title: 'NeuronDB',
+      description: [
+        'Vector search with HNSW and IVF indexing, supporting 5 vector types and 10+ distance metrics.',
+        '52 ML algorithms implemented in pure C: Random Forest, XGBoost, LightGBM, CatBoost, SVM, KNN, and more.',
+        'RAG pipeline with document processing, semantic retrieval, reranking, and LLM integration.',
+        'GPU acceleration for CUDA (NVIDIA), ROCm (AMD), and Metal (Apple Silicon) with automatic detection.',
+        '473 SQL functions with hybrid search, background workers, and security features.',
+      ],
+      href: '/docs/neurondb/getting-started',
+      icon: <Database className="w-8 h-8 text-cyan-400" />,
+    },
+    {
+      title: 'NeuronAgent',
+      description: [
+        'REST API and WebSocket agent runtime system with long-term memory and tool execution.',
+        'Agent state machine with HNSW-based vector search for context retrieval and memory management.',
+        'Tool registry supporting SQL, HTTP, Code, and Shell operations with streaming responses.',
+        'Background jobs with API key authentication, crash recovery, and SKIP LOCKED processing.',
+        'Integration with NeuronDB for embeddings, LLM operations, and vector search.',
+      ],
+      href: '/docs/neurondb/neuronagent',
+      icon: <Bot className="w-8 h-8 text-cyan-400" />,
+    },
+    {
+      title: 'NeuronMCP',
+      description: [
+        'Model Context Protocol server enabling MCP-compatible clients (like Claude Desktop) to access NeuronDB.',
+        'JSON-RPC 2.0 implementation with stdio communication protocol and resource management.',
+        'Tools for vector search, embedding generation, model training, and database schema management.',
+        'Middleware support for custom integrations and tool architecture.',
+        'MCP server with structured logging and error handling.',
+      ],
+      href: '/docs/neurondb/neuronmcp',
+      icon: <Server className="w-8 h-8 text-cyan-400" />,
+    },
   ],
   architecture: {
     title: 'Architecture',
@@ -221,6 +260,26 @@ const neurondbConfig = {
             <td className="px-4 py-3 text-slate-300">Zero core modifications</td>
           <td className="px-4 py-3 text-green-400">✓</td>
         </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium">
+              <Link href="/docs/neurondb/neuronagent" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
+                NeuronAgent
+              </Link>
+            </td>
+            <td className="px-4 py-3 text-slate-300">REST API and WebSocket agent runtime with long-term memory, tool execution, and streaming responses</td>
+            <td className="px-4 py-3 text-slate-300">HNSW-based context retrieval</td>
+            <td className="px-4 py-3 text-green-400">✓</td>
+          </tr>
+          <tr className="bg-slate-800/60">
+            <td className="px-4 py-3 font-medium">
+              <Link href="/docs/neurondb/neuronmcp" className="text-cyan-300 hover:text-cyan-200 hover:underline transition-colors">
+                NeuronMCP
+              </Link>
+            </td>
+            <td className="px-4 py-3 text-slate-300">Model Context Protocol server enabling MCP-compatible clients to access NeuronDB via stdio</td>
+            <td className="px-4 py-3 text-slate-300">JSON-RPC 2.0 implementation</td>
+            <td className="px-4 py-3 text-green-400">✓</td>
+          </tr>
       </tbody>
     </table>
   ),
