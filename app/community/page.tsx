@@ -134,38 +134,36 @@ const CommunityPage = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <div 
-        className="relative overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
+      <section 
+        className="relative text-center overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
         style={{ 
           backgroundColor: '#111827'
         }}
       >
         <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
-            <div className="max-w-6xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
-                Community
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto">
-                Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
-              </p>
-              
-              {/* Community Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
-                {communityStats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="flex justify-center mb-2">
-                      <stat.icon className={`w-8 h-8 ${stat.color}`} />
-                    </div>
-                    <div className="text-3xl font-thin text-white mb-2">{stat.value}</div>
-                    <div className="text-sm text-white">{stat.label}</div>
+            <h1 className="text-4xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">
+              Community
+            </h1>
+            <p className="text-xl md:text-2xl text-white mb-8 max-w-4xl mx-auto drop-shadow-lg">
+              Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
+            </p>
+            
+            {/* Community Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
+              {communityStats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex justify-center mb-2">
+                    <stat.icon className={`w-8 h-8 ${stat.color}`} />
                   </div>
-                ))}
-              </div>
+                  <div className="text-3xl font-thin text-white mb-2">{stat.value}</div>
+                  <div className="text-sm text-white">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Community Platforms - Enhanced Layout */}
       <div className="py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
