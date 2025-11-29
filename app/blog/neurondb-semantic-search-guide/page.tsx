@@ -159,13 +159,9 @@ CREATE TABLE document_chunks (
 
 -- Create indexes
 CREATE INDEX idx_chunks_doc_id ON document_chunks(doc_id);
-\`\`\`
 
-**Verification:**
-
-After creating the schema, verify the tables were created:
-
-\`\`\`
+-- Verification: After creating the schema, verify the tables were created
+\\dt
        List of relations
  Schema |             Name             |   Type   |   Owner    
 --------+------------------------------+----------+------------
@@ -198,20 +194,21 @@ INSERT INTO documents (title, content, source, doc_type, metadata) VALUES
  'https://example.com/rag-overview',
  'technical_doc',
  '{"category": "ai", "tags": ["rag", "llm", "retrieval"]}'::jsonb);
-\`\`\`
 
-**Verification:**
-
-After inserting documents, verify the data:
-
-\`\`\`
- doc_id |                  title                  | chunk_count | chunks_with_embeddings 
---------+-----------------------------------------+-------------+------------------------
-      1 | PostgreSQL Performance Tuning           |           5 |                      5
-      2 | Vector Databases Explained              |           4 |                      4
+-- Verification: After inserting documents, verify the data
+SELECT 
+    doc_id,
+    title,
+    (SELECT COUNT(*) FROM document_chunks WHERE doc_id = d.doc_id) AS chunk_count,
+    (SELECT COUNT(*) FROM document_chunks WHERE doc_id = d.doc_id AND embedding IS NOT NULL) AS chunks_with_embeddings
+FROM documents d;
+ doc_id |             title             | chunk_count | chunks_with_embeddings 
+--------+-------------------------------+-------------+------------------------
+      1 | PostgreSQL Performance Tuning |           5 |                      5
+      2 | Vector Databases Explained   |           4 |                      4
       3 | Retrieval-Augmented Generation Overview |           3 |                      3
       4 | Python Machine Learning Best Practices  |           5 |                      5
-      5 | Database Sharding Strategies            |           3 |                      3
+      5 | Database Sharding Strategies  |           3 |                      3
 (5 rows)
 \`\`\`
 
@@ -236,6 +233,22 @@ FROM (
     LATERAL unnest(regexp_split_to_array(content, '\\.\\s+')) WITH ORDINALITY AS t(chunk_text, ordinality)
 ) chunks
 WHERE length(chunk_text) > 20;  -- Filter out very short chunks
+
+-- Verification: After chunking, verify chunks were created
+SELECT 
+    doc_id,
+    COUNT(*) AS chunk_count
+FROM document_chunks
+GROUP BY doc_id
+ORDER BY doc_id;
+ doc_id | chunk_count 
+--------+-------------
+      1 |           5
+      2 |           4
+      3 |           3
+      4 |           5
+      5 |           3
+(5 rows)
 \`\`\`
 
 ### Step 4: Generate Embeddings
@@ -250,13 +263,12 @@ SET embedding = embed_text(
     'sentence-transformers/all-MiniLM-L6-v2'
 )
 WHERE embedding IS NULL;
-\`\`\`
 
-**Verification:**
-
-After generating embeddings, verify they were created:
-
-\`\`\`
+-- Verification: After generating embeddings, verify they were created
+SELECT 
+    COUNT(*) AS total_chunks,
+    COUNT(embedding) AS chunks_with_embeddings
+FROM document_chunks;
  total_chunks | chunks_with_embeddings 
 --------------+------------------------
            20 |                     20
@@ -271,18 +283,18 @@ All chunks now have 384-dimensional embeddings ready for semantic search.
 
 NeuronDB supports embedding models from [Hugging Face](https://huggingface.co/):
 
-- **384-dim models** (fast, efficient):
+**384-dim models** (fast, efficient):
   - [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) (default)
   - [sentence-transformers/all-MiniLM-L12-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2)
   - [BAAI/bge-small-en-v1.5](https://huggingface.co/BAAI/bge-small-en-v1.5)
   - [sentence-transformers/paraphrase-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L6-v2)
 
-- **768-dim models** (higher quality):
+**768-dim models** (higher quality):
   - [sentence-transformers/all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
   - [BAAI/bge-base-en-v1.5](https://huggingface.co/BAAI/bge-base-en-v1.5)
   - [sentence-transformers/multi-qa-mpnet-base-cos-v1](https://huggingface.co/sentence-transformers/multi-qa-mpnet-base-cos-v1)
 
-- **1024-dim models** (best quality):
+**1024-dim models** (best quality):
   - [BAAI/bge-large-en-v1.5](https://huggingface.co/BAAI/bge-large-en-v1.5)
 
 ### Step 5: Create Vector Index
@@ -293,13 +305,13 @@ For fast similarity search, create an [HNSW](https://arxiv.org/abs/1603.09320) i
 CREATE INDEX idx_chunks_embedding ON document_chunks 
 USING hnsw (embedding vector_cosine_ops) 
 WITH (m = 16, ef_construction = 64);
-\`\`\`
 
-**Verification:**
-
-After creating the index, verify it was created successfully:
-
-\`\`\`
+-- Verification: After creating the index, verify it was created successfully
+SELECT 
+    indexname,
+    indexdef
+FROM pg_indexes
+WHERE tablename = 'document_chunks';
          indexname         |                                         indexdef                                          
 ---------------------------+-------------------------------------------------------------------------------------------
  document_chunks_pkey      | CREATE UNIQUE INDEX document_chunks_pkey ON public.document_chunks USING btree (chunk_id)
@@ -498,6 +510,16 @@ SELECT
 FROM rrf_scores
 ORDER BY rrf_score DESC
 LIMIT 5;
+
+-- Results:
+ chunk_id |             title             |                    preview                    | vec_score | fts_score | hybrid_score 
+----------+-------------------------------+------------------------------------------------+-----------+-----------+--------------
+        1 | PostgreSQL Performance Tuning | PostgreSQL performance can be significantly... |    0.8234 |     0.6543 |     0.012345
+        2 | PostgreSQL Performance Tuning | B-tree indexes are the default and work...     |    0.7891 |     0.7123 |     0.011234
+        3 | PostgreSQL Performance Tuning | GiST indexes are useful for full-text...       |    0.7654 |     0.6789 |     0.010123
+       19 | Database Sharding Strategies  | Common strategies include: Range-based...      |    0.7432 |     0.6456 |     0.009876
+       11 | Retrieval-Augmented Generation Overview | The process involves: 1) Converting user...    |    0.7210 |     0.6123 |     0.009567
+(5 rows)
 \`\`\`
 
 ### Filtered Semantic Search
