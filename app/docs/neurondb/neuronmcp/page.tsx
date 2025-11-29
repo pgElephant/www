@@ -10,9 +10,7 @@ export const metadata: Metadata = generateDocsMetadata('neurondb', 'NeuronMCP: M
 export default function NeuronMCPPage() {
   return (
     <PostgresDocsLayout
-      productId="neurondb"
       title="NeuronMCP: Model Context Protocol Server"
-      description="MCP server enabling MCP-compatible clients to access NeuronDB through stdio communication."
     >
       <div className="prose prose-invert max-w-none">
         <h1>NeuronMCP: Model Context Protocol Server</h1>
