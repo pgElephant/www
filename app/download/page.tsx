@@ -246,7 +246,6 @@ const DownloadPage = () => {
         <section 
           className="relative text-center overflow-hidden bg-hero-gradient min-h-[400px] flex items-center"
           style={{ 
-            backgroundColor: '#1f2937',
             position: 'relative'
           }}
         >

@@ -25,7 +25,7 @@ export default function HeroTemplate({
         className
       )}
       style={{
-        backgroundColor: '#1f2937',
+        backgroundColor: '#111827',
       }}
     >
       {overlay && (

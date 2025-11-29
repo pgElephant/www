@@ -607,7 +607,7 @@ const FauxdbDemoTerminal = () => {
         </div>
       </div>
 
-      {/* EDB-Style Tabs */}
+      {/* Tabs */}
       <div className="bg-gray-800 px-4 py-3 border-b border-gray-700">
         <div className="flex gap-1">
           <button

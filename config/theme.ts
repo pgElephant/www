@@ -268,10 +268,10 @@ export const productThemes: Record<ProductId, ProductTheme> = {
 // Change this value to update backgrounds across the entire site.
 
 export const gradients = {
-  // Hero and Footer - Solid color (dark)
+  // Hero and Footer - Solid color (slightly darker than page background)
   hero: {
-    css: '#1f2937',
-    tailwind: 'bg-[#1f2937]',
+    css: '#111827',
+    tailwind: 'bg-[#111827]',
   },
   // Page background - Solid color (used for all other page content)
   page: {

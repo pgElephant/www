@@ -96,10 +96,10 @@ const Community = () => {
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-edbDark-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Join Our Community
           </h2>
-          <p className="text-xl text-edbGray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Connect with developers, share experiences, and contribute to the future of PostgreSQL high availability.
           </p>
         </div>
@@ -115,11 +115,11 @@ const Community = () => {
              
               className="text-center"
             >
-              <div className="w-16 h-16 bg-edb-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <stat.icon className="w-8 h-8 text-edb-600" />
+              <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <stat.icon className="w-8 h-8 text-slate-600" />
               </div>
-              <div className="text-2xl font-bold text-edbDark-900 mb-2">{stat.value}</div>
-              <div className="text-edbGray-600 text-sm">{stat.label}</div>
+              <div className="text-2xl font-bold text-slate-900 mb-2">{stat.value}</div>
+              <div className="text-slate-600 text-sm">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -136,12 +136,12 @@ const Community = () => {
                   <platform.icon className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-edbDark-900">{platform.name}</h3>
-                  <p className="text-sm text-edbGray-600">{platform.description}</p>
+                  <h3 className="text-lg font-bold text-slate-900">{platform.name}</h3>
+                  <p className="text-sm text-slate-600">{platform.description}</p>
                 </div>
               </div>
               
-              <p className="text-sm text-edbGray-600 mb-6">{platform.stats}</p>
+              <p className="text-sm text-slate-600 mb-6">{platform.stats}</p>
               
               <a
                 href={platform.url}
@@ -161,10 +161,10 @@ const Community = () => {
         {/* Contribution Areas - Simple List Layout */}
         <div className="mb-16">
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-edbDark-900 mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
               How You Can Contribute
             </h3>
-            <p className="text-lg text-edbGray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
               There are many ways to get involved and help make pgelephant better for everyone.
             </p>
           </div>
@@ -180,8 +180,8 @@ const Community = () => {
                     <area.icon className="w-6 h-6 text-blue-600" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-edbDark-900 mb-2 text-lg">{area.title}</h4>
-                    <p className="text-edbGray-600 mb-3">{area.description}</p>
+                    <h4 className="font-semibold text-slate-900 mb-2 text-lg">{area.title}</h4>
+                    <p className="text-slate-600 mb-3">{area.description}</p>
                     <a
                       href={area.link}
                       className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
@@ -201,7 +201,7 @@ const Community = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Recent Updates */}
           <div>
-            <h3 className="text-2xl font-bold text-edbDark-900 mb-6">Recent Updates</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-6">Recent Updates</h3>
             <div className="space-y-6">
               {recentUpdates.map((update, index) => (
                 <div
@@ -209,28 +209,28 @@ const Community = () => {
                   className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <h4 className="font-semibold text-edbDark-900">{update.title}</h4>
+                    <h4 className="font-semibold text-slate-900">{update.title}</h4>
                     <span className="text-xs bg-white/10 backdrop-blur-sm text-white px-2 py-1 rounded-full border border-white/20">
                       {update.tag}
                     </span>
                   </div>
-                  <p className="text-edbGray-600 text-sm mb-3">{update.description}</p>
-                  <div className="text-xs text-edbGray-500">{update.date}</div>
+                  <p className="text-slate-600 text-sm mb-3">{update.description}</p>
+                  <div className="text-xs text-slate-500">{update.date}</div>
                 </div>
               ))}
             </div>
-            <button className="btn-edb-secondary mt-6">
+            <button className="bg-slate-600 hover:bg-slate-700 text-white font-semibold px-6 py-2 rounded-lg transition-colors mt-6">
               View All Updates
             </button>
           </div>
 
           {/* Get Involved */}
           <div>
-            <h3 className="text-2xl font-bold text-edbDark-900 mb-6">Get Involved</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-6">Get Involved</h3>
             <div className="space-y-6">
               <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200">
-                <h4 className="font-semibold text-edbDark-900 mb-3">Contribute Code</h4>
-                <p className="text-edbGray-600 text-sm mb-4">
+                <h4 className="font-semibold text-slate-900 mb-3">Contribute Code</h4>
+                <p className="text-slate-600 text-sm mb-4">
                   Help improve pgelephant by contributing code, documentation, or bug reports.
                 </p>
                 <a
@@ -245,8 +245,8 @@ const Community = () => {
               </div>
 
               <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200">
-                <h4 className="font-semibold text-edbDark-900 mb-3">Share Your Story</h4>
-                <p className="text-edbGray-600 text-sm mb-4">
+                <h4 className="font-semibold text-slate-900 mb-3">Share Your Story</h4>
+                <p className="text-slate-600 text-sm mb-4">
                   Tell us how pgelephant helped your organization achieve high availability.
                 </p>
                 <button className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm">
@@ -256,8 +256,8 @@ const Community = () => {
               </div>
 
               <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-gray-200">
-                <h4 className="font-semibold text-edbDark-900 mb-3">Help Others</h4>
-                <p className="text-edbGray-600 text-sm mb-4">
+                <h4 className="font-semibold text-slate-900 mb-3">Help Others</h4>
+                <p className="text-slate-600 text-sm mb-4">
                   Answer questions, share knowledge, and help new users in our community.
                 </p>
                 <a

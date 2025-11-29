@@ -350,7 +350,7 @@ const PgraftDemoTerminal = () => {
           </div>
         </div>
         
-        {/* EDB-Style Tabs */}
+        {/* Tabs */}
         <div className="flex gap-1">
           <button
             onClick={() => setActiveTab('build')}

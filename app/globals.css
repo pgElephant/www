@@ -59,8 +59,8 @@ body {
  * Change these values to update backgrounds across the entire site.
  */
 :root {
-  /* Hero and Footer - Solid color (dark) */
-  --hero-gradient: #1f2937;
+  /* Hero and Footer - Solid color (slightly darker than page background) */
+  --hero-gradient: #111827;
   /* Page Background - Solid color (used for all other content) - matches blog posts */
   --page-gradient: #1f2937;
   
@@ -137,7 +137,7 @@ body {
 
 /* Utility classes for consistent solid backgrounds */
 .bg-hero-gradient {
-  background-color: #1f2937;
+  background-color: #111827;
 }
 
 .bg-page-gradient {
