@@ -129,15 +129,16 @@ body {
   --easing-in: ease-in;
   --easing-out: ease-out;
   
-  /* Product-Specific Gradients (can be overridden per product) */
+  /* Product-Specific Backgrounds (solid colors, no gradients) */
   --product-badge-gradient: var(--primary-600) var(--secondary-600);
-  --product-hero-gradient: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
-  --product-page-gradient: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #eef2ff 100%);
+  --product-hero-gradient: #1f2937;
+  --product-page-gradient: #1f2937;
 }
 
-/* Utility classes for consistent gradients */
+/* Utility classes for consistent solid backgrounds */
 .bg-hero-gradient {
   background: var(--hero-gradient);
+  background-color: #1f2937;
 }
 
 .bg-page-gradient {

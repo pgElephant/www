@@ -11,7 +11,7 @@ export const metadata = generateProductPageMetadata('neurondb');
 const neurondbConfig = {
   productId: 'neurondb' as const,
   hero: {
-    subtitle: 'Vector search with 52 ML algorithms, 473 SQL functions, GPU acceleration, and RAG pipeline, all within PostgreSQL',
+    subtitle: 'Complete AI platform with NeuronDB extension, NeuronAgent runtime, and NeuronMCP server. Vector search, ML inference, GPU acceleration, and RAG pipeline, all within PostgreSQL',
   },
   demo: <NeurondBDemoTerminal />,
   badges: [

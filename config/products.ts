@@ -50,7 +50,7 @@ export const products: Record<'neurondb' | 'pgraft' | 'pgbalancer' | 'fauxdb' | 
     id: 'neurondb',
     name: 'neurondb',
     displayName: 'NeurondB',
-    tagline: 'AI Database Extension for PostgreSQL',
+    tagline: 'A complete AI solution',
     description: 'PostgreSQL extension with vector search, RAG pipeline, machine learning inference, and GPU acceleration.',
     longDescription: 'PostgreSQL extension with vector search, RAG pipeline, machine learning inference, and GPU acceleration. Includes HNSW indexing, ONNX runtime, GPU acceleration, embeddings generation, and cross-encoder reranking. Provides in-database RAG with semantic search, full-text search, and LLM integration.',
     keywords: [
