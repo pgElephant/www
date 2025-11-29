@@ -280,7 +280,7 @@ const DownloadPage = () => {
       </section>
 
       {/* pgElephant Products - Card-Based Layout */}
-      <section className="py-24 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
+      <section className="py-12 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="container-wide mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">pgElephant Products</h2>
@@ -289,7 +289,7 @@ const DownloadPage = () => {
             </p>
           </div>
 
-          <div className="max-w-7xl mx-auto space-y-8">
+          <div className="max-w-7xl mx-auto space-y-4">
             {products.map((product, idx) => (
               <div
                 key={product.id}
@@ -466,7 +466,7 @@ const DownloadPage = () => {
       </section>
 
       {/* Quick Start Section */}
-      <section className="py-24 border-t border-b border-gray-100 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
+      <section className="py-12 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-orange-400/10 rounded-full blur-2xl animate-pulse" />
@@ -499,7 +499,7 @@ const DownloadPage = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
+      <section className="py-12 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="container-wide mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-thin text-white mb-4">Why Choose pgElephant?</h2>
