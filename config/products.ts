@@ -81,7 +81,6 @@ export const products: Record<'neurondb' | 'pgraft' | 'pgbalancer' | 'fauxdb' | 
       'ML inference runs ONNX models. Generates text, image, and multimodal embeddings. Processes batches.',
       'Hybrid search combines semantic and full-text search. Cross-encoder reranking. In-database RAG pipeline.',
       'GPU acceleration supports CUDA and ROCm. Faster matrix operations. Falls back to CPU automatically.',
-      'Includes 100 SQL functions. Background workers handle jobs. Monitoring included. Works with PostgreSQL 16-18.',
     ],
     badges: [
       'PostgreSQL 16-18',
@@ -331,7 +330,7 @@ export function generateProductMetadata(productId: ProductId): Metadata {
   if (!product) {
     throw new Error(`Product ${productId} not found`)
   }
-  
+
   return {
     title: `${product.displayName} - ${product.tagline} | pgElephant`,
     description: product.description,
@@ -384,10 +383,10 @@ export function generateDocsMetadata(productId: ProductId, pageTitle?: string): 
   if (!product) {
     throw new Error(`Product ${productId} not found`)
   }
-  const title = pageTitle 
+  const title = pageTitle
     ? `${pageTitle} | ${product.displayName} Documentation`
     : `${product.displayName} Documentation | pgElephant`
-  
+
   return {
     title,
     description: `Complete documentation for ${product.displayName}. ${product.description}`,
