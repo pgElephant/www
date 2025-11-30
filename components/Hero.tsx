@@ -63,7 +63,7 @@ const Hero = () => {
   const current = products[currentProduct]
 
   return (
-    <HeroTemplate className="relative overflow-hidden">
+    <HeroTemplate className="relative overflow-hidden" height="default">
       <div className="container-extra-wide relative z-10">
         <div className="max-w-7xl mx-auto">
 

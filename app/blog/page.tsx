@@ -286,10 +286,10 @@ export default function BlogPage() {
       <HeroTemplate overlay={false}>
         <div className="container-wide relative z-10">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Blog
             </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl font-normal mb-8 leading-relaxed text-white max-w-4xl mx-auto">
               Technical insights, tutorials, and updates about PostgreSQL extensions
             </p>
 

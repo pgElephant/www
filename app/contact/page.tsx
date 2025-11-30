@@ -135,10 +135,10 @@ Message: ${formData.message}
         <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-thin text-white mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 Contact Us
               </h1>
-              <p className="text-xl mb-8 leading-relaxed text-white">
+              <p className="text-xl font-normal mb-8 leading-relaxed text-white">
                 Get in touch with our team for support, sales, or technical questions. We're here to help you succeed with pgElephant's enterprise-grade PostgreSQL solutions.
               </p>
 

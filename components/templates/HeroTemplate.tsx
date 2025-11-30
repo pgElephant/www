@@ -6,22 +6,31 @@ export interface HeroTemplateProps {
   className?: string
   backgroundImage?: string
   overlay?: boolean
+  height?: 'default' | 'fixed'
 }
 
 /**
  * HeroTemplate - Standardized hero section wrapper
  * Uses solid background color for consistent hero styling
+ * - default: h-[400px] md:h-[750px] (for home page)
+ * - fixed: h-[400px] (for all other pages)
  */
 export default function HeroTemplate({
   children,
   className,
   backgroundImage,
   overlay = false,
+  height = 'fixed',
 }: HeroTemplateProps) {
+  const heightClass = height === 'default' 
+    ? 'h-[400px] md:h-[750px]' 
+    : 'h-[400px]'
+  
   return (
     <section
       className={cn(
-        'relative overflow-hidden flex items-center h-[400px] md:h-[750px] pt-20',
+        'relative overflow-hidden flex items-center pt-20',
+        heightClass,
         className
       )}
       style={{
