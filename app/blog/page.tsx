@@ -44,6 +44,23 @@ const blogStats = [
 
 const blogPosts = [
   {
+    slug: 'pg-stat-insights-index-monitoring',
+    title: 'Index Monitoring with pg_stat_insights v3.0.0',
+    excerpt: 'Monitor PostgreSQL indexes using pg_stat_insights v3.0.0. Track index usage, detect bloat, identify missing indexes, and optimize performance with 11 specialized views.',
+    content: 'Complete guide to PostgreSQL index monitoring using pg_stat_insights v3.0.0. Includes real queries, outputs, and examples for all 11 index monitoring views.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-22',
+    readTime: '18 min read',
+    category: 'Technical',
+    featured: true,
+    icon: 'pg_stat_insights',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['PostgreSQL', 'Index Monitoring', 'Performance Optimization', 'Database Administration', 'pg_stat_insights']
+  },
+  {
     slug: 'pg-stat-insights-1-0-0',
     title: 'pg_stat_insights 1.0.0 Release Announcement',
     excerpt: 'pg_stat_insights 1.0.0 is a PostgreSQL performance monitoring extension. Provides 52 metrics across 11 views. Production-ready. Easy to install.',

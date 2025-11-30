@@ -83,6 +83,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/blog/pg-stat-insights-index-monitoring/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/pg-stat-insights-index-monitoring">> = Specific
+  const handler = {} as typeof import("../../app/blog/pg-stat-insights-index-monitoring/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/blog/pg-stat-insights/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/blog/pg-stat-insights">> = Specific
