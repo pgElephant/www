@@ -110,58 +110,33 @@ export default function ProductPageTemplate({
       {/* Hero Section */}
       <HeroTemplate
         overlay={false}
-        className="text-white"
+        className="text-white text-center"
         height="product"
       >
-        <div className="container-extra-wide relative z-10">
+        <div className="container-extra-wide relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
-              {/* Left side - Icon */}
-              {heroIcon && (
-                <div className="flex-shrink-0">
-                  <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-2xl">
-                    {heroIcon}
-                  </div>
-                </div>
-              )}
-
-              {/* Right side - Content */}
-              <div className="flex-1 text-center lg:text-left">
-                <div className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 drop-shadow-lg">
-                  {heroTitle}
-                </div>
-                {hero.subtitle && (
-                  <div className="text-lg lg:text-xl font-normal text-white mb-8 leading-relaxed drop-shadow-lg">
-                    {hero.subtitle}
-                  </div>
-                )}
-
-                {hero.customContent}
-
-                {demo && (
-                  <div className="max-w-4xl mx-auto lg:mx-0">
-                    {demo}
-                  </div>
-                )}
-
-                {/* Badges */}
-                {badges && badges.length > 0 && (
-                  <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-2">
-                    {badges.map((badge, i) => (
-                      <span
-                        key={i}
-                        className={`inline-block bg-gradient-to-r ${theme.badgeGradient} text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/20 shadow-sm`}
-                      >
-                        {badge}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">
+              {heroTitle}
+            </h1>
+            {hero.subtitle && (
+              <p className="text-lg md:text-xl font-normal text-white mb-6 max-w-2xl mx-auto drop-shadow-lg">
+                {hero.subtitle}
+              </p>
+            )}
           </div>
         </div>
       </HeroTemplate>
+
+      {/* Demo Section */}
+      {demo && (
+        <SectionTemplate background="page" padding="xl">
+          <div className="container-wide">
+            <div className="max-w-4xl mx-auto">
+              {demo}
+            </div>
+          </div>
+        </SectionTemplate>
+      )}
 
       {/* Component Cards Section */}
       {componentCards && componentCards.length > 0 && (

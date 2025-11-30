@@ -33,7 +33,10 @@ const fauxdbConfig = {
       { title: 'Cross-Protocol Consistency', desc: 'Insert via MongoDB, query via MySQL. Write via MySQL, read via MongoDB. Always consistent with PostgreSQL ACID.' },
     ],
   },
-  featureMatrix: (
+  featureMatrix: {
+    title: 'Core Capabilities',
+    subtitle: 'Dual-protocol database server capabilities and performance characteristics.',
+    content: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
@@ -82,8 +85,12 @@ const fauxdbConfig = {
         </tr>
       </tbody>
     </table>
-  ),
-  featureComparison: (
+    ),
+  },
+  featureComparison: {
+    title: 'Feature Comparison',
+    subtitle: 'Compare FauxDB with other database solutions supporting MongoDB and MySQL protocols.',
+    content: (
     <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
       <thead className="bg-slate-800/60">
         <tr className="text-left">
@@ -181,7 +188,8 @@ const fauxdbConfig = {
         </tr>
       </tbody>
     </table>
-  ),
+    ),
+  },
   docsLinks: [
     { href: '/docs/fauxdb/getting-started', title: 'Getting Started', desc: 'Quick start guide for FauxDB.' },
     { href: '/docs/fauxdb/api', title: 'API Reference', desc: 'Explore the FauxDB API.' },

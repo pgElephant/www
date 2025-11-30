@@ -74,7 +74,8 @@ const pgSentinelConfig = {
         </div>
       </div>
     </div>
-  ),
+    ),
+  },
   features: [
     { icon: '📊', iconColor: 'text-blue-500', title: 'Real-Time Dashboard', desc: 'Beautiful web-based interface with live metrics, connection pool visualization, and backend node management.' },
     { icon: '📈', iconColor: 'text-purple-500', title: 'Prometheus Metrics', desc: '30+ custom metrics exported for comprehensive monitoring with PromQL query support and time-series analysis.' },
@@ -99,7 +100,10 @@ const pgSentinelConfig = {
       { title: 'Production Ready', desc: 'Complete with health checks, automatic restarts, volume persistence, network isolation, and comprehensive logging across all services.' },
     ],
   },
-  featureMatrix: (
+  featureMatrix: {
+    title: 'Platform Architecture',
+    subtitle: 'pgSentinel monitoring and management platform architecture with comprehensive component overview.',
+    content: (
     <div className="space-y-8">
       {/* Architecture Diagram */}
       <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700">

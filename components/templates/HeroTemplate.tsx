@@ -14,7 +14,7 @@ export interface HeroTemplateProps {
  * Uses solid background color for consistent hero styling
  * - default: h-[400px] md:h-[750px] (for home page)
  * - fixed: h-[400px] (for all other pages)
- * - product: h-[800px] (for product pages)
+ * - product: h-[400px] (for product pages)
  */
 export default function HeroTemplate({
   children,
@@ -26,7 +26,7 @@ export default function HeroTemplate({
   const heightClass = height === 'default'
     ? 'h-[400px] md:h-[750px]'
     : height === 'product'
-      ? 'h-[850px]'
+      ? 'h-[400px]'
       : 'h-[400px]'
 
   return (

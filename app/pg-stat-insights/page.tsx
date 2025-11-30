@@ -53,7 +53,10 @@ const pgStatInsightsConfig = {
       { title: 'Replication Monitoring', desc: 'pg_stat_insights_replication view tracks WAL sender/receiver stats, lag (write/flush/replay), sync_state, and replication health across all standbys.' },
     ],
   },
-  featureMatrix: (
+  featureMatrix: {
+    title: 'Performance Analytics Overview',
+    subtitle: 'Comprehensive views and metrics for PostgreSQL performance monitoring and optimization.',
+    content: (
     <div className="space-y-8">
       {/* 11 Views Overview */}
       <div className="style={{ backgroundColor: '#1f2937' }} p-8 rounded-xl border border-slate-700">
@@ -327,7 +330,8 @@ const pgStatInsightsConfig = {
       </tbody>
     </table>
     </div>
-  ),
+    ),
+  },
   useCases: [
     {
       title: 'Query Optimization',

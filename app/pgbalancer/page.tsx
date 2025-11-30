@@ -53,7 +53,10 @@ const pgbalancerConfig = {
       { title: 'Query Cache', desc: 'Intelligent query result caching with cache invalidation, memory management, and TTL support. AI-driven cache warming and prefetching based on query patterns.' },
     ],
   },
-  featureMatrix: (
+  featureMatrix: {
+    title: 'Architecture & Capabilities',
+    subtitle: 'AI-powered load balancing and connection pooling architecture with comprehensive feature overview.',
+    content: (
     <div className="space-y-8">
       {/* Architecture Diagram */}
       <div className="style={{ backgroundColor: '#1f2937' }} p-8 rounded-xl border border-slate-700">
@@ -366,8 +369,12 @@ const pgbalancerConfig = {
       </tbody>
     </table>
     </div>
-  ),
-  featureComparison: (
+    ),
+  },
+  featureComparison: {
+    title: 'Feature Comparison',
+    subtitle: 'Compare pgbalancer with other PostgreSQL connection poolers and load balancers.',
+    content: (
     <div className="overflow-x-auto">
       <table className="w-full text-sm border border-slate-700 rounded-lg">
         <thead className="bg-slate-800/60">
@@ -474,7 +481,8 @@ const pgbalancerConfig = {
         </tbody>
       </table>
     </div>
-  ),
+    ),
+  },
   codeExamples: [
     {
       title: 'REST API - Cluster Management',
