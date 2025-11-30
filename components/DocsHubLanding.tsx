@@ -72,7 +72,7 @@ const DEFAULT_THEME: HubProductTheme = {
 
 export default function DocsHubLanding({ hero, products, resources }: DocsHubLandingProps) {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+    <div className="min-h-screen" style={{ backgroundColor: '#1f2937' }}>
       {/* Unified Professional Hero */}
       <section
         className="relative text-center overflow-hidden flex items-center h-[400px] pt-20"
@@ -100,7 +100,7 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
       </section>
 
       {/* Products */}
-      <section className="py-20">
+      <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 lg:grid-cols-2">
           {products.map((product) => {
             const theme = { ...DEFAULT_THEME, ...product.theme }
@@ -120,9 +120,9 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
                     {product.icon}
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white">{product.name}</h2>
+                    <h2 className="text-3xl font-bold text-white">{product.name}</h2>
                     <p className={`text-md font-semibold ${theme.accentText}`}>{product.headline}</p>
-                    <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">{product.summary}</p>
+                    <p className="mt-3 text-sm text-white/80">{product.summary}</p>
                   </div>
                 </div>
 
@@ -131,34 +131,34 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
                     <Link
                       key={category.key}
                       href={category.href}
-                      className="group/category flex items-center justify-between gap-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 transition hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700"
+                      className="group/category flex items-center justify-between gap-4 rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4 transition hover:border-white/30 hover:bg-white/20"
                     >
                       <div className="flex items-center gap-3">
                         {category.icon ? (
-                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-white">
                             {category.icon}
                           </span>
                         ) : (
-                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-white">
                             {CATEGORY_ORDER.indexOf(category.key) + 1}
                           </span>
                         )}
                         <div>
-                          <div className="font-semibold text-slate-900 dark:text-white group-hover/category:text-slate-700 dark:group-hover/category:text-slate-200">
+                          <div className="font-semibold text-white group-hover/category:text-white/90">
                             {category.title}
                           </div>
-                          <p className="text-xs text-slate-600 dark:text-slate-400 group-hover/category:text-slate-700 dark:group-hover/category:text-slate-300">{category.description}</p>
+                          <p className="text-xs text-white/70 group-hover/category:text-white/80">{category.description}</p>
                         </div>
                       </div>
-                      <ArrowRight className="h-5 w-5 text-slate-400 dark:text-slate-500 transition group-hover/category:text-slate-700 dark:group-hover/category:text-slate-300 group-hover/category:translate-x-1" />
+                      <ArrowRight className="h-5 w-5 text-white/60 transition group-hover/category:text-white group-hover/category:translate-x-1" />
                     </Link>
                   ))}
                 </div>
 
-                <div className="mt-6 border-t border-slate-200 dark:border-slate-700 pt-6">
+                <div className="mt-6 border-t border-white/20 pt-6">
                   <Link
                     href={product.viewAllHref}
-                    className="inline-flex items-center gap-2 font-semibold text-slate-700 dark:text-slate-300 transition hover:text-slate-900 dark:hover:text-white"
+                    className="inline-flex items-center gap-2 font-semibold text-white transition hover:text-white/80"
                   >
                     View complete documentation
                     <ArrowRight className="h-4 w-4" />
@@ -171,10 +171,10 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
       </section>
 
       {resources && resources.length > 0 ? (
-        <section className="border-t border-slate-200 dark:border-slate-700 py-20">
+        <section className="border-t border-white/20 py-20 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
           <div className="mx-auto max-w-6xl px-6 text-center">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Additional Resources</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-600 dark:text-slate-400">
+            <h2 className="text-3xl font-bold text-white">Additional Resources</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm text-white/80">
               Explore downloads, community links, and source code to get the most out of pgElephant products.
             </p>
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -188,14 +188,14 @@ export default function DocsHubLanding({ hero, products, resources }: DocsHubLan
                   <Wrapper
                     key={link.href}
                     {...wrapperProps}
-                    className="group flex h-full flex-col items-center gap-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 text-center transition hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700"
+                    className="group flex h-full flex-col items-center gap-4 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-6 text-center transition hover:border-white/30 hover:bg-white/20"
                   >
-                    <span className="flex h-16 w-16 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 transition group-hover:scale-110">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition group-hover:scale-110">
                       {link.icon}
                     </span>
-                    <div className="text-lg font-semibold text-slate-900 dark:text-white transition group-hover:text-slate-700 dark:group-hover:text-slate-200">{link.title}</div>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">{link.description}</p>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    <div className="text-lg font-semibold text-white transition group-hover:text-white/90">{link.title}</div>
+                    <p className="text-sm text-white/80">{link.description}</p>
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-white/70">
                       Learn more
                       <ArrowRight className="h-3 w-3" />
                     </span>

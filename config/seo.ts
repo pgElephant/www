@@ -207,7 +207,7 @@ export function generateProductSchema(productId: ProductId) {
   if (!product) {
     throw new Error(`Product ${productId} not found`)
   }
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -303,7 +303,7 @@ export const openGraphTemplates = {
    * Generate OpenGraph image URL
    */
   imageUrl: (path: string) => `${baseSEO.siteUrl}${path}`,
-  
+
   /**
    * Generate OpenGraph metadata
    */

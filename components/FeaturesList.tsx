@@ -2,14 +2,14 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { 
-  Database, 
-  Zap, 
-  Shield, 
-  Globe, 
-  Settings, 
-  Crown, 
-  Terminal, 
+import {
+  Database,
+  Zap,
+  Shield,
+  Globe,
+  Settings,
+  Crown,
+  Terminal,
   Code,
   Server,
   Users,
@@ -401,8 +401,8 @@ const FeaturesList = () => {
   }
 
   return (
-    <section 
-      id="features" 
+    <section
+      id="features"
       className="section-padding relative overflow-hidden"
       style={{
         backgroundColor: '#1f2937',
@@ -415,7 +415,7 @@ const FeaturesList = () => {
         <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/15 to-accent-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
         <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/10 to-primary-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        
+
         {/* Subtle pattern overlay */}
         <div
           className="absolute inset-0 opacity-10"
@@ -433,7 +433,7 @@ const FeaturesList = () => {
         <div className="text-center mb-16 relative z-10">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-primary-300/30 rounded-full text-sm font-light text-primary-200 mb-6 shadow-sm">
             <Database className="w-4 h-4" />
-Enterprise Solutions
+            Enterprise Solutions
           </div>
           <h2 className="text-4xl md:text-5xl font-display font-light mb-6 leading-tight">
             <span className="text-white">
@@ -450,7 +450,7 @@ Enterprise Solutions
               <h3 className="text-2xl font-semibold text-white mb-2">Database Extensions</h3>
               <p className="text-white/90">PostgreSQL extensions and services comparison</p>
             </div>
-            
+
             {/* PostgreSQL Extensions Section */}
             <div className="mb-12">
               <h3 className="text-2xl font-semibold text-white mb-4">PostgreSQL Extensions</h3>
@@ -468,234 +468,234 @@ Enterprise Solutions
                   </thead>
                   <tbody>
                     {projects.filter(p => ['NeurondB', 'pgbalancer', 'pg_stat_insights', 'pgraft'].includes(p.name)).map((project, index) => {
-                    const colors = getColorClasses(project.color)
-                    return (
-                      <tr key={project.name} className="border-b border-slate-400/10 hover:bg-white/5 transition-all duration-200">
-                        <td className="p-4">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
-                              {project.icon}
-                            </div>
-                            <div>
-                              <h3 className="text-base font-light text-white">{project.name}</h3>
-                              <p className={`text-xs ${colors.accent}`}>{project.description}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="p-3">
-                          <div className="space-y-1">
-                            {project.name === 'NeurondB' && (
-                              <>
-                                <span className="block px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs font-light rounded-full text-center">AI Database</span>
-                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Vector Search</span>
-                              </>
-                            )}
-                            {project.name === 'pgbalancer' && (
-                              <>
-                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Pooling</span>
-                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-light rounded-full text-center">Load Balance</span>
-                              </>
-                            )}
-                            {project.name === 'pgSentinel' && (
-                              <>
-                                <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Monitoring</span>
-                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Management</span>
-                              </>
-                            )}
-                            {project.name === 'pg_stat_insights' && (
-                              <>
-                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Analytics</span>
-                                <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-light rounded-full text-center">Performance</span>
-                              </>
-                            )}
-                            {project.name === 'pgraft' && (
-                              <>
-                                <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Consensus</span>
-                                <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-light rounded-full text-center">Extension</span>
-                              </>
-                            )}
-                            {project.name === 'FauxDB' && (
-                              <>
-                                <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Migration</span>
-                                <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-light rounded-full text-center">Compatibility</span>
-                              </>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-3 py-4">
-                          <div className="space-y-1">
-                            {project.features.slice(0, 4).map((feature, featureIndex) => (
-                              <div key={featureIndex} className="flex items-center gap-2 text-white/90">
-                                <CheckCircle className="w-3 h-3 text-green-400 flex-shrink-0" />
-                                <span className="text-xs font-light">{feature.title}</span>
+                      const colors = getColorClasses(project.color)
+                      return (
+                        <tr key={project.name} className="border-b border-slate-400/10 hover:bg-white/5 transition-all duration-200">
+                          <td className="p-4">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center ${colors.icon}`}>
+                                {project.icon}
                               </div>
-                            ))}
-                          </div>
-                        </td>
-                        <td className="px-3 py-4">
-                          <div className="space-y-1">
-                            {project.name === 'NeurondB' && (
-                              <>
-                                <div className="text-xs text-white/90">• Sub-ms vector search</div>
-                                <div className="text-xs text-white/90">• 100+ SQL functions</div>
-                                <div className="text-xs text-white/90">• HNSW indexing</div>
-                                <div className="text-xs text-white/90">• Native PG integration</div>
-                              </>
-                            )}
-                            {project.name === 'pgbalancer' && (
-                              <>
-                                <div className="text-xs text-white/90">• 10K+ connections/sec</div>
-                                <div className="text-xs text-white/90">• &lt;1ms latency</div>
-                                <div className="text-xs text-white/90">• 99.9% uptime</div>
-                                <div className="text-xs text-white/90">• C-optimized</div>
-                              </>
-                            )}
-                            {project.name === 'pgSentinel' && (
-                              <>
-                                <div className="text-xs text-white/90">• 5s update interval</div>
-                                <div className="text-xs text-white/90">• &lt;50ms API response</div>
-                                <div className="text-xs text-white/90">• 30+ metrics</div>
-                                <div className="text-xs text-white/90">• Real-time WebSocket</div>
-                              </>
-                            )}
-                            {project.name === 'pg_stat_insights' && (
-                              <>
-                                <div className="text-xs text-white/90">• &lt;100ms analysis</div>
-                                <div className="text-xs text-white/90">• 50+ tracked metrics</div>
-                                <div className="text-xs text-white/90">• 10+ data sources</div>
-                                <div className="text-xs text-white/90">• Intelligent recommendations</div>
-                              </>
-                            )}
-                            {project.name === 'pgraft' && (
-                              <>
-                                <div className="text-xs text-white/90">• Sub-second failover</div>
-                                <div className="text-xs text-white/90">• Raft consensus</div>
-                                <div className="text-xs text-white/90">• Go reliability</div>
-                                <div className="text-xs text-white/90">• Zero config</div>
-                              </>
-                            )}
-                            {project.name === 'FauxDB' && (
-                              <>
-                                <div className="text-xs text-white/90">• Rust performance</div>
-                                <div className="text-xs text-white/90">• MongoDB compatible</div>
-                                <div className="text-xs text-white/90">• SQL translation</div>
-                                <div className="text-xs text-white/90">• Production ready</div>
-                              </>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-3 py-4">
-                          <div className="space-y-1">
-                            {project.name === 'NeurondB' && (
-                              <>
-                                <div className="text-xs text-white/90">• PostgreSQL C extension</div>
-                                <div className="text-xs text-white/90">• PG 16-18 compatible</div>
-                                <div className="text-xs text-white/90">• Background workers</div>
-                                <div className="text-xs text-white/90">• Production-ready</div>
-                              </>
-                            )}
-                            {project.name === 'pgbalancer' && (
-                              <>
-                                <div className="text-xs text-white/90">• C-based high performance</div>
-                                <div className="text-xs text-white/90">• PostgreSQL extension</div>
-                                <div className="text-xs text-white/90">• Production-ready</div>
-                                <div className="text-xs text-white/90">• Zero downtime</div>
-                              </>
-                            )}
-                            {project.name === 'pgSentinel' && (
-                              <>
-                                <div className="text-xs text-white/90">• Next.js 14 + React 18</div>
-                                <div className="text-xs text-white/90">• FastAPI Python backend</div>
-                                <div className="text-xs text-white/90">• Docker Compose</div>
-                                <div className="text-xs text-white/90">• Production-ready</div>
-                              </>
-                            )}
-                            {project.name === 'pg_stat_insights' && (
-                              <>
-                                <div className="text-xs text-white/90">• Python asyncpg</div>
-                                <div className="text-xs text-white/90">• PostgreSQL extensions</div>
-                                <div className="text-xs text-white/90">• API integrated</div>
-                                <div className="text-xs text-white/90">• Cloud native</div>
-                              </>
-                            )}
-                            {project.name === 'pgraft' && (
-                              <>
-                                <div className="text-xs text-white/90">• PostgreSQL extension</div>
-                                <div className="text-xs text-white/90">• Go implementation</div>
-                                <div className="text-xs text-white/90">• Auto-configuration</div>
-                                <div className="text-xs text-white/90">• Container ready</div>
-                              </>
-                            )}
-                            {project.name === 'FauxDB' && (
-                              <>
-                                <div className="text-xs text-white/90">• Rust-based engine</div>
-                                <div className="text-xs text-white/90">• PostgreSQL backend</div>
-                                <div className="text-xs text-white/90">• Docker ready</div>
-                                <div className="text-xs text-white/90">• Cloud native</div>
-                              </>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-3 py-4">
-                          <div className="space-y-1">
-                            {project.name === 'NeurondB' && (
-                              <>
-                                <div className="text-xs text-white/90">• Semantic search apps</div>
-                                <div className="text-xs text-white/90">• RAG applications</div>
-                                <div className="text-xs text-white/90">• AI-powered features</div>
-                                <div className="text-xs text-white/90">• Embedding storage</div>
-                              </>
-                            )}
-                            {project.name === 'pgbalancer' && (
-                              <>
-                                <div className="text-xs text-white/90">• High-traffic apps</div>
-                                <div className="text-xs text-white/90">• Multi-tenant systems</div>
-                                <div className="text-xs text-white/90">• Load distribution</div>
-                                <div className="text-xs text-white/90">• Connection scaling</div>
-                              </>
-                            )}
-                            {project.name === 'pgSentinel' && (
-                              <>
-                                <div className="text-xs text-white/90">• Production monitoring</div>
-                                <div className="text-xs text-white/90">• DevOps automation</div>
-                                <div className="text-xs text-white/90">• Performance tuning</div>
-                                <div className="text-xs text-white/90">• Capacity planning</div>
-                              </>
-                            )}
-                            {project.name === 'pg_stat_insights' && (
-                              <>
-                                <div className="text-xs text-white/90">• Query optimization</div>
-                                <div className="text-xs text-white/90">• Performance troubleshooting</div>
-                                <div className="text-xs text-white/90">• Capacity planning</div>
-                                <div className="text-xs text-white/90">• Production analytics</div>
-                              </>
-                            )}
-                            {project.name === 'pgraft' && (
-                              <>
-                                <div className="text-xs text-white/90">• Distributed clusters</div>
-                                <div className="text-xs text-white/90">• Leader election</div>
-                                <div className="text-xs text-white/90">• Consensus protocols</div>
-                                <div className="text-xs text-white/90">• HA databases</div>
-                              </>
-                            )}
-                            {project.name === 'FauxDB' && (
-                              <>
-                                <div className="text-xs text-white/90">• MongoDB migration</div>
-                                <div className="text-xs text-white/90">• Legacy app support</div>
-                                <div className="text-xs text-white/90">• Protocol compatibility</div>
-                                <div className="text-xs text-white/90">• Data transformation</div>
-                              </>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    )
-                  })}
+                              <div>
+                                <h3 className="text-base font-light text-white">{project.name}</h3>
+                                <p className={`text-xs ${colors.accent}`}>{project.description}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="p-3">
+                            <div className="space-y-1">
+                              {project.name === 'NeurondB' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs font-light rounded-full text-center">AI Database</span>
+                                  <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Vector Search</span>
+                                </>
+                              )}
+                              {project.name === 'pgbalancer' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Pooling</span>
+                                  <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-light rounded-full text-center">Load Balance</span>
+                                </>
+                              )}
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Monitoring</span>
+                                  <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Management</span>
+                                </>
+                              )}
+                              {project.name === 'pg_stat_insights' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Analytics</span>
+                                  <span className="block px-2 py-1 bg-green-500/20 text-green-300 text-xs font-light rounded-full text-center">Performance</span>
+                                </>
+                              )}
+                              {project.name === 'pgraft' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Consensus</span>
+                                  <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-light rounded-full text-center">Extension</span>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Migration</span>
+                                  <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-light rounded-full text-center">Compatibility</span>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.features.slice(0, 4).map((feature, featureIndex) => (
+                                <div key={featureIndex} className="flex items-center gap-2 text-white/90">
+                                  <CheckCircle className="w-3 h-3 text-green-400 flex-shrink-0" />
+                                  <span className="text-xs font-light">{feature.title}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.name === 'NeurondB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Sub-ms vector search</div>
+                                  <div className="text-xs text-white/90">• 100+ SQL functions</div>
+                                  <div className="text-xs text-white/90">• HNSW indexing</div>
+                                  <div className="text-xs text-white/90">• Native PG integration</div>
+                                </>
+                              )}
+                              {project.name === 'pgbalancer' && (
+                                <>
+                                  <div className="text-xs text-white/90">• 10K+ connections/sec</div>
+                                  <div className="text-xs text-white/90">• &lt;1ms latency</div>
+                                  <div className="text-xs text-white/90">• 99.9% uptime</div>
+                                  <div className="text-xs text-white/90">• C-optimized</div>
+                                </>
+                              )}
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <div className="text-xs text-white/90">• 5s update interval</div>
+                                  <div className="text-xs text-white/90">• &lt;50ms API response</div>
+                                  <div className="text-xs text-white/90">• 30+ metrics</div>
+                                  <div className="text-xs text-white/90">• Real-time WebSocket</div>
+                                </>
+                              )}
+                              {project.name === 'pg_stat_insights' && (
+                                <>
+                                  <div className="text-xs text-white/90">• &lt;100ms analysis</div>
+                                  <div className="text-xs text-white/90">• 50+ tracked metrics</div>
+                                  <div className="text-xs text-white/90">• 10+ data sources</div>
+                                  <div className="text-xs text-white/90">• Intelligent recommendations</div>
+                                </>
+                              )}
+                              {project.name === 'pgraft' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Sub-second failover</div>
+                                  <div className="text-xs text-white/90">• Raft consensus</div>
+                                  <div className="text-xs text-white/90">• Go reliability</div>
+                                  <div className="text-xs text-white/90">• Zero config</div>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Rust performance</div>
+                                  <div className="text-xs text-white/90">• MongoDB compatible</div>
+                                  <div className="text-xs text-white/90">• SQL translation</div>
+                                  <div className="text-xs text-white/90">• Production ready</div>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.name === 'NeurondB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• PostgreSQL C extension</div>
+                                  <div className="text-xs text-white/90">• PG 16-18 compatible</div>
+                                  <div className="text-xs text-white/90">• Background workers</div>
+                                  <div className="text-xs text-white/90">• Production-ready</div>
+                                </>
+                              )}
+                              {project.name === 'pgbalancer' && (
+                                <>
+                                  <div className="text-xs text-white/90">• C-based high performance</div>
+                                  <div className="text-xs text-white/90">• PostgreSQL extension</div>
+                                  <div className="text-xs text-white/90">• Production-ready</div>
+                                  <div className="text-xs text-white/90">• Zero downtime</div>
+                                </>
+                              )}
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Next.js 14 + React 18</div>
+                                  <div className="text-xs text-white/90">• FastAPI Python backend</div>
+                                  <div className="text-xs text-white/90">• Docker Compose</div>
+                                  <div className="text-xs text-white/90">• Production-ready</div>
+                                </>
+                              )}
+                              {project.name === 'pg_stat_insights' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Python asyncpg</div>
+                                  <div className="text-xs text-white/90">• PostgreSQL extensions</div>
+                                  <div className="text-xs text-white/90">• API integrated</div>
+                                  <div className="text-xs text-white/90">• Cloud native</div>
+                                </>
+                              )}
+                              {project.name === 'pgraft' && (
+                                <>
+                                  <div className="text-xs text-white/90">• PostgreSQL extension</div>
+                                  <div className="text-xs text-white/90">• Go implementation</div>
+                                  <div className="text-xs text-white/90">• Auto-configuration</div>
+                                  <div className="text-xs text-white/90">• Container ready</div>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Rust-based engine</div>
+                                  <div className="text-xs text-white/90">• PostgreSQL backend</div>
+                                  <div className="text-xs text-white/90">• Docker ready</div>
+                                  <div className="text-xs text-white/90">• Cloud native</div>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-3 py-4">
+                            <div className="space-y-1">
+                              {project.name === 'NeurondB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Semantic search apps</div>
+                                  <div className="text-xs text-white/90">• RAG applications</div>
+                                  <div className="text-xs text-white/90">• AI-powered features</div>
+                                  <div className="text-xs text-white/90">• Embedding storage</div>
+                                </>
+                              )}
+                              {project.name === 'pgbalancer' && (
+                                <>
+                                  <div className="text-xs text-white/90">• High-traffic apps</div>
+                                  <div className="text-xs text-white/90">• Multi-tenant systems</div>
+                                  <div className="text-xs text-white/90">• Load distribution</div>
+                                  <div className="text-xs text-white/90">• Connection scaling</div>
+                                </>
+                              )}
+                              {project.name === 'pgSentinel' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Production monitoring</div>
+                                  <div className="text-xs text-white/90">• DevOps automation</div>
+                                  <div className="text-xs text-white/90">• Performance tuning</div>
+                                  <div className="text-xs text-white/90">• Capacity planning</div>
+                                </>
+                              )}
+                              {project.name === 'pg_stat_insights' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Query optimization</div>
+                                  <div className="text-xs text-white/90">• Performance troubleshooting</div>
+                                  <div className="text-xs text-white/90">• Capacity planning</div>
+                                  <div className="text-xs text-white/90">• Production analytics</div>
+                                </>
+                              )}
+                              {project.name === 'pgraft' && (
+                                <>
+                                  <div className="text-xs text-white/90">• Distributed clusters</div>
+                                  <div className="text-xs text-white/90">• Leader election</div>
+                                  <div className="text-xs text-white/90">• Consensus protocols</div>
+                                  <div className="text-xs text-white/90">• HA databases</div>
+                                </>
+                              )}
+                              {project.name === 'FauxDB' && (
+                                <>
+                                  <div className="text-xs text-white/90">• MongoDB migration</div>
+                                  <div className="text-xs text-white/90">• Legacy app support</div>
+                                  <div className="text-xs text-white/90">• Protocol compatibility</div>
+                                  <div className="text-xs text-white/90">• Data transformation</div>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>
             </div>
-            
+
             {/* PostgreSQL Services Section */}
             <div className="mt-12">
               <h3 className="text-2xl font-semibold text-white mb-4">PostgreSQL Services</h3>
@@ -897,7 +897,7 @@ Enterprise Solutions
                       <p className={`text-sm ${colors.accent}`}>{project.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-6 flex-grow">
                     {project.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="border-l-2 border-slate-400/30 pl-4">
@@ -913,7 +913,7 @@ Enterprise Solutions
                       </div>
                     ))}
                   </div>
-                  
+
                   <div className="mt-8 pt-6 border-t border-slate-400/20">
                     <Link href={project.link} className={`w-full ${colors.button} text-white px-6 py-3 rounded-lg font-light transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 min-h-[48px]`}>
                       View Details

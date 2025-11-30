@@ -14,7 +14,7 @@ export default function NeuronAgentPage() {
     >
       <div className="prose prose-invert max-w-none">
         <h1>NeuronAgent: AI Agent Runtime</h1>
-        
+
         <p className="lead">
           NeuronAgent is an AI agent runtime system providing REST API and WebSocket endpoints for building applications with long-term memory, tool execution, and streaming responses. It integrates seamlessly with NeuronDB for vector search, embeddings, and LLM operations.
         </p>
@@ -81,7 +81,7 @@ export default function NeuronAgentPage() {
 
         <h2>Architecture</h2>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`┌─────────────────────────────────────────────┐
+          {`┌─────────────────────────────────────────────┐
 │          NeuronAgent Service                │
 ├─────────────────────────────────────────────┤
 │  REST API     │  WebSocket  │  Health      │
@@ -105,7 +105,7 @@ export default function NeuronAgentPage() {
 
         <h3>Database Setup</h3>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`createdb neurondb
+          {`createdb neurondb
 psql -d neurondb -c "CREATE EXTENSION neurondb;"
 
 # Run migrations
@@ -117,7 +117,7 @@ psql -d neurondb -f migrations/003_add_triggers.sql`}
         <h3>Configuration</h3>
         <p>Set environment variables or create <code>config.yaml</code>:</p>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`export DB_HOST=localhost
+          {`export DB_HOST=localhost
 export DB_PORT=5432
 export DB_NAME=neurondb
 export DB_USER=neurondb
@@ -128,11 +128,11 @@ export SERVER_PORT=8080`}
         <h3>Run Service</h3>
         <p>From source:</p>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`go run cmd/agent-server/main.go`}
+          {`go run cmd/agent-server/main.go`}
         </pre>
         <p>Using Docker:</p>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`cd docker
+          {`cd docker
 cp .env.example .env
 # Edit .env with your configuration
 docker compose up -d`}
@@ -196,7 +196,7 @@ docker compose up -d`}
         <h2>Usage Examples</h2>
         <h3>Create Agent</h3>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`curl -X POST http://localhost:8080/api/v1/agents \\
+          {`curl -X POST http://localhost:8080/api/v1/agents \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -208,7 +208,7 @@ docker compose up -d`}
 
         <h3>Create Session</h3>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`curl -X POST http://localhost:8080/api/v1/sessions \\
+          {`curl -X POST http://localhost:8080/api/v1/sessions \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -218,7 +218,7 @@ docker compose up -d`}
 
         <h3>Send Message</h3>
         <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-{`curl -X POST http://localhost:8080/api/v1/sessions/SESSION_ID/messages \\
+          {`curl -X POST http://localhost:8080/api/v1/sessions/SESSION_ID/messages \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{

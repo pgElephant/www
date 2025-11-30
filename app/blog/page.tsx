@@ -2,7 +2,6 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Calendar, Clock, User, Tag, Eye, ThumbsUp, MessageCircle, TrendingUp, BookOpen, Code, Database, Server, Zap, Award, Globe, Users } from 'lucide-react'
-import PageTemplate from '@/components/templates/PageTemplate'
 
 export const metadata: Metadata = {
   title: 'Blog - pgElephant',
@@ -280,7 +279,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
 
 export default function BlogPage() {
   return (
-    <PageTemplate className="pt-0">
+    <div className="pt-0">
       {/* Unified Professional Hero */}
       <section
         className="relative text-center overflow-hidden flex items-center h-[400px] pt-20"
@@ -339,6 +338,6 @@ export default function BlogPage() {
           </div>
         </div>
       </div>
-    </PageTemplate>
+    </div>
   )
 }
