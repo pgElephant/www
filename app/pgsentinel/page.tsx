@@ -74,8 +74,7 @@ const pgSentinelConfig = {
         </div>
       </div>
     </div>
-    ),
-  },
+  ),
   features: [
     { icon: '📊', iconColor: 'text-blue-500', title: 'Real-Time Dashboard', desc: 'Beautiful web-based interface with live metrics, connection pool visualization, and backend node management.' },
     { icon: '📈', iconColor: 'text-purple-500', title: 'Prometheus Metrics', desc: '30+ custom metrics exported for comprehensive monitoring with PromQL query support and time-series analysis.' },
@@ -520,7 +519,8 @@ const pgSentinelConfig = {
       </tbody>
     </table>
     </div>
-  ),
+    ),
+  },
   useCases: [
     {
       title: 'Production Monitoring',
