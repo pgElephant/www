@@ -209,6 +209,15 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
                 unoptimized
                 priority
               />
+            ) : post.slug === 'pg-stat-insights-index-monitoring' ? (
+              <Image
+                src="/blog/pg-stat-insights/header.svg?v=7"
+                alt="pg_stat_insights index monitoring blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
             ) : post.slug === 'neurondb' ? (
               <Image
                 src="/blog/neurondb/header.svg?v=7"
