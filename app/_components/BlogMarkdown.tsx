@@ -139,22 +139,22 @@ export function BlogMarkdown({ children }: { children: string }) {
           // Tables with proper styling
           table({ node, ...props }) {
             return (
-              <div 
-                className="overflow-x-auto my-8 w-full" 
-                style={{ 
-                  scrollbarWidth: 'thin', 
+              <div
+                className="overflow-x-auto my-8 w-full"
+                style={{
+                  scrollbarWidth: 'thin',
                   scrollbarColor: 'rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1)',
                   maxWidth: '100%'
                 }}
               >
-                <table 
-                  className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl" 
-                  style={{ 
-                    width: 'max-content', 
+                <table
+                  className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl"
+                  style={{
+                    width: 'max-content',
                     minWidth: '100%',
                     borderCollapse: 'collapse'
-                  }} 
-                  {...props} 
+                  }}
+                  {...props}
                 />
               </div>
             );
@@ -186,7 +186,7 @@ export function BlogMarkdown({ children }: { children: string }) {
                   src={src}
                   alt={alt}
                   width={900}
-                  height={675}
+                  height={750}
                   style={{ width: '100%', height: 'auto' }}
                   unoptimized
                 />
