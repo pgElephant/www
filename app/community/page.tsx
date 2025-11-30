@@ -132,8 +132,8 @@ const CommunityPage = () => {
   ]
 
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
+    <div className="pt-0">
+      {/* Unified Professional Hero */}
       <section
         className="relative text-center overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
         style={{
@@ -142,10 +142,8 @@ const CommunityPage = () => {
       >
         <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-4 tracking-tight drop-shadow-lg">
-              Community
-            </h1>
-            <p className="text-xl md:text-2xl text-white mb-8 max-w-4xl mx-auto drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Community</h1>
+            <p className="text-lg md:text-xl text-white mb-6 max-w-2xl mx-auto drop-shadow-lg">
               Join our growing community of developers, users, and contributors building the future of PostgreSQL clustering.
             </p>
 

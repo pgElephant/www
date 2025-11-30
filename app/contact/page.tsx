@@ -45,7 +45,7 @@ const ContactPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     // Create mailto link with form data
     const subject = encodeURIComponent(formData.subject)
     const body = encodeURIComponent(`
@@ -53,7 +53,7 @@ Name: ${formData.name}
 Email: ${formData.email}
 Message: ${formData.message}
     `)
-    
+
     const mailtoLink = `mailto:contact@pgelephant.com?subject=${subject}&body=${body}`
     window.location.href = mailtoLink
   }
@@ -126,9 +126,9 @@ Message: ${formData.message}
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <div 
-        className="relative overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20"
-        style={{ 
+      <div
+        className="relative overflow-hidden flex items-center h-[400px] md:h-[400px] pt-20"
+        style={{
           backgroundColor: '#111827'
         }}
       >
@@ -141,7 +141,7 @@ Message: ${formData.message}
               <p className="text-xl mb-8 leading-relaxed text-white">
                 Get in touch with our team for support, sales, or technical questions. We're here to help you succeed with pgElephant's enterprise-grade PostgreSQL solutions.
               </p>
-              
+
               {/* Contact Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
                 <div className="text-center">
@@ -379,7 +379,7 @@ Message: ${formData.message}
               </p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 border border-white/20">
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -396,7 +396,7 @@ Message: ${formData.message}
                       className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors text-white placeholder-white/50"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-sm text-white mb-2">
                       Email
@@ -412,7 +412,7 @@ Message: ${formData.message}
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="subject" className="block text-sm text-white mb-2">
                     Subject
@@ -427,7 +427,7 @@ Message: ${formData.message}
                     className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors text-white placeholder-white/50"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm text-white mb-2">
                     Message
@@ -442,7 +442,7 @@ Message: ${formData.message}
                     className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors resize-none text-white placeholder-white/50"
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   className="w-full py-3 px-6 rounded-lg text-white transition-all duration-200 flex items-center justify-center gap-2"
