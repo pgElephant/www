@@ -77,10 +77,10 @@ export const products: Record<'neurondb' | 'pgraft' | 'pgbalancer' | 'fauxdb' | 
     postgresqlVersions: ['16', '17', '18'],
     title: 'AI Database Features',
     items: [
-      'Vector search uses HNSW and IVF indexing. Supports 10 distance metrics. Compression up to 32x.',
-      'ML inference runs ONNX models. Generates text, image, and multimodal embeddings. Processes batches.',
-      'Hybrid search combines semantic and full-text search. Cross-encoder reranking. In-database RAG pipeline.',
-      'GPU acceleration supports CUDA and ROCm. Faster matrix operations. Falls back to CPU automatically.',
+      'Vector search uses HNSW and IVF indexing.',
+      'ML inference runs ONNX models. Generates text, image, and multimodal embeddings.',
+      'Hybrid search combines semantic and full-text search. Cross-encoder reranking. RAG pipeline.',
+      'GPU acceleration supports CUDA and ROCm. Faster matrix operations.',
     ],
     badges: [
       'PostgreSQL 16-18',
