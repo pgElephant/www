@@ -110,7 +110,7 @@ export function BlogMarkdown({ children }: { children: string }) {
                 >
                   {({ className, style, tokens, getLineProps, getTokenProps }) => (
                     <div className="w-full max-w-full overflow-x-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1)' }}>
-                      <pre className={`${className} rounded-lg text-sm shadow-2xl ${hasOutput ? 'min-h-[90px]' : 'min-h-[60px]'} flex flex-col justify-start border border-gray-600/30 overflow-x-auto`} style={style}>
+                      <pre className={`${className} rounded-lg text-sm shadow-2xl ${hasOutput ? 'min-h-[72px]' : 'min-h-[48px]'} flex flex-col justify-start border border-gray-600/30 overflow-x-auto`} style={style}>
                         <div className="flex-1 p-4 min-w-max">
                           {tokens.map((line, i) => (
                             <div key={i} {...getLineProps({ line })} className="min-h-[1.5rem] whitespace-pre">
@@ -121,8 +121,8 @@ export function BlogMarkdown({ children }: { children: string }) {
                           ))}
                         </div>
                         {/* Fill remaining space if content is short */}
-                        {tokens.length < (hasOutput ? 6 : 3) && !isLongContent && (
-                          <div className="flex-1" style={{ minHeight: `${((hasOutput ? 6 : 3) - tokens.length) * 1.5}rem` }}></div>
+                        {tokens.length < (hasOutput ? 5 : 2) && !isLongContent && (
+                          <div className="flex-1" style={{ minHeight: `${((hasOutput ? 5 : 2) - tokens.length) * 1.5}rem` }}></div>
                         )}
                       </pre>
                     </div>
