@@ -1,5 +1,4 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
-import GiscusComments from '../../../components/GiscusComments';
 import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 
 export const metadata = {
@@ -104,56 +103,6 @@ export default function PgStatInsightsReleaseBlog() {
                 'OpenSource',
                 'pgElephant',
               ]}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Comments Section */}
-      <div 
-        className="relative overflow-hidden py-16 px-6"
-        style={{ 
-          backgroundColor: '#1f2937',
-        }}
-      >
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
-              backgroundSize: '32px 32px'
-            }}
-          />
-        </div>
-
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
-              `,
-              backgroundSize: '50px 50px'
-            }}
-          />
-        </div>
-
-        <div className="relative max-w-4xl mx-auto">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 shadow-2xl">
-            <GiscusComments
-              repo="pgElephant/www"
-              repoId="R_kgDONWqK3A"
-              category="Blog Comments"
-              categoryId="DIC_kwDONWqK3M4ClOuv"
-              mapping="pathname"
-              reactionsEnabled={true}
-              theme="dark"
             />
           </div>
         </div>

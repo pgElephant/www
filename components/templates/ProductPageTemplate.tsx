@@ -115,6 +115,14 @@ export default function ProductPageTemplate({
       >
         <div className="container-extra-wide relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
+            {/* Product Icon */}
+            {heroIcon && (
+              <div className="flex justify-center mb-6">
+                <div className="bg-black/20 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-2xl">
+                  {heroIcon}
+                </div>
+              </div>
+            )}
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">
               {heroTitle}
             </h1>
@@ -131,6 +139,12 @@ export default function ProductPageTemplate({
       {demo && (
         <SectionTemplate background="page" padding="xl">
           <div className="container-wide">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                Demo
+              </h2>
+              <div className="mx-auto h-1 w-28 bg-slate-400 rounded" />
+            </div>
             <div className="max-w-4xl mx-auto">
               {demo}
             </div>

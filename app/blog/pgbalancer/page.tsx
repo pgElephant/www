@@ -1,5 +1,4 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
-import GiscusComments from '../../../components/GiscusComments';
 import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 
 export const metadata = {
@@ -1081,26 +1080,6 @@ export default function PgbalancerBlogPost() {
             url="https://www.pgelephant.com/blog/pgbalancer"
             hashtags={['PostgreSQL', 'AI', 'LoadBalancing', 'DevOps', 'Database', 'MachineLearning', 'ConnectionPooling', 'RESTAPI']}
           />
-        </div>
-
-        {/* Comments Section */}
-        <div className="mt-16 pt-8 border-t border-slate-800">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-              Comments
-            </h2>
-
-            {/* Giscus Comments - Persistent GitHub Discussions */}
-            <GiscusComments
-              repo="pgElephant/www"
-              repoId="R_kgDONWqK3A"
-              category="Blog Comments"
-              categoryId="DIC_kwDONWqK3M4ClOuv"
-              mapping="pathname"
-              reactionsEnabled={true}
-              theme="dark"
-            />
-          </div>
         </div>
       </article>
     </div>
