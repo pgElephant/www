@@ -186,7 +186,7 @@ export function BlogMarkdown({ children }: { children: string }) {
                   src={src}
                   alt={alt}
                   width={900}
-                  height={600}
+                  height={675}
                   style={{ width: '100%', height: 'auto' }}
                   unoptimized
                 />
