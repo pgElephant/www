@@ -21,7 +21,7 @@ export default function HeroTemplate({
   return (
     <section
       className={cn(
-        'relative overflow-hidden flex items-center h-[500px] md:h-[625px] pt-20',
+        'relative overflow-hidden flex items-center h-[400px] md:h-[500px] pt-20',
         className
       )}
       style={{
