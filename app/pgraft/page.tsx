@@ -33,120 +33,128 @@ const pgraftConfig = {
       { title: 'etcd-Compatible KV Store', desc: 'Raft-replicated key-value storage included. For distributed configuration and coordination.' },
     ],
   },
-  featureMatrix: (
-    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
-      <thead className="bg-slate-800/60">
-        <tr className="text-left">
-          <th className="px-4 py-3 font-semibold text-white">Capability</th>
-          <th className="px-4 py-3 font-semibold text-white">Description</th>
-          <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
-          <th className="px-4 py-3 font-semibold text-white">Performance</th>
-          <th className="px-4 py-3 font-semibold text-white">Scalability</th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Consensus (Raft)</td>
-          <td className="px-4 py-3 text-slate-300">Leader election, log replication, term monotonicity.</td>
-          <td className="px-4 py-3 text-slate-300">Deterministic failover; no split-brain.</td>
-          <td className="px-4 py-3 text-slate-300">Sub-second leader election</td>
-          <td className="px-4 py-3 text-slate-300">3-5 nodes optimal</td>
-        </tr>
-        <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">State Durability</td>
-          <td className="px-4 py-3 text-slate-300">Persistent HardState, entries, snapshots.</td>
-          <td className="px-4 py-3 text-slate-300">Crash-safe recovery.</td>
-          <td className="px-4 py-3 text-slate-300">WAL-based persistence</td>
-          <td className="px-4 py-3 text-slate-300">Unlimited log entries</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Command Interface</td>
-          <td className="px-4 py-3 text-slate-300">SQL functions for init, membership, diagnostics.</td>
-          <td className="px-4 py-3 text-slate-300">Native DB admin UX.</td>
-          <td className="px-4 py-3 text-slate-300">Zero-latency SQL access</td>
-          <td className="px-4 py-3 text-slate-300">Per-connection scaling</td>
-        </tr>
-        <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Monitoring Hooks</td>
-          <td className="px-4 py-3 text-slate-300">Cluster status, log stats, leader checks.</td>
-          <td className="px-4 py-3 text-slate-300">Simplifies observability.</td>
-          <td className="px-4 py-3 text-slate-300">Real-time metrics</td>
-          <td className="px-4 py-3 text-slate-300">Multi-cluster support</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Node Membership</td>
-          <td className="px-4 py-3 text-slate-300">Add/remove nodes through leader replication.</td>
-          <td className="px-4 py-3 text-slate-300">Controlled scaling.</td>
-          <td className="px-4 py-3 text-slate-300">Online reconfiguration</td>
-          <td className="px-4 py-3 text-slate-300">Dynamic cluster size</td>
-        </tr>
-        <tr className="bg-slate-800/60">
-          <td className="px-4 py-3 font-medium text-cyan-300">Debug Mode</td>
-          <td className="px-4 py-3 text-slate-300">Toggle extended logging via SQL.</td>
-          <td className="px-4 py-3 text-slate-300">Faster incident analysis.</td>
-          <td className="px-4 py-3 text-slate-300">Configurable verbosity</td>
-          <td className="px-4 py-3 text-slate-300">Per-node granularity</td>
-        </tr>
-      </tbody>
-    </table>
-  ),
-  featureComparison: (
-    <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
-      <thead className="bg-slate-800/60">
-        <tr className="text-left">
-          <th className="px-4 py-3 font-semibold text-white">Feature</th>
-          <th className="px-4 py-3 font-semibold text-white">pgraft</th>
-          <th className="px-4 py-3 font-semibold text-white">Patroni</th>
-          <th className="px-4 py-3 font-semibold text-white">Stolon</th>
-          <th className="px-4 py-3 font-semibold text-white">RepMgr</th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-slate-700 bg-slate-800/40">
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Consensus Protocol</td>
-          <td className="px-4 py-3 text-green-400">Raft (libraft)</td>
-          <td className="px-4 py-3 text-yellow-300">etcd/Consul</td>
-          <td className="px-4 py-3 text-yellow-300">etcd</td>
-          <td className="px-4 py-3 text-red-300">None</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
-          <td className="px-4 py-3 text-green-400">Native Extension</td>
-          <td className="px-4 py-3 text-yellow-300">External Agent</td>
-          <td className="px-4 py-3 text-yellow-300">External Agent</td>
-          <td className="px-4 py-3 text-yellow-300">External Agent</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Split-Brain Prevention</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">SQL Interface</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Zero External Dependencies</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-3 font-medium text-cyan-300">Background Workers</td>
-          <td className="px-4 py-3 text-green-400">✔️</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-          <td className="px-4 py-3 text-red-300">✗</td>
-        </tr>
-      </tbody>
-    </table>
-  ),
+  featureMatrix: {
+    title: 'Core Capabilities',
+    subtitle: 'Comprehensive capabilities overview of pgraft consensus and cluster management features.',
+    content: (
+      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+        <thead className="bg-slate-800/60">
+          <tr className="text-left">
+            <th className="px-4 py-3 font-semibold text-white">Capability</th>
+            <th className="px-4 py-3 font-semibold text-white">Description</th>
+            <th className="px-4 py-3 font-semibold text-white">Operational Impact</th>
+            <th className="px-4 py-3 font-semibold text-white">Performance</th>
+            <th className="px-4 py-3 font-semibold text-white">Scalability</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">Consensus (Raft)</td>
+            <td className="px-4 py-3 text-slate-300">Leader election, log replication, term monotonicity.</td>
+            <td className="px-4 py-3 text-slate-300">Deterministic failover; no split-brain.</td>
+            <td className="px-4 py-3 text-slate-300">Sub-second leader election</td>
+            <td className="px-4 py-3 text-slate-300">3-5 nodes optimal</td>
+          </tr>
+          <tr className="bg-slate-800/60">
+            <td className="px-4 py-3 font-medium text-cyan-300">State Durability</td>
+            <td className="px-4 py-3 text-slate-300">Persistent HardState, entries, snapshots.</td>
+            <td className="px-4 py-3 text-slate-300">Crash-safe recovery.</td>
+            <td className="px-4 py-3 text-slate-300">WAL-based persistence</td>
+            <td className="px-4 py-3 text-slate-300">Unlimited log entries</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">Command Interface</td>
+            <td className="px-4 py-3 text-slate-300">SQL functions for init, membership, diagnostics.</td>
+            <td className="px-4 py-3 text-slate-300">Native DB admin UX.</td>
+            <td className="px-4 py-3 text-slate-300">Zero-latency SQL access</td>
+            <td className="px-4 py-3 text-slate-300">Per-connection scaling</td>
+          </tr>
+          <tr className="bg-slate-800/60">
+            <td className="px-4 py-3 font-medium text-cyan-300">Monitoring Hooks</td>
+            <td className="px-4 py-3 text-slate-300">Cluster status, log stats, leader checks.</td>
+            <td className="px-4 py-3 text-slate-300">Simplifies observability.</td>
+            <td className="px-4 py-3 text-slate-300">Real-time metrics</td>
+            <td className="px-4 py-3 text-slate-300">Multi-cluster support</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">Node Membership</td>
+            <td className="px-4 py-3 text-slate-300">Add/remove nodes through leader replication.</td>
+            <td className="px-4 py-3 text-slate-300">Controlled scaling.</td>
+            <td className="px-4 py-3 text-slate-300">Online reconfiguration</td>
+            <td className="px-4 py-3 text-slate-300">Dynamic cluster size</td>
+          </tr>
+          <tr className="bg-slate-800/60">
+            <td className="px-4 py-3 font-medium text-cyan-300">Debug Mode</td>
+            <td className="px-4 py-3 text-slate-300">Toggle extended logging via SQL.</td>
+            <td className="px-4 py-3 text-slate-300">Faster incident analysis.</td>
+            <td className="px-4 py-3 text-slate-300">Configurable verbosity</td>
+            <td className="px-4 py-3 text-slate-300">Per-node granularity</td>
+          </tr>
+        </tbody>
+      </table>
+    ),
+  },
+  featureComparison: {
+    title: 'Feature Comparison',
+    subtitle: 'Compare pgraft with other PostgreSQL high availability solutions.',
+    content: (
+      <table className="w-full text-sm border border-slate-700 rounded-lg overflow-hidden">
+        <thead className="bg-slate-800/60">
+          <tr className="text-left">
+            <th className="px-4 py-3 font-semibold text-white">Feature</th>
+            <th className="px-4 py-3 font-semibold text-white">pgraft</th>
+            <th className="px-4 py-3 font-semibold text-white">Patroni</th>
+            <th className="px-4 py-3 font-semibold text-white">Stolon</th>
+            <th className="px-4 py-3 font-semibold text-white">RepMgr</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-700 bg-slate-800/40">
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">Consensus Protocol</td>
+            <td className="px-4 py-3 text-green-400">Raft (libraft)</td>
+            <td className="px-4 py-3 text-yellow-300">etcd/Consul</td>
+            <td className="px-4 py-3 text-yellow-300">etcd</td>
+            <td className="px-4 py-3 text-red-300">None</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">PostgreSQL Integration</td>
+            <td className="px-4 py-3 text-green-400">Native Extension</td>
+            <td className="px-4 py-3 text-yellow-300">External Agent</td>
+            <td className="px-4 py-3 text-yellow-300">External Agent</td>
+            <td className="px-4 py-3 text-yellow-300">External Agent</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">Split-Brain Prevention</td>
+            <td className="px-4 py-3 text-green-400">✔️</td>
+            <td className="px-4 py-3 text-green-400">✔️</td>
+            <td className="px-4 py-3 text-green-400">✔️</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">SQL Interface</td>
+            <td className="px-4 py-3 text-green-400">✔️</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">Zero External Dependencies</td>
+            <td className="px-4 py-3 text-green-400">✔️</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+            <td className="px-4 py-3 text-green-400">✔️</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-3 font-medium text-cyan-300">Background Workers</td>
+            <td className="px-4 py-3 text-green-400">✔️</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+            <td className="px-4 py-3 text-red-300">✗</td>
+          </tr>
+        </tbody>
+      </table>
+    ),
+  },
   docsLinks: [
     { href: '/docs/pgraft/getting-started', title: 'Getting Started', desc: 'Quick start guide for pgraft.' },
     { href: '/docs/pgraft/configuration', title: 'Configuration', desc: 'Setup and configuration options.' },
