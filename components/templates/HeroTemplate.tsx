@@ -26,7 +26,7 @@ export default function HeroTemplate({
   const heightClass = height === 'default'
     ? 'h-[400px] md:h-[750px]'
     : height === 'product'
-      ? 'h-[800px]'
+      ? 'h-[850px]'
       : 'h-[400px]'
 
   return (
