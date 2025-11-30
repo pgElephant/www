@@ -73,22 +73,25 @@ const DEFAULT_THEME: HubProductTheme = {
 export default function DocsHubLanding({ hero, products, resources }: DocsHubLandingProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden min-h-[400px] flex items-center">
-        <div className="relative mx-auto max-w-6xl px-6 w-full py-20">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-3 rounded-full border border-slate-300/20 bg-white/5 px-4 py-2 backdrop-blur-sm">
-              {hero.badgeIcon}
-              <span className="text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-300">{hero.badgeLabel}</span>
-            </div>
-            <h1 className="mt-6 text-5xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-6xl">{hero.title}</h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">{hero.description}</p>
+      {/* Unified Professional Hero */}
+      <section
+        className="relative text-center overflow-hidden flex items-center h-[400px] pt-20"
+        style={{
+          backgroundColor: '#111827'
+        }}
+      >
+        <div className="container-extra-wide mx-auto relative z-10 w-full">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Documentation</h1>
+            <p className="text-lg md:text-xl font-normal text-white mb-6 max-w-2xl mx-auto drop-shadow-lg">
+              {hero.description}
+            </p>
 
-            <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
               {hero.stats.map((stat) => (
-                <div key={stat.label} className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-5 text-center">
-                  <div className="text-3xl font-bold text-slate-900 dark:text-white">{stat.value}</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">{stat.label}</div>
+                <div key={stat.label} className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-6 py-5 text-center">
+                  <div className="text-3xl font-bold text-white">{stat.value}</div>
+                  <div className="text-sm text-white/80">{stat.label}</div>
                 </div>
               ))}
             </div>

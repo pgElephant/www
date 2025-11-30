@@ -111,6 +111,7 @@ export default function ProductPageTemplate({
       <HeroTemplate
         overlay={false}
         className="text-white"
+        height="product"
       >
         <div className="container-extra-wide relative z-10">
           <div className="max-w-7xl mx-auto">

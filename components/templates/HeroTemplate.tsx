@@ -6,7 +6,7 @@ export interface HeroTemplateProps {
   className?: string
   backgroundImage?: string
   overlay?: boolean
-  height?: 'default' | 'fixed'
+  height?: 'default' | 'fixed' | 'product'
 }
 
 /**
@@ -14,6 +14,7 @@ export interface HeroTemplateProps {
  * Uses solid background color for consistent hero styling
  * - default: h-[400px] md:h-[750px] (for home page)
  * - fixed: h-[400px] (for all other pages)
+ * - product: h-[700px] (for product pages)
  */
 export default function HeroTemplate({
   children,
@@ -22,10 +23,12 @@ export default function HeroTemplate({
   overlay = false,
   height = 'fixed',
 }: HeroTemplateProps) {
-  const heightClass = height === 'default' 
-    ? 'h-[400px] md:h-[750px]' 
-    : 'h-[400px]'
-  
+  const heightClass = height === 'default'
+    ? 'h-[400px] md:h-[750px]'
+    : height === 'product'
+      ? 'h-[700px]'
+      : 'h-[400px]'
+
   return (
     <section
       className={cn(

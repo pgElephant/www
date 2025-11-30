@@ -124,43 +124,39 @@ Message: ${formData.message}
   }
 
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <div
-        className="relative overflow-hidden flex items-center h-[400px] md:h-[400px] pt-20"
+    <div className="pt-0">
+      {/* Unified Professional Hero */}
+      <section
+        className="relative text-center overflow-hidden flex items-center h-[400px] pt-20"
         style={{
           backgroundColor: '#111827'
         }}
       >
         <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Contact Us
-              </h1>
-              <p className="text-xl font-normal mb-8 leading-relaxed text-white">
-                Get in touch with our team for support, sales, or technical questions. We're here to help you succeed with pgElephant's enterprise-grade PostgreSQL solutions.
-              </p>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Contact Us</h1>
+            <p className="text-lg md:text-xl font-normal text-white mb-6 max-w-2xl mx-auto drop-shadow-lg">
+              Get in touch with our team for support, sales, or technical questions. We're here to help you succeed with pgElephant's enterprise-grade PostgreSQL solutions.
+            </p>
 
-              {/* Contact Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                <div className="text-center">
-                  <div className="text-3xl font-thin text-white mb-2">&lt; 2hrs</div>
-                  <div className="text-sm text-white">Response Time</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-thin text-white mb-2">24/7</div>
-                  <div className="text-sm text-white">Enterprise Support</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-thin text-white mb-2">99.9%</div>
-                  <div className="text-sm text-white">Uptime SLA</div>
-                </div>
+            {/* Contact Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-thin text-white mb-2">&lt; 2hrs</div>
+                <div className="text-sm text-white">Response Time</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-thin text-white mb-2">24/7</div>
+                <div className="text-sm text-white">Enterprise Support</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-thin text-white mb-2">99.9%</div>
+                <div className="text-sm text-white">Uptime SLA</div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Professional Contact Methods */}
       <div className="py-24 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>

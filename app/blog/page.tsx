@@ -2,7 +2,6 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Calendar, Clock, User, Tag, Eye, ThumbsUp, MessageCircle, TrendingUp, BookOpen, Code, Database, Server, Zap, Award, Globe, Users } from 'lucide-react'
-import HeroTemplate from '@/components/templates/HeroTemplate'
 import PageTemplate from '@/components/templates/PageTemplate'
 
 export const metadata: Metadata = {
@@ -281,15 +280,18 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
 
 export default function BlogPage() {
   return (
-    <PageTemplate className="pt-16">
-      {/* Hero Section */}
-      <HeroTemplate overlay={false}>
-        <div className="container-wide relative z-10">
-          <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Blog
-            </h1>
-            <p className="text-xl md:text-2xl font-normal mb-8 leading-relaxed text-white max-w-4xl mx-auto">
+    <PageTemplate className="pt-0">
+      {/* Unified Professional Hero */}
+      <section
+        className="relative text-center overflow-hidden flex items-center h-[400px] pt-20"
+        style={{
+          backgroundColor: '#111827'
+        }}
+      >
+        <div className="container-extra-wide mx-auto relative z-10 w-full">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Blog</h1>
+            <p className="text-lg md:text-xl font-normal text-white mb-6 max-w-2xl mx-auto drop-shadow-lg">
               Technical insights, tutorials, and updates about PostgreSQL extensions
             </p>
 
@@ -307,7 +309,7 @@ export default function BlogPage() {
             </div>
           </div>
         </div>
-      </HeroTemplate>
+      </section>
 
       {/* Blog Articles - Split by Category */}
       <div className="py-24 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
