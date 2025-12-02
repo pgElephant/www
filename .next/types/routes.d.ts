@@ -5,7 +5,7 @@ type AppRoutes = "/" | "/blog" | "/blog/pg-stat-insights" | "/blog/pg-stat-insig
 type AppRouteHandlerRoutes = "/api/blog-header" | "/api/indexing/bulk" | "/api/indexing/google"
 type PageRoutes = never
 type LayoutRoutes = "/"
-type RedirectRoutes = "/[[...slug]]" | "/blog/clustering" | "/blog/docker-deployment" | "/blog/getting-started" | "/blog/high-availability" | "/blog/pg_stat_insights" | "/blog/pg_stat_insights/[[...path]]" | "/consensus" | "/distributed-consensus" | "/docs/fauxdb/api-reference" | "/docs/fauxdb/configuration" | "/docs/fauxdb/installation" | "/docs/fauxdb/kubernetes" | "/docs/fauxdb/migration" | "/docs/pgbalancer/ai-configuration" | "/docs/pgbalancer/installation" | "/docs/pgbalancer/performance-tuning" | "/docs/ram/[[...path]]" | "/document-database" | "/documentation" | "/download/rale" | "/download/ram" | "/guide" | "/guides" | "/high-availability" | "/home" | "/leader-election" | "/mongodb-alternative" | "/mongodb-compatible" | "/pg-elefant" | "/pg-elephant" | "/pgelefant" | "/postgresql-clustering" | "/postgresql-ha" | "/postgresql-raft" | "/raft-consensus" | "/raft-extension" | "/tutorial"
+type RedirectRoutes = "/[[...slug]]" | "/blog/clustering" | "/blog/docker-deployment" | "/blog/getting-started" | "/blog/high-availability" | "/blog/neurondb-semantic-search-guide" | "/blog/pg_stat_insights" | "/blog/pg_stat_insights/[[...path]]" | "/consensus" | "/distributed-consensus" | "/docs/fauxdb/api-reference" | "/docs/fauxdb/configuration" | "/docs/fauxdb/installation" | "/docs/fauxdb/kubernetes" | "/docs/fauxdb/migration" | "/docs/pgbalancer/ai-configuration" | "/docs/pgbalancer/installation" | "/docs/pgbalancer/performance-tuning" | "/docs/ram/[[...path]]" | "/document-database" | "/documentation" | "/download/rale" | "/download/ram" | "/guide" | "/guides" | "/high-availability" | "/home" | "/leader-election" | "/mongodb-alternative" | "/mongodb-compatible" | "/pg-elefant" | "/pg-elephant" | "/pgelefant" | "/postgresql-clustering" | "/postgresql-ha" | "/postgresql-raft" | "/raft-consensus" | "/raft-extension" | "/tutorial"
 type RewriteRoutes = never
 type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRoutes | AppRouteHandlerRoutes
 
@@ -21,6 +21,7 @@ interface ParamMap {
   "/blog/docker-deployment": {}
   "/blog/getting-started": {}
   "/blog/high-availability": {}
+  "/blog/neurondb-semantic-search-guide": {}
   "/blog/pg_stat_insights": {}
   "/blog/pg_stat_insights/[[...path]]": { "path"?: string[]; }
   "/blog/pg-stat-insights": {}

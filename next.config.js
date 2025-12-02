@@ -277,6 +277,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/blog/neurondb-semantic-search-guide',
+        destination: 'https://www.neurondb.ai/blog/neurondb-semantic-search-guide',
+        permanent: true,
+      },
+      {
         source: '/postgresql-clustering',
         destination: '/pgraft',
         permanent: true,
