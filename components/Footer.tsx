@@ -44,11 +44,6 @@ const Footer = () => {
               <nav aria-label="Products">
                 <ul className="space-y-3">
                   <li>
-                    <Link href="/neurondb" className="text-white/70 hover:text-white transition-colors text-sm">
-                      NeuronDB
-                    </Link>
-                  </li>
-                  <li>
                     <Link href="/pgraft" className="text-white/70 hover:text-white transition-colors text-sm">
                       pgraft
                     </Link>

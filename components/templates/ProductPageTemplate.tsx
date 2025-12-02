@@ -158,7 +158,7 @@ export default function ProductPageTemplate({
           <div className="container-wide">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                NeuronDB Ecosystem
+                Components
               </h2>
               <p className="text-lg text-white/90 max-w-3xl mx-auto mb-4">
                 Complete AI database platform with core engine and runtime components

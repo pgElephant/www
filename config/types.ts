@@ -11,7 +11,7 @@ import { LucideIcon } from 'lucide-react'
 // THEME TYPES
 // ============================================================================
 
-export type ProductId = 'neurondb' | 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights'
+export type ProductId = 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights'
 
 export interface ColorScale {
   50: string

@@ -45,52 +45,7 @@ export interface ProductBadges {
 // PRODUCT CONFIGURATIONS
 // ============================================================================
 
-export const products: Record<'neurondb' | 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights', ProductMetadata & ProductFeatures & ProductBadges> = {
-  neurondb: {
-    id: 'neurondb',
-    name: 'neurondb',
-    displayName: 'NeurondB',
-    tagline: 'A complete AI solution',
-    description: 'PostgreSQL extension with vector search, RAG pipeline, machine learning inference, and GPU acceleration.',
-    longDescription: 'PostgreSQL extension with vector search, RAG pipeline, machine learning inference, and GPU acceleration. Includes HNSW indexing, ONNX runtime, GPU acceleration, embeddings generation, and cross-encoder reranking. Provides in-database RAG with semantic search, full-text search, and LLM integration.',
-    keywords: [
-      'ai database', 'ai database postgresql', 'postgres ai', 'postgresql ai extension', 'postgres ai extension',
-      'vector database', 'vector database postgresql', 'postgres vector database', 'vector search postgresql',
-      'rag pipeline', 'rag database', 'rag postgresql', 'retrieval augmented generation postgresql',
-      'semantic search postgresql', 'semantic database', 'similarity search postgresql',
-      'machine learning postgresql', 'ml inference postgresql', 'postgres ml', 'postgresql machine learning',
-      'embeddings database', 'embedding generation postgresql', 'text embeddings postgresql',
-      'hnsw index', 'hnsw postgresql', 'vector index postgresql', 'ann search postgresql',
-      'hybrid search', 'hybrid search postgresql', 'vector full text search',
-      'onnx postgresql', 'onnx runtime postgresql', 'ml models postgresql',
-      'gpu accelerated database', 'cuda postgresql', 'rocm postgresql',
-      'ai powered database', 'llm database', 'gpt database', 'chatgpt database',
-      'langchain postgresql', 'llamaindex postgresql', 'rag framework postgresql',
-      'pgvector alternative', 'postgres ai comparison', 'postgresql ai tools',
-      'neurondb', 'neurondB', 'pg ai', 'pgai', 'postgres vector',
-    ],
-    githubUrl: 'https://github.com/pgElephant/NeurondB',
-    docsUrl: '/docs/neurondb',
-    productUrl: '/neurondb',
-    ogImage: 'https://www.pgelephant.com/og-neurondb.jpg',
-    category: 'AI Database Extension',
-    postgresqlVersions: ['16', '17', '18'],
-    title: 'AI Database Features',
-    items: [
-      'Vector search uses HNSW and IVF indexing.',
-      'ML inference runs ONNX models. Generates text, image, and multimodal embeddings.',
-      'Hybrid search combines semantic and full-text search. Cross-encoder reranking. RAG pipeline.',
-      'GPU acceleration supports CUDA and ROCm. Faster matrix operations.',
-    ],
-    badges: [
-      'PostgreSQL 16-18',
-      '5 Vector Types',
-      '52 ML Algorithms',
-      '473 SQL Functions',
-      'GPU Acceleration',
-      '4 Background Workers',
-    ],
-  },
+export const products: Record<'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights', ProductMetadata & ProductFeatures & ProductBadges> = {
   pgraft: {
     id: 'pgraft',
     name: 'pgraft',

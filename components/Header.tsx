@@ -20,7 +20,6 @@ const Header = () => {
     { name: 'pgSentinel', href: '/pgsentinel', description: 'Monitoring Platform' },
     { name: 'pg_stat_insights', href: '/pg-stat-insights', description: 'Performance Analytics' },
     { name: 'FauxDB', href: '/fauxdb', description: 'Document Database' },
-    { name: 'NeuronDB', href: '/neurondb', description: 'Vector Database' },
   ]
 
   return (

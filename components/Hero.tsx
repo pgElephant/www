@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import HeroTemplate from '@/components/templates/HeroTemplate'
 import { 
-  NeurondBIcon, 
   PgbalancerIcon, 
   PgraftIcon, 
   FauxDbIcon, 
@@ -30,7 +29,6 @@ const Hero = () => {
 
   // Icon mapping
   const iconMap: Partial<Record<ProductId, React.ComponentType<{ size?: number }>>> = {
-    neurondb: NeurondBIcon,
     pgraft: PgraftIcon,
     pgbalancer: PgbalancerIcon,
     fauxdb: FauxDbIcon,

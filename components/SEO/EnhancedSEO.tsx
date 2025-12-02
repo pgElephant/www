@@ -61,7 +61,7 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
         name: 'Is pgElephant free?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes, pgElephant is open source and free to use. All products including NeurondB, pgbalancer, pgraft, FauxDB, pgSentinel, and pg_stat_insights are available under open source licenses.',
+          text: 'Yes, pgElephant is open source and free to use. All products including pgbalancer, pgraft, FauxDB, pgSentinel, and pg_stat_insights are available under open source licenses.',
         },
       },
     ],

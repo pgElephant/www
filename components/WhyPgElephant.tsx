@@ -3,7 +3,6 @@
 import React from 'react'
 import Link from 'next/link'
 import {
-  NeurondBIcon,
   PgraftIcon,
   PgbalancerIcon,
   FauxDbIcon,
@@ -13,22 +12,6 @@ import {
 
 const WhyPgElephant = () => {
   const products = [
-    {
-      icon: NeurondBIcon,
-      title: 'NeuronDB',
-      category: 'AI Database Extension',
-      description: 'AI database extension with vector search, RAG pipeline, ML inference, and GPU acceleration.',
-      features: [
-        'Vector search with HNSW indexing',
-        '52 ML algorithms',
-        '473 SQL functions',
-        'GPU acceleration (CUDA/ROCm/Metal)',
-        'RAG pipeline in-database'
-      ],
-      badges: ['PostgreSQL 16-18', '5 Vector Types', 'GPU Support'],
-      postgresqlVersions: '16-18',
-      href: '/neurondb'
-    },
     {
       icon: PgraftIcon,
       title: 'pgraft',

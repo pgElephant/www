@@ -48,13 +48,12 @@ import { gradients } from '@/config/theme'
 const unifiedHeroGradient = gradients.hero.css
 
 // Use centralized ProductIcons
-import { PgbalancerIcon, PgraftIcon, FauxDbIcon, PgSentinelIcon, PgStatInsightsIcon, NeurondBIcon } from '@/components/ProductIcons'
+import { PgbalancerIcon, PgraftIcon, FauxDbIcon, PgSentinelIcon, PgStatInsightsIcon } from '@/components/ProductIcons'
 
 // Icon wrappers for size compatibility (using centralized ProductIcons)
 const PgbalancerIconWrapper = () => <PgbalancerIcon size={48} />
 const PgraftIconWrapper = () => <PgraftIcon size={48} />
 const FauxDbIconWrapper = () => <FauxDbIcon size={48} />
-const NeurondBIconWrapper = () => <NeurondBIcon size={48} />
 const PgStatInsightsIconWrapper = () => <PgStatInsightsIcon size={48} />
 
 const DownloadPage = () => {
@@ -119,31 +118,6 @@ const DownloadPage = () => {
   ]
 
   const products = [
-    {
-      id: 'neurondb',
-      name: 'NeuronDB',
-      title: 'AI Database Extension for PostgreSQL',
-      icon: 'neurondb-custom',
-      featured: true,
-      isExtension: true,
-      features: [
-        'Vector Search: High-performance vector similarity search with multiple index types',
-        'ML Inference: Built-in machine learning models and embedding generation',
-        'GPU Acceleration: CUDA and ROCm support for accelerated operations',
-        'Hybrid Search: Combines semantic vector search with full-text search',
-        'RAG Pipeline: Complete Retrieval-Augmented Generation implementation',
-        'Background Workers: Automated indexing, monitoring, and defragmentation',
-      ],
-      details: '/docs/neurondb',
-      downloads: [
-        { title: 'Source Code (tar.gz)', href: 'https://github.com/pgElephant/neurondb/archive/refs/tags/v1.0.0.tar.gz', type: 'Source', available: true },
-        { title: 'Source Code (zip)', href: 'https://github.com/pgElephant/neurondb/archive/refs/tags/v1.0.0.zip', type: 'Source', available: true },
-        { title: 'Installation Guide', href: '/docs/neurondb/installation', type: 'Docs', available: true },
-        { title: 'RPM Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
-        { title: 'DEB Package', href: '#', type: 'Binary', available: false, note: 'PostgreSQL Extension' },
-        { title: 'Docker Image', href: '#', type: 'Docker', available: false, note: 'PostgreSQL Extension' }
-      ]
-    },
     {
       id: 'pg_stat_insights',
       name: 'pg_stat_insights',
@@ -306,7 +280,6 @@ const DownloadPage = () => {
                       <div className="flex-shrink-0">
                         {(() => {
                           const iconMap: Record<string, { Icon: React.ComponentType<{ size?: number }>, gradient: string, border: string }> = {
-                            'neurondb-custom': { Icon: NeurondBIcon, gradient: 'from-purple-500/20 to-pink-500/20', border: 'border-purple-400/30' },
                             'pg_stat_insights-custom': { Icon: PgStatInsightsIcon, gradient: 'from-teal-500/20 to-cyan-500/20', border: 'border-teal-400/30' },
                             'pgbalancer-custom': { Icon: PgbalancerIcon, gradient: 'from-cyan-500/20 to-blue-500/20', border: 'border-cyan-400/30' },
                             'pgraft-custom': { Icon: PgraftIcon, gradient: 'from-blue-500/20 to-purple-500/20', border: 'border-blue-400/30' },

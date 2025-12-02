@@ -1,6 +1,6 @@
 import React from 'react'
 import { BookOpen, Download, ExternalLink, Shield, Cpu, Zap, Wrench, Network } from 'lucide-react'
-import { NeurondBIcon, PgraftIcon, PgbalancerIcon, PgStatInsightsIcon, FauxDbIcon, PgSentinelIcon } from '../../components/ProductIcons'
+import { PgraftIcon, PgbalancerIcon, PgStatInsightsIcon, FauxDbIcon, PgSentinelIcon } from '../../components/ProductIcons'
 import DocsHubLanding, { type HubProduct, type ResourceLink } from '../../components/DocsHubLanding'
 
 const hero = {
@@ -9,7 +9,7 @@ const hero = {
   title: 'Documentation',
   description: 'Guides, API references, and troubleshooting for every pgElephant product.',
   stats: [
-    { label: 'Products', value: '6' },
+    { label: 'Products', value: '5' },
     { label: 'Guides', value: '40+' },
     { label: 'Open Source', value: '100%' },
     { label: 'Updated', value: '24/7' },
@@ -17,59 +17,6 @@ const hero = {
 }
 
   const products: HubProduct[] = [
-    {
-      id: 'neurondb',
-    name: 'NeurondB',
-    headline: 'PostgreSQL AI Vector Extension',
-    summary:
-      'PostgreSQL extension with vector search, ONNX inference, hybrid retrieval, and RAG pipelines.',
-    icon: <NeurondBIcon size={40} />, 
-    theme: {
-      gradient: 'from-slate-800/70 to-slate-900/70',
-      border: 'border-slate-700/60',
-      glow: 'shadow-slate-900/40',
-      iconBorder: 'border-slate-700/70',
-      accentText: 'text-slate-300',
-    },
-    categories: [
-      {
-        key: 'getting-started',
-        title: 'Getting Started',
-        description: 'Initialize the extension, load sample data, and run first vector searches.',
-        href: '/docs/neurondb/getting-started',
-        icon: <BookOpen className="h-5 w-5" />, 
-      },
-      {
-        key: 'installation',
-        title: 'Installation',
-        description: 'Platform-specific build and install instructions with GPU guidance.',
-        href: '/docs/neurondb/installation',
-        icon: <Download className="h-5 w-5" />, 
-      },
-      {
-        key: 'configuration',
-        title: 'Configuration',
-        description: 'Tunable GUC parameters for search, inference, and background workers.',
-        href: '/docs/neurondb/configuration',
-        icon: <Cpu className="h-5 w-5" />, 
-      },
-      {
-        key: 'troubleshooting',
-        title: 'Troubleshooting',
-        description: 'Fix build failures, GPU driver issues, and runtime load errors.',
-        href: '/docs/neurondb/troubleshooting',
-        icon: <Wrench className="h-5 w-5" />, 
-      },
-      {
-        key: 'common-issues',
-        title: 'Common Issues & Solutions',
-        description: 'FAQ covering installation, configuration, and operational edge cases.',
-        href: '/docs/neurondb/troubleshooting',
-        icon: <Shield className="h-5 w-5" />, 
-      },
-    ],
-    viewAllHref: '/docs/neurondb',
-    },
     {
       id: 'pgraft',
     name: 'pgRaft',

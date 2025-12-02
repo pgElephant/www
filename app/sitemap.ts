@@ -34,12 +34,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Main product pages
   const productPages: SitemapEntry[] = [
     {
-      url: `${baseUrl}/neurondb`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.mainProducts,
-    },
-    {
       url: `${baseUrl}/pgbalancer`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
@@ -78,79 +72,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.docs,
-    },
-    // NeurondB documentation
-    {
-      url: `${baseUrl}/docs/neurondb`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/installation`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/features/vector-types`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/ml/embeddings`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/gpu`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/hybrid`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/analytics`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/rag`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/background-workers`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/configuration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/neurondb/performance`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
     },
     // pgbalancer documentation
     {
@@ -371,12 +292,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/pg-stat-insights-1-0-0`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.blog,
-    },
-    {
-      url: `${baseUrl}/blog/neurondb`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.blog,

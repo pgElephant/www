@@ -84,7 +84,7 @@ export const colors = {
 // PRODUCT-SPECIFIC THEMES
 // ============================================================================
 
-export type ProductId = 'neurondb' | 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights'
+export type ProductId = 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights'
 
 export interface ProductTheme {
   // Gradient classes for Tailwind
@@ -119,29 +119,6 @@ export interface ProductTheme {
 }
 
 export const productThemes: Record<ProductId, ProductTheme> = {
-  neurondb: {
-    badgeGradient: 'from-indigo-600 to-purple-600',
-    heroGradient: 'bg-gradient-to-r from-indigo-900/60 via-purple-900/50 to-cyan-900/40',
-    pageGradient: 'bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900',
-    primaryColor: 'indigo-600',
-    secondaryColor: 'purple-600',
-    accentColor: 'cyan-600',
-    iconColors: {
-      primary: 'indigo-400',
-      secondary: 'teal-400',
-      tertiary: 'yellow-400',
-      quaternary: 'purple-400',
-    },
-    buttonPrimary: 'bg-indigo-600 hover:bg-indigo-700 text-white',
-    buttonSecondary: 'border-indigo-300 hover:border-indigo-400 text-indigo-600',
-    linkHover: 'hover:text-indigo-600',
-    featureIconClass: 'text-indigo-600',
-    featureCardClass: 'rounded-2xl border border-slate-200 bg-white/85 p-6 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/60',
-    quickLinkCardClass: 'rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm transition hover:border-indigo-300 dark:border-slate-700/60 dark:bg-slate-900/60',
-    quickLinkIconClass: 'text-indigo-600',
-    quickLinkHoverLabelClass: 'text-indigo-600',
-    docCardClass: 'rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/60',
-  },
   pgraft: {
     badgeGradient: 'from-blue-600 to-purple-600',
     heroGradient: 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 dark:from-blue-500/10 dark:to-purple-500/10',
