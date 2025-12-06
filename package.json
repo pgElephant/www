@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "PostgreSQL High Availability Made Easy - Official Website",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
