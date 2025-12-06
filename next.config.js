@@ -282,6 +282,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/blog/neurondb',
+        destination: 'https://www.neurondb.ai/blog/neurondb',
+        permanent: true,
+      },
+      {
         source: '/postgresql-clustering',
         destination: '/pgraft',
         permanent: true,

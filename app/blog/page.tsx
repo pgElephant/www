@@ -312,7 +312,7 @@ export default function BlogPage() {
 
       {/* Blog Articles - Split by Category */}
       <div className="py-24 relative overflow-hidden" style={{ backgroundColor: '#1f2937' }}>
-        <div className="container-wide">
+        <div className="container-extra-wide">
           <div className="max-w-7xl mx-auto">
             {/* Technical Blogs */}
             <div className="text-center mb-10">

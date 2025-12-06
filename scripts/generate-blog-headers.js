@@ -142,6 +142,30 @@ const icons = {
     <path d="M 70,80 L 85,95 L 110,60" fill="none" stroke="#10b981" stroke-width="4" 
           stroke-linecap="round" stroke-linejoin="round"/>
   </g>`,
+
+  neurondb: `  <!-- Neural network / AI vector database illustration -->
+  <g transform="translate(80, 100)">
+    <g opacity="0.9">
+      <!-- Neural network nodes -->
+      <circle cx="40" cy="40" r="12" fill="#4f46e5" opacity="0.8"/>
+      <circle cx="90" cy="30" r="12" fill="#06b6d4" opacity="0.8"/>
+      <circle cx="140" cy="40" r="12" fill="#10b981" opacity="0.8"/>
+      <circle cx="65" cy="90" r="12" fill="#fbbf24" opacity="0.8"/>
+      <circle cx="115" cy="90" r="12" fill="#4f46e5" opacity="0.8"/>
+      <!-- Connections -->
+      <line x1="40" y1="40" x2="90" y2="30" stroke="#06b6d4" stroke-width="2" opacity="0.5"/>
+      <line x1="90" y1="30" x2="140" y2="40" stroke="#06b6d4" stroke-width="2" opacity="0.5"/>
+      <line x1="40" y1="40" x2="65" y2="90" stroke="#06b6d4" stroke-width="2" opacity="0.5"/>
+      <line x1="90" y1="30" x2="65" y2="90" stroke="#06b6d4" stroke-width="2" opacity="0.5"/>
+      <line x1="90" y1="30" x2="115" y2="90" stroke="#06b6d4" stroke-width="2" opacity="0.5"/>
+      <line x1="140" y1="40" x2="115" y2="90" stroke="#06b6d4" stroke-width="2" opacity="0.5"/>
+      <line x1="65" y1="90" x2="115" y2="90" stroke="#fbbf24" stroke-width="2" opacity="0.6"/>
+      <!-- Vector arrows -->
+      <path d="M 20,120 L 50,120 L 45,115 M 50,120 L 45,125" stroke="#10b981" stroke-width="2" fill="none"/>
+      <path d="M 70,120 L 100,120 L 95,115 M 100,120 L 95,125" stroke="#10b981" stroke-width="2" fill="none"/>
+      <path d="M 120,120 L 150,120 L 145,115 M 150,120 L 145,125" stroke="#10b981" stroke-width="2" fill="none"/>
+    </g>
+  </g>`,
 };
 
 // Badge generator
@@ -203,6 +227,17 @@ const blogs = {
       { text: 'REST API', color: 'cyan', width: 130 },
       { text: 'MQTT Clustering', color: 'emerald', width: 180 },
       { text: '✓ Production Ready', color: 'yellow', width: 190 },
+    ],
+  },
+  'neurondb': {
+    title: 'NeuronDB',
+    subtitle: 'PostgreSQL AI Vector Database Extension',
+    icon: 'neurondb',
+    badges: [
+      { text: 'Vector Search', color: 'indigo', width: 140 },
+      { text: 'HNSW Indexing', color: 'cyan', width: 150 },
+      { text: 'GPU Acceleration', color: 'emerald', width: 170 },
+      { text: 'RAG Ready', color: 'yellow', width: 130 },
     ],
   },
 };

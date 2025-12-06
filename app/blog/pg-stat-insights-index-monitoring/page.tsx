@@ -1,5 +1,6 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
 import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
+import BlogPageTracker from '../../../components/BlogPageTracker';
 
 export const metadata = {
     title: 'Index Monitoring with pg_stat_insights v3.0.0',
@@ -63,7 +64,6 @@ FROM pg_views
 WHERE viewname LIKE 'pg_stat_insights_index%'
 ORDER BY viewname;
 
--- Results:
                   viewname                  
 --------------------------------------------
  pg_stat_insights_index_alerts
@@ -108,7 +108,6 @@ WHERE schemaname = 'public'
 ORDER BY index_size_mb DESC
 LIMIT 10;
 
--- Results:
  schemaname |  tablename  |        indexname        | index_size_mb | idx_scan | idx_tup_read | idx_tup_fetch | idx_cache_hit_ratio | index_type | is_unique | is_primary 
 ------------+-------------+-------------------------+---------------+----------+--------------+---------------+---------------------+------------+-----------+------------
  public     | order_items | order_items_pkey        |        214.23 |        0 |            0 |             0 |              1.0000 | btree      | t         | t
@@ -143,7 +142,6 @@ FROM pg_stat_insights_index_usage
 WHERE usage_status IN ('NEVER_USED', 'RARE')
 ORDER BY total_scans;
 
--- Results:
  schemaname |  tablename  |        indexname        | total_scans | usage_status | index_scan_ratio |              recommendation              
 ------------+-------------+-------------------------+-------------+--------------+------------------+------------------------------------------
  public     | orders      | orders_pkey             |           0 | NEVER_USED   |           0.0000 | REVIEW: Low usage, high sequential scans
@@ -178,7 +176,6 @@ FROM pg_stat_insights_index_bloat
 WHERE bloat_severity IN ('HIGH', 'MEDIUM')
 ORDER BY estimated_bloat_size_mb DESC;
 
--- Results:
  schemaname | tablename | indexname | actual_size_mb | estimated_bloat_size_mb | bloat_severity | needs_reindex 
 ------------+-----------+-----------+----------------+-------------------------+----------------+---------------
 (0 rows)
@@ -204,7 +201,6 @@ FROM pg_stat_insights_index_efficiency
 WHERE efficiency_rating IN ('POOR', 'UNUSED')
 ORDER BY index_scan_ratio;
 
--- Results:
  schemaname |  tablename  |        indexname        | index_scans | seq_scans | index_scan_ratio | efficiency_rating |                           recommendation                           
 ------------+-------------+-------------------------+-------------+-----------+------------------+-------------------+--------------------------------------------------------------------
  public     | orders      | orders_pkey             |           0 |      7000 |           0.0000 | UNUSED            | Consider dropping: Index never used, high sequential scan activity
@@ -247,7 +243,6 @@ ORDER BY
     END,
     tablename;
 
--- Results:
  schemaname | tablename | indexname | maintenance_type | priority | reason | recommended_action | estimated_benefit 
 ------------+-----------+-----------+------------------+----------+--------+--------------------+-------------------
 (0 rows)
@@ -272,7 +267,6 @@ SELECT
     overall_index_usage_ratio
 FROM pg_stat_insights_index_summary;
 
--- Results:
  total_indexes | total_index_size_mb | active_indexes | unused_indexes | bloated_indexes | indexes_needing_reindex | never_used_indexes | avg_index_cache_hit_ratio | overall_index_usage_ratio 
 ---------------+---------------------+----------------+----------------+-----------------+-------------------------+--------------------+---------------------------+---------------------------
             17 |             1497.16 |              0 |             17 |               0 |                       0 |                 17 |                    1.0000 |                    0.0000
@@ -302,7 +296,6 @@ ORDER BY
         ELSE 3 
     END;
 
--- Results:
  alert_type  | severity | schemaname |  tablename  |        indexname        |                        alert_message                        |                     recommended_action                     
 -------------+----------+------------+-------------+-------------------------+-------------------------------------------------------------+------------------------------------------------------------
  INEFFICIENT | WARNING  | public     | customers   | customers_pkey          | Index rarely used, sequential scans preferred (ratio: 0.00) | Review query patterns and consider index tuning or removal
@@ -337,7 +330,6 @@ SELECT
 FROM pg_stat_insights_index_dashboard
 WHERE section = 'SUMMARY';
 
--- Results:
  section | name |                                                                               details                                                                               
 ---------+------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
  SUMMARY |      | {"total_indexes" : 17, "total_size_mb" : 1497.16, "active_indexes" : 0, "unused_indexes" : 17, "bloated_indexes" : 0, "critical_alerts" : 0, "warning_alerts" : 29}
@@ -364,7 +356,6 @@ FROM pg_stat_insights_missing_indexes
 WHERE high_priority = true
 ORDER BY benefit_score DESC;
 
--- Results:
  schemaname |  tablename  | occurrence_count | estimated_benefit | high_priority |                recommended_index_def                 | estimated_index_size_mb | benefit_score 
 ------------+-------------+------------------+-------------------+---------------+------------------------------------------------------+-------------------------+---------------
  public     | orders      |             7000 | HIGH              | t             | Consider adding index on frequently filtered columns |                  305.16 |   98000000.00
@@ -398,7 +389,6 @@ ORDER BY
         ELSE 3 
     END;
 
--- Results:
  schemaname | tablename |     index1_name     |     index2_name     | duplicate_type  | severity | index1_size_mb | index2_size_mb |             recommendation             
 ------------+-----------+---------------------+---------------------+-----------------+----------+----------------+----------------+----------------------------------------
  public     | customers | customers_email_key | idx_customers_email | EXACT_DUPLICATE | CRITICAL |         125.39 |         125.39 | DROP INDEX public.idx_customers_email;
@@ -426,7 +416,6 @@ FROM pg_stat_insights_index_maintenance_history
 WHERE maintenance_status != 'CURRENT'
 ORDER BY days_since_analyze DESC NULLS LAST;
 
--- Results:
  schemaname | tablename | indexname | last_vacuum | last_autovacuum | last_analyze | days_since_vacuum | days_since_analyze | maintenance_status 
 ------------+-----------+-----------+-------------+-----------------+--------------+-------------------+--------------------+--------------------
 (0 rows)
@@ -451,7 +440,6 @@ FROM pg_stat_insights_index_usage
 WHERE usage_status = 'NEVER_USED'
 ORDER BY index_size_mb DESC;
 
--- Results:
  schemaname |  tablename  |        indexname        | index_size_mb | total_scans 
 ------------+-------------+-------------------------+---------------+-------------
  public     | order_items | order_items_pkey        |        214.23 |           0
@@ -488,7 +476,6 @@ JOIN pg_stat_insights_index_maintenance m
 WHERE b.bloat_severity = 'HIGH'
 ORDER BY estimated_bloat_size_mb DESC;
 
--- Results:
  index_full_name | actual_size_mb | estimated_bloat_size_mb | bloat_percentage | recommended_action 
 -----------------+----------------+-------------------------+------------------+--------------------
 (0 rows)
@@ -519,7 +506,6 @@ GROUP BY t.schemaname, t.tablename, t.seq_scan, m.estimated_benefit, m.recommend
 HAVING t.seq_scan > COALESCE(SUM(i.idx_scan), 0) * 5
 ORDER BY t.seq_scan DESC;
 
--- Results:
  schemaname |  tablename  | seq_scan | total_index_scans | seq_scan_ratio | estimated_benefit |                recommended_index_def                 
 ------------+-------------+----------+-------------------+----------------+-------------------+------------------------------------------------------
  public     | customers   |     8800 |                 0 |         1.0000 | HIGH              | Consider adding index on frequently filtered columns
@@ -547,7 +533,6 @@ FROM pg_stat_insights_index_efficiency
 WHERE index_scans + seq_scans > 100
 ORDER BY index_usage_percent;
 
--- Results:
  schemaname |  tablename  |        indexname        | index_scans | seq_scans | index_usage_percent | efficiency_rating 
 ------------+-------------+-------------------------+-------------+-----------+---------------------+-------------------
  public     | orders      | orders_pkey             |           0 |      7000 |                0.00 | UNUSED
@@ -587,7 +572,6 @@ ORDER BY
     END,
     maintenance_type;
 
--- Results:
  maintenance_type | priority | index_count | indexes 
 ------------------+----------+-------------+---------
 (0 rows)
@@ -609,17 +593,62 @@ pg_stat_insights v3.0.0 provides comprehensive index monitoring through 11 speci
 
 - [pg_stat_insights GitHub](https://github.com/pgElephant/pg_stat_insights)
 - [v3.0.0 Release Notes](https://github.com/pgElephant/pg_stat_insights/releases/tag/v3.0.0)
-- [Documentation](https://www.pgelephant.com/docs/pg-stat-insights)`;
+- [Documentation](https://www.pgelephant.com/docs/pg-stat-insights)
+
+## Related Blog Posts
+
+- [pg_stat_insights: PostgreSQL Performance Monitoring Extension](/blog/pg-stat-insights) - Comprehensive guide to PostgreSQL performance monitoring with 52 metrics across 42 pre-built views for query analysis, replication monitoring, and index optimization.
+- [pg_stat_insights 1.0.0 Release Announcement](/blog/pg-stat-insights-1-0-0) - Learn about the initial release of pg_stat_insights with 52 metrics and 11 pre-built views. Production-ready PostgreSQL performance monitoring extension.
+
+## Support
+
+For questions, issues, or commercial support, contact [admin@pgelephant.com](mailto:admin@pgelephant.com)`;
 
 export default function IndexMonitoringBlogPost() {
+    const structuredData = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: 'Index Monitoring with pg_stat_insights v3.0.0',
+        description: 'Monitor PostgreSQL indexes using pg_stat_insights v3.0.0. Track index usage, detect bloat, identify missing indexes, and optimize performance with 11 specialized views.',
+        image: 'https://www.pgelephant.com/blog/pg-stat-insights/og-image.jpg',
+        datePublished: '2024-12-01',
+        dateModified: '2024-12-01',
+        author: {
+            '@type': 'Organization',
+            name: 'pgElephant',
+            url: 'https://www.pgelephant.com',
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'pgElephant',
+            logo: {
+                '@type': 'ImageObject',
+                url: 'https://www.pgelephant.com/favicon-512.png',
+            },
+        },
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': 'https://www.pgelephant.com/blog/pg-stat-insights-index-monitoring',
+        },
+        keywords: 'PostgreSQL, Index Monitoring, Performance Optimization, Database Administration, pg_stat_insights',
+    };
+
     return (
         <div className="pt-16">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
+            <BlogPageTracker
+                slug="pg-stat-insights-index-monitoring"
+                title="Index Monitoring with pg_stat_insights v3.0.0"
+            />
             {/* Blog Content */}
             <div style={{ backgroundColor: '#1f2937' }}>
                 <BlogMarkdown>{markdown}</BlogMarkdown>
 
                 {/* Share Section */}
-                <div className="max-w-4xl mx-auto px-6 pb-12">
+                <div className="max-w-7xl mx-auto px-6 pb-12">
                     <div className="border-t border-white/10 pt-8">
                         <h3 className="text-2xl font-bold text-white mb-4">Share This Article</h3>
                         <ShareOnLinkedIn

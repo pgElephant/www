@@ -1,5 +1,6 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
 import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
+import BlogPageTracker from '../../../components/BlogPageTracker';
 
 export const metadata = {
   title: 'pg_stat_insights 1.0.0 Release Announcement',
@@ -76,17 +77,61 @@ sha256sum -c SHA256SUMS
 Huge thanks to the PostgreSQL community and early users who helped shape this release with feedback and testing.
 
 pgElephant Team
-`;
+
+## Related Blog Posts
+
+- [pg_stat_insights: PostgreSQL Performance Monitoring Extension](/blog/pg-stat-insights) - Comprehensive guide to PostgreSQL performance monitoring with 52 metrics across 42 pre-built views for query analysis, replication monitoring, and index optimization.
+- [Index Monitoring with pg_stat_insights v3.0.0](/blog/pg-stat-insights-index-monitoring) - Complete guide to monitoring PostgreSQL indexes using pg_stat_insights. Track index usage, detect bloat, identify missing indexes, and optimize performance with 11 specialized views.
+
+## Support
+
+For questions, issues, or commercial support, contact [admin@pgelephant.com](mailto:admin@pgelephant.com)`;
 
 export default function PgStatInsightsReleaseBlog() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: 'pg_stat_insights 1.0.0 Release Announcement',
+    description: 'We are releasing pg_stat_insights 1.0.0, a PostgreSQL performance monitoring extension with 52 metrics and 11 pre-built views. Production-ready and installable.',
+    image: 'https://www.pgelephant.com/blog/pg-stat-insights/og-image.jpg',
+    datePublished: '2024-12-01',
+    dateModified: '2024-12-01',
+    author: {
+      '@type': 'Organization',
+      name: 'pgElephant',
+      url: 'https://www.pgelephant.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'pgElephant',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.pgelephant.com/favicon-512.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://www.pgelephant.com/blog/pg-stat-insights-1-0-0',
+    },
+    keywords: 'PostgreSQL, Performance Monitoring, pg_stat_insights, Database, Observability',
+  };
+
   return (
     <div className="pt-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <BlogPageTracker
+        slug="pg-stat-insights-1-0-0"
+        title="pg_stat_insights 1.0.0 Release Announcement"
+      />
       {/* Blog Content */}
       <div style={{ backgroundColor: '#1f2937' }}>
         <BlogMarkdown>{markdown}</BlogMarkdown>
 
         {/* Share Section */}
-        <div className="max-w-4xl mx-auto px-6 pb-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
           <div className="border-t border-white/10 pt-8">
             <h3 className="text-2xl font-bold text-white mb-4">Share This Announcement</h3>
             <ShareOnLinkedIn

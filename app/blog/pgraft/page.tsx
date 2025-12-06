@@ -1,5 +1,6 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
 import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
+import BlogPageTracker from '../../../components/BlogPageTracker';
 
 export const metadata = {
   title: 'pgraft: Raft-Based PostgreSQL Extension',
@@ -958,17 +959,62 @@ Join the community and start building more reliable PostgreSQL infrastructure to
 
 ---
 
-*pgraft is developed with care for the PostgreSQL community. Version 1.0.0 | PostgreSQL 16, 17, 18 supported*`;
+*pgraft is developed with care for the PostgreSQL community. Version 1.0.0 | PostgreSQL 16, 17, 18 supported*
+
+## Related Blog Posts
+
+- [pgbalancer: AI-Powered PostgreSQL Connection Pooler](/blog/pgbalancer) - Learn about AI-powered connection pooling with machine learning load balancing, REST API management, and distributed MQTT coordination for PostgreSQL clusters.
+- [pg_stat_insights: PostgreSQL Performance Monitoring Extension](/blog/pg-stat-insights) - Comprehensive guide to PostgreSQL performance monitoring with 52 metrics across 42 pre-built views for query analysis, replication monitoring, and index optimization.
+
+## Support
+
+For questions, issues, or commercial support, contact [admin@pgelephant.com](mailto:admin@pgelephant.com)`;
 
 export default function PgraftBlogPost() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: 'pgraft: Raft-Based PostgreSQL Extension',
+    description: 'How pgraft brings automatic leader election, split-brain prevention, and high availability to PostgreSQL clusters with mathematical guarantees.',
+    image: 'https://www.pgelephant.com/blog/pgraft/og-image.jpg',
+    datePublished: '2024-12-01',
+    dateModified: '2024-12-01',
+    author: {
+      '@type': 'Organization',
+      name: 'pgElephant',
+      url: 'https://www.pgelephant.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'pgElephant',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.pgelephant.com/favicon-512.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://www.pgelephant.com/blog/pgraft',
+    },
+    keywords: 'PostgreSQL, Raft Consensus, High Availability, Database Clustering, Distributed Systems, pgraft',
+  };
+
   return (
     <div className="pt-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <BlogPageTracker
+        slug="pgraft"
+        title="pgraft: Raft-Based PostgreSQL Extension"
+      />
       {/* Blog Content */}
       <div style={{ backgroundColor: '#1f2937' }}>
         <BlogMarkdown>{markdown}</BlogMarkdown>
         
         {/* Share Section */}
-        <div className="max-w-4xl mx-auto px-6 pb-12">
+        <div className="max-w-7xl mx-auto px-6 pb-12">
           <div className="border-t border-white/10 pt-8">
             <h3 className="text-2xl font-bold text-white mb-4">Share This Article</h3>
             <ShareOnLinkedIn

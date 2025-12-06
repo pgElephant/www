@@ -4,7 +4,36 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { Highlight, themes } from 'prism-react-renderer';
+
+// Helper function to style arrows and numbered items in text
+const styleSpecialChars = (text: string): React.ReactNode => {
+  if (typeof text !== 'string') return text;
+
+  // Check if text contains special characters
+  if (!text.includes('→') && !/\[[0-9]+\]/.test(text)) {
+    return text;
+  }
+
+  const parts = text.split(/(→|\[[0-9]+\])/);
+  if (parts.length === 1) return text;
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (!part) return null;
+        if (part === '→') {
+          return <span key={`arrow-${index}`} className="text-cyan-400 font-bold">{part}</span>;
+        }
+        if (/^\[[0-9]+\]$/.test(part)) {
+          return <span key={`num-${index}`} className="text-cyan-400 font-bold">{part}</span>;
+        }
+        return part;
+      })}
+    </>
+  );
+};
 
 // Usage: <BlogMarkdown>{markdown}</BlogMarkdown>
 export function BlogMarkdown({ children }: { children: string }) {
@@ -35,9 +64,10 @@ export function BlogMarkdown({ children }: { children: string }) {
   };
 
   return (
-    <article className="prose dark:prose-invert max-w-4xl mx-auto py-12 px-6">
+    <article className="prose dark:prose-invert max-w-7xl mx-auto py-12 px-6">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
         components={{
           // Headings with proper sizing and styling
           h1({ node, ...props }) {
@@ -60,19 +90,48 @@ export function BlogMarkdown({ children }: { children: string }) {
           },
 
           // Paragraphs with better spacing and readability
-          p({ node, ...props }) {
-            return <p className="text-white/90 text-lg leading-relaxed mb-6 drop-shadow-sm" {...props} />;
+          p({ node, children, ...props }: any) {
+            // Check if paragraph only contains an image - if so, unwrap it
+            const hasOnlyImage = node?.children?.length === 1 &&
+              node.children[0]?.type === 'element' &&
+              node.children[0]?.tagName === 'img';
+
+            if (hasOnlyImage) {
+              // Return the image directly without paragraph wrapper
+              return <>{children}</>;
+            }
+
+            // Process children to style special characters - only process string children
+            const processChildren = (children: any): any => {
+              if (typeof children === 'string') {
+                return styleSpecialChars(children);
+              }
+              if (Array.isArray(children)) {
+                return children.map((child, idx) => {
+                  if (typeof child === 'string') {
+                    const styled = styleSpecialChars(child);
+                    return <React.Fragment key={`p-${idx}`}>{styled}</React.Fragment>;
+                  }
+                  // Don't process React elements, just return them
+                  return child;
+                });
+              }
+              // Don't process if it's already a React element
+              return children;
+            };
+
+            return <p className="text-white/90 text-lg leading-relaxed mb-6 drop-shadow-sm" {...props}>{processChildren(children)}</p>;
           },
 
           // Lists with proper styling
           ul({ node, ...props }) {
-            return <ul className="list-disc list-inside text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-4" {...props} />;
+            return <ul className="list-disc text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-6" {...props} />;
           },
           ol({ node, ...props }) {
-            return <ol className="list-decimal list-inside text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-4" {...props} />;
+            return <ol className="list-decimal text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-6" {...props} />;
           },
           li({ node, ...props }) {
-            return <li className="mb-2 drop-shadow-sm" {...props} />;
+            return <li className="mb-2 drop-shadow-sm pl-2" {...props} />;
           },
 
           // Code blocks with syntax highlighting
@@ -176,16 +235,18 @@ export function BlogMarkdown({ children }: { children: string }) {
           },
 
           // Images with proper styling (use Next/Image to avoid lint warnings)
+          // Note: Images are block-level elements, so we use a div wrapper
           img({ node, ...props }) {
             const src = (props as any).src as string | undefined
             const alt = ((props as any).alt as string | undefined) || 'Blog image'
             if (!src) return null
+            // Return as a block-level element to prevent nesting in paragraphs
             return (
-              <div style={{ borderRadius: 12, marginBottom: 40, maxWidth: 900, width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', overflow: 'hidden' }}>
+              <div style={{ borderRadius: 12, marginBottom: 40, maxWidth: '100%', width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', overflow: 'hidden', display: 'block' }}>
                 <Image
                   src={src}
                   alt={alt}
-                  width={900}
+                  width={1280}
                   height={750}
                   style={{ width: '100%', height: 'auto' }}
                   unoptimized
@@ -200,20 +261,41 @@ export function BlogMarkdown({ children }: { children: string }) {
           },
 
           // Strong and emphasis
-          strong({ node, ...props }) {
-            return <strong className="font-semibold text-white" {...props} />;
+          strong({ node, children, ...props }: any) {
+            // Process children to style special characters - only process string children
+            const processChildren = (children: any): any => {
+              if (typeof children === 'string') {
+                return styleSpecialChars(children);
+              }
+              if (Array.isArray(children)) {
+                return children.map((child, idx) => {
+                  if (typeof child === 'string') {
+                    const styled = styleSpecialChars(child);
+                    return <React.Fragment key={`strong-${idx}`}>{styled}</React.Fragment>;
+                  }
+                  // Don't process React elements, just return them
+                  return child;
+                });
+              }
+              // Don't process if it's already a React element
+              return children;
+            };
+
+            return <strong className="font-semibold text-white" {...props}>{processChildren(children)}</strong>;
           },
           em({ node, ...props }) {
             return <em className="italic text-white/95" {...props} />;
           },
 
-          // Links with proper styling
-          a({ node, ...props }) {
+          // Links with proper styling - all links are yellow
+          a({ node, className, ...props }: any) {
+            const href = props.href || '';
+
             return (
               <a
-                className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors duration-200"
-                target="_blank"
-                rel="noopener noreferrer"
+                className="text-yellow-400 hover:text-yellow-300 underline underline-offset-2 transition-colors duration-200"
+                target={href && (href.startsWith('http') || href.startsWith('mailto')) && !href.includes('pgelephant.com') ? '_blank' : undefined}
+                rel={href && (href.startsWith('http') || href.startsWith('mailto')) && !href.includes('pgelephant.com') ? 'noopener noreferrer' : undefined}
                 {...props}
               />
             );

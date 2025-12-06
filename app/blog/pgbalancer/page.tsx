@@ -1,5 +1,6 @@
 import { BlogMarkdown } from '../../_components/BlogMarkdown';
 import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
+import BlogPageTracker from '../../../components/BlogPageTracker';
 
 export const metadata = {
   title: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
@@ -1053,35 +1054,83 @@ Ready to deploy? Check out the **[Getting Started Guide](https://www.pgelephant.
 - **[REST API Documentation](https://www.pgelephant.com/docs/pgbalancer/api)**
 - **[CLI Tool (bctl) Guide](https://www.pgelephant.com/docs/pgbalancer/bctl)**
 
-## About pgElephant
+## Related Blog Posts
 
-pgbalancer is part of the pgElephant suite of PostgreSQL tools designed for modern cloud-native deployments. Explore our other projects:
+- [pgraft: Raft-Based PostgreSQL Extension](/blog/pgraft) - Learn how pgraft brings automatic leader election, split-brain prevention, and high availability to PostgreSQL clusters with mathematical guarantees using the Raft consensus protocol.
+- [pg_stat_insights: PostgreSQL Performance Monitoring Extension](/blog/pg-stat-insights) - Comprehensive guide to PostgreSQL performance monitoring with 52 metrics across 42 pre-built views for query analysis, replication monitoring, and index optimization.
 
-- **[pgraft](https://www.pgelephant.com/pgraft)**: Raft-based consensus for PostgreSQL
-- **[pg_stat_insights](https://www.pgelephant.com/pg-stat-insights)**: Performance monitoring
-- **[neurondb](https://www.pgelephant.com/neurondb)**: GPU-accelerated PostgreSQL for ML
+## Support
 
-`;
+For questions, issues, or commercial support, contact [admin@pgelephant.com](mailto:admin@pgelephant.com)`;
 
 export default function PgbalancerBlogPost() {
-  return (
-    <div className="min-h-screen" style={{ backgroundColor: '#1f2937' }}>
-      <article className="max-w-4xl mx-auto px-6 py-16">
-        {/* Content */}
-        <div className="prose prose-invert prose-lg max-w-none">
-          <BlogMarkdown>{markdown}</BlogMarkdown>
-        </div>
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: 'pgbalancer: AI-Powered PostgreSQL Connection Pooler',
+    description: 'AI Load Balancing, REST API, MQTT Clustering - Modern PostgreSQL Connection Pooling with Machine Learning Optimization',
+    image: 'https://www.pgelephant.com/blog/pgbalancer/og-image.jpg',
+    datePublished: '2024-12-01',
+    dateModified: '2024-12-01',
+    author: {
+      '@type': 'Organization',
+      name: 'pgElephant',
+      url: 'https://www.pgelephant.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'pgElephant',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.pgelephant.com/favicon-512.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://www.pgelephant.com/blog/pgbalancer',
+    },
+    keywords: 'PostgreSQL, Connection Pooling, Load Balancing, AI, Machine Learning, REST API, MQTT, pgbalancer',
+  };
 
-        {/* LinkedIn Share */}
-        <div className="mt-16 pt-8 border-t border-slate-800">
-          <ShareOnLinkedIn
-            title="pgbalancer: AI-Powered PostgreSQL Connection Pooler"
-            summary="AI Load Balancing, REST API, MQTT Clustering - Modern PostgreSQL Connection Pooling with Machine Learning Optimization"
-            url="https://www.pgelephant.com/blog/pgbalancer"
-            hashtags={['PostgreSQL', 'AI', 'LoadBalancing', 'DevOps', 'Database', 'MachineLearning', 'ConnectionPooling', 'RESTAPI']}
-          />
+  return (
+    <div className="pt-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <BlogPageTracker
+        slug="pgbalancer"
+        title="pgbalancer: AI-Powered PostgreSQL Connection Pooler"
+      />
+      {/* Blog Content */}
+      <div style={{ backgroundColor: '#1f2937' }}>
+        <BlogMarkdown>{markdown}</BlogMarkdown>
+        
+        {/* Share Section */}
+        <div className="max-w-7xl mx-auto px-6 pb-12">
+          <div className="border-t border-white/10 pt-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Share This Article</h3>
+            <ShareOnLinkedIn
+              url="https://www.pgelephant.com/blog/pgbalancer"
+              title="pgbalancer: AI-Powered PostgreSQL Connection Pooler"
+              summary="AI Load Balancing, REST API, MQTT Clustering - Modern PostgreSQL Connection Pooling with Machine Learning Optimization"
+              hashtags={[
+                'PostgreSQL',
+                'AI',
+                'LoadBalancing',
+                'DevOps',
+                'Database',
+                'MachineLearning',
+                'ConnectionPooling',
+                'RESTAPI',
+                'pgElephant',
+                'MQTT',
+                'CloudNative'
+              ]}
+            />
+          </div>
         </div>
-      </article>
+      </div>
     </div>
   );
 }
