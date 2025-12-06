@@ -245,25 +245,25 @@ const blogs = {
 // Generate SVGs
 Object.entries(blogs).forEach(([slug, config]) => {
   let svg = svgTemplate;
-  
+
   // Replace placeholders
   svg = svg.replace('{{TITLE}}', config.title);
   svg = svg.replace('{{SUBTITLE}}', config.subtitle);
   svg = svg.replace('{{ICON_SVG}}', icons[config.icon] || '');
   svg = svg.replace('{{BADGES}}', generateBadges(config.badges));
   svg = svg.replace('{{EXTRA_GRADIENTS}}', '');
-  
+
   // Write header.svg
   const headerPath = path.join(__dirname, '..', 'public', 'blog', slug, 'header.svg');
   fs.mkdirSync(path.dirname(headerPath), { recursive: true });
   fs.writeFileSync(headerPath, svg);
   console.log(`✅ Generated: ${headerPath}`);
-  
+
   // Create OG image (1200x630) - same design, different dimensions
   const ogSvg = svg
     .replace('height="400"', 'height="630"')
     .replace('viewBox="0 0 1200 400"', 'viewBox="0 0 1200 630"');
-  
+
   const ogPath = path.join(__dirname, '..', 'public', 'blog', slug, 'og-image.svg');
   fs.writeFileSync(ogPath, ogSvg);
   console.log(`✅ Generated: ${ogPath}`);

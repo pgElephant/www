@@ -56,23 +56,23 @@ const nextConfig = {
   },
   // Enable compression and caching
   compress: true,
-  
+
   // Enable static optimization
   staticPageGenerationTimeout: 120,
-  
+
   // Production optimizations
   poweredByHeader: false,
   generateEtags: true,
-  
+
   // SEO optimizations
   trailingSlash: false,
   generateBuildId: async () => {
     return process.env.BUILD_ID || 'build-' + Date.now()
   },
-  
+
   // Output optimization
   // output: 'standalone',
-  
+
   // Bundle analyzer for production builds
   ...(process.env.ANALYZE === 'true' && {
     webpack: (config, { isServer }) => {
@@ -88,7 +88,7 @@ const nextConfig = {
       return config
     },
   }),
-  
+
   // Enhanced security headers for SEO and security
   async headers() {
     return [
@@ -153,7 +153,7 @@ const nextConfig = {
       },
     ]
   },
-  
+
   // Enhanced redirects for better SEO and user experience
   async redirects() {
     return [
