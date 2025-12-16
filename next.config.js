@@ -211,31 +211,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/docs/fauxdb/api-reference',
-        destination: '/docs/fauxdb/api',
-        permanent: true,
-      },
-      {
-        source: '/docs/fauxdb/migration',
-        destination: '/docs/fauxdb/getting-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/fauxdb/installation',
-        destination: '/docs/fauxdb/getting-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/fauxdb/configuration',
-        destination: '/docs/fauxdb/getting-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/fauxdb/kubernetes',
-        destination: '/docs/fauxdb/docker',
-        permanent: true,
-      },
-      {
         source: '/download/rale',
         destination: '/pgraft',
         permanent: true,
@@ -309,21 +284,6 @@ const nextConfig = {
       {
         source: '/raft-consensus',
         destination: '/pgraft',
-        permanent: true,
-      },
-      {
-        source: '/mongodb-alternative',
-        destination: '/fauxdb',
-        permanent: true,
-      },
-      {
-        source: '/document-database',
-        destination: '/fauxdb',
-        permanent: true,
-      },
-      {
-        source: '/mongodb-compatible',
-        destination: '/fauxdb',
         permanent: true,
       },
       {

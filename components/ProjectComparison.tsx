@@ -8,165 +8,143 @@ const ProjectComparison = () => {
     {
       feature: 'Core Purpose',
       ramd: 'In-memory database',
-      fauxdb: 'Mock database for testing',
       pgraft: 'PostgreSQL Raft consensus',
       showIcon: false
     },
     {
       feature: 'Consensus Protocol',
       ramd: 'None (single node)',
-      fauxdb: 'None (testing only)',
       pgraft: 'Raft consensus',
       showIcon: true
     },
     {
       feature: 'Leader Election',
       ramd: '❌',
-      fauxdb: '❌',
       pgraft: '✅ Automatic',
       showIcon: true
     },
     {
       feature: 'Fault Tolerance',
       ramd: '❌',
-      fauxdb: '❌',
       pgraft: '✅ Multi-node',
       showIcon: true
     },
     {
       feature: 'Data Persistence',
       ramd: '❌ In-memory only',
-      fauxdb: '❌ Temporary',
       pgraft: '✅ PostgreSQL storage',
       showIcon: true
     },
     {
       feature: 'Replication',
       ramd: '❌',
-      fauxdb: '❌',
       pgraft: '✅ Log replication',
       showIcon: true
     },
     {
       feature: 'Configuration Management',
       ramd: 'Basic',
-      fauxdb: 'Test configs',
       pgraft: '✅ Dynamic node addition/removal',
       showIcon: true
     },
     {
       feature: 'Network Communication',
       ramd: 'None',
-      fauxdb: 'None',
       pgraft: '✅ TCP-based peer communication',
       showIcon: true
     },
     {
       feature: 'Shared Memory',
       ramd: 'Basic',
-      fauxdb: 'None',
       pgraft: '✅ Command queue system',
       showIcon: true
     },
     {
       feature: 'Background Workers',
       ramd: 'None',
-      fauxdb: 'None',
       pgraft: '✅ PostgreSQL background workers',
       showIcon: true
     },
     {
       feature: 'SQL Compatibility',
       ramd: 'Custom syntax',
-      fauxdb: 'SQL-like',
       pgraft: '✅ Full PostgreSQL SQL',
       showIcon: true
     },
     {
       feature: 'Transaction Support',
       ramd: 'Limited',
-      fauxdb: 'Basic',
       pgraft: '✅ ACID compliance',
       showIcon: true
     },
     {
       feature: 'Backup & Recovery',
       ramd: '❌',
-      fauxdb: '❌',
       pgraft: '✅ Snapshot support',
       showIcon: true
     },
     {
       feature: 'Monitoring',
       ramd: 'Basic logs',
-      fauxdb: 'Test output',
       pgraft: '✅ Comprehensive logging',
       showIcon: true
     },
     {
       feature: 'Performance',
       ramd: 'High (in-memory)',
-      fauxdb: 'Fast (testing)',
       pgraft: 'Production-ready',
       showIcon: false
     },
     {
       feature: 'Production Use',
       ramd: '❌',
-      fauxdb: '❌',
       pgraft: '✅ Enterprise-ready',
       showIcon: true
     },
     {
       feature: 'Setup Complexity',
       ramd: 'Simple',
-      fauxdb: 'Very Simple',
       pgraft: 'Moderate',
       showIcon: false
     },
     {
       feature: 'Memory Usage',
       ramd: 'High',
-      fauxdb: 'Low',
       pgraft: 'Configurable',
       showIcon: false
     },
     {
       feature: 'Scalability',
       ramd: 'Single node',
-      fauxdb: 'Testing only',
       pgraft: 'Multi-node cluster',
       showIcon: false
     },
     {
       feature: 'Documentation',
       ramd: 'Basic',
-      fauxdb: 'Minimal',
       pgraft: 'Comprehensive',
       showIcon: false
     },
     {
       feature: 'License',
       ramd: 'Open source',
-      fauxdb: 'Open source',
       pgraft: 'Open source',
       showIcon: false
     },
     {
       feature: 'Community Support',
       ramd: 'Limited',
-      fauxdb: 'Testing focused',
       pgraft: 'Active development',
       showIcon: false
     }
   ]
 
   const getFeatureIcon = (value: string) => {
-    if (value.includes('✅') || value.includes('Raft consensus') || value.includes('Full PostgreSQL') || 
-        value.includes('ACID') || value.includes('Enterprise-ready') || value.includes('Comprehensive')) {
+    if (value.includes('✅') || value.includes('Raft consensus') || value.includes('Full PostgreSQL') ||
+      value.includes('ACID') || value.includes('Enterprise-ready') || value.includes('Comprehensive')) {
       return <Check className="w-5 h-5 text-green-400" />
-    } else if (value.includes('❌') || value.includes('None') || value.includes('Limited') || 
-               value.includes('Basic') || value.includes('Custom syntax') || value.includes('Testing only')) {
+    } else if (value.includes('❌') || value.includes('None') || value.includes('Limited') ||
+      value.includes('Basic') || value.includes('Custom syntax') || value.includes('Testing only')) {
       return <X className="w-5 h-5 text-red-400" />
     } else {
       return <Minus className="w-5 h-5 text-slate-400" />
@@ -210,7 +188,7 @@ const ProjectComparison = () => {
             </span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto font-medium">
-            Compare RAMD, FauxDB, and pgraft - three complementary solutions for different database needs.
+            Compare RAMD and pgraft - two complementary solutions for different database needs.
           </p>
         </div>
 
@@ -221,7 +199,7 @@ const ProjectComparison = () => {
             <div className="min-w-[800px]">
               {/* Table Header */}
               <div className="bg-white/10 backdrop-blur-sm border-b border-white/20 p-4 md:p-6 lg:p-8">
-                <div className="grid grid-cols-4 gap-4 items-center">
+                <div className="grid grid-cols-3 gap-4 items-center">
                   <div className="text-sm md:text-lg font-semibold text-white">Feature</div>
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-2">
@@ -229,13 +207,6 @@ const ProjectComparison = () => {
                       <span className="font-bold text-sm md:text-lg text-white">RAMD</span>
                     </div>
                     <div className="text-yellow-400 text-xs md:text-sm font-medium">In-Memory DB</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="flex items-center justify-center mb-2">
-                      <Code className="w-4 h-4 md:w-6 md:h-6 mr-1 md:mr-2 text-orange-400" />
-                      <span className="font-bold text-sm md:text-lg text-white">FauxDB</span>
-                    </div>
-                    <div className="text-orange-400 text-xs md:text-sm font-medium">Mock Database</div>
                   </div>
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-2">
@@ -252,16 +223,13 @@ const ProjectComparison = () => {
                 {features.map((feature) => (
                   <div
                     key={feature.feature}
-                    className="grid grid-cols-4 gap-4 p-3 md:p-4 lg:p-6 hover:bg-white/10 transition-colors"
+                    className="grid grid-cols-3 gap-4 p-3 md:p-4 lg:p-6 hover:bg-white/10 transition-colors"
                   >
                     <div className="font-medium text-white flex items-center text-sm md:text-base">
                       {feature.feature}
                     </div>
                     <div className="text-center flex items-center justify-center">
                       {getFeatureDisplay(feature.ramd, feature.showIcon)}
-                    </div>
-                    <div className="text-center flex items-center justify-center">
-                      {getFeatureDisplay(feature.fauxdb, feature.showIcon)}
                     </div>
                     <div className="text-center flex items-center justify-center">
                       {getFeatureDisplay(feature.pgraft, feature.showIcon)}
@@ -281,8 +249,8 @@ const ProjectComparison = () => {
           <p className="text-lg text-slate-300 text-center mb-12 max-w-2xl mx-auto">
             Each project serves a specific purpose in the database ecosystem
           </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* RAMD */}
             <div className="text-center group">
               <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
@@ -296,23 +264,6 @@ const ProjectComparison = () => {
                   <li>• Cache layer</li>
                   <li>• Real-time analytics</li>
                   <li>• Prototype applications</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* FauxDB */}
-            <div className="text-center group">
-              <div className="bg-white/10 backdrop-blur-sm/10 backdrop-blur-sm rounded-2xl p-6 border border-orange-400/30 hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-sm">
-                <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 border border-orange-400/30">
-                  <Code className="w-8 h-8 text-orange-400" />
-                </div>
-                <h4 className="font-bold text-white mb-2">FauxDB</h4>
-                <p className="text-sm text-slate-300 mb-4">MongoDB-compatible mock database</p>
-                <ul className="text-xs text-slate-400 space-y-1">
-                  <li>• Unit testing</li>
-                  <li>• CI/CD pipelines</li>
-                  <li>• Development mocking</li>
-                  <li>• MongoDB migration testing</li>
                 </ul>
               </div>
             </div>

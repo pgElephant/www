@@ -45,7 +45,7 @@ export interface ProductBadges {
 // PRODUCT CONFIGURATIONS
 // ============================================================================
 
-export const products: Record<'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights', ProductMetadata & ProductFeatures & ProductBadges> = {
+export const products: Record<'pgraft' | 'pgbalancer' | 'pgsentinel' | 'pg-stat-insights', ProductMetadata & ProductFeatures & ProductBadges> = {
   pgraft: {
     id: 'pgraft',
     name: 'pgraft',
@@ -136,43 +136,6 @@ export const products: Record<'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' 
       'AI Routing',
       'YAML Config',
       'CLI Tools',
-    ],
-  },
-  fauxdb: {
-    id: 'fauxdb',
-    name: 'fauxdb',
-    displayName: 'FauxDB',
-    tagline: 'Dual-Protocol Database: MongoDB and MySQL on PostgreSQL',
-    description: 'Dual-protocol database with MongoDB and MySQL wire protocol support on PostgreSQL.',
-    longDescription: 'Dual-protocol database with MongoDB and MySQL wire protocol support on PostgreSQL. Connect with MongoDB clients or MySQL clients. Access the same data through both protocols with PostgreSQL ACID guarantees. SQL translator converts MySQL queries to PostgreSQL automatically. Rust-powered with geospatial, aggregation, and monitoring.',
-    keywords: [
-      'fauxdb', 'mongodb alternative', 'mysql alternative', 'dual-protocol database',
-      'mongodb wire protocol', 'mysql wire protocol', 'postgresql mongodb',
-      'postgresql mysql', 'sql translator', 'wire protocol postgresql',
-      'mongodb compatible', 'mysql compatible', 'document database postgresql',
-      'nosql postgresql', 'multi-protocol database', 'database protocol translation',
-    ],
-    githubUrl: 'https://github.com/fauxdb/fauxdb',
-    docsUrl: '/docs/fauxdb',
-    productUrl: '/fauxdb',
-    ogImage: 'https://www.pgelephant.com/og-fauxdb.jpg',
-    category: 'Dual-Protocol Database',
-    postgresqlVersions: ['14', '15', '16', '17', '18'],
-    title: 'Key Features',
-    items: [
-      'Supports MongoDB and MySQL wire protocols. Both protocols work simultaneously.',
-      'Connect using MongoDB clients or MySQL clients.',
-      'Access the same data through both protocols. PostgreSQL ACID guarantees apply.',
-      'SQL translator converts MySQL queries to PostgreSQL automatically.',
-      'Built with Rust. Includes geospatial, aggregation, and monitoring features.',
-    ],
-    badges: [
-      'MongoDB Protocol',
-      'MySQL Protocol',
-      'PostgreSQL 14+',
-      'Rust Powered',
-      'ACID Guarantees',
-      'SQL Translator',
     ],
   },
   pgsentinel: {

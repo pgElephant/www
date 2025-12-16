@@ -9,9 +9,9 @@ export default function TermsPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <div 
+      <div
         className="relative overflow-hidden min-h-[400px] flex items-center"
-        style={{ 
+        style={{
           backgroundColor: '#1f2937',
         }}
       >
@@ -35,9 +35,9 @@ export default function TermsPage() {
       </div>
 
       {/* Content */}
-      <div 
+      <div
         className="py-20"
-        style={{ 
+        style={{
           backgroundColor: '#1f2937',
         }}
       >
@@ -57,7 +57,6 @@ export default function TermsPage() {
                 <li>RALE: Apache 2.0 License</li>
                 <li>RAM: Apache 2.0 License</li>
                 <li>pgraft: Apache 2.0 License</li>
-                <li>FauxDB: Apache 2.0 License</li>
               </ul>
 
               <h2 className="text-2xl font-thin text-white mb-6">Usage Guidelines</h2>

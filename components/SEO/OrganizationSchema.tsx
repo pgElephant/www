@@ -25,7 +25,7 @@ const OrganizationSchema = () => {
         "url": "https://www.pgelephant.com/contact"
       },
       {
-        "@type": "ContactPoint", 
+        "@type": "ContactPoint",
         "contactType": "Customer Service",
         "url": "https://www.pgelephant.com/contact"
       }
@@ -61,7 +61,7 @@ const OrganizationSchema = () => {
         {
           "@type": "Offer",
           "itemOffered": {
-            "@type": "SoftwareApplication", 
+            "@type": "SoftwareApplication",
             "name": "RALE",
             "description": "Resilient Adaptive Leader Election for distributed consensus"
           }
@@ -70,7 +70,7 @@ const OrganizationSchema = () => {
           "@type": "Offer",
           "itemOffered": {
             "@type": "SoftwareApplication",
-            "name": "pgraft", 
+            "name": "pgraft",
             "description": "Raft-based PostgreSQL extension for leader election"
           }
         },
@@ -82,14 +82,6 @@ const OrganizationSchema = () => {
             "description": "Connection pooling and load balancing for PostgreSQL"
           }
         },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "SoftwareApplication",
-            "name": "FauxDB",
-            "description": "MongoDB-compatible document database"
-          }
-        }
       ]
     }
   }

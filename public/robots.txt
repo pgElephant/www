@@ -18,7 +18,6 @@ Disallow: /test/
 # Allow important pages
 Allow: /
 Allow: /pgraft/
-Allow: /fauxdb/
 Allow: /pgbalancer/
 Allow: /ram/
 Allow: /rale/

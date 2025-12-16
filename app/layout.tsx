@@ -1,10 +1,10 @@
 import React from 'react'
 import type { Metadata, Viewport } from 'next'
-import { 
-  Inter, 
-  Poppins, 
-  Space_Grotesk, 
-  JetBrains_Mono, 
+import {
+  Inter,
+  Poppins,
+  Space_Grotesk,
+  JetBrains_Mono,
   Outfit
 } from 'next/font/google'
 import dynamic from 'next/dynamic'
@@ -29,7 +29,7 @@ const OrganizationSchema = dynamic(() => import('@/components/SEO/OrganizationSc
 
 // Optimized font configurations - reduced to essential fonts only
 // Only preload the primary font for better performance
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
@@ -39,7 +39,7 @@ const inter = Inter({
   adjustFontFallback: true,
 })
 
-const poppins = Poppins({ 
+const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-poppins',
   display: 'swap',
@@ -48,7 +48,7 @@ const poppins = Poppins({
   fallback: ['system-ui', 'arial'],
 })
 
-const spaceGrotesk = Space_Grotesk({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
   display: 'swap',
@@ -57,7 +57,7 @@ const spaceGrotesk = Space_Grotesk({
   fallback: ['system-ui', 'arial'],
 })
 
-const jetbrainsMono = JetBrains_Mono({ 
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains-mono',
   display: 'swap',
@@ -66,7 +66,7 @@ const jetbrainsMono = JetBrains_Mono({
   fallback: ['monospace'],
 })
 
-const outfit = Outfit({ 
+const outfit = Outfit({
   subsets: ['latin'],
   variable: '--font-outfit',
   display: 'swap',
@@ -90,10 +90,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pgelephant.com'),
   title: {
-    default: 'pgElephant - Enterprise PostgreSQL High Availability | MongoDB Alternative | Database Clustering',
-    template: '%s | pgElephant - PostgreSQL Enterprise Solutions'
+    default: 'pgElephant - PostgreSQL High Availability Solution | Automatic Failover & Clustering',
+    template: '%s | pgElephant - PostgreSQL High Availability Solution'
   },
-  description: 'pgElephant: Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus. Production-ready pgbalancer connection pooling, pgraft Raft extension, and FauxDB document database. Zero-downtime database solutions for modern applications.',
+  description: 'pgElephant: PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, and distributed consensus. Production-ready pgraft Raft extension for leader election, pgbalancer connection pooling, pgSentinel monitoring, and pg_stat_insights analytics. Enterprise-grade database infrastructure for mission-critical applications.',
   applicationName: 'pgElephant',
   authors: [
     { name: 'pgElephant Team', url: 'https://www.pgelephant.com' },
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     'database clustering', 'database failover', 'automatic failover', 'zero downtime database',
     'PostgreSQL extension', 'PostgreSQL tools', 'PostgreSQL management', 'PostgreSQL solutions',
     // Product-specific terms
-    'pgbalancer PostgreSQL', 'pgraft extension', 'FauxDB database',
+    'pgbalancer PostgreSQL', 'pgraft extension',
     'PostgreSQL Raft', 'distributed PostgreSQL', 'PostgreSQL consensus', 'PostgreSQL leader election',
     'PostgreSQL replication', 'PostgreSQL backup', 'PostgreSQL monitoring', 'PostgreSQL performance',
     // Technical keywords
@@ -146,8 +146,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: '/',
     siteName: 'pgElephant',
-    title: 'pgElephant - Enterprise PostgreSQL Platform | High Availability & MongoDB Alternative',
-    description: 'Enterprise-grade PostgreSQL solutions: pgbalancer connection pooling, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
+    title: 'pgElephant - PostgreSQL High Availability Solution | Automatic Failover & Clustering',
+    description: 'PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, and distributed consensus. Includes pgraft Raft extension, pgbalancer connection pooling, pgSentinel monitoring, and pg_stat_insights analytics.',
     images: [
       {
         url: '/og-image.jpg?v=2',
@@ -169,8 +169,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@pgElephant',
     creator: '@pgElephant',
-    title: 'pgElephant - Enterprise PostgreSQL Platform',
-    description: 'Enterprise-grade PostgreSQL solutions: pgbalancer connection pooling, pgraft Raft extension, and FauxDB MongoDB-compatible document database.',
+    title: 'pgElephant - PostgreSQL High Availability Solution',
+    description: 'PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, and distributed consensus. Includes pgraft Raft extension, pgbalancer connection pooling, pgSentinel monitoring, and pg_stat_insights analytics.',
     images: ['/og-image.jpg?v=2'],
   },
   robots: {
@@ -219,52 +219,52 @@ export default function RootLayout({
         {/* Preload critical resources */}
         <link rel="preload" href="/og-image.jpg" as="image" type="image/jpeg" />
         <link rel="prefetch" href="/favicon.svg" as="image" />
-  <link rel="manifest" href="/manifest.json" />
-        
-  {/* Primary favicon - SVG for best visibility (modern browsers) */}
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
-  {/* PNG fallbacks for broad compatibility */}
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16.png?v=1" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32.png?v=1" />
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48.png?v=2" />
-  <link rel="icon" type="image/png" sizes="64x64" href="/favicons/favicon-64.png?v=2" />
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96.png?v=1" />
-  <link rel="icon" type="image/png" sizes="128x128" href="/favicons/favicon-128.png?v=1" />
-  <link rel="icon" type="image/png" sizes="180x180" href="/favicons/favicon-180.png?v=2" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicons/favicon-192.png?v=2" />
-  <link rel="icon" type="image/png" sizes="256x256" href="/favicons/favicon-256.png?v=1" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/favicons/favicon-512.png?v=2" />
-  <link rel="icon" type="image/png" sizes="1024x1024" href="/favicons/favicon-1024.png?v=2" />
+        <link rel="manifest" href="/manifest.json" />
 
-  {/* Apple Touch Icon */}
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180.png?v=2" />
-        
+        {/* Primary favicon - SVG for best visibility (modern browsers) */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+        {/* PNG fallbacks for broad compatibility */}
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16.png?v=1" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32.png?v=1" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48.png?v=2" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/favicons/favicon-64.png?v=2" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96.png?v=1" />
+        <link rel="icon" type="image/png" sizes="128x128" href="/favicons/favicon-128.png?v=1" />
+        <link rel="icon" type="image/png" sizes="180x180" href="/favicons/favicon-180.png?v=2" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicons/favicon-192.png?v=2" />
+        <link rel="icon" type="image/png" sizes="256x256" href="/favicons/favicon-256.png?v=1" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/favicons/favicon-512.png?v=2" />
+        <link rel="icon" type="image/png" sizes="1024x1024" href="/favicons/favicon-1024.png?v=2" />
+
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/favicon-180.png?v=2" />
+
         {/* Windows/Microsoft icons */}
-  <meta name="msapplication-TileColor" content="#070d1a" />
-  <meta name="msapplication-TileImage" content="/favicons/favicon-192.png?v=1" />
-  <meta name="msapplication-square70x70logo" content="/favicons/favicon-128.png?v=1" />
-  <meta name="msapplication-square150x150logo" content="/favicons/favicon-192.png?v=1" />
-  <meta name="msapplication-square310x310logo" content="/favicons/favicon-256.png?v=1" />
-  <meta name="msapplication-wide310x150logo" content="/favicons/favicon-256.png?v=1" />
-        
+        <meta name="msapplication-TileColor" content="#070d1a" />
+        <meta name="msapplication-TileImage" content="/favicons/favicon-192.png?v=1" />
+        <meta name="msapplication-square70x70logo" content="/favicons/favicon-128.png?v=1" />
+        <meta name="msapplication-square150x150logo" content="/favicons/favicon-192.png?v=1" />
+        <meta name="msapplication-square310x310logo" content="/favicons/favicon-256.png?v=1" />
+        <meta name="msapplication-wide310x150logo" content="/favicons/favicon-256.png?v=1" />
+
         {/* Theme colors for better visibility */}
         <meta name="theme-color" content="#070d1a" />
         <meta name="msapplication-navbutton-color" content="#070d1a" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        
+
         {/* Additional favicon meta tags for maximum visibility */}
         <meta name="application-name" content="pgElephant" />
         <meta name="apple-mobile-web-app-title" content="pgElephant" />
         <meta name="msapplication-tooltip" content="pgElephant - Enterprise PostgreSQL Platform" />
         <meta name="msapplication-starturl" content="/" />
-        
-  {/* Safari pinned tab icon */}
-  <link rel="mask-icon" href="/hero-bg.svg" color="#070d1a" />
-        
+
+        {/* Safari pinned tab icon */}
+        <link rel="mask-icon" href="/hero-bg.svg" color="#070d1a" />
+
         {/* Additional browser-specific favicons */}
-  <link rel="fluid-icon" href="/favicons/favicon-512.png?v=1" title="pgElephant" />
-        
+        <link rel="fluid-icon" href="/favicons/favicon-512.png?v=1" title="pgElephant" />
+
         {/* Organization Schema for Google Search */}
         <script
           type="application/ld+json"
@@ -281,7 +281,7 @@ export default function RootLayout({
                 "width": 512,
                 "height": 512
               },
-              "description": "Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus",
+              "description": "PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, and distributed consensus",
               "foundingDate": "2024",
               "sameAs": [
                 "https://github.com/pgElephant"
@@ -294,7 +294,7 @@ export default function RootLayout({
             })
           }}
         />
-        
+
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -304,7 +304,7 @@ export default function RootLayout({
               "@type": "SoftwareApplication",
               "name": "pgElephant",
               "alternateName": ["pgElephant Platform", "PostgreSQL Elephant"],
-              "description": "Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus",
+              "description": "PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, and distributed consensus",
               "url": "https://www.pgelephant.com",
               "applicationCategory": "DatabaseApplication",
               "operatingSystem": ["Linux", "macOS", "Windows", "Docker", "Kubernetes"],
@@ -350,7 +350,7 @@ export default function RootLayout({
             })
           }}
         />
-        
+
         {/* Organization Schema */}
         <script
           type="application/ld+json"
@@ -361,7 +361,7 @@ export default function RootLayout({
               "name": "pgElephant",
               "url": "https://www.pgelephant.com",
               "logo": "https://www.pgelephant.com/favicons/favicon-512.png",
-              "description": "Enterprise PostgreSQL solutions provider specializing in high availability, clustering, and MongoDB-compatible databases",
+              "description": "PostgreSQL High Availability Solution provider specializing in automatic failover, zero-downtime clustering, and distributed consensus",
               "foundingDate": "2024",
               "contactPoint": {
                 "@type": "ContactPoint",
@@ -383,7 +383,7 @@ export default function RootLayout({
             })
           }}
         />
-        
+
 
         {/* WebSite SearchAction */}
         <script

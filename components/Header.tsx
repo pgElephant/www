@@ -19,7 +19,6 @@ const Header = () => {
     { name: 'pgbalancer', href: '/pgbalancer', description: 'Connection Pooling' },
     { name: 'pgSentinel', href: '/pgsentinel', description: 'Monitoring Platform' },
     { name: 'pg_stat_insights', href: '/pg-stat-insights', description: 'Performance Analytics' },
-    { name: 'FauxDB', href: '/fauxdb', description: 'Document Database' },
   ]
 
   return (
@@ -29,9 +28,9 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <div className="text-white group-hover:text-white transition-colors">
-              <Image 
-                src="/favicons/favelatest.ico" 
-                alt="pgElephant" 
+              <Image
+                src="/favicons/favelatest.ico"
+                alt="pgElephant"
                 width={64}
                 height={64}
                 className="w-16 h-16 object-contain"
@@ -105,7 +104,7 @@ const Header = () => {
           <div className="hidden md:flex items-center justify-end min-w-[180px]">
             <Link href="/docs" className="bg-white/20 hover:bg-white/30 text-white  font-semibold px-6 py-2 rounded-lg transition-all duration-200 text-sm  ">Getting Started</Link>
           </div>
-          
+
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -28,7 +28,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer 
+    <footer
       role="contentinfo"
       aria-label="Site footer"
       className="relative overflow-hidden border-t border-slate-700/50"
@@ -61,11 +61,6 @@ const Footer = () => {
                   <li>
                     <Link href="/pg-stat-insights" className="text-white/70 hover:text-white transition-colors text-sm">
                       pg_stat_insights
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/fauxdb" className="text-white/70 hover:text-white transition-colors text-sm">
-                      FauxDB
                     </Link>
                   </li>
                 </ul>
@@ -146,9 +141,9 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <a 
-                      href="https://github.com/pgElephant" 
-                      target="_blank" 
+                    <a
+                      href="https://github.com/pgElephant"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-white/70 hover:text-white transition-colors text-sm"
                     >
@@ -180,9 +175,9 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <a 
-                      href="https://github.com/pgElephant" 
-                      target="_blank" 
+                    <a
+                      href="https://github.com/pgElephant"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-white/70 hover:text-white transition-colors text-sm"
                     >
@@ -196,9 +191,9 @@ const Footer = () => {
             {/* Logo and Social Column */}
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center mb-4">
-                <Image 
-                  src="/favicons/favelatest.ico" 
-                  alt="pgElephant" 
+                <Image
+                  src="/favicons/favelatest.ico"
+                  alt="pgElephant"
                   width={32}
                   height={32}
                   className="w-8 h-8 object-contain"

@@ -10,7 +10,7 @@ interface SitemapEntry {
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.pgelephant.com'
   const currentDate = new Date()
-  
+
   // Define priority levels for different content types
   const priorities = {
     homepage: 1.0,
@@ -35,12 +35,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const productPages: SitemapEntry[] = [
     {
       url: `${baseUrl}/pgbalancer`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.mainProducts,
-    },
-    {
-      url: `${baseUrl}/fauxdb`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.mainProducts,
@@ -100,31 +94,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/docs/pgbalancer/internals`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    // FauxDB documentation
-    {
-      url: `${baseUrl}/docs/fauxdb`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/docs/fauxdb/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/fauxdb/api`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/fauxdb/docker`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,

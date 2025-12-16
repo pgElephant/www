@@ -17,7 +17,7 @@ export const baseSEO = {
   siteUrl: 'https://www.pgelephant.com',
   twitterHandle: '@pgElephant',
   defaultImage: '/og-image.jpg?v=2',
-  defaultDescription: 'PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus.',
+  defaultDescription: 'PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, distributed consensus, and production-ready extensions for enterprise database infrastructure.',
 }
 
 // ============================================================================

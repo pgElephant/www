@@ -84,7 +84,7 @@ export const colors = {
 // PRODUCT-SPECIFIC THEMES
 // ============================================================================
 
-export type ProductId = 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights'
+export type ProductId = 'pgraft' | 'pgbalancer' | 'pgsentinel' | 'pg-stat-insights'
 
 export interface ProductTheme {
   // Gradient classes for Tailwind
@@ -162,29 +162,6 @@ export const productThemes: Record<ProductId, ProductTheme> = {
     quickLinkCardClass: 'rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm transition hover:border-blue-300 dark:border-slate-700/60 dark:bg-slate-900/60',
     quickLinkIconClass: 'text-blue-600',
     quickLinkHoverLabelClass: 'text-blue-600',
-    docCardClass: 'rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/60',
-  },
-  fauxdb: {
-    badgeGradient: 'from-emerald-600 to-orange-600',
-    heroGradient: 'bg-gradient-to-r from-emerald-600/20 to-orange-600/20 dark:from-emerald-500/10 dark:to-orange-500/10',
-    pageGradient: 'bg-gradient-to-br from-slate-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-900',
-    primaryColor: 'emerald-600',
-    secondaryColor: 'orange-600',
-    accentColor: 'blue-600',
-    iconColors: {
-      primary: 'emerald-400',
-      secondary: 'orange-400',
-      tertiary: 'blue-400',
-      quaternary: 'red-400',
-    },
-    buttonPrimary: 'bg-emerald-600 hover:bg-emerald-700 text-white',
-    buttonSecondary: 'border-emerald-300 hover:border-emerald-400 text-emerald-600',
-    linkHover: 'hover:text-emerald-600',
-    featureIconClass: 'text-emerald-600',
-    featureCardClass: 'rounded-2xl border border-slate-200 bg-white/85 p-6 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/60',
-    quickLinkCardClass: 'rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm transition hover:border-emerald-300 dark:border-slate-700/60 dark:bg-slate-900/60',
-    quickLinkIconClass: 'text-emerald-600',
-    quickLinkHoverLabelClass: 'text-emerald-600',
     docCardClass: 'rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm dark:border-slate-700/60 dark:bg-slate-900/60',
   },
   pgsentinel: {

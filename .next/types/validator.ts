@@ -83,6 +83,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../app/blog/pgbalancer-3-node-ha/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/pgbalancer-3-node-ha">> = Specific
+  const handler = {} as typeof import("../../app/blog/pgbalancer-3-node-ha/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/pgbalancer-pg-stat-insights/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/pgbalancer-pg-stat-insights">> = Specific
+  const handler = {} as typeof import("../../app/blog/pgbalancer-pg-stat-insights/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/blog/pgbalancer/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/blog/pgbalancer">> = Specific
@@ -114,87 +132,6 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/contact">> = Specific
   const handler = {} as typeof import("../../app/contact/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/api/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/api">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/api/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/configuration/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/configuration">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/configuration/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/docker/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/docker">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/docker/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/examples/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/examples">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/examples/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/getting-started/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/getting-started">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/getting-started/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/monitoring/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/monitoring">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/monitoring/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/production/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/production">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/production/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/docs/fauxdb/troubleshooting/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/docs/fauxdb/troubleshooting">> = Specific
-  const handler = {} as typeof import("../../app/docs/fauxdb/troubleshooting/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -735,15 +672,6 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/download">> = Specific
   const handler = {} as typeof import("../../app/download/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/fauxdb/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/fauxdb">> = Specific
-  const handler = {} as typeof import("../../app/fauxdb/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

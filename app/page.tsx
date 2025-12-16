@@ -4,30 +4,27 @@ import WhyPgElephant from '@/components/WhyPgElephant'
 import ProductSchema from '@/components/SEO/ProductSchema'
 
 export const metadata = {
-  title: 'pgElephant | PostgreSQL Platform - AI Database, Vector Search and RAG Pipeline',
-  description: 'pgElephant provides PostgreSQL extensions: pgbalancer connection pooling, pgraft Raft extension for leader election, FauxDB dual-protocol database (MongoDB + MySQL), pgSentinel monitoring, and pg_stat_insights analytics.',
+  title: 'pgElephant | PostgreSQL High Availability Solution - Automatic Failover & Clustering',
+  description: 'pgElephant is a PostgreSQL High Availability Solution providing automatic failover, zero-downtime clustering, and distributed consensus. Includes pgraft Raft extension for leader election, pgbalancer connection pooling, pgSentinel monitoring, and pg_stat_insights analytics.',
   keywords: [
-    // AI Database & Vector Search Keywords
-    'ai database', 'ai database postgresql', 'postgres ai', 'postgresql ai extension', 'postgres ai extension',
-    'vector database', 'vector database postgresql', 'postgres vector database', 'vector search postgresql',
-    'rag pipeline', 'rag database', 'rag postgresql', 'retrieval augmented generation postgresql',
-    'semantic search postgresql', 'semantic database', 'similarity search postgresql',
-    'machine learning postgresql', 'ml inference postgresql', 'postgres ml', 'postgresql machine learning',
-    'embeddings database', 'embedding generation postgresql', 'hnsw postgresql', 'hybrid search',
-    'open source database',
+    // PostgreSQL High Availability Keywords (Primary)
+    'postgresql high availability', 'postgresql ha solution', 'postgresql high availability solution',
+    'postgresql automatic failover', 'postgresql zero downtime', 'postgresql clustering',
+    'postgresql failover', 'postgresql ha', 'postgresql leader election', 'postgresql consensus',
+    'distributed postgresql', 'postgresql raft', 'postgresql replication', 'postgresql disaster recovery',
     // Enterprise PostgreSQL Keywords
     'enterprise postgresql', 'postgresql platform', 'database clustering', 'high availability',
     'postgresql failover', 'mongodb alternative', 'mysql alternative', 'dual-protocol database',
     'raft algorithm', 'postgresql extension', 'database management', 'production database',
-    'postgresql solutions', 'pgbalancer pooling', 'pgraft extension', 'fauxdb',
+    'postgresql solutions', 'pgbalancer pooling', 'pgraft extension',
     'pgsentinel monitoring', 'pg_stat_insights analytics', 'postgresql monitoring', 'database analytics',
     'automatic failover', 'zero downtime', 'database replication', 'leader election',
     'postgresql ha', 'mongodb wire protocol', 'mysql wire protocol', 'sql translator',
     'distributed postgresql', 'postgresql consensus', 'database reliability'
   ].join(', '),
   openGraph: {
-    title: 'pgElephant - PostgreSQL Platform | AI Database, Vector Search and RAG',
-    description: 'PostgreSQL extensions: pgbalancer connection pooling, pgraft Raft extension, FauxDB dual-protocol database (MongoDB + MySQL), pgSentinel monitoring, and pg_stat_insights analytics.',
+    title: 'pgElephant - PostgreSQL High Availability Solution | Automatic Failover & Clustering',
+    description: 'PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, and distributed consensus. Includes pgraft Raft extension, pgbalancer connection pooling, pgSentinel monitoring, and pg_stat_insights analytics.',
     images: [
       {
         url: '/og-image.jpg?v=2',
@@ -42,8 +39,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'pgElephant - PostgreSQL Platform | AI Database and Vector Search',
-    description: 'PostgreSQL extensions: pgbalancer, pgraft, FauxDB, pgSentinel, and pg_stat_insights.',
+    title: 'pgElephant - PostgreSQL High Availability Solution',
+    description: 'PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, and distributed consensus. Includes pgraft, pgbalancer, pgSentinel, and pg_stat_insights.',
     images: ['/og-image.jpg?v=2'],
     creator: '@pgElephant',
     site: '@pgElephant',

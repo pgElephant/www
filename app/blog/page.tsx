@@ -33,7 +33,7 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '5', icon: BookOpen, color: 'text-white' },
+  { label: 'Total Articles', value: '8', icon: BookOpen, color: 'text-white' },
   { label: 'Monthly Readers', value: '4.2k', icon: Eye, color: 'text-white' },
   { label: 'Categories', value: '1', icon: Tag, color: 'text-white' },
   { label: 'Authors', value: '1', icon: Users, color: 'text-white' }
@@ -41,6 +41,23 @@ const blogStats = [
 
 
 const blogPosts = [
+  {
+    slug: 'pgbalancer-3-node-ha',
+    title: 'PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup',
+    excerpt: 'Complete guide to building a production-ready PostgreSQL high availability cluster with pgBalancer and 3 PostgreSQL nodes. Includes step-by-step setup, configuration, failover testing, and best practices.',
+    content: 'Comprehensive production guide for setting up a 3-node PostgreSQL HA cluster with pgBalancer, covering architecture, installation, configuration, failover scenarios, monitoring, and production best practices.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-25',
+    readTime: '35 min read',
+    category: 'Technical',
+    featured: true,
+    icon: 'pgbalancer',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['PostgreSQL', 'High Availability', 'pgBalancer', 'Database Clustering', 'Load Balancing', 'Failover', 'Production Guide']
+  },
   {
     slug: 'pg-stat-insights-index-monitoring',
     title: 'Index Monitoring with pg_stat_insights v3.0.0',
@@ -193,6 +210,15 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               <Image
                 src="/blog/pgbalancer/header.svg?v=7"
                 alt="pgbalancer blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'pgbalancer-3-node-ha' ? (
+              <Image
+                src="/blog/pgbalancer-3-node-ha/header.svg?v=1"
+                alt="PostgreSQL HA with pgBalancer 3-Node Setup"
                 fill
                 className="object-cover"
                 unoptimized

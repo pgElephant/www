@@ -53,7 +53,7 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
         name: 'What is pgElephant?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'pgElephant is an enterprise PostgreSQL platform providing high availability, AI database capabilities, vector search, and MongoDB-compatible document database solutions.',
+          text: 'pgElephant is a PostgreSQL High Availability Solution providing automatic failover, zero-downtime clustering, distributed consensus, connection pooling, monitoring, and analytics for enterprise database infrastructure.',
         },
       },
       {
@@ -61,7 +61,7 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
         name: 'Is pgElephant free?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes, pgElephant is open source and free to use. All products including pgbalancer, pgraft, FauxDB, pgSentinel, and pg_stat_insights are available under open source licenses.',
+          text: 'Yes, pgElephant is open source and free to use. All products including pgbalancer, pgraft, pgSentinel, and pg_stat_insights are available under open source licenses.',
         },
       },
     ],
@@ -71,9 +71,9 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
     <>
       {/* Enhanced Meta Tags */}
       <meta name="description" content={description} />
-      <meta name="keywords" content="PostgreSQL, high availability, AI database, vector search, RAG, MongoDB alternative, database clustering" />
+      <meta name="keywords" content="PostgreSQL high availability, PostgreSQL HA solution, automatic failover, zero downtime, database clustering, distributed consensus, PostgreSQL failover" />
       <link rel="canonical" href={fullCanonicalUrl} />
-      
+
       {/* Open Graph Enhanced */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />

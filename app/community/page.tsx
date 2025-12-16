@@ -90,7 +90,6 @@ const CommunityPage = () => {
         { title: 'Main Repository', href: 'https://github.com/pgelephant', type: 'Code', description: 'Core pgElephant organization' },
         { title: 'RAM Project', href: 'https://github.com/pgelephant/ram', type: 'Code', description: 'Resilient Adaptive Manager' },
         { title: 'pgraft Extension', href: 'https://github.com/pgelephant/pgraft', type: 'Code', description: 'PostgreSQL Raft Extension' },
-        { title: 'FauxDB Engine', href: 'https://github.com/pgelephant/fauxdb', type: 'Code', description: 'MongoDB Compatible Database' },
         { title: 'Report Issues', href: 'https://github.com/pgelephant/issues', type: 'Support', description: 'Bug reports and feature requests' },
         { title: 'Submit PRs', href: 'https://github.com/pgelephant/pulls', type: 'Code', description: 'Contribute code improvements' }
       ]
@@ -583,56 +582,28 @@ const CommunityPage = () => {
                   </Link>
                 </div>
               </div>
-
-              {/* FauxDB Repository */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
-                    <Database className="w-5 h-5 text-white " />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-white ">FauxDB</h3>
-                    <p className="text-sm text-white /70">MongoDB Proxy</p>
-                  </div>
-                </div>
-                <p className="text-white /80 text-sm mb-4">
-                  MongoDB wire protocol proxy for PostgreSQL
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-xs text-white /60">
-                    <span>⭐ 0</span>
-                    <span>🍴 0</span>
-                  </div>
-                  <Link
-                    href="https://github.com/pgelephant/fauxdb"
-                    className="text-blue-400 hover:text-blue-300 text-xs font-bold"
-                  >
-                    View Repository →
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* GitHub Actions */}
-            <div className="text-center">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  href="https://github.com/pgelephant"
-                  className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-700 to-slate-800 text-white  rounded-xl hover:from-gray-800 hover:to-slate-900 transition-all duration-200 font-bold  hover:scale-105"
-                >
-                  <Github className="w-5 h-5" />
-                  View Organization
-                </Link>
-                <Link
-                  href="/docs"
-                  className="flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white  border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-200 font-bold"
-                >
-                  Contribute Guide
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* GitHub Actions */}
+      <div className="text-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link
+            href="https://github.com/pgelephant"
+            className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-700 to-slate-800 text-white  rounded-xl hover:from-gray-800 hover:to-slate-900 transition-all duration-200 font-bold  hover:scale-105"
+          >
+            <Github className="w-5 h-5" />
+            View Organization
+          </Link>
+          <Link
+            href="/docs"
+            className="flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white  border border-white/20 rounded-xl hover:bg-white/20 transition-all duration-200 font-bold"
+          >
+            Contribute Guide
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
 
@@ -890,10 +861,10 @@ const CommunityPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* Community Guidelines Section */}
-      <div
+      < div
         className="py-20 relative overflow-hidden"
         style={{
           backgroundColor: '#1f2937',
@@ -901,9 +872,9 @@ const CommunityPage = () => {
         }}
       >
         {/* Elegant floating elements */}
-        <div className="absolute inset-0 overflow-hidden">
+        < div className="absolute inset-0 overflow-hidden" >
           {/* Floating orbs */}
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse" />
+          < div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-purple-500/15 to-blue-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
 
@@ -916,7 +887,7 @@ const CommunityPage = () => {
               backgroundSize: '32px 32px'
             }}
           />
-        </div>
+        </div >
 
         <div className="container-wide relative z-10">
           <div className="max-w-6xl mx-auto">

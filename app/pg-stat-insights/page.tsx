@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductPageTemplate from '@/components/templates/ProductPageTemplate';
 import PgStatInsightsDemoTerminal from '@/components/PgStatInsightsDemoTerminal';
+import PgStatInsightsProductSlideshow from '@/components/PgStatInsightsProductSlideshow';
 import { generateProductPageMetadata } from '@/config/seo';
 import { 
   TrendingUp, Database, Zap, Target, Eye, AlertTriangle,
@@ -624,6 +625,16 @@ asyncio.run(analyze_database())`,
 };
 
 export default function PgStatInsightsPage() {
-  return <ProductPageTemplate {...pgStatInsightsConfig} />;
+  return (
+    <>
+      <ProductPageTemplate {...pgStatInsightsConfig} />
+      {/* Slideshow Section */}
+      <div className="py-16" style={{ backgroundColor: '#1f2937' }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <PgStatInsightsProductSlideshow />
+        </div>
+      </div>
+    </>
+  );
 }
 

@@ -48,12 +48,11 @@ import { gradients } from '@/config/theme'
 const unifiedHeroGradient = gradients.hero.css
 
 // Use centralized ProductIcons
-import { PgbalancerIcon, PgraftIcon, FauxDbIcon, PgSentinelIcon, PgStatInsightsIcon } from '@/components/ProductIcons'
+import { PgbalancerIcon, PgraftIcon, PgSentinelIcon, PgStatInsightsIcon } from '@/components/ProductIcons'
 
 // Icon wrappers for size compatibility (using centralized ProductIcons)
 const PgbalancerIconWrapper = () => <PgbalancerIcon size={48} />
 const PgraftIconWrapper = () => <PgraftIcon size={48} />
-const FauxDbIconWrapper = () => <FauxDbIcon size={48} />
 const PgStatInsightsIconWrapper = () => <PgStatInsightsIcon size={48} />
 
 const DownloadPage = () => {
@@ -169,28 +168,6 @@ const DownloadPage = () => {
       ]
     },
     {
-      id: 'fauxdb',
-      name: 'FauxDB',
-      title: 'MongoDB Compatible Document Database',
-      icon: 'fauxdb-custom',
-      isExtension: false,
-      features: [
-        '100% MongoDB Compatibility: Full wire protocol support with mongosh compatibility',
-        'High Performance: Built in Rust for superior speed and memory efficiency',
-        'Advanced Features: Transactions, geospatial, aggregation pipelines',
-        'Pure PostgreSQL Backend: Native JSONB support, no external dependencies',
-        'Production Ready: Enterprise-grade monitoring, logging, and configuration',
-        'Docker Support: Comprehensive Docker support for dev, test, and production',
-      ],
-      details: '/fauxdb',
-      downloads: [
-        { title: 'Source Code (tar.gz)', href: 'https://github.com/pgElephant/fauxdb/archive/refs/tags/v1.0.0.tar.gz', type: 'Source', available: true },
-        { title: 'Source Code (zip)', href: 'https://github.com/pgElephant/fauxdb/archive/refs/tags/v1.0.0.zip', type: 'Source', available: true },
-        { title: 'Linux Binary', href: '/download/fauxdb', type: 'Binary', available: true },
-        { title: 'Docker Image', href: '/download/fauxdb', type: 'Docker', available: true }
-      ]
-    },
-    {
       id: 'pgbalancer',
       name: 'pgbalancer',
       title: 'Connection Pooling & Load Balancing for PostgreSQL',
@@ -217,12 +194,12 @@ const DownloadPage = () => {
   return (
     <div className="pt-0">
       {/* Unified Professional Hero */}
-        <section 
-          className="relative text-center overflow-hidden flex items-center h-[400px] pt-20"
-          style={{ 
-            backgroundColor: '#111827'
-          }}
-        >
+      <section
+        className="relative text-center overflow-hidden flex items-center h-[400px] pt-20"
+        style={{
+          backgroundColor: '#111827'
+        }}
+      >
         <div className="container-extra-wide mx-auto relative z-10 w-full">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Downloads</h1>
@@ -266,11 +243,10 @@ const DownloadPage = () => {
             {products.map((product, idx) => (
               <div
                 key={product.id}
-                className={`bg-gradient-to-r from-slate-800/60 to-slate-900/60 backdrop-blur-sm rounded-2xl p-8 border transition-all hover:shadow-2xl hover:scale-[1.02] ${
-                  product.featured 
-                    ? 'border-cyan-400/50 shadow-lg shadow-cyan-500/20' 
-                    : 'border-white/10'
-                }`}
+                className={`bg-gradient-to-r from-slate-800/60 to-slate-900/60 backdrop-blur-sm rounded-2xl p-8 border transition-all hover:shadow-2xl hover:scale-[1.02] ${product.featured
+                  ? 'border-cyan-400/50 shadow-lg shadow-cyan-500/20'
+                  : 'border-white/10'
+                  }`}
               >
                 <div className="flex flex-col lg:flex-row gap-8">
                   {/* Left: Product Info */}
@@ -283,7 +259,6 @@ const DownloadPage = () => {
                             'pg_stat_insights-custom': { Icon: PgStatInsightsIcon, gradient: 'from-teal-500/20 to-cyan-500/20', border: 'border-teal-400/30' },
                             'pgbalancer-custom': { Icon: PgbalancerIcon, gradient: 'from-cyan-500/20 to-blue-500/20', border: 'border-cyan-400/30' },
                             'pgraft-custom': { Icon: PgraftIcon, gradient: 'from-blue-500/20 to-purple-500/20', border: 'border-blue-400/30' },
-                            'fauxdb-custom': { Icon: FauxDbIcon, gradient: 'from-emerald-500/20 to-green-500/20', border: 'border-emerald-400/30' },
                           }
                           const iconConfig = iconMap[product.icon || '']
                           if (iconConfig) {
@@ -332,8 +307,8 @@ const DownloadPage = () => {
                         </div>
 
                         {/* Product Details Link */}
-                        <Link 
-                          href={product.details} 
+                        <Link
+                          href={product.details}
                           className="inline-flex items-center gap-2 mt-6 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors group"
                         >
                           <FileText className="w-5 h-5" />
@@ -351,7 +326,7 @@ const DownloadPage = () => {
                         <Download className="w-5 h-5 text-cyan-400" />
                         Download Options
                       </h4>
-                      
+
                       {/* Extension Notice */}
                       {product.isExtension && (
                         <div className="mb-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
@@ -363,12 +338,12 @@ const DownloadPage = () => {
                           </div>
                         </div>
                       )}
-                      
+
                       <div className="space-y-3">
                         {product.downloads.map((download, index) => {
                           const IconComponent = getDownloadIcon(download.type);
                           const isAvailable = download.available !== false; // Default to true if not specified
-                          
+
                           if (!isAvailable) {
                             // Disabled/Greyed out option for extensions
                             return (
@@ -388,10 +363,10 @@ const DownloadPage = () => {
                               </div>
                             );
                           }
-                          
+
                           return (
-                            <Link 
-                              key={index} 
+                            <Link
+                              key={index}
                               href={download.href}
                               className="flex items-center justify-between gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white transition-all hover:shadow-lg hover:scale-105 group"
                             >
@@ -410,7 +385,7 @@ const DownloadPage = () => {
 
                       {/* Release Notes */}
                       <div className="mt-6 pt-6 border-t border-white/10">
-                        <a 
+                        <a
                           href={`https://github.com/pgElephant/${product.id}/releases`}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -476,7 +451,7 @@ const DownloadPage = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-thin text-white mb-4">Why Choose pgElephant?</h2>
             <p className="text-lg text-white mb-8">
-              pgElephant is an independent open source project providing enterprise-grade PostgreSQL extensions and tools. 
+              pgElephant is an independent open source project providing enterprise-grade PostgreSQL extensions and tools.
               All releases are cryptographically signed, verified, and built from source on GitHub Actions.
             </p>
             <div className="flex flex-wrap justify-center gap-6">

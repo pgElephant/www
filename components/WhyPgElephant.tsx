@@ -5,7 +5,6 @@ import Link from 'next/link'
 import {
   PgraftIcon,
   PgbalancerIcon,
-  FauxDbIcon,
   PgStatInsightsIcon,
   PgSentinelIcon,
 } from '@/components/ProductIcons'
@@ -43,22 +42,6 @@ const WhyPgElephant = () => {
       badges: ['PostgreSQL 13+', 'REST API', 'AI Routing'],
       postgresqlVersions: '13-18',
       href: '/pgbalancer'
-    },
-    {
-      icon: FauxDbIcon,
-      title: 'FauxDB',
-      category: 'Dual-Protocol Database',
-      description: 'Dual-protocol database supporting MongoDB and MySQL wire protocols on PostgreSQL.',
-      features: [
-        'MongoDB wire protocol',
-        'MySQL wire protocol',
-        'PostgreSQL ACID guarantees',
-        'SQL query translator',
-        'Rust-powered performance'
-      ],
-      badges: ['MongoDB Protocol', 'MySQL Protocol', 'PostgreSQL 14+'],
-      postgresqlVersions: '14-18',
-      href: '/fauxdb'
     },
     {
       icon: PgStatInsightsIcon,
@@ -102,7 +85,7 @@ const WhyPgElephant = () => {
             Products
           </h2>
           <p className="text-xl text-white/90 leading-relaxed font-light">
-            PostgreSQL extensions and tools for AI, high availability, connection pooling, monitoring, and multi-protocol support.
+            PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, connection pooling, monitoring, and distributed consensus.
           </p>
         </div>
 
@@ -123,21 +106,21 @@ const WhyPgElephant = () => {
                     {product.postgresqlVersions}
                   </span>
                 </div>
-                
+
                 <div className="mb-2">
                   <span className="text-xs text-cyan-400/80 font-light uppercase tracking-wide">
                     {product.category}
                   </span>
                 </div>
-                
+
                 <h3 className="text-xl font-light text-white mb-3 group-hover:text-cyan-300 transition-colors">
                   {product.title}
                 </h3>
-                
+
                 <p className="text-white/90 leading-relaxed font-light mb-4 text-sm">
                   {product.description}
                 </p>
-                
+
                 <div className="mb-4 flex-1">
                   <ul className="space-y-2">
                     {product.features.map((feature, idx) => (
@@ -148,7 +131,7 @@ const WhyPgElephant = () => {
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {product.badges.slice(0, 3).map((badge, idx) => (
                     <span
@@ -159,7 +142,7 @@ const WhyPgElephant = () => {
                     </span>
                   ))}
                 </div>
-                
+
                 <div className="mt-auto text-cyan-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
                   Learn more →
                 </div>

@@ -11,7 +11,7 @@ import { LucideIcon } from 'lucide-react'
 // THEME TYPES
 // ============================================================================
 
-export type ProductId = 'pgraft' | 'pgbalancer' | 'fauxdb' | 'pgsentinel' | 'pg-stat-insights'
+export type ProductId = 'pgraft' | 'pgbalancer' | 'pgsentinel' | 'pg-stat-insights'
 
 export interface ColorScale {
   50: string
@@ -218,7 +218,7 @@ export interface ProductBadges {
   badges: string[]
 }
 
-export interface ProductConfig extends ProductMetadata, ProductFeatures, ProductBadges {}
+export interface ProductConfig extends ProductMetadata, ProductFeatures, ProductBadges { }
 
 export interface ProductsConfig {
   [key: string]: ProductConfig

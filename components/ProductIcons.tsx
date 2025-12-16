@@ -32,16 +32,6 @@ export const PgraftIcon = ({ size = 24, className }: ProductIconProps) => (
   </div>
 )
 
-// Custom FauxDB icon component
-export const FauxDbIcon = ({ size = 24, className }: ProductIconProps) => (
-  <div className={className || 'relative flex items-center justify-center'} style={{ width: size, height: size }}>
-    <Database className="text-emerald-400" style={{ width: size * 0.6, height: size * 0.6 }} />
-    <FileText className="text-orange-400 absolute -top-1 -right-1" style={{ width: size * 0.3, height: size * 0.3 }} />
-    <Layers className="text-blue-400 absolute -bottom-1 -left-1" style={{ width: size * 0.25, height: size * 0.25 }} />
-    <Activity className="text-red-400 absolute -bottom-1 -right-1" style={{ width: size * 0.2, height: size * 0.2 }} />
-  </div>
-)
-
 // Custom pgSentinel icon component
 export const PgSentinelIcon = ({ size = 24, className }: ProductIconProps) => (
   <div className={className || 'relative flex items-center justify-center'} style={{ width: size, height: size }}>
@@ -69,7 +59,6 @@ export function getProductIcon(productId: ProductId) {
   const iconMap: Record<ProductId, React.ComponentType<ProductIconProps>> = {
     pgraft: PgraftIcon,
     pgbalancer: PgbalancerIcon,
-    fauxdb: FauxDbIcon,
     pgsentinel: PgSentinelIcon,
     'pg-stat-insights': PgStatInsightsIcon,
   }

@@ -8,19 +8,6 @@ const Download = () => {
 
   const components = [
     {
-      title: 'FauxDB',
-      description: 'Dual-protocol database with MongoDB AND MySQL wire protocol support on PostgreSQL',
-      icon: Database,
-      packages: {
-        debian: 'fauxdb',
-        rpm: 'fauxdb'
-      },
-      downloadLinks: {
-        deb: 'https://github.com/fauxdb/fauxdb/releases/latest',
-        rpm: 'https://github.com/fauxdb/fauxdb/releases/latest'
-      }
-    },
-    {
       title: 'Secure PostgreSQL',
       description: 'Hardened PostgreSQL with enhanced security features',
       icon: Shield,
@@ -147,7 +134,7 @@ const Download = () => {
               Add the official pgelephant repository for easy package management and updates.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Debian Repository */}
             <div className="bg-slate-100/20 rounded-xl p-6 border border-slate-400/30">
@@ -207,13 +194,13 @@ const Download = () => {
                     </button>
                   </div>
                   <code className="text-xs text-white/90 font-mono break-all">
-                    {repositoryInfo.debian.update}<br/>
+                    {repositoryInfo.debian.update}<br />
                     {repositoryInfo.debian.install}
                   </code>
                 </div>
               </div>
             </div>
-            
+
             {/* RPM Repository */}
             <div className="bg-slate-100/20 rounded-xl p-6 border border-slate-400/30">
               <h4 className="font-bold text-white mb-4 flex items-center">
@@ -254,7 +241,7 @@ const Download = () => {
                     </button>
                   </div>
                   <code className="text-xs text-white/90 font-mono break-all">
-                    {repositoryInfo.rpm.update}<br/>
+                    {repositoryInfo.rpm.update}<br />
                     {repositoryInfo.rpm.install}
                   </code>
                 </div>
@@ -283,7 +270,7 @@ const Download = () => {
             <p className="text-sm text-white/80 mb-4">
               Modern PostgreSQL connection pooler with REST API, AI load balancing, and MQTT support.
             </p>
-            
+
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-white/90">
                 <thead className="bg-slate-100/20 border border-slate-400/30">
@@ -432,7 +419,7 @@ const Download = () => {
             <p className="text-sm text-white/80 mb-4">
               PostgreSQL extension for comprehensive query monitoring with response time categories and time-series tracking.
             </p>
-            
+
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-white/90">
                 <thead className="bg-slate-100/20 border border-slate-400/30">
@@ -581,7 +568,7 @@ const Download = () => {
             <p className="text-sm text-white/80 mb-4">
               Distributed consensus and replication for PostgreSQL using the Raft algorithm.
             </p>
-            
+
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-white/90">
                 <thead className="bg-slate-100/20 border border-slate-400/30">
@@ -738,7 +725,7 @@ const Download = () => {
                   <p className="text-sm text-white/90">{component.description}</p>
                 </div>
               </div>
-              
+
               <div className="space-y-4">
                 {/* Debian Package */}
                 <div className="bg-slate-100/20 rounded-xl p-4 border border-slate-400/30">
@@ -772,7 +759,7 @@ const Download = () => {
                     apt install {component.packages.debian}
                   </code>
                 </div>
-                
+
                 {/* RPM Package */}
                 <div className="bg-slate-100/20 rounded-xl p-4 border border-slate-400/30">
                   <div className="flex items-center justify-between mb-2">
@@ -820,7 +807,7 @@ const Download = () => {
               All pgelephant components are available as Debian (.deb) and RPM (.rpm) packages for easy deployment.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-slate-100/20 rounded-xl p-6 border border-slate-400/30">
               <h4 className="font-bold text-white mb-4 flex items-center">
@@ -834,7 +821,7 @@ const Download = () => {
                 <li>• pgelephant-postgresql-custom - Custom patched PostgreSQL</li>
               </ul>
             </div>
-            
+
             <div className="bg-slate-100/20 rounded-xl p-6 border border-slate-400/30">
               <h4 className="font-bold text-white mb-4 flex items-center">
                 <Package className="w-5 h-5 mr-2 text-teal-400" />
@@ -866,7 +853,7 @@ const Download = () => {
                   <p className="text-sm text-white/90">{method.description}</p>
                 </div>
               </div>
-              
+
               <div className="bg-slate-100/20 rounded-xl p-4 border border-slate-400/30">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-medium text-white/70">Command</span>
@@ -943,7 +930,7 @@ const Download = () => {
           <h3 className="text-2xl font-bold text-white mb-8">
             Need Help Getting Started?
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <a
               href="/docs"
@@ -953,7 +940,7 @@ const Download = () => {
               <h4 className="font-semibold text-white mb-2">Documentation</h4>
               <p className="text-sm text-white/90">Comprehensive guides and API reference</p>
             </a>
-            
+
             <a
               href="/community"
               className="group bg-white/10 backdrop-blur-sm border border-slate-400/30 rounded-xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 text-center"
@@ -962,7 +949,7 @@ const Download = () => {
               <h4 className="font-semibold text-white mb-2">Community</h4>
               <p className="text-sm text-white/90">Join our community for support</p>
             </a>
-            
+
             <a
               href="https://github.com/pgElephant"
               className="group bg-white/10 backdrop-blur-sm border border-slate-400/30 rounded-xl p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 text-center"

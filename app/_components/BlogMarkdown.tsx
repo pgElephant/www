@@ -240,6 +240,26 @@ export function BlogMarkdown({ children }: { children: string }) {
             const src = (props as any).src as string | undefined
             const alt = ((props as any).alt as string | undefined) || 'Blog image'
             if (!src) return null
+
+            // For SVG files, use img tag directly for better compatibility
+            const isSvg = src.toLowerCase().includes('.svg')
+            if (isSvg) {
+              return (
+                <div style={{ borderRadius: 12, marginBottom: 40, maxWidth: '100%', width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', overflow: 'hidden', display: 'block', textAlign: 'center', backgroundColor: 'transparent' }}>
+                  <img
+                    src={src}
+                    alt={alt}
+                    style={{ width: '100%', height: 'auto', maxWidth: '100%', display: 'block' }}
+                    loading="lazy"
+                    onError={(e) => {
+                      console.error('Failed to load SVG:', src);
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                </div>
+              )
+            }
+
             // Return as a block-level element to prevent nesting in paragraphs
             return (
               <div style={{ borderRadius: 12, marginBottom: 40, maxWidth: '100%', width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', overflow: 'hidden', display: 'block' }}>

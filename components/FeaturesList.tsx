@@ -194,45 +194,6 @@ const FeaturesList = () => {
           icon: <Code className="w-5 h-5" />
         }
       ]
-    },
-    {
-      name: 'FauxDB',
-      description: 'MongoDB Wire Protocol Proxy & Query Translator',
-      icon: <Globe className="w-8 h-8" />,
-      color: 'accent',
-      link: '/fauxdb',
-      features: [
-        {
-          title: 'MongoDB Wire Protocol Proxy',
-          description: 'Full MongoDB wire protocol support with mongosh compatibility',
-          icon: <Database className="w-5 h-5" />
-        },
-        {
-          title: 'Query Translation Engine',
-          description: 'Real-time MongoDB queries translated to PostgreSQL SQL',
-          icon: <Code className="w-5 h-5" />
-        },
-        {
-          title: 'Rust-Powered Performance',
-          description: 'High-performance, safe, and modern proxy engine',
-          icon: <Zap className="w-5 h-5" />
-        },
-        {
-          title: 'PostgreSQL Backend',
-          description: 'Pure PostgreSQL storage with native JSONB support',
-          icon: <HardDrive className="w-5 h-5" />
-        },
-        {
-          title: 'Advanced Features',
-          description: 'Transactions, geospatial, aggregation pipelines',
-          icon: <Globe className="w-5 h-5" />
-        },
-        {
-          title: 'Production Ready',
-          description: 'Enterprise-grade monitoring, logging, and configuration',
-          icon: <Shield className="w-5 h-5" />
-        }
-      ]
     }
   ]
 
@@ -381,12 +342,6 @@ const FeaturesList = () => {
                                   <span className="block px-2 py-1 bg-orange-500/20 text-orange-300 text-xs font-light rounded-full text-center">Extension</span>
                                 </>
                               )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Migration</span>
-                                  <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-light rounded-full text-center">Compatibility</span>
-                                </>
-                              )}
                             </div>
                           </td>
                           <td className="px-3 py-4">
@@ -433,14 +388,6 @@ const FeaturesList = () => {
                                   <div className="text-xs text-white/90">• Zero config</div>
                                 </>
                               )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <div className="text-xs text-white/90">• Rust performance</div>
-                                  <div className="text-xs text-white/90">• MongoDB compatible</div>
-                                  <div className="text-xs text-white/90">• SQL translation</div>
-                                  <div className="text-xs text-white/90">• Production ready</div>
-                                </>
-                              )}
                             </div>
                           </td>
                           <td className="px-3 py-4">
@@ -475,14 +422,6 @@ const FeaturesList = () => {
                                   <div className="text-xs text-white/90">• Go implementation</div>
                                   <div className="text-xs text-white/90">• Auto-configuration</div>
                                   <div className="text-xs text-white/90">• Container ready</div>
-                                </>
-                              )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <div className="text-xs text-white/90">• Rust-based engine</div>
-                                  <div className="text-xs text-white/90">• PostgreSQL backend</div>
-                                  <div className="text-xs text-white/90">• Docker ready</div>
-                                  <div className="text-xs text-white/90">• Cloud native</div>
                                 </>
                               )}
                             </div>
@@ -521,14 +460,6 @@ const FeaturesList = () => {
                                   <div className="text-xs text-white/90">• HA databases</div>
                                 </>
                               )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <div className="text-xs text-white/90">• MongoDB migration</div>
-                                  <div className="text-xs text-white/90">• Legacy app support</div>
-                                  <div className="text-xs text-white/90">• Protocol compatibility</div>
-                                  <div className="text-xs text-white/90">• Data transformation</div>
-                                </>
-                              )}
                             </div>
                           </td>
                         </tr>
@@ -555,7 +486,7 @@ const FeaturesList = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {projects.filter(p => ['pgSentinel', 'FauxDB'].includes(p.name)).map((project, index) => {
+                    {projects.filter(p => ['pgSentinel'].includes(p.name)).map((project, index) => {
                       const colors = getColorClasses(project.color)
                       return (
                         <tr key={project.name} className="border-b border-slate-400/10 hover:bg-white/5 transition-all duration-200">
@@ -576,12 +507,6 @@ const FeaturesList = () => {
                                 <>
                                   <span className="block px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-light rounded-full text-center">Monitoring</span>
                                   <span className="block px-2 py-1 bg-purple-500/20 text-purple-300 text-xs font-light rounded-full text-center">Management</span>
-                                </>
-                              )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <span className="block px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-light rounded-full text-center">Migration</span>
-                                  <span className="block px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-light rounded-full text-center">Compatibility</span>
                                 </>
                               )}
                             </div>
@@ -606,14 +531,6 @@ const FeaturesList = () => {
                                   <div className="text-xs text-white/90">• Real-time WebSocket</div>
                                 </>
                               )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <div className="text-xs text-white/90">• Rust performance</div>
-                                  <div className="text-xs text-white/90">• MongoDB compatible</div>
-                                  <div className="text-xs text-white/90">• SQL translation</div>
-                                  <div className="text-xs text-white/90">• Production ready</div>
-                                </>
-                              )}
                             </div>
                           </td>
                           <td className="px-3 py-4">
@@ -626,14 +543,6 @@ const FeaturesList = () => {
                                   <div className="text-xs text-white/90">• Production-ready</div>
                                 </>
                               )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <div className="text-xs text-white/90">• Rust-based engine</div>
-                                  <div className="text-xs text-white/90">• PostgreSQL backend</div>
-                                  <div className="text-xs text-white/90">• Docker ready</div>
-                                  <div className="text-xs text-white/90">• Cloud native</div>
-                                </>
-                              )}
                             </div>
                           </td>
                           <td className="px-3 py-4">
@@ -644,14 +553,6 @@ const FeaturesList = () => {
                                   <div className="text-xs text-white/90">• DevOps automation</div>
                                   <div className="text-xs text-white/90">• Performance tuning</div>
                                   <div className="text-xs text-white/90">• Capacity planning</div>
-                                </>
-                              )}
-                              {project.name === 'FauxDB' && (
-                                <>
-                                  <div className="text-xs text-white/90">• MongoDB migration</div>
-                                  <div className="text-xs text-white/90">• Legacy app support</div>
-                                  <div className="text-xs text-white/90">• Protocol compatibility</div>
-                                  <div className="text-xs text-white/90">• Data transformation</div>
                                 </>
                               )}
                             </div>

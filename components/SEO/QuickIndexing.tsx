@@ -8,12 +8,12 @@ interface QuickIndexingProps {
   urls?: string[]
 }
 
-const QuickIndexing: React.FC<QuickIndexingProps> = ({ 
-  enabled = true, 
+const QuickIndexing: React.FC<QuickIndexingProps> = ({
+  enabled = true,
   autoSubmit = false,
   urls = []
 }) => {
-  
+
   useEffect(() => {
     if (!enabled || typeof window === 'undefined') return
 
@@ -21,21 +21,20 @@ const QuickIndexing: React.FC<QuickIndexingProps> = ({
       try {
         // Get current page URL
         const currentUrl = window.location.href
-        
+
         // Default URLs to submit
         const defaultUrls = [
           '/',
           '/ram',
-          '/fauxdb', 
           '/rale',
           '/pgraft',
           '/docs',
           '/download',
           '/contact'
         ]
-        
+
         const urlsToSubmit = urls.length > 0 ? urls : [...defaultUrls, currentUrl]
-        
+
         // Submit to our bulk indexing API
         const response = await fetch('/api/indexing/bulk', {
           method: 'POST',
@@ -46,7 +45,7 @@ const QuickIndexing: React.FC<QuickIndexingProps> = ({
         })
 
         const result = await response.json()
-        
+
         if (result.success) {
           console.log('✅ Pages submitted for quick indexing:', result.message)
         } else {
@@ -55,7 +54,7 @@ const QuickIndexing: React.FC<QuickIndexingProps> = ({
 
         // Additional indexing optimizations
         submitToSearchEngines()
-        
+
       } catch (error) {
         console.error('❌ Error submitting pages for indexing:', error)
       }
@@ -64,7 +63,7 @@ const QuickIndexing: React.FC<QuickIndexingProps> = ({
     const submitToSearchEngines = async () => {
       const baseUrl = window.location.origin
       const sitemapUrl = `${baseUrl}/sitemap.xml`
-      
+
       // Ping major search engines
       const searchEngines = [
         `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`,
@@ -85,14 +84,14 @@ const QuickIndexing: React.FC<QuickIndexingProps> = ({
       if (autoSubmit) {
         setTimeout(submitForIndexing, 1000)
       }
-      
+
       // Also submit when user is about to leave (ensures new content is indexed)
       const handleBeforeUnload = () => {
         navigator.sendBeacon('/api/indexing/bulk', JSON.stringify({
           urls: [window.location.href]
         }))
       }
-      
+
       // Submit on visibility change (when user switches tabs/returns)
       const handleVisibilityChange = () => {
         if (document.visibilityState === 'hidden') {
@@ -102,7 +101,7 @@ const QuickIndexing: React.FC<QuickIndexingProps> = ({
 
       window.addEventListener('beforeunload', handleBeforeUnload)
       document.addEventListener('visibilitychange', handleVisibilityChange)
-      
+
       return () => {
         window.removeEventListener('beforeunload', handleBeforeUnload)
         document.removeEventListener('visibilitychange', handleVisibilityChange)
@@ -120,8 +119,8 @@ const QuickIndexing: React.FC<QuickIndexingProps> = ({
           const response = await fetch('/api/indexing/bulk', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-              urls: customUrls || [window.location.href] 
+            body: JSON.stringify({
+              urls: customUrls || [window.location.href]
             }),
           })
           const result = await response.json()

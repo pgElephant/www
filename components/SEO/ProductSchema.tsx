@@ -26,18 +26,6 @@ const ProductSchema = () => {
         availability: "InStock"
       }
     },
-    {
-      name: "FauxDB",
-      description: "MongoDB-compatible document database powered by Rust and PostgreSQL",
-      category: "Database Management Software",
-      url: "https://www.pgelephant.com/fauxdb/",
-      image: "https://www.pgelephant.com/ico/FauxDB_HD.ico",
-      offers: {
-        price: "0",
-        priceCurrency: "USD",
-        availability: "InStock"
-      }
-    }
   ]
 
   const productSchemas = products.map((product, index) => ({
@@ -74,7 +62,7 @@ const ProductSchema = () => {
     },
     "featureList": [
       "PostgreSQL High Availability",
-      "Automatic Failover", 
+      "Automatic Failover",
       "Distributed Consensus",
       "Zero Downtime Operations",
       "Enterprise Security"
