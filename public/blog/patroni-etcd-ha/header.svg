@@ -1,0 +1,111 @@
+<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1f2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1419;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="standbyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="etcdGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="patroniGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4f46e5" />
+    </marker>
+    <marker id="arrowheadGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#10b981" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="600" y="80" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" text-anchor="middle">
+    PostgreSQL High Availability
+  </text>
+  <text x="600" y="120" font-family="Arial, sans-serif" font-size="24" fill="#94a3b8" text-anchor="middle">
+    with Patroni and etcd: 3-Node Cluster Setup
+  </text>
+  
+  <!-- etcd Cluster (Top) -->
+  <g transform="translate(450, 160)">
+    <rect x="0" y="0" width="100" height="60" rx="8" fill="url(#etcdGradient)"/>
+    <rect x="0" y="0" width="100" height="60" rx="8" fill="none" stroke="#4f46e5" stroke-width="2"/>
+    <text x="50" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">etcd</text>
+    <text x="50" y="42" font-family="Arial, sans-serif" font-size="11" fill="#c7d2fe" text-anchor="middle">Consensus</text>
+  </g>
+  <g transform="translate(550, 160)">
+    <rect x="0" y="0" width="100" height="60" rx="8" fill="url(#etcdGradient)"/>
+    <rect x="0" y="0" width="100" height="60" rx="8" fill="none" stroke="#4f46e5" stroke-width="2"/>
+    <text x="50" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">etcd</text>
+    <text x="50" y="42" font-family="Arial, sans-serif" font-size="11" fill="#c7d2fe" text-anchor="middle">Consensus</text>
+  </g>
+  <g transform="translate(650, 160)">
+    <rect x="0" y="0" width="100" height="60" rx="8" fill="url(#etcdGradient)"/>
+    <rect x="0" y="0" width="100" height="60" rx="8" fill="none" stroke="#4f46e5" stroke-width="2"/>
+    <text x="50" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">etcd</text>
+    <text x="50" y="42" font-family="Arial, sans-serif" font-size="11" fill="#c7d2fe" text-anchor="middle">Consensus</text>
+  </g>
+  
+  <!-- Patroni (Center) -->
+  <g transform="translate(500, 240)">
+    <rect x="0" y="0" width="200" height="80" rx="10" fill="url(#patroniGradient)"/>
+    <rect x="0" y="0" width="200" height="80" rx="10" fill="none" stroke="#10b981" stroke-width="2"/>
+    <text x="100" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Patroni</text>
+    <text x="100" y="55" font-family="Arial, sans-serif" font-size="14" fill="#a7f3d0" text-anchor="middle">Leader Election</text>
+  </g>
+  
+  <!-- Node 1 (Primary) - Left -->
+  <g transform="translate(150, 280)">
+    <rect x="0" y="0" width="120" height="100" rx="10" fill="url(#primaryGradient)"/>
+    <rect x="0" y="0" width="120" height="100" rx="10" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text x="60" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">P</text>
+    <text x="60" y="65" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Node 1</text>
+    <text x="60" y="82" font-family="Arial, sans-serif" font-size="12" fill="#fef3c7" text-anchor="middle">PRIMARY</text>
+  </g>
+  
+  <!-- Node 2 (Standby) - Right Top -->
+  <g transform="translate(930, 240)">
+    <rect x="0" y="0" width="120" height="100" rx="10" fill="url(#standbyGradient)"/>
+    <rect x="0" y="0" width="120" height="100" rx="10" fill="none" stroke="#06b6d4" stroke-width="2"/>
+    <text x="60" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="60" y="65" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Node 2</text>
+    <text x="60" y="82" font-family="Arial, sans-serif" font-size="12" fill="#cffafe" text-anchor="middle">STANDBY</text>
+  </g>
+  
+  <!-- Node 3 (Standby) - Right Bottom -->
+  <g transform="translate(930, 360)">
+    <rect x="0" y="0" width="120" height="100" rx="10" fill="url(#standbyGradient)"/>
+    <rect x="0" y="0" width="120" height="100" rx="10" fill="none" stroke="#06b6d4" stroke-width="2"/>
+    <text x="60" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">S</text>
+    <text x="60" y="65" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Node 3</text>
+    <text x="60" y="82" font-family="Arial, sans-serif" font-size="12" fill="#cffafe" text-anchor="middle">STANDBY</text>
+  </g>
+  
+  <!-- Connection lines from etcd to Patroni -->
+  <line x1="500" y1="220" x2="550" y2="240" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="550" y1="220" x2="550" y2="240" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="600" y1="220" x2="550" y2="240" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connection lines from Patroni to nodes -->
+  <line x1="600" y1="280" x2="210" y2="330" stroke="#10b981" stroke-width="3" marker-end="url(#arrowheadGreen)"/>
+  <line x1="600" y1="300" x2="990" y2="290" stroke="#10b981" stroke-width="3" marker-end="url(#arrowheadGreen)"/>
+  <line x1="600" y1="320" x2="990" y2="410" stroke="#10b981" stroke-width="3" marker-end="url(#arrowheadGreen)"/>
+  
+  <!-- Replication lines from primary to standbys -->
+  <line x1="270" y1="330" x2="990" y2="290" stroke="#06b6d4" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowheadGreen)"/>
+  <line x1="270" y1="330" x2="990" y2="410" stroke="#06b6d4" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowheadGreen)"/>
+</svg>
+
