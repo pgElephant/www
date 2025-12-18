@@ -18,7 +18,7 @@ export const metadata = {
   },
 };
 
-const markdown = `![PostgreSQL HA with pgBalancer 3-Node Setup](/blog/pgbalancer-3-node-ha/header.svg)
+const markdown = `![PostgreSQL High Availability with pgBalancer](/blog/pgbalancer-3-node-ha/header.svg)
 
 # PostgreSQL High Availability with pgBalancer
 
