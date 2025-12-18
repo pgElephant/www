@@ -3,16 +3,16 @@ import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 import BlogPageTracker from '../../../components/BlogPageTracker';
 
 export const metadata = {
-  title: 'PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup',
+  title: 'PostgreSQL High Availability with pgBalancer',
   description: 'Complete guide to building a PostgreSQL high availability cluster with pgBalancer and 3 PostgreSQL nodes. Includes step-by-step setup, configuration, failover testing, and best practices.',
   openGraph: {
-    title: 'PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup',
+    title: 'PostgreSQL High Availability with pgBalancer',
     description: 'Complete guide: 3-node PostgreSQL HA cluster with pgBalancer, automatic failover, load balancing, and zero-downtime operations.',
     images: ['/blog/pgbalancer/og-image.jpg?v=8'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup',
+    title: 'PostgreSQL High Availability with pgBalancer',
     description: 'Complete guide: 3-node PostgreSQL HA cluster with pgBalancer, automatic failover, and load balancing.',
     images: ['/blog/pgbalancer/og-image.jpg?v=8'],
   },
@@ -20,7 +20,7 @@ export const metadata = {
 
 const markdown = `![PostgreSQL HA with pgBalancer 3-Node Setup](/blog/pgbalancer-3-node-ha/header.svg)
 
-# PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup
+# PostgreSQL High Availability with pgBalancer
 
 📦 **[View on GitHub](https://github.com/pgElephant/pgbalancer)** | 📥 **[Download Latest Release](https://github.com/pgElephant/pgbalancer/releases)** | 📖 **[Documentation](https://www.pgelephant.com/docs/pgbalancer)**
 
@@ -1354,7 +1354,7 @@ export default function Pgbalancer3NodeHaBlogPost() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: 'PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup',
+    headline: 'PostgreSQL High Availability with pgBalancer',
     description: 'Complete guide to building a PostgreSQL high availability cluster with pgBalancer and 3 PostgreSQL nodes. Includes step-by-step setup, configuration, failover testing, and best practices.',
     image: 'https://www.pgelephant.com/blog/pgbalancer/og-image.jpg',
     datePublished: '2025-02-25',
@@ -1387,7 +1387,7 @@ export default function Pgbalancer3NodeHaBlogPost() {
       />
       <BlogPageTracker
         slug="pgbalancer-3-node-ha"
-        title="PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup"
+        title="PostgreSQL High Availability with pgBalancer"
       />
       {/* Blog Content */}
       <div style={{ backgroundColor: '#1f2937' }}>
@@ -1399,7 +1399,7 @@ export default function Pgbalancer3NodeHaBlogPost() {
             <h3 className="text-2xl font-bold text-white mb-4">Share This Article</h3>
             <ShareOnLinkedIn
               url="https://www.pgelephant.com/blog/pgbalancer-3-node-ha"
-              title="PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup"
+              title="PostgreSQL High Availability with pgBalancer"
               summary="Complete guide to building a PostgreSQL high availability cluster with pgBalancer and 3 PostgreSQL nodes. Includes step-by-step setup, configuration, failover testing, monitoring, and best practices."
               hashtags={[
                 'PostgreSQL',
