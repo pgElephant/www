@@ -398,7 +398,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               />
             ) : post.slug === 'neurondb-semantic-search-guide' ? (
               <Image
-                src="/blog/neurondb/header.svg?v=7"
+                src="/blog/neurondb-semantic-search-guide/header.svg?v=7"
                 alt="NeuronDB Semantic Search Guide blog header"
                 fill
                 className="object-cover"
