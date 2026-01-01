@@ -3,24 +3,24 @@ import ShareOnLinkedIn from '../../../components/ShareOnLinkedIn';
 import BlogPageTracker from '../../../components/BlogPageTracker';
 
 export const metadata = {
-  title: 'PostgreSQL High Availability with Patroni and etcd: 3-Node Cluster Setup',
+  title: 'PostgreSQL High Availability with Patroni and etcd',
   description: 'Complete guide to building a PostgreSQL high availability cluster with Patroni and etcd. Includes step-by-step setup, configuration, automatic failover, and best practices.',
   openGraph: {
-    title: 'PostgreSQL High Availability with Patroni and etcd: 3-Node Cluster Setup',
-    description: 'Complete guide: 3-node PostgreSQL HA cluster with Patroni leader election, etcd consensus, automatic failover, and zero-downtime operations.',
-    images: ['/blog/pgbalancer/og-image.jpg?v=8'],
+    title: 'PostgreSQL High Availability with Patroni and etcd',
+    description: 'Complete guide: PostgreSQL HA cluster with Patroni leader election, etcd consensus, automatic failover, and zero-downtime operations.',
+    images: ['/blog/patroni-etcd-ha/header.svg?v=1'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PostgreSQL High Availability with Patroni and etcd: 3-Node Cluster Setup',
-    description: 'Complete guide: 3-node PostgreSQL HA cluster with Patroni and etcd, automatic failover, and leader election.',
-    images: ['/blog/pgbalancer/og-image.jpg?v=8'],
+    title: 'PostgreSQL High Availability with Patroni and etcd',
+    description: 'Complete guide: PostgreSQL HA cluster with Patroni and etcd, automatic failover, and leader election.',
+    images: ['/blog/patroni-etcd-ha/header.svg?v=1'],
   },
 };
 
-const markdown = `![PostgreSQL HA with Patroni and etcd 3-Node Setup](/blog/patroni-etcd-ha/header.svg)
+const markdown = `![PostgreSQL High Availability with Patroni and etcd](/blog/patroni-etcd-ha/header.svg?v=1)
 
-# PostgreSQL High Availability with Patroni and etcd: 3-Node Cluster Setup
+# PostgreSQL High Availability with Patroni and etcd
 
 📦 **[View Patroni on GitHub](https://github.com/zalando/patroni)** | 📦 **[View etcd on GitHub](https://github.com/etcd-io/etcd)** | 📖 **[Patroni Documentation](https://patroni.readthedocs.io/)**
 
@@ -36,7 +36,7 @@ High Availability (HA) is a system design approach that ensures continuous opera
 
 Database downtime causes immediate and long-term problems. Understanding these costs helps justify the investment in high availability infrastructure.
 
-![The Cost of Downtime](/blog/pgbalancer-3-node-ha/diagrams/cost-of-downtime.svg)
+![The Cost of Downtime](/blog/patroni-etcd-ha/diagrams/cost-of-downtime.svg)
 
 **Figure: The Five Critical Costs of Database Downtime**
 
@@ -82,7 +82,7 @@ This HA cluster configuration works well for most environments because it provid
 
 High availability systems follow a predictable sequence when handling failures. Understanding this flow helps configure the system correctly and troubleshoot issues.
 
-![The Complete High Availability Flow](/blog/pgbalancer-3-node-ha/diagrams/ha-flow.svg)
+![The Complete High Availability Flow](/blog/patroni-etcd-ha/diagrams/ha-flow.svg)
 
 **Figure: Seven-Step Automated HA Process**
 
@@ -102,6 +102,10 @@ This entire process happens automatically, without manual intervention, ensuring
 
 A high availability cluster balances redundancy, performance, and operational complexity. This architecture offers several advantages.
 
+![3-Node PostgreSQL HA Architecture with Patroni and etcd](/blog/patroni-etcd-ha/diagrams/architecture.svg)
+
+**Figure 1: Complete 3-Node High Availability Architecture**
+
 The architecture consists of three main components:
 
 1. **etcd Cluster**: Provides distributed consensus and leader election coordination
@@ -116,7 +120,7 @@ Three nodes create a quorum system. Any two nodes form a quorum, allowing the cl
 - **Split-Brain Prevention**: The quorum requirement prevents conflicting writes from multiple primaries
 - **Network Partition Tolerance**: The majority partition continues serving requests
 
-![Split-Brain Scenario Explanation](/blog/pgbalancer-3-node-ha/diagrams/split-brain.svg)
+![Split-Brain Scenario Explanation](/blog/patroni-etcd-ha/diagrams/split-brain.svg)
 
 **Figure: Split-Brain Problem and Quorum Solution**
 
@@ -143,6 +147,10 @@ Compared to larger clusters (5+ nodes), a 3-node setup offers:
 ### Component Roles
 
 Each component in the high availability architecture has specific responsibilities that work together to ensure continuous database availability. Understanding these roles is essential for proper configuration and troubleshooting.
+
+![Component Roles and Responsibilities](/blog/patroni-etcd-ha/diagrams/component-roles.svg)
+
+**Figure 2: Component Roles and Responsibilities**
 
 **etcd Cluster**: Provides distributed key-value store for cluster state and leader election. The etcd cluster must have an odd number of nodes (3, 5, 7) to maintain quorum.
 
@@ -532,6 +540,22 @@ host    replication     replicator      10.0.1.0/24             md5
 sudo -u postgres psql -c "CREATE USER replicator WITH REPLICATION PASSWORD 'secure_replication_password';"
 \`\`\`
 
+### Understanding Replication Flow
+
+Streaming replication sends Write-Ahead Log data from the primary to standby nodes in real-time. This keeps all nodes synchronized with minimal delay.
+
+![Streaming Replication Flow Diagram](/blog/patroni-etcd-ha/diagrams/replication-flow.svg)
+
+**Figure 2: WAL Streaming Replication Flow**
+
+The diagram above shows how Write-Ahead Log (WAL) data flows from the primary node to both standby nodes:
+
+1. **Primary Node (Node 1)** generates WAL segments as transactions are committed
+2. **WAL Streaming** sends these segments to both standby nodes in real-time
+3. **Standby Nodes** receive and replay WAL, keeping data synchronized
+4. **Read Queries** can be served from standby nodes (hot standby mode)
+5. **Replication Slots** ensure WAL is retained until standby nodes have received it
+
 ### Step 3: Patroni Installation
 
 Patroni serves as the leader election and failover manager for the cluster. Installing and configuring Patroni correctly is crucial for achieving high availability.
@@ -812,7 +836,16 @@ curl http://10.0.1.12:8008/patroni | jq .role
 
 ### Step 5: Testing Failover Scenarios
 
-Thorough testing of failover scenarios is essential before deploying to production. Understanding how the system behaves during different failure modes helps ensure reliability and prepares teams for real-world incidents.
+Thorough testing of failover scenarios is essential before deploying to production. Understanding how the system behaves during different failure modes helps ensure reliability and prepares teams for real-world incidents. The following diagram illustrates a complete failover sequence:
+
+![Failover Scenario: Primary Node Failure](/blog/patroni-etcd-ha/diagrams/failover-scenario.svg)
+
+**Figure 3: Complete Failover Sequence**
+
+The diagram shows three stages:
+1. **Before Failure**: Normal operation with all nodes healthy
+2. **Failure Detection**: Patroni detects primary node failure through etcd
+3. **After Failover**: New primary elected and cluster restored
 
 ### Test 1: Primary Node Failure
 
@@ -868,7 +901,36 @@ psql -h 10.0.1.10 -U postgres -d postgres -c "INSERT INTO failover_test (data) V
 psql -h 10.0.1.10 -U postgres -d postgres -c "SELECT COUNT(*) FROM failover_test;"
 \`\`\`
 
-### Test 3: etcd Node Failure
+### Test 3: Network Partition
+
+Network partitions can split the cluster into isolated groups. Quorum-based systems ensure only the majority partition accepts writes, preventing split-brain scenarios.
+
+**Simulate network partition:**
+
+\`\`\`bash
+# Block traffic to Node 1
+sudo iptables -A INPUT -s 10.0.1.10 -j DROP
+sudo iptables -A OUTPUT -d 10.0.1.10 -j DROP
+\`\`\`
+
+**Verify cluster behavior:**
+
+\`\`\`bash
+# Patroni should detect failure and elect new leader
+curl http://10.0.1.11:8008/cluster | jq .
+
+# Check which node is now leader
+curl http://10.0.1.11:8008/patroni | jq .role
+\`\`\`
+
+**Restore connectivity:**
+
+\`\`\`bash
+sudo iptables -D INPUT -s 10.0.1.10 -j DROP
+sudo iptables -D OUTPUT -d 10.0.1.10 -j DROP
+\`\`\`
+
+### Test 4: etcd Node Failure
 
 etcd cluster can tolerate the failure of one node (out of three). If two etcd nodes fail, the cluster loses quorum and Patroni cannot elect a leader.
 
@@ -887,6 +949,31 @@ curl http://10.0.1.10:8008/cluster | jq .
 
 # Restart etcd node
 sudo systemctl start etcd
+\`\`\`
+
+### Test 5: Complete Failover and Recovery
+
+A complete failover test simulates the full cycle: primary failure, standby promotion, service continuation, and recovery of the failed node. This validates the entire high availability process.
+
+**Full failover test:**
+
+\`\`\`bash
+# 1. Stop primary
+sudo systemctl stop patroni  # On Node 1
+
+# 2. Wait for failover (30-60 seconds)
+sleep 60
+
+# 3. Verify new primary
+curl http://10.0.1.11:8008/cluster | jq .
+psql -h 10.0.1.11 -U postgres -d postgres -c "SELECT inet_server_addr(), pg_is_in_recovery();"
+
+# 4. Restore old primary as standby
+sudo systemctl start patroni  # On Node 1
+# Patroni will automatically rejoin as standby
+
+# 5. Verify cluster is healthy
+curl http://10.0.1.11:8008/cluster | jq .
 \`\`\`
 
 ### Step 6: Monitoring and Observability
@@ -958,6 +1045,51 @@ ETCDCTL_API=3 /usr/local/bin/etcdctl --endpoints=https://10.0.1.20:2379,https://
 curl https://10.0.1.20:2379/metrics --cacert /etc/etcd/ca.crt --cert /etc/etcd/etcd1.crt --key /etc/etcd/etcd1.key
 \`\`\`
 
+### Setting Up Prometheus Monitoring
+
+Prometheus provides time-series monitoring and alerting. Configure Prometheus to scrape metrics from Patroni and PostgreSQL nodes for centralized monitoring.
+
+**Install Prometheus exporter (if available) or use custom metrics:**
+
+\`\`\`yaml
+# prometheus.yml
+scrape_configs:
+  - job_name: 'patroni'
+    static_configs:
+      - targets: ['10.0.1.10:8008', '10.0.1.11:8008', '10.0.1.12:8008']
+  
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: ['10.0.1.10:9187', '10.0.1.11:9187', '10.0.1.12:9187']
+  
+  - job_name: 'etcd'
+    static_configs:
+      - targets: ['10.0.1.20:2379', '10.0.1.21:2379', '10.0.1.22:2379']
+\`\`\`
+
+### Log Monitoring
+
+Log files grow over time and can fill disk space. Configure log rotation to automatically archive and remove old logs while keeping recent logs for troubleshooting.
+
+**Set up log rotation:**
+
+\`\`\`bash
+# /etc/logrotate.d/patroni
+/var/log/postgresql/*.log {
+    daily
+    rotate 30
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 postgres postgres
+    sharedscripts
+    postrotate
+        systemctl reload patroni > /dev/null 2>&1 || true
+    endscript
+}
+\`\`\`
+
 ### Production Best Practices
 
 Following best practices is crucial for maintaining a stable, secure, and performant high availability cluster in production. These recommendations are based on real-world experience and industry standards.
@@ -985,6 +1117,21 @@ ssl_key_file = '/var/lib/postgresql/16/main/server.key'
 ssl_ca_file = '/var/lib/postgresql/16/main/ca.crt'
 \`\`\`
 
+**Generate certificates:**
+
+\`\`\`bash
+# Create CA
+openssl req -new -x509 -days 3650 -nodes -out ca.crt -keyout ca.key
+
+# Create server certificate
+openssl req -new -nodes -out server.csr -keyout server.key
+openssl x509 -req -in server.csr -days 3650 -CA ca.crt -CAkey ca.key -out server.crt
+
+# Set permissions
+chmod 600 server.key
+chown postgres:postgres server.* ca.*
+\`\`\`
+
 ### Backup Strategy
 
 Regular backups provide protection against data loss from corruption, accidental deletion, or catastrophic failures. Automate backups to ensure consistency and reduce manual work.
@@ -1008,6 +1155,33 @@ pg_basebackup -h 10.0.1.\${PRIMARY: -1} -D "\$BACKUP_DIR/backup_\$DATE" -U repli
 # Clean old backups
 find "\$BACKUP_DIR" -type d -mtime +\$RETENTION_DAYS -exec rm -rf {} +
 \`\`\`
+
+**Schedule with cron:**
+
+\`\`\`bash
+# Add to crontab
+0 2 * * * /usr/local/bin/pg_backup.sh
+\`\`\`
+
+### Performance Optimization
+
+Performance tuning improves query response times and system throughput. Adjust configuration parameters based on workload patterns and available resources.
+
+1. **Connection Management**: Tune \`max_connections\` based on workload
+2. **Query Routing**: Applications can connect directly to standby nodes for read queries
+3. **Monitoring**: Track query performance and adjust accordingly
+4. **Indexing**: Ensure proper indexes on frequently queried columns
+5. **Vacuum**: Schedule regular VACUUM and ANALYZE operations
+
+### Disaster Recovery Planning
+
+Disaster recovery procedures ensure the team can restore service quickly after major failures. Document step-by-step recovery procedures and test them regularly.
+
+1. **Document Procedures**: Maintain runbooks for common failure scenarios
+2. **Regular Testing**: Test failover procedures monthly
+3. **Backup Verification**: Regularly test backup restoration
+4. **Monitoring Alerts**: Set up alerts for critical failures
+5. **Recovery Time Objectives**: Define and test RTO/RPO requirements
 
 ### Troubleshooting Common Issues
 
@@ -1073,9 +1247,41 @@ ETCDCTL_API=3 /usr/local/bin/etcdctl --endpoints=https://10.0.1.20:2379 \\
 3. **Verify network connectivity**
 4. **Check firewall rules**
 
-### Issue 3: Split-Brain Scenario
+### Issue 3: Leader Election Failing
+
+Leader election may fail if Patroni cannot communicate with etcd or if the etcd cluster loses quorum. This prevents automatic failover.
+
+**Symptoms:**
+- No leader elected
+- Patroni logs show etcd connection errors
+- Cluster status shows all nodes as unknown
+
+**Diagnosis:**
+
+\`\`\`bash
+# Check Patroni logs
+sudo journalctl -u patroni -n 100
+
+# Check etcd cluster health
+ETCDCTL_API=3 /usr/local/bin/etcdctl --endpoints=https://10.0.1.20:2379,https://10.0.1.21:2379,https://10.0.1.22:2379 \\
+  --cacert=/etc/etcd/ca.crt \\
+  --cert=/etc/etcd/etcd1.crt \\
+  --key=/etc/etcd/etcd1.key \\
+  endpoint health
+\`\`\`
+
+**Solutions:**
+
+1. **Verify etcd cluster has quorum (2 out of 3 nodes)**
+2. **Check certificate paths and permissions**
+3. **Verify network connectivity between Patroni and etcd**
+4. **Check firewall rules**
+
+### Issue 4: Split-Brain Scenario
 
 Split-brain occurs when network partitions cause multiple nodes to act as primary simultaneously. Each primary accepts writes independently, creating data conflicts and corruption.
+
+![Split-Brain Scenario Explanation](/blog/patroni-etcd-ha/diagrams/split-brain.svg)
 
 **Symptoms:**
 - Multiple nodes acting as primary
@@ -1098,9 +1304,66 @@ curl http://10.0.1.10:8008/leader
 curl -X POST http://10.0.1.11:8008/patroni -d '{"action": "reinitialize"}'
 \`\`\`
 
+### Performance Tuning
+
+Performance tuning adjusts configuration parameters to improve system performance. Tune Patroni, PostgreSQL, and network settings based on workload characteristics.
+
+### Patroni Tuning
+
+Patroni performance depends on leader election timing and health check intervals. Adjust these settings to match cluster requirements.
+
+**Leader election timing:**
+
+\`\`\`yaml
+# In Patroni configuration
+dcs:
+  ttl: 30
+  loop_wait: 10
+  retry_timeout: 30
+  maximum_lag_on_failover: 1048576
+\`\`\`
+
+### PostgreSQL Tuning
+
+PostgreSQL performance depends on memory allocation, disk I/O settings, and query planner configuration. Tune these based on available hardware and workload.
+
+**Memory configuration:**
+
+\`\`\`ini
+# For 16GB RAM system
+shared_buffers = 4GB
+effective_cache_size = 12GB
+work_mem = 20MB
+maintenance_work_mem = 1GB
+\`\`\`
+
+**WAL and checkpoint tuning:**
+
+\`\`\`ini
+wal_buffers = 16MB
+min_wal_size = 1GB
+max_wal_size = 4GB
+checkpoint_completion_target = 0.9
+\`\`\`
+
+### Network Optimization
+
+Network performance directly affects replication speed and query latency. Optimize network settings to reduce latency and increase throughput for replication traffic.
+
+1. **Use dedicated replication network**
+2. **Enable jumbo frames if supported**
+3. **Tune TCP parameters:**
+   \`\`\`bash
+   # /etc/sysctl.conf
+   net.core.rmem_max = 16777216
+   net.core.wmem_max = 16777216
+   net.ipv4.tcp_rmem = 4096 87380 16777216
+   net.ipv4.tcp_wmem = 4096 65536 16777216
+   \`\`\`
+
 ## Conclusion
 
-Building a 3-node PostgreSQL high availability cluster with Patroni and etcd provides a database infrastructure. This guide covers everything from initial setup to deployment, ensuring the database remains available even during failures.
+Building a 3-node PostgreSQL high availability cluster with Patroni and etcd provides a robust, production-ready database infrastructure. This comprehensive guide covers everything from initial setup to deployment, ensuring the database remains available even during failures.
 
 **Key Points:**
 - Automatic failover provides zero-downtime operations
@@ -1119,7 +1382,7 @@ Building a 3-node PostgreSQL high availability cluster with Patroni and etcd pro
 
 [pgbalancer: AI-Powered PostgreSQL Connection Pooler](/blog/pgbalancer) - Learn about AI-powered connection pooling with machine learning load balancing, REST API management, and distributed MQTT coordination for PostgreSQL clusters.
 
-[PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup](/blog/pgbalancer-3-node-ha) - Complete guide to building a PostgreSQL high availability cluster with pgBalancer and 3 PostgreSQL nodes.
+[PostgreSQL High Availability with pgBalancer](/blog/pgbalancer-3-node-ha) - Complete guide to building a PostgreSQL high availability cluster with pgBalancer and 3 PostgreSQL nodes.
 
 ## Support
 
@@ -1129,9 +1392,9 @@ export default function PatroniEtcdHaBlogPost() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: 'PostgreSQL High Availability with Patroni and etcd: 3-Node Cluster Setup',
+    headline: 'PostgreSQL High Availability with Patroni and etcd',
     description: 'Complete guide to building a PostgreSQL high availability cluster with Patroni and etcd. Includes step-by-step setup, configuration, automatic failover, and best practices.',
-    image: 'https://www.pgelephant.com/blog/pgbalancer/og-image.jpg',
+    image: 'https://www.pgelephant.com/blog/patroni-etcd-ha/header.svg',
     datePublished: '2025-02-25',
     dateModified: '2025-02-25',
     author: {
@@ -1162,7 +1425,7 @@ export default function PatroniEtcdHaBlogPost() {
       />
       <BlogPageTracker
         slug="patroni-etcd-ha"
-        title="PostgreSQL High Availability with Patroni and etcd: 3-Node Cluster Setup"
+        title="PostgreSQL High Availability with Patroni and etcd"
       />
       {/* Blog Content */}
       <div style={{ backgroundColor: '#1f2937' }}>
@@ -1174,7 +1437,7 @@ export default function PatroniEtcdHaBlogPost() {
             <h3 className="text-2xl font-bold text-white mb-4">Share This Article</h3>
             <ShareOnLinkedIn
               url="https://www.pgelephant.com/blog/patroni-etcd-ha"
-              title="PostgreSQL High Availability with Patroni and etcd: 3-Node Cluster Setup"
+              title="PostgreSQL High Availability with Patroni and etcd"
               summary="Complete guide to building a PostgreSQL high availability cluster with Patroni and etcd. Includes step-by-step setup, configuration, automatic failover, monitoring, and best practices."
               hashtags={[
                 'PostgreSQL',

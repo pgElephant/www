@@ -1,0 +1,262 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="etcdGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.95" />
+    </linearGradient>
+    <linearGradient id="patroniGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.95" />
+    </linearGradient>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.95" />
+    </linearGradient>
+    <linearGradient id="standbyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.9" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#10b981" opacity="0.8"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#0f172a" rx="8"/>
+  
+  <!-- Title -->
+  <text x="600" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#fff" text-anchor="middle">Component Roles and Responsibilities</text>
+  <text x="600" y="80" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">3-Node PostgreSQL HA Cluster with Patroni and etcd</text>
+  
+  <!-- etcd Cluster Component -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="1100" height="120" rx="12" fill="url(#etcdGradient)" opacity="0.95" filter="url(#glow)"/>
+    <rect x="0" y="0" width="1100" height="120" rx="12" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+    
+    <!-- Icon/Logo Area -->
+    <g transform="translate(30, 20)">
+      <circle cx="40" cy="40" r="35" fill="#fff" opacity="0.2"/>
+      <circle cx="40" cy="40" r="25" fill="none" stroke="#fff" stroke-width="3"/>
+      <circle cx="25" cy="40" r="8" fill="#fff"/>
+      <circle cx="40" cy="40" r="8" fill="#fff"/>
+      <circle cx="55" cy="40" r="8" fill="#fff"/>
+      <line x1="25" y1="40" x2="55" y2="40" stroke="#fff" stroke-width="2"/>
+    </g>
+    
+    <!-- Title and Address -->
+    <text x="150" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fff">etcd Cluster</text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="16" fill="#e9d5ff">10.0.1.20:2379, 10.0.1.21:2379, 10.0.1.22:2379</text>
+    <line x1="150" y1="85" x2="1080" y2="85" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Features List -->
+    <g transform="translate(150, 100)">
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="13" fill="#fff">
+        <tspan x="0" dy="0">✓ Provides distributed key-value store</tspan>
+        <tspan x="0" dy="18">✓ Coordinates leader election via consensus</tspan>
+      </text>
+      <text x="500" y="0" font-family="Arial, sans-serif" font-size="13" fill="#fff">
+        <tspan x="500" dy="0">✓ Maintains cluster state and metadata</tspan>
+        <tspan x="500" dy="18">✓ Ensures quorum-based operations (3 nodes)</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- Patroni Component -->
+  <g transform="translate(50, 260)">
+    <rect x="0" y="0" width="1100" height="120" rx="12" fill="url(#patroniGradient)" opacity="0.95" filter="url(#glow)"/>
+    <rect x="0" y="0" width="1100" height="120" rx="12" fill="none" stroke="#06b6d4" stroke-width="3"/>
+    
+    <!-- Icon/Logo Area -->
+    <g transform="translate(30, 20)">
+      <circle cx="40" cy="40" r="35" fill="#fff" opacity="0.2"/>
+      <circle cx="40" cy="40" r="25" fill="none" stroke="#fff" stroke-width="3"/>
+      <path d="M 20 40 L 40 20 L 60 40 L 40 60 Z" fill="#fff" opacity="0.8"/>
+    </g>
+    
+    <!-- Title -->
+    <text x="150" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fff">Patroni Agents</text>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="16" fill="#cffafe">Runs on each PostgreSQL node (port 8008)</text>
+    <line x1="150" y1="85" x2="1080" y2="85" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Features List -->
+    <g transform="translate(150, 100)">
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="13" fill="#fff">
+        <tspan x="0" dy="0">✓ Monitors PostgreSQL health and status</tspan>
+        <tspan x="0" dy="18">✓ Coordinates with etcd for leader election</tspan>
+      </text>
+      <text x="500" y="0" font-family="Arial, sans-serif" font-size="13" fill="#fff">
+        <tspan x="500" dy="0">✓ Manages automatic failover and promotion</tspan>
+        <tspan x="500" dy="18">✓ Provides REST API for cluster management</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- PostgreSQL Node 1 (Primary) -->
+  <g transform="translate(50, 400)">
+    <rect x="0" y="0" width="340" height="200" rx="12" fill="url(#primaryGradient)" opacity="0.95" filter="url(#glow)"/>
+    <rect x="0" y="0" width="340" height="200" rx="12" fill="none" stroke="#fbbf24" stroke-width="3"/>
+    
+    <!-- Database Icon -->
+    <g transform="translate(20, 20)">
+      <ellipse cx="30" cy="20" rx="25" ry="6" fill="#fff" opacity="0.3"/>
+      <rect x="5" y="20" width="50" height="40" rx="3" fill="#fff" opacity="0.2"/>
+      <ellipse cx="30" cy="60" rx="25" ry="6" fill="#fff" opacity="0.3"/>
+      <line x1="30" y1="20" x2="30" y2="60" stroke="#fff" stroke-width="2" opacity="0.4"/>
+      <!-- Primary Badge -->
+      <circle cx="50" cy="10" r="12" fill="#fbbf24"/>
+      <text x="50" y="15" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">P</text>
+    </g>
+    
+    <!-- Title -->
+    <text x="100" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff">PostgreSQL Node 1</text>
+    <text x="100" y="55" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fef3c7">PRIMARY</text>
+    <text x="100" y="75" font-family="Arial, sans-serif" font-size="14" fill="#fff">10.0.1.10:5432</text>
+    <line x1="20" y1="90" x2="320" y2="90" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Responsibilities -->
+    <g transform="translate(20, 110)">
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#fff">
+        <tspan x="0" dy="0">✓ Accepts write transactions</tspan>
+        <tspan x="0" dy="18">✓ Streams WAL to standby nodes</tspan>
+        <tspan x="0" dy="18">✓ Serves read queries</tspan>
+        <tspan x="0" dy="18">✓ Managed by Patroni agent</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- PostgreSQL Node 2 (Standby) -->
+  <g transform="translate(430, 400)">
+    <rect x="0" y="0" width="340" height="200" rx="12" fill="url(#standbyGradient)" opacity="0.9" filter="url(#glow)"/>
+    <rect x="0" y="0" width="340" height="200" rx="12" fill="none" stroke="#06b6d4" stroke-width="3"/>
+    
+    <!-- Database Icon -->
+    <g transform="translate(20, 20)">
+      <ellipse cx="30" cy="20" rx="25" ry="6" fill="#fff" opacity="0.3"/>
+      <rect x="5" y="20" width="50" height="40" rx="3" fill="#fff" opacity="0.2"/>
+      <ellipse cx="30" cy="60" rx="25" ry="6" fill="#fff" opacity="0.3"/>
+      <line x1="30" y1="20" x2="30" y2="60" stroke="#fff" stroke-width="2" opacity="0.4"/>
+      <!-- Standby Badge -->
+      <circle cx="50" cy="10" r="12" fill="#06b6d4"/>
+      <text x="50" y="15" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">S</text>
+    </g>
+    
+    <!-- Title -->
+    <text x="100" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff">PostgreSQL Node 2</text>
+    <text x="100" y="55" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#cffafe">STANDBY</text>
+    <text x="100" y="75" font-family="Arial, sans-serif" font-size="14" fill="#fff">10.0.1.11:5432</text>
+    <line x1="20" y1="90" x2="320" y2="90" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Responsibilities -->
+    <g transform="translate(20, 110)">
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#fff">
+        <tspan x="0" dy="0">✓ Receives WAL stream from primary</tspan>
+        <tspan x="0" dy="18">✓ Serves read-only queries (hot standby)</tspan>
+        <tspan x="0" dy="18">✓ Can be promoted to primary if needed</tspan>
+        <tspan x="0" dy="18">✓ Managed by Patroni agent</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- PostgreSQL Node 3 (Standby) -->
+  <g transform="translate(810, 400)">
+    <rect x="0" y="0" width="340" height="200" rx="12" fill="url(#standbyGradient)" opacity="0.9" filter="url(#glow)"/>
+    <rect x="0" y="0" width="340" height="200" rx="12" fill="none" stroke="#06b6d4" stroke-width="3"/>
+    
+    <!-- Database Icon -->
+    <g transform="translate(20, 20)">
+      <ellipse cx="30" cy="20" rx="25" ry="6" fill="#fff" opacity="0.3"/>
+      <rect x="5" y="20" width="50" height="40" rx="3" fill="#fff" opacity="0.2"/>
+      <ellipse cx="30" cy="60" rx="25" ry="6" fill="#fff" opacity="0.3"/>
+      <line x1="30" y1="20" x2="30" y2="60" stroke="#fff" stroke-width="2" opacity="0.4"/>
+      <!-- Standby Badge -->
+      <circle cx="50" cy="10" r="12" fill="#06b6d4"/>
+      <text x="50" y="15" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">S</text>
+    </g>
+    
+    <!-- Title -->
+    <text x="100" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff">PostgreSQL Node 3</text>
+    <text x="100" y="55" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#cffafe">STANDBY</text>
+    <text x="100" y="75" font-family="Arial, sans-serif" font-size="14" fill="#fff">10.0.1.12:5432</text>
+    <line x1="20" y1="90" x2="320" y2="90" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Responsibilities -->
+    <g transform="translate(20, 110)">
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#fff">
+        <tspan x="0" dy="0">✓ Receives WAL stream from primary</tspan>
+        <tspan x="0" dy="18">✓ Serves read-only queries (hot standby)</tspan>
+        <tspan x="0" dy="18">✓ Can be promoted to primary if needed</tspan>
+        <tspan x="0" dy="18">✓ Managed by Patroni agent</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- Connection Flow Arrows -->
+  <!-- From etcd to Patroni -->
+  <line x1="600" y1="240" x2="220" y2="400" stroke="#8b5cf6" stroke-width="3" opacity="0.6" marker-end="url(#arrowhead)"/>
+  <line x1="600" y1="240" x2="600" y2="400" stroke="#8b5cf6" stroke-width="3" opacity="0.6" marker-end="url(#arrowhead)"/>
+  <line x1="600" y1="240" x2="980" y2="400" stroke="#8b5cf6" stroke-width="3" opacity="0.6" marker-end="url(#arrowhead)"/>
+  <text x="400" y="320" font-family="Arial, sans-serif" font-size="11" fill="#8b5cf6" text-anchor="middle">Consensus</text>
+  <text x="600" y="320" font-family="Arial, sans-serif" font-size="11" fill="#8b5cf6" text-anchor="middle">Leader Election</text>
+  <text x="800" y="320" font-family="Arial, sans-serif" font-size="11" fill="#8b5cf6" text-anchor="middle">State Management</text>
+  
+  <!-- Replication from Primary to Standbys -->
+  <line x1="220" y1="500" x2="600" y2="500" stroke="#10b981" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="220" y1="550" x2="980" y2="550" stroke="#10b981" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="410" y="495" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">WAL Streaming</text>
+  <text x="600" y="545" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">WAL Streaming</text>
+  
+  <!-- Network Topology Section -->
+  <g transform="translate(50, 650)">
+    <rect x="0" y="0" width="1100" height="220" rx="12" fill="#1e293b" opacity="0.8"/>
+    <rect x="0" y="0" width="1100" height="220" rx="12" fill="none" stroke="#475569" stroke-width="2"/>
+    
+    <text x="550" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Network Topology Requirements</text>
+    <line x1="50" y1="50" x2="1050" y2="50" stroke="#475569" stroke-width="1" opacity="0.5"/>
+    
+    <g transform="translate(50, 70)">
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#8b5cf6">Network Configuration:</text>
+      <text x="0" y="30" font-family="Arial, sans-serif" font-size="12" fill="#fff">
+        <tspan x="0" dy="0">• Private Network: For replication traffic (low latency, high bandwidth)</tspan>
+        <tspan x="0" dy="20">• Public Network: For client connections (optional, can use private)</tspan>
+        <tspan x="0" dy="20">• Firewall Rules: Allow PostgreSQL (5432), etcd (2379, 2380), and Patroni API (8008) ports</tspan>
+        <tspan x="0" dy="20">• DNS/Service Discovery: Optional but recommended for production</tspan>
+      </text>
+    </g>
+    
+    <g transform="translate(600, 70)">
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#06b6d4">Communication Matrix:</text>
+      <text x="0" y="30" font-family="Arial, sans-serif" font-size="12" fill="#fff">
+        <tspan x="0" dy="0">• Patroni agents → etcd: Leader election, state management</tspan>
+        <tspan x="0" dy="20">• Primary → Standbys: WAL streaming (port 5432)</tspan>
+        <tspan x="0" dy="20">• Applications → PostgreSQL: Direct connections (port 5432)</tspan>
+        <tspan x="0" dy="20">• Management → Patroni: REST API (port 8008)</tspan>
+      </text>
+    </g>
+  </g>
+  
+  <!-- Legend -->
+  <g transform="translate(50, 850)">
+    <rect x="0" y="0" width="1100" height="40" rx="8" fill="#1e293b" opacity="0.6"/>
+    <rect x="20" y="10" width="20" height="20" rx="4" fill="#8b5cf6"/>
+    <text x="50" y="25" font-family="Arial, sans-serif" font-size="12" fill="#fff">etcd Cluster</text>
+    <rect x="200" y="10" width="20" height="20" rx="4" fill="#06b6d4"/>
+    <text x="230" y="25" font-family="Arial, sans-serif" font-size="12" fill="#fff">Patroni Agent</text>
+    <rect x="380" y="10" width="20" height="20" rx="4" fill="#fbbf24"/>
+    <text x="410" y="25" font-family="Arial, sans-serif" font-size="12" fill="#fff">Primary Node</text>
+    <rect x="550" y="10" width="20" height="20" rx="4" fill="#06b6d4"/>
+    <text x="580" y="25" font-family="Arial, sans-serif" font-size="12" fill="#fff">Standby Node</text>
+    <line x1="700" y1="20" x2="730" y2="20" stroke="#8b5cf6" stroke-width="3"/>
+    <text x="750" y="25" font-family="Arial, sans-serif" font-size="12" fill="#fff">Consensus/Leader Election</text>
+    <line x1="950" y1="20" x2="980" y2="20" stroke="#10b981" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="1000" y="25" font-family="Arial, sans-serif" font-size="12" fill="#fff">WAL Replication</text>
+  </g>
+</svg>
+
+

@@ -1,0 +1,139 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1f2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1419;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc0000;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff8844;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc5500;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="yellowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffaa44;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc7700;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8844ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5500cc;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4488ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0055cc;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="600" y="60" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#glow)">
+    The Cost of Downtime
+  </text>
+  <text x="600" y="95" font-family="Arial, sans-serif" font-size="20" fill="#aaaaaa" text-anchor="middle">
+    Database outages have severe consequences for your business
+  </text>
+  
+  <!-- Central Warning Icon -->
+  <circle cx="600" cy="400" r="80" fill="url(#redGradient)" opacity="0.3"/>
+  <path d="M 600 340 L 640 420 L 560 420 Z" fill="#ff4444" filter="url(#glow)"/>
+  <text x="600" y="410" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#ffffff" text-anchor="middle">!</text>
+  
+  <!-- Financial Impact (Top Left) -->
+  <g transform="translate(150, 180)">
+    <circle cx="0" cy="0" r="70" fill="url(#redGradient)" opacity="0.2"/>
+    <circle cx="0" cy="0" r="60" fill="url(#redGradient)"/>
+    <text x="0" y="-15" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#ffffff" text-anchor="middle">$</text>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#ffffff" text-anchor="middle">$$$</text>
+    
+    <rect x="-120" y="90" width="240" height="100" rx="10" fill="#1a1f2e" stroke="#ff4444" stroke-width="2"/>
+    <text x="0" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ff4444" text-anchor="middle">Financial Impact</text>
+    <text x="0" y="140" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">E-commerce sites lose</text>
+    <text x="0" y="158" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">thousands per minute</text>
+    <text x="0" y="176" font-family="Arial, sans-serif" font-size="12" fill="#ffaa44" text-anchor="middle">during outages</text>
+  </g>
+  
+  <!-- User Experience (Top Right) -->
+  <g transform="translate(1050, 180)">
+    <circle cx="0" cy="0" r="70" fill="url(#orangeGradient)" opacity="0.2"/>
+    <circle cx="0" cy="0" r="60" fill="url(#orangeGradient)"/>
+    <path d="M -20 -20 Q -20 -30 0 -30 Q 20 -30 20 -20" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M -20 20 Q -20 30 0 30 Q 20 30 20 20" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="-10" cy="-5" r="3" fill="#ffffff"/>
+    <circle cx="10" cy="-5" r="3" fill="#ffffff"/>
+    
+    <rect x="-120" y="90" width="240" height="100" rx="10" fill="#1a1f2e" stroke="#ff8844" stroke-width="2"/>
+    <text x="0" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ff8844" text-anchor="middle">User Experience</text>
+    <text x="0" y="140" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">Applications become</text>
+    <text x="0" y="158" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">unusable, leading to</text>
+    <text x="0" y="176" font-family="Arial, sans-serif" font-size="12" fill="#ffaa44" text-anchor="middle">frustrated users &amp; lost trust</text>
+  </g>
+  
+  <!-- Data Loss Risk (Bottom Left) -->
+  <g transform="translate(150, 620)">
+    <circle cx="0" cy="0" r="70" fill="url(#yellowGradient)" opacity="0.2"/>
+    <circle cx="0" cy="0" r="60" fill="url(#yellowGradient)"/>
+    <path d="M -30 -20 L -20 -10 L -10 -20 L 10 -20 L 20 -10 L 30 -20 L 30 10 L 20 20 L -20 20 L -30 10 Z" fill="#ffffff" opacity="0.9"/>
+    <path d="M -15 -5 L -5 5 L 5 -5" stroke="#cc7700" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M -15 5 L -5 15 L 5 5" stroke="#cc7700" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <rect x="-120" y="90" width="240" height="100" rx="10" fill="#1a1f2e" stroke="#ffaa44" stroke-width="2"/>
+    <text x="0" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffaa44" text-anchor="middle">Data Loss Risk</text>
+    <text x="0" y="140" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">Hardware failures can</text>
+    <text x="0" y="158" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">result in permanent</text>
+    <text x="0" y="176" font-family="Arial, sans-serif" font-size="12" fill="#ffaa44" text-anchor="middle">data loss</text>
+  </g>
+  
+  <!-- Compliance Issues (Bottom Right) -->
+  <g transform="translate(1050, 620)">
+    <circle cx="0" cy="0" r="70" fill="url(#purpleGradient)" opacity="0.2"/>
+    <circle cx="0" cy="0" r="60" fill="url(#purpleGradient)"/>
+    <rect x="-25" y="-25" width="50" height="50" rx="5" fill="#ffffff" opacity="0.9"/>
+    <path d="M -15 -15 L 15 -15 L 15 15 L -15 15 Z" stroke="#5500cc" stroke-width="3" fill="none"/>
+    <text x="0" y="8" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#5500cc" text-anchor="middle">✓</text>
+    
+    <rect x="-120" y="90" width="240" height="100" rx="10" fill="#1a1f2e" stroke="#8844ff" stroke-width="2"/>
+    <text x="0" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#8844ff" text-anchor="middle">Compliance Issues</text>
+    <text x="0" y="140" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">Many industries require</text>
+    <text x="0" y="158" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">99.9%+ uptime for</text>
+    <text x="0" y="176" font-family="Arial, sans-serif" font-size="12" fill="#ffaa44" text-anchor="middle">regulatory compliance</text>
+  </g>
+  
+  <!-- Reputation Damage (Bottom Center) -->
+  <g transform="translate(600, 620)">
+    <circle cx="0" cy="0" r="70" fill="url(#blueGradient)" opacity="0.2"/>
+    <circle cx="0" cy="0" r="60" fill="url(#blueGradient)"/>
+    <path d="M -20 -20 L 20 -20 L 20 20 L -20 20 Z" fill="#ffffff" opacity="0.9"/>
+    <path d="M -15 -15 L 15 -15 L 15 15 L -15 15 Z" fill="#0055cc"/>
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">★</text>
+    
+    <rect x="-120" y="90" width="240" height="100" rx="10" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="0" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4488ff" text-anchor="middle">Reputation Damage</text>
+    <text x="0" y="140" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">Extended outages damage</text>
+    <text x="0" y="158" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">brand reputation and</text>
+    <text x="0" y="176" font-family="Arial, sans-serif" font-size="12" fill="#ffaa44" text-anchor="middle">customer relationships</text>
+  </g>
+  
+  <!-- Connecting Lines -->
+  <path d="M 150 180 L 520 360" stroke="#ff4444" stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+  <path d="M 1050 180 L 680 360" stroke="#ff8844" stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+  <path d="M 150 620 L 520 480" stroke="#ffaa44" stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+  <path d="M 1050 620 L 680 480" stroke="#8844ff" stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+  <path d="M 600 620 L 600 480" stroke="#4488ff" stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+  
+  <!-- Stats Bar at Bottom -->
+  <rect x="100" y="750" width="1000" height="30" rx="15" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+  <text x="600" y="770" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">
+    Average cost of downtime: $5,600 per minute | 99.9% uptime = 8.76 hours downtime/year
+  </text>
+</svg>

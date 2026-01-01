@@ -1,0 +1,266 @@
+<svg width="1400" height="900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1f2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1419;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#44ff88;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00cc55;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4488ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0055cc;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="yellowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffaa44;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc7700;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc0000;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8844ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5500cc;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff8844;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cc5500;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4488ff" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="900" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="700" y="50" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#glow)">
+    The Complete High Availability Flow
+  </text>
+  <text x="700" y="80" font-family="Arial, sans-serif" font-size="18" fill="#aaaaaa" text-anchor="middle">
+    Automated failover process with Patroni and etcd ensures zero-downtime operations
+  </text>
+  
+  <!-- Timeline Line -->
+  <line x1="100" y1="450" x2="1300" y2="450" stroke="#4488ff" stroke-width="4" opacity="0.3"/>
+  
+  <!-- Step 1: Normal Operation -->
+  <g transform="translate(150, 450)">
+    <circle cx="0" cy="0" r="50" fill="url(#greenGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="url(#greenGradient)"/>
+    <path d="M -15 -15 L 15 0 L -15 15 Z" fill="#ffffff"/>
+    
+    <rect x="-100" y="-180" width="200" height="140" rx="10" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="0" y="-155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#44ff88" text-anchor="middle">1. Normal Operation</text>
+    <text x="0" y="-130" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Primary handles writes</text>
+    <text x="0" y="-115" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Standbys replicate &amp; serve</text>
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">read queries</text>
+    
+    <!-- Database Icons -->
+    <circle cx="-60" cy="80" r="25" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="-60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#44ff88" text-anchor="middle">P</text>
+    <circle cx="0" cy="80" r="25" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="0" y="88" font-family="Arial, sans-serif" font-size="18" fill="#4488ff" text-anchor="middle">S</text>
+    <circle cx="60" cy="80" r="25" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#4488ff" text-anchor="middle">S</text>
+  </g>
+  
+  <!-- Arrow 1 -->
+  <path d="M 250 450 L 300 450" stroke="#4488ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 2: Health Monitoring -->
+  <g transform="translate(350, 450)">
+    <circle cx="0" cy="0" r="50" fill="url(#cyanGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="url(#cyanGradient)"/>
+    <circle cx="-10" cy="-5" r="8" fill="#ffffff"/>
+    <circle cx="10" cy="-5" r="8" fill="#ffffff"/>
+    <path d="M -15 10 Q 0 5 15 10" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <rect x="-100" y="-180" width="200" height="140" rx="10" fill="#1a1f2e" stroke="#06b6d4" stroke-width="2"/>
+    <text x="0" y="-155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#06b6d4" text-anchor="middle">2. Health Monitoring</text>
+    <text x="0" y="-130" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Patroni continuously</text>
+    <text x="0" y="-115" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">monitors all nodes for</text>
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">availability &amp; performance</text>
+    
+    <!-- Monitoring waves -->
+    <circle cx="-60" cy="80" r="20" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.6"/>
+    <circle cx="-60" cy="80" r="15" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.8"/>
+    <circle cx="-60" cy="80" r="10" fill="#06b6d4"/>
+    <circle cx="60" cy="80" r="20" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.6"/>
+    <circle cx="60" cy="80" r="15" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.8"/>
+    <circle cx="60" cy="80" r="10" fill="#06b6d4"/>
+  </g>
+  
+  <!-- Arrow 2 -->
+  <path d="M 450 450 L 500 450" stroke="#4488ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 3: Failure Detection -->
+  <g transform="translate(550, 450)">
+    <circle cx="0" cy="0" r="50" fill="url(#yellowGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="url(#yellowGradient)"/>
+    <path d="M -20 -20 L 20 -20 L 20 20 L -20 20 Z" fill="#ffffff" opacity="0.9"/>
+    <path d="M -15 -15 L 15 -15 L 15 15 L -15 15 Z" stroke="#cc7700" stroke-width="3" fill="none"/>
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#cc7700" text-anchor="middle">!</text>
+    
+    <rect x="-100" y="-180" width="200" height="140" rx="10" fill="#1a1f2e" stroke="#ffaa44" stroke-width="2"/>
+    <text x="0" y="-155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffaa44" text-anchor="middle">3. Failure Detection</text>
+    <text x="0" y="-130" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">When a node fails,</text>
+    <text x="0" y="-115" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Patroni detects it</text>
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">via etcd TTL expiration</text>
+    
+    <!-- Failed node -->
+    <circle cx="-60" cy="80" r="25" fill="#1a1f2e" stroke="#ff4444" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="-60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#ff4444" text-anchor="middle">P</text>
+    <line x1="-75" y1="65" x2="-45" y2="95" stroke="#ff4444" stroke-width="2"/>
+    <circle cx="0" cy="80" r="25" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="0" y="88" font-family="Arial, sans-serif" font-size="18" fill="#44ff88" text-anchor="middle">S</text>
+    <circle cx="60" cy="80" r="25" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#44ff88" text-anchor="middle">S</text>
+  </g>
+  
+  <!-- Arrow 3 -->
+  <path d="M 650 450 L 700 450" stroke="#4488ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 4: Automatic Failover -->
+  <g transform="translate(750, 450)">
+    <circle cx="0" cy="0" r="50" fill="url(#redGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="url(#redGradient)"/>
+    <path d="M -20 -10 L 0 10 L 20 -10" fill="#ffffff"/>
+    
+    <rect x="-100" y="-180" width="200" height="140" rx="10" fill="#1a1f2e" stroke="#ff4444" stroke-width="2"/>
+    <text x="0" y="-155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ff4444" text-anchor="middle">4. Automatic Failover</text>
+    <text x="0" y="-130" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">etcd coordinates leader</text>
+    <text x="0" y="-115" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">election, Patroni promotes</text>
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">standby to primary</text>
+    
+    <!-- Failover happening -->
+    <circle cx="-60" cy="80" r="25" fill="#1a1f2e" stroke="#ff4444" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+    <text x="-60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#ff4444" text-anchor="middle" opacity="0.5">P</text>
+    <circle cx="0" cy="80" r="25" fill="#1a1f2e" stroke="#44ff88" stroke-width="3"/>
+    <text x="0" y="88" font-family="Arial, sans-serif" font-size="18" fill="#44ff88" text-anchor="middle">P</text>
+    <path d="M 0 55 L 0 75" stroke="#44ff88" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <circle cx="60" cy="80" r="25" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#4488ff" text-anchor="middle">S</text>
+  </g>
+  
+  <!-- Arrow 4 -->
+  <path d="M 850 450 L 900 450" stroke="#4488ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 5: Service Continuity -->
+  <g transform="translate(950, 450)">
+    <circle cx="0" cy="0" r="50" fill="url(#greenGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="url(#greenGradient)"/>
+    <path d="M -20 -10 L 0 10 L 20 -10" fill="#ffffff"/>
+    <circle cx="0" cy="15" r="3" fill="#ffffff"/>
+    
+    <rect x="-100" y="-180" width="200" height="140" rx="10" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="0" y="-155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#44ff88" text-anchor="middle">5. Service Continuity</text>
+    <text x="0" y="-130" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Applications continue</text>
+    <text x="0" y="-115" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">operating with minimal</text>
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="11" fill="#ffaa44" text-anchor="middle">interruption (&lt; 30 seconds)</text>
+    
+    <!-- Healthy cluster -->
+    <circle cx="-60" cy="80" r="25" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="-60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#44ff88" text-anchor="middle">P</text>
+    <circle cx="0" cy="80" r="25" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="0" y="88" font-family="Arial, sans-serif" font-size="18" fill="#4488ff" text-anchor="middle">S</text>
+    <circle cx="60" cy="80" r="25" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#4488ff" text-anchor="middle">S</text>
+    <!-- Connection lines -->
+    <line x1="-35" y1="80" x2="-25" y2="80" stroke="#44ff88" stroke-width="2"/>
+    <line x1="25" y1="80" x2="35" y2="80" stroke="#4488ff" stroke-width="2"/>
+  </g>
+  
+  <!-- Arrow 5 (downward) -->
+  <path d="M 950 500 L 950 550" stroke="#4488ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 6: Recovery -->
+  <g transform="translate(950, 650)">
+    <circle cx="0" cy="0" r="50" fill="url(#purpleGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="url(#purpleGradient)"/>
+    <path d="M -15 -10 L 0 5 L 15 -10" fill="#ffffff"/>
+    <path d="M -10 0 L 0 10 L 10 0" fill="#ffffff"/>
+    
+    <rect x="-100" y="-180" width="200" height="140" rx="10" fill="#1a1f2e" stroke="#8844ff" stroke-width="2"/>
+    <text x="0" y="-155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#8844ff" text-anchor="middle">6. Recovery</text>
+    <text x="0" y="-130" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Failed node can be</text>
+    <text x="0" y="-115" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">repaired and rejoin</text>
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">the cluster as standby</text>
+    
+    <!-- Node rejoining -->
+    <circle cx="-60" cy="80" r="25" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="-60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#44ff88" text-anchor="middle">P</text>
+    <circle cx="0" cy="80" r="25" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="0" y="88" font-family="Arial, sans-serif" font-size="18" fill="#4488ff" text-anchor="middle">S</text>
+    <circle cx="60" cy="80" r="25" fill="#1a1f2e" stroke="#ffaa44" stroke-width="2" stroke-dasharray="3,3"/>
+    <text x="60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#ffaa44" text-anchor="middle">S</text>
+    <path d="M 60 55 L 60 75" stroke="#ffaa44" stroke-width="2" marker-end="url(#arrowhead)"/>
+  </g>
+  
+  <!-- Arrow 6 (leftward) -->
+  <path d="M 850 650 L 750 650" stroke="#4488ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 7: Replication Sync -->
+  <g transform="translate(750, 650)">
+    <circle cx="0" cy="0" r="50" fill="url(#orangeGradient)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="40" fill="url(#orangeGradient)"/>
+    <path d="M -20 -15 L 0 0 L -20 15 L -10 0 Z" fill="#ffffff"/>
+    <path d="M 20 -15 L 0 0 L 20 15 L 10 0 Z" fill="#ffffff"/>
+    
+    <rect x="-100" y="-180" width="200" height="140" rx="10" fill="#1a1f2e" stroke="#ff8844" stroke-width="2"/>
+    <text x="0" y="-155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ff8844" text-anchor="middle">7. Replication Sync</text>
+    <text x="0" y="-130" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">New standby catches up</text>
+    <text x="0" y="-115" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">with current primary</text>
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">through WAL streaming</text>
+    
+    <!-- Sync arrows -->
+    <circle cx="-60" cy="80" r="25" fill="#1a1f2e" stroke="#44ff88" stroke-width="2"/>
+    <text x="-60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#44ff88" text-anchor="middle">P</text>
+    <path d="M -35 80 L 35 80" stroke="#4488ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+    <path d="M 35 80 L -35 80" stroke="#4488ff" stroke-width="1" fill="none" opacity="0.5" marker-end="url(#arrowhead)"/>
+    <circle cx="60" cy="80" r="25" fill="#1a1f2e" stroke="#4488ff" stroke-width="2"/>
+    <text x="60" y="88" font-family="Arial, sans-serif" font-size="18" fill="#4488ff" text-anchor="middle">S</text>
+  </g>
+  
+  <!-- Arrow 7 (back to start, circular) -->
+  <path d="M 700 650 Q 350 800 150 500" stroke="#4488ff" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+  <text x="425" y="750" font-family="Arial, sans-serif" font-size="14" fill="#4488ff" text-anchor="middle" opacity="0.6">Cycle Continues</text>
+  
+  <!-- Patroni & etcd Icon (top center) -->
+  <g transform="translate(700, 150)">
+    <rect x="-80" y="-30" width="160" height="60" rx="10" fill="#1a1f2e" stroke="#06b6d4" stroke-width="3"/>
+    <text x="0" y="-5" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#06b6d4" text-anchor="middle">Patroni</text>
+    <text x="0" y="15" font-family="Arial, sans-serif" font-size="12" fill="#8b5cf6" text-anchor="middle">+ etcd</text>
+    <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#aaaaaa" text-anchor="middle">Orchestrating HA</text>
+  </g>
+  
+  <!-- Connection lines from Patroni/etcd to steps -->
+  <line x1="700" y1="180" x2="150" y2="400" stroke="#06b6d4" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
+  <line x1="700" y1="180" x2="350" y2="400" stroke="#06b6d4" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
+  <line x1="700" y1="180" x2="550" y2="400" stroke="#06b6d4" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
+  <line x1="700" y1="180" x2="750" y2="400" stroke="#06b6d4" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
+  <line x1="700" y1="180" x2="950" y2="400" stroke="#06b6d4" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
+  
+  <!-- Bottom stats -->
+  <rect x="200" y="820" width="1000" height="50" rx="10" fill="#1a1f2e" stroke="#06b6d4" stroke-width="2" opacity="0.5"/>
+  <text x="700" y="840" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#44ff88" text-anchor="middle">Zero-Downtime Operations</text>
+  <text x="700" y="860" font-family="Arial, sans-serif" font-size="12" fill="#aaaaaa" text-anchor="middle">
+    Automatic failover in &lt; 30 seconds | Patroni + etcd coordination | Self-healing architecture
+  </text>
+</svg>
+
+

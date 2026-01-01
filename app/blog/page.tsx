@@ -33,7 +33,7 @@ const palette = {
 
 // Blog statistics
 const blogStats = [
-  { label: 'Total Articles', value: '8', icon: BookOpen, color: 'text-white' },
+  { label: 'Total Articles', value: '16', icon: BookOpen, color: 'text-white' },
   { label: 'Monthly Readers', value: '4.2k', icon: Eye, color: 'text-white' },
   { label: 'Categories', value: '1', icon: Tag, color: 'text-white' },
   { label: 'Authors', value: '1', icon: Users, color: 'text-white' }
@@ -43,7 +43,7 @@ const blogStats = [
 const blogPosts = [
   {
     slug: 'pgbalancer-3-node-ha',
-    title: 'PostgreSQL High Availability with pgBalancer: 3-Node Cluster Setup',
+    title: 'PostgreSQL High Availability with pgBalancer',
     excerpt: 'Complete guide to building a production-ready PostgreSQL high availability cluster with pgBalancer and 3 PostgreSQL nodes. Includes step-by-step setup, configuration, failover testing, and best practices.',
     content: 'Comprehensive production guide for setting up a 3-node PostgreSQL HA cluster with pgBalancer, covering architecture, installation, configuration, failover scenarios, monitoring, and production best practices.',
     author: 'pgElephant Team',
@@ -57,6 +57,23 @@ const blogPosts = [
     likes: 0,
     comments: 0,
     tags: ['PostgreSQL', 'High Availability', 'pgBalancer', 'Database Clustering', 'Load Balancing', 'Failover', 'Production Guide']
+  },
+  {
+    slug: 'patroni-etcd-ha',
+    title: 'PostgreSQL High Availability with Patroni and etcd',
+    excerpt: 'Complete guide to building a PostgreSQL high availability cluster with Patroni and etcd. Includes step-by-step setup, configuration, automatic failover, leader election, and best practices.',
+    content: 'Comprehensive production guide for setting up a PostgreSQL HA cluster with Patroni leader election and etcd consensus, covering architecture, installation, configuration, failover scenarios, monitoring, and production best practices.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-26',
+    readTime: '38 min read',
+    category: 'Technical',
+    featured: true,
+    icon: 'patroni',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['PostgreSQL', 'High Availability', 'Patroni', 'etcd', 'Database Clustering', 'Leader Election', 'Failover', 'Production Guide']
   },
   {
     slug: 'pg-stat-insights-index-monitoring',
@@ -125,6 +142,125 @@ const blogPosts = [
     likes: 0,
     comments: 0,
     tags: ['NeuronDB', 'Semantic Search', 'RAG', 'Vector Search', 'PostgreSQL', 'Tutorial', 'AI']
+  },
+  {
+    slug: 'agentic-ai',
+    title: 'Agentic AI: Guide to Autonomous AI Agents',
+    excerpt: 'Agentic AI systems guide. Explains agent architecture, planning, tool use, memory systems, and autonomous task execution. Includes implementation using NeuronDB and NeuronAgent with code examples.',
+    content: 'Agentic AI architecture, planning systems, tool execution, memory management, state machines, and implementation patterns. Learn how to build autonomous agents using NeuronDB and NeuronAgent with code examples.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-24',
+    readTime: '40 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['AgenticAI', 'AutonomousAgents', 'AIAgents', 'AgentArchitecture', 'ToolUse', 'Planning', 'MemorySystems', 'NeuronDB', 'NeuronAgent', 'PostgreSQL', 'LLM', 'RAG', 'VectorSearch', 'MachineLearning', 'AI']
+  },
+  {
+    slug: 'ai-with-database-on-prem',
+    title: 'AI With Data On-Premises',
+    excerpt: 'Guide to deploying AI workloads with databases on-premises. Learn about on-premises AI infrastructure, data sovereignty, security, performance, and implementation with NeuronDB. Includes architecture patterns, deployment strategies, and examples.',
+    content: 'On-premises AI infrastructure, data sovereignty, security architecture, performance optimization, deployment strategies, and implementation patterns. Learn how to deploy NeuronDB and AI workloads on-premises with control over data and infrastructure.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-26',
+    readTime: '38 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['OnPremises', 'AIInfrastructure', 'DataSovereignty', 'PrivateAI', 'EnterpriseAI', 'SelfHosted', 'NeuronDB', 'PostgreSQL', 'Security', 'Compliance', 'EdgeAI', 'HybridCloud']
+  },
+  {
+    slug: 'neurondb-mcp-server',
+    title: 'MCP Server: Model Context Protocol Explained',
+    excerpt: 'MCP Server (Model Context Protocol) guide. What it is, how it works, integration with Claude Desktop, known MCP servers, and NeuronMCP implementation. Learn how MCP enables AI assistants to access external tools and resources.',
+    content: 'MCP Server architecture, protocol implementation, Claude Desktop integration, popular MCP servers, and NeuronMCP. Learn how the Model Context Protocol enables AI assistants to access external tools and data sources.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-22',
+    readTime: '28 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['MCP', 'ModelContextProtocol', 'ClaudeDesktop', 'NeuronMCP', 'AI', 'PostgreSQL', 'VectorDatabase', 'MachineLearning', 'RAG', 'OpenSource', 'NeuronDB']
+  },
+  {
+    slug: 'neurondb-vectors',
+    title: 'Vectors in PostgreSQL',
+    excerpt: 'Vector operations, indexing, and similarity search in PostgreSQL with NeuronDB. Guide with SQL queries and results. Learn HNSW indexing, distance metrics, quantization, and performance optimization.',
+    content: 'Guide to working with vectors in PostgreSQL using NeuronDB. Covers vector types, operations, distance metrics, indexing strategies, quantization, and performance optimization with SQL queries and results.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-21',
+    readTime: '30 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['NeuronDB', 'Vectors', 'Vector Search', 'HNSW', 'Distance Metrics', 'PostgreSQL', 'Tutorial', 'AI', 'Indexing']
+  },
+  {
+    slug: 'postgresql-vector-database',
+    title: 'PostgreSQL as a Vector Database',
+    excerpt: 'Guide to using PostgreSQL as a vector database. Learn how PostgreSQL with NeuronDB extension works as a vector database with HNSW indexing, similarity search, and production capabilities.',
+    content: 'PostgreSQL vector database architecture, performance benchmarks, indexing strategies, query patterns, and migration approaches. Learn how PostgreSQL with NeuronDB works as a vector database solution.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-25',
+    readTime: '35 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['PostgreSQL', 'VectorDatabase', 'NeuronDB', 'VectorSearch', 'HNSW', 'SQL', 'Database', 'AI', 'SemanticSearch', 'Production', 'Indexing']
+  },
+  {
+    slug: 'rag-architectures-ai-builders-should-understand',
+    title: 'RAG Architectures AI Builders Should Understand',
+    excerpt: 'Practical guide to the core RAG architecture patterns: basic, conversational, filtered, adaptive, hypothesis-driven, agent-driven, and graph-based RAG. Learn when to use each and what trade-offs matter in production.',
+    content: 'Core RAG patterns and how to choose between them. Covers conversational RAG, filtering/reranking, adaptive retrieval, agent-driven workflows, graph-based retrieval, and operational realities.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2026-01-01',
+    readTime: '18 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['RAG', 'RAGArchitectures', 'LLM', 'VectorSearch', 'SemanticSearch', 'GraphRAG', 'AgenticAI', 'ProductionAI']
+  },
+  {
+    slug: 'rag-complete-guide',
+    title: 'RAG: Retrieval-Augmented Generation With PostgreSQL',
+    excerpt: 'RAG (Retrieval-Augmented Generation) guide with examples, SQL queries, and implementation patterns. Learn how to build RAG systems with document retrieval, context building, LLM integration, and response generation.',
+    content: 'RAG architecture, implementation patterns, SQL examples, and NeuronDB integration. Learn how to build RAG systems with document processing, embedding generation, similarity search, context building, and response generation.',
+    author: 'pgElephant Team',
+    authorRole: 'Core Developers',
+    date: '2025-02-23',
+    readTime: '35 min read',
+    category: 'Technical',
+    featured: false,
+    icon: 'neurondb',
+    views: 0,
+    likes: 0,
+    comments: 0,
+    tags: ['RAG', 'RetrievalAugmentedGeneration', 'LLM', 'VectorSearch', 'SemanticSearch', 'NeuronDB', 'PostgreSQL', 'AI', 'MachineLearning', 'DocumentRetrieval', 'KnowledgeBase']
   },
   {
     slug: 'pgbalancer',
@@ -217,8 +353,17 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               />
             ) : post.slug === 'pgbalancer-3-node-ha' ? (
               <Image
-                src="/blog/pgbalancer-3-node-ha/header.svg?v=1"
-                alt="PostgreSQL HA with pgBalancer 3-Node Setup"
+                src="/blog/pgbalancer-3-node-ha/header.svg?v=2"
+                alt="PostgreSQL High Availability with pgBalancer"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'patroni-etcd-ha' ? (
+              <Image
+                src="/blog/patroni-etcd-ha/header.svg?v=1"
+                alt="PostgreSQL High Availability with Patroni and etcd"
                 fill
                 className="object-cover"
                 unoptimized
@@ -255,6 +400,69 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               <Image
                 src="/blog/neurondb/header.svg?v=7"
                 alt="NeuronDB Semantic Search Guide blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'agentic-ai' ? (
+              <Image
+                src="/blog/agentic-ai/header.svg?v=7"
+                alt="Agentic AI blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'ai-with-database-on-prem' ? (
+              <Image
+                src="/blog/ai-with-database-on-prem/header.svg?v=12"
+                alt="AI With Data On-Premises blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'neurondb-mcp-server' ? (
+              <Image
+                src="/blog/neurondb-mcp-server/header.svg?v=7"
+                alt="MCP Server blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'neurondb-vectors' ? (
+              <Image
+                src="/blog/neurondb-vectors/header.svg?v=7"
+                alt="NeuronDB Vectors Guide blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'postgresql-vector-database' ? (
+              <Image
+                src="/blog/postgresql-vector-database/header.svg?v=8"
+                alt="PostgreSQL as Vector Database blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'rag-architectures-ai-builders-should-understand' ? (
+              <Image
+                src="/blog/rag-architectures-ai-builders-should-understand/header.svg?v=1"
+                alt="RAG Architectures blog header"
+                fill
+                className="object-cover"
+                unoptimized
+                priority
+              />
+            ) : post.slug === 'rag-complete-guide' ? (
+              <Image
+                src="/blog/rag-complete-guide/header.svg?v=7"
+                alt="RAG Complete Guide blog header"
                 fill
                 className="object-cover"
                 unoptimized

@@ -1,0 +1,123 @@
+<svg width="1000" height="500" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="standbyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.8" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#10b981" opacity="0.8"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="500" fill="#0f172a" rx="8"/>
+  
+  <!-- Title -->
+  <text x="500" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">Streaming Replication Flow: WAL Distribution</text>
+  
+  <!-- Primary Node -->
+  <g transform="translate(50, 100)">
+    <rect x="0" y="0" width="200" height="300" rx="8" fill="url(#primaryGradient)" opacity="0.95" filter="url(#glow)"/>
+    <rect x="0" y="0" width="200" height="300" rx="8" fill="none" stroke="#fbbf24" stroke-width="3"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">PostgreSQL Node 1</text>
+    <text x="100" y="50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fef3c7" text-anchor="middle">PRIMARY</text>
+    <text x="100" y="70" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">10.0.1.10:5432</text>
+    <line x1="20" y1="85" x2="180" y2="85" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- WAL Generation -->
+    <text x="100" y="115" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">WAL Generation</text>
+    <rect x="30" y="130" width="140" height="40" rx="4" fill="#1e293b" opacity="0.8"/>
+    <text x="100" y="150" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">WAL Segment 1</text>
+    <text x="100" y="165" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">WAL Segment 2</text>
+    
+    <!-- Write Operations -->
+    <text x="100" y="200" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">Write Operations</text>
+    <rect x="30" y="215" width="140" height="30" rx="4" fill="#1e293b" opacity="0.8"/>
+    <text x="100" y="235" font-family="Arial, sans-serif" font-size="11" fill="#fbbf24" text-anchor="middle">INSERT, UPDATE, DELETE</text>
+    
+    <!-- Replication Slots -->
+    <text x="100" y="270" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">Replication Slots</text>
+    <rect x="30" y="285" width="60" height="20" rx="4" fill="#10b981" opacity="0.6"/>
+    <text x="60" y="298" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">standby1</text>
+    <rect x="110" y="285" width="60" height="20" rx="4" fill="#10b981" opacity="0.6"/>
+    <text x="140" y="298" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">standby2</text>
+  </g>
+  
+  <!-- WAL Streaming Arrows -->
+  <line x1="250" y1="200" x2="350" y2="150" stroke="#10b981" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <line x1="250" y1="250" x2="350" y2="300" stroke="#10b981" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <text x="300" y="200" font-family="Arial, sans-serif" font-size="12" fill="#10b981" text-anchor="middle">WAL Stream</text>
+  <text x="300" y="250" font-family="Arial, sans-serif" font-size="12" fill="#10b981" text-anchor="middle">WAL Stream</text>
+  
+  <!-- Standby Node 2 -->
+  <g transform="translate(350, 80)">
+    <rect x="0" y="0" width="200" height="300" rx="8" fill="url(#standbyGradient)" opacity="0.9" filter="url(#glow)"/>
+    <rect x="0" y="0" width="200" height="300" rx="8" fill="none" stroke="#06b6d4" stroke-width="3"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">PostgreSQL Node 2</text>
+    <text x="100" y="50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#cffafe" text-anchor="middle">STANDBY</text>
+    <text x="100" y="70" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">10.0.1.11:5432</text>
+    <line x1="20" y1="85" x2="180" y2="85" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- WAL Receive -->
+    <text x="100" y="115" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">WAL Receive</text>
+    <rect x="30" y="130" width="140" height="40" rx="4" fill="#1e293b" opacity="0.8"/>
+    <text x="100" y="150" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">Receiving WAL...</text>
+    <text x="100" y="165" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">Slot: standby1</text>
+    
+    <!-- WAL Replay -->
+    <text x="100" y="200" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">WAL Replay</text>
+    <rect x="30" y="215" width="140" height="30" rx="4" fill="#1e293b" opacity="0.8"/>
+    <text x="100" y="235" font-family="Arial, sans-serif" font-size="11" fill="#06b6d4" text-anchor="middle">Applying Changes</text>
+    
+    <!-- Read Queries -->
+    <text x="100" y="270" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">Read Queries</text>
+    <rect x="30" y="285" width="140" height="20" rx="4" fill="#06b6d4" opacity="0.6"/>
+    <text x="100" y="298" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">SELECT (Hot Standby)</text>
+  </g>
+  
+  <!-- Standby Node 3 -->
+  <g transform="translate(650, 80)">
+    <rect x="0" y="0" width="200" height="300" rx="8" fill="url(#standbyGradient)" opacity="0.9" filter="url(#glow)"/>
+    <rect x="0" y="0" width="200" height="300" rx="8" fill="none" stroke="#06b6d4" stroke-width="3"/>
+    <text x="100" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">PostgreSQL Node 3</text>
+    <text x="100" y="50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#cffafe" text-anchor="middle">STANDBY</text>
+    <text x="100" y="70" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">10.0.1.12:5432</text>
+    <line x1="20" y1="85" x2="180" y2="85" stroke="#fff" stroke-width="1" opacity="0.3"/>
+    
+    <!-- WAL Receive -->
+    <text x="100" y="115" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">WAL Receive</text>
+    <rect x="30" y="130" width="140" height="40" rx="4" fill="#1e293b" opacity="0.8"/>
+    <text x="100" y="150" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">Receiving WAL...</text>
+    <text x="100" y="165" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">Slot: standby2</text>
+    
+    <!-- WAL Replay -->
+    <text x="100" y="200" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">WAL Replay</text>
+    <rect x="30" y="215" width="140" height="30" rx="4" fill="#1e293b" opacity="0.8"/>
+    <text x="100" y="235" font-family="Arial, sans-serif" font-size="11" fill="#06b6d4" text-anchor="middle">Applying Changes</text>
+    
+    <!-- Read Queries -->
+    <text x="100" y="270" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">Read Queries</text>
+    <rect x="30" y="285" width="140" height="20" rx="4" fill="#06b6d4" opacity="0.6"/>
+    <text x="100" y="298" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">SELECT (Hot Standby)</text>
+  </g>
+  
+  <!-- Replication Lag Indicator -->
+  <g transform="translate(50, 420)">
+    <rect x="0" y="0" width="900" height="60" rx="8" fill="#1e293b" opacity="0.8"/>
+    <text x="450" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Replication Lag Monitoring</text>
+    <text x="150" y="50" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">Node 2 Lag: &lt; 1MB</text>
+    <text x="450" y="50" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">Node 3 Lag: &lt; 1MB</text>
+    <text x="750" y="50" font-family="Arial, sans-serif" font-size="11" fill="#06b6d4" text-anchor="middle">Health: Excellent</text>
+  </g>
+</svg>
