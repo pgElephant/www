@@ -47,6 +47,60 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 }
 
 
+// Validate ../../app/blog/agentic-ai/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/agentic-ai">> = Specific
+  const handler = {} as typeof import("../../app/blog/agentic-ai/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/ai-with-database-on-prem/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/ai-with-database-on-prem">> = Specific
+  const handler = {} as typeof import("../../app/blog/ai-with-database-on-prem/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/neurondb-mcp-server/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/neurondb-mcp-server">> = Specific
+  const handler = {} as typeof import("../../app/blog/neurondb-mcp-server/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/neurondb-semantic-search-guide/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/neurondb-semantic-search-guide">> = Specific
+  const handler = {} as typeof import("../../app/blog/neurondb-semantic-search-guide/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/neurondb-vectors/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/neurondb-vectors">> = Specific
+  const handler = {} as typeof import("../../app/blog/neurondb-vectors/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/neurondb/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/neurondb">> = Specific
+  const handler = {} as typeof import("../../app/blog/neurondb/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../app/blog/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/blog">> = Specific
@@ -123,6 +177,33 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/blog/pgraft">> = Specific
   const handler = {} as typeof import("../../app/blog/pgraft/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/postgresql-vector-database/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/postgresql-vector-database">> = Specific
+  const handler = {} as typeof import("../../app/blog/postgresql-vector-database/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/rag-architectures-ai-builders-should-understand/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/rag-architectures-ai-builders-should-understand">> = Specific
+  const handler = {} as typeof import("../../app/blog/rag-architectures-ai-builders-should-understand/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../app/blog/rag-complete-guide/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/blog/rag-complete-guide">> = Specific
+  const handler = {} as typeof import("../../app/blog/rag-complete-guide/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
