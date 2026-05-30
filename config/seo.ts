@@ -7,6 +7,8 @@
 
 import { Metadata } from 'next'
 import { products, generateProductMetadata, generateDocsMetadata, getProduct, type ProductId } from './products'
+import type { VideosHubConfig } from './videos'
+import { POSTGRESQL_VIDEOS_HUB } from './videos'
 
 // ============================================================================
 // BASE SEO CONFIGURATION
@@ -294,6 +296,270 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
   }
 }
 
+interface VideoForSeo {
+  id: string
+  title: string
+  description?: string
+  publishedAt: string
+  thumbnailUrl: string
+  url: string
+}
+
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+    return text
+  }
+
+  return `${text.slice(0, maxLength - 3).trim()}...`
+}
+
+/**
+ * Metadata for a videos hub page
+ */
+export function generateVideosHubMetadata(
+  hub: VideosHubConfig,
+  videos: VideoForSeo[]
+): Metadata {
+  const latestVideo = videos[0]
+  const videoCount = videos.length
+  const description = `${hub.description} ${videoCount} videos available on pgElephant.`
+  const ogImage = latestVideo?.thumbnailUrl || baseSEO.defaultImage
+  const pageUrl = `${baseSEO.siteUrl}${hub.path}`
+
+  return {
+    title: hub.metaTitle,
+    description,
+    keywords: hub.keywords.join(', '),
+    authors: [{ name: 'Dr. Ibrar Ahmed', url: hub.channel.url }],
+    creator: 'Dr. Ibrar Ahmed',
+    publisher: baseSEO.siteName,
+    category: hub.category,
+    openGraph: {
+      title: `${hub.title} | ${baseSEO.siteName}`,
+      description,
+      type: 'website',
+      url: pageUrl,
+      siteName: baseSEO.siteName,
+      locale: 'en_US',
+      images: [
+        {
+          url: ogImage,
+          width: 1280,
+          height: 720,
+          alt: latestVideo?.title || hub.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${hub.title} | ${baseSEO.siteName}`,
+      description,
+      images: [ogImage],
+      creator: baseSEO.twitterHandle,
+      site: baseSEO.twitterHandle,
+    },
+    alternates: {
+      canonical: pageUrl,
+      types: {
+        'application/rss+xml': [
+          {
+            url: `https://www.youtube.com/feeds/videos.xml?channel_id=${hub.channel.id}`,
+            title: `${hub.channel.name} RSS`,
+          },
+        ],
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    other: {
+      'video:channel': hub.channel.url,
+      'video:count': String(videoCount),
+    },
+  }
+}
+
+function buildVideoObjectSchema(
+  hub: VideosHubConfig,
+  video: VideoForSeo
+) {
+  return {
+    '@type': 'VideoObject',
+    '@id': `${baseSEO.siteUrl}${hub.path}#video-${video.id}`,
+    name: video.title,
+    description: truncateText(
+      video.description || `${hub.genre} tutorial: ${video.title}`,
+      500
+    ),
+    thumbnailUrl: [video.thumbnailUrl],
+    uploadDate: video.publishedAt,
+    embedUrl: `https://www.youtube.com/embed/${video.id}`,
+    contentUrl: video.url,
+    url: video.url,
+    inLanguage: 'en-US',
+    genre: hub.genre,
+    isFamilyFriendly: true,
+    publisher: {
+      '@type': 'Organization',
+      name: hub.channel.name,
+      url: hub.channel.url,
+    },
+  }
+}
+
+/**
+ * Single JSON-LD graph for a videos hub (avoids duplicate VideoObject markup).
+ */
+export function generateVideosHubStructuredData(
+  hub: VideosHubConfig,
+  videos: VideoForSeo[]
+) {
+  const validVideos = videos.filter(
+    (video) => video.publishedAt && video.title && video.thumbnailUrl
+  )
+  const pageUrl = `${baseSEO.siteUrl}${hub.path}`
+  const latestVideo = validVideos[0]
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${pageUrl}#webpage`,
+        name: hub.title,
+        description: hub.description,
+        url: pageUrl,
+        inLanguage: 'en-US',
+        ...(latestVideo
+          ? {
+              primaryImageOfPage: {
+                '@type': 'ImageObject',
+                url: latestVideo.thumbnailUrl,
+              },
+            }
+          : {}),
+        isPartOf: {
+          '@type': 'WebSite',
+          '@id': `${baseSEO.siteUrl}/#website`,
+          name: baseSEO.siteName,
+          url: baseSEO.siteUrl,
+        },
+        ...(hub.about
+          ? {
+              about: {
+                '@type': 'Thing',
+                name: hub.about.name,
+                ...(hub.about.sameAs ? { sameAs: hub.about.sameAs } : {}),
+              },
+            }
+          : {}),
+        author: {
+          '@type': 'Person',
+          name: 'Dr. Ibrar Ahmed',
+          url: hub.channel.url,
+          sameAs: [hub.channel.url],
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: baseSEO.siteName,
+          url: baseSEO.siteUrl,
+          logo: {
+            '@type': 'ImageObject',
+            url: `${baseSEO.siteUrl}/favicon-512.png`,
+          },
+        },
+        sameAs: [hub.channel.url],
+        ...(hub.siblingHub
+          ? {
+              relatedLink: `${baseSEO.siteUrl}${hub.siblingHub.href}`,
+            }
+          : {}),
+        mainEntity: {
+          '@type': 'ItemList',
+          name: `${hub.channel.name} Videos`,
+          numberOfItems: validVideos.length,
+          itemListElement: validVideos.map((video, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${pageUrl}#video-${video.id}`,
+          })),
+        },
+      },
+      ...validVideos.map((video) => buildVideoObjectSchema(hub, video)),
+      {
+        ...generateBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: hub.breadcrumbLabel, url: hub.path },
+        ]),
+        '@context': undefined,
+      },
+      {
+        ...generateVideosHubFaqSchema(hub),
+        '@context': undefined,
+      },
+    ],
+  }
+}
+
+export function generateVideosHubFaqSchema(hub: VideosHubConfig) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: hub.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+/** @deprecated Use generateVideosHubMetadata with POSTGRESQL_VIDEOS_HUB */
+export function generateVideosMetadata(videos: VideoForSeo[], _channelName: string): Metadata {
+  return generateVideosHubMetadata(POSTGRESQL_VIDEOS_HUB, videos)
+}
+
+/** @deprecated Use generateVideosHubStructuredData with POSTGRESQL_VIDEOS_HUB */
+export function generateVideosStructuredData(
+  videos: VideoForSeo[],
+  _channelName: string,
+  _channelUrl: string
+) {
+  return generateVideosHubStructuredData(POSTGRESQL_VIDEOS_HUB, videos)
+}
+
+/** @deprecated Use generateVideosHubFaqSchema with POSTGRESQL_VIDEOS_HUB */
+export function generateVideosFaqSchema() {
+  return generateVideosHubFaqSchema(POSTGRESQL_VIDEOS_HUB)
+}
+
+/** @deprecated Use hub breadcrumb via generateVideosHubStructuredData */
+export function generateVideosBreadcrumbSchema() {
+  return generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'PostgreSQL Videos', url: '/videos' },
+  ])
+}
+
+/** @deprecated Use POSTGRESQL_VIDEOS_HUB from config/videos */
+export function getVideosPageCopy() {
+  return {
+    title: POSTGRESQL_VIDEOS_HUB.title,
+    description: POSTGRESQL_VIDEOS_HUB.description,
+    topics: POSTGRESQL_VIDEOS_HUB.topics,
+  }
+}
+
 export const postgresqlVideoKeywords = [
   'PostgreSQL videos',
   'PostgreSQL tutorials',
@@ -321,253 +587,6 @@ export const postgresqlVideoKeywords = [
   'Dr Ibrar Ahmed PostgreSQL',
   'pgElephant videos',
 ]
-
-const videosPageTitle = 'PostgreSQL Videos, Tutorials & DBA Guides'
-const videosPageDescription =
-  'Free PostgreSQL video tutorials on replication, high availability, performance tuning, VACUUM, indexing, backups, PITR, migrations, and production DBA skills. Watch embedded lessons from Dr. Ibrar Ahmed on pgElephant.'
-
-interface VideoForSeo {
-  id: string
-  title: string
-  description?: string
-  publishedAt: string
-  thumbnailUrl: string
-  url: string
-}
-
-function truncateText(text: string, maxLength: number): string {
-  if (text.length <= maxLength) {
-    return text
-  }
-
-  return `${text.slice(0, maxLength - 3).trim()}...`
-}
-
-/**
- * Metadata for the PostgreSQL videos hub page
- */
-export function generateVideosMetadata(
-  videos: VideoForSeo[],
-  channelName: string
-): Metadata {
-  const latestVideo = videos[0]
-  const videoCount = videos.length
-  const description = `${videosPageDescription} ${videoCount} videos available.`
-  const ogImage = latestVideo?.thumbnailUrl || baseSEO.defaultImage
-
-  return {
-    title: videosPageTitle,
-    description,
-    keywords: postgresqlVideoKeywords.join(', '),
-    authors: [{ name: channelName, url: 'https://www.youtube.com/@DrIbrarAhmed' }],
-    category: 'PostgreSQL',
-    openGraph: {
-      title: `${videosPageTitle} | ${baseSEO.siteName}`,
-      description,
-      type: 'website',
-      url: `${baseSEO.siteUrl}/videos`,
-      siteName: baseSEO.siteName,
-      locale: 'en_US',
-      images: [
-        {
-          url: ogImage,
-          width: 1280,
-          height: 720,
-          alt: latestVideo?.title || videosPageTitle,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${videosPageTitle} | ${baseSEO.siteName}`,
-      description,
-      images: [ogImage],
-      creator: baseSEO.twitterHandle,
-      site: baseSEO.twitterHandle,
-    },
-    alternates: {
-      canonical: `${baseSEO.siteUrl}/videos`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-  }
-}
-
-function buildVideoObjectSchema(
-  video: VideoForSeo,
-  channelName: string,
-  channelUrl: string
-) {
-  return {
-    '@type': 'VideoObject',
-    '@id': `${baseSEO.siteUrl}/videos#video-${video.id}`,
-    name: video.title,
-    description: truncateText(
-      video.description || `PostgreSQL tutorial: ${video.title}`,
-      500
-    ),
-    thumbnailUrl: [video.thumbnailUrl],
-    uploadDate: video.publishedAt,
-    embedUrl: `https://www.youtube.com/embed/${video.id}`,
-    contentUrl: video.url,
-    url: video.url,
-    inLanguage: 'en-US',
-    genre: 'PostgreSQL',
-    isFamilyFriendly: true,
-    publisher: {
-      '@type': 'Organization',
-      name: channelName,
-      url: channelUrl,
-    },
-  }
-}
-
-/**
- * Single JSON-LD graph for the videos hub (avoids duplicate VideoObject markup).
- */
-export function generateVideosStructuredData(
-  videos: VideoForSeo[],
-  channelName: string,
-  channelUrl: string
-) {
-  const validVideos = videos.filter(
-    (video) => video.publishedAt && video.title && video.thumbnailUrl
-  )
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'CollectionPage',
-        '@id': `${baseSEO.siteUrl}/videos#webpage`,
-        name: videosPageTitle,
-        description: videosPageDescription,
-        url: `${baseSEO.siteUrl}/videos`,
-        inLanguage: 'en-US',
-        isPartOf: {
-          '@type': 'WebSite',
-          name: baseSEO.siteName,
-          url: baseSEO.siteUrl,
-        },
-        about: {
-          '@type': 'Thing',
-          name: 'PostgreSQL',
-          sameAs: 'https://en.wikipedia.org/wiki/PostgreSQL',
-        },
-        author: {
-          '@type': 'Person',
-          name: 'Dr. Ibrar Ahmed',
-          url: channelUrl,
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: baseSEO.siteName,
-          url: baseSEO.siteUrl,
-          logo: {
-            '@type': 'ImageObject',
-            url: `${baseSEO.siteUrl}/favicon-512.png`,
-          },
-        },
-        mainEntity: {
-          '@type': 'ItemList',
-          name: `${channelName} PostgreSQL Videos`,
-          numberOfItems: validVideos.length,
-          itemListElement: validVideos.map((video, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            url: `${baseSEO.siteUrl}/videos#video-${video.id}`,
-          })),
-        },
-      },
-      ...validVideos.map((video) => buildVideoObjectSchema(video, channelName, channelUrl)),
-      {
-        ...generateBreadcrumbSchema([
-          { name: 'Home', url: '/' },
-          { name: 'PostgreSQL Videos', url: '/videos' },
-        ]),
-        '@context': undefined,
-      },
-      {
-        ...generateVideosFaqSchema(),
-        '@context': undefined,
-      },
-    ],
-  }
-}
-
-export function generateVideosFaqSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Where can I watch free PostgreSQL video tutorials?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'pgElephant hosts free PostgreSQL video tutorials at https://www.pgelephant.com/videos, including replication, high availability, performance tuning, backups, indexing, and DBA production guides from Dr. Ibrar Ahmed.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What PostgreSQL topics are covered in these videos?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Topics include PostgreSQL logical replication, high availability, VACUUM and bloat, slow query tuning, EXPLAIN ANALYZE, indexing, backups, point-in-time recovery (PITR), Oracle and MySQL migration, security hardening, disaster recovery, checkpoints, and major version upgrades.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Are these PostgreSQL tutorials for beginners or DBAs?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'The library includes PostgreSQL content for developers and production DBAs, from foundational DBA cheat sheets to advanced replication, failover, and performance troubleshooting walkthroughs.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Who teaches the PostgreSQL videos on pgElephant?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'The videos are from Dr. Ibrar Ahmed on the YouTube channel PostgreSQL with Dr. Ibrar Ahmed, embedded and curated on pgElephant for PostgreSQL engineers and teams.',
-        },
-      },
-    ],
-  }
-}
-
-export function generateVideosBreadcrumbSchema() {
-  return generateBreadcrumbSchema([
-    { name: 'Home', url: '/' },
-    { name: 'PostgreSQL Videos', url: '/videos' },
-  ])
-}
-
-export function getVideosPageCopy() {
-  return {
-    title: videosPageTitle,
-    description: videosPageDescription,
-    topics: [
-      'PostgreSQL replication & logical replication',
-      'High availability & disaster recovery',
-      'Performance tuning & slow queries',
-      'VACUUM, bloat & autovacuum',
-      'Indexing & EXPLAIN ANALYZE',
-      'Backups, PITR & checkpoints',
-      'Oracle & MySQL to PostgreSQL migration',
-      'Security hardening & production runbooks',
-    ],
-  }
-}
 
 // ============================================================================
 // OPENGRAPH TEMPLATES
@@ -651,11 +670,9 @@ const seoConfig = {
   generateProductSchema,
   generateArticleSchema,
   generateBreadcrumbSchema,
-  generateVideosMetadata,
-  generateVideosStructuredData,
-  generateVideosFaqSchema,
-  generateVideosBreadcrumbSchema,
-  getVideosPageCopy,
+  generateVideosHubMetadata,
+  generateVideosHubStructuredData,
+  generateVideosHubFaqSchema,
   postgresqlVideoKeywords,
   openGraphTemplates,
   twitterCardTemplates,

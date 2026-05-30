@@ -1,11 +1,13 @@
 import { MetadataRoute } from 'next'
 import { fetchChannelVideos } from '@/lib/youtube'
+import { VIDEO_HUBS } from '@/config/videos'
 
 interface SitemapEntry {
   url: string
   lastModified: Date | string
   changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
   priority: number
+  images?: string[]
 }
 
 export const revalidate = 3600
@@ -13,8 +15,21 @@ export const revalidate = 3600
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.pgelephant.com'
   const currentDate = new Date()
-  const videos = await fetchChannelVideos()
-  const latestVideoDate = videos[0]?.publishedAt ? new Date(videos[0].publishedAt) : currentDate
+
+  const hubVideoData = await Promise.all(
+    VIDEO_HUBS.map(async (hub) => ({
+      hub,
+      videos: await fetchChannelVideos(hub.channel),
+    }))
+  )
+
+  const videoHubPages: SitemapEntry[] = hubVideoData.map(({ hub, videos }) => ({
+    url: `${baseUrl}${hub.path}`,
+    lastModified: videos[0]?.publishedAt ? new Date(videos[0].publishedAt) : currentDate,
+    changeFrequency: 'daily',
+    priority: 0.9,
+    images: videos[0]?.thumbnailUrl ? [videos[0].thumbnailUrl] : undefined,
+  }))
 
   // Define priority levels for different content types
   const priorities = {
@@ -35,12 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: priorities.homepage,
     },
-    {
-      url: `${baseUrl}/videos`,
-      lastModified: latestVideoDate,
-      changeFrequency: 'daily',
-      priority: priorities.videos,
-    },
+    ...videoHubPages,
   ]
 
   // Main product pages

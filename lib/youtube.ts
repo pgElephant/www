@@ -7,12 +7,26 @@ export interface YouTubeVideo {
   url: string
 }
 
-export const YOUTUBE_CHANNEL = {
+export interface YouTubeChannelConfig {
+  handle: string
+  id: string
+  url: string
+  name: string
+}
+
+export const YOUTUBE_CHANNEL: YouTubeChannelConfig = {
   handle: '@DrIbrarAhmed',
   id: 'UCn-OaZ1f3NaEJZu_8T5GM0g',
   url: 'https://www.youtube.com/@DrIbrarAhmed',
   name: 'PostgreSQL with Dr. Ibrar Ahmed',
-} as const
+}
+
+export const YOUTUBE_CHANNEL_AI: YouTubeChannelConfig = {
+  handle: '@DrIbrarAhmedAI',
+  id: 'UCGMbodcC3rLHEI96xPZyy0Q',
+  url: 'https://www.youtube.com/@DrIbrarAhmedAI',
+  name: 'AI With Dr. Ibrar Ahmed',
+}
 
 const USER_AGENT = 'Mozilla/5.0 (compatible; pgElephant/1.0)'
 
@@ -53,8 +67,8 @@ function parseRssEntries(xml: string): YouTubeVideo[] {
   return videos
 }
 
-async function fetchVideoIdsFromChannelPage(): Promise<string[]> {
-  const response = await fetch(`${YOUTUBE_CHANNEL.url}/videos`, {
+async function fetchVideoIdsFromChannelPage(channel: YouTubeChannelConfig): Promise<string[]> {
+  const response = await fetch(`${channel.url}/videos`, {
     headers: { 'User-Agent': USER_AGENT },
     next: { revalidate: 3600 },
   })
@@ -147,12 +161,14 @@ async function enrichVideoMetadata(video: YouTubeVideo): Promise<YouTubeVideo> {
   }
 }
 
-export async function fetchChannelVideos(): Promise<YouTubeVideo[]> {
+export async function fetchChannelVideos(
+  channel: YouTubeChannelConfig = YOUTUBE_CHANNEL
+): Promise<YouTubeVideo[]> {
   const [rssResponse, scrapedIds] = await Promise.all([
-    fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL.id}`, {
+    fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channel.id}`, {
       next: { revalidate: 3600 },
     }),
-    fetchVideoIdsFromChannelPage(),
+    fetchVideoIdsFromChannelPage(channel),
   ])
 
   const videosById = new Map<string, YouTubeVideo>()

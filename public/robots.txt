@@ -26,6 +26,7 @@ Allow: /download/
 Allow: /docs/
 Allow: /blog/
 Allow: /videos/
+Allow: /videos-ai/
 Allow: /contact/
 
 # Specific bot instructions

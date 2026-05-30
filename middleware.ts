@@ -8,6 +8,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname === '/' ||
     pathname === '/videos' ||
+    pathname === '/videos-ai' ||
     pathname.startsWith('/sitemap-videos.xml') ||
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/api/') ||

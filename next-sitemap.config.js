@@ -23,6 +23,7 @@ module.exports = {
     
     // Add dynamic blog posts and documentation pages
     const blogCategories = ['pgbalancer', 'fauxdb', 'pgraft', 'postgresql', 'high-availability', 'tutorials']
+    const videoHubs = ['/videos', '/videos-ai']
     const docSections = [
       'pgbalancer/getting-started',
       'pgbalancer/installation',
@@ -44,6 +45,16 @@ module.exports = {
         loc: `/blog/${category}`,
         changefreq: 'weekly',
         priority: 0.6,
+        lastmod: new Date().toISOString()
+      })
+    })
+
+    // Add video hub pages
+    videoHubs.forEach(path => {
+      result.push({
+        loc: path,
+        changefreq: 'daily',
+        priority: 0.9,
         lastmod: new Date().toISOString()
       })
     })
@@ -101,7 +112,7 @@ module.exports = {
       }
     }
     // PostgreSQL videos hub
-    else if (path === '/videos') {
+    else if (path === '/videos' || path === '/videos-ai') {
       priority = 0.9
       changefreq = 'daily'
     }
