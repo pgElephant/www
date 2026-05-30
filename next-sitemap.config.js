@@ -100,6 +100,11 @@ module.exports = {
         priority = 0.7
       }
     }
+    // PostgreSQL videos hub
+    else if (path === '/videos') {
+      priority = 0.9
+      changefreq = 'daily'
+    }
     // Contact and utility pages
     else if (path.match(/^\/(contact|privacy|terms)/)) {
       priority = 0.4

@@ -294,6 +294,247 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
   }
 }
 
+export const postgresqlVideoKeywords = [
+  'PostgreSQL videos',
+  'PostgreSQL tutorials',
+  'PostgreSQL DBA',
+  'PostgreSQL training',
+  'PostgreSQL performance tuning',
+  'PostgreSQL high availability',
+  'PostgreSQL replication',
+  'PostgreSQL logical replication',
+  'PostgreSQL backup',
+  'PostgreSQL PITR',
+  'PostgreSQL VACUUM',
+  'PostgreSQL indexing',
+  'PostgreSQL EXPLAIN ANALYZE',
+  'PostgreSQL migration',
+  'PostgreSQL security',
+  'PostgreSQL disaster recovery',
+  'PostgreSQL bloat',
+  'PostgreSQL checkpoint',
+  'PostgreSQL slow queries',
+  'PostgreSQL multi-master',
+  'learn PostgreSQL',
+  'PostgreSQL course',
+  'PostgreSQL webinar',
+  'Dr Ibrar Ahmed PostgreSQL',
+  'pgElephant videos',
+]
+
+const videosPageTitle = 'PostgreSQL Videos, Tutorials & DBA Guides'
+const videosPageDescription =
+  'Free PostgreSQL video tutorials on replication, high availability, performance tuning, VACUUM, indexing, backups, PITR, migrations, and production DBA skills. Watch embedded lessons from Dr. Ibrar Ahmed on pgElephant.'
+
+interface VideoForSeo {
+  id: string
+  title: string
+  description?: string
+  publishedAt: string
+  thumbnailUrl: string
+  url: string
+}
+
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+    return text
+  }
+
+  return `${text.slice(0, maxLength - 3).trim()}...`
+}
+
+/**
+ * Metadata for the PostgreSQL videos hub page
+ */
+export function generateVideosMetadata(
+  videos: VideoForSeo[],
+  channelName: string
+): Metadata {
+  const latestVideo = videos[0]
+  const videoCount = videos.length
+  const description = `${videosPageDescription} ${videoCount} videos available.`
+  const ogImage = latestVideo?.thumbnailUrl || baseSEO.defaultImage
+
+  return {
+    title: videosPageTitle,
+    description,
+    keywords: postgresqlVideoKeywords.join(', '),
+    authors: [{ name: channelName, url: 'https://www.youtube.com/@DrIbrarAhmed' }],
+    category: 'PostgreSQL',
+    openGraph: {
+      title: `${videosPageTitle} | ${baseSEO.siteName}`,
+      description,
+      type: 'website',
+      url: `${baseSEO.siteUrl}/videos`,
+      siteName: baseSEO.siteName,
+      locale: 'en_US',
+      images: [
+        {
+          url: ogImage,
+          width: 1280,
+          height: 720,
+          alt: latestVideo?.title || videosPageTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${videosPageTitle} | ${baseSEO.siteName}`,
+      description,
+      images: [ogImage],
+      creator: baseSEO.twitterHandle,
+      site: baseSEO.twitterHandle,
+    },
+    alternates: {
+      canonical: `${baseSEO.siteUrl}/videos`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  }
+}
+
+/**
+ * CollectionPage + ItemList + VideoObject structured data
+ */
+export function generateVideosPageSchema(videos: VideoForSeo[], channelName: string, channelUrl: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: videosPageTitle,
+    description: videosPageDescription,
+    url: `${baseSEO.siteUrl}/videos`,
+    inLanguage: 'en-US',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: baseSEO.siteName,
+      url: baseSEO.siteUrl,
+    },
+    about: {
+      '@type': 'Thing',
+      name: 'PostgreSQL',
+      sameAs: 'https://en.wikipedia.org/wiki/PostgreSQL',
+    },
+    author: {
+      '@type': 'Person',
+      name: 'Dr. Ibrar Ahmed',
+      url: channelUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: baseSEO.siteName,
+      url: baseSEO.siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseSEO.siteUrl}/favicon-512.png`,
+      },
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      name: `${channelName} PostgreSQL Videos`,
+      numberOfItems: videos.length,
+      itemListElement: videos.map((video, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${baseSEO.siteUrl}/videos#video-${video.id}`,
+        item: {
+          '@type': 'VideoObject',
+          name: video.title,
+          description: truncateText(
+            video.description || `PostgreSQL tutorial: ${video.title}`,
+            500
+          ),
+          thumbnailUrl: video.thumbnailUrl,
+          uploadDate: video.publishedAt || undefined,
+          embedUrl: `https://www.youtube.com/embed/${video.id}`,
+          contentUrl: video.url,
+          url: video.url,
+          inLanguage: 'en-US',
+          genre: 'PostgreSQL',
+          publisher: {
+            '@type': 'Organization',
+            name: channelName,
+            url: channelUrl,
+          },
+        },
+      })),
+    },
+  }
+}
+
+export function generateVideosFaqSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Where can I watch free PostgreSQL video tutorials?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'pgElephant hosts free PostgreSQL video tutorials at https://www.pgelephant.com/videos, including replication, high availability, performance tuning, backups, indexing, and DBA production guides from Dr. Ibrar Ahmed.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What PostgreSQL topics are covered in these videos?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Topics include PostgreSQL logical replication, high availability, VACUUM and bloat, slow query tuning, EXPLAIN ANALYZE, indexing, backups, point-in-time recovery (PITR), Oracle and MySQL migration, security hardening, disaster recovery, checkpoints, and major version upgrades.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are these PostgreSQL tutorials for beginners or DBAs?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'The library includes PostgreSQL content for developers and production DBAs, from foundational DBA cheat sheets to advanced replication, failover, and performance troubleshooting walkthroughs.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Who teaches the PostgreSQL videos on pgElephant?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'The videos are from Dr. Ibrar Ahmed on the YouTube channel PostgreSQL with Dr. Ibrar Ahmed, embedded and curated on pgElephant for PostgreSQL engineers and teams.',
+        },
+      },
+    ],
+  }
+}
+
+export function generateVideosBreadcrumbSchema() {
+  return generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'PostgreSQL Videos', url: '/videos' },
+  ])
+}
+
+export function getVideosPageCopy() {
+  return {
+    title: videosPageTitle,
+    description: videosPageDescription,
+    topics: [
+      'PostgreSQL replication & logical replication',
+      'High availability & disaster recovery',
+      'Performance tuning & slow queries',
+      'VACUUM, bloat & autovacuum',
+      'Indexing & EXPLAIN ANALYZE',
+      'Backups, PITR & checkpoints',
+      'Oracle & MySQL to PostgreSQL migration',
+      'Security hardening & production runbooks',
+    ],
+  }
+}
+
 // ============================================================================
 // OPENGRAPH TEMPLATES
 // ============================================================================
@@ -376,6 +617,12 @@ const seoConfig = {
   generateProductSchema,
   generateArticleSchema,
   generateBreadcrumbSchema,
+  generateVideosMetadata,
+  generateVideosPageSchema,
+  generateVideosFaqSchema,
+  generateVideosBreadcrumbSchema,
+  getVideosPageCopy,
+  postgresqlVideoKeywords,
   openGraphTemplates,
   twitterCardTemplates,
 }

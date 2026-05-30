@@ -4,6 +4,7 @@ Allow: /
 # Sitemap location
 Sitemap: https://www.pgelephant.com/sitemap.xml
 Sitemap: https://www.pgelephant.com/sitemap_index.xml
+Sitemap: https://www.pgelephant.com/sitemap-videos.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
@@ -24,6 +25,7 @@ Allow: /rale/
 Allow: /download/
 Allow: /docs/
 Allow: /blog/
+Allow: /videos/
 Allow: /contact/
 
 # Specific bot instructions

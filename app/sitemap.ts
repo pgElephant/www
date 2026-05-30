@@ -1,24 +1,30 @@
 import { MetadataRoute } from 'next'
+import { fetchChannelVideos } from '@/lib/youtube'
 
 interface SitemapEntry {
   url: string
-  lastModified: Date
+  lastModified: Date | string
   changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
   priority: number
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 3600
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.pgelephant.com'
   const currentDate = new Date()
+  const videos = await fetchChannelVideos()
+  const latestVideoDate = videos[0]?.publishedAt ? new Date(videos[0].publishedAt) : currentDate
 
   // Define priority levels for different content types
   const priorities = {
     homepage: 1.0,
     mainProducts: 0.9,
+    videos: 0.9,
     docs: 0.8,
     subPages: 0.7,
     blog: 0.6,
-    utility: 0.5
+    utility: 0.5,
   }
 
   // Core pages with highest priority
@@ -28,7 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.homepage,
-    }
+    },
+    {
+      url: `${baseUrl}/videos`,
+      lastModified: latestVideoDate,
+      changeFrequency: 'daily',
+      priority: priorities.videos,
+    },
   ]
 
   // Main product pages
@@ -56,7 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.mainProducts,
-    }
+    },
   ]
 
   // Documentation pages
@@ -214,7 +226,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.subPages,
-    }
+    },
   ]
 
   // Utility and secondary pages
@@ -243,12 +255,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: priorities.blog,
     },
-    {
-      url: `${baseUrl}/videos`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.blog,
-    }
   ]
 
   // Blog category pages
@@ -276,7 +282,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: priorities.blog,
-    }
+    },
   ]
 
   // Combine all pages
@@ -285,7 +291,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productPages,
     ...docPages,
     ...utilityPages,
-    ...blogPages
+    ...blogPages,
   ]
 }
-
