@@ -2,10 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ExternalLink, Play, Youtube } from 'lucide-react'
 import {
-  generateVideosBreadcrumbSchema,
-  generateVideosFaqSchema,
   generateVideosMetadata,
-  generateVideosPageSchema,
+  generateVideosStructuredData,
   getVideosPageCopy,
 } from '@/config/seo'
 import {
@@ -33,22 +31,15 @@ function VideoStructuredData({ data }: { data: Record<string, unknown> }) {
 
 function VideoCard({ video }: { video: YouTubeVideo }) {
   const publishedLabel = formatPublishedDate(video.publishedAt)
-  const excerpt = video.description
-    ? video.description.split('\n').find((line) => line.trim().length > 0)?.trim()
-    : undefined
+  const excerpt =
+    video.description?.split('\n').find((line) => line.trim().length > 0)?.trim() ||
+    `PostgreSQL tutorial covering ${video.title}.`
 
   return (
     <article
       id={`video-${video.id}`}
-      className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm scroll-mt-28"
-      itemScope
-      itemType="https://schema.org/VideoObject"
+      className="scroll-mt-28 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
     >
-      <meta itemProp="embedUrl" content={`https://www.youtube.com/embed/${video.id}`} />
-      <meta itemProp="contentUrl" content={video.url} />
-      {video.publishedAt && <meta itemProp="uploadDate" content={video.publishedAt} />}
-      <meta itemProp="thumbnailUrl" content={video.thumbnailUrl} />
-
       <div className="relative aspect-video bg-black">
         <iframe
           src={`https://www.youtube.com/embed/${video.id}`}
@@ -62,7 +53,7 @@ function VideoCard({ video }: { video: YouTubeVideo }) {
       </div>
 
       <div className="p-5">
-        <h2 className="mb-2 text-lg font-semibold leading-snug text-white" itemProp="name">
+        <h2 className="mb-2 text-lg font-semibold leading-snug text-white">
           {video.title}
         </h2>
         {publishedLabel && (
@@ -70,17 +61,14 @@ function VideoCard({ video }: { video: YouTubeVideo }) {
             <time dateTime={video.publishedAt}>{publishedLabel}</time>
           </p>
         )}
-        {excerpt && (
-          <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-white/70" itemProp="description">
-            {excerpt}
-          </p>
-        )}
+        <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-white/70">
+          {excerpt}
+        </p>
         <Link
           href={video.url}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-medium text-red-400 transition-colors hover:text-red-300"
-          itemProp="url"
         >
           <Play className="h-4 w-4" aria-hidden="true" />
           Watch on YouTube
@@ -94,17 +82,15 @@ function VideoCard({ video }: { video: YouTubeVideo }) {
 export default async function VideosPage() {
   const videos = await fetchChannelVideos()
   const copy = getVideosPageCopy()
-  const structuredData = [
-    generateVideosPageSchema(videos, YOUTUBE_CHANNEL.name, YOUTUBE_CHANNEL.url),
-    generateVideosBreadcrumbSchema(),
-    generateVideosFaqSchema(),
-  ]
+  const structuredData = generateVideosStructuredData(
+    videos,
+    YOUTUBE_CHANNEL.name,
+    YOUTUBE_CHANNEL.url
+  )
 
   return (
     <div className="min-h-screen bg-[#111827] pt-0">
-      {structuredData.map((schema, index) => (
-        <VideoStructuredData key={index} data={schema} />
-      ))}
+      <VideoStructuredData data={structuredData} />
 
       <section className="relative flex min-h-[420px] items-center overflow-hidden pt-20 text-center">
         <div className="container-extra-wide relative z-10 mx-auto w-full px-4 py-12">

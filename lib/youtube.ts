@@ -75,6 +75,37 @@ async function fetchVideoIdsFromChannelPage(): Promise<string[]> {
   return Array.from(ids)
 }
 
+function decodeJsonString(value: string): string {
+  return value
+    .replace(/\\n/g, '\n')
+    .replace(/\\"/g, '"')
+    .replace(/\\'/g, "'")
+    .replace(/\\\\/g, '\\')
+    .replace(/\\u0026/g, '&')
+}
+
+async function fetchVideoWatchMetadata(
+  videoId: string
+): Promise<Pick<YouTubeVideo, 'publishedAt' | 'description'>> {
+  const response = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
+    headers: { 'User-Agent': USER_AGENT },
+    next: { revalidate: 86400 },
+  })
+
+  if (!response.ok) {
+    return { publishedAt: '', description: undefined }
+  }
+
+  const html = await response.text()
+  const publishedAt = html.match(/"uploadDate":"([^"]+)"/)?.[1] ?? ''
+  const shortDescription = html.match(/"shortDescription":"((?:\\.|[^"\\])*)"/)?.[1]
+
+  return {
+    publishedAt,
+    description: shortDescription ? decodeJsonString(shortDescription).trim() : undefined,
+  }
+}
+
 async function fetchOembedVideo(videoId: string): Promise<YouTubeVideo | null> {
   const response = await fetch(
     `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`,
@@ -90,12 +121,29 @@ async function fetchOembedVideo(videoId: string): Promise<YouTubeVideo | null> {
     thumbnail_url: string
   }
 
+  const watchMetadata = await fetchVideoWatchMetadata(videoId)
+
   return {
     id: videoId,
     title: data.title,
-    publishedAt: '',
+    publishedAt: watchMetadata.publishedAt,
+    description: watchMetadata.description,
     thumbnailUrl: data.thumbnail_url,
     url: `https://www.youtube.com/watch?v=${videoId}`,
+  }
+}
+
+async function enrichVideoMetadata(video: YouTubeVideo): Promise<YouTubeVideo> {
+  if (video.publishedAt && video.description) {
+    return video
+  }
+
+  const watchMetadata = await fetchVideoWatchMetadata(video.id)
+
+  return {
+    ...video,
+    publishedAt: video.publishedAt || watchMetadata.publishedAt,
+    description: video.description || watchMetadata.description,
   }
 }
 
@@ -125,7 +173,11 @@ export async function fetchChannelVideos(): Promise<YouTubeVideo[]> {
     }
   }
 
-  return Array.from(videosById.values()).sort((a, b) => {
+  const enrichedVideos = await Promise.all(
+    Array.from(videosById.values()).map((video) => enrichVideoMetadata(video))
+  )
+
+  return enrichedVideos.sort((a, b) => {
     const aTime = a.publishedAt ? Date.parse(a.publishedAt) : 0
     const bTime = b.publishedAt ? Date.parse(b.publishedAt) : 0
     return bTime - aTime

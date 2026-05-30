@@ -16,6 +16,7 @@ export async function GET() {
   const pageUrl = 'https://www.pgelephant.com/videos'
 
   const videoEntries = videos
+    .filter((video) => video.publishedAt)
     .map((video) => {
       const title = escapeXml(video.title)
       const description = escapeXml(
@@ -26,7 +27,7 @@ export async function GET() {
 
       return `  <url>
     <loc>${pageUrl}#video-${video.id}</loc>
-    <lastmod>${video.publishedAt || new Date().toISOString()}</lastmod>
+    <lastmod>${video.publishedAt}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <video:video>
@@ -34,7 +35,7 @@ export async function GET() {
       <video:title>${title}</video:title>
       <video:description>${description}</video:description>
       <video:player_loc allow_embed="yes">${player}</video:player_loc>
-      <video:publication_date>${video.publishedAt || new Date().toISOString()}</video:publication_date>
+      <video:publication_date>${video.publishedAt}</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:requires_subscription>no</video:requires_subscription>
       <video:live>no</video:live>

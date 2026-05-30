@@ -402,71 +402,105 @@ export function generateVideosMetadata(
   }
 }
 
-/**
- * CollectionPage + ItemList + VideoObject structured data
- */
-export function generateVideosPageSchema(videos: VideoForSeo[], channelName: string, channelUrl: string) {
+function buildVideoObjectSchema(
+  video: VideoForSeo,
+  channelName: string,
+  channelUrl: string
+) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: videosPageTitle,
-    description: videosPageDescription,
-    url: `${baseSEO.siteUrl}/videos`,
+    '@type': 'VideoObject',
+    '@id': `${baseSEO.siteUrl}/videos#video-${video.id}`,
+    name: video.title,
+    description: truncateText(
+      video.description || `PostgreSQL tutorial: ${video.title}`,
+      500
+    ),
+    thumbnailUrl: [video.thumbnailUrl],
+    uploadDate: video.publishedAt,
+    embedUrl: `https://www.youtube.com/embed/${video.id}`,
+    contentUrl: video.url,
+    url: video.url,
     inLanguage: 'en-US',
-    isPartOf: {
-      '@type': 'WebSite',
-      name: baseSEO.siteName,
-      url: baseSEO.siteUrl,
-    },
-    about: {
-      '@type': 'Thing',
-      name: 'PostgreSQL',
-      sameAs: 'https://en.wikipedia.org/wiki/PostgreSQL',
-    },
-    author: {
-      '@type': 'Person',
-      name: 'Dr. Ibrar Ahmed',
-      url: channelUrl,
-    },
+    genre: 'PostgreSQL',
+    isFamilyFriendly: true,
     publisher: {
       '@type': 'Organization',
-      name: baseSEO.siteName,
-      url: baseSEO.siteUrl,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${baseSEO.siteUrl}/favicon-512.png`,
-      },
+      name: channelName,
+      url: channelUrl,
     },
-    mainEntity: {
-      '@type': 'ItemList',
-      name: `${channelName} PostgreSQL Videos`,
-      numberOfItems: videos.length,
-      itemListElement: videos.map((video, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        url: `${baseSEO.siteUrl}/videos#video-${video.id}`,
-        item: {
-          '@type': 'VideoObject',
-          name: video.title,
-          description: truncateText(
-            video.description || `PostgreSQL tutorial: ${video.title}`,
-            500
-          ),
-          thumbnailUrl: video.thumbnailUrl,
-          uploadDate: video.publishedAt || undefined,
-          embedUrl: `https://www.youtube.com/embed/${video.id}`,
-          contentUrl: video.url,
-          url: video.url,
-          inLanguage: 'en-US',
-          genre: 'PostgreSQL',
-          publisher: {
-            '@type': 'Organization',
-            name: channelName,
-            url: channelUrl,
+  }
+}
+
+/**
+ * Single JSON-LD graph for the videos hub (avoids duplicate VideoObject markup).
+ */
+export function generateVideosStructuredData(
+  videos: VideoForSeo[],
+  channelName: string,
+  channelUrl: string
+) {
+  const validVideos = videos.filter(
+    (video) => video.publishedAt && video.title && video.thumbnailUrl
+  )
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${baseSEO.siteUrl}/videos#webpage`,
+        name: videosPageTitle,
+        description: videosPageDescription,
+        url: `${baseSEO.siteUrl}/videos`,
+        inLanguage: 'en-US',
+        isPartOf: {
+          '@type': 'WebSite',
+          name: baseSEO.siteName,
+          url: baseSEO.siteUrl,
+        },
+        about: {
+          '@type': 'Thing',
+          name: 'PostgreSQL',
+          sameAs: 'https://en.wikipedia.org/wiki/PostgreSQL',
+        },
+        author: {
+          '@type': 'Person',
+          name: 'Dr. Ibrar Ahmed',
+          url: channelUrl,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: baseSEO.siteName,
+          url: baseSEO.siteUrl,
+          logo: {
+            '@type': 'ImageObject',
+            url: `${baseSEO.siteUrl}/favicon-512.png`,
           },
         },
-      })),
-    },
+        mainEntity: {
+          '@type': 'ItemList',
+          name: `${channelName} PostgreSQL Videos`,
+          numberOfItems: validVideos.length,
+          itemListElement: validVideos.map((video, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${baseSEO.siteUrl}/videos#video-${video.id}`,
+          })),
+        },
+      },
+      ...validVideos.map((video) => buildVideoObjectSchema(video, channelName, channelUrl)),
+      {
+        ...generateBreadcrumbSchema([
+          { name: 'Home', url: '/' },
+          { name: 'PostgreSQL Videos', url: '/videos' },
+        ]),
+        '@context': undefined,
+      },
+      {
+        ...generateVideosFaqSchema(),
+        '@context': undefined,
+      },
+    ],
   }
 }
 
@@ -618,7 +652,7 @@ const seoConfig = {
   generateArticleSchema,
   generateBreadcrumbSchema,
   generateVideosMetadata,
-  generateVideosPageSchema,
+  generateVideosStructuredData,
   generateVideosFaqSchema,
   generateVideosBreadcrumbSchema,
   getVideosPageCopy,
