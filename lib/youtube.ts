@@ -1,0 +1,145 @@
+export interface YouTubeVideo {
+  id: string
+  title: string
+  description?: string
+  publishedAt: string
+  thumbnailUrl: string
+  url: string
+}
+
+export const YOUTUBE_CHANNEL = {
+  handle: '@DrIbrarAhmed',
+  id: 'UCn-OaZ1f3NaEJZu_8T5GM0g',
+  url: 'https://www.youtube.com/@DrIbrarAhmed',
+  name: 'PostgreSQL with Dr. Ibrar Ahmed',
+} as const
+
+const USER_AGENT = 'Mozilla/5.0 (compatible; pgElephant/1.0)'
+
+function decodeXml(text: string): string {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+}
+
+function parseRssEntries(xml: string): YouTubeVideo[] {
+  const entries = xml.split('<entry>').slice(1)
+  const videos: YouTubeVideo[] = []
+
+  for (const entry of entries) {
+    const id = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)?.[1]
+    const title = entry.match(/<media:title>([^<]+)<\/media:title>/)?.[1]
+    const publishedAt = entry.match(/<published>([^<]+)<\/published>/)?.[1]
+    const description = entry.match(/<media:description>([\s\S]*?)<\/media:description>/)?.[1]
+    const thumbnailUrl = entry.match(/<media:thumbnail url="([^"]+)"/)?.[1]
+
+    if (!id || !title || !publishedAt) {
+      continue
+    }
+
+    videos.push({
+      id,
+      title: decodeXml(title),
+      description: description ? decodeXml(description.trim()) : undefined,
+      publishedAt,
+      thumbnailUrl: thumbnailUrl ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+      url: `https://www.youtube.com/watch?v=${id}`,
+    })
+  }
+
+  return videos
+}
+
+async function fetchVideoIdsFromChannelPage(): Promise<string[]> {
+  const response = await fetch(`${YOUTUBE_CHANNEL.url}/videos`, {
+    headers: { 'User-Agent': USER_AGENT },
+    next: { revalidate: 3600 },
+  })
+
+  if (!response.ok) {
+    return []
+  }
+
+  const html = await response.text()
+  const ids = new Set<string>()
+  let match: RegExpExecArray | null
+
+  const pattern = /"videoId":"([a-zA-Z0-9_-]{11})"/g
+  while ((match = pattern.exec(html)) !== null) {
+    ids.add(match[1])
+  }
+
+  return Array.from(ids)
+}
+
+async function fetchOembedVideo(videoId: string): Promise<YouTubeVideo | null> {
+  const response = await fetch(
+    `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`,
+    { next: { revalidate: 86400 } }
+  )
+
+  if (!response.ok) {
+    return null
+  }
+
+  const data = (await response.json()) as {
+    title: string
+    thumbnail_url: string
+  }
+
+  return {
+    id: videoId,
+    title: data.title,
+    publishedAt: '',
+    thumbnailUrl: data.thumbnail_url,
+    url: `https://www.youtube.com/watch?v=${videoId}`,
+  }
+}
+
+export async function fetchChannelVideos(): Promise<YouTubeVideo[]> {
+  const [rssResponse, scrapedIds] = await Promise.all([
+    fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL.id}`, {
+      next: { revalidate: 3600 },
+    }),
+    fetchVideoIdsFromChannelPage(),
+  ])
+
+  const videosById = new Map<string, YouTubeVideo>()
+
+  if (rssResponse.ok) {
+    const xml = await rssResponse.text()
+    for (const video of parseRssEntries(xml)) {
+      videosById.set(video.id, video)
+    }
+  }
+
+  const missingIds = scrapedIds.filter((id) => !videosById.has(id))
+  const oembedVideos = await Promise.all(missingIds.map((id) => fetchOembedVideo(id)))
+
+  for (const video of oembedVideos) {
+    if (video) {
+      videosById.set(video.id, video)
+    }
+  }
+
+  return Array.from(videosById.values()).sort((a, b) => {
+    const aTime = a.publishedAt ? Date.parse(a.publishedAt) : 0
+    const bTime = b.publishedAt ? Date.parse(b.publishedAt) : 0
+    return bTime - aTime
+  })
+}
+
+export function formatPublishedDate(isoDate: string): string | null {
+  if (!isoDate) {
+    return null
+  }
+
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(isoDate))
+}

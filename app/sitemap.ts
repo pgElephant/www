@@ -242,6 +242,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: priorities.blog,
+    },
+    {
+      url: `${baseUrl}/videos`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: priorities.blog,
     }
   ]
 
