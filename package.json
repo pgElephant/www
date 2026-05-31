@@ -18,7 +18,7 @@
     "format:check": "prettier --check .",
     "analyze": "ANALYZE=true npm run build",
     "export": "next export",
-    "sitemap": "next-sitemap",
+    "sitemap": "node scripts/generate-static-sitemaps.js",
     "seo:audit": "npm run build && npm run lighthouse",
     "lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html --view",
     "validate:schemas": "./scripts/validate-schemas.sh",

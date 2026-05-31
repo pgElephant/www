@@ -1,14 +1,7 @@
 import { MetadataRoute } from 'next'
 import { fetchChannelVideos } from '@/lib/youtube'
+import { getDiscoveredRoutes, getRouteMeta } from '@/lib/sitemap-routes'
 import { VIDEO_HUBS } from '@/config/videos'
-
-interface SitemapEntry {
-  url: string
-  lastModified: Date | string
-  changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
-  priority: number
-  images?: string[]
-}
 
 export const revalidate = 3600
 
@@ -23,284 +16,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   )
 
-  const videoHubPages: SitemapEntry[] = hubVideoData.map(({ hub, videos }) => ({
-    url: `${baseUrl}${hub.path}`,
-    lastModified: videos[0]?.publishedAt ? new Date(videos[0].publishedAt) : currentDate,
-    changeFrequency: 'daily',
-    priority: 0.9,
-    images: videos[0]?.thumbnailUrl ? [videos[0].thumbnailUrl] : undefined,
-  }))
+  const videoHubByPath = new Map(
+    hubVideoData.map(({ hub, videos }) => [
+      hub.path,
+      {
+        lastModified: videos[0]?.publishedAt ? new Date(videos[0].publishedAt) : currentDate,
+        images: videos[0]?.thumbnailUrl ? [videos[0].thumbnailUrl] : undefined,
+      },
+    ])
+  )
 
-  // Define priority levels for different content types
-  const priorities = {
-    homepage: 1.0,
-    mainProducts: 0.9,
-    videos: 0.9,
-    docs: 0.8,
-    subPages: 0.7,
-    blog: 0.6,
-    utility: 0.5,
-  }
+  return getDiscoveredRoutes().map((routePath) => {
+    const { changeFrequency, priority } = getRouteMeta(routePath)
+    const videoHub = videoHubByPath.get(routePath as '/videos' | '/videos-ai')
 
-  // Core pages with highest priority
-  const corePages: SitemapEntry[] = [
-    {
-      url: baseUrl,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.homepage,
-    },
-    ...videoHubPages,
-  ]
-
-  // Main product pages
-  const productPages: SitemapEntry[] = [
-    {
-      url: `${baseUrl}/pgbalancer`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.mainProducts,
-    },
-    {
-      url: `${baseUrl}/pgraft`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.mainProducts,
-    },
-    {
-      url: `${baseUrl}/pgsentinel`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.mainProducts,
-    },
-    {
-      url: `${baseUrl}/pg-stat-insights`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.mainProducts,
-    },
-  ]
-
-  // Documentation pages
-  const docPages: SitemapEntry[] = [
-    {
-      url: `${baseUrl}/docs`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.docs,
-    },
-    // pgbalancer documentation
-    {
-      url: `${baseUrl}/docs/pgbalancer`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/docs/pgbalancer/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgbalancer/configuration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgbalancer/metrics`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgbalancer/internals`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    // pgraft documentation
-    {
-      url: `${baseUrl}/docs/pgraft`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/installation`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/configuration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/cluster-management`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/raft-protocol`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/sql-functions`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/performance`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgraft/troubleshooting`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    // pgSentinel documentation
-    {
-      url: `${baseUrl}/docs/pgsentinel`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/docs/pgsentinel/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgsentinel/configuration`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgsentinel/api`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pgsentinel/troubleshooting`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    // pg_stat_insights documentation
-    {
-      url: `${baseUrl}/docs/pg-stat-insights`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/docs/pg-stat-insights/getting-started`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pg-stat-insights/api`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pg-stat-insights/query-analytics`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-    {
-      url: `${baseUrl}/docs/pg-stat-insights/best-practices`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.subPages,
-    },
-  ]
-
-  // Utility and secondary pages
-  const utilityPages: SitemapEntry[] = [
-    {
-      url: `${baseUrl}/download`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.docs,
-    },
-    {
-      url: `${baseUrl}/community`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.blog,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.utility,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: priorities.blog,
-    },
-  ]
-
-  // Blog category pages
-  const blogPages: SitemapEntry[] = [
-    {
-      url: `${baseUrl}/blog/pgraft`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.blog,
-    },
-    {
-      url: `${baseUrl}/blog/pg-stat-insights`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.blog,
-    },
-    {
-      url: `${baseUrl}/blog/pg-stat-insights-1-0-0`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.blog,
-    },
-    {
-      url: `${baseUrl}/blog/pgbalancer`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: priorities.blog,
-    },
-  ]
-
-  // Combine all pages
-  return [
-    ...corePages,
-    ...productPages,
-    ...docPages,
-    ...utilityPages,
-    ...blogPages,
-  ]
+    return {
+      url: `${baseUrl}${routePath}`,
+      lastModified: videoHub?.lastModified ?? currentDate,
+      changeFrequency,
+      priority,
+      ...(videoHub?.images ? { images: videoHub.images } : {}),
+    }
+  })
 }

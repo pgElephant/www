@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
     <loc>https://www.pgelephant.com/blog</loc>
-    <lastmod>2025-11-03T00:00:00.000Z</lastmod>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.pgelephant.com/blog/pgraft</loc>
-    <lastmod>2025-01-15T00:00:00.000Z</lastmod>
+    <loc>https://www.pgelephant.com/blog/patroni-etcd-ha</loc>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <news:news>
@@ -16,13 +16,13 @@
         <news:name>pgElephant Blog</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-01-15T00:00:00.000Z</news:publication_date>
-      <news:title>pgraft: Raft-Based PostgreSQL Extension</news:title>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Patroni Etcd Ha - pgElephant Blog</news:title>
     </news:news>
   </url>
   <url>
     <loc>https://www.pgelephant.com/blog/pg-stat-insights</loc>
-    <lastmod>2025-01-29T00:00:00.000Z</lastmod>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <news:news>
@@ -30,13 +30,13 @@
         <news:name>pgElephant Blog</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-01-29T00:00:00.000Z</news:publication_date>
-      <news:title>pg_stat_insights: PostgreSQL Performance Monitoring Extension</news:title>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Pg Stat Insights - pgElephant Blog</news:title>
     </news:news>
   </url>
   <url>
     <loc>https://www.pgelephant.com/blog/pg-stat-insights-1-0-0</loc>
-    <lastmod>2025-02-21T00:00:00.000Z</lastmod>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <news:news>
@@ -44,13 +44,13 @@
         <news:name>pgElephant Blog</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-02-21T00:00:00.000Z</news:publication_date>
-      <news:title>pg_stat_insights 1.0.0 — Release Announcement</news:title>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Pg Stat Insights 1 0 0 - pgElephant Blog</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://www.pgelephant.com/blog/neurondb</loc>
-    <lastmod>2025-02-20T00:00:00.000Z</lastmod>
+    <loc>https://www.pgelephant.com/blog/pg-stat-insights-index-monitoring</loc>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <news:news>
@@ -58,13 +58,13 @@
         <news:name>pgElephant Blog</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-02-20T00:00:00.000Z</news:publication_date>
-      <news:title>NeuronDB: PostgreSQL AI Vector Database Extension</news:title>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Pg Stat Insights Index Monitoring - pgElephant Blog</news:title>
     </news:news>
   </url>
   <url>
     <loc>https://www.pgelephant.com/blog/pgbalancer</loc>
-    <lastmod>2025-02-15T00:00:00.000Z</lastmod>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <news:news>
@@ -72,8 +72,50 @@
         <news:name>pgElephant Blog</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-02-15T00:00:00.000Z</news:publication_date>
-      <news:title>pgbalancer: AI-Powered PostgreSQL Connection Pooler</news:title>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Pgbalancer - pgElephant Blog</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/blog/pgbalancer-3-node-ha</loc>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <news:news>
+      <news:publication>
+        <news:name>pgElephant Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Pgbalancer 3 Node Ha - pgElephant Blog</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/blog/pgbalancer-pg-stat-insights</loc>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <news:news>
+      <news:publication>
+        <news:name>pgElephant Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Pgbalancer Pg Stat Insights - pgElephant Blog</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.pgelephant.com/blog/pgraft</loc>
+    <lastmod>2026-05-31T18:03:43.135Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <news:news>
+      <news:publication>
+        <news:name>pgElephant Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-31T18:03:43.135Z</news:publication_date>
+      <news:title>Pgraft - pgElephant Blog</news:title>
     </news:news>
   </url>
 </urlset>
