@@ -387,13 +387,12 @@ export function generateVideosHubMetadata(
   }
 }
 
-function buildVideoObjectSchema(
-  hub: VideosHubConfig,
-  video: VideoForSeo
-) {
+function buildVideoObjectSchema(hub: VideosHubConfig, video: VideoForSeo) {
+  const pageUrl = `${baseSEO.siteUrl}${hub.path}`
+
   return {
     '@type': 'VideoObject',
-    '@id': `${baseSEO.siteUrl}${hub.path}#video-${video.id}`,
+    '@id': `${pageUrl}#video-${video.id}`,
     name: video.title,
     description: truncateText(
       video.description || `${hub.genre} tutorial: ${video.title}`,
@@ -407,16 +406,46 @@ function buildVideoObjectSchema(
     inLanguage: 'en-US',
     genre: hub.genre,
     isFamilyFriendly: true,
+    author: {
+      '@type': 'Person',
+      name: 'Dr. Ibrar Ahmed',
+      url: hub.channel.url,
+    },
     publisher: {
       '@type': 'Organization',
       name: hub.channel.name,
       url: hub.channel.url,
     },
+    potentialAction: {
+      '@type': 'WatchAction',
+      target: video.url,
+    },
+    isPartOf: {
+      '@type': 'CollectionPage',
+      '@id': `${pageUrl}#webpage`,
+      name: hub.title,
+      url: pageUrl,
+    },
   }
 }
 
+export function generateVideoObjectStructuredData(
+  hub: VideosHubConfig,
+  video: VideoForSeo
+) {
+  return {
+    '@context': 'https://schema.org',
+    ...buildVideoObjectSchema(hub, video),
+  }
+}
+
+export function isValidVideoForSchema(video: VideoForSeo): boolean {
+  return Boolean(video.publishedAt && video.title && video.thumbnailUrl)
+}
+
 /**
- * Single JSON-LD graph for a videos hub (avoids duplicate VideoObject markup).
+ * Page-level JSON-LD graph for a videos hub (CollectionPage, ItemList, FAQ, breadcrumbs).
+ * Per-video VideoObject markup is emitted alongside each embedded player.
  */
 export function generateVideosHubStructuredData(
   hub: VideosHubConfig,
@@ -489,11 +518,11 @@ export function generateVideosHubStructuredData(
           itemListElement: validVideos.map((video, index) => ({
             '@type': 'ListItem',
             position: index + 1,
-            url: `${pageUrl}#video-${video.id}`,
+            name: video.title,
+            item: `${pageUrl}#video-${video.id}`,
           })),
         },
       },
-      ...validVideos.map((video) => buildVideoObjectSchema(hub, video)),
       {
         ...generateBreadcrumbSchema([
           { name: 'Home', url: '/' },

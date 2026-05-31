@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import { ExternalLink, Play, Sparkles, Youtube } from 'lucide-react'
 import type { VideosHubConfig } from '@/config/videos'
-import { generateVideosHubStructuredData } from '@/config/seo'
+import {
+  generateVideoObjectStructuredData,
+  generateVideosHubStructuredData,
+  isValidVideoForSchema,
+} from '@/config/seo'
 import {
   fetchChannelVideos,
   formatPublishedDate,
@@ -18,9 +22,11 @@ function VideoStructuredData({ data }: { data: Record<string, unknown> }) {
 }
 
 function VideoCard({
+  hub,
   video,
   excerptFallback,
 }: {
+  hub: VideosHubConfig
   video: YouTubeVideo
   excerptFallback: (title: string) => string
 }) {
@@ -29,11 +35,21 @@ function VideoCard({
     video.description?.split('\n').find((line) => line.trim().length > 0)?.trim() ||
     excerptFallback(video.title)
 
+  const videoSchema = isValidVideoForSchema(video)
+    ? generateVideoObjectStructuredData(hub, video)
+    : null
+
   return (
     <article
       id={`video-${video.id}`}
       className="scroll-mt-28 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
     >
+      {videoSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+        />
+      )}
       <div className="relative aspect-video bg-black">
         <iframe
           src={`https://www.youtube.com/embed/${video.id}`}
@@ -198,6 +214,7 @@ export async function VideosHubPage({ hub }: { hub: VideosHubConfig }) {
               {videos.map((video) => (
                 <VideoCard
                   key={video.id}
+                  hub={hub}
                   video={video}
                   excerptFallback={hub.excerptFallback}
                 />
