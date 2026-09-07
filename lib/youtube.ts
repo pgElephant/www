@@ -49,7 +49,7 @@ export const YOUTUBE_CHANNEL_CYBER: YouTubeChannelConfig = {
 
 const USER_AGENT = 'Mozilla/5.0 (compatible; DrIbrarAhmedSite/1.0)';
 const MIN_LONG_FORM_SECONDS = 90;
-const KNOWN_SHORT_VIDEO_IDS = new Set(['62VNgSdoc6E']);
+const KNOWN_SHORT_VIDEO_IDS = new Set(['62VNgSdoc6E', '_uppjqKvp1w', '0wR4BuQMA50', '0DCk7wqvTlA']);
 
 const VIDEO_CACHE_BY_CHANNEL_ID: Record<string, YouTubeVideo[]> = {
   [YOUTUBE_CHANNEL.id]: videoCache.postgresql as YouTubeVideo[],
