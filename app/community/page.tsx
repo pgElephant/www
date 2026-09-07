@@ -87,7 +87,7 @@ const CommunityPage = () => {
       stats: { stars: '2', forks: '1', issues: '3', prs: '2' },
       bg: { from: palette.navy, via: palette.slate, to: palette.navy },
       links: [
-        { title: 'Main Repository', href: 'https://github.com/pgelephant', type: 'Code', description: 'Core pgElephant organization' },
+        { title: 'GitHub profile', href: 'https://github.com/pgelephant', type: 'Code', description: 'Open-source projects by Dr. Ibrar Ahmed' },
         { title: 'RAM Project', href: 'https://github.com/pgelephant/ram', type: 'Code', description: 'Resilient Adaptive Manager' },
         { title: 'pgraft Extension', href: 'https://github.com/pgelephant/pgraft', type: 'Code', description: 'PostgreSQL Raft Extension' },
         { title: 'Report Issues', href: 'https://github.com/pgelephant/issues', type: 'Support', description: 'Bug reports and feature requests' },

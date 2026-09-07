@@ -76,7 +76,7 @@ sha256sum -c SHA256SUMS
 
 Huge thanks to the PostgreSQL community and early users who helped shape this release with feedback and testing.
 
-pgElephant Team
+Dr. Ibrar Ahmed
 
 ## Related Blog Posts
 

@@ -491,7 +491,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0], index: number })
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
                   <User className="w-4 h-4" />
-                  <span>{post.author}</span>
+                  <span>Dr. Ibrar Ahmed</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />

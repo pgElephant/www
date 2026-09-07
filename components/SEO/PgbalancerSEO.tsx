@@ -37,7 +37,7 @@ const PgbalancerSEO: React.FC<PgbalancerSEOProps> = ({
     "logo": "https://www.pgelephant.com/ico/pgbalancer_HD.ico",
     "creator": {
       "@type": "Organization",
-      "name": "pgElephant Team",
+      "name": "Dr. Ibrar Ahmed",
       "url": "https://www.pgelephant.com",
       "logo": "https://www.pgelephant.com/ico/pgElephant_HD.ico",
       "email": "contact@pgelephant.com",

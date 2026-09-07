@@ -1,0 +1,208 @@
+{
+  "ai": [
+    {
+      "id": "UeoNl5U_f5E",
+      "title": "Kimi K3: 2.8T Parameters, But Only 104B Active Per Token",
+      "description": "Kimi K3 has 2. 8 trillion parameters-but only about 104 billion are activated for each token. This visual deep dive explains how 16 of 896 routed experts, 2 shared experts, Stable LatentMoE, and Kimi Delta Attention make that possible. Kimi K3 is a Mixture-of-Experts model with a 1M-token context window. We follow one token through expert routing, distributed communication, the 7168 → 3584 latent projection, Quantile Balancing, KDA, Gated MLA, and Block Attention Residuals.",
+      "publishedAt": "2026-09-03T04:04:03+00:00",
+      "thumbnailUrl": "https://i2.ytimg.com/vi/UeoNl5U_f5E/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=UeoNl5U_f5E",
+      "durationSeconds": 758
+    },
+    {
+      "id": "-mOKLAP5ct4",
+      "title": "How ChatGPT Actually Writes: Next Token Prediction Explained",
+      "description": "What is an LLM? ChatGPT generates answers by predicting the next token. Beginner visual guide-no math required. Tokens, weights, context, and hallucinations. What you will learn • What LLM means • How next-token prediction builds an answer • Where probabilities come from • Context vs memory • LLM vs the full ChatGPT-style app Playlists Beginner AI: https://www.",
+      "publishedAt": "2026-08-31T14:53:00+00:00",
+      "thumbnailUrl": "https://i2.ytimg.com/vi/-mOKLAP5ct4/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=-mOKLAP5ct4",
+      "durationSeconds": 440
+    },
+    {
+      "id": "td3bOBa7KMY",
+      "title": "Why AI Models Think Longer Before Answering | Test-Time Compute Explained",
+      "description": "Why do reasoning models spend more compute before answering? Test-time compute. Best-of-N, backtracking, verification, rewards, DeepSeek-R1, and tool use-visually explained. What you will learn • Training-time vs test-time scaling • Reasoning budgets and candidate paths • Best-of-N, backtracking, and verification • Outcome vs process rewards • When thinking longer helps-and when it fails Playlists DEEP AI: https://www.",
+      "publishedAt": "2026-08-30T11:12:31+00:00",
+      "thumbnailUrl": "https://i1.ytimg.com/vi/td3bOBa7KMY/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=td3bOBa7KMY"
+    },
+    {
+      "id": "oLazZ0I8-aQ",
+      "title": "Speculative Decoding: Faster LLM Token Generation",
+      "description": "What is speculative decoding? A small draft model proposes tokens; the large LLM verifies them. Same output distribution as the big model-faster when the draft is often right. What you will learn • Why one token per forward pass wastes GPU parallelism • Draft model vs target model • One-pass verification and rejection • Why draft quality controls the speedup • How it sits next to GQA, quantization, and PagedAttention Playlists DEEP AI: https://www.",
+      "publishedAt": "2026-08-30T10:34:14+00:00",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/oLazZ0I8-aQ/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=oLazZ0I8-aQ",
+      "durationSeconds": 658
+    },
+    {
+      "id": "T_u6Oyyp1ag",
+      "title": "Why LLM Prediction Is Compression (Entropy Explained)",
+      "description": "What is entropy? Next-token prediction and compression are the same math. From Shannon’s information theory to why language models train with cross-entropy. Watch next: Transformer Attention Explained - https://www. youtube. com/watch? v=rbrSteyXx_0 What you will learn • Variable-length and prefix-free codes • Self-information I = -log₂ p • Why prediction equals compression • Entropy rate of language • How this leads to LLM training loss Playlists LLM Fundamentals: https://www.",
+      "publishedAt": "2026-08-28T09:05:12+00:00",
+      "thumbnailUrl": "https://i1.ytimg.com/vi/T_u6Oyyp1ag/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=T_u6Oyyp1ag"
+    },
+    {
+      "id": "kY--WQxI2Rw",
+      "title": "How AI Agents Work: Tools, Memory, MCP, Guardrails",
+      "description": "How AI agents work beyond the LLM: prompt → tool call → policy → runtime → observation. Follow one agent from a user request to a controlled real-world action-plus memory, MCP, and guardrails. What you will learn • Why writing a plan is not taking an action • Structured tool calls and the agent loop • Session context vs durable memory • MCP discovery is not permission • Policy gates, human approval, budgets, and tracing Playlists AI Agents: https://www.",
+      "publishedAt": "2026-08-27T20:08:03+00:00",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/kY--WQxI2Rw/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=kY--WQxI2Rw",
+      "durationSeconds": 649
+    },
+    {
+      "id": "4eCj3GOhpW4",
+      "title": "How Vector Databases Work: Embeddings, HNSW & Semantic Search",
+      "description": "One query. A million stored vectors. Do we compare against every one? That is exact nearest neighbor, and it is correct, and it is linear. At that scale, latency is the product. A point in space is not a search. This lecture is the store those numbers live in, and the hop that finds the nearest neighbor without reading every row.",
+      "publishedAt": "2026-08-25T22:59:45+00:00",
+      "thumbnailUrl": "https://i1.ytimg.com/vi/4eCj3GOhpW4/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=4eCj3GOhpW4",
+      "durationSeconds": 628
+    },
+    {
+      "id": "qxN9X9nMPmE",
+      "title": "RAG Explained: Why LLM Guesses Without Retrieval",
+      "description": "What is RAG? Retrieval-augmented generation fetches document chunks with embeddings before the language model writes an answer. This visual explanation shows query, embed, retrieve, stuff, generate, and the failures when the index misses. Watch next: Why AI Hallucinates - https://www. youtube. com/watch? v=PVFRCS6pt84 Then: AI Agent Architecture - https://www.",
+      "publishedAt": "2026-08-24T15:59:48+00:00",
+      "thumbnailUrl": "https://i2.ytimg.com/vi/qxN9X9nMPmE/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=qxN9X9nMPmE"
+    },
+    {
+      "id": "NjMK2Hignh4",
+      "title": "AI Embeddings Explained: Vectors Behind RAG Search",
+      "description": "What are embeddings? They turn text into vectors so semantic search can find nearest neighbors by meaning, not spelling. This visual explanation shows cosine similarity, chunking, HNSW, and why RAG retrieval depends on that vector space. Watch next: RAG - https://www. youtube. com/watch? v=qxN9X9nMPmE Vector Databases is the next episode in this chain and is in production.",
+      "publishedAt": "2026-08-21T14:53:32+00:00",
+      "thumbnailUrl": "https://i3.ytimg.com/vi/NjMK2Hignh4/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=NjMK2Hignh4",
+      "durationSeconds": 873
+    }
+  ],
+  "postgresql": [
+    {
+      "id": "rO8MQa0m7w0",
+      "title": "PostgreSQL Database Indexes: Complete Production Troubleshooting",
+      "description": "Before we open a single terminal, here is what you are getting. Every index type PostgreSQL 18 ships, on a five million row table. Measured, not guessed. You will watch the planner refuse a perfectly good index, and you will find out why. If you have ever added an index and watched nothing get faster, this is the one that fixes it.",
+      "publishedAt": "2026-08-29T08:57:53+00:00",
+      "thumbnailUrl": "https://i3.ytimg.com/vi/rO8MQa0m7w0/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=rO8MQa0m7w0"
+    },
+    {
+      "id": "ktxMp16wyCw",
+      "title": "Amazon Aurora PostgreSQL Database: What Happens When It Fails?",
+      "description": "Managed doesn't mean unbreakable. But on Aurora, the thing that breaks is compute. Your data sits in a separate storage service that the instance failure never touched. So when the writer dies, what happens next depends on one question. Do you have a replica? With one, Aurora promotes it, usually in under thirty seconds. Without one, Aurora has to build you a new writer, and that takes minutes. Lose a whole availability zone and writes keep going. We'll build all of it, break it, and measure it.",
+      "publishedAt": "2026-08-12T09:15:10+00:00",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/ktxMp16wyCw/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=ktxMp16wyCw",
+      "durationSeconds": 1083
+    },
+    {
+      "id": "Pb40avdFFBs",
+      "title": "PostgreSQL Active-Active Across 3 Regions | Production HA",
+      "description": "Three writable PostgreSQL regions. No single global primary - all three accept writes at once. That is active-active, with pgEdge Spock. When one region dies, the survivors keep writing.",
+      "publishedAt": "2026-08-10T05:49:12+00:00",
+      "thumbnailUrl": "https://i1.ytimg.com/vi/Pb40avdFFBs/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=Pb40avdFFBs"
+    },
+    {
+      "id": "ETjUXzKFp4I",
+      "title": "Amazon RDS PostgreSQL Database: What Happens When It Fails?",
+      "description": "Managed doesn't mean it never breaks. When the writer goes away, every open connection goes with it. What happens next depends on the architecture you picked. Single-AZ has no standby, so recovery means a restart, or a replacement. AWS documents sixty to one hundred twenty seconds for a Multi-AZ DB instance, and under thirty-five for a Multi-AZ DB cluster. Sockets never migrate. So we build each pattern, break it, and measure what the application sees.",
+      "publishedAt": "2026-08-07T13:20:26+00:00",
+      "thumbnailUrl": "https://i2.ytimg.com/vi/ETjUXzKFp4I/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=ETjUXzKFp4I",
+      "durationSeconds": 942
+    },
+    {
+      "id": "gcSWFKX89vo",
+      "title": "PostgreSQL HA Architecture: Surviving a Full Region Failure",
+      "description": "Let's build a PostgreSQL cluster that survives things going wrong, and let's build it one honest step at a time. This is where everyone starts: one application, one PostgreSQL eighteen server called db one. A write arrives, it is recorded in the write-ahead log, and the commit comes back. It works perfectly. And that is exactly the trap, because the postgres processes, the kernel, the disk, and the address your clients dial all live inside a single failure domain.",
+      "publishedAt": "2026-08-04T09:18:02+00:00",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/gcSWFKX89vo/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=gcSWFKX89vo"
+    },
+    {
+      "id": "a73oSuoeGPY",
+      "title": "PostgreSQL High Availability: Build, Break & Fix Patroni + etcd",
+      "description": "Let's build a PostgreSQL cluster that survives things going wrong, and let's build it one honest step at a time. This is where everyone starts: one application, one PostgreSQL eighteen server called db one. A write arrives, it is recorded in the write-ahead log, and the commit comes back. It works perfectly. And that is exactly the trap, because the postgres processes, the kernel, the disk, and the address your clients dial all live inside a single failure domain.",
+      "publishedAt": "2026-07-29T18:07:27+00:00",
+      "thumbnailUrl": "https://i2.ytimg.com/vi/a73oSuoeGPY/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=a73oSuoeGPY"
+    },
+    {
+      "id": "7CBQcT8doaE",
+      "title": "500 PostgreSQL Connections, 470 Idle: Fix This Before Production Slows",
+      "description": "500 PostgreSQL Connections, 470 Idle: Fix This Before Production Slows. A detailed PostgreSQL article and long-form video by Dr. Ibrar Ahmed, with technical context, examples, and production guidance.",
+      "publishedAt": "2026-07-19T21:13:59+00:00",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/7CBQcT8doaE/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=7CBQcT8doaE",
+      "durationSeconds": 519
+    },
+    {
+      "id": "_1bqNyb_t1w",
+      "title": "PostgreSQL Uses 1 of 16 CPU Cores. Here's the Fix.",
+      "description": "PostgreSQL Uses 1 of 16 CPU Cores. Here's the Fix.. A detailed PostgreSQL article and long-form video by Dr. Ibrar Ahmed, with technical context, examples, and production guidance.",
+      "publishedAt": "2026-07-13T12:02:35+00:00",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/_1bqNyb_t1w/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=_1bqNyb_t1w",
+      "durationSeconds": 538
+    },
+    {
+      "id": "1KJryLXOlMU",
+      "title": "Your PostgreSQL work_mem Is a 400 GB Memory Bomb",
+      "description": "Your PostgreSQL work_mem Is a 400 GB Memory Bomb. A detailed PostgreSQL article and long-form video by Dr. Ibrar Ahmed, with technical context, examples, and production guidance.",
+      "publishedAt": "2026-06-26T10:48:40+00:00",
+      "thumbnailUrl": "https://i2.ytimg.com/vi/1KJryLXOlMU/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=1KJryLXOlMU",
+      "durationSeconds": 415
+    }
+  ],
+  "cybersecurity": [
+    {
+      "id": "ph14FnVAboI",
+      "title": "Darkweb: Tor Worked. So How Did Silk Road Get Caught?",
+      "description": "Darkweb: How Silk Road and AlphaBay were caught while Tor was still working. Operation Bayonet, the Hansa takeover, Bitcoin trails, and the seized laptop. This episode breaks down two real investigations: the Silk Road case and Operation Bayonet involving AlphaBay and Hansa. Tor can hide a network route. An investigation can still collect evidence from accounts, servers, money, devices, public activity, and the physical world.",
+      "publishedAt": "2026-09-06T17:26:06+00:00",
+      "thumbnailUrl": "https://i1.ytimg.com/vi/ph14FnVAboI/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=ph14FnVAboI",
+      "durationSeconds": 489
+    },
+    {
+      "id": "u28ClpRZfYY",
+      "title": "5 Legit Dark Web Sites That Actually Exist",
+      "description": "These are real onion sites. And they're operated or published by legitimate organizations. DuckDuckGo. ProPublica. SecureDrop. Even the B B C. But there is one rule you need before opening any of them. Finding an onion address is not the same as verifying an onion address.",
+      "publishedAt": "2026-08-31T07:53:32+00:00",
+      "thumbnailUrl": "https://i2.ytimg.com/vi/u28ClpRZfYY/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=u28ClpRZfYY",
+      "durationSeconds": 488
+    },
+    {
+      "id": "l9w6JM-qGy4",
+      "title": "Dark Web Explained, How It Really Works",
+      "description": "Who is watching you on the dark web? One request. Two routes. On the normal web, the destination sees where you came from. Tor changes who gets to know each part of the path.",
+      "publishedAt": "2026-08-27T16:47:20+00:00",
+      "thumbnailUrl": "https://i1.ytimg.com/vi/l9w6JM-qGy4/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=l9w6JM-qGy4",
+      "durationSeconds": 413
+    },
+    {
+      "id": "79XEqDxC-ew",
+      "title": "AI Agent Escaped Its Sandbox. Here's How",
+      "description": "July 2026. OpenAI evaluated a cybersecurity agent driven by a combination of its models.",
+      "publishedAt": "2026-08-26T01:09:28+00:00",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/79XEqDxC-ew/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=79XEqDxC-ew",
+      "durationSeconds": 599
+    },
+    {
+      "id": "NQFnPoyfTA4",
+      "title": "WhatsApp Hacked? 8 Tricks Scammers Use to Steal Your Account",
+      "description": "Most WhatsApp account takeovers start with one mistake: sharing a code, scanning an unknown QR, trusting a fake support message, or ignoring a sudden “No Service” warning. In this video, Dr. Ibrar Ahmed explains how scammers take over WhatsApp accounts, why family groups are targeted, and the exact defenses that protect you: two-step verification, linked device audits, SIM protection, app locks, safe backups, and recovery steps.",
+      "publishedAt": "2026-06-06T19:17:23+00:00",
+      "thumbnailUrl": "https://i3.ytimg.com/vi/NQFnPoyfTA4/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=NQFnPoyfTA4",
+      "durationSeconds": 1116
+    }
+  ]
+}

@@ -45,7 +45,25 @@ const nextConfig = {
         hostname: '*.pgelephant.com',
         port: '',
         pathname: '/**',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'yt3.ggpht.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'yt3.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -161,6 +179,16 @@ const nextConfig = {
       {
         source: '/home',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/videos',
+        destination: '/postgresql',
+        permanent: true,
+      },
+      {
+        source: '/videos-ai',
+        destination: '/ai',
         permanent: true,
       },
       {

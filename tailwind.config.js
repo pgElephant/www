@@ -85,15 +85,12 @@ module.exports = {
       },
       fontFamily: {
         // Synchronized with config/theme.ts
-        sans: ['Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        heading: ['Poppins', 'Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
-        body: ['Inter', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'Inter', 'SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-serif)', 'Source Serif 4', 'Georgia', 'serif'],
+        body: ['var(--font-inter)', 'Inter', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        display: ['var(--font-serif)', 'Source Serif 4', 'Georgia', 'serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Consolas', 'monospace'],
-        // Additional font families
-        geometric: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
-        tech: ['Orbitron', 'Exo 2', 'Inter', 'system-ui', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
+        serif: ['var(--font-serif)', 'Source Serif 4', 'Georgia', 'Times New Roman', 'serif'],
       },
       maxWidth: {
         '7xl': '1280px',

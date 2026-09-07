@@ -1,93 +1,63 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - pgElephant',
-  description: 'Terms of service for pgElephant - usage terms and conditions for our products and services.',
-}
+  title: 'Terms',
+  description: 'Terms for using the personal website and educational material of Dr. Ibrar Ahmed.',
+  alternates: { canonical: '/terms' },
+};
 
 export default function TermsPage() {
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <div
-        className="relative overflow-hidden min-h-[400px] flex items-center"
-        style={{
-          backgroundColor: '#1f2937',
-        }}
-      >
-        {/* Floating orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
+    <main className="mx-auto w-full max-w-3xl px-5 py-16 sm:px-8 sm:py-24">
+      <header className="border-b border-stone-800 pb-8">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-stone-500">
+          Personal website
+        </p>
+        <h1 className="mt-3 font-serif text-4xl text-stone-50 sm:text-5xl">Terms</h1>
+        <p className="mt-4 max-w-2xl leading-7 text-stone-400">
+          These terms cover the articles, videos, diagrams, and code examples published on this
+          website.
+        </p>
+      </header>
 
-        <div className="container-wide mx-auto px-6 relative z-10 w-full py-20">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
-              Terms of Service
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Terms and conditions for using pgElephant products and services.
-            </p>
-          </div>
-        </div>
+      <div className="space-y-10 py-10 text-[1.02rem] leading-8 text-stone-300">
+        <section>
+          <h2 className="font-serif text-2xl text-stone-100">Educational material</h2>
+          <p className="mt-3">
+            The material reflects my experience and judgment at the time of publication. It is
+            provided for education and should be tested against your own requirements before use in
+            a live system.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-stone-100">Code examples</h2>
+          <p className="mt-3">
+            Examples are illustrative and provided without warranty. Review security, compatibility,
+            backups, and operational impact before applying any command or configuration.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-stone-100">Open-source projects</h2>
+          <p className="mt-3">
+            Repositories linked from this site are governed by the license in each repository. This
+            website does not replace those license terms.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-stone-100">Attribution</h2>
+          <p className="mt-3">
+            You may link to published pages. Republishing substantial portions of an article,
+            diagram, or recording requires permission unless its page states a separate license.
+          </p>
+        </section>
+
+        <p className="border-t border-stone-800 pt-8 text-sm text-stone-500">
+          Last updated September 2026.
+        </p>
       </div>
-
-      {/* Content */}
-      <div
-        className="py-20"
-        style={{
-          backgroundColor: '#1f2937',
-        }}
-      >
-        <div className="container-wide mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-              <h2 className="text-2xl font-thin text-white mb-6">Acceptance of Terms</h2>
-              <p className="text-white/90 mb-4">
-                By downloading, installing, or using pgElephant products, you agree to be bound by these terms of service.
-              </p>
-
-              <h2 className="text-2xl font-thin text-white mb-6">Open Source License</h2>
-              <p className="text-white/90 mb-4">
-                pgElephant products are released under open source licenses. Please review the specific license for each product:
-              </p>
-              <ul className="list-disc list-inside text-white/90 space-y-2 mb-8">
-                <li>RALE: Apache 2.0 License</li>
-                <li>RAM: Apache 2.0 License</li>
-                <li>pgraft: Apache 2.0 License</li>
-              </ul>
-
-              <h2 className="text-2xl font-thin text-white mb-6">Usage Guidelines</h2>
-              <p className="text-white/90 mb-4">
-                You may use pgElephant products for:
-              </p>
-              <ul className="list-disc list-inside text-white/90 space-y-2 mb-4">
-                <li>Commercial and non-commercial projects</li>
-                <li>Production environments</li>
-                <li>Modification and distribution (subject to license terms)</li>
-              </ul>
-
-              <h2 className="text-2xl font-thin text-white mb-6">Support and Warranty</h2>
-              <p className="text-white/90 mb-4">
-                pgElephant products are provided "as is" without warranty. Community support is available through our documentation and community forums.
-              </p>
-
-              <h2 className="text-2xl font-thin text-white mb-6">Limitation of Liability</h2>
-              <p className="text-white/90 mb-4">
-                pgElephant shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use of our products.
-              </p>
-
-              <h2 className="text-2xl font-thin text-white mb-6">Contact Us</h2>
-              <p className="text-white/90">
-                For questions about these terms, please contact us at{' '}
-                <a href="/contact" className="text-blue-400 hover:underline">our contact page</a>.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+    </main>
+  );
 }

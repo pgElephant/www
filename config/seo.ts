@@ -9,17 +9,29 @@ import { Metadata } from 'next'
 import { products, generateProductMetadata, generateDocsMetadata, getProduct, type ProductId } from './products'
 import type { VideosHubConfig } from './videos'
 import { POSTGRESQL_VIDEOS_HUB } from './videos'
+import type { TopicHubConfig } from './topics'
+import { videoSlug, buildVideoBlogBody } from '@/lib/video-blog'
 
 // ============================================================================
 // BASE SEO CONFIGURATION
 // ============================================================================
 
 export const baseSEO = {
-  siteName: 'pgElephant',
+  siteName: 'Dr. Ibrar Ahmed',
   siteUrl: 'https://www.pgelephant.com',
-  twitterHandle: '@pgElephant',
-  defaultImage: '/og-image.jpg?v=2',
-  defaultDescription: 'PostgreSQL High Availability Solution with automatic failover, zero-downtime clustering, distributed consensus, and production-ready extensions for enterprise database infrastructure.',
+  twitterHandle: '@DrIbrarAhmed',
+  defaultImage: '/profile/dr-ibrar-ahmed.png',
+  defaultDescription:
+    'Personal site of Dr. Ibrar Ahmed. Principal Engineer, PhD. Long-form notes and YouTube videos on PostgreSQL, AI, and cyber security.',
+  linkedInUrl: 'https://www.linkedin.com/in/ibrarahmed74/',
+  profileImage: '/profile/dr-ibrar-ahmed.png',
+  sameAs: [
+    'https://www.linkedin.com/in/ibrarahmed74/',
+    'https://www.youtube.com/@DrIbrarAhmed',
+    'https://www.youtube.com/@DrIbrarAhmedAI',
+    'https://www.youtube.com/@DrIbrarCyberSecurity',
+    'https://github.com/pgElephant',
+  ],
 }
 
 // ============================================================================
@@ -117,7 +129,7 @@ export function generateBlogMetadata({
   slug,
   publishedAt,
   image,
-  author = 'pgElephant Team',
+  author = 'Dr. Ibrar Ahmed',
 }: {
   title: string
   description: string
@@ -180,25 +192,60 @@ export function generateBlogMetadata({
 // ============================================================================
 
 /**
- * Generate Organization structured data
+ * Generate Person structured data (primary entity for this personal site)
  */
-export function generateOrganizationSchema() {
+export function generatePersonSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'Person',
+    '@id': `${baseSEO.siteUrl}/#person`,
+    name: 'Dr. Ibrar Ahmed',
+    url: baseSEO.siteUrl,
+    image: `${baseSEO.siteUrl}${baseSEO.profileImage}`,
+    jobTitle: 'Principal Engineer',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'pgEdge',
+    },
+    description: baseSEO.defaultDescription,
+    sameAs: baseSEO.sameAs,
+    knowsAbout: [
+      'PostgreSQL',
+      'Artificial Intelligence',
+      'Cybersecurity',
+      'Distributed Systems',
+      'High Availability',
+      'Database Performance',
+    ],
+  }
+}
+
+/**
+ * Generate WebSite structured data with sitelinks search hint omitted (personal site)
+ */
+export function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${baseSEO.siteUrl}/#website`,
     name: baseSEO.siteName,
     url: baseSEO.siteUrl,
-    logo: `${baseSEO.siteUrl}/logo.png`,
-    sameAs: [
-      'https://github.com/pgElephant',
-      'https://twitter.com/pgElephant',
-    ],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Customer Service',
-      url: `${baseSEO.siteUrl}/contact`,
+    description: baseSEO.defaultDescription,
+    inLanguage: 'en-US',
+    publisher: {
+      '@id': `${baseSEO.siteUrl}/#person`,
+    },
+    author: {
+      '@id': `${baseSEO.siteUrl}/#person`,
     },
   }
+}
+
+/**
+ * @deprecated Prefer generatePersonSchema for the personal site
+ */
+export function generateOrganizationSchema() {
+  return generatePersonSchema()
 }
 
 /**
@@ -243,7 +290,7 @@ export function generateArticleSchema({
   publishedAt,
   modifiedAt,
   image,
-  author = 'pgElephant Team',
+  author = 'Dr. Ibrar Ahmed',
 }: {
   title: string
   description: string
@@ -303,6 +350,7 @@ interface VideoForSeo {
   publishedAt: string
   thumbnailUrl: string
   url: string
+  durationSeconds?: number
 }
 
 function truncateText(text: string, maxLength: number): string {
@@ -310,7 +358,285 @@ function truncateText(text: string, maxLength: number): string {
     return text
   }
 
-  return `${text.slice(0, maxLength - 3).trim()}...`
+  const candidate = text.slice(0, maxLength + 1)
+  const sentenceEnd = Math.max(
+    candidate.lastIndexOf('. '),
+    candidate.lastIndexOf('! '),
+    candidate.lastIndexOf('? ')
+  )
+  if (sentenceEnd >= Math.min(70, maxLength / 2)) {
+    return candidate.slice(0, sentenceEnd + 1).trim()
+  }
+  const wordEnd = candidate.lastIndexOf(' ')
+  return `${candidate.slice(0, wordEnd > 0 ? wordEnd : maxLength - 3).trim()}...`
+}
+
+function videoBlogDescription(
+  topic: TopicHubConfig,
+  video: VideoForSeo,
+  maxLength: number
+): string {
+  if (
+    topic.path === 'postgresql' &&
+    /database indexes.*production troubleshooting/i.test(video.title)
+  ) {
+    return truncateText(
+      'A complete PostgreSQL index troubleshooting guide with a five-million-row lab, measured query plans, SQL examples, index types, monitoring, and production fixes.',
+      maxLength
+    )
+  }
+  return truncateText(
+    buildVideoBlogBody(video, topic.topicLabel, topic.path)[0] ||
+      topic.description,
+    maxLength
+  )
+}
+
+function isoDuration(seconds?: number): string | undefined {
+  if (!seconds || seconds <= 0) return undefined
+  const rounded = Math.round(seconds)
+  const hours = Math.floor(rounded / 3600)
+  const minutes = Math.floor((rounded % 3600) / 60)
+  const remainingSeconds = rounded % 60
+  return `PT${hours ? `${hours}H` : ''}${minutes ? `${minutes}M` : ''}${remainingSeconds || (!hours && !minutes) ? `${remainingSeconds}S` : ''}`
+}
+
+/**
+ * Metadata for a topic hub (/ai, /postgresql, /cybersecurity)
+ */
+export function generateTopicHubMetadata(topic: TopicHubConfig): Metadata {
+  const pageUrl = `${baseSEO.siteUrl}/${topic.path}`
+  const ogImage = topic.channel.logo
+
+  return {
+    title: topic.metaTitle,
+    description: topic.description,
+    keywords: topic.keywords.join(', '),
+    authors: [{ name: 'Dr. Ibrar Ahmed', url: baseSEO.linkedInUrl }],
+    creator: 'Dr. Ibrar Ahmed',
+    publisher: baseSEO.siteName,
+    openGraph: {
+      title: `${topic.title} · ${baseSEO.siteName}`,
+      description: topic.description,
+      type: 'website',
+      url: pageUrl,
+      siteName: baseSEO.siteName,
+      locale: 'en_US',
+      images: [
+        {
+          url: ogImage,
+          width: 800,
+          height: 800,
+          alt: topic.channel.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${topic.title} · ${baseSEO.siteName}`,
+      description: topic.description,
+      images: [ogImage],
+      creator: baseSEO.twitterHandle,
+      site: baseSEO.twitterHandle,
+    },
+    alternates: {
+      canonical: pageUrl,
+      types: {
+        'application/rss+xml': [
+          {
+            url: `https://www.youtube.com/feeds/videos.xml?channel_id=${topic.channel.id}`,
+            title: `${topic.channel.name} RSS`,
+          },
+        ],
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  }
+}
+
+/**
+ * CollectionPage JSON-LD for a topic hub
+ */
+export function generateTopicHubStructuredData(
+  topic: TopicHubConfig,
+  videos: VideoForSeo[]
+) {
+  const pageUrl = `${baseSEO.siteUrl}/${topic.path}`
+  const validVideos = videos.filter(isValidVideoForSchema)
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${pageUrl}#webpage`,
+        name: topic.metaTitle,
+        description: topic.description,
+        url: pageUrl,
+        inLanguage: 'en-US',
+        isPartOf: { '@id': `${baseSEO.siteUrl}/#website` },
+        author: { '@id': `${baseSEO.siteUrl}/#person` },
+        about: {
+          '@type': 'Thing',
+          name: topic.topicLabel,
+        },
+        mainEntity: {
+          '@type': 'ItemList',
+          name: `${topic.channel.name} notes`,
+          numberOfItems: validVideos.length,
+          itemListElement: validVideos.map((video, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: video.title,
+            url: `${pageUrl}/${videoSlug(video)}`,
+          })),
+        },
+        sameAs: [topic.channel.url],
+      },
+      generateBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: topic.title, url: `/${topic.path}` },
+      ]),
+    ],
+  }
+}
+
+/**
+ * Metadata for an individual video-blog note
+ */
+export function generateVideoBlogMetadata(
+  topic: TopicHubConfig,
+  video: VideoForSeo
+): Metadata {
+  const slug = videoSlug(video)
+  const pageUrl = `${baseSEO.siteUrl}/${topic.path}/${slug}`
+  const description = videoBlogDescription(topic, video, 160)
+
+  return {
+    title: video.title,
+    description,
+    keywords: [...topic.keywords, video.title],
+    authors: [{ name: 'Dr. Ibrar Ahmed', url: baseSEO.linkedInUrl }],
+    creator: 'Dr. Ibrar Ahmed',
+    publisher: baseSEO.siteName,
+    openGraph: {
+      title: video.title,
+      description,
+      type: 'article',
+      url: pageUrl,
+      siteName: baseSEO.siteName,
+      publishedTime: video.publishedAt,
+      authors: ['Dr. Ibrar Ahmed'],
+      images: [
+        {
+          url: video.thumbnailUrl,
+          width: 1280,
+          height: 720,
+          alt: video.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: video.title,
+      description,
+      images: [video.thumbnailUrl],
+      creator: baseSEO.twitterHandle,
+      site: baseSEO.twitterHandle,
+    },
+    alternates: {
+      canonical: pageUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  }
+}
+
+/**
+ * Article + VideoObject JSON-LD for a video-blog note
+ */
+export function generateVideoBlogStructuredData(
+  topic: TopicHubConfig,
+  video: VideoForSeo
+) {
+  const slug = videoSlug(video)
+  const pageUrl = `${baseSEO.siteUrl}/${topic.path}/${slug}`
+  const description = videoBlogDescription(topic, video, 500)
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        '@id': `${pageUrl}#article`,
+        headline: video.title,
+        description,
+        image: [video.thumbnailUrl],
+        datePublished: video.publishedAt,
+        dateModified: video.publishedAt,
+        author: { '@id': `${baseSEO.siteUrl}/#person` },
+        publisher: { '@id': `${baseSEO.siteUrl}/#person` },
+        articleSection: topic.topicLabel,
+        keywords: [...topic.keywords, video.title],
+        mainEntity: { '@id': `${pageUrl}#video` },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': pageUrl,
+        },
+        isPartOf: {
+          '@type': 'CollectionPage',
+          '@id': `${baseSEO.siteUrl}/${topic.path}#webpage`,
+        },
+      },
+      {
+        '@type': 'VideoObject',
+        '@id': `${pageUrl}#video`,
+        name: video.title,
+        description,
+        thumbnailUrl: [video.thumbnailUrl],
+        uploadDate: video.publishedAt,
+        ...(isoDuration(video.durationSeconds)
+          ? { duration: isoDuration(video.durationSeconds) }
+          : {}),
+        embedUrl: `https://www.youtube.com/embed/${video.id}`,
+        contentUrl: video.url,
+        url: pageUrl,
+        inLanguage: 'en-US',
+        isFamilyFriendly: true,
+        author: { '@id': `${baseSEO.siteUrl}/#person` },
+        publisher: { '@id': `${baseSEO.siteUrl}/#person` },
+        isPartOf: { '@id': `${pageUrl}#article` },
+        potentialAction: {
+          '@type': 'WatchAction',
+          target: video.url,
+        },
+      },
+      generateBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: topic.title, url: `/${topic.path}` },
+        { name: video.title, url: `/${topic.path}/${slug}` },
+      ]),
+    ],
+  }
 }
 
 /**
@@ -322,7 +648,7 @@ export function generateVideosHubMetadata(
 ): Metadata {
   const latestVideo = videos[0]
   const videoCount = videos.length
-  const description = `${hub.description} ${videoCount} videos available on pgElephant.`
+  const description = `${hub.description} ${videoCount} videos available.`
   const ogImage = latestVideo?.thumbnailUrl || baseSEO.defaultImage
   const pageUrl = `${baseSEO.siteUrl}${hub.path}`
 
@@ -696,9 +1022,15 @@ const seoConfig = {
   generateDocsPageMetadata,
   generateBlogMetadata,
   generateOrganizationSchema,
+  generatePersonSchema,
+  generateWebSiteSchema,
   generateProductSchema,
   generateArticleSchema,
   generateBreadcrumbSchema,
+  generateTopicHubMetadata,
+  generateTopicHubStructuredData,
+  generateVideoBlogMetadata,
+  generateVideoBlogStructuredData,
   generateVideosHubMetadata,
   generateVideosHubStructuredData,
   generateVideosHubFaqSchema,

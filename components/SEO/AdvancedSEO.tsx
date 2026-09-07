@@ -98,7 +98,7 @@ const AdvancedSEO: React.FC<AdvancedSEOProps> = ({
     "image": fullOgImage,
     "author": {
       "@type": "Organization",
-      "name": author || "pgElephant Team"
+      "name": author || "Dr. Ibrar Ahmed"
     },
     "publisher": {
       "@type": "Organization",

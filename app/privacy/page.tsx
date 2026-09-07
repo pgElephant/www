@@ -1,83 +1,55 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - pgElephant',
-  description: 'Privacy policy for pgElephant - how we collect, use, and protect your information.',
-}
+  title: 'Privacy',
+  description: 'Privacy information for the personal website of Dr. Ibrar Ahmed.',
+  alternates: { canonical: '/privacy' },
+};
 
 export default function PrivacyPage() {
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <div 
-        className="relative overflow-hidden min-h-[400px] flex items-center"
-        style={{ 
-          backgroundColor: '#1f2937',
-        }}
-      >
-        {/* Floating orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary-500/25 to-secondary-500/25 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-secondary-500/20 to-accent-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-r from-accent-500/15 to-primary-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
+    <main className="mx-auto w-full max-w-3xl px-5 py-16 sm:px-8 sm:py-24">
+      <header className="border-b border-stone-800 pb-8">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-stone-500">
+          Personal website
+        </p>
+        <h1 className="mt-3 font-serif text-4xl text-stone-50 sm:text-5xl">Privacy</h1>
+        <p className="mt-4 max-w-2xl leading-7 text-stone-400">
+          This site publishes my writing, teaching, and open-source work. It does not sell products
+          or collect payment information.
+        </p>
+      </header>
 
-        <div className="container-wide mx-auto px-6 relative z-10 w-full py-20">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-thin text-white mb-6">
-              Privacy Policy
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              How we collect, use, and protect your information when using pgElephant services.
-            </p>
-          </div>
-        </div>
+      <div className="space-y-10 py-10 text-[1.02rem] leading-8 text-stone-300">
+        <section>
+          <h2 className="font-serif text-2xl text-stone-100">Information</h2>
+          <p className="mt-3">
+            Basic, aggregated visit data may be recorded to understand which pages are useful and to
+            keep the site reliable. I do not operate user accounts, mailing lists, advertising
+            profiles, or checkout services on this website.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-stone-100">External links</h2>
+          <p className="mt-3">
+            Articles link to YouTube, GitHub, LinkedIn, and technical documentation. Those services
+            apply their own privacy policies when you visit them.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-stone-100">Your data</h2>
+          <p className="mt-3">
+            I do not sell personal information. If you contact me through an external profile, I use
+            the information only to respond to that conversation.
+          </p>
+        </section>
+
+        <p className="border-t border-stone-800 pt-8 text-sm text-stone-500">
+          Last updated September 2026.
+        </p>
       </div>
-
-      {/* Content */}
-      <div 
-        className="py-20"
-        style={{ 
-          backgroundColor: '#1f2937',
-        }}
-      >
-        <div className="container-wide mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
-              <h2 className="text-2xl font-thin text-white mb-6">Information We Collect</h2>
-              <p className="text-white/90 mb-4">
-                pgElephant is committed to protecting your privacy. We collect minimal information necessary to provide our services:
-              </p>
-              <ul className="list-disc list-inside text-white/90 space-y-2 mb-8">
-                <li>Usage analytics to improve our products</li>
-                <li>Contact information when you reach out for support</li>
-                <li>Download statistics for product improvement</li>
-              </ul>
-
-              <h2 className="text-2xl font-thin text-white mb-6">How We Use Your Information</h2>
-              <p className="text-white/90 mb-4">
-                We use collected information solely to:
-              </p>
-              <ul className="list-disc list-inside text-white/90 space-y-2 mb-8">
-                <li>Improve our products and services</li>
-                <li>Provide technical support</li>
-                <li>Send important updates and announcements</li>
-              </ul>
-
-              <h2 className="text-2xl font-thin text-white mb-6">Data Protection</h2>
-              <p className="text-white/90 mb-4">
-                We implement industry-standard security measures to protect your information and never sell or share personal data with third parties.
-              </p>
-
-              <h2 className="text-2xl font-thin text-white mb-6">Contact Us</h2>
-              <p className="text-white/90">
-                If you have questions about this privacy policy, please contact us at{' '}
-                <a href="/contact" className="text-blue-400 hover:underline">our contact page</a>.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+    </main>
+  );
 }

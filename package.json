@@ -1,16 +1,16 @@
 {
   "name": "pgelephant-website",
   "version": "1.0.0",
-  "description": "PostgreSQL High Availability Made Easy - Official Website",
+  "description": "Personal website of Dr. Ibrar Ahmed",
   "private": true,
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "env -u npm_config_devdir next dev",
+    "build": "env -u npm_config_devdir next build",
+    "start": "env -u npm_config_devdir next start",
     "lint": "eslint . --fix --ignore-pattern '.next/**' --ignore-pattern 'node_modules/**'",
     "lint:check": "eslint . --ignore-pattern '.next/**' --ignore-pattern 'node_modules/**'",
     "type-check": "tsc --noEmit",
@@ -18,7 +18,8 @@
     "format:check": "prettier --check .",
     "analyze": "ANALYZE=true npm run build",
     "export": "next export",
-    "sitemap": "node scripts/generate-static-sitemaps.js",
+    "channels:index": "node scripts/build-channel-index.js",
+    "prebuild": "node scripts/build-channel-index.js",
     "seo:audit": "npm run build && npm run lighthouse",
     "lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html --view",
     "validate:schemas": "./scripts/validate-schemas.sh",

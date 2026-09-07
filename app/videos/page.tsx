@@ -1,16 +1,5 @@
-import type { Metadata } from 'next'
-import { generateVideosHubMetadata } from '@/config/seo'
-import { POSTGRESQL_VIDEOS_HUB } from '@/config/videos'
-import { VideosHubPage } from '@/components/VideosHubPage'
-import { fetchChannelVideos } from '@/lib/youtube'
+import { redirect } from 'next/navigation'
 
-export const revalidate = 3600
-
-export async function generateMetadata(): Promise<Metadata> {
-  const videos = await fetchChannelVideos(POSTGRESQL_VIDEOS_HUB.channel)
-  return generateVideosHubMetadata(POSTGRESQL_VIDEOS_HUB, videos)
-}
-
-export default function VideosPage() {
-  return <VideosHubPage hub={POSTGRESQL_VIDEOS_HUB} />
+export default function VideosRedirect() {
+  redirect('/postgresql')
 }

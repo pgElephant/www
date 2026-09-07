@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image'
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import { Highlight, themes } from 'prism-react-renderer';
+import { TechnicalCodeBlock } from '@/components/TechnicalCodeBlock'
 
 // Helper function to style arrows and numbered items in text
 const styleSpecialChars = (text: string): React.ReactNode => {
@@ -37,50 +37,24 @@ const styleSpecialChars = (text: string): React.ReactNode => {
 
 // Usage: <BlogMarkdown>{markdown}</BlogMarkdown>
 export function BlogMarkdown({ children }: { children: string }) {
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  const copyToClipboard = async (text: string) => {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-999999px';
-        textArea.style.top = '-999999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        textArea.remove();
-      }
-      setCopiedCode(text);
-      setTimeout(() => setCopiedCode(null), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
-
   return (
-    <article className="prose dark:prose-invert max-w-7xl mx-auto py-12 px-6">
+    <article className="mx-auto max-w-3xl px-5 py-12 sm:px-6 sm:py-16">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
           // Headings with proper sizing and styling
           h1({ node, ...props }) {
-            return <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 mt-12 first:mt-0 leading-tight drop-shadow-lg" {...props} />;
+            return <h1 className="mb-8 mt-14 font-serif text-4xl font-medium leading-tight tracking-tight text-stone-50 first:mt-0 md:text-5xl" {...props} />;
           },
           h2({ node, ...props }) {
-            return <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6 mt-10 leading-tight drop-shadow-lg" {...props} />;
+            return <h2 className="mb-6 mt-14 border-b border-white/[0.09] pb-4 font-serif text-3xl font-medium leading-tight tracking-tight text-stone-100 md:text-4xl" {...props} />;
           },
           h3({ node, ...props }) {
-            return <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 mt-8 leading-tight drop-shadow-lg" {...props} />;
+            return <h3 className="mb-4 mt-10 font-serif text-2xl font-medium leading-tight text-stone-100 md:text-3xl" {...props} />;
           },
           h4({ node, ...props }) {
-            return <h4 className="text-xl md:text-2xl font-semibold text-white mb-3 mt-6 leading-tight drop-shadow-lg" {...props} />;
+            return <h4 className="mb-3 mt-8 text-xl font-semibold leading-tight text-stone-100 md:text-2xl" {...props} />;
           },
           h5({ node, ...props }) {
             return <h5 className="text-lg md:text-xl font-semibold text-white mb-3 mt-5 leading-tight drop-shadow-lg" {...props} />;
@@ -120,18 +94,18 @@ export function BlogMarkdown({ children }: { children: string }) {
               return children;
             };
 
-            return <p className="text-white/90 text-lg leading-relaxed mb-6 drop-shadow-sm" {...props}>{processChildren(children)}</p>;
+            return <p className="mb-6 text-[1.05rem] leading-[1.85] text-stone-300" {...props}>{processChildren(children)}</p>;
           },
 
           // Lists with proper styling
           ul({ node, ...props }) {
-            return <ul className="list-disc text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-6" {...props} />;
+            return <ul className="mb-7 ml-5 list-disc space-y-2.5 text-[1.02rem] leading-relaxed text-stone-300 marker:text-[#c9b68e]" {...props} />;
           },
           ol({ node, ...props }) {
-            return <ol className="list-decimal text-white/90 text-lg leading-relaxed mb-6 space-y-2 ml-6" {...props} />;
+            return <ol className="mb-7 ml-5 list-decimal space-y-2.5 text-[1.02rem] leading-relaxed text-stone-300 marker:text-[#c9b68e]" {...props} />;
           },
           li({ node, ...props }) {
-            return <li className="mb-2 drop-shadow-sm pl-2" {...props} />;
+            return <li className="pl-2" {...props} />;
           },
 
           // Code blocks with syntax highlighting
@@ -139,57 +113,10 @@ export function BlogMarkdown({ children }: { children: string }) {
             const match = /language-(\w+)/.exec(className || '');
             const codeText = String(children).replace(/\n$/, '');
 
-            // Check if this contains both query and output (has "Output:" or table-like content)
-            const hasOutput = codeText.includes('Output:') || codeText.includes('---') ||
-              (codeText.includes('SELECT') && codeText.includes('log_size'));
-            const isLongContent = codeText.split('\n').length > 10;
-
             return match ? (
-              <div className="my-8 relative group">
-                {/* Copy button */}
-                <button
-                  onClick={() => copyToClipboard(codeText)}
-                  className="absolute top-3 right-3 z-10 p-2 bg-gray-700/80 hover:bg-gray-600/90 rounded-md transition-all duration-200 opacity-0 group-hover:opacity-100"
-                  title="Copy code"
-                >
-                  {copiedCode === codeText ? (
-                    <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  ) : (
-                    <svg className="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                  )}
-                </button>
-                <Highlight
-                  theme={themes.vsDark}
-                  code={codeText}
-                  language={match[1]}
-                >
-                  {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <div className="w-full max-w-full overflow-x-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1)' }}>
-                      <pre className={`${className} rounded-lg text-sm shadow-2xl ${hasOutput ? 'min-h-[72px]' : 'min-h-[48px]'} flex flex-col justify-start border border-gray-600/30 overflow-x-auto`} style={style}>
-                        <div className="flex-1 p-4 min-w-max">
-                          {tokens.map((line, i) => (
-                            <div key={i} {...getLineProps({ line })} className="min-h-[1.5rem] whitespace-pre">
-                              {line.map((token, tokenKey) => (
-                                <span key={tokenKey} {...getTokenProps({ token })} />
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                        {/* Fill remaining space if content is short */}
-                        {tokens.length < (hasOutput ? 5 : 2) && !isLongContent && (
-                          <div className="flex-1" style={{ minHeight: `${((hasOutput ? 5 : 2) - tokens.length) * 1.5}rem` }}></div>
-                        )}
-                      </pre>
-                    </div>
-                  )}
-                </Highlight>
-              </div>
+              <TechnicalCodeBlock code={codeText} language={match[1]} />
             ) : (
-              <code className="bg-gray-800 text-cyan-300 px-2 py-1 rounded text-sm font-mono inline-block" {...props}>
+              <code className="border border-white/[0.09] bg-white/[0.055] px-1.5 py-0.5 font-mono text-[0.86em] text-[#e4c98f]" {...props}>
                 {children}
               </code>
             );
@@ -199,7 +126,7 @@ export function BlogMarkdown({ children }: { children: string }) {
           table({ node, ...props }) {
             return (
               <div
-                className="overflow-x-auto my-8 w-full"
+                className="my-8 w-full overflow-x-auto border border-white/[0.1]"
                 style={{
                   scrollbarWidth: 'thin',
                   scrollbarColor: 'rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1)',
@@ -207,7 +134,7 @@ export function BlogMarkdown({ children }: { children: string }) {
                 }}
               >
                 <table
-                  className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl"
+                  className="bg-[#0b0b0b]"
                   style={{
                     width: 'max-content',
                     minWidth: '100%',
@@ -219,19 +146,19 @@ export function BlogMarkdown({ children }: { children: string }) {
             );
           },
           thead({ node, ...props }) {
-            return <thead className="bg-white/20" {...props} />;
+            return <thead className="border-b border-white/[0.1] bg-white/[0.035]" {...props} />;
           },
           tbody({ node, ...props }) {
             return <tbody className="divide-y divide-white/10" {...props} />;
           },
           tr({ node, ...props }) {
-            return <tr className="hover:bg-white/5 transition-colors" {...props} />;
+            return <tr className="border-b border-white/[0.07] transition-colors last:border-b-0 hover:bg-white/[0.025]" {...props} />;
           },
           th({ node, ...props }) {
-            return <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider" {...props} />;
+            return <th className="px-5 py-4 text-left text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-300" {...props} />;
           },
           td({ node, ...props }) {
-            return <td className="px-6 py-4 text-sm text-white/90" {...props} />;
+            return <td className="px-5 py-4 text-sm leading-relaxed text-stone-400" {...props} />;
           },
 
           // Images with proper styling (use Next/Image to avoid lint warnings)
@@ -241,14 +168,17 @@ export function BlogMarkdown({ children }: { children: string }) {
             const alt = ((props as any).alt as string | undefined) || 'Blog image'
             if (!src) return null
 
-            // For SVG files, use img tag directly for better compatibility
+            // Keep SVGs unoptimized while retaining Next's image semantics.
             const isSvg = src.toLowerCase().includes('.svg')
             if (isSvg) {
               return (
                 <div style={{ borderRadius: 12, marginBottom: 40, maxWidth: '100%', width: '100%', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', overflow: 'hidden', display: 'block', textAlign: 'center', backgroundColor: 'transparent' }}>
-                  <img
+                  <Image
                     src={src}
                     alt={alt}
+                    width={1280}
+                    height={750}
+                    unoptimized
                     style={{ width: '100%', height: 'auto', maxWidth: '100%', display: 'block' }}
                     loading="lazy"
                     onError={(e) => {
@@ -277,7 +207,7 @@ export function BlogMarkdown({ children }: { children: string }) {
 
           // Blockquotes with styling
           blockquote({ node, ...props }) {
-            return <blockquote className="border-l-4 border-primary-500 pl-6 py-2 my-6 bg-white/5 rounded-r-lg italic text-white/80" {...props} />;
+            return <blockquote className="my-8 border-l-2 border-[#c9b68e] bg-white/[0.025] py-4 pl-6 pr-5 font-serif text-lg italic leading-relaxed text-stone-300" {...props} />;
           },
 
           // Strong and emphasis
@@ -301,10 +231,10 @@ export function BlogMarkdown({ children }: { children: string }) {
               return children;
             };
 
-            return <strong className="font-semibold text-white" {...props}>{processChildren(children)}</strong>;
+            return <strong className="font-semibold text-stone-100" {...props}>{processChildren(children)}</strong>;
           },
           em({ node, ...props }) {
-            return <em className="italic text-white/95" {...props} />;
+            return <em className="italic text-stone-200" {...props} />;
           },
 
           // Links with proper styling - all links are yellow
@@ -313,7 +243,7 @@ export function BlogMarkdown({ children }: { children: string }) {
 
             return (
               <a
-                className="text-yellow-400 hover:text-yellow-300 underline underline-offset-2 transition-colors duration-200"
+                className="text-[#dfc58f] underline decoration-white/20 underline-offset-4 transition hover:text-[#f0d8a6] hover:decoration-current"
                 target={href && (href.startsWith('http') || href.startsWith('mailto')) && !href.includes('pgelephant.com') ? '_blank' : undefined}
                 rel={href && (href.startsWith('http') || href.startsWith('mailto')) && !href.includes('pgelephant.com') ? 'noopener noreferrer' : undefined}
                 {...props}

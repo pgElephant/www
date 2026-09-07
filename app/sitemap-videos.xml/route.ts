@@ -1,18 +1,18 @@
 import { buildVideoSitemapXml } from '@/lib/sitemap-videos'
 import { fetchChannelVideos } from '@/lib/youtube'
-import { VIDEO_HUBS } from '@/config/videos'
+import { TOPIC_LIST } from '@/config/topics'
 
 export const revalidate = 3600
 
 export async function GET() {
-  const hubVideos = await Promise.all(
-    VIDEO_HUBS.map(async (hub) => ({
-      hub,
-      videos: await fetchChannelVideos(hub.channel),
+  const topicVideos = await Promise.all(
+    TOPIC_LIST.map(async (topic) => ({
+      topic,
+      videos: await fetchChannelVideos(topic.channel),
     }))
   )
 
-  const xml = buildVideoSitemapXml(hubVideos)
+  const xml = buildVideoSitemapXml(topicVideos)
 
   return new Response(xml, {
     headers: {

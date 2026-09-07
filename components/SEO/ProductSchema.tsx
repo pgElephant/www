@@ -46,7 +46,7 @@ const ProductSchema = () => {
     },
     "creator": {
       "@type": "Organization",
-      "name": "pgElephant Team",
+      "name": "Dr. Ibrar Ahmed",
       "url": "https://www.pgelephant.com"
     },
     "softwareVersion": "1.0.0",
