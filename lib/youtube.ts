@@ -49,7 +49,18 @@ export const YOUTUBE_CHANNEL_CYBER: YouTubeChannelConfig = {
 
 const USER_AGENT = 'Mozilla/5.0 (compatible; DrIbrarAhmedSite/1.0)';
 const MIN_LONG_FORM_SECONDS = 90;
-const KNOWN_SHORT_VIDEO_IDS = new Set(['62VNgSdoc6E', '_uppjqKvp1w', '0wR4BuQMA50', '0DCk7wqvTlA']);
+const KNOWN_SHORT_VIDEO_IDS = new Set([
+  '62VNgSdoc6E',
+  '_uppjqKvp1w',
+  '0wR4BuQMA50',
+  '0DCk7wqvTlA',
+  'svYSrl9IWc0',
+  'iGCTjhALxTs',
+  'PVFRCS6pt84',
+  'OayiK01eebY',
+  'LcfV4xbUQoo',
+  'mUKrnvYYsWA',
+]);
 
 const VIDEO_CACHE_BY_CHANNEL_ID: Record<string, YouTubeVideo[]> = {
   [YOUTUBE_CHANNEL.id]: videoCache.postgresql as YouTubeVideo[],
@@ -79,6 +90,7 @@ function looksLikeShortByTitle(title: string): boolean {
 
 function looksLikeShortByDescription(description?: string): boolean {
   if (!description) return false;
+  if (/\bai shorts?\b/i.test(description)) return true;
   const durationHint = description.match(
     /(?:^|\[|\()\s*(\d{1,3})\s*(?:seconds?|secs?|s)\s*(?:\]|\)|:|$)/i
   );
