@@ -1,11 +1,11 @@
-import React from 'react'
-import type { Metadata, Viewport } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import PersonSchema from '@/components/SEO/PersonSchema'
-import { baseSEO } from '@/config/seo'
-import './globals.css'
+import React from 'react';
+import type { Metadata, Viewport } from 'next';
+import { Inter, Source_Serif_4 } from 'next/font/google';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import PersonSchema from '@/components/SEO/PersonSchema';
+import { baseSEO } from '@/config/seo';
+import './globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -15,7 +15,7 @@ const inter = Inter({
   preload: true,
   fallback: ['system-ui', 'arial'],
   adjustFontFallback: true,
-})
+});
 
 const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
@@ -25,7 +25,7 @@ const sourceSerif = Source_Serif_4({
   preload: true,
   fallback: ['Georgia', 'serif'],
   adjustFontFallback: true,
-})
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -34,7 +34,7 @@ export const viewport: Viewport = {
   userScalable: true,
   themeColor: '#0c0a09',
   colorScheme: 'dark',
-}
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseSEO.siteUrl),
@@ -97,19 +97,13 @@ export const metadata: Metadata = {
     },
   },
   category: 'technology',
+  manifest: '/manifest.json',
   icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
-    ],
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
@@ -124,5 +118,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  )
+  );
 }

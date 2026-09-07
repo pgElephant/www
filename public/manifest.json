@@ -1,122 +1,50 @@
 {
-  "name": "pgElephant - Enterprise PostgreSQL Platform",
-  "short_name": "pgElephant",
-  "description": "Enterprise PostgreSQL high availability platform with automatic failover, MongoDB-compatible document database, and distributed consensus",
+  "name": "Dr. Ibrar Ahmed",
+  "short_name": "Ibrar Ahmed",
+  "description": "Writing and long-form teaching on PostgreSQL, artificial intelligence, and cyber security by Dr. Ibrar Ahmed.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#070d1a",
-  "theme_color": "#4f46e5",
+  "background_color": "#0c0a09",
+  "theme_color": "#0c0a09",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en-US",
   "dir": "ltr",
-  "categories": ["productivity", "developer", "business"],
+  "categories": ["education", "developer"],
   "icons": [
     {
-      "src": "/favicons/favicon-180.png",
-      "sizes": "180x180",
+      "src": "/profile/dr-ibrar-ahmed.png",
+      "sizes": "400x400",
       "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicons/favicon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicons/favicon-256.png",
-      "sizes": "256x256",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicons/favicon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicons/favicon-1024.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicons/favicon-128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    { "src": "/favicons/favicon-96.png",  "sizes": "96x96",  "type": "image/png",  "purpose": "any" },
-    { "src": "/favicons/favicon-64.png",  "sizes": "64x64",  "type": "image/png",  "purpose": "any" },
-    { "src": "/favicons/favicon-48.png",  "sizes": "48x48",  "type": "image/png",  "purpose": "any" },
-    { "src": "/favicons/favicon-32.png",  "sizes": "32x32",  "type": "image/png",  "purpose": "any" },
-    { "src": "/favicons/favicon-16.png",  "sizes": "16x16",  "type": "image/png",  "purpose": "any" }
+      "purpose": "any"
+    }
   ],
   "shortcuts": [
     {
-      "name": "Download",
-      "short_name": "Download",
-      "description": "Download pgElephant products",
-      "url": "/download",
-      "icons": [
-        {
-          "src": "/favicons/favicon-96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
+      "name": "PostgreSQL",
+      "short_name": "PostgreSQL",
+      "description": "PostgreSQL articles and videos",
+      "url": "/postgresql"
     },
     {
-      "name": "Documentation",
-      "short_name": "Docs",
-      "description": "View documentation",
-      "url": "/docs",
-      "icons": [
-        {
-          "src": "/favicons/favicon-96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
+      "name": "Artificial Intelligence",
+      "short_name": "AI",
+      "description": "Artificial intelligence articles and videos",
+      "url": "/ai"
     },
     {
-      "name": "pgraft",
-      "short_name": "pgraft",
-      "description": "Raft-Based PostgreSQL Extension",
-      "url": "/pgraft",
-      "icons": [
-        {
-          "src": "/favicons/favicon-96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
+      "name": "Cyber Security",
+      "short_name": "Cyber",
+      "description": "Cyber security articles and videos",
+      "url": "/cybersecurity"
     },
     {
-      "name": "FauxDB",
-      "short_name": "FauxDB",
-      "description": "MongoDB Compatible Document Database",
-      "url": "/fauxdb",
-      "icons": [
-        {
-          "src": "/favicons/favicon-96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
+      "name": "About Dr. Ibrar Ahmed",
+      "short_name": "About",
+      "description": "Biography, experience, books, and teaching",
+      "url": "/about"
     }
   ],
   "related_applications": [],
-  "prefer_related_applications": false,
-  "screenshots": [
-    {
-      "src": "/og-image.jpg",
-      "sizes": "1200x630",
-      "type": "image/jpeg",
-      "form_factor": "wide",
-      "label": "pgElephant Platform Overview"
-    }
-  ]
+  "prefer_related_applications": false
 }
