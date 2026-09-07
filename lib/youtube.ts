@@ -51,7 +51,6 @@ const USER_AGENT = 'Mozilla/5.0 (compatible; DrIbrarAhmedSite/1.0)';
 // YouTube Shorts can run for up to three minutes. Keep this site strictly
 // long-form even when the watch-page Shorts flag is unavailable.
 const MIN_LONG_FORM_SECONDS = 180;
-const KNOWN_SHORT_VIDEO_IDS = new Set(['62VNgSdoc6E']);
 
 const VIDEO_CACHE_BY_CHANNEL_ID: Record<string, YouTubeVideo[]> = {
   [YOUTUBE_CHANNEL.id]: videoCache.postgresql as YouTubeVideo[],
@@ -82,9 +81,9 @@ function looksLikeShortByTitle(title: string): boolean {
 function looksLikeShortByDescription(description?: string): boolean {
   if (!description) return false;
   const durationHint = description.match(
-    /(?:^|\[|\()\s*(\d{1,2})\s*(?:seconds?|secs?|s)\s*(?:\]|\)|:|$)/i
+    /(?:^|\[|\()\s*(\d{1,3})\s*(?:seconds?|secs?|s)\s*(?:\]|\)|:|$)/i
   );
-  return durationHint ? Number(durationHint[1]) < MIN_LONG_FORM_SECONDS : false;
+  return durationHint ? Number(durationHint[1]) <= MIN_LONG_FORM_SECONDS : false;
 }
 
 function parseRssEntries(xml: string): YouTubeVideo[] {
@@ -195,7 +194,7 @@ async function fetchVideoWatchMetadata(videoId: string): Promise<{
     isShortFlag ||
     (typeof durationSeconds === 'number' &&
       durationSeconds > 0 &&
-      durationSeconds < MIN_LONG_FORM_SECONDS);
+      durationSeconds <= MIN_LONG_FORM_SECONDS);
 
   return {
     publishedAt,
@@ -239,7 +238,7 @@ async function enrichVideoMetadata(video: YouTubeVideo): Promise<YouTubeVideo> {
     const isShort =
       Boolean(video.isShort) ||
       looksLikeShortByTitle(video.title) ||
-      video.durationSeconds < MIN_LONG_FORM_SECONDS;
+      video.durationSeconds <= MIN_LONG_FORM_SECONDS;
     return { ...video, isShort };
   }
 
@@ -249,7 +248,7 @@ async function enrichVideoMetadata(video: YouTubeVideo): Promise<YouTubeVideo> {
     Boolean(video.isShort) ||
     Boolean(watchMetadata.isShort) ||
     looksLikeShortByTitle(video.title) ||
-    (typeof durationSeconds === 'number' && durationSeconds < MIN_LONG_FORM_SECONDS);
+    (typeof durationSeconds === 'number' && durationSeconds <= MIN_LONG_FORM_SECONDS);
 
   return {
     ...video,
@@ -261,14 +260,10 @@ async function enrichVideoMetadata(video: YouTubeVideo): Promise<YouTubeVideo> {
 }
 
 function isLongFormVideo(video: YouTubeVideo): boolean {
-  if (KNOWN_SHORT_VIDEO_IDS.has(video.id)) return false;
   if (video.isShort) return false;
   if (looksLikeShortByTitle(video.title)) return false;
   if (looksLikeShortByDescription(video.description)) return false;
-  if (typeof video.durationSeconds === 'number' && video.durationSeconds < MIN_LONG_FORM_SECONDS) {
-    return false;
-  }
-  return true;
+  return typeof video.durationSeconds === 'number' && video.durationSeconds > MIN_LONG_FORM_SECONDS;
 }
 
 export async function fetchChannelVideos(
