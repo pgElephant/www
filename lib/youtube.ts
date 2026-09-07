@@ -60,6 +60,14 @@ const KNOWN_SHORT_VIDEO_IDS = new Set([
   'OayiK01eebY',
   'LcfV4xbUQoo',
   'mUKrnvYYsWA',
+  'KZJeLiRIxug',
+  's6_yGxEeps4',
+  'eK34XNKmJoE',
+  'dZq9ooSxehU',
+  'V-OSxCbAw78',
+  'vBP7AaVQ6E4',
+  '8KktbKngGjs',
+  'FE0Vw1LTJWo',
 ]);
 
 const VIDEO_CACHE_BY_CHANNEL_ID: Record<string, YouTubeVideo[]> = {
